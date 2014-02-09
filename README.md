@@ -10,7 +10,7 @@ var css = require("!sass!./file.scss");
 Use in tandem with the [`style-loader`](https://github.com/webpack/style-loader) to add the css rules to your document:
 
 ``` javascript
-require("!style!css!sass!./file.scss");
+require("!style!sass!./file.scss");
 ```
 
 ### webpack config
@@ -21,7 +21,7 @@ module.exports = {
     loaders: [
       {
         test: /\.scss|\.sass$/,
-        loader: "style-loader!css-loader!sass-loader"
+        loader: "style-loader!sass-loader?outputStyle=expanded"
       }
     ]
   }
