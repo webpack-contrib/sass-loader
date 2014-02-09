@@ -29,7 +29,7 @@ module.exports = {
 };
 ```
 
-Then you only need to write: `require("./file.scss")`
+Then you only need to write: `require("./file.scss")`. See [`node-sass`](https://github.com/andrew/node-sass) for the available options.
 
 ## Install
 
