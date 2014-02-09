@@ -1,5 +1,6 @@
 # sass loader for webpack
 
+
 ## Usage
 
 ``` javascript
@@ -29,6 +30,10 @@ module.exports = {
 ```
 
 Then you only need to write: `require("./file.scss")`
+
+## Install
+
+`npm install sass-loader`
 
 ## License
 
