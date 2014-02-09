@@ -14,6 +14,8 @@ Use in tandem with the [`style-loader`](https://github.com/webpack/style-loader)
 require("!style!sass!./file.scss");
 ```
 
+You can even go next level, by using it with the [`css-loader`](https://github.com/webpack/css-loader) to import linked files.
+
 ### webpack config
 
 ``` javascript
