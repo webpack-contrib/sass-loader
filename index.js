@@ -13,7 +13,10 @@ module.exports = function(content) {
   
   // set include path to fix imports
   opt.includePaths = opt.includePaths || [];
-  opt.includePaths.push(path.dirname(this.request));
+  opt.includePaths.push(path.dirname(this.resourcePath));
+  
+  // output compressed by default
+  opt.outputStyle = opt.outputStyle || 'compressed';
 
   opt.success = function(css) {
     callback(null, "module.exports = " + JSON.stringify(css));
