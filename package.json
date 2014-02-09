@@ -11,6 +11,10 @@
     "webpack",
     "loader"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jtangelder/sass-loader.git"
+  },
   "author": "J. Tangelder",
   "license": "MIT",
   "dependencies": {
