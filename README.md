@@ -1,22 +1,22 @@
-# sass loader for webpack
+# sass loader for [webpack](http://webpack.github.io/)
 
 
 ## Usage
 
 ``` javascript
-var css = require("!sass!./file.scss");
+var css = require("sass!./file.scss");
 // => returns compiled css code from file.scss
 ```
 
-Use in tandem with the [`style-loader`](https://github.com/webpack/style-loader) to add the css rules to your document:
+Typically you'd use the sass-loader in tandem with the [`css-loader`](https://github.com/webpack/css-loader) and the [`style-loader`](https://github.com/webpack/style-loader) to resolve `url()` statements and to add the generated css to your document:
 
 ``` javascript
-require("!style!sass!./file.scss");
+require("style!css!sass!./file.scss");
 ```
 
-You can even go next level, by using it with the [`css-loader`](https://github.com/webpack/css-loader) to import linked files.
-
 ### webpack config
+
+It's recommended to adjust your `webpack.config` so `style!css!sass!` is applied automatically on all files ending on `.scss`:
 
 ``` javascript
 module.exports = {
@@ -24,7 +24,7 @@ module.exports = {
     loaders: [
       {
         test: /\.scss$/,
-        loader: "style-loader!sass-loader?outputStyle=expanded"
+        loader: "style!css!sass?outputStyle=expanded"
       }
     ]
   }
