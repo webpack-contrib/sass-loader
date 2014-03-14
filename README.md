@@ -3,15 +3,19 @@
 
 ## Usage
 
+[Documentation: Using loaders](http://webpack.github.io/docs/using-loaders.html)
+
 ``` javascript
-var css = require("sass!./file.scss");
-// => returns compiled css code from file.scss
+var css = require("!raw!less!./file.less");
+// => returns compiled css code from file.less, resolves imports
+var css = require("!css!less!./file.less");
+// => returns compiled css code from file.less, resolves imports and url(...)s
 ```
 
-Typically you'd use the sass-loader in tandem with the [`css-loader`](https://github.com/webpack/css-loader) and the [`style-loader`](https://github.com/webpack/style-loader) to resolve `url()` statements and to add the generated css to your document:
+Use in tandem with the [`style-loader`](https://github.com/webpack/style-loader) to add the css rules to your document:
 
 ``` javascript
-require("style!css!sass!./file.scss");
+require("!style!css!less!./file.less");
 ```
 
 ### webpack config
