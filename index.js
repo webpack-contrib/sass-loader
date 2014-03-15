@@ -25,7 +25,7 @@ module.exports = function(content) {
   opt.outputStyle = opt.outputStyle || 'compressed';
 
   opt.success = function(css) {
-    callback(null, "module.exports = " + JSON.stringify(css));
+    callback(null, css);
   };  
   opt.error = function(err) {
     throw err;
