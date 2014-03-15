@@ -6,16 +6,16 @@
 [Documentation: Using loaders](http://webpack.github.io/docs/using-loaders.html)
 
 ``` javascript
-var css = require("!raw!less!./file.less");
-// => returns compiled css code from file.less, resolves imports
-var css = require("!css!less!./file.less");
-// => returns compiled css code from file.less, resolves imports and url(...)s
+var css = require("!raw!sass!./file.scss");
+// => returns compiled css code from file.scss, resolves imports
+var css = require("!css!sass!./file.scss");
+// => returns compiled css code from file.scss, resolves imports and url(...)s
 ```
 
 Use in tandem with the [`style-loader`](https://github.com/webpack/style-loader) to add the css rules to your document:
 
 ``` javascript
-require("!style!css!less!./file.less");
+require("!style!css!sass!./file.scss");
 ```
 
 ### webpack config
