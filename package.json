@@ -4,7 +4,7 @@
   "description": "SASS loader for Webpack",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/webpack/bin/webpack.js test/src/entry.js test/output.js -w"
   },
   "keywords": [
     "sass",
@@ -19,6 +19,10 @@
   "license": "MIT",
   "dependencies": {
     "node-sass": "~0.8.1",
-    "loader-utils": "~0.2.1"
+    "loader-utils": "~0.2.2"
+  },
+  "devDependencies": {
+    "webpack": "^1.1.8",
+    "css-loader": "^0.6.12"
   }
 }
