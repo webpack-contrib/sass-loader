@@ -4,7 +4,7 @@
   "description": "SASS loader for Webpack",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/webpack/bin/webpack.js test/src/entry.js test/output.js -w"
+    "test": "./node_modules/webpack/bin/webpack.js -w --config=test/webpack.config.js"
   },
   "keywords": [
     "sass",
@@ -23,6 +23,6 @@
   },
   "devDependencies": {
     "css-loader": "^0.6.12",
-    "webpack": "^1.1.8"
+    "webpack": "^1.2.0"
   }
 }

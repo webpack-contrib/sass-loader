@@ -1,9 +1,17 @@
+var path = require('path');
+var webpack = require('webpack');
+
 module.exports = {
-    entry: "./src/entry",
-    output: "test.js",
-    resolveLoader: {
-      modulesDirectories: ["web_loaders", "web_modules", "node_loaders", "node_modules"],
-      extensions: ["", ".webpack-loader.js", ".web-loader.js", ".loader.js", ".js"],
-      packageMains: ["webpackLoader", "webLoader", "loader", "main"]
-    }
+    entry: {
+        test: path.join(__dirname, "src/entry.js")
+    },
+    output: {
+        path: __dirname,
+        publicPath: "/",
+        filename: "[name].js",
+        sourceMapFilename: "[file].map"
+    },
+    plugins: [
+        new webpack.optimize.UglifyJsPlugin()
+    ]
 };
