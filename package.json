@@ -18,11 +18,11 @@
   "author": "J. Tangelder",
   "license": "MIT",
   "dependencies": {
-    "node-sass": "~0.8.1",
-    "loader-utils": "~0.2.2"
+    "loader-utils": "~0.2.2",
+    "node-sass": "^0.9.0"
   },
   "devDependencies": {
-    "webpack": "^1.1.8",
-    "css-loader": "^0.6.12"
+    "css-loader": "^0.6.12",
+    "webpack": "^1.1.8"
   }
 }

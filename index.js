@@ -1,25 +1,15 @@
-var nutil = require('util');
+var util = require('util');
 var utils = require('loader-utils');
 var sass = require('node-sass');
 var path = require('path');
 
 
 module.exports = function (content) {
-    this.cacheable && this.cacheable();
+    this.cacheable();
     var callback = this.async();
 
     var opt = utils.parseQuery(this.query);
     opt.data = content;
-
-    if (opt.contextDependencies) {
-        if (!nutil.isArray(opt.contextDependencies)) {
-            opt.contextDependencies = [opt.contextDependencies]
-        }
-        var loaderContext = this;
-        opt.contextDependencies.forEach(function (d) {
-            loaderContext.addContextDependency(d);
-        });
-    }
 
     // set include path to fix imports
     opt.includePaths = opt.includePaths || [];
@@ -33,12 +23,16 @@ module.exports = function (content) {
     opt.outputStyle = opt.outputStyle || 'compressed';
     opt.stats = {};
 
-    opt.success = function (css, sourceMap) {
-        console.log(opt.stats);
+    opt.success = function (css) {
+        // mark dependencies
+        opt.stats.includedFiles.forEach(function(path) {
+            this.addDependency(path);
+        }, this);
         callback(null, css);
-    };
+    }.bind(this);
+
     opt.error = function (err) {
-        throw err;
+        callback(err);
     };
 
     sass.render(opt);
