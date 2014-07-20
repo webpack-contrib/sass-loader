@@ -28,7 +28,8 @@ module.exports = {
     loaders: [
       {
         test: /\.scss$/,
-        loader: "style!css!sass?outputStyle=expanded"
+        loader: "style!css!sass?outputStyle=expanded&includePaths[]=" + 
+            (path.resolve(__dirname, './bower_components/bootstrap-sass-official'))
       }
     ]
   }
