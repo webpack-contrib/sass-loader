@@ -32,8 +32,9 @@ module.exports = function (content) {
     }.bind(this);
 
     opt.error = function (err) {
+        this.emitError(err);
         callback(err);
-    };
+    }.bind(this);
 
     sass.render(opt);
 };
