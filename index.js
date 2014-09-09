@@ -25,11 +25,11 @@ module.exports = function (content) {
     opt.stats = {};
 
     // mark dependencies
-    var graph = sassGraph.parseFile(this.resourcePath);
+    var graph = sassGraph.parseFile(this.resourcePath, {loadPaths: opt.includePaths});
     graph.visitDescendents(this.resourcePath, function (imp) {
         this.addDependency(imp);
     }.bind(this));
-    
+
     opt.success = function (css) {
         callback(null, css);
     }.bind(this);
