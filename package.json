@@ -19,7 +19,8 @@
   "license": "MIT",
   "dependencies": {
     "loader-utils": "~0.2.2",
-    "node-sass": "^0.9.0"
+    "node-sass": "^0.9.0",
+    "sass-graph": "^0.1.2"
   },
   "devDependencies": {
     "css-loader": "^0.6.12",
