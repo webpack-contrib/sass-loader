@@ -44,7 +44,7 @@ Then you only need to write: `require("./file.scss")`. See [`node-sass`](https:/
 
 ## Caveats
 
-The sass-loader does not currently follow all of the webpack loader guidelines.  Specifically, until the [mark and resolve dependencies](https://github.com/jtangelder/sass-loader/issues/2) feature is added, webpack will not resolve your `@import` statements for you or watch and reload when a SASS dependency changes.  You can use a third party watch module to handle at least the reloading aspect for the time being.
+Currently the sass-loader does not follow all of the webpack loader guidelines. The general problem is that the entry scss-file is passed to [node-sass](https://github.com/sass/node-sass) which does pretty much the rest. Thus `@import` statements inside your scss-files cannot be resolved by webpack's resolver. However, there is an [issue for that missing feature in libsass](https://github.com/sass/libsass/issues/21).
 
 ## License
 
