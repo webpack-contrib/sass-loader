@@ -12,6 +12,11 @@ module.exports = function (content) {
     var opt = utils.parseQuery(this.query);
     opt.data = content;
 
+    // skip empty files, otherwise it will stop webpack, see issue #21
+    if(opt.data.trim() == '') {
+        return callback(null, content);
+    }
+
     // set include path to fix imports
     opt.includePaths = opt.includePaths || [];
     opt.includePaths.push(path.dirname(this.resourcePath));
