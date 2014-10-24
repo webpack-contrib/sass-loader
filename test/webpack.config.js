@@ -3,15 +3,14 @@ var webpack = require('webpack');
 
 module.exports = {
     entry: {
-        test: path.join(__dirname, "src/entry.js")
+        test: path.join(__dirname, "src", "entry.js")
     },
     output: {
-        path: __dirname,
-        publicPath: "/",
+        path: path.join(__dirname, "output"),
         filename: "[name].js",
         sourceMapFilename: "[file].map"
     },
     plugins: [
-        new webpack.optimize.UglifyJsPlugin()
+        //new webpack.optimize.UglifyJsPlugin()
     ]
 };
