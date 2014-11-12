@@ -28,18 +28,22 @@ module.exports = function (content) {
     // output compressed by default
     opt.outputStyle = opt.outputStyle || 'compressed';
     opt.stats = {};
-
-    // mark dependencies
-    var graph = sassGraph.parseFile(this.resourcePath, {loadPaths: opt.includePaths});
-    graph.visitDescendents(this.resourcePath, function (imp) {
-        this.addDependency(imp);
-    }.bind(this));
+    
+    var loadPaths = opt.includePaths;
+    var markDependencies = function () {
+        var graph = sassGraph.parseFile(this.resourcePath, {loadPaths: loadPaths});
+        graph.visitDescendents(this.resourcePath, function (imp) {
+            this.addDependency(imp);
+        }.bind(this));  
+    }.bind(this);
 
     opt.success = function (css) {
+        markDependencies();
         callback(null, css);
     }.bind(this);
 
     opt.error = function (err) {
+        markDependencies();
         this.emitError(err);
         callback(err);
     }.bind(this);
