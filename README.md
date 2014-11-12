@@ -28,8 +28,12 @@ module.exports = {
     loaders: [
       {
         test: /\.scss$/,
-        loader: "style!css!sass?outputStyle=expanded&includePaths[]=" + 
-            (path.resolve(__dirname, './bower_components/bootstrap-sass-official'))
+        // Query parameters are passed to node-sass
+        loader: "style!css!sass?outputStyle=expanded&" +
+          "includePaths[]=" +
+            (path.resolve(__dirname, "./bower_components")) + "&" +
+          "includePaths[]=" +
+            (path.resolve(__dirname, "./node_modules"))
       }
     ]
   }
