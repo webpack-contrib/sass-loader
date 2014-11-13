@@ -31,10 +31,14 @@ module.exports = function (content) {
     
     var loadPaths = opt.includePaths;
     var markDependencies = function () {
-        var graph = sassGraph.parseFile(this.resourcePath, {loadPaths: loadPaths});
-        graph.visitDescendents(this.resourcePath, function (imp) {
-            this.addDependency(imp);
-        }.bind(this));  
+        try {
+            var graph = sassGraph.parseFile(this.resourcePath, {loadPaths: loadPaths});
+            graph.visitDescendents(this.resourcePath, function (imp) {
+                this.addDependency(imp);
+            }.bind(this));
+        } catch(err) {
+            this.emitError(err);
+        } 
     }.bind(this);
 
     opt.success = function (css) {
