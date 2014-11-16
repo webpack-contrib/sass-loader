@@ -21,7 +21,7 @@
   "dependencies": {
     "loader-utils": "~0.2.2",
     "node-sass": "^1.2.2",
-    "sass-graph": "git+https://github.com/akiran/sass-graph.git"
+    "sass-graph": "git+https://github.com/akiran/sass-graph.git#3a173283e50287af35ce1c2f6306f0cf432bfc85"
   },
   "devDependencies": {
     "mocha": "^2.0.1",
