@@ -21,7 +21,7 @@
   "dependencies": {
     "loader-utils": "~0.2.2",
     "node-sass": "^1.2.2",
-    "sass-graph": "^0.1.2"
+    "sass-graph": "git+https://github.com/lox/sass-graph.git#3a17328"
   },
   "devDependencies": {
     "mocha": "^2.0.1",

@@ -67,4 +67,7 @@ describe('sass-loader', function () {
     test('should pass the include paths to node-sass', 'include-paths',
         'includePaths[]=' + path.resolve(__dirname, './sass/another') + '&' +
         'includePaths[]=' + path.resolve(__dirname, './scss/another'));
+
+    // Test for issue: https://github.com/jtangelder/sass-loader/issues/32
+    test('should pass with multiple imports', 'multiple-imports')
 });
