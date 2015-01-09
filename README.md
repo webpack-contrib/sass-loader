@@ -42,6 +42,14 @@ module.exports = {
 
 Then you only need to write: `require("./file.scss")`. See [`node-sass`](https://github.com/andrew/node-sass) for the available options.
 
+### async/sync
+
+By default, all processing is done **asynchronously** unless the `sync` parameter is passed
+
+``` javascript
+var css = require("!raw!sass?sync!./file.scss");
+```
+
 ## Install
 
 `npm install sass-loader`
