@@ -5,10 +5,14 @@ var sassGraph = require('sass-graph');
 
 module.exports = function (content) {
     this.cacheable();
-    var callback = this.async();
 
     var opt = utils.parseQuery(this.query);
     opt.data = content;
+
+    var callback = function() {};
+    if (opt.sync !== true) {
+        callback = this.async();
+    }
 
     // skip empty files, otherwise it will stop webpack, see issue #21
     if (opt.data.trim() === '') {
@@ -39,16 +43,23 @@ module.exports = function (content) {
         } 
     }.bind(this);
 
-    opt.success = function (css) {
+    if (opt.sync === true) {
+        var css = sass.renderSync(opt);
         markDependencies();
-        callback(null, css);
-    }.bind(this);
+        return css;
+    }
+    else {
+        opt.success = function (css) {
+            markDependencies();
+            callback(null, css);
+        }.bind(this);
 
-    opt.error = function (err) {
-        markDependencies();
-        this.emitError(err);
-        callback(err);
-    }.bind(this);
+        opt.error = function (err) {
+            markDependencies();
+            this.emitError(err);
+            callback(err);
+        }.bind(this);
 
-    sass.render(opt);
+        sass.render(opt);
+    }
 };
