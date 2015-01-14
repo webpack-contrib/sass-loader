@@ -1,7 +1,6 @@
 var utils = require('loader-utils');
 var sass = require('node-sass');
 var path = require('path');
-var sassGraph = require('sass-graph');
 
 module.exports = function (content) {
     this.cacheable();
@@ -25,28 +24,15 @@ module.exports = function (content) {
 
     // output compressed by default
     opt.outputStyle = opt.outputStyle || 'compressed';
-    
-    var loadPaths = opt.includePaths;
-    var markDependencies = function () {
-        try {
-            var graph = sassGraph.parseFile(this.resourcePath, {loadPaths: loadPaths});
-            graph.visitDescendents(this.resourcePath, function (imp) {
-                this.addDependency(imp);
-            }.bind(this));
-        } catch (err) {
-            this.emitError(err);
-        } 
-    }.bind(this);
 
     opt.success = function (result) {
-        markDependencies();
+        result.stats.includedFiles.forEach(this.addDependency);
         callback(null, result.css, result.map);
     }.bind(this);
 
     opt.error = function (err) {
-        markDependencies();
-        callback(err);
-    }.bind(this);
+        callback({message: err.message + ' (' + err.line + ':' + err.column + ')'});
+    };
 
     sass.render(opt);
 };
