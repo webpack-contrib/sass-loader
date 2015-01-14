@@ -21,7 +21,7 @@ var path = require('path');
                 includePaths: [
                     path.join(__dirname, ext, 'another')
                 ]
-            })
+            }).css;
         })
         .forEach(function (content, index) {
             fs.writeFileSync(files[index].replace(new RegExp('\\.' + ext + '$', 'gi'), '.css'), content, 'utf8');
