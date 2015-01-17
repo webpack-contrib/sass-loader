@@ -20,7 +20,8 @@
   "license": "MIT",
   "dependencies": {
     "loader-utils": "^0.2.5",
-    "node-sass": "^2.0.0-beta"
+    "node-sass": "^2.0.0-beta",
+    "sass-graph": "git+https://github.com/lox/sass-graph.git#3a17328"
   },
   "devDependencies": {
     "mocha": "^2.0.1",
