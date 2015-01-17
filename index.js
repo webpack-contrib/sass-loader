@@ -25,7 +25,6 @@ module.exports = function (content) {
 
     // output compressed by default
     opt.outputStyle = opt.outputStyle || 'compressed';
-    opt.stats = {};
     
     var loadPaths = opt.includePaths;
     var markDependencies = function () {
@@ -39,15 +38,14 @@ module.exports = function (content) {
         } 
     }.bind(this);
 
-    opt.success = function (css) {
+    opt.success = function (result) {
         markDependencies();
-        callback(null, css);
+        callback(null, result.css, result.map);
     }.bind(this);
 
     opt.error = function (err) {
         markDependencies();
-        this.emitError(err);
-        callback(err);
+        callback({message: err.message + ' (' + err.line + ':' + err.column + ')'});
     }.bind(this);
 
     sass.render(opt);
