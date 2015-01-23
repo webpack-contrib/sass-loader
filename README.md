@@ -51,7 +51,7 @@ module.exports = {
       {
         test: /\.scss$/,
         // Passing indentedSyntax query param to node-sass
-        loader: "style!css!sass?indentedSyntax=sass
+        loader: "style!css!sass?indentedSyntax=sass"
       }
     ]
   }
