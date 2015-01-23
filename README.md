@@ -40,7 +40,25 @@ module.exports = {
 };
 ```
 
-Then you only need to write: `require("./file.scss")`. See [`node-sass`](https://github.com/andrew/node-sass) for the available options.
+Then you only need to write: `require("./file.scss")`. 
+
+For requiring `.sass` files, add `indentedSyntax=sass` as a loader option:
+
+``` javascript
+module.exports = {
+  module: {
+    loaders: [
+      {
+        test: /\.scss$/,
+        // Passing indentedSyntax query param to node-sass
+        loader: "style!css!sass?indentedSyntax=sass
+      }
+    ]
+  }
+};
+```
+
+See [`node-sass`](https://github.com/andrew/node-sass) for the available options.
 
 ## Install
 
