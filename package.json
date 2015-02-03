@@ -21,7 +21,7 @@
   "dependencies": {
     "loader-utils": "^0.2.5",
     "node-sass": "^2.0.0-beta",
-    "sass-graph": "justin808/sass-graph#change-for-var-in-array-loops-to-foreach"
+    "sass-graph": "^1.0.3"
   },
   "devDependencies": {
     "mocha": "^2.0.1",
