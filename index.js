@@ -1,52 +1,122 @@
+
+'use strict';
+
 var utils = require('loader-utils');
 var sass = require('node-sass');
 var path = require('path');
-var sassGraph = require('sass-graph');
+var _ = require('lodash');
+
+function split(str) {
+    var idx = str.lastIndexOf("!");
+    return idx < 0 ? ['', str] : [str.substr(0, idx+1), str.substr(idx+1)];
+}
+
+var UnsafeCachePlugin = require("enhanced-resolve/lib/UnsafeCachePlugin");
+
+var ModulesInRootPlugin = require("enhanced-resolve/lib/ModulesInRootPlugin");
+var ModuleAsFilePlugin = require("enhanced-resolve/lib/ModuleAsFilePlugin");
+var ModuleAsDirectoryPlugin = require("enhanced-resolve/lib/ModuleAsDirectoryPlugin");
+var ModuleAliasPlugin = require("enhanced-resolve/lib/ModuleAliasPlugin");
+var DirectoryDefaultFilePlugin = require("enhanced-resolve/lib/DirectoryDefaultFilePlugin");
+var DirectoryDescriptionFilePlugin = require("enhanced-resolve/lib/DirectoryDescriptionFilePlugin");
+var DirectoryDescriptionFileFieldAliasPlugin = require("enhanced-resolve/lib/DirectoryDescriptionFileFieldAliasPlugin");
+var FileAppendPlugin = require("enhanced-resolve/lib/FileAppendPlugin");
+var DirectoryResultPlugin = require("enhanced-resolve/lib/DirectoryResultPlugin");
+var ResultSymlinkPlugin = require("enhanced-resolve/lib/ResultSymlinkPlugin");
+
+var Resolver = require("enhanced-resolve/lib/Resolver");
+
+function makeRootPlugin(name, root) {
+    if(typeof root === "string") {
+        return new ModulesInRootPlugin(name, root);
+    } else if(Array.isArray(root)) {
+        return function() {
+            root.forEach(function(root) {
+                this.apply(new ModulesInRootPlugin(name, root));
+            }, this);
+        }
+    }
+    return function() {};
+}
 
 module.exports = function (content) {
+
     this.cacheable();
     var callback = this.async();
+    var self = this;
 
-    var opt = utils.parseQuery(this.query);
-    opt.data = content;
+    function importer(url, prev, callback) {
 
-    // skip empty files, otherwise it will stop webpack, see issue #21
-    if (opt.data.trim() === '') {
-        return callback(null, content);
-    }
+        var parts = split(url),
+            loaders = parts[0],
+            filename = parts[1],
+            mod;
 
-    // set include path to fix imports
-    opt.includePaths = opt.includePaths || [];
-    opt.includePaths.push(path.dirname(this.resourcePath));
-    if (this.options.resolve && this.options.resolve.root) {
-        var root = [].concat(this.options.resolve.root);
-        opt.includePaths = opt.includePaths.concat(root);
-    }
+        var resolver = new Resolver(null);
 
-    // output compressed by default
-    opt.outputStyle = opt.outputStyle || 'compressed';
-    
-    var loadPaths = opt.includePaths;
-    var markDependencies = function () {
-        try {
-            var graph = sassGraph.parseFile(this.resourcePath, {loadPaths: loadPaths});
-            graph.visitDescendents(this.resourcePath, function (imp) {
-                this.addDependency(imp);
-            }.bind(this));
-        } catch (err) {
-            this.emitError(err);
-        } 
-    }.bind(this);
+        // lol this.
+        // Waiting on https://github.com/webpack/webpack/pull/732
+        resolver.fileSystem = require('fs');
 
-    opt.success = function (result) {
-        markDependencies();
-        callback(null, result.css, result.map);
-    }.bind(this);
+        resolver.apply(
+            makeRootPlugin("module", path.dirname(prev)),
+            makeRootPlugin("module", self.context),
+            makeRootPlugin("module", self.options.resolve.root),
+            new ModuleAsFilePlugin("module"),
+            new ModuleAsDirectoryPlugin("module"),
+            new DirectoryDefaultFilePlugin(["index"]),
+            new FileAppendPlugin([ '.scss', '.sass' ]),
+            new ResultSymlinkPlugin()
+        );
 
-    opt.error = function (err) {
-        markDependencies();
-        callback({message: err.message + ' (' + err.line + ':' + err.column + ')'});
-    }.bind(this);
+        function resolveFinish(err, resolved) {
+            if (err) {
+                callback(err);
+                return;
+            }
 
-    sass.render(opt);
+            var url = loaders + resolved;
+            var k = '!!' +__dirname+'/stringify.loader.js!' + url;
+
+            self.loadModule(k, function(err, data, map, mod) {
+                if (err) {
+                    callback(err);
+                    return;
+                }
+
+                self.dependency(resolved);
+
+                // Why this doesn't take an explicit err argument is beyond me.
+                callback({
+                    contents: data && JSON.parse(data),
+                    file: resolved
+                });
+            });
+        }
+
+        mod = path.join(path.dirname(filename), '_' + path.basename(filename));
+
+        // Try for normal version first, then _ version
+        resolver.resolve(self.context, filename, function(err, resolved) {
+            if (err) {
+                resolver.resolve(self.context, mod, resolveFinish);
+            } else {
+                resolveFinish(err, resolved);
+            }
+
+        });
+    };
+
+    sass.render(_.assign({
+        file: this.resourcePath,
+        data: content,
+        importer: importer,
+        outputStyle: 'compressed',
+        error: function (err) {
+            callback(err);
+        },
+        success: function (result) {
+            callback(null, result.css, result.map);
+        }
+    }, utils.parseQuery(this.query)));
 };

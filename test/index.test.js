@@ -21,9 +21,8 @@ function test(name, id, query) {
         exts.forEach(function (ext) {
             var expectedCss = readCss(ext, id);
             var sassFile = 'raw!' +
-                    path.resolve(__dirname, '../index.js') + '?' +
-                    query +
-                    (ext === 'sass'? '&indentedSyntax=sass' : '') + '!' +
+                    path.resolve(__dirname, '../index.js') +
+                    (ext === 'sass'? '?indentedSyntax=sass' : '') + '!' +
                     path.join(__dirname, ext, id + '.' + ext);
             var actualCss;
 
@@ -64,10 +63,6 @@ function test(name, id, query) {
 describe('sass-loader', function () {
     test('should compile simple sass without errors', 'language');
     test('should resolve imports correctly', 'imports');
-    test('should pass the include paths to node-sass', 'include-paths',
-        'includePaths[]=' + path.resolve(__dirname, './sass/another') + '&' +
-        'includePaths[]=' + path.resolve(__dirname, './scss/another'));
-
     // Test for issue: https://github.com/jtangelder/sass-loader/issues/32
     test('should pass with multiple imports', 'multiple-imports');
 });
