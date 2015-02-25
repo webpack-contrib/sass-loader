@@ -24,7 +24,6 @@
     "undef": true,     // Require all non-global variables be declared before they are used.
     "strict": true,     // Require `use strict` pragma in every file.
     "trailing": true,    // Prohibit trailing whitespaces.
-
     "asi": false,    // Tolerate Automatic Semicolon Insertion (no semicolons).
     "boss": false,    // Tolerate assignments inside if, for & while. Usually conditions & loops are for comparison, not assignments.
     "debug": false,    // Allow debugger statements e.g. browser breakpoints.
@@ -39,6 +38,7 @@
     "laxcomma": false,    // Suppress warnings about comma-first coding style.
     "loopfunc": false,    // Allow functions to be defined within loops.
     "multistr": false,    // Tolerate multi-line strings.
+    "quotmark": "single", // Only single quotes for strings.
     "proto": false,    // Tolerate __proto__ property. This property is deprecated.
     "scripturl": false,    // Tolerate script-targeted URLs.
     "smarttabs": false,    // Tolerate mixed tabs and spaces when the latter are used for alignmnent only.
