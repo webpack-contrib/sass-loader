@@ -16,7 +16,6 @@ var path = require('path');
 
             files.push(filename = path.join(__dirname, ext, file));
             return sass.renderSync({
-                outputStyle: 'compressed',
                 file: filename,
                 includePaths: [
                     path.join(__dirname, ext, 'another')

@@ -23,9 +23,10 @@ module.exports = function (content) {
         opt.includePaths = opt.includePaths.concat(root);
     }
 
-    // output compressed by default
-    opt.outputStyle = opt.outputStyle || 'compressed';
-    
+    if (!opt.outputStyle && this.minimize) {
+        opt.outputStyle = 'compressed';
+    }
+
     var loadPaths = opt.includePaths;
     var markDependencies = function () {
         try {
@@ -35,7 +36,7 @@ module.exports = function (content) {
             }.bind(this));
         } catch (err) {
             this.emitError(err);
-        } 
+        }
     }.bind(this);
 
     opt.success = function (result) {
