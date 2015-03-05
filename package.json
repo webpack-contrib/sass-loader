@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "pretest": "node test/prepare.js",
-    "test": "mocha -R spec"
+    "test": "mocha -R spec",
+    "test-source-map": "webpack --config test/sourceMap/webpack.config.js && open ./test/sourceMap/index.html"
   },
   "keywords": [
     "sass",
@@ -24,6 +25,8 @@
     "sass-graph": "^1.0.3"
   },
   "devDependencies": {
+    "css-loader": "^0.9.1",
+    "extract-text-webpack-plugin": "^0.3.8",
     "mocha": "^2.0.1",
     "raw-loader": "^0.5.1",
     "should": "^5.0.1",

@@ -1,3 +1,5 @@
+'use strict';
+
 var utils = require('loader-utils');
 var sass = require('node-sass');
 var path = require('path');
@@ -27,6 +29,15 @@ module.exports = function (content) {
         opt.outputStyle = 'compressed';
     }
 
+    // not using the `this.sourceMap` flag because css source maps are different
+    // @see https://github.com/webpack/css-loader/pull/40
+    if (opt.sourceMap) {
+        // deliberately overriding the sourceMap option
+        // this value is (currently) ignored by libsass when using the data input instead of file input
+        // however, it is still necessary for correct relative paths in result.map.sources
+        opt.sourceMap = this.options.output.path + '/sass.map';
+    }
+
     var loadPaths = opt.includePaths;
     var markDependencies = function () {
         try {
@@ -41,6 +52,15 @@ module.exports = function (content) {
 
     opt.success = function (result) {
         markDependencies();
+
+        if (result.map && result.map !== '{}') {
+            result.map = JSON.parse(result.map);
+            result.map.file = utils.getCurrentRequest(this);
+            // the first source is 'stdin' according to libsass because we've used the data input
+            // now let's override that value with the correct relative path
+            result.map.sources[0] = path.relative(this.options.output.path, utils.getRemainingRequest(this));
+        }
+
         callback(null, result.css, result.map);
     }.bind(this);
 
