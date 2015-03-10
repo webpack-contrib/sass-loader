@@ -60,7 +60,7 @@ module.exports = function (content) {
             // now let's override that value with the correct relative path
             result.map.sources[0] = path.relative(this.options.output.path, utils.getRemainingRequest(this));
         } else {
-            result.map = null
+            result.map = null;
         }
 
         callback(null, result.css, result.map);
