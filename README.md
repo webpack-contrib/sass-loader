@@ -9,16 +9,16 @@
 [Documentation: Using loaders](http://webpack.github.io/docs/using-loaders.html)
 
 ``` javascript
-var css = require("raw!sass!./file.scss");
+var css = require("!raw!sass!./file.scss");
 // => returns compiled css code from file.scss, resolves imports
-var css = require("css!sass!./file.scss");
+var css = require("!css!sass!./file.scss");
 // => returns compiled css code from file.scss, resolves imports and url(...)s
 ```
 
 Use in tandem with the [`style-loader`](https://github.com/webpack/style-loader) to add the css rules to your document:
 
 ``` javascript
-require("style!css!sass!./file.scss");
+require("!style!css!sass!./file.scss");
 ```
 
 ### Apply via webpack config
@@ -31,7 +31,25 @@ module.exports = {
     loaders: [
       {
         test: /\.scss$/,
-        // Query parameters are passed to node-sass
+        loader: "style!css!sass"
+      }
+    ]
+  }
+};
+```
+
+Then you only need to write: `require("./file.scss")`.
+
+### SASS options
+
+You can pass any SASS specific configuration options through to the render function via [query parameters](http://webpack.github.io/docs/using-loaders.html#query-parameters).
+
+``` javascript
+module.exports = {
+  module: {
+    loaders: [
+      {
+        test: /\.scss$/,
         loader: "style!css!sass?outputStyle=expanded&" +
           "includePaths[]=" +
             (path.resolve(__dirname, "./bower_components")) + "&" +
@@ -43,7 +61,7 @@ module.exports = {
 };
 ```
 
-Then you only need to write: `require("./file.scss")`. See [`node-sass`](https://github.com/andrew/node-sass) for all available options.
+See [node-sass](https://github.com/andrew/node-sass) for all available options.
 
 ### .sass files
 
@@ -54,7 +72,7 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.scss$/,
+        test: /\.sass$/,
         // Passing indentedSyntax query param to node-sass
         loader: "style!css!sass?indentedSyntax=sass"
       }
@@ -63,9 +81,9 @@ module.exports = {
 };
 ```
 
-### Source maps
+## Source maps
 
-Source maps are only available in conjunction with the [extract-text-webpack-plugin](https://github.com/webpack/extract-text-webpack-plugin). Use that plugin to extract the CSS code from the generated JS bundle into a separate file (which even improves the perceived performance because JS and CSS are loaded in parallel).
+Because of browser limitations, source maps are only available in conjunction with the [extract-text-webpack-plugin](https://github.com/webpack/extract-text-webpack-plugin). Use that plugin to extract the CSS code from the generated JS bundle into a separate file (which even improves the perceived performance because JS and CSS are loaded in parallel).
 
 Then your `webpack.config.js` should look like this:
 
@@ -89,7 +107,7 @@ module.exports = {
         ]
     },
     plugins: [
-        // extract into separate 'styles.css'
+        // extract inline css into separate 'styles.css'
         new ExtractTextPlugin('styles.css')
     ]
 };
