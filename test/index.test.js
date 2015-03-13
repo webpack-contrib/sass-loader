@@ -4,6 +4,7 @@ var should = require('should');
 var path = require('path');
 var webpack = require('webpack');
 var fs = require('fs');
+var enhancedReqFactory = require('enhanced-require');
 
 var CR = /\r/g;
 
@@ -11,21 +12,25 @@ function readCss(ext, id) {
     return fs.readFileSync(path.join(__dirname, ext, id + '.css'), 'utf8').replace(CR, '');
 }
 
-function test(name, id, query) {
+function test(name, id) {
     it(name, function (done) {
         var exts = ['scss', 'sass'];
         var pending = exts.length;
-
-        query = query || '';
 
         exts.forEach(function (ext) {
             var expectedCss = readCss(ext, id);
             var sassFile = 'raw!' +
                     path.resolve(__dirname, '../index.js') + '?' +
-                    query +
                     (ext === 'sass'? '&indentedSyntax=sass' : '') + '!' +
                     path.join(__dirname, ext, id + '.' + ext);
+            var enhancedReq;
             var actualCss;
+
+            enhancedReq = enhancedReqFactory(module);
+
+            // run synchronously
+            actualCss = enhancedReq(sassFile);
+            fs.writeFileSync(__dirname + '/output/' + name + '.' + ext + '.sync.css', actualCss, 'utf8');
 
             // run asynchronously
             webpack({
@@ -49,7 +54,7 @@ function test(name, id, query) {
 
                 actualCss = require('./output/bundle.' + ext + '.js');
                 // writing the actual css to output-dir for better debugging
-                //fs.writeFileSync(__dirname + '/output/' + name + '.' + ext + '.async.css', actualCss, 'utf8');
+                fs.writeFileSync(__dirname + '/output/' + name + '.' + ext + '.async.css', actualCss, 'utf8');
                 actualCss.should.eql(expectedCss);
 
                 pending--;

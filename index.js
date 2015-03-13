@@ -6,6 +6,7 @@ var path = require('path');
 
 module.exports = function (content) {
     var callback = this.async();
+    var isSync = typeof callback !== 'function';
     var self = this;
     var resourcePath = this.resourcePath;
     var fileExt;
@@ -39,12 +40,13 @@ module.exports = function (content) {
     fileExt = '.' + (opt.indentedSyntax || 'scss');
 
     // opt.importer
-    opt.importer = function (url, prev, done) {
+    opt.importer = function webpackImporter(url, context, importDone) {
         var request;
+        var filename;
 
         // The first file is 'stdin' when we're using the data option
-        if (prev === 'stdin') {
-            prev = resourcePath;
+        if (context === 'stdin') {
+            context = resourcePath;
         }
 
         // Add file extension if it's not present already
@@ -52,17 +54,26 @@ module.exports = function (content) {
             url = url + fileExt;
         }
 
-        prev = path.dirname(prev);
+        context = path.dirname(context);
         request = utils.urlToRequest(url, opt.root);
 
-        self.resolve(prev, request, function (err, filename) {
+        if (isSync) {
+            try {
+                filename = self.resolveSync(context, request);
+                self.dependency && self.dependency(filename);
+            } catch (err) {
+                callback(err);
+            }
+            return filename;
+        }
+        self.resolve(context, request, function onWebpackResolve(err, filename) {
             if (err) {
                 callback(err);
                 return;
             }
 
             self.dependency && self.dependency(filename);
-            done({
+            importDone({
                 file: filename
             });
 
@@ -76,7 +87,7 @@ module.exports = function (content) {
             //        return;
             //    }
             //
-            //    done({
+            //    importDone({
             //        file: filename,
             //        contents: JSON.parse(data)
             //    });
@@ -84,7 +95,10 @@ module.exports = function (content) {
         });
     };
 
-    sass.render(opt, function (err, result) {
+    if (isSync) {
+        return sass.renderSync(opt).css;
+    }
+    sass.render(opt, function onRender(err, result) {
         if (err) {
             callback({message: err.message + ' (' + err.line + ':' + err.column + ')'});
             return;

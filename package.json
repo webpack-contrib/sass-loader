@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "css-loader": "^0.9.1",
+    "enhanced-require": "^0.5.0-beta6",
     "extract-text-webpack-plugin": "^0.3.8",
     "mocha": "^2.0.1",
     "raw-loader": "^0.5.1",
