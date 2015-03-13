@@ -50,7 +50,7 @@ module.exports = function (content) {
         }
     }.bind(this);
 
-    opt.success = function (result) {
+    var successCallback = function (result) {
         markDependencies();
 
         if (result.map && result.map !== '{}') {
@@ -66,10 +66,12 @@ module.exports = function (content) {
         callback(null, result.css, result.map);
     }.bind(this);
 
-    opt.error = function (err) {
+    var errorCallback = function (err) {
         markDependencies();
         callback({message: err.message + ' (' + err.line + ':' + err.column + ')'});
     }.bind(this);
 
-    sass.render(opt);
+    sass.render(opt, function( err, result ){
+        err  ? errorCallback(err) : successCallback(result);
+    });
 };
