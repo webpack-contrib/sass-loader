@@ -6,10 +6,23 @@ var path = require('path');
 var sassGraph = require('sass-graph');
 
 module.exports = function (content) {
-    this.cacheable();
     var callback = this.async();
+    var markDependencies = function () {
+        try {
+            var graph = sassGraph.parseFile(this.resourcePath, { loadPaths: loadPaths });
+            graph.visitDescendents(this.resourcePath, function (imp) {
+                this.addDependency(imp);
+            }.bind(this));
+        } catch (err) {
+            this.emitError(err);
+        }
+    }.bind(this);
+    var loadPaths;
+    var opt;
 
-    var opt = utils.parseQuery(this.query);
+    this.cacheable();
+
+    opt = utils.parseQuery(this.query);
     opt.data = content;
 
     // skip empty files, otherwise it will stop webpack, see issue #21
@@ -18,7 +31,7 @@ module.exports = function (content) {
     }
 
     // set include path to fix imports
-    opt.includePaths = opt.includePaths || [];
+    opt.includePaths = loadPaths = opt.includePaths || [];
     opt.includePaths.push(path.dirname(this.resourcePath));
     if (this.options.resolve && this.options.resolve.root) {
         var root = [].concat(this.options.resolve.root);
@@ -38,26 +51,13 @@ module.exports = function (content) {
         opt.sourceMap = this.options.output.path + '/sass.map';
     }
 
-    var loadPaths = opt.includePaths;
-    var markDependencies = function () {
-        try {
-            var graph = sassGraph.parseFile(this.resourcePath, {loadPaths: loadPaths});
-            graph.visitDescendents(this.resourcePath, function (imp) {
-                this.addDependency(imp);
-            }.bind(this));
-        } catch (err) {
-            this.emitError(err);
-        }
-    }.bind(this);
+    sass.render(opt, function (err, result) {
+        markDependencies();
 
-    sass.render(opt, function(err, result) {
-        if(err) {
-            markDependencies();
+        if (err) {
             callback({message: err.message + ' (' + err.line + ':' + err.column + ')'});
             return;
         }
-
-        markDependencies();
 
         if (result.map && result.map !== '{}') {
             result.map = JSON.parse(result.map);
