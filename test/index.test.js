@@ -7,6 +7,7 @@ var fs = require('fs');
 var enhancedReqFactory = require('enhanced-require');
 
 var CR = /\r/g;
+var syntaxStyles = ['scss', 'sass'];
 var pathToSassLoader = path.resolve(__dirname, '../index.js');
 var pathToErrorFileNotFound = path.resolve(__dirname, './scss/error-file-not-found.scss');
 var pathToErrorFile = path.resolve(__dirname, './scss/error.scss');
@@ -79,7 +80,7 @@ function readCss(ext, id) {
 }
 
 function testAsync(name, id) {
-    ['scss', 'sass'].forEach(function forEachSyntaxStyle(ext) {
+    syntaxStyles.forEach(function forEachSyntaxStyle(ext) {
         it(name + ' (' + ext + ')', function (done) {
             var expectedCss = readCss(ext, id);
             var sassFile = pathToSassFile(ext, id);
@@ -116,7 +117,7 @@ function testAsync(name, id) {
 }
 
 function testSync(name, id) {
-    ['scss', 'sass'].forEach(function forEachSyntaxStyle(ext) {
+    syntaxStyles.forEach(function forEachSyntaxStyle(ext) {
         it(name + ' (' + ext + ')', function () {
             var expectedCss = readCss(ext, id);
             var sassFile = pathToSassFile(ext, id);

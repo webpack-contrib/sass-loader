@@ -15,6 +15,12 @@ var SassError = {
     status: 1
 };
 
+/**
+ * The sass-loader makes node-sass available to webpack modules.
+ *
+ * @param {String} content
+ * @returns {*}
+ */
 module.exports = function (content) {
     var callback = this.async();
     var isSync = typeof callback !== 'function';
@@ -87,26 +93,12 @@ module.exports = function (content) {
                     self.dependency && self.dependency(filename);
                 }
 
+                // Use self.loadModule() before calling done() to make imported files available to
+                // other webpack tools like postLoaders etc.?
+
                 done({
                     file: filename
                 });
-
-                // It would be better if we could use self.loadModule() to give other
-                // loaders the chance to intercept but unfortunately node-sass is currently giving
-                // us strange segfaults when we're returning contents
-
-                //self.loadModule('-!' + __dirname + '/stringify.loader.js!' + filename, function (err, data) {
-                //    if (err) {
-                //        // Unfortunately we can't return an error inside a custom importer yet
-                //        // @see https://github.com/sass/node-sass/issues/651#issuecomment-73317319
-                //        filename = url;
-                //    }
-                //
-                //    importDone({
-                //        file: filename,
-                //        contents: !err && JSON.parse(data)
-                //    });
-                //});
             });
         };
     }
@@ -152,12 +144,15 @@ module.exports = function (content) {
         opt.sourceMap = this.options.output.path + '/sass.map';
     }
 
+    // indentedSyntax is a boolean flag
     opt.indentedSyntax = Boolean(opt.indentedSyntax);
     fileExt = '.' + (opt.indentedSyntax? 'sass' : 'scss');
 
     // opt.importer
     opt.importer = getWebpackImporter();
 
+
+    // start the actual rendering
     if (isSync) {
         try {
             return sass.renderSync(opt).css.toString();
