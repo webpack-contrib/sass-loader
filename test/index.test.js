@@ -108,7 +108,7 @@ describe('sass-loader', function () {
             } catch (err) {
                 // check for file excerpt
                 err.message.should.match(/@import "does-not-exist";/);
-                err.message.should.match(/File to import not found or unreadable: does-not-exist\.scss/);
+                err.message.should.match(/File to import not found or unreadable: \.\/does-not-exist\.scss/);
                 err.message.should.match(/\(line 1, column 9\)/);
                 err.message.indexOf(pathToErrorFileNotFound).should.not.equal(-1);
             }

@@ -44,6 +44,89 @@ module.exports = function (content) {
             '      in ' + err.file + ' (line ' + err.line + ', column ' + err.column + ')';
     }
 
+    /**
+     * Returns an importer that uses webpack's resolving algorithm.
+     *
+     * It's important that the returned function has the correct number of arguments
+     * (based on whether the call is sync or async) because otherwise node-sass doesn't exit.
+     *
+     * @returns {Function}
+     */
+    function getWebpackImporter() {
+        if (isSync) {
+            return function syncWebpackImporter(url, context) {
+                var filename;
+
+                url = urlToRequest(url);
+                context = normalizeContext(context);
+
+                try {
+                    filename = self.resolveSync(context, url);
+                    self.dependency && self.dependency(filename);
+                } catch (err) {
+                    // Unfortunately we can't return an error inside a custom importer yet
+                    // @see https://github.com/sass/node-sass/issues/651#issuecomment-73317319
+                    filename = url;
+                }
+                return {
+                    file: filename
+                };
+            };
+        }
+        return function asyncWebpackImporter(url, context, done) {
+
+            url = urlToRequest(url);
+            context = normalizeContext(context);
+
+            self.resolve(context, url, function onWebpackResolve(err, filename) {
+                if (err) {
+                    // Unfortunately we can't return an error inside a custom importer yet
+                    // @see https://github.com/sass/node-sass/issues/651#issuecomment-73317319
+                    filename = url;
+                } else {
+                    self.dependency && self.dependency(filename);
+                }
+
+                done({
+                    file: filename
+                });
+
+                // It would be better if we could use self.loadModule() to give other
+                // loaders the chance to intercept but unfortunately node-sass is currently giving
+                // us strange segfaults when we're returning contents
+
+                //self.loadModule('-!' + __dirname + '/stringify.loader.js!' + filename, function (err, data) {
+                //    if (err) {
+                //        // Unfortunately we can't return an error inside a custom importer yet
+                //        // @see https://github.com/sass/node-sass/issues/651#issuecomment-73317319
+                //        filename = url;
+                //    }
+                //
+                //    importDone({
+                //        file: filename,
+                //        contents: !err && JSON.parse(data)
+                //    });
+                //});
+            });
+        };
+    }
+
+    function urlToRequest(url) {
+        // Add file extension if it's not present already
+        if (url.slice(-fileExt.length) !== fileExt) {
+            url = url + fileExt;
+        }
+        return utils.urlToRequest(url, opt.root);
+    }
+
+    function normalizeContext(context) {
+        // The first file is 'stdin' when we're using the data option
+        if (context === 'stdin') {
+            context = resourcePath;
+        }
+        return path.dirname(context);
+    }
+
     this.cacheable();
 
     opt = utils.parseQuery(this.query);
@@ -69,69 +152,11 @@ module.exports = function (content) {
         opt.sourceMap = this.options.output.path + '/sass.map';
     }
 
-    fileExt = '.' + (opt.indentedSyntax || 'scss');
+    opt.indentedSyntax = Boolean(opt.indentedSyntax);
+    fileExt = '.' + (opt.indentedSyntax? 'sass' : 'scss');
 
     // opt.importer
-    opt.importer = function webpackImporter(url, context, importDone) {
-        var request;
-        var filename;
-
-        // The first file is 'stdin' when we're using the data option
-        if (context === 'stdin') {
-            context = resourcePath;
-        }
-
-        // Add file extension if it's not present already
-        if (url.slice(-fileExt.length) !== fileExt) {
-            url = url + fileExt;
-        }
-
-        context = path.dirname(context);
-        request = utils.urlToRequest(url, opt.root);
-
-        if (isSync) {
-            try {
-                filename = self.resolveSync(context, request);
-                self.dependency && self.dependency(filename);
-            } catch (err) {
-                // Unfortunately we can't return an error inside a custom importer yet
-                // @see https://github.com/sass/node-sass/issues/651#issuecomment-73317319
-                filename = url;
-            }
-            return {
-                file: filename
-            };
-        }
-        self.resolve(context, request, function onWebpackResolve(err, filename) {
-            if (err) {
-                // Unfortunately we can't return an error inside a custom importer yet
-                // @see https://github.com/sass/node-sass/issues/651#issuecomment-73317319
-                filename = url;
-            } else {
-                self.dependency && self.dependency(filename);
-            }
-
-            importDone({
-                file: filename
-            });
-
-            // It would be better if we could use self.loadModule() to give other
-            // loaders the chance to intercept but unfortunately node-sass is currently giving
-            // us strange segfaults when we're returning contents
-
-            //self.loadModule('-!' + __dirname + '/stringify.loader.js!' + filename, function (err, data) {
-            //    if (err) {
-            //        callback(err);
-            //        return;
-            //    }
-            //
-            //    importDone({
-            //        file: filename,
-            //        contents: JSON.parse(data)
-            //    });
-            //});
-        });
-    };
+    opt.importer = getWebpackImporter();
 
     if (isSync) {
         try {
