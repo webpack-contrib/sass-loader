@@ -17,11 +17,8 @@ function readCss(ext, id) {
 }
 
 function test(name, id) {
-    it(name, function (done) {
-        var exts = ['scss', 'sass'];
-        var pending = exts.length;
-
-        exts.forEach(function (ext) {
+    ['scss', 'sass'].forEach(function forEachSyntaxStyle(ext) {
+        it(name + ' (' + ext + ')', function (done) {
             var expectedCss = readCss(ext, id);
             var sassFile = 'raw!' +
                     pathToSassLoader + '?' +
@@ -61,10 +58,7 @@ function test(name, id) {
                 fs.writeFileSync(__dirname + '/output/' + name + '.' + ext + '.async.css', actualCss, 'utf8');
                 actualCss.should.eql(expectedCss);
 
-                pending--;
-                if (pending === 0) {
-                    done();
-                }
+                done();
             });
         });
     });
