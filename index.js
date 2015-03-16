@@ -160,7 +160,7 @@ module.exports = function (content) {
 
     if (isSync) {
         try {
-            return sass.renderSync(opt);
+            return sass.renderSync(opt).css.toString();
         } catch (err) {
             formatSassError(err);
             throw err;
@@ -183,7 +183,7 @@ module.exports = function (content) {
             result.map = null;
         }
 
-        callback(null, result.css, result.map);
+        callback(null, result.css.toString(), result.map);
     });
 };
 
