@@ -16,24 +16,13 @@ function readCss(ext, id) {
     return fs.readFileSync(path.join(__dirname, ext, id + '.css'), 'utf8').replace(CR, '');
 }
 
-function test(name, id) {
+function testAsync(name, id) {
     ['scss', 'sass'].forEach(function forEachSyntaxStyle(ext) {
         it(name + ' (' + ext + ')', function (done) {
             var expectedCss = readCss(ext, id);
-            var sassFile = 'raw!' +
-                    pathToSassLoader + '?' +
-                    (ext === 'sass'? '&indentedSyntax=sass' : '') + '!' +
-                    path.join(__dirname, ext, id + '.' + ext);
-            var enhancedReq;
+            var sassFile = pathToSassFile(ext, id);
             var actualCss;
 
-            enhancedReq = enhancedReqFactory(module);
-
-            // run synchronously
-            actualCss = enhancedReq(sassFile);
-            fs.writeFileSync(__dirname + '/output/' + name + '.' + ext + '.sync.css', actualCss, 'utf8');
-
-            // run asynchronously
             webpack({
                 entry: sassFile,
                 output: {
@@ -64,16 +53,45 @@ function test(name, id) {
     });
 }
 
+function testSync(name, id) {
+    ['scss', 'sass'].forEach(function forEachSyntaxStyle(ext) {
+        it(name + ' (' + ext + ')', function () {
+            var expectedCss = readCss(ext, id);
+            var sassFile = pathToSassFile(ext, id);
+            var enhancedReq = enhancedReqFactory(module);
+            var actualCss = enhancedReq(sassFile);
+
+            fs.writeFileSync(__dirname + '/output/' + name + '.' + ext + '.sync.css', actualCss, 'utf8');
+            actualCss.should.eql(expectedCss);
+        });
+    });
+}
+
+function pathToSassFile(ext, id) {
+    return 'raw!' +
+        pathToSassLoader + '?' +
+        (ext === 'sass'? '&indentedSyntax=sass' : '') + '!' +
+        path.join(__dirname, ext, id + '.' + ext);
+}
+
 describe('sass-loader', function () {
 
     describe('basic', function () {
-        test('should compile simple sass without errors', 'language');
+
+        testSync('should compile simple sass without errors (sync)', 'language');
+        testAsync('should compile simple sass without errors (async)', 'language');
+
     });
 
     describe('imports', function () {
-        test('should resolve imports correctly', 'imports');
+
+        testSync('should resolve imports correctly (sync)', 'imports');
+        testAsync('should resolve imports correctly (async)', 'imports');
+
         // Test for issue: https://github.com/jtangelder/sass-loader/issues/32
-        test('should pass with multiple imports', 'multiple-imports');
+        testSync('should pass with multiple imports (sync)', 'multiple-imports');
+        testAsync('should pass with multiple imports (async)', 'multiple-imports');
+
     });
 
     describe('errors', function () {
