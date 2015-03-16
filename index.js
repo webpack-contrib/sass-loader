@@ -48,6 +48,10 @@ module.exports = function (content) {
         err.message = getFileExcerptIfPossible(err) +
             msg.charAt(0).toUpperCase() + msg.slice(1) + os.EOL +
             '      in ' + err.file + ' (line ' + err.line + ', column ' + err.column + ')';
+
+        // Instruct webpack to hide the JS stack from the console
+        // Usually you're only interested in the SASS stack in this case.
+        err.hideStack = true;
     }
 
     /**
@@ -124,7 +128,7 @@ module.exports = function (content) {
     opt = utils.parseQuery(this.query);
     opt.data = content;
 
-    // skip empty files, otherwise it will stop webpack, see issue #21
+    // Skip empty files, otherwise it will stop webpack, see issue #21
     if (opt.data.trim() === '') {
         return callback(null, content);
     }
@@ -135,7 +139,7 @@ module.exports = function (content) {
     }
 
     // opt.sourceMap
-    // not using the `this.sourceMap` flag because css source maps are different
+    // Not using the `this.sourceMap` flag because css source maps are different
     // @see https://github.com/webpack/css-loader/pull/40
     if (opt.sourceMap) {
         // deliberately overriding the sourceMap option
@@ -171,8 +175,8 @@ module.exports = function (content) {
         if (result.map && result.map !== '{}') {
             result.map = JSON.parse(result.map);
             result.map.file = resourcePath;
-            // the first source is 'stdin' according to libsass because we've used the data input
-            // now let's override that value with the correct relative path
+            // The first source is 'stdin' according to libsass because we've used the data input
+            // Now let's override that value with the correct relative path
             result.map.sources[0] = path.relative(self.options.output.path, resourcePath);
         } else {
             result.map = null;
@@ -202,7 +206,7 @@ function getFileExcerptIfPossible(err) {
             new Array(err.column - 1).join(' ') + '^' + os.EOL +
             '      ';
     } catch (err) {
-        // if anything goes wrong here, we don't want any errors to be reported to the user
+        // If anything goes wrong here, we don't want any errors to be reported to the user
         return '';
     }
 }
