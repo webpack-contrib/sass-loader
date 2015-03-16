@@ -133,6 +133,6 @@ function testSync(name, id) {
 function pathToSassFile(ext, id) {
     return 'raw!' +
         pathToSassLoader + '?' +
-        (ext === 'sass'? '&indentedSyntax=sass' : '') + '!' +
+        (ext === 'sass'? '&indentedSyntax' : '') + '!' +
         path.join(__dirname, ext, id + '.' + ext);
 }

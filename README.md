@@ -65,7 +65,7 @@ See [node-sass](https://github.com/andrew/node-sass) for all available options.
 
 ### .sass files
 
-For requiring `.sass` files, add `indentedSyntax=sass` as a loader option:
+For requiring `.sass` files, add `indentedSyntax` as a loader option:
 
 ``` javascript
 module.exports = {
@@ -74,7 +74,7 @@ module.exports = {
       {
         test: /\.sass$/,
         // Passing indentedSyntax query param to node-sass
-        loader: "style!css!sass?indentedSyntax=sass"
+        loader: "style!css!sass?indentedSyntax"
       }
     ]
   }
