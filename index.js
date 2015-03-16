@@ -3,6 +3,17 @@
 var utils = require('loader-utils');
 var sass = require('node-sass');
 var path = require('path');
+var os = require('os');
+var fs = require('fs');
+
+// A typical sass error looks like this
+var SassError = {
+    message: 'invalid property name',
+    column: 14,
+    line: 1,
+    file: 'stdin',
+    status: 1
+};
 
 module.exports = function (content) {
     var callback = this.async();
@@ -11,6 +22,27 @@ module.exports = function (content) {
     var resourcePath = this.resourcePath;
     var fileExt;
     var opt;
+
+    /**
+     * Enhances the sass error with additional information about what actually went wrong.
+     *
+     * @param {SassError} err
+     */
+    function formatSassError(err) {
+        var msg = err.message;
+
+        if (err.file === 'stdin') {
+            err.file = resourcePath;
+        }
+
+        // The 'Current dir' hint of node-sass does not help us, we're providing
+        // additional information by reading the err.file property
+        msg = msg.replace(/\s*Current dir:\s*/, '');
+
+        err.message = getFileExcerptIfPossible(err) +
+            msg.charAt(0).toUpperCase() + msg.slice(1) + os.EOL +
+            '      in ' + err.file + ' (line ' + err.line + ', column ' + err.column + ')';
+    }
 
     this.cacheable();
 
@@ -62,17 +94,23 @@ module.exports = function (content) {
                 filename = self.resolveSync(context, request);
                 self.dependency && self.dependency(filename);
             } catch (err) {
-                callback(err);
+                // Unfortunately we can't return an error inside a custom importer yet
+                // @see https://github.com/sass/node-sass/issues/651#issuecomment-73317319
+                filename = url;
             }
-            return filename;
+            return {
+                file: filename
+            };
         }
         self.resolve(context, request, function onWebpackResolve(err, filename) {
             if (err) {
-                callback(err);
-                return;
+                // Unfortunately we can't return an error inside a custom importer yet
+                // @see https://github.com/sass/node-sass/issues/651#issuecomment-73317319
+                filename = url;
+            } else {
+                self.dependency && self.dependency(filename);
             }
 
-            self.dependency && self.dependency(filename);
             importDone({
                 file: filename
             });
@@ -96,11 +134,17 @@ module.exports = function (content) {
     };
 
     if (isSync) {
-        return sass.renderSync(opt).css;
+        try {
+            return sass.renderSync(opt);
+        } catch (err) {
+            formatSassError(err);
+            throw err;
+        }
     }
     sass.render(opt, function onRender(err, result) {
         if (err) {
-            callback({message: err.message + ' (' + err.line + ':' + err.column + ')'});
+            formatSassError(err);
+            callback(err);
             return;
         }
 
@@ -117,3 +161,28 @@ module.exports = function (content) {
         callback(null, result.css, result.map);
     });
 };
+
+/**
+ * Tries to get an excerpt of the file where the error happened.
+ * Uses err.line and err.column.
+ *
+ * Returns an empty string if the excerpt could not be retrieved.
+ *
+ * @param {SassError} err
+ * @returns {string}
+ */
+function getFileExcerptIfPossible(err) {
+    var content;
+
+    try {
+        content = fs.readFileSync(err.file, 'utf8');
+
+        return os.EOL +
+            content.split(os.EOL)[err.line - 1] + os.EOL +
+            new Array(err.column - 1).join(' ') + '^' + os.EOL +
+            '      ';
+    } catch (err) {
+        // if anything goes wrong here, we don't want any errors to be reported to the user
+        return '';
+    }
+}

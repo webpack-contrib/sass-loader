@@ -4,13 +4,15 @@ var sass = require('node-sass');
 var fs = require('fs');
 var path = require('path');
 
+var error = 'error';
+
 ['scss', 'sass'].forEach(function (ext) {
     var files = [];
     var basePath = path.join(__dirname, ext);
 
     fs.readdirSync(path.join(__dirname, ext))
         .filter(function (file) {
-            return path.extname(file) === '.' + ext;
+            return path.extname(file) === '.' + ext && file.slice(0, error.length) !== error;
         })
         .map(function (file) {
             var fileName = path.join(basePath, file);
