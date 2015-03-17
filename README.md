@@ -1,4 +1,4 @@
-# sass loader for [webpack](http://webpack.github.io/)
+# Sass loader for [webpack](http://webpack.github.io/)
 
 ## Install
 
@@ -40,9 +40,9 @@ module.exports = {
 
 Then you only need to write: `require("./file.scss")`.
 
-### SASS options
+### Sass options
 
-You can pass any SASS specific configuration options through to the render function via [query parameters](http://webpack.github.io/docs/using-loaders.html#query-parameters).
+You can pass any Sass specific configuration options through to the render function via [query parameters](http://webpack.github.io/docs/using-loaders.html#query-parameters).
 
 ``` javascript
 module.exports = {
@@ -113,7 +113,7 @@ module.exports = {
 };
 ```
 
-If you want to view the original SASS files inside Chrome and even edit it,  [there's a good blog post](https://medium.com/@toolmantim/getting-started-with-css-sourcemaps-and-in-browser-sass-editing-b4daab987fb0). Checkout [test/sourceMap](https://github.com/jtangelder/sass-loader/tree/master/test) for a running example. Make sure to serve the content with an HTTP server.
+If you want to view the original Sass files inside Chrome and even edit it,  [there's a good blog post](https://medium.com/@toolmantim/getting-started-with-css-sourcemaps-and-in-browser-sass-editing-b4daab987fb0). Checkout [test/sourceMap](https://github.com/jtangelder/sass-loader/tree/master/test) for a running example. Make sure to serve the content with an HTTP server.
 
 
 ## Caveats
