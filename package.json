@@ -6,11 +6,13 @@
   "scripts": {
     "pretest": "node test/prepare.js",
     "test": "mocha -R spec",
-    "test-source-map": "webpack --config test/sourceMap/webpack.config.js && open ./test/sourceMap/index.html",
-    "test-watch": "webpack --config test/watch/webpack.config.js"
+    "test-source-map": "webpack-dev-server --config test/sourceMap/webpack.config.js --content-base ./test/sourceMap",
+    "test-watch": "webpack --config test/watch/webpack.config.js",
+    "test-hmr": "webpack-dev-server --config test/hmr/webpack.config.js --content-base ./test/hmr --hot --inline"
   },
   "keywords": [
     "sass",
+    "libsass",
     "webpack",
     "loader"
   ],
@@ -20,17 +22,22 @@
   },
   "author": "J. Tangelder",
   "license": "MIT",
-  "dependencies": {
-    "loader-utils": "^0.2.5",
+  "peerDependencies": {
     "node-sass": "^3.0.0-alpha.0"
+  },
+  "dependencies": {
+    "loader-utils": "^0.2.5"
   },
   "devDependencies": {
     "css-loader": "^0.9.1",
     "enhanced-require": "^0.5.0-beta6",
     "extract-text-webpack-plugin": "^0.3.8",
     "mocha": "^2.0.1",
+    "node-sass": "^3.0.0-alpha.0",
     "raw-loader": "^0.5.1",
     "should": "^5.0.1",
-    "webpack": "^1.4.0"
+    "style-loader": "^0.8.3",
+    "webpack": "^1.4.0",
+    "webpack-dev-server": "^1.7.0"
   }
 }
