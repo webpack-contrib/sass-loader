@@ -1,7 +1,7 @@
 {
   "name": "sass-loader",
-  "version": "0.5.0",
-  "description": "Sass loader for Webpack",
+  "version": "1.0.0",
+  "description": "Sass loader for webpack",
   "main": "index.js",
   "scripts": {
     "pretest": "node test/prepare.js",
