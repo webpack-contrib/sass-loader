@@ -14,11 +14,12 @@ var SassError = {
     file: 'stdin',
     status: 1
 };
+var resolveError = /Cannot resolve/;
 
 /**
  * The sass-loader makes node-sass available to webpack modules.
  *
- * @param {String} content
+ * @param {string} content
  * @returns {*}
  */
 module.exports = function (content) {
@@ -60,27 +61,16 @@ module.exports = function (content) {
      * It's important that the returned function has the correct number of arguments
      * (based on whether the call is sync or async) because otherwise node-sass doesn't exit.
      *
-     * @returns {Function}
+     * @returns {function}
      */
     function getWebpackImporter() {
         if (isSync) {
             return function syncWebpackImporter(url, context) {
-                var filename;
 
                 url = urlToRequest(url);
                 context = normalizeContext(context);
 
-                try {
-                    filename = self.resolveSync(context, url);
-                    self.dependency && self.dependency(filename);
-                } catch (err) {
-                    // Unfortunately we can't return an error inside a custom importer yet
-                    // @see https://github.com/sass/node-sass/issues/651#issuecomment-73317319
-                    filename = url;
-                }
-                return {
-                    file: filename
-                };
+                return syncResolve(self, url, context);
             };
         }
         return function asyncWebpackImporter(url, context, done) {
@@ -88,22 +78,7 @@ module.exports = function (content) {
             url = urlToRequest(url);
             context = normalizeContext(context);
 
-            self.resolve(context, url, function onWebpackResolve(err, filename) {
-                if (err) {
-                    // Unfortunately we can't return an error inside a custom importer yet
-                    // @see https://github.com/sass/node-sass/issues/651#issuecomment-73317319
-                    filename = url;
-                } else {
-                    self.dependency && self.dependency(filename);
-                }
-
-                // Use self.loadModule() before calling done() to make imported files available to
-                // other webpack tools like postLoaders etc.?
-
-                done({
-                    file: filename
-                });
-            });
+            asyncResolve(self, url, context, done);
         };
     }
 
@@ -209,4 +184,90 @@ function getFileExcerptIfPossible(err) {
         // If anything goes wrong here, we don't want any errors to be reported to the user
         return '';
     }
+}
+
+/**
+ * Tries to resolve the given url synchronously. If a resolve error occurs, a second try for the same
+ * module prefixed with an underscore is started.
+ *
+ * @param {object} loaderContext
+ * @param {string} url
+ * @param {string} context
+ * @returns {object}
+ */
+function syncResolve(loaderContext, url, context) {
+    var filename;
+    var basename;
+
+    try {
+        filename = loaderContext.resolveSync(context, url);
+        loaderContext.dependency && loaderContext.dependency(filename);
+    } catch (err) {
+        basename = path.basename(url);
+        if (requiresLookupForUnderscoreModule(err, basename)) {
+            url = addUnderscoreToBasename(url, basename);
+            return syncResolve(loaderContext, url, context);
+        }
+        // Unfortunately we can't return an error inside a custom importer yet
+        // @see https://github.com/sass/node-sass/issues/651#issuecomment-73317319
+        filename = url;
+    }
+    return {
+        file: filename
+    };
+}
+
+/**
+ * Tries to resolve the given url asynchronously. If a resolve error occurs, a second try for the same
+ * module prefixed with an underscore is started.
+ *
+ * @param {object} loaderContext
+ * @param {string} url
+ * @param {string} context
+ * @param {function} done
+ */
+function asyncResolve(loaderContext, url, context, done) {
+    loaderContext.resolve(context, url, function onWebpackResolve(err, filename) {
+        var basename;
+
+        if (err) {
+            basename = path.basename(url);
+            if (requiresLookupForUnderscoreModule(err, basename)) {
+                url = addUnderscoreToBasename(url, basename);
+                return asyncResolve(loaderContext, url, context, done);
+            }
+            // Unfortunately we can't return an error inside a custom importer yet
+            // @see https://github.com/sass/node-sass/issues/651#issuecomment-73317319
+            filename = url;
+        } else {
+            loaderContext.dependency && loaderContext.dependency(filename);
+        }
+
+        // Use self.loadModule() before calling done() to make imported files available to
+        // other webpack tools like postLoaders etc.?
+
+        done({
+            file: filename
+        });
+    });
+}
+
+/**
+ * Check whether its a resolve error and the basename does *not* start with an underscore.
+ *
+ * @param {Error} err
+ * @param {string} basename
+ * @returns {boolean}
+ */
+function requiresLookupForUnderscoreModule(err, basename) {
+    return resolveError.test(err.message) && basename.charAt(0) !== '_';
+}
+
+/**
+ * @param {string} url
+ * @param {string} basename
+ * @returns {string}
+ */
+function addUnderscoreToBasename(url, basename) {
+    return url.slice(0, -basename.length) + '_' + basename;
 }

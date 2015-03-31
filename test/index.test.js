@@ -31,6 +31,9 @@ describe('sass-loader', function () {
         testSync('should pass with multiple imports (sync)', 'multiple-imports');
         testAsync('should pass with multiple imports (async)', 'multiple-imports');
 
+        testSync('should resolve modules starting with an underscore (sync)', 'underscore-imports');
+        testAsync('should resolve modules starting with an underscore (async)', 'underscore-imports');
+
     });
 
     describe('errors', function () {
@@ -65,7 +68,7 @@ describe('sass-loader', function () {
             } catch (err) {
                 // check for file excerpt
                 err.message.should.match(/@import "does-not-exist";/);
-                err.message.should.match(/File to import not found or unreadable: \.\/does-not-exist\.scss/);
+                err.message.should.match(/File to import not found or unreadable: \.\/_does-not-exist\.scss/);
                 err.message.should.match(/\(line 1, column 9\)/);
                 err.message.indexOf(pathToErrorFileNotFound).should.not.equal(-1);
             }

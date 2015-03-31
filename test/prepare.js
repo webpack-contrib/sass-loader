@@ -5,6 +5,9 @@ var fs = require('fs');
 var path = require('path');
 
 var error = 'error';
+var filesWithTildeImports = [
+    'imports', 'underscore-imports'
+];
 
 ['scss', 'sass'].forEach(function (ext) {
     var files = [];
@@ -16,10 +19,11 @@ var error = 'error';
         })
         .map(function (file) {
             var fileName = path.join(basePath, file);
+            var fileWithoutExt = file.slice(0, -ext.length - 1);
             var fileContent;
             var css;
 
-            if (file === 'imports.' + ext) {
+            if (filesWithTildeImports.indexOf(fileWithoutExt) > -1) {
                 // We need to replace all occurrences of '~' with relative paths
                 // so node-sass finds the imported files without webpack's resolving algorithm
                 fileContent = fs.readFileSync(fileName, 'utf8');
@@ -36,7 +40,7 @@ var error = 'error';
                 ]
             }).css;
 
-            if (file === 'imports.' + ext) {
+            if (filesWithTildeImports.indexOf(fileWithoutExt) > -1) {
                 // Revert back our changes and add '~' again
                 fileContent = fs.readFileSync(fileName, 'utf8');
                 fileContent = fileContent.replace('../node_modules/', '~');
