@@ -1,6 +1,11 @@
 Changelog
 ---------
 
+### 1.0.1
+
+- Fix SASS partials not being resolved anymore [#68](https://github.com/jtangelder/sass-loader/issues/68)
+- Update peer-dependency `node-sass` to `3.0.0-beta.4`
+
 ### 1.0.0
 
 - Moved `node-sass^3.0.0-alpha.0` to `peerDependencies` [#28](https://github.com/jtangelder/sass-loader/issues/28)
