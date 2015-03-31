@@ -43,9 +43,9 @@ describe('sass-loader', function () {
                 enhancedReqFactory(module)(pathToSassLoader + '!' + pathToErrorFile);
             } catch (err) {
                 // check for file excerpt
-                err.message.should.match(/\.syntax-error{/);
-                err.message.should.match(/Invalid property name/);
-                err.message.should.match(/\(line 1, column 14\)/);
+                err.message.should.match(/\.syntax-error''/);
+                err.message.should.match(/Invalid top-level expression/);
+                err.message.should.match(/\(line 1, column 1\)/);
                 err.message.indexOf(pathToErrorFile).should.not.equal(-1);
             }
         });
@@ -55,9 +55,9 @@ describe('sass-loader', function () {
                 enhancedReqFactory(module)(pathToSassLoader + '!' + pathToErrorImport);
             } catch (err) {
                 // check for file excerpt
-                err.message.should.match(/\.syntax-error{/);
-                err.message.should.match(/Invalid property name/);
-                err.message.should.match(/\(line 1, column 14\)/);
+                err.message.should.match(/\.syntax-error''/);
+                err.message.should.match(/Invalid top-level expression/);
+                err.message.should.match(/\(line 1, column 1\)/);
                 err.message.indexOf(pathToErrorFile).should.not.equal(-1);
             }
         });
