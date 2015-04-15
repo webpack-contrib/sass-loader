@@ -10,7 +10,7 @@ Starting with `1.0.0`, the sass-loader requires [node-sass](https://github.com/s
 
 ## Please note
 
-sass-loader `1.0.0` requires a non-stable node-sass version as `peerDependency`. If you encounter any problems such as [`Abort trap`](https://github.com/jtangelder/sass-loader/issues/65) or [`Assertion failed`](https://github.com/sass/node-sass/issues/713) please consider using sass-loader `0.6.0`. It provides the same features while depending on node-sass `2.1.1`
+sass-loader `1.0.0` requires a non-stable node-sass version as `peerDependency`. If you encounter any problems such as [`Abort trap`](https://github.com/jtangelder/sass-loader/issues/65) or [`Assertion failed`](https://github.com/sass/node-sass/issues/713) please consider using sass-loader `0.4.2`.
 
 ---
 
