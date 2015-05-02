@@ -29,6 +29,9 @@ module.exports = function (content) {
     var resourcePath = this.resourcePath;
     var fileExt;
     var opt;
+    var extensionMatcher = /\.(sass|scss)$/;
+    var contextMatch;
+    var extension;
 
     /**
      * Enhances the sass error with additional information about what actually went wrong.
@@ -66,27 +69,30 @@ module.exports = function (content) {
     function getWebpackImporter() {
         if (isSync) {
             return function syncWebpackImporter(url, context) {
-
-                url = urlToRequest(url);
+                url = urlToRequest(url, context);
                 context = normalizeContext(context);
 
                 return syncResolve(self, url, context);
             };
         }
         return function asyncWebpackImporter(url, context, done) {
-
-            url = urlToRequest(url);
+            url = urlToRequest(url, context);
             context = normalizeContext(context);
 
             asyncResolve(self, url, context, done);
         };
     }
 
-    function urlToRequest(url) {
-        // Add file extension if it's not present already
-        if (url.slice(-fileExt.length) !== fileExt) {
-            url = url + fileExt;
+    function urlToRequest(url, context) {
+        contextMatch = context.match(extensionMatcher);
+
+        // Add sass/scss extension if it is missing
+        // The extension is inherited from importing resource or the default is used
+        if (!url.match(extensionMatcher)) {
+            extension = contextMatch && contextMatch[0] || fileExt
+            url = url + extension;
         }
+
         return utils.urlToRequest(url, opt.root);
     }
 
