@@ -1,6 +1,11 @@
 Changelog
 ---------
 
+### 1.0.2
+
+- Fix a bug where files could not be imported across language styles [#73](https://github.com/jtangelder/sass-loader/issues/73)
+- Update peer-dependency `node-sass` to `3.1.0`
+
 ### 1.0.1
 
 - Fix SASS partials not being resolved anymore [#68](https://github.com/jtangelder/sass-loader/issues/68)
