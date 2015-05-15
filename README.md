@@ -8,12 +8,6 @@ Starting with `1.0.0`, the sass-loader requires [node-sass](https://github.com/s
 
 ---
 
-## Please note
-
-sass-loader `1.0.0` requires a non-stable node-sass version as `peerDependency`. If you encounter any problems such as [`Abort trap`](https://github.com/jtangelder/sass-loader/issues/65) or [`Assertion failed`](https://github.com/sass/node-sass/issues/713) please consider using sass-loader `0.4.2`.
-
----
-
 ## Usage
 
 [Documentation: Using loaders](http://webpack.github.io/docs/using-loaders.html)
@@ -100,6 +94,10 @@ module.exports = {
   }
 };
 ```
+
+### Importing across language styles
+
+Importing a file written in the other language style, like importing a `.sass` file from a `.scss` file, requires the file extension to be set explicitly. If no extension is specified, the extension is inherited from the importing file.
 
 ## Source maps
 
