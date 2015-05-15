@@ -34,6 +34,10 @@ describe('sass-loader', function () {
         testSync('should resolve modules starting with an underscore (sync)', 'underscore-imports');
         testAsync('should resolve modules starting with an underscore (async)', 'underscore-imports');
 
+        // Test for issue: https://github.com/jtangelder/sass-loader/issues/73
+        testSync('should resolve imports from other language style correctly (sync)', 'import-other-style');
+        testAsync('should resolve imports from other language style correctly (async)', 'import-other-style');
+
     });
 
     describe('errors', function () {

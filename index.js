@@ -27,9 +27,9 @@ module.exports = function (content) {
     var isSync = typeof callback !== 'function';
     var self = this;
     var resourcePath = this.resourcePath;
+    var extensionMatcher = /\.(sass|scss)$/;
     var fileExt;
     var opt;
-    var extensionMatcher = /\.(sass|scss)$/;
     var contextMatch;
     var extension;
 
@@ -89,7 +89,7 @@ module.exports = function (content) {
         // Add sass/scss extension if it is missing
         // The extension is inherited from importing resource or the default is used
         if (!url.match(extensionMatcher)) {
-            extension = contextMatch && contextMatch[0] || fileExt
+            extension = contextMatch && contextMatch[0] || fileExt;
             url = url + extension;
         }
 
