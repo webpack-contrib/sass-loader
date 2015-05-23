@@ -127,6 +127,12 @@ module.exports = function (content) {
         // this value is (currently) ignored by libsass when using the data input instead of file input
         // however, it is still necessary for correct relative paths in result.map.sources
         opt.sourceMap = this.options.output.path + '/sass.map';
+
+        // If sourceMapContents option is not set, set it to true otherwise maps will be empty/null
+        // when exported by webpack-extract-text-plugin.
+        if (!opt.hasOwnProperty('sourceMapContents') ) {
+            opt.sourceMapContents = true;
+        }
     }
 
     // indentedSyntax is a boolean flag
