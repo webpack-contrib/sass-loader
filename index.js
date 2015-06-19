@@ -23,8 +23,7 @@ var resolveError = /Cannot resolve/;
  * @returns {*}
  */
 module.exports = function (content) {
-    var callback = this.async();
-    var isSync = typeof callback !== 'function';
+    var isSync = true;
     var self = this;
     var resourcePath = this.resourcePath;
     var extensionMatcher = /\.(sass|scss)$/;
@@ -139,12 +138,25 @@ module.exports = function (content) {
 
     // start the actual rendering
     if (isSync) {
+        var result;
         try {
-            return sass.renderSync(opt).css.toString();
+            result = sass.renderSync(opt);
         } catch (err) {
             formatSassError(err);
             throw err;
         }
+
+        if (result.map && result.map !== '{}') {
+            result.map = JSON.parse(result.map);
+            result.map.file = resourcePath;
+            // The first source is 'stdin' according to libsass because we've used the data input
+            // Now let's override that value with the correct relative path
+            result.map.sources[0] = path.relative(self.options.output.path, resourcePath);
+        } else {
+            result.map = null;
+        }
+
+        return [result.css.toString(), result.map];
     }
     sass.render(opt, function onRender(err, result) {
         if (err) {
