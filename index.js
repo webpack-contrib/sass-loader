@@ -5,6 +5,7 @@ var sass = require('node-sass');
 var path = require('path');
 var os = require('os');
 var fs = require('fs');
+var deasync = require('deasync');
 
 // A typical sass error looks like this
 var SassError = {
@@ -67,19 +68,17 @@ module.exports = function (content) {
      * @returns {function}
      */
     function getWebpackImporter() {
-        if (isSync) {
-            return function syncWebpackImporter(url, context) {
-                url = urlToRequest(url, context);
-                context = normalizeContext(context);
-
-                return syncResolve(self, url, context);
-            };
-        }
-        return function asyncWebpackImporter(url, context, done) {
+        return function syncWebpackImporter(url, context) {
             url = urlToRequest(url, context);
             context = normalizeContext(context);
+            var result = null;
 
-            asyncResolve(self, url, context, done);
+            asyncResolve(self, url, context, function(ret) {
+                result = ret;
+            });
+
+            deasync.loopWhile(function() {return result === null;});
+            return result;
         };
     }
 
@@ -137,34 +136,26 @@ module.exports = function (content) {
     opt.importer = getWebpackImporter();
 
 
-    // start the actual rendering
-    if (isSync) {
-        try {
-            return sass.renderSync(opt).css.toString();
-        } catch (err) {
-            formatSassError(err);
-            throw err;
-        }
+    // do the actual rendering
+    var result;
+    try {
+        result = sass.renderSync(opt);
+    } catch (err) {
+        formatSassError(err);
+        throw err;
     }
-    sass.render(opt, function onRender(err, result) {
-        if (err) {
-            formatSassError(err);
-            callback(err);
-            return;
-        }
 
-        if (result.map && result.map !== '{}') {
-            result.map = JSON.parse(result.map);
-            result.map.file = resourcePath;
-            // The first source is 'stdin' according to libsass because we've used the data input
-            // Now let's override that value with the correct relative path
-            result.map.sources[0] = path.relative(self.options.output.path, resourcePath);
-        } else {
-            result.map = null;
-        }
+    if (result.map && result.map !== '{}') {
+        result.map = JSON.parse(result.map);
+        result.map.file = resourcePath;
+        // The first source is 'stdin' according to libsass because we've used the data input
+        // Now let's override that value with the correct relative path
+        result.map.sources[0] = path.relative(self.options.output.path, resourcePath);
+    } else {
+        result.map = null;
+    }
 
-        callback(null, result.css.toString(), result.map);
-    });
+    callback(null, result.css.toString(), result.map);
 };
 
 /**

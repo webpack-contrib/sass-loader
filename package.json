@@ -1,6 +1,6 @@
 {
   "name": "sass-loader",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "Sass loader for webpack",
   "main": "index.js",
   "scripts": {
@@ -26,6 +26,7 @@
     "node-sass": "^3.1.0"
   },
   "dependencies": {
+    "deasync": "0.1.0",
     "loader-utils": "^0.2.5"
   },
   "devDependencies": {
