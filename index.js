@@ -104,6 +104,19 @@ module.exports = function (content) {
         return path.dirname(context);
     }
 
+    // add result files to loader
+    function addNodeSassResult2WebpackDep(loader, result) {
+      if (!loader || !result || !result.stats
+          || !result.stats.includedFiles || 1 > result.stats.includedFiles) {
+        return;
+      }
+
+      var depFn = loader.addDependency || loader.dependency;
+      for (var i in result.stats.includedFiles) {
+        depFn(result.stats.includedFiles[i]);
+      }
+    }
+
     this.cacheable();
 
     opt = utils.parseQuery(this.query);
@@ -140,7 +153,10 @@ module.exports = function (content) {
     // start the actual rendering
     if (isSync) {
         try {
-            return sass.renderSync(opt).css.toString();
+
+            var ret = sass.renderSync(opt);
+            addNodeSassResult2WebpackDep(self, ret);
+            return ret.css.toString();
         } catch (err) {
             formatSassError(err);
             throw err;
@@ -162,6 +178,8 @@ module.exports = function (content) {
         } else {
             result.map = null;
         }
+
+        addNodeSassResult2WebpackDep(self, result);
 
         callback(null, result.css.toString(), result.map);
     });
@@ -207,17 +225,17 @@ function syncResolve(loaderContext, url, context) {
 
     try {
         filename = loaderContext.resolveSync(context, url);
-        loaderContext.dependency && loaderContext.dependency(filename);
     } catch (err) {
         basename = path.basename(url);
         if (requiresLookupForUnderscoreModule(err, basename)) {
             url = addUnderscoreToBasename(url, basename);
             return syncResolve(loaderContext, url, context);
         }
-        // Unfortunately we can't return an error inside a custom importer yet
-        // @see https://github.com/sass/node-sass/issues/651#issuecomment-73317319
-        filename = url;
+
+        // let the libsass do the rest job, e.g. search module in includePaths
+        filename = path.join(path.dirname(url), removeUnderscoreFromBasename(basename));
     }
+
     return {
         file: filename
     };
@@ -242,11 +260,9 @@ function asyncResolve(loaderContext, url, context, done) {
                 url = addUnderscoreToBasename(url, basename);
                 return asyncResolve(loaderContext, url, context, done);
             }
-            // Unfortunately we can't return an error inside a custom importer yet
-            // @see https://github.com/sass/node-sass/issues/651#issuecomment-73317319
-            filename = url;
-        } else {
-            loaderContext.dependency && loaderContext.dependency(filename);
+
+            // let the libsass do the rest job, e.g. search module in includePaths
+            filename = path.join(path.dirname(url), removeUnderscoreFromBasename(basename));
         }
 
         // Use self.loadModule() before calling done() to make imported files available to
@@ -276,4 +292,8 @@ function requiresLookupForUnderscoreModule(err, basename) {
  */
 function addUnderscoreToBasename(url, basename) {
     return url.slice(0, -basename.length) + '_' + basename;
+}
+
+function removeUnderscoreFromBasename(basename) {
+  return !basename ? basename : ("_" === basename[0] ? basename.substring(1) : basename);
 }
