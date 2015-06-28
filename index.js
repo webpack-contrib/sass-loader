@@ -107,7 +107,7 @@ module.exports = function (content) {
     // add result files to loader
     function addNodeSassResult2WebpackDep(loader, result) {
       if (!loader || !result || !result.stats
-          || !result.stats.includedFiles || 1 > result.stats.includedFiles) {
+          || !result.stats.includedFiles || 1 > result.stats.includedFiles.length) {
         return;
       }
 
