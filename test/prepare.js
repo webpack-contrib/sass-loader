@@ -36,7 +36,8 @@ var filesWithTildeImports = [
             css = sass.renderSync({
                 file: fileName,
                 includePaths: [
-                    path.join(__dirname, ext, 'another')
+                    path.join(__dirname, ext, 'another'),
+                    path.join(__dirname, 'another', ext)
                 ]
             }).css;
 
