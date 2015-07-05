@@ -27,7 +27,7 @@ module.exports = function (content) {
     var isSync = typeof callback !== 'function';
     var self = this;
     var resourcePath = this.resourcePath;
-    var extensionMatcher = /\.(sass|scss)$/;
+    var extensionMatcher = /\.(sass|scss|css)$/;
     var fileExt;
     var opt;
     var contextMatch;
