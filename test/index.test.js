@@ -38,9 +38,9 @@ describe('sass-loader', function () {
         testSync('should resolve imports from other language style correctly (sync)', 'import-other-style');
         testAsync('should resolve imports from other language style correctly (async)', 'import-other-style');
 
-        // test for includepath not under context
-        testSync('should resolve imports from another directory declared by includePaths correctly(sync)', 'import-include-paths');
-        testAsync('should resolve imports from another directory declared by includePaths correctly(async)', 'import-include-paths');
+        // Test for includePath imports
+        testSync('should resolve imports from another directory declared by includePaths correctly (sync)', 'import-include-paths');
+        testAsync('should resolve imports from another directory declared by includePaths correctly (async)', 'import-include-paths');
     });
 
     describe('errors', function () {
@@ -143,6 +143,6 @@ function testSync(name, id) {
 function pathToSassFile(ext, id) {
     return 'raw!' +
         pathToSassLoader + '?' +
-        (ext === 'sass'? '&indentedSyntax&' : '') + 'includePaths[]=' + path.join(__dirname, 'another', ext) + '!' +
+        (ext === 'sass'? '&indentedSyntax&' : '') + 'includePaths[]=' + path.join(__dirname, ext, 'from-include-path') + '!' +
         path.join(__dirname, ext, id + '.' + ext);
 }

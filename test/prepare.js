@@ -38,7 +38,7 @@ var filesWithTildeImports = [
                 file: fileName,
                 includePaths: [
                     path.join(__dirname, ext, 'another'),
-                    path.join(__dirname, 'another', ext)
+                    path.join(__dirname, ext, 'from-include-path')
                 ]
             }).css;
 
