@@ -133,14 +133,6 @@ module.exports = {
 
 If you want to view the original Sass files inside Chrome and even edit it,  [there's a good blog post](https://medium.com/@toolmantim/getting-started-with-css-sourcemaps-and-in-browser-sass-editing-b4daab987fb0). Checkout [test/sourceMap](https://github.com/jtangelder/sass-loader/tree/master/test) for a running example. Make sure to serve the content with an HTTP server.
 
-## Contribution  
-  
-### How to run test  
-```bash  
-  mkdir -p test/node_modules/ && touch test/node_modules/some-module.s{a,c}ss && touch test/node_modules/underscore.s{a,c}ss
-  npm test
-```
-
 ## License
 
 MIT (http://www.opensource.org/licenses/mit-license.php)
