@@ -28,6 +28,7 @@ module.exports = function (content) {
     var self = this;
     var resourcePath = this.resourcePath;
     var extensionMatcher = /\.(sass|scss|css)$/;
+    var result;
     var fileExt;
     var opt;
     var contextMatch;
@@ -86,7 +87,7 @@ module.exports = function (content) {
     function urlToRequest(url, context) {
         contextMatch = context.match(extensionMatcher);
 
-        // Add sass/scss extension if it is missing
+        // Add sass/scss/css extension if it is missing
         // The extension is inherited from importing resource or the default is used
         if (!url.match(extensionMatcher)) {
             extension = contextMatch && contextMatch[0] || fileExt;
@@ -104,17 +105,10 @@ module.exports = function (content) {
         return path.dirname(context);
     }
 
-    // add result files to loader
-    function addNodeSassResult2WebpackDep(loader, result) {
-      if (!loader || !result || !result.stats
-          || !result.stats.includedFiles || 1 > result.stats.includedFiles.length) {
-        return;
-      }
-
-      var depFn = loader.addDependency || loader.dependency;
-      for (var i in result.stats.includedFiles) {
-        depFn(result.stats.includedFiles[i]);
-      }
+    // When files have been imported via the includePaths-option, these files need to be
+    // introduced to webpack in order to make them watchable.
+    function addIncludedFilesToWebpack(includedFiles) {
+        includedFiles.forEach(self.dependency);
     }
 
     this.cacheable();
@@ -149,14 +143,12 @@ module.exports = function (content) {
     // opt.importer
     opt.importer = getWebpackImporter();
 
-
     // start the actual rendering
     if (isSync) {
         try {
-
-            var ret = sass.renderSync(opt);
-            addNodeSassResult2WebpackDep(self, ret);
-            return ret.css.toString();
+            result = sass.renderSync(opt);
+            addIncludedFilesToWebpack(result.stats.includedFiles);
+            return result.css.toString();
         } catch (err) {
             formatSassError(err);
             throw err;
@@ -179,8 +171,7 @@ module.exports = function (content) {
             result.map = null;
         }
 
-        addNodeSassResult2WebpackDep(self, result);
-
+        addIncludedFilesToWebpack(result.stats.includedFiles);
         callback(null, result.css.toString(), result.map);
     });
 };
@@ -261,7 +252,7 @@ function asyncResolve(loaderContext, url, context, done) {
                 return asyncResolve(loaderContext, url, context, done);
             }
 
-            // let the libsass do the rest job, e.g. search module in includePaths
+            // Let libsass do the rest of the job, like searching for the module in includePaths
             filename = path.join(path.dirname(url), removeUnderscoreFromBasename(basename));
         }
 
@@ -294,6 +285,10 @@ function addUnderscoreToBasename(url, basename) {
     return url.slice(0, -basename.length) + '_' + basename;
 }
 
+/**
+ * @param {string} basename
+ * @returns {string}
+ */
 function removeUnderscoreFromBasename(basename) {
-  return !basename ? basename : ("_" === basename[0] ? basename.substring(1) : basename);
+  return basename[0] === '_' ? basename.substring(1) : basename;
 }
