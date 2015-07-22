@@ -1,9 +1,10 @@
 Changelog
 ---------
 
-### ????
+### 1.0.3
 
-- Fix importing css files from scss/sass
+- Fix importing css files from scss/sass [#101](https://github.com/jtangelder/sass-loader/issues/101)
+- Fix importing SASS partials from includePath [#98](https://github.com/jtangelder/sass-loader/issues/98) [#110](https://github.com/jtangelder/sass-loader/issues/110)
 
 ### 1.0.2
 
