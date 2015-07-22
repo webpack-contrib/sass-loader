@@ -16,3 +16,5 @@ node_modules
 coverage
 examples
 .idea
+
+test/output
