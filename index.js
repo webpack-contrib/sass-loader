@@ -32,6 +32,7 @@ module.exports = function (content) {
     var opt;
     var contextMatch;
     var extension;
+    var includePaths;
 
     /**
      * Enhances the sass error with additional information about what actually went wrong.
@@ -59,27 +60,58 @@ module.exports = function (content) {
     }
 
     /**
+     * Returns all possible paths pointing to import taking include paths and
+     * possible underscore prefixes into account.
+     *
+     * @param {string} the original import url
+     * @param {string} context
+     * @param {array} include paths
+     */
+    function getAllPaths(url, context, includePaths) {
+        var request = urlToRequest(url, context);
+        var allPaths = [request];
+        var resolvedUrl = request.substring(request.indexOf(url));
+        var basename = path.basename(request);
+
+        if (requiresLookupForUnderscoreModule(basename)) {
+            allPaths.push(addUnderscoreToBasename(request, basename));
+            includePaths.forEach(function(includePath) {
+                request = path.resolve(includePath, resolvedUrl);
+                allPaths.push(request);
+                allPaths.push(addUnderscoreToBasename(request, basename));
+            });
+        } else {
+            includePaths.forEeach(function(includePath) {
+                allPaths.push(path.resolve(includePath, resolvedUrl));
+            });
+        }
+
+        return allPaths;
+    }
+
+    /**
      * Returns an importer that uses webpack's resolving algorithm.
      *
      * It's important that the returned function has the correct number of arguments
      * (based on whether the call is sync or async) because otherwise node-sass doesn't exit.
      *
+     * @param {array} includePaths
      * @returns {function}
      */
-    function getWebpackImporter() {
+    function getWebpackImporter(includePaths) {
         if (isSync) {
             return function syncWebpackImporter(url, context) {
-                url = urlToRequest(url, context);
                 context = normalizeContext(context);
+                var allPaths = getAllPaths(url, context, includePaths);
 
-                return syncResolve(self, url, context);
+                return syncResolve(self, context, allPaths, url);
             };
         }
         return function asyncWebpackImporter(url, context, done) {
-            url = urlToRequest(url, context);
             context = normalizeContext(context);
+            var allPaths = getAllPaths(url, context, includePaths);
 
-            asyncResolve(self, url, context, done);
+            asyncResolve(self, context, done, allPaths, url);
         };
     }
 
@@ -134,7 +166,7 @@ module.exports = function (content) {
     fileExt = '.' + (opt.indentedSyntax? 'sass' : 'scss');
 
     // opt.importer
-    opt.importer = getWebpackImporter();
+    opt.importer = getWebpackImporter(opt.includePaths);
 
 
     // start the actual rendering
@@ -197,26 +229,24 @@ function getFileExcerptIfPossible(err) {
  * module prefixed with an underscore is started.
  *
  * @param {object} loaderContext
- * @param {string} url
  * @param {string} context
+ * @param {array} all possible paths for resource
+ * @param {string} the original import url
  * @returns {object}
  */
-function syncResolve(loaderContext, url, context) {
+function syncResolve(loaderContext, context, allPaths, originalImport) {
     var filename;
     var basename;
 
     try {
-        filename = loaderContext.resolveSync(context, url);
+        filename = loaderContext.resolveSync(context, allPaths.shift());
         loaderContext.dependency && loaderContext.dependency(filename);
     } catch (err) {
-        basename = path.basename(url);
-        if (requiresLookupForUnderscoreModule(err, basename)) {
-            url = addUnderscoreToBasename(url, basename);
-            return syncResolve(loaderContext, url, context);
+        if (allPaths.length > 0) {
+            return syncResolve(loaderContext, url, context, allPaths);
+        } else {
+            done(new Error('Could not resolve module "' + originalImport + '".'));
         }
-        // Unfortunately we can't return an error inside a custom importer yet
-        // @see https://github.com/sass/node-sass/issues/651#issuecomment-73317319
-        filename = url;
     }
     return {
         file: filename
@@ -231,42 +261,37 @@ function syncResolve(loaderContext, url, context) {
  * @param {string} url
  * @param {string} context
  * @param {function} done
+ * @param {array} all possible paths for resource
+ * @param {string} the original import url
  */
-function asyncResolve(loaderContext, url, context, done) {
-    loaderContext.resolve(context, url, function onWebpackResolve(err, filename) {
-        var basename;
-
+function asyncResolve(loaderContext, context, done, allPaths, originalImport) {
+    loaderContext.resolve(context, allPaths.shift(), function onWebpackResolve(err, filename) {
         if (err) {
-            basename = path.basename(url);
-            if (requiresLookupForUnderscoreModule(err, basename)) {
-                url = addUnderscoreToBasename(url, basename);
-                return asyncResolve(loaderContext, url, context, done);
+            if (allPaths.length > 0) {
+                return asyncResolve(loaderContext, context, done, allPaths, originalImport);
+            } else {
+                done(new Error('Could not resolve module "' + originalImport + '".'));
             }
-            // Unfortunately we can't return an error inside a custom importer yet
-            // @see https://github.com/sass/node-sass/issues/651#issuecomment-73317319
-            filename = url;
         } else {
             loaderContext.dependency && loaderContext.dependency(filename);
+
+            // Use self.loadModule() before calling done() to make imported files available to
+            // other webpack tools like postLoaders etc.?
+            done({
+                file: filename
+            });
         }
-
-        // Use self.loadModule() before calling done() to make imported files available to
-        // other webpack tools like postLoaders etc.?
-
-        done({
-            file: filename
-        });
     });
 }
 
 /**
- * Check whether its a resolve error and the basename does *not* start with an underscore.
+ * Check whether the basename does *not* start with an underscore.
  *
- * @param {Error} err
  * @param {string} basename
  * @returns {boolean}
  */
-function requiresLookupForUnderscoreModule(err, basename) {
-    return resolveError.test(err.message) && basename.charAt(0) !== '_';
+function requiresLookupForUnderscoreModule(basename) {
+    return basename.charAt(0) !== '_';
 }
 
 /**
