@@ -1,2 +1,3 @@
 // Importing the other language style requires the file extension to be set explicitly
 @import "../sass/another/module.sass";
+@import "~some-module.css";

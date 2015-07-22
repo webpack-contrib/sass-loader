@@ -1,6 +1,10 @@
 Changelog
 ---------
 
+### ????
+
+- Fix importing css files from scss/sass
+
 ### 1.0.2
 
 - Fix a bug where files could not be imported across language styles [#73](https://github.com/jtangelder/sass-loader/issues/73)
