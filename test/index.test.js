@@ -38,6 +38,9 @@ describe('sass-loader', function () {
         testSync('should resolve imports from other language style correctly (sync)', 'import-other-style');
         testAsync('should resolve imports from other language style correctly (async)', 'import-other-style');
 
+        // test for includepath not under context
+        testSync('should resolve imports from another directory declared by includePaths correctly(sync)', 'import-include-paths');
+        testAsync('should resolve imports from another directory declared by includePaths correctly(async)', 'import-include-paths');
     });
 
     describe('errors', function () {
@@ -72,7 +75,7 @@ describe('sass-loader', function () {
             } catch (err) {
                 // check for file excerpt
                 err.message.should.match(/@import "does-not-exist";/);
-                err.message.should.match(/File to import not found or unreadable: \.\/_does-not-exist\.scss/);
+                err.message.should.match(/File to import not found or unreadable: does-not-exist\.scss/);
                 err.message.should.match(/\(line 1, column 9\)/);
                 err.message.indexOf(pathToErrorFileNotFound).should.not.equal(-1);
             }
@@ -140,6 +143,6 @@ function testSync(name, id) {
 function pathToSassFile(ext, id) {
     return 'raw!' +
         pathToSassLoader + '?' +
-        (ext === 'sass'? '&indentedSyntax' : '') + '!' +
+        (ext === 'sass'? '&indentedSyntax&' : '') + 'includePaths[]=' + path.join(__dirname, 'another', ext) + '!' +
         path.join(__dirname, ext, id + '.' + ext);
 }
