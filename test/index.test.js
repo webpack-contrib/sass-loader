@@ -65,7 +65,14 @@ describe('sass-loader', function () {
                 err.message.should.match(/\.syntax-error''/);
                 err.message.should.match(/Invalid top-level expression/);
                 err.message.should.match(/\(line 1, column 1\)/);
-                err.message.indexOf(pathToErrorFile).should.not.equal(-1);
+
+                // On Windows, the path seems translated.
+                var searchPath = pathToErrorFile;
+                if (process.platform === 'win32') {
+                    searchPath = searchPath.replace(/\\/g, '/');
+                }
+
+                err.message.indexOf(searchPath).should.not.equal(-1);
             }
         });
 
