@@ -16,4 +16,7 @@ node_modules
 coverage
 .idea
 test/output/bundle.js
-test/**/*.css
+test/scss/*.css
+test/sass/*.css
+
+!test/node_modules
