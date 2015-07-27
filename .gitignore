@@ -12,8 +12,9 @@ logs
 results
 
 npm-debug.log
-node_modules
+/node_modules
 coverage
 .idea
-test/output/bundle.js
-test/**/*.css
+test/sass/*.css
+test/scss/*.css
+!/node_modules/test/*.css
