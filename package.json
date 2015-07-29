@@ -27,6 +27,7 @@
     "node-sass": "^3.1.0"
   },
   "dependencies": {
+    "async": "^1.4.0",
     "loader-utils": "^0.2.5"
   },
   "devDependencies": {
