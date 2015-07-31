@@ -155,6 +155,9 @@ module.exports = function (content) {
             addIncludedFilesToWebpack(cachedIncludedFiles);
             return result.css.toString();
         } catch (err) {
+            if (err.file) {
+                cachedIncludedFiles.push(err.file);
+            }
             addIncludedFilesToWebpack(cachedIncludedFiles);
             formatSassError(err);
             throw err;
@@ -162,6 +165,10 @@ module.exports = function (content) {
     }
     sass.render(opt, function onRender(err, result) {
         if (err) {
+            console.log(err);
+            if (err.file) {
+                cachedIncludedFiles.push(err.file);
+            }
             addIncludedFilesToWebpack(cachedIncludedFiles);
             formatSassError(err);
             callback(err);
