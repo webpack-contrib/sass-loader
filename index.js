@@ -16,12 +16,15 @@ var SassError = {
 };
 var resolveError = /Cannot resolve/;
 
+var cachedIncludedFiles = [];
+
 /**
  * The sass-loader makes node-sass available to webpack modules.
  *
  * @param {string} content
  * @returns {*}
  */
+
 module.exports = function (content) {
     var callback = this.async();
     var isSync = typeof callback !== 'function';
@@ -148,15 +151,18 @@ module.exports = function (content) {
     if (isSync) {
         try {
             result = sass.renderSync(opt);
-            addIncludedFilesToWebpack(result.stats.includedFiles);
+            cachedIncludedFiles = result.stats.includedFiles;
+            addIncludedFilesToWebpack(cachedIncludedFiles);
             return result.css.toString();
         } catch (err) {
+            addIncludedFilesToWebpack(cachedIncludedFiles);
             formatSassError(err);
             throw err;
         }
     }
     sass.render(opt, function onRender(err, result) {
         if (err) {
+            addIncludedFilesToWebpack(cachedIncludedFiles);
             formatSassError(err);
             callback(err);
             return;
@@ -171,8 +177,8 @@ module.exports = function (content) {
         } else {
             result.map = null;
         }
-
-        addIncludedFilesToWebpack(result.stats.includedFiles);
+        cachedIncludedFiles = result.stats.includedFiles;
+        addIncludedFilesToWebpack(cachedIncludedFiles);
         callback(null, result.css.toString(), result.map);
     });
 };
