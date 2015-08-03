@@ -108,7 +108,9 @@ module.exports = function (content) {
     // When files have been imported via the includePaths-option, these files need to be
     // introduced to webpack in order to make them watchable.
     function addIncludedFilesToWebpack(includedFiles) {
-        includedFiles.forEach(self.dependency);
+        includedFiles.forEach(function(file) {
+          self.dependency(path.normalize(file));
+        });
     }
 
     this.cacheable();
