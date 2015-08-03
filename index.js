@@ -135,6 +135,12 @@ module.exports = function (content) {
         // however, it is still necessary for correct relative paths in result.map.sources
         opt.sourceMap = this.options.output.path + '/sass.map';
         opt.omitSourceMapUrl = true;
+
+        // If sourceMapContents option is not set, set it to true otherwise maps will be empty/null
+        // when exported by webpack-extract-text-plugin.
+        if ('sourceMapContents' in opt === false) {
+            opt.sourceMapContents = true;
+        }
     }
 
     // indentedSyntax is a boolean flag
