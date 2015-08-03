@@ -30,15 +30,15 @@
     "loader-utils": "^0.2.5"
   },
   "devDependencies": {
-    "css-loader": "^0.9.1",
+    "css-loader": "^0.15.6",
     "enhanced-require": "^0.5.0-beta6",
-    "extract-text-webpack-plugin": "^0.3.8",
+    "extract-text-webpack-plugin": "^0.8.2",
     "jshint": "^2.8.0",
     "mocha": "^2.0.1",
     "node-sass": "^3.1.0",
     "raw-loader": "^0.5.1",
-    "should": "^5.0.1",
-    "style-loader": "^0.8.3",
+    "should": "^7.0.2",
+    "style-loader": "^0.12.3",
     "webpack": "^1.4.0",
     "webpack-dev-server": "^1.7.0"
   }
