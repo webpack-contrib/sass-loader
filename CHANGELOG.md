@@ -1,6 +1,11 @@
 Changelog
 ---------
 
+### 1.0.4
+
+- Fix wrong source-map urls [#123](https://github.com/jtangelder/sass-loader/pull/123)
+- Include source-map contents by default [#104](https://github.com/jtangelder/sass-loader/pull/104)
+
 ### 1.0.3
 
 - Fix importing css files from scss/sass [#101](https://github.com/jtangelder/sass-loader/issues/101)
