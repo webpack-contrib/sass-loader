@@ -55,6 +55,8 @@ describe('sass-loader', function () {
         testAsync('should prefer .scss over .sass (async)', 'import-order-4');
         testSync('should prefer .sass over .css (sync)', 'import-order-5');
         testAsync('should prefer .sass over .css (async)', 'import-order-5');
+        testSync('should prefer explicit imports over auto-resolving (sync)', 'import-order-6');
+        testAsync('should prefer explicit imports over auto-resolving', 'import-order-6');
     });
 
     describe('errors', function () {
@@ -84,6 +86,18 @@ describe('sass-loader', function () {
         });
 
         it('should output understandable errors when a file could not be found', function () {
+            try {
+                enhancedReqFactory(module)(pathToSassLoader + '!' + pathToErrorFileNotFound);
+            } catch (err) {
+                // check for file excerpt
+                err.message.should.match(/@import "does-not-exist";/);
+                err.message.should.match(/File to import not found or unreadable: does-not-exist\.scss/);
+                err.message.should.match(/\(line 1, column 9\)/);
+                err.message.indexOf(pathToErrorFileNotFound).should.not.equal(-1);
+            }
+        });
+
+        it.skip('should not auto-resolve imports with explicit file names', function () {
             try {
                 enhancedReqFactory(module)(pathToSassLoader + '!' + pathToErrorFileNotFound);
             } catch (err) {
