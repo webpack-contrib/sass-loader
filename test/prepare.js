@@ -8,50 +8,56 @@ var error = 'error';
 var filesWithTildeImports = [
     'imports', 'underscore-imports', 'import-other-style'
 ];
+var sassError;
 
 ['scss', 'sass'].forEach(function (ext) {
     var files = [];
     var basePath = path.join(__dirname, ext);
-    var nodeModulesPath = path.join(__dirname, 'node_modules') + '/';
+    var nodeModulesPath = path.join(__dirname, 'node_modules');
+    var tildeReplacement = path.relative(basePath, nodeModulesPath) + '/';
 
     fs.readdirSync(path.join(__dirname, ext))
         .filter(function (file) {
             return path.extname(file) === '.' + ext && file.slice(0, error.length) !== error;
         })
-        .map(function (file) {
+        .map(function (file, i) {
             var fileName = path.join(basePath, file);
             var fileWithoutExt = file.slice(0, -ext.length - 1);
-            var fileContent;
+            var oldFileContent;
+            var newFileContent;
             var css;
 
             if (filesWithTildeImports.indexOf(fileWithoutExt) > -1) {
                 // We need to replace all occurrences of '~' with relative paths
                 // so node-sass finds the imported files without webpack's resolving algorithm
-                fileContent = fs.readFileSync(fileName, 'utf8');
-                fileContent = fileContent.replace('~', nodeModulesPath);
-                fs.writeFileSync(fileName, fileContent, 'utf8');
+                oldFileContent = fs.readFileSync(fileName, 'utf8');
+                newFileContent = oldFileContent.replace(/~/g, tildeReplacement);
+                fs.writeFileSync(fileName, newFileContent, 'utf8');
             }
 
             files.push(fileName);
 
-            css = sass.renderSync({
-                file: fileName,
-                includePaths: [
-                    path.join(__dirname, ext, 'another'),
-                    path.join(__dirname, ext, 'from-include-path')
-                ]
-            }).css;
-
-            if (filesWithTildeImports.indexOf(fileWithoutExt) > -1) {
-                // Revert back our changes and add '~' again
-                fileContent = fs.readFileSync(fileName, 'utf8');
-                fileContent = fileContent.replace(nodeModulesPath, '~');
-                fs.writeFileSync(fileName, fileContent, 'utf8');
+            try {
+                css = sass.renderSync({
+                    file: fileName,
+                    includePaths: [
+                        path.join(__dirname, ext, 'another'),
+                        path.join(__dirname, ext, 'from-include-path')
+                    ]
+                }).css;
+                fs.writeFileSync(files[i].replace(new RegExp('\\.' + ext + '$', 'gi'), '.css'), css, 'utf8');
+            } catch (err) {
+                // Capture the sass error, but don't crash the script in order to roll-back all temporary file changes
+                sassError = err;
             }
 
-            return css;
-        })
-        .forEach(function (content, index) {
-            fs.writeFileSync(files[index].replace(new RegExp('\\.' + ext + '$', 'gi'), '.css'), content, 'utf8');
+            if (filesWithTildeImports.indexOf(fileWithoutExt) > -1) {
+                fs.writeFileSync(fileName, oldFileContent, 'utf8');
+            }
         });
 });
+
+if (sassError) {
+    // Now we throw the sass error to prevent the tests from being executed
+    throw sassError;
+}
