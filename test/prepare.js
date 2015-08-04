@@ -12,7 +12,12 @@ var filesWithTildeImports = [
 ['scss', 'sass'].forEach(function (ext) {
     var files = [];
     var basePath = path.join(__dirname, ext);
-    var nodeModulesPath = path.join(__dirname, 'node_modules') + '/';
+    var nodeModulesPath = path.join(__dirname, 'node_modules') + path.sep;
+
+    // node-sass wants either double backslash or forward slash on Windows.
+    if (process.platform === 'win32') {
+        nodeModulesPath = nodeModulesPath.replace(/\\/g, '\\\\');
+    }
 
     fs.readdirSync(path.join(__dirname, ext))
         .filter(function (file) {
