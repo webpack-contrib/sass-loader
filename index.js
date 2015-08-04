@@ -14,7 +14,9 @@ var SassError = {
     file: 'stdin',
     status: 1
 };
-var resolveError = /Cannot resolve/;
+
+var extPrecedence = ['.scss', '.sass', '.css'];
+var matchCss = /\.css$/;
 
 /**
  * The sass-loader makes node-sass available to webpack modules.
@@ -27,12 +29,8 @@ module.exports = function (content) {
     var isSync = typeof callback !== 'function';
     var self = this;
     var resourcePath = this.resourcePath;
-    var extensionMatcher = /\.(sass|scss|css)$/;
     var result;
-    var fileExt;
     var opt;
-    var contextMatch;
-    var extension;
 
     /**
      * Enhances the sass error with additional information about what actually went wrong.
@@ -70,31 +68,82 @@ module.exports = function (content) {
     function getWebpackImporter() {
         if (isSync) {
             return function syncWebpackImporter(url, context) {
-                url = urlToRequest(url, context);
+                url = utils.urlToRequest(url, opt.root);
                 context = normalizeContext(context);
 
-                return syncResolve(self, url, context);
+                return syncResolve(context, url, getImportsToResolve(url));
             };
         }
         return function asyncWebpackImporter(url, context, done) {
-            url = urlToRequest(url, context);
+            url = utils.urlToRequest(url, opt.root);
             context = normalizeContext(context);
 
-            asyncResolve(self, url, context, done);
+            asyncResolve(context, url, getImportsToResolve(url), done);
         };
     }
 
-    function urlToRequest(url, context) {
-        contextMatch = context.match(extensionMatcher);
+    /**
+     * Tries to resolve the given url synchronously. If a resolve error occurs, a second try for the same
+     * module prefixed with an underscore is started.
+     *
+     * @param {object} loaderContext
+     * @param {string} url
+     //* @param {string} context
+     * @returns {object}
+     */
+    function syncResolve(fileContext, originalImport, importsToResolve) {
+        var importToResolve = importsToResolve.shift();
+        var resolvedFilename;
 
-        // Add sass/scss/css extension if it is missing
-        // The extension is inherited from importing resource or the default is used
-        if (!url.match(extensionMatcher)) {
-            extension = contextMatch && contextMatch[0] || fileExt;
-            url = url + extension;
+        if (!importToResolve) {
+            return {
+                file: originalImport
+            };
         }
 
-        return utils.urlToRequest(url, opt.root);
+        try {
+            resolvedFilename = self.resolveSync(fileContext, importToResolve);
+            resolvedFilename = resolvedFilename.replace(matchCss, '');
+            return {
+                file: resolvedFilename
+            };
+        } catch (err) {
+            return syncResolve(fileContext, originalImport, importsToResolve);
+        }
+    }
+
+    /**
+     * Tries to resolve the given url asynchronously. If a resolve error occurs, a second try for the same
+     * module prefixed with an underscore is started.
+     *
+     * @param {object} loaderContext
+     * @param {string} url
+     * @param {string} fileContext
+     * @param {function} done
+     */
+    function asyncResolve(fileContext, originalImport, importsToResolve, done) {
+        var importToResolve = importsToResolve.shift();
+
+        if (!importToResolve) {
+            done({
+                file: originalImport
+            });
+            return;
+        }
+
+        self.resolve(fileContext, importToResolve, function onWebpackResolve(err, resolvedFilename) {
+            if (err) {
+                asyncResolve(fileContext, originalImport, importsToResolve, done);
+                return;
+            }
+            // Use self.loadModule() before calling done() to make imported files available to
+            // other webpack tools like postLoaders etc.?
+
+            resolvedFilename = resolvedFilename.replace(matchCss, '');
+            done({
+                file: resolvedFilename.replace(matchCss, '')
+            });
+        });
     }
 
     function normalizeContext(context) {
@@ -145,7 +194,6 @@ module.exports = function (content) {
 
     // indentedSyntax is a boolean flag
     opt.indentedSyntax = Boolean(opt.indentedSyntax);
-    fileExt = '.' + (opt.indentedSyntax? 'sass' : 'scss');
 
     // opt.importer
     opt.importer = getWebpackImporter();
@@ -208,94 +256,39 @@ function getFileExcerptIfPossible(err) {
     }
 }
 
-/**
- * Tries to resolve the given url synchronously. If a resolve error occurs, a second try for the same
- * module prefixed with an underscore is started.
- *
- * @param {object} loaderContext
- * @param {string} url
- * @param {string} context
- * @returns {object}
- */
-function syncResolve(loaderContext, url, context) {
-    var filename;
-    var basename;
+function getImportsToResolve(originalImport) {
+    var ext = path.extname(originalImport);
+    var basename = path.basename(originalImport);
+    var dirname = path.dirname(originalImport);
+    var startsWithUnderscore = basename.charAt(0) === '_';
+    var paths = [];
 
-    try {
-        filename = loaderContext.resolveSync(context, url);
-    } catch (err) {
-        basename = path.basename(url);
-        if (requiresLookupForUnderscoreModule(err, basename)) {
-            url = addUnderscoreToBasename(url, basename);
-            return syncResolve(loaderContext, url, context);
-        }
-
-        // let the libsass do the rest job, e.g. search module in includePaths
-        filename = path.join(path.dirname(url), removeUnderscoreFromBasename(basename));
+    function add(file) {
+        paths.push(dirname + path.sep + file);
     }
 
-    return {
-        file: filename
-    };
-}
-
-/**
- * Tries to resolve the given url asynchronously. If a resolve error occurs, a second try for the same
- * module prefixed with an underscore is started.
- *
- * @param {object} loaderContext
- * @param {string} url
- * @param {string} context
- * @param {function} done
- */
-function asyncResolve(loaderContext, url, context, done) {
-    loaderContext.resolve(context, url, function onWebpackResolve(err, filename) {
-        var basename;
-
-        if (err) {
-            basename = path.basename(url);
-            if (requiresLookupForUnderscoreModule(err, basename)) {
-                url = addUnderscoreToBasename(url, basename);
-                return asyncResolve(loaderContext, url, context, done);
-            }
-
-            // Let libsass do the rest of the job, like searching for the module in includePaths
-            filename = path.join(path.dirname(url), removeUnderscoreFromBasename(basename));
+    if (originalImport.charAt(0) !== '.') {
+        if (dirname === '.') {
+            return [originalImport];
         }
-
-        // Use self.loadModule() before calling done() to make imported files available to
-        // other webpack tools like postLoaders etc.?
-
-        done({
-            file: filename
+    }
+    if (ext) {
+        if (ext === '.scss' || ext === '.sass') {
+            add(basename);
+            if (!startsWithUnderscore) {
+                add('_' + basename);
+            }
+        }/* else {
+            Leave unknown extensions (like .css) untouched
+        }*/
+    } else {
+        extPrecedence.forEach(function (ext) {
+            add('_' + basename + ext);
         });
-    });
-}
+        extPrecedence.forEach(function (ext) {
+            add(basename + ext);
+        });
+    }
 
-/**
- * Check whether its a resolve error and the basename does *not* start with an underscore.
- *
- * @param {Error} err
- * @param {string} basename
- * @returns {boolean}
- */
-function requiresLookupForUnderscoreModule(err, basename) {
-    return resolveError.test(err.message) && basename.charAt(0) !== '_';
-}
-
-/**
- * @param {string} url
- * @param {string} basename
- * @returns {string}
- */
-function addUnderscoreToBasename(url, basename) {
-    return url.slice(0, -basename.length) + '_' + basename;
-}
-
-/**
- * @param {string} basename
- * @returns {string}
- */
-function removeUnderscoreFromBasename(basename) {
-  return basename[0] === '_' ? basename.substring(1) : basename;
+    return paths;
 }
