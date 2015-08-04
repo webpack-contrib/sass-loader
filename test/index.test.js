@@ -41,6 +41,9 @@ describe('sass-loader', function () {
         // Test for includePath imports
         testSync('should resolve imports from another directory declared by includePaths correctly (sync)', 'import-include-paths');
         testAsync('should resolve imports from another directory declared by includePaths correctly (async)', 'import-include-paths');
+
+        testSync('should not resolve CSS imports (sync)', 'import-css');
+        testAsync('should not resolve CSS imports (async)', 'import-css');
     });
 
     describe('errors', function () {

@@ -6,7 +6,7 @@ var path = require('path');
 
 var error = 'error';
 var filesWithTildeImports = [
-    'imports', 'underscore-imports', 'import-other-style'
+    'imports', 'import-other-style', 'import-css'
 ];
 var sassError;
 
