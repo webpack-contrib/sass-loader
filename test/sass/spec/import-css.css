@@ -1,4 +1,4 @@
-@import url(../node_modules/some-css-module.css);
+@import url(../node_modules/css/some-css-module.css);
 @import url(./does/not/exist.css);
 .some-css-module {
   background: hotpink; }

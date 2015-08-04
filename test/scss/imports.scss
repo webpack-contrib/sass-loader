@@ -2,8 +2,8 @@
 @import "another/module";
 /* @import "another/underscore"; */
 @import "another/underscore";
-/* @import "~some-module.scss"; */
-@import "~some-module.scss";
-/* @import "~underscore.scss"; */
-@import "~underscore.scss";
+/* @import "~test-module/some-module"; */
+@import "~test-module/some-module";
+/* @import "~test-module/underscore"; */
+@import "~test-module/underscore";
 @import url(http://example.com/something/from/the/interwebs);

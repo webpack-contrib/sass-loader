@@ -7,10 +7,10 @@
 .underscore {
   background: hotpink; }
 
-/* @import ../node_modules/some-module.sass */
-.some-sass-module {
+/* @import ~test-module/some-module */
+.some-scss-module {
   background: hotpink; }
 
-/* @import ../node_modules/underscore.sass */
-.underscore-sass {
+/* @import ~test-module/underscore */
+.underscore-scss {
   background: hotpink; }
