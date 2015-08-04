@@ -100,7 +100,7 @@ describe('sass-loader', function () {
 
 
 function readCss(ext, id) {
-    return fs.readFileSync(path.join(__dirname, ext, id + '.css'), 'utf8').replace(CR, '');
+    return fs.readFileSync(path.join(__dirname, ext, 'spec', id + '.css'), 'utf8').replace(CR, '');
 }
 
 function testAsync(name, id) {

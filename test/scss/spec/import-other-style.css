@@ -1,0 +1,14 @@
+/* Importing a sass module does not require to set the extension explicitly... */
+.another-sass-module {
+  background: hotpink; }
+
+/* ...but it is allowed */
+.another-sass-module {
+  background: hotpink; }
+
+/* However, if it is omitted, .scss always takes precedence */
+.some-scss-module {
+  background: hotpink; }
+
+.underscore-scss {
+  background: hotpink; }

@@ -11,16 +11,15 @@ var filesWithTildeImports = [
 var sassError;
 
 ['scss', 'sass'].forEach(function (ext) {
-    var files = [];
     var basePath = path.join(__dirname, ext);
     var nodeModulesPath = path.join(__dirname, 'node_modules');
-    var tildeReplacement = path.relative(basePath, nodeModulesPath) + '/';
+    var tildeReplacement = path.relative(basePath, nodeModulesPath) + path.sep;
 
     fs.readdirSync(path.join(__dirname, ext))
         .filter(function (file) {
             return path.extname(file) === '.' + ext && file.slice(0, error.length) !== error;
         })
-        .map(function (file, i) {
+        .map(function (file) {
             var fileName = path.join(basePath, file);
             var fileWithoutExt = file.slice(0, -ext.length - 1);
             var oldFileContent;
@@ -35,8 +34,6 @@ var sassError;
                 fs.writeFileSync(fileName, newFileContent, 'utf8');
             }
 
-            files.push(fileName);
-
             try {
                 css = sass.renderSync({
                     file: fileName,
@@ -45,7 +42,7 @@ var sassError;
                         path.join(__dirname, ext, 'from-include-path')
                     ]
                 }).css;
-                fs.writeFileSync(files[i].replace(new RegExp('\\.' + ext + '$', 'gi'), '.css'), css, 'utf8');
+                fs.writeFileSync(path.join(basePath, 'spec', fileWithoutExt + '.css'), css, 'utf8');
             } catch (err) {
                 // Capture the sass error, but don't crash the script in order to roll-back all temporary file changes
                 sassError = err;

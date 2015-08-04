@@ -1,0 +1,16 @@
+/* @import "another/module"; */
+@import url(http://example.com/something/from/the/interwebs);
+.another-scss-module {
+  background: hotpink; }
+
+/* @import "another/underscore"; */
+.underscore {
+  background: hotpink; }
+
+/* @import "../node_modules/some-module.scss"; */
+.some-scss-module {
+  background: hotpink; }
+
+/* @import "../node_modules/underscore.scss"; */
+.underscore-scss {
+  background: hotpink; }
