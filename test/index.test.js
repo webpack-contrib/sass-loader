@@ -10,6 +10,7 @@ var CR = /\r/g;
 var syntaxStyles = ['scss', 'sass'];
 var pathToSassLoader = path.resolve(__dirname, '../index.js');
 var pathToErrorFileNotFound = path.resolve(__dirname, './scss/error-file-not-found.scss');
+var pathToErrorFileNotFound2 = path.resolve(__dirname, './scss/error-file-not-found-2.scss');
 var pathToErrorFile = path.resolve(__dirname, './scss/error.scss');
 var pathToErrorImport = path.resolve(__dirname, './scss/error-import.scss');
 
@@ -22,7 +23,7 @@ describe('sass-loader', function () {
 
     });
 
-    describe.only('imports', function () {
+    describe('imports', function () {
 
         testSync('should resolve imports correctly (sync)', 'imports');
         testAsync('should resolve imports correctly (async)', 'imports');
@@ -30,9 +31,6 @@ describe('sass-loader', function () {
         // Test for issue: https://github.com/jtangelder/sass-loader/issues/32
         testSync('should pass with multiple imports (sync)', 'multiple-imports');
         testAsync('should pass with multiple imports (async)', 'multiple-imports');
-
-        testSync('should resolve modules starting with an underscore (sync)', 'underscore-imports');
-        testAsync('should resolve modules starting with an underscore (async)', 'underscore-imports');
 
         // Test for issue: https://github.com/jtangelder/sass-loader/issues/73
         testSync('should resolve imports from other language style correctly (sync)', 'import-other-style');
@@ -56,7 +54,7 @@ describe('sass-loader', function () {
         testSync('should prefer .sass over .css (sync)', 'import-order-5');
         testAsync('should prefer .sass over .css (async)', 'import-order-5');
         testSync('should prefer explicit imports over auto-resolving (sync)', 'import-order-6');
-        testAsync('should prefer explicit imports over auto-resolving', 'import-order-6');
+        testAsync('should prefer explicit imports over auto-resolving (async)', 'import-order-6');
     });
 
     describe('errors', function () {
@@ -91,21 +89,21 @@ describe('sass-loader', function () {
             } catch (err) {
                 // check for file excerpt
                 err.message.should.match(/@import "does-not-exist";/);
-                err.message.should.match(/File to import not found or unreadable: does-not-exist\.scss/);
+                err.message.should.match(/File to import not found or unreadable: \.\/does-not-exist/);
                 err.message.should.match(/\(line 1, column 9\)/);
                 err.message.indexOf(pathToErrorFileNotFound).should.not.equal(-1);
             }
         });
 
-        it.skip('should not auto-resolve imports with explicit file names', function () {
+        it('should not auto-resolve imports with explicit file names', function () {
             try {
-                enhancedReqFactory(module)(pathToSassLoader + '!' + pathToErrorFileNotFound);
+                enhancedReqFactory(module)(pathToSassLoader + '!' + pathToErrorFileNotFound2);
             } catch (err) {
                 // check for file excerpt
-                err.message.should.match(/@import "does-not-exist";/);
-                err.message.should.match(/File to import not found or unreadable: does-not-exist\.scss/);
+                err.message.should.match(/@import "\.\/another\/_module\.scss";/);
+                err.message.should.match(/File to import not found or unreadable: \.\/another\/_module\.scss/);
                 err.message.should.match(/\(line 1, column 9\)/);
-                err.message.indexOf(pathToErrorFileNotFound).should.not.equal(-1);
+                err.message.indexOf(pathToErrorFileNotFound2).should.not.equal(-1);
             }
         });
 
