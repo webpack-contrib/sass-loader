@@ -4,18 +4,19 @@ var sass = require('node-sass');
 var fs = require('fs');
 var path = require('path');
 
+var testFolder = path.resolve(__dirname, '../');
 var error = 'error';
 var filesWithTildeImports = [
     'imports', 'import-other-style', 'import-css'
 ];
-var sassError;
 
-['scss', 'sass'].forEach(function (ext) {
-    var basePath = path.join(__dirname, ext);
-    var nodeModulesPath = path.join(__dirname, 'node_modules');
+function createSpec(ext) {
+    var basePath = path.join(testFolder, ext);
+    var nodeModulesPath = path.join(testFolder, 'node_modules');
     var tildeReplacement = path.relative(basePath, nodeModulesPath) + path.sep;
+    var sassError;
 
-    fs.readdirSync(path.join(__dirname, ext))
+    fs.readdirSync(path.join(testFolder, ext))
         .filter(function (file) {
             return path.extname(file) === '.' + ext && file.slice(0, error.length) !== error;
         })
@@ -38,8 +39,8 @@ var sassError;
                 css = sass.renderSync({
                     file: fileName,
                     includePaths: [
-                        path.join(__dirname, ext, 'another'),
-                        path.join(__dirname, ext, 'from-include-path')
+                        path.join(testFolder, ext, 'another'),
+                        path.join(testFolder, ext, 'from-include-path')
                     ]
                 }).css;
                 fs.writeFileSync(path.join(basePath, 'spec', fileWithoutExt + '.css'), css, 'utf8');
@@ -52,9 +53,11 @@ var sassError;
                 fs.writeFileSync(fileName, oldFileContent, 'utf8');
             }
         });
-});
 
-if (sassError) {
-    // Now we throw the sass error to prevent the tests from being executed
-    throw sassError;
+    if (sassError) {
+        // Now we can throw the sass error
+        throw sassError;
+    }
 }
+
+module.exports = createSpec;

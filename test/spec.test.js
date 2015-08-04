@@ -1,0 +1,52 @@
+'use strict';
+
+var should = require('should');
+var fs = require('fs');
+var path = require('path');
+var createSpec = require('./tools/createSpec.js');
+
+var testFolder = __dirname;
+
+function readSpec(folder) {
+    var result = {};
+
+    fs.readdirSync(folder)
+        .forEach(function (file) {
+            result[file] = fs.readFileSync(path.join(folder, file), 'utf8');
+        });
+
+    return result;
+}
+
+function writeSpec(folder, spec) {
+    Object.keys(spec)
+        .forEach(function (specName) {
+            fs.writeFileSync(path.resolve(folder, specName), spec[specName], 'utf8');
+        });
+}
+
+['scss', 'sass'].forEach(function (ext) {
+
+    describe(ext + ' spec', function () {
+        var specFolder = path.resolve(testFolder, ext, 'spec');
+        var oldSpec;
+        var newSpec;
+
+        oldSpec = readSpec(specFolder);
+        createSpec(ext);
+        newSpec = readSpec(specFolder);
+
+        Object.keys(oldSpec)
+            .forEach(function (specName) {
+                it(specName + ' should not have been changed', function () {
+                    oldSpec[specName].should.eql(newSpec[specName]);
+                });
+            });
+
+        after(function () {
+            // Write old spec back to the folder so that future tests will also fail
+            writeSpec(specFolder, oldSpec);
+        });
+    });
+
+});
