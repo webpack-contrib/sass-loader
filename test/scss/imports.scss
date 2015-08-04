@@ -1,5 +1,7 @@
 @import "another/module";
 @import "~some-module.scss";
+@import "~underscore.scss";
 // .scss is preferred over .sass when the file extension is missing
 @import "~some-module";
+@import "~underscore";
 @import url(http://example.com/something/from/the/interwebs);
