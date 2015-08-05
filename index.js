@@ -5,6 +5,7 @@ var sass = require('node-sass');
 var path = require('path');
 var os = require('os');
 var fs = require('fs');
+var async = require('async');
 
 // A typical sass error looks like this
 var SassError = {
@@ -18,6 +19,12 @@ var SassError = {
 // libsass uses this precedence when importing files without extension
 var extPrecedence = ['.scss', '.sass', '.css'];
 var matchCss = /\.css$/;
+
+// This queue makes sure node-sass leaves one thread available for executing
+// fs tasks when running the custom importer code.
+// This can be removed as soon as node-sass implements a fix for this.
+var threadPoolSize = process.env.UV_THREADPOOL_SIZE || 4;
+var asyncSassJobQueue = async.queue(sass.render, threadPoolSize - 1);
 
 /**
  * The sass-loader makes node-sass available to webpack modules.
@@ -232,7 +239,8 @@ module.exports = function (content) {
             throw err;
         }
     }
-    sass.render(opt, function onRender(err, result) {
+
+    asyncSassJobQueue.push(opt, function onRender(err, result) {
         if (err) {
             formatSassError(err);
             err.file && self.dependency(err.file);
