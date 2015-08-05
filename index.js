@@ -105,6 +105,7 @@ module.exports = function (content) {
 
         try {
             resolvedFilename = self.resolveSync(fileContext, importToResolve);
+            self.dependency(resolvedFilename);
             resolvedFilename = resolvedFilename.replace(matchCss, '');
             return {
                 file: resolvedFilename
@@ -138,6 +139,7 @@ module.exports = function (content) {
                 asyncResolve(fileContext, originalImport, importsToResolve, done);
                 return;
             }
+            self.dependency(resolvedFilename);
             // Use self.loadModule() before calling done() to make imported files available to
             // other webpack tools like postLoaders etc.?
 
@@ -212,12 +214,14 @@ module.exports = function (content) {
             return result.css.toString();
         } catch (err) {
             formatSassError(err);
+            err.file && this.dependency(err.file);
             throw err;
         }
     }
     sass.render(opt, function onRender(err, result) {
         if (err) {
             formatSassError(err);
+            err.file && self.dependency(err.file);
             callback(err);
             return;
         }
