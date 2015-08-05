@@ -55,6 +55,9 @@ describe('sass-loader', function () {
         testAsync('should prefer .sass over .css (async)', 'import-order-5');
         testSync('should prefer explicit imports over auto-resolving (sync)', 'import-order-6');
         testAsync('should prefer explicit imports over auto-resolving (async)', 'import-order-6');
+
+        testSync('should compile bootstrap-sass without errors (sync)', 'bootstrap-sass');
+        testAsync('should compile bootstrap-sass without errors (async)', 'bootstrap-sass');
     });
 
     describe('errors', function () {

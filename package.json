@@ -32,6 +32,7 @@
     "loader-utils": "^0.2.5"
   },
   "devDependencies": {
+    "bootstrap-sass": "^3.3.5",
     "css-loader": "^0.15.6",
     "enhanced-require": "^0.5.0-beta6",
     "extract-text-webpack-plugin": "^0.8.2",

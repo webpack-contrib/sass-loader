@@ -10,6 +10,7 @@ var error = 'error';
 function createSpec(ext) {
     var basePath = path.join(testFolder, ext);
     var testModulePath = path.relative(basePath, path.join(testFolder, 'node_modules', 'test-module'));
+    var pathToBootstrap = path.relative(basePath, path.resolve(testFolder, '..', 'node_modules', 'bootstrap-sass'));
 
     fs.readdirSync(path.join(testFolder, ext))
         .filter(function (file) {
@@ -24,7 +25,9 @@ function createSpec(ext) {
                 file: fileName,
                 importer: function (url) {
                     return {
-                        file: url.replace(/^~test-module/, testModulePath)
+                        file: url
+                                  .replace(/^~test-module/, testModulePath)
+                                  .replace(/^~bootstrap-sass/, pathToBootstrap)
                     };
                 },
                 includePaths: [
