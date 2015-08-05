@@ -24,7 +24,6 @@ module.exports = {
         ]
     },
     debug: true,
-    devtool: 'eval',
     watch: true,
     plugins: [
         new webpack.HotModuleReplacementPlugin()
