@@ -5,12 +5,13 @@
   "main": "index.js",
   "scripts": {
     "create-spec": "node test/tools/runCreateSpec.js",
+    "pretest": "node test/tools/runCreateSpec.js",
     "test": "mocha -R spec",
+    "posttest": "jshint index.js test",
     "test-source-map": "webpack-dev-server --config test/sourceMap/webpack.config.js --content-base ./test/sourceMap",
     "test-watch": "webpack --config test/watch/webpack.config.js",
     "test-hmr": "webpack-dev-server --config test/hmr/webpack.config.js --content-base ./test/hmr --hot --inline",
-    "test-spec": "mocha -R spec test/spec.test.js",
-    "posttest": "jshint index.js test"
+    "test-spec": "mocha -R spec test/spec.test.js"
   },
   "keywords": [
     "sass",
