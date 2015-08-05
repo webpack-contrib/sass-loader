@@ -43,6 +43,8 @@ module.exports = function (content) {
         if (err.file === 'stdin') {
             err.file = resourcePath;
         }
+        // node-sass returns UNIX-style paths
+        err.file = path.normalize(err.file);
 
         // The 'Current dir' hint of node-sass does not help us, we're providing
         // additional information by reading the err.file property
@@ -157,7 +159,12 @@ module.exports = function (content) {
     // When files have been imported via the includePaths-option, these files need to be
     // introduced to webpack in order to make them watchable.
     function addIncludedFilesToWebpack(includedFiles) {
-        includedFiles.forEach(self.dependency);
+        includedFiles.forEach(addNormalizedDependency);
+    }
+
+    function addNormalizedDependency(file) {
+        // node-sass returns UNIX-style paths
+        self.dependency(path.normalize(file));
     }
 
     this.cacheable();
