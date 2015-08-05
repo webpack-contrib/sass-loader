@@ -15,6 +15,7 @@ var SassError = {
     status: 1
 };
 
+// libsass uses this precedence when importing files without extension
 var extPrecedence = ['.scss', '.sass', '.css'];
 var matchCss = /\.css$/;
 
@@ -22,7 +23,7 @@ var matchCss = /\.css$/;
  * The sass-loader makes node-sass available to webpack modules.
  *
  * @param {string} content
- * @returns {*}
+ * @returns {string}
  */
 module.exports = function (content) {
     var callback = this.async();
@@ -69,93 +70,106 @@ module.exports = function (content) {
      */
     function getWebpackImporter() {
         if (isSync) {
-            return function syncWebpackImporter(url, context) {
-                url = utils.urlToRequest(url, opt.root);
-                context = normalizeContext(context);
+            return function syncWebpackImporter(url, fileContext) {
+                var dirContext;
 
-                return syncResolve(context, url, getImportsToResolve(url));
+                url = utils.urlToRequest(url, opt.root);
+                dirContext = fileToDirContext(fileContext);
+
+                return resolveSync(dirContext, url, getImportsToResolve(url));
             };
         }
-        return function asyncWebpackImporter(url, context, done) {
-            url = utils.urlToRequest(url, opt.root);
-            context = normalizeContext(context);
+        return function asyncWebpackImporter(url, fileContext, done) {
+            var dirContext;
 
-            asyncResolve(context, url, getImportsToResolve(url), done);
+            url = utils.urlToRequest(url, opt.root);
+            dirContext = fileToDirContext(fileContext);
+
+            resolve(dirContext, url, getImportsToResolve(url), done);
         };
     }
 
     /**
-     * Tries to resolve the given url synchronously. If a resolve error occurs, a second try for the same
-     * module prefixed with an underscore is started.
+     * Tries to resolve the first url of importsToResolve. If that resolve fails, the next url is tried.
+     * If all imports fail, the import is passed to libsass which also take includePaths into account.
      *
-     * @param {object} loaderContext
-     * @param {string} url
-     //* @param {string} context
+     * @param {string} dirContext
+     * @param {string} originalImport
+     * @param {Array} importsToResolve
      * @returns {object}
      */
-    function syncResolve(fileContext, originalImport, importsToResolve) {
+    function resolveSync(dirContext, originalImport, importsToResolve) {
         var importToResolve = importsToResolve.shift();
         var resolvedFilename;
 
         if (!importToResolve) {
+            // No import possibilities left. Let's pass that one back to libsass...
             return {
                 file: originalImport
             };
         }
 
         try {
-            resolvedFilename = self.resolveSync(fileContext, importToResolve);
+            resolvedFilename = self.resolveSync(dirContext, importToResolve);
+            // Add the resolvedFilename as dependency. Although we're also using stats.includedFiles, this might come
+            // in handy when an error occurs. In this case, we don't get stats.includedFiles from node-sass.
             self.dependency(resolvedFilename);
+            // By removing the CSS file extension, we trigger node-sass to include the CSS file instead of just linking it.
             resolvedFilename = resolvedFilename.replace(matchCss, '');
             return {
                 file: resolvedFilename
             };
         } catch (err) {
-            return syncResolve(fileContext, originalImport, importsToResolve);
+            return resolveSync(dirContext, originalImport, importsToResolve);
         }
     }
 
     /**
-     * Tries to resolve the given url asynchronously. If a resolve error occurs, a second try for the same
-     * module prefixed with an underscore is started.
+     * Tries to resolve the first url of importsToResolve. If that resolve fails, the next url is tried.
+     * If all imports fail, the import is passed to libsass which also take includePaths into account.
      *
-     * @param {object} loaderContext
-     * @param {string} url
-     * @param {string} fileContext
+     * @param {string} dirContext
+     * @param {string} originalImport
+     * @param {Array} importsToResolve
      * @param {function} done
      */
-    function asyncResolve(fileContext, originalImport, importsToResolve, done) {
+    function resolve(dirContext, originalImport, importsToResolve, done) {
         var importToResolve = importsToResolve.shift();
 
         if (!importToResolve) {
+            // No import possibilities left. Let's pass that one back to libsass...
             done({
                 file: originalImport
             });
             return;
         }
 
-        self.resolve(fileContext, importToResolve, function onWebpackResolve(err, resolvedFilename) {
+        self.resolve(dirContext, importToResolve, function onWebpackResolve(err, resolvedFilename) {
             if (err) {
-                asyncResolve(fileContext, originalImport, importsToResolve, done);
+                resolve(dirContext, originalImport, importsToResolve, done);
                 return;
             }
+            // Add the resolvedFilename as dependency. Although we're also using stats.includedFiles, this might come
+            // in handy when an error occurs. In this case, we don't get stats.includedFiles from node-sass.
             self.dependency(resolvedFilename);
+            // By removing the CSS file extension, we trigger node-sass to include the CSS file instead of just linking it.
+            resolvedFilename = resolvedFilename.replace(matchCss, '');
+
             // Use self.loadModule() before calling done() to make imported files available to
             // other webpack tools like postLoaders etc.?
 
-            resolvedFilename = resolvedFilename.replace(matchCss, '');
             done({
                 file: resolvedFilename.replace(matchCss, '')
             });
         });
     }
 
-    function normalizeContext(context) {
+    function fileToDirContext(fileContext) {
         // The first file is 'stdin' when we're using the data option
-        if (context === 'stdin') {
-            context = resourcePath;
+        if (fileContext === 'stdin') {
+            fileContext = resourcePath;
         }
-        return path.dirname(context);
+        return path.dirname(fileContext);
     }
 
     // When files have been imported via the includePaths-option, these files need to be
@@ -266,6 +280,22 @@ function getFileExcerptIfPossible(err) {
     }
 }
 
+/**
+ * When libsass tries to resolve an import, it uses this "funny" algorithm:
+ *
+ * - Imports with no file extension:
+ *   - Prefer modules starting with '_'
+ *   - File extension precedence: .scss, .sass, .css
+ * - Imports with file extension:
+ *   - If the file is a CSS-file, do not include it all, but just link it via @import url()
+ *   - The exact file name must match (no auto-resolving of '_'-modules)
+ *
+ * Since the sass-loader uses webpack to resolve the modules, we need to simulate that algorithm. This function
+ * returns an array of import paths to try.
+ *
+ * @param {string} originalImport
+ * @returns {Array}
+ */
 function getImportsToResolve(originalImport) {
     var ext = path.extname(originalImport);
     var basename = path.basename(originalImport);
@@ -278,23 +308,26 @@ function getImportsToResolve(originalImport) {
     }
 
     if (originalImport.charAt(0) !== '.') {
+        // If true: originalImport is a module import like 'bootstrap-sass...'
         if (dirname === '.') {
+            // If true: originalImport is just a module import without a path like 'bootstrap-sass'
+            // In this case we don't do that auto-resolving dance at all.
             return [originalImport];
         }
     }
     if (ext) {
         if (ext === '.scss' || ext === '.sass') {
             add(basename);
-            if (!startsWithUnderscore) {
-                add('_' + basename);
-            }
         }/* else {
             Leave unknown extensions (like .css) untouched
         }*/
     } else {
-        extPrecedence.forEach(function (ext) {
-            add('_' + basename + ext);
-        });
+        if (!startsWithUnderscore) {
+            // Prefer modules starting with '_' first
+            extPrecedence.forEach(function (ext) {
+                add('_' + basename + ext);
+            });
+        }
         extPrecedence.forEach(function (ext) {
             add(basename + ext);
         });
