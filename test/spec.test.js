@@ -19,13 +19,16 @@ var path = require('path');
 var createSpec = require('./tools/createSpec.js');
 
 var testFolder = __dirname;
+var matchCss = /\.css$/;
 
 function readSpec(folder) {
     var result = {};
 
     fs.readdirSync(folder)
         .forEach(function (file) {
-            result[file] = fs.readFileSync(path.join(folder, file), 'utf8');
+            if (matchCss.test(file)) {
+                result[file] = fs.readFileSync(path.join(folder, file), 'utf8');
+            }
         });
 
     return result;
