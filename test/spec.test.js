@@ -1,5 +1,18 @@
 'use strict';
 
+/**
+ * This file can be used to track changes in the spec introduced by newer node-sass versions.
+ * This can be useful to check if the tests need to be adjusted to new behavior.
+ *
+ * If you want to check if there are any changes, do this:
+ *
+ * 1. First, install the old version of node-sass
+ * 2. Run `npm run create-spec`
+ * 3. Now install the new version of node-sass
+ * 4. Remove .skip( from describe-block in this file to activate the test
+ * 5. Run `npm run test-spec`
+ */
+
 var should = require('should');
 var fs = require('fs');
 var path = require('path');
@@ -27,7 +40,7 @@ function writeSpec(folder, spec) {
 
 ['scss', 'sass'].forEach(function (ext) {
 
-    describe(ext + ' spec', function () {
+    describe.skip(ext + ' spec', function () {
         var specFolder = path.resolve(testFolder, ext, 'spec');
         var oldSpec;
         var newSpec;
