@@ -26,12 +26,15 @@ var matchCss = /\.css$/;
 var threadPoolSize = process.env.UV_THREADPOOL_SIZE || 4;
 var asyncSassJobQueue = async.queue(sass.render, threadPoolSize - 1);
 
+var cachedIncludedFiles = [];
+
 /**
  * The sass-loader makes node-sass available to webpack modules.
  *
  * @param {string} content
  * @returns {string}
  */
+
 module.exports = function (content) {
     var callback = this.async();
     var isSync = typeof callback !== 'function';
@@ -231,9 +234,14 @@ module.exports = function (content) {
     if (isSync) {
         try {
             result = sass.renderSync(opt);
-            addIncludedFilesToWebpack(result.stats.includedFiles);
+            cachedIncludedFiles = result.stats.includedFiles;
+            addIncludedFilesToWebpack(cachedIncludedFiles);
             return result.css.toString();
         } catch (err) {
+            if (err.file) {
+                cachedIncludedFiles.push(err.file);
+            }
+            addIncludedFilesToWebpack(cachedIncludedFiles);
             formatSassError(err);
             err.file && this.dependency(err.file);
             throw err;
@@ -242,6 +250,10 @@ module.exports = function (content) {
 
     asyncSassJobQueue.push(opt, function onRender(err, result) {
         if (err) {
+            if (err.file) {
+                cachedIncludedFiles.push(err.file);
+            }
+            addIncludedFilesToWebpack(cachedIncludedFiles);
             formatSassError(err);
             err.file && self.dependency(err.file);
             callback(err);
@@ -257,8 +269,8 @@ module.exports = function (content) {
         } else {
             result.map = null;
         }
-
-        addIncludedFilesToWebpack(result.stats.includedFiles);
+        cachedIncludedFiles = result.stats.includedFiles;
+        addIncludedFilesToWebpack(cachedIncludedFiles);
         callback(null, result.css.toString(), result.map);
     });
 };
