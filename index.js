@@ -174,7 +174,7 @@ module.exports = function (content) {
 
     // Skip empty files, otherwise it will stop webpack, see issue #21
     if (opt.data.trim() === '') {
-        return callback(null, content);
+        return isSync ? content : callback(null, content);
     }
 
     // opt.outputStyle
@@ -202,7 +202,6 @@ module.exports = function (content) {
     // indentedSyntax is a boolean flag
     opt.indentedSyntax = Boolean(opt.indentedSyntax);
 
-    // opt.importer
     opt.importer = getWebpackImporter();
 
     // start the actual rendering
