@@ -9,7 +9,7 @@ var error = 'error';
 
 function createSpec(ext) {
     var basePath = path.join(testFolder, ext);
-    var testModulePath = path.relative(basePath, path.join(testFolder, 'node_modules', 'test-module'));
+    var testNodeModules = path.relative(basePath, path.join(testFolder, 'node_modules')) + path.sep;
     var pathToBootstrap = path.relative(basePath, path.resolve(testFolder, '..', 'node_modules', 'bootstrap-sass'));
 
     fs.readdirSync(path.join(testFolder, ext))
@@ -24,10 +24,13 @@ function createSpec(ext) {
             css = sass.renderSync({
                 file: fileName,
                 importer: function (url) {
+                    if (/\.css$/.test(url) === false) { // Do not transform css imports
+                        url = url
+                            .replace(/^~bootstrap-sass/, pathToBootstrap)
+                            .replace(/^~/, testNodeModules);
+                    }
                     return {
                         file: url
-                                  .replace(/^~test-module/, testModulePath)
-                                  .replace(/^~bootstrap-sass/, pathToBootstrap)
                     };
                 },
                 includePaths: [

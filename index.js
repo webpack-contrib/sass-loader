@@ -79,20 +79,22 @@ module.exports = function (content) {
         if (isSync) {
             return function syncWebpackImporter(url, fileContext) {
                 var dirContext;
+                var request;
 
-                url = utils.urlToRequest(url, opt.root);
+                request = utils.urlToRequest(url, opt.root);
                 dirContext = fileToDirContext(fileContext);
 
-                return resolveSync(dirContext, url, getImportsToResolve(url));
+                return resolveSync(dirContext, url, getImportsToResolve(request));
             };
         }
         return function asyncWebpackImporter(url, fileContext, done) {
             var dirContext;
+            var request;
 
-            url = utils.urlToRequest(url, opt.root);
+            request = utils.urlToRequest(url, opt.root);
             dirContext = fileToDirContext(fileContext);
 
-            resolve(dirContext, url, getImportsToResolve(url), done);
+            resolve(dirContext, url, getImportsToResolve(request), done);
         };
     }
 
@@ -312,7 +314,8 @@ function getImportsToResolve(originalImport) {
     var paths = [];
 
     function add(file) {
-        paths.push(dirname + path.sep + file);
+        // No path.sep required here, because imports inside SASS are usually with /
+        paths.push(dirname + '/' + file);
     }
 
     if (originalImport.charAt(0) !== '.') {
