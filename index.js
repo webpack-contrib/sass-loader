@@ -122,7 +122,7 @@ module.exports = function (content) {
             resolvedFilename = self.resolveSync(dirContext, importToResolve);
             // Add the resolvedFilename as dependency. Although we're also using stats.includedFiles, this might come
             // in handy when an error occurs. In this case, we don't get stats.includedFiles from node-sass.
-            self.dependency(resolvedFilename);
+            addNormalizedDependency(resolvedFilename);
             // By removing the CSS file extension, we trigger node-sass to include the CSS file instead of just linking it.
             resolvedFilename = resolvedFilename.replace(matchCss, '');
             return {
@@ -160,7 +160,7 @@ module.exports = function (content) {
             }
             // Add the resolvedFilename as dependency. Although we're also using stats.includedFiles, this might come
             // in handy when an error occurs. In this case, we don't get stats.includedFiles from node-sass.
-            self.dependency(resolvedFilename);
+            addNormalizedDependency(resolvedFilename);
             // By removing the CSS file extension, we trigger node-sass to include the CSS file instead of just linking it.
             resolvedFilename = resolvedFilename.replace(matchCss, '');
 
@@ -237,7 +237,7 @@ module.exports = function (content) {
             return result.css.toString();
         } catch (err) {
             formatSassError(err);
-            err.file && this.dependency(err.file);
+            err.file && addNormalizedDependency(err.file);
             throw err;
         }
     }
@@ -245,7 +245,7 @@ module.exports = function (content) {
     asyncSassJobQueue.push(opt, function onRender(err, result) {
         if (err) {
             formatSassError(err);
-            err.file && self.dependency(err.file);
+            err.file && addNormalizedDependency(err.file);
             callback(err);
             return;
         }
