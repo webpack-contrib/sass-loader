@@ -1,9 +1,13 @@
 Changelog
 ---------
 
+### 2.0.1
+
+- Add missing path normalization (fixes [#141](https://github.com/jtangelder/sass-loader/pull/141))
+
 ### 2.0.0
 
-- **Breaking:** Refactor [import resolving algorithm](https://github.com/jtangelder/sass-loader/blob/089c52dc9bd02ec67fb5c65c2c226f43710f231c/index.js#L293-L348). The new algorithm is aligned to libsass' way of resolving files. This yields to different results if two files with the same path and filename but with different extensions are present. Though this change should be no problem for most users, we must flag it as breaking change. [#135](https://github.com/jtangelder/sass-loader/issues/135) [#138](https://github.com/jtangelder/sass-loader/issues/138) 
+- **Breaking:** Refactor [import resolving algorithm](https://github.com/jtangelder/sass-loader/blob/089c52dc9bd02ec67fb5c65c2c226f43710f231c/index.js#L293-L348). The new algorithm is aligned to libsass' way of resolving files. This yields to different results if two files with the same path and filename but with different extensions are present. Though this change should be no problem for most users, we must flag it as breaking change. [#135](https://github.com/jtangelder/sass-loader/issues/135) [#138](https://github.com/jtangelder/sass-loader/issues/138)
 - Add temporary fix for stuck processes (see [sass/node-sass#857](https://github.com/sass/node-sass/issues/857)) [#100](https://github.com/jtangelder/sass-loader/issues/100) [#119](https://github.com/jtangelder/sass-loader/issues/119) [#132](https://github.com/jtangelder/sass-loader/pull/132)
 - Fix path resolving on Windows [#108](https://github.com/jtangelder/sass-loader/issues/108)
 - Fix file watchers on Windows [#102](https://github.com/jtangelder/sass-loader/issues/102)
