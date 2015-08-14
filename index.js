@@ -81,6 +81,8 @@ module.exports = function (content) {
                 var dirContext;
                 var request;
 
+                // node-sass returns UNIX-style paths
+                fileContext = path.normalize(fileContext);
                 request = utils.urlToRequest(url, opt.root);
                 dirContext = fileToDirContext(fileContext);
 
@@ -91,6 +93,8 @@ module.exports = function (content) {
             var dirContext;
             var request;
 
+            // node-sass returns UNIX-style paths
+            fileContext = path.normalize(fileContext);
             request = utils.urlToRequest(url, opt.root);
             dirContext = fileToDirContext(fileContext);
 
@@ -237,7 +241,7 @@ module.exports = function (content) {
             return result.css.toString();
         } catch (err) {
             formatSassError(err);
-            err.file && addNormalizedDependency(err.file);
+            err.file && this.dependency(err.file);
             throw err;
         }
     }
@@ -245,7 +249,7 @@ module.exports = function (content) {
     asyncSassJobQueue.push(opt, function onRender(err, result) {
         if (err) {
             formatSassError(err);
-            err.file && addNormalizedDependency(err.file);
+            err.file && self.dependency(err.file);
             callback(err);
             return;
         }
