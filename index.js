@@ -46,6 +46,16 @@ module.exports = function (content) {
      * @param {SassError} err
      */
     function formatSassError(err) {
+        // Instruct webpack to hide the JS stack from the console
+        // Usually you're only interested in the SASS stack in this case.
+        err.hideStack = true;
+
+        // The file property is missing in rare cases.
+        // No improvement in the error is possible.
+        if (!err.file) {
+            return;
+        }
+
         var msg = err.message;
 
         if (err.file === 'stdin') {
@@ -61,10 +71,6 @@ module.exports = function (content) {
         err.message = getFileExcerptIfPossible(err) +
             msg.charAt(0).toUpperCase() + msg.slice(1) + os.EOL +
             '      in ' + err.file + ' (line ' + err.line + ', column ' + err.column + ')';
-
-        // Instruct webpack to hide the JS stack from the console
-        // Usually you're only interested in the SASS stack in this case.
-        err.hideStack = true;
     }
 
     /**
