@@ -24,7 +24,7 @@ Use in tandem with the [`style-loader`](https://github.com/webpack/style-loader)
 ``` javascript
 require('!style!css!sass!./file.scss');
 ```
-*NOTE: If you encounter module errors when requiring scss files, make sure you have installed the required node module for each additional loader you use.*
+*NOTE: If you encounter module errors complaining about a missing `style` or `css` module, make sure you have installed all required loaders via npm.*
 
 ### Apply via webpack config
 
@@ -139,7 +139,6 @@ module.exports = {
     ]
 };
 ```
-You will need to reference your app's scss file using ```require('/.file.scss')``` and you will need to add a link tag to your mapping CSS ```<link rel="stylesheet" href="styles.css" />```
 
 If you want to edit the original Sass files inside Chrome, [there's a good blog post](https://medium.com/@toolmantim/getting-started-with-css-sourcemaps-and-in-browser-sass-editing-b4daab987fb0). Checkout [test/sourceMap](https://github.com/jtangelder/sass-loader/tree/master/test) for a running example. Make sure to serve the content with an HTTP server.
 
