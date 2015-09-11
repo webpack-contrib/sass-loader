@@ -102,10 +102,10 @@ Since Sass/[libsass](https://github.com/sass/libsass) does not provide [url rewr
 - If you're just generating CSS without passing it to the css-loader, it must be relative to your web root.
 - If you pass the generated CSS on to the css-loader, all urls must be relative to the entry-file (e.g. `main.scss`).
 
-More likely you will be disrupted this second issue. It is natural to expect relative references to be resolved like in `.css`; against the (`.scss`) file in which they are specified. Thankfully there are a couple of different ways to make this happen.
+More likely you will be disrupted by this second issue. It is natural to expect relative references to be resolved against the `.scss`-file in which they are specified (like in regular `.css`-files). Thankfully there are a two solutions to this problem:
 
-- Add the missing url rewriting using the [resolve-url-loader](https://www.npmjs.com/package/resolve-url-loader). Place it directly after the sass-loader in the loader chain.
-- Library authors usually provide a variable to modify the asset path. [bootstrap-sass](https://github.com/twbs/bootstrap-sass) for example has an `$icon-font-path`. Check out [this example](https://github.com/jtangelder/sass-loader/tree/master/test/bootstrapSass).
+- Add the missing url rewriting using the [resolve-url-loader](https://github.com/bholloway/resolve-url-loader). Place it directly after the sass-loader in the loader chain.
+- Library authors usually provide a variable to modify the asset path. [bootstrap-sass](https://github.com/twbs/bootstrap-sass) for example has an `$icon-font-path`. Check out [this working bootstrap example](https://github.com/jtangelder/sass-loader/tree/master/test/bootstrapSass).
 
 ## Source maps
 
