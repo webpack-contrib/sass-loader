@@ -37,8 +37,14 @@ module.exports = function (content) {
     var isSync = typeof callback !== 'function';
     var self = this;
     var resourcePath = this.resourcePath;
+    var query = utils.parseQuery(this.query);
     var result;
     var opt;
+
+    // Allow passing "programmable objects" (e.g. importers) via custom `this.options` field.
+    // http://webpack.github.io/docs/how-to-write-a-loader.html#programmable-objects-as-query-option
+    var configKey = query.config || 'sassLoader';
+    var configOptions = this.options[configKey] || {};
 
     /**
      * Enhances the sass error with additional information about what actually went wrong.
@@ -198,7 +204,7 @@ module.exports = function (content) {
 
     this.cacheable();
 
-    opt = utils.parseQuery(this.query);
+    opt = query;
     opt.data = content;
 
     // Skip empty files, otherwise it will stop webpack, see issue #21
@@ -231,7 +237,14 @@ module.exports = function (content) {
     // indentedSyntax is a boolean flag
     opt.indentedSyntax = Boolean(opt.indentedSyntax);
 
-    opt.importer = getWebpackImporter();
+    // Allow passing custom importers to `node-sass`. Accepts `Function` or an array of `Function`s.
+    opt.importer = []
+        .concat(configOptions.importer || [])
+        .concat(getWebpackImporter());
+
+    // `node-sass` uses `includePaths` to resolve `@import` paths. Append the currently processed file.
+    opt.includePaths = (opt.includePaths || [])
+        .concat(path.dirname(resourcePath));
 
     // start the actual rendering
     if (isSync) {
