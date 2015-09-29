@@ -35,9 +35,8 @@
   },
   "devDependencies": {
     "bootstrap-sass": "^3.3.5",
-    "css-loader": "^0.15.6",
+    "css-loader": "^0.19.0",
     "enhanced-require": "^0.5.0-beta6",
-    "extract-text-webpack-plugin": "^0.8.2",
     "file-loader": "^0.8.4",
     "jshint": "^2.8.0",
     "mocha": "^2.0.1",

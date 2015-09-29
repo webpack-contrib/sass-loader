@@ -1,7 +1,6 @@
 'use strict';
 
 var path = require('path');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var pathToSassLoader = path.resolve(__dirname, '../../index.js');
 
@@ -16,14 +15,8 @@ module.exports = {
         loaders: [
             {
                 test: /\.scss$/,
-                loader: ExtractTextPlugin.extract(
-                    'css-loader?sourceMap!' +
-                    pathToSassLoader + '?sourceMap'
-                )
+                loaders: ['style', 'css-loader?sourceMap', pathToSassLoader + '?sourceMap']
             }
         ]
-    },
-    plugins: [
-        new ExtractTextPlugin('styles.sourcemap.css')
-    ]
+    }
 };
