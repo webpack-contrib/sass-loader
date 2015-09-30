@@ -1,9 +1,14 @@
 Changelog
 ---------
 
+### 3.0.0
+
+- **Breaking:** Add `node-sass@^3.3.3` and `webpack@^1.12.2` as peer-dependency [#165](https://github.com/jtangelder/sass-loader/pull/165) [#166](https://github.com/jtangelder/sass-loader/pull/166) [#169](https://github.com/jtangelder/sass-loader/pull/169)
+- Fix crash when Sass reported an error without `file` [#158](https://github.com/jtangelder/sass-loader/pull/158)
+
 ### 2.0.1
 
-- Add missing path normalization (fixes [#141](https://github.com/jtangelder/sass-loader/pull/141))
+- Add missing path normalization [#141](https://github.com/jtangelder/sass-loader/pull/141)
 
 ### 2.0.0
 
@@ -21,7 +26,7 @@ Changelog
 ### 1.0.3
 
 - Fix importing css files from scss/sass [#101](https://github.com/jtangelder/sass-loader/issues/101)
-- Fix importing SASS partials from includePath [#98](https://github.com/jtangelder/sass-loader/issues/98) [#110](https://github.com/jtangelder/sass-loader/issues/110)
+- Fix importing Sass partials from includePath [#98](https://github.com/jtangelder/sass-loader/issues/98) [#110](https://github.com/jtangelder/sass-loader/issues/110)
 
 ### 1.0.2
 
@@ -30,7 +35,7 @@ Changelog
 
 ### 1.0.1
 
-- Fix SASS partials not being resolved anymore [#68](https://github.com/jtangelder/sass-loader/issues/68)
+- Fix Sass partials not being resolved anymore [#68](https://github.com/jtangelder/sass-loader/issues/68)
 - Update peer-dependency `node-sass` to `3.0.0-beta.4`
 
 ### 1.0.0
