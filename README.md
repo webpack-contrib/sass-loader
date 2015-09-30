@@ -2,9 +2,10 @@
 
 ## Install
 
-`npm install sass-loader --save-dev`
+`npm install sass-loader node-sass webpack --save-dev`
 
-Starting with `1.0.0`, the sass-loader requires [node-sass](https://github.com/sass/node-sass) as [`peerDependency`](https://docs.npmjs.com/files/package.json#peerdependencies). Thus you are able to specify the required version accurately.
+The sass-loader requires [node-sass](https://github.com/sass/node-sass) and [webpack](https://github.com/webpack/webpack)
+as [`peerDependency`](https://docs.npmjs.com/files/package.json#peerdependencies). Thus you are able to specify the required versions accurately.
 
 ---
 
