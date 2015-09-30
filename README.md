@@ -56,7 +56,7 @@ module.exports = {
     loaders: [
       {
         test: /\.scss$/,
-        loaders: ["style, "css", "sass?outputStyle=expanded&" +
+        loaders: ["style", "css", "sass?outputStyle=expanded&" +
           "includePaths[]=" +
             encodeURIComponent(path.resolve(__dirname, "./some-folder")) + "&" +
           "includePaths[]=" +
