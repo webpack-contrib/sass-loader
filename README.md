@@ -13,16 +13,16 @@ Starting with `1.0.0`, the sass-loader requires [node-sass](https://github.com/s
 [Documentation: Using loaders](http://webpack.github.io/docs/using-loaders.html)
 
 ``` javascript
-var css = require('!raw!sass!./file.scss');
+var css = require("!raw!sass!./file.scss");
 // => returns compiled css code from file.scss, resolves imports
-var css = require('!css!sass!./file.scss');
+var css = require("!css!sass!./file.scss");
 // => returns compiled css code from file.scss, resolves imports and url(...)s
 ```
 
 Use in tandem with the [`style-loader`](https://github.com/webpack/style-loader) and [`css-loader`](https://github.com/webpack/css-loader) to add the css rules to your document:
 
 ``` javascript
-require('!style!css!sass!./file.scss');
+require("!style!css!sass!./file.scss");
 ```
 *NOTE: If you encounter module errors complaining about a missing `style` or `css` module, make sure you have installed all required loaders via npm.*
 
@@ -36,14 +36,14 @@ module.exports = {
     loaders: [
       {
         test: /\.scss$/,
-        loader: 'style!css!sass'
+        loaders: ["style", "css", "sass"]
       }
     ]
   }
 };
 ```
 
-Then you only need to write: `require('./file.scss')`.
+Then you only need to write: `require("./file.scss")`.
 
 ### Sass options
 
@@ -55,11 +55,11 @@ module.exports = {
     loaders: [
       {
         test: /\.scss$/,
-        loader: "style!css!sass?outputStyle=expanded&" +
+        loaders: ["style, "css", "sass?outputStyle=expanded&" +
           "includePaths[]=" +
             encodeURIComponent(path.resolve(__dirname, "./some-folder")) + "&" +
           "includePaths[]=" +
-            encodeURIComponent(path.resolve(__dirname, "./another-folder"))
+            encodeURIComponent(path.resolve(__dirname, "./another-folder"))]
       }
     ]
   }
@@ -89,7 +89,7 @@ module.exports = {
       {
         test: /\.sass$/,
         // Passing indentedSyntax query param to node-sass
-        loader: "style!css!sass?indentedSyntax"
+        loaders: ["style", "css", "sass?indentedSyntax"]
       }
     ]
   }
@@ -110,37 +110,24 @@ More likely you will be disrupted by this second issue. It is natural to expect 
 
 ## Source maps
 
-Because of browser limitations, source maps are only available in conjunction with the [extract-text-webpack-plugin](https://github.com/webpack/extract-text-webpack-plugin). Use that plugin to extract the CSS code from the generated JS bundle into a separate file (which even improves the perceived performance because JS and CSS are downloaded in parallel).
-
-Then your `webpack.config.js` should look like this:
+To enable CSS Source maps, you'll need to pass the `sourceMap`-option to the sass- and the css-loader. Your `webpack.config.js` should look like this:
 
 ```javascript
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-
 module.exports = {
     ...
-    // must be 'source-map' or 'inline-source-map'
-    devtool: 'source-map',
+    devtool: "source-map", // or "inline-source-map"
     module: {
         loaders: [
             {
                 test: /\.scss$/,
-                loader: ExtractTextPlugin.extract(
-                    // activate source maps via loader query
-                    'css?sourceMap!' +
-                    'sass?sourceMap'
-                )
+                loaders: ["style", "css?sourceMap", "sass?sourceMap"]
             }
         ]
-    },
-    plugins: [
-        // extract inline css into separate 'styles.css'
-        new ExtractTextPlugin('styles.css')
-    ]
+    }
 };
 ```
 
-If you want to edit the original Sass files inside Chrome, [there's a good blog post](https://medium.com/@toolmantim/getting-started-with-css-sourcemaps-and-in-browser-sass-editing-b4daab987fb0). Checkout [test/sourceMap](https://github.com/jtangelder/sass-loader/tree/master/test) for a running example. Make sure to serve the content with an HTTP server.
+If you want to edit the original Sass files inside Chrome, [there's a good blog post](https://medium.com/@toolmantim/getting-started-with-css-sourcemaps-and-in-browser-sass-editing-b4daab987fb0). Checkout [test/sourceMap](https://github.com/jtangelder/sass-loader/tree/master/test) for a running example.
 
 ## License
 
