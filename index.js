@@ -239,6 +239,11 @@ module.exports = function (content) {
 
     opt.importer = getWebpackImporter();
 
+    // functions can't be set in query, load from sassLoader section in webpack options
+    if (this.options.sassLoader) {
+        opt.functions = this.options.sassLoader.functions;
+    }
+
     // start the actual rendering
     if (isSync) {
         try {
