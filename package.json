@@ -42,6 +42,7 @@
     "jshint": "^2.8.0",
     "mocha": "^2.0.1",
     "node-sass": "3.3.3",
+    "object-assign": "^4.0.1",
     "raw-loader": "^0.5.1",
     "should": "^7.0.2",
     "style-loader": "^0.12.3",

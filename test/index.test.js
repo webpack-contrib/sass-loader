@@ -1,10 +1,14 @@
 'use strict';
 
+Object.assign = Object.assign || require('object-assign');
+
 var should = require('should');
 var path = require('path');
 var webpack = require('webpack');
 var fs = require('fs');
 var enhancedReqFactory = require('enhanced-require');
+var customImporter = require('./tools/customImporter.js');
+var customFunctions = require('./tools/customFunctions.js');
 
 var CR = /\r/g;
 var syntaxStyles = ['scss', 'sass'];
@@ -55,6 +59,28 @@ describe('sass-loader', function () {
         testAsync('should prefer .sass over .css (async)', 'import-order-5');
         testSync('should prefer explicit imports over auto-resolving (sync)', 'import-order-6');
         testAsync('should prefer explicit imports over auto-resolving (async)', 'import-order-6');
+
+        testSync('should use custom importer', 'custom-importer', {
+            sassLoader: {
+                importer: customImporter
+            }
+        });
+        testAsync('should use custom importer', 'custom-importer', {
+            sassLoader: {
+                importer: customImporter
+            }
+        });
+
+        testSync('should expose custom functions', 'custom-functions', {
+            sassLoader: {
+                functions: customFunctions
+            }
+        });
+        testAsync('should expose custom functions', 'custom-functions', {
+            sassLoader: {
+                functions: customFunctions
+            }
+        });
 
         testSync('should compile bootstrap-sass without errors (sync)', 'bootstrap-sass');
         testAsync('should compile bootstrap-sass without errors (async)', 'bootstrap-sass');
@@ -118,21 +144,22 @@ function readCss(ext, id) {
     return fs.readFileSync(path.join(__dirname, ext, 'spec', id + '.css'), 'utf8').replace(CR, '');
 }
 
-function testAsync(name, id) {
+function testAsync(name, id, config) {
     syntaxStyles.forEach(function forEachSyntaxStyle(ext) {
         it(name + ' (' + ext + ')', function (done) {
             var expectedCss = readCss(ext, id);
             var sassFile = pathToSassFile(ext, id);
-            var actualCss;
-
-            webpack({
+            var webpackConfig = Object.assign({}, config, {
                 entry: sassFile,
                 output: {
                     path: __dirname + '/output',
                     filename: 'bundle.' + ext + '.js',
                     libraryTarget: 'commonjs2'
                 }
-            }, function onCompilationFinished(err, stats) {
+            });
+            var actualCss;
+
+            webpack(webpackConfig, function onCompilationFinished(err, stats) {
                 if (err) {
                     return done(err);
                 }
@@ -155,13 +182,19 @@ function testAsync(name, id) {
     });
 }
 
-function testSync(name, id) {
+function testSync(name, id, config) {
     syntaxStyles.forEach(function forEachSyntaxStyle(ext) {
         it(name + ' (' + ext + ')', function () {
             var expectedCss = readCss(ext, id);
             var sassFile = pathToSassFile(ext, id);
-            var enhancedReq = enhancedReqFactory(module);
-            var actualCss = enhancedReq(sassFile);
+            var webpackConfig = Object.assign({}, config, {
+                entry: sassFile
+            });
+            var enhancedReq;
+            var actualCss;
+
+            enhancedReq = enhancedReqFactory(module, webpackConfig);
+            actualCss = enhancedReq(webpackConfig.entry);
 
             fs.writeFileSync(__dirname + '/output/' + name + '.' + ext + '.sync.css', actualCss, 'utf8');
             actualCss.should.eql(expectedCss);
