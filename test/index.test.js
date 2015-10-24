@@ -60,6 +60,12 @@ describe('sass-loader', function () {
         testSync('should prefer explicit imports over auto-resolving (sync)', 'import-order-6');
         testAsync('should prefer explicit imports over auto-resolving (async)', 'import-order-6');
 
+        testSync('should compile bootstrap-sass without errors (sync)', 'bootstrap-sass');
+        testAsync('should compile bootstrap-sass without errors (async)', 'bootstrap-sass');
+    });
+
+    describe('custom importers', function () {
+
         testSync('should use custom importer', 'custom-importer', {
             sassLoader: {
                 importer: customImporter
@@ -70,6 +76,10 @@ describe('sass-loader', function () {
                 importer: customImporter
             }
         });
+
+    });
+
+    describe('custom functions', function () {
 
         testSync('should expose custom functions', 'custom-functions', {
             sassLoader: {
@@ -82,8 +92,6 @@ describe('sass-loader', function () {
             }
         });
 
-        testSync('should compile bootstrap-sass without errors (sync)', 'bootstrap-sass');
-        testAsync('should compile bootstrap-sass without errors (async)', 'bootstrap-sass');
     });
 
     describe('errors', function () {
