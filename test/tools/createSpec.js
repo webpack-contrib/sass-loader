@@ -3,6 +3,8 @@
 var sass = require('node-sass');
 var fs = require('fs');
 var path = require('path');
+var customImporter = require('./customImporter.js');
+var customFunctions = require('./customFunctions.js');
 
 var testFolder = path.resolve(__dirname, '../');
 var error = 'error';
@@ -24,6 +26,9 @@ function createSpec(ext) {
             css = sass.renderSync({
                 file: fileName,
                 importer: function (url) {
+                    if (url === 'import-with-custom-logic') {
+                        return customImporter.returnValue;
+                    }
                     if (/\.css$/.test(url) === false) { // Do not transform css imports
                         url = url
                             .replace(/^~bootstrap-sass/, pathToBootstrap)
@@ -33,6 +38,7 @@ function createSpec(ext) {
                         file: url
                     };
                 },
+                functions: customFunctions,
                 includePaths: [
                     path.join(testFolder, ext, 'another'),
                     path.join(testFolder, ext, 'from-include-path')
