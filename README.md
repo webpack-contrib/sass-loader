@@ -15,9 +15,9 @@ as [`peerDependency`](https://docs.npmjs.com/files/package.json#peerdependencies
 
 ``` javascript
 var css = require("!raw!sass!./file.scss");
-// => returns compiled css code from file.scss, resolves imports
+// => returns compiled css code from file.scss, resolves Sass imports
 var css = require("!css!sass!./file.scss");
-// => returns compiled css code from file.scss, resolves imports and url(...)s
+// => returns compiled css code from file.scss, resolves Sass and CSS imports and url(...)s
 ```
 
 Use in tandem with the [`style-loader`](https://github.com/webpack/style-loader) and [`css-loader`](https://github.com/webpack/css-loader) to add the css rules to your document:
@@ -33,6 +33,7 @@ It's recommended to adjust your `webpack.config` so `style!css!sass!` is applied
 
 ``` javascript
 module.exports = {
+  ...
   module: {
     loaders: [
       {
@@ -48,26 +49,45 @@ Then you only need to write: `require("./file.scss")`.
 
 ### Sass options
 
-You can pass any Sass specific configuration options through to the render function via [query parameters](http://webpack.github.io/docs/using-loaders.html#query-parameters).
+You can pass options to node-sass by defining a `sassLoader`-property on your `webpack.config.js`. See [node-sass](https://github.com/andrew/node-sass) for all available options.
 
 ``` javascript
 module.exports = {
+  ...
   module: {
     loaders: [
       {
         test: /\.scss$/,
-        loaders: ["style", "css", "sass?outputStyle=expanded&" +
-          "includePaths[]=" +
-            encodeURIComponent(path.resolve(__dirname, "./some-folder")) + "&" +
-          "includePaths[]=" +
-            encodeURIComponent(path.resolve(__dirname, "./another-folder"))]
+        loaders: ["style", "css", "sass"]
       }
     ]
+  }
+  sassLoader: {
+    includePaths: [path.resolve(__dirname, "./some-folder")]
   }
 };
 ```
 
-See [node-sass](https://github.com/andrew/node-sass) for all available options.
+Passing your options as [query parameters](http://webpack.github.io/docs/using-loaders.html#query-parameters) is also supported, but can get confusing if you need to set a lot of options.
+
+If you need to define two different loader configs, you can also change the config's property name via `sass?config=otherSassLoaderConfig`:
+
+```javascript
+module.exports = {
+  ...
+  module: {
+    loaders: [
+      {
+        test: /\.scss$/,
+        loaders: ["style", "css", "sass?config=otherSassLoaderConfig"]
+      }
+    ]
+  }
+  otherSassLoaderConfig: {
+    ...
+  }
+};
+```
 
 ### Imports
 
@@ -78,24 +98,6 @@ webpack provides an [advanced mechanism to resolve files](http://webpack.github.
 ```
 
 It's important to only prepend it with `~`, because `~/` resolves to the home-directory. webpack needs to distinguish between `bootstrap` and `~bootstrap` because CSS- and Sass-files have no special syntax for importing relative files. Writing `@import "file"` is the same as `@import "./file";`
-
-### .sass files
-
-For requiring `.sass` files, add `indentedSyntax` as a loader option:
-
-``` javascript
-module.exports = {
-  module: {
-    loaders: [
-      {
-        test: /\.sass$/,
-        // Passing indentedSyntax query param to node-sass
-        loaders: ["style", "css", "sass?indentedSyntax"]
-      }
-    ]
-  }
-};
-```
 
 ### Problems with `url(...)`
 
@@ -109,9 +111,9 @@ More likely you will be disrupted by this second issue. It is natural to expect 
 - Add the missing url rewriting using the [resolve-url-loader](https://github.com/bholloway/resolve-url-loader). Place it directly after the sass-loader in the loader chain.
 - Library authors usually provide a variable to modify the asset path. [bootstrap-sass](https://github.com/twbs/bootstrap-sass) for example has an `$icon-font-path`. Check out [this working bootstrap example](https://github.com/jtangelder/sass-loader/tree/master/test/bootstrapSass).
 
-## Source maps
+### Source maps
 
-To enable CSS Source maps, you'll need to pass the `sourceMap`-option to the sass- and the css-loader. Your `webpack.config.js` should look like this:
+To enable CSS Source maps, you'll need to pass the `sourceMap`-option to the sass- *and* the css-loader. Your `webpack.config.js` should look like this:
 
 ```javascript
 module.exports = {
