@@ -6,6 +6,7 @@ var path = require('path');
 var os = require('os');
 var fs = require('fs');
 var async = require('async');
+var assign = require('object-assign');
 
 // A typical sass error looks like this
 var SassError = {
@@ -37,13 +38,8 @@ module.exports = function (content) {
     var isSync = typeof callback !== 'function';
     var self = this;
     var resourcePath = this.resourcePath;
-    var query = utils.parseQuery(this.query);
-    // Allow passing "programmable objects" (e.g. importers) via custom `this.options` field.
-    // http://webpack.github.io/docs/how-to-write-a-loader.html#programmable-objects-as-query-option
-    var configKey = query.config || 'sassLoader';
-    var configOptions = this.options[configKey] || {};
+    var sassOptions = getLoaderConfig(this);
     var result;
-    var opt;
 
     /**
      * Enhances the sass error with additional information about what actually went wrong.
@@ -94,7 +90,7 @@ module.exports = function (content) {
 
                 // node-sass returns UNIX-style paths
                 fileContext = path.normalize(fileContext);
-                request = utils.urlToRequest(url, opt.root);
+                request = utils.urlToRequest(url, sassOptions.root);
                 dirContext = fileToDirContext(fileContext);
 
                 return resolveSync(dirContext, url, getImportsToResolve(request));
@@ -106,7 +102,7 @@ module.exports = function (content) {
 
             // node-sass returns UNIX-style paths
             fileContext = path.normalize(fileContext);
-            request = utils.urlToRequest(url, opt.root);
+            request = utils.urlToRequest(url, sassOptions.root);
             dirContext = fileToDirContext(fileContext);
 
             resolve(dirContext, url, getImportsToResolve(request), done);
@@ -209,56 +205,50 @@ module.exports = function (content) {
 
     this.cacheable();
 
-    opt = query;
-    opt.data = content;
+    sassOptions.data = content;
 
     // Skip empty files, otherwise it will stop webpack, see issue #21
-    if (opt.data.trim() === '') {
+    if (content.trim() === '') {
         return isSync ? content : callback(null, content);
     }
 
     // opt.outputStyle
-    if (!opt.outputStyle && this.minimize) {
-        opt.outputStyle = 'compressed';
+    if (!sassOptions.outputStyle && this.minimize) {
+        sassOptions.outputStyle = 'compressed';
     }
 
     // opt.sourceMap
     // Not using the `this.sourceMap` flag because css source maps are different
     // @see https://github.com/webpack/css-loader/pull/40
-    if (opt.sourceMap) {
+    if (sassOptions.sourceMap) {
         // deliberately overriding the sourceMap option
         // this value is (currently) ignored by libsass when using the data input instead of file input
         // however, it is still necessary for correct relative paths in result.map.sources
-        opt.sourceMap = this.options.output.path + '/sass.map';
-        opt.omitSourceMapUrl = true;
+        sassOptions.sourceMap = this.options.output.path + '/sass.map';
+        sassOptions.omitSourceMapUrl = true;
 
         // If sourceMapContents option is not set, set it to true otherwise maps will be empty/null
         // when exported by webpack-extract-text-plugin.
-        if ('sourceMapContents' in opt === false) {
-            opt.sourceMapContents = true;
+        if ('sourceMapContents' in sassOptions === false) {
+            sassOptions.sourceMapContents = true;
         }
     }
 
     // indentedSyntax is a boolean flag
-    opt.indentedSyntax = Boolean(opt.indentedSyntax);
+    sassOptions.indentedSyntax = Boolean(sassOptions.indentedSyntax);
 
     // Allow passing custom importers to `node-sass`. Accepts `Function` or an array of `Function`s.
-    opt.importer = configOptions.importer ? [].concat(configOptions.importer) : [];
-    opt.importer.push(getWebpackImporter());
+    sassOptions.importer = sassOptions.importer ? [].concat(sassOptions.importer) : [];
+    sassOptions.importer.push(getWebpackImporter());
 
     // `node-sass` uses `includePaths` to resolve `@import` paths. Append the currently processed file.
-    opt.includePaths = opt.includePaths ? [].concat(opt.includePaths) : [];
-    opt.includePaths.push(path.dirname(resourcePath));
-
-    // functions can't be set in query, load from sassLoader section in webpack options
-    if (configOptions.functions) {
-        opt.functions = configOptions.functions;
-    }
+    sassOptions.includePaths = sassOptions.includePaths ? [].concat(sassOptions.includePaths) : [];
+    sassOptions.includePaths.push(path.dirname(resourcePath));
 
     // start the actual rendering
     if (isSync) {
         try {
-            result = sass.renderSync(opt);
+            result = sass.renderSync(sassOptions);
             addIncludedFilesToWebpack(result.stats.includedFiles);
             return result.css.toString();
         } catch (err) {
@@ -268,7 +258,7 @@ module.exports = function (content) {
         }
     }
 
-    asyncSassJobQueue.push(opt, function onRender(err, result) {
+    asyncSassJobQueue.push(sassOptions, function onRender(err, result) {
         if (err) {
             formatSassError(err);
             err.file && self.dependency(err.file);
@@ -371,4 +361,21 @@ function getImportsToResolve(originalImport) {
     }
 
     return paths;
+}
+
+/**
+ * Check the loader query and webpack config for loader options. If an option is defined in both places,
+ * the loader query takes precedence.
+ *
+ * @param {Loader} loaderContext
+ * @returns {Object}
+ */
+function getLoaderConfig(loaderContext) {
+    var query = utils.parseQuery(loaderContext.query);
+    var configKey = query.config || 'sassLoader';
+    var config = loaderContext.options[configKey] || {};
+
+    delete query.config;
+
+    return assign(query, config);
 }

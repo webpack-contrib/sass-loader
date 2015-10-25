@@ -41,8 +41,20 @@ describe('sass-loader', function () {
         testAsync('should resolve imports from other language style correctly (async)', 'import-other-style');
 
         // Test for includePath imports
-        testSync('should resolve imports from another directory declared by includePaths correctly (sync)', 'import-include-paths');
-        testAsync('should resolve imports from another directory declared by includePaths correctly (async)', 'import-include-paths');
+        testSync('should resolve imports from another directory declared by includePaths correctly (sync)', 'import-include-paths', function (ext) {
+            return {
+                sassLoader: {
+                    includePaths: [path.join(__dirname, ext, 'from-include-path')]
+                }
+            }
+        });
+        testAsync('should resolve imports from another directory declared by includePaths correctly (async)', 'import-include-paths', function (ext) {
+            return {
+                sassLoader: {
+                    includePaths: [path.join(__dirname, ext, 'from-include-path')]
+                }
+            }
+        });
 
         testSync('should not resolve CSS imports (sync)', 'import-css');
         testAsync('should not resolve CSS imports (async)', 'import-css');
@@ -66,30 +78,38 @@ describe('sass-loader', function () {
 
     describe('custom importers', function () {
 
-        testSync('should use custom importer', 'custom-importer', {
-            sassLoader: {
-                importer: customImporter
-            }
+        testSync('should use custom importer', 'custom-importer', function () {
+            return {
+                sassLoader: {
+                    importer: customImporter
+                }
+            };
         });
-        testAsync('should use custom importer', 'custom-importer', {
-            sassLoader: {
-                importer: customImporter
-            }
+        testAsync('should use custom importer', 'custom-importer', function () {
+            return {
+                sassLoader: {
+                    importer: customImporter
+                }
+            };
         });
 
     });
 
     describe('custom functions', function () {
 
-        testSync('should expose custom functions', 'custom-functions', {
-            sassLoader: {
-                functions: customFunctions
-            }
+        testSync('should expose custom functions', 'custom-functions', function () {
+            return {
+                sassLoader: {
+                    functions: customFunctions
+                }
+            };
         });
-        testAsync('should expose custom functions', 'custom-functions', {
-            sassLoader: {
-                functions: customFunctions
-            }
+        testAsync('should expose custom functions', 'custom-functions', function () {
+            return {
+                sassLoader: {
+                    functions: customFunctions
+                }
+            };
         });
 
     });
@@ -157,7 +177,7 @@ function testAsync(name, id, config) {
         it(name + ' (' + ext + ')', function (done) {
             var expectedCss = readCss(ext, id);
             var sassFile = pathToSassFile(ext, id);
-            var webpackConfig = Object.assign({}, config, {
+            var webpackConfig = Object.assign(config ? config(ext) : {}, {
                 entry: sassFile,
                 output: {
                     path: __dirname + '/output',
@@ -195,7 +215,7 @@ function testSync(name, id, config) {
         it(name + ' (' + ext + ')', function () {
             var expectedCss = readCss(ext, id);
             var sassFile = pathToSassFile(ext, id);
-            var webpackConfig = Object.assign({}, config, {
+            var webpackConfig = Object.assign(config ? config(ext) : {}, {
                 entry: sassFile
             });
             var enhancedReq;
@@ -211,8 +231,5 @@ function testSync(name, id, config) {
 }
 
 function pathToSassFile(ext, id) {
-    return 'raw!' +
-        pathToSassLoader + '?' +
-        (ext === 'sass'? '&indentedSyntax&' : '') + 'includePaths[]=' + path.join(__dirname, ext, 'from-include-path') + '!' +
-        path.join(__dirname, ext, id + '.' + ext);
+    return 'raw!' + pathToSassLoader + '?' + (ext === 'sass'? 'indentedSyntax' : '') + '!' + path.join(__dirname, ext, id + '.' + ext);
 }
