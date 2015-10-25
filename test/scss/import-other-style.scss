@@ -3,5 +3,5 @@
 /* ...but it is allowed */
 @import "../sass/another/module.sass";
 /* However, if it is omitted, .scss always takes precedence */
-@import "~test-module/some-module";
+@import "~test-module/some.module";
 @import "~test-module/underscore";
