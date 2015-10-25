@@ -1,6 +1,11 @@
 Changelog
 ---------
 
+### 3.1.0
+
+- Add possibility to also define all options in your `webpack.config.js` [#152](https://github.com/jtangelder/sass-loader/pull/152) [#170](https://github.com/jtangelder/sass-loader/pull/170)
+- Fix a problem where modules with a `.` in their names were not resolved [#167](https://github.com/jtangelder/sass-loader/issues/167)
+
 ### 3.0.0
 
 - **Breaking:** Add `node-sass@^3.3.3` and `webpack@^1.12.2` as peer-dependency [#165](https://github.com/jtangelder/sass-loader/pull/165) [#166](https://github.com/jtangelder/sass-loader/pull/166) [#169](https://github.com/jtangelder/sass-loader/pull/169)
