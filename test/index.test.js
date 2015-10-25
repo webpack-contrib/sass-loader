@@ -46,14 +46,14 @@ describe('sass-loader', function () {
                 sassLoader: {
                     includePaths: [path.join(__dirname, ext, 'from-include-path')]
                 }
-            }
+            };
         });
         testAsync('should resolve imports from another directory declared by includePaths correctly (async)', 'import-include-paths', function (ext) {
             return {
                 sassLoader: {
                     includePaths: [path.join(__dirname, ext, 'from-include-path')]
                 }
-            }
+            };
         });
 
         testSync('should not resolve CSS imports (sync)', 'import-css');
