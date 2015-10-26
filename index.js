@@ -346,9 +346,11 @@ function getImportsToResolve(originalImport) {
     // We can't just check for ext being defined because ext can also be something like '.datepicker'
     // when the true extension is omitted and the filename contains a dot.
     // @see https://github.com/jtangelder/sass-loader/issues/167
+    /*jshint noempty:false */
     if (ext === '.css') {
         // do not import css files
     } else if (ext === '.scss' || ext === '.sass') {
+    /*jshint noempty:true */
         add(basename);
     } else {
         if (!startsWithUnderscore) {
