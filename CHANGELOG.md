@@ -1,6 +1,10 @@
 Changelog
 ---------
 
+### 3.1.1
+
+- Fix missing module `object-assign` [#178](https://github.com/jtangelder/sass-loader/issues/178)
+
 ### 3.1.0
 
 - Add possibility to also define all options in your `webpack.config.js` [#152](https://github.com/jtangelder/sass-loader/pull/152) [#170](https://github.com/jtangelder/sass-loader/pull/170)
