@@ -27,7 +27,7 @@
   "author": "J. Tangelder",
   "license": "MIT",
   "peerDependencies": {
-    "node-sass": "^3.3.3",
+    "node-sass": "^3.4.0",
     "webpack": "^1.12.2"
   },
   "dependencies": {
@@ -42,7 +42,7 @@
     "file-loader": "^0.8.4",
     "jshint": "^2.8.0",
     "mocha": "^2.0.1",
-    "node-sass": "3.3.3",
+    "node-sass": "^3.4.0",
     "raw-loader": "^0.5.1",
     "should": "^7.0.2",
     "style-loader": "^0.12.3",
