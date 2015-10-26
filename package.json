@@ -32,7 +32,8 @@
   },
   "dependencies": {
     "async": "^1.4.0",
-    "loader-utils": "^0.2.5"
+    "loader-utils": "^0.2.5",
+    "object-assign": "^4.0.1"
   },
   "devDependencies": {
     "bootstrap-sass": "^3.3.5",
@@ -42,7 +43,6 @@
     "jshint": "^2.8.0",
     "mocha": "^2.0.1",
     "node-sass": "3.3.3",
-    "object-assign": "^4.0.1",
     "raw-loader": "^0.5.1",
     "should": "^7.0.2",
     "style-loader": "^0.12.3",
