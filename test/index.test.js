@@ -59,19 +59,6 @@ describe('sass-loader', function () {
         testSync('should not resolve CSS imports (sync)', 'import-css');
         testAsync('should not resolve CSS imports (async)', 'import-css');
 
-        testSync('should prefer _.scss over _.sass (sync)', 'import-order-1');
-        testAsync('should prefer _.scss over _.sass (async)', 'import-order-1');
-        testSync('should prefer _.sass over _.css (sync)', 'import-order-2');
-        testAsync('should prefer _.sass over _.css (async)', 'import-order-2');
-        testSync('should prefer _.css over .scss (sync)', 'import-order-3');
-        testAsync('should prefer _.css over .scss (async)', 'import-order-3');
-        testSync('should prefer .scss over .sass (sync)', 'import-order-4');
-        testAsync('should prefer .scss over .sass (async)', 'import-order-4');
-        testSync('should prefer .sass over .css (sync)', 'import-order-5');
-        testAsync('should prefer .sass over .css (async)', 'import-order-5');
-        testSync('should prefer explicit imports over auto-resolving (sync)', 'import-order-6');
-        testAsync('should prefer explicit imports over auto-resolving (async)', 'import-order-6');
-
         testSync('should compile bootstrap-sass without errors (sync)', 'bootstrap-sass');
         testAsync('should compile bootstrap-sass without errors (async)', 'bootstrap-sass');
     });
@@ -122,8 +109,8 @@ describe('sass-loader', function () {
             } catch (err) {
                 // check for file excerpt
                 err.message.should.match(/\.syntax-error''/);
-                err.message.should.match(/Invalid top-level expression/);
-                err.message.should.match(/\(line 1, column 1\)/);
+                err.message.should.match(/Invalid CSS after "\.syntax-error''": expected "\{", was ""/);
+                err.message.should.match(/\(line 1, column 14\)/);
                 err.message.indexOf(pathToErrorFile).should.not.equal(-1);
             }
         });
@@ -134,8 +121,8 @@ describe('sass-loader', function () {
             } catch (err) {
                 // check for file excerpt
                 err.message.should.match(/\.syntax-error''/);
-                err.message.should.match(/Invalid top-level expression/);
-                err.message.should.match(/\(line 1, column 1\)/);
+                err.message.should.match(/Invalid CSS after "\.syntax-error''": expected "\{", was ""/);
+                err.message.should.match(/\(line 1, column 14\)/);
                 err.message.indexOf(pathToErrorFile).should.not.equal(-1);
             }
         });

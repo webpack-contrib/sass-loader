@@ -4,8 +4,8 @@
 @import "another/underscore";
 // Import a module with a dot in its name
 // @see https://github.com/jtangelder/sass-loader/issues/167
-/* @import "~test-module/some.module"; */
-@import "~test-module/some.module";
-/* @import "~test-module/underscore"; */
-@import "~test-module/underscore";
+/* @import "~scss/some.module"; */
+@import "~scss/some.module";
+/* @import "~t~scss/underscore"; */
+@import "~scss/underscore";
 @import url(http://example.com/something/from/the/interwebs);
