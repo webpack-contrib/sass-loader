@@ -381,5 +381,5 @@ function getLoaderConfig(loaderContext) {
 
     delete query.config;
 
-    return assign(query, config);
+    return assign({}, config, query);
 }
