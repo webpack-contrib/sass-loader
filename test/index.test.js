@@ -134,7 +134,7 @@ describe('sass-loader', function () {
                 // check for file excerpt
                 err.message.should.match(/@import "does-not-exist";/);
                 err.message.should.match(/File to import not found or unreadable: does-not-exist/);
-                err.message.should.match(/\(line 1, column 9\)/);
+                err.message.should.match(/\(line 1, column 1\)/);
                 err.message.indexOf(pathToErrorFileNotFound).should.not.equal(-1);
             }
         });
@@ -146,7 +146,7 @@ describe('sass-loader', function () {
                 // check for file excerpt
                 err.message.should.match(/@import "\.\/another\/_module\.scss";/);
                 err.message.should.match(/File to import not found or unreadable: \.\/another\/_module\.scss/);
-                err.message.should.match(/\(line 1, column 9\)/);
+                err.message.should.match(/\(line 1, column 1\)/);
                 err.message.indexOf(pathToErrorFileNotFound2).should.not.equal(-1);
             }
         });
