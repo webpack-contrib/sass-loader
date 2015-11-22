@@ -1,6 +1,13 @@
 Changelog
 ---------
 
+### 3.1.2
+
+- Fix loader query not overriding webpack config [#189](https://github.com/jtangelder/sass-loader/pull/189)
+- Update peer-dependencies [#182](https://github.com/jtangelder/sass-loader/pull/182)
+  - `node-sass^3.4.2`
+  - `webpack^1.12.6`
+
 ### 3.1.1
 
 - Fix missing module `object-assign` [#178](https://github.com/jtangelder/sass-loader/issues/178)
