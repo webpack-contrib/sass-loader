@@ -27,6 +27,31 @@ describe('sass-loader', function () {
 
     });
 
+    describe('config', function () {
+
+        it('should override sassLoader config with loader query', function () {
+            var expectedCss = readCss('sass', 'language');
+            var sassFile = pathToSassFile('sass', 'language');
+            var webpackConfig = Object.assign({}, {
+                entry: sassFile,
+                sassLoader: {
+                    // Incorrect setting here should be overridden by loader query string given by
+                    // pathToSassFile()
+                    indentedSyntax: false
+                }
+            });
+            var enhancedReq;
+            var actualCss;
+
+            enhancedReq = enhancedReqFactory(module, webpackConfig);
+            actualCss = enhancedReq(webpackConfig.entry);
+
+            fs.writeFileSync(__dirname + '/output/should override sassLoader config with loader query.sass.sync.css', actualCss, 'utf8');
+            actualCss.should.eql(expectedCss);
+        });
+
+    });
+
     describe('imports', function () {
 
         testSync('should resolve imports correctly (sync)', 'imports');
