@@ -99,12 +99,18 @@ webpack provides an [advanced mechanism to resolve files](http://webpack.github.
 
 It's important to only prepend it with `~`, because `~/` resolves to the home-directory. webpack needs to distinguish between `bootstrap` and `~bootstrap` because CSS- and Sass-files have no special syntax for importing relative files. Writing `@import "file"` is the same as `@import "./file";`
 
-#### Advanced: Using a custom node-sass importer with sass-loader
+#### Advanced: Doing wild things with a custom node-sass importer
 
-Though sass-loader implements a custom importer, you can use your own as well. Include your importer function in your sassLoader options, like this:
+node-sass's `importer` API allows you to define custom handlers for Sass's `@import` directive. While sass-loader defines its own importer callback to integrate `@import` with webpack's resolve mechanism, it will also pass along your own importer callback to node-sass. This allows your code a chance to "steal" the import and handle it, or pass on it and let sass-loader handle it as normal.
+
+Why would you want to do this? Well, maybe you want your Sass to be able to `@import` something other than Sass or normal stylesheets... like Stylus, or LESS. You could write an importer that checks for the appropriate file extension, and invokes another compiler, replacing the `@import` with compiled CSS before it gets to node-sass. Or you could even transpile it to Sass.
+
+Luckily, sass-loader won't get in your way if you want to do this. sass-loader will pass along your importer to node-sass and (as of 3.1.3) allow you to access webpack's loader API via `this.options.loaderContext`. For now, you'll have to handle the path resolution logic yourself, though, since path resolution and actual processing of imports are tightly coupled together.
+
+Include your importer function in your sassLoader options, like this:
 
 ```javascript
-var sass = require('node-sass')
+var sass = require('node-sass');
 module.exports = {
   ...
   module: {
@@ -112,16 +118,13 @@ module.exports = {
       test: /\.scss$/,
       loaders: ['style', 'css', 'sass']
     }]
-  }
+  },
   sassLoader: {
-    importer: specialImporter
+    importer: stylusImporter
   }
 };
 ```
-
-Writing an importer that can resolve properly is a bit involved, but is possible because sass-loader (as of version 3.1.3) gives your importer access to sass-loader's own `this` value via `this.options.loaderContext`, so that you can access Webpack's loader API.
-
-Here's an example implementation:
+And then, use loader-util's and webpack's resolve in your importer:
 
 ```javascript
 var loaderUtils = require('loader-utils');
@@ -166,8 +169,8 @@ function specialImporter (url, fileContext, done) {
     // Return the result or error via the `done` function:
     done({ contents: '/* Resulting Sass code goes here */' });
     // If there's an error, send an error object or the error you caught:
-    // done(new Error('Helpful error message about the file'))
-  }.bind(this))
+    // done(new Error('Helpful error message about the file'));
+  }.bind(this));
 }
 ```
 
