@@ -63,7 +63,8 @@ module.exports = {
     ]
   }
   sassLoader: {
-    includePaths: [path.resolve(__dirname, "./some-folder")]
+    includePaths: [path.resolve(__dirname, "./some-folder")],
+    indentedSyntax: true  // compile .sass syntax instead of .scss
   }
 };
 ```
