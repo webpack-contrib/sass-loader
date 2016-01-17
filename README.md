@@ -49,7 +49,7 @@ Then you only need to write: `require("./file.scss")`.
 
 ### Sass options
 
-You can pass options to node-sass by defining a `sassLoader`-property on your `webpack.config.js`. See [node-sass](https://github.com/andrew/node-sass) for all available options.
+You can pass options to node-sass by defining a `sassLoader`-property on your `webpack.config.js`. See [node-sass](https://github.com/andrew/node-sass) for all available options. Hint: If you want to compile `.sass` instead of `.scss` files, set the property `indentedSyntax` to true.
 
 ``` javascript
 module.exports = {
@@ -63,8 +63,7 @@ module.exports = {
     ]
   }
   sassLoader: {
-    includePaths: [path.resolve(__dirname, "./some-folder")],
-    indentedSyntax: true  // compile .sass syntax instead of .scss
+    includePaths: [path.resolve(__dirname, "./some-folder")]
   }
 };
 ```
