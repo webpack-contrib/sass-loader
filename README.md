@@ -51,7 +51,7 @@ Then you only need to write: `require("./file.scss")`.
 
 You can pass options to node-sass by defining a `sassLoader`-property on your `webpack.config.js`. See [node-sass](https://github.com/andrew/node-sass) for all available options.
 
-``` javascript
+```javascript
 module.exports = {
   ...
   module: {
@@ -61,7 +61,7 @@ module.exports = {
         loaders: ["style", "css", "sass"]
       }
     ]
-  }
+  },
   sassLoader: {
     includePaths: [path.resolve(__dirname, "./some-folder")]
   }
@@ -82,7 +82,7 @@ module.exports = {
         loaders: ["style", "css", "sass?config=otherSassLoaderConfig"]
       }
     ]
-  }
+  },
   otherSassLoaderConfig: {
     ...
   }
