@@ -44,9 +44,9 @@
     "mocha": "^2.3.4",
     "node-sass": "3.4.2",
     "raw-loader": "^0.5.1",
-    "should": "^7.0.2",
+    "should": "^8.2.2",
     "style-loader": "^0.13.0",
-    "webpack": "1.12.6",
+    "webpack": "^1.12.14",
     "webpack-dev-server": "^1.7.0"
   }
 }
