@@ -205,7 +205,7 @@ module.exports = function (content) {
 
     this.cacheable();
 
-    sassOptions.data = content;
+    sassOptions.data = sassOptions.data ? (sassOptions.data + '\n\n' + content) : content;
 
     // Skip empty files, otherwise it will stop webpack, see issue #21
     if (content.trim() === '') {
