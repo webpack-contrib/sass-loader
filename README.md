@@ -61,7 +61,7 @@ module.exports = {
         loaders: ["style", "css", "sass"]
       }
     ]
-  }
+  },
   sassLoader: {
     includePaths: [path.resolve(__dirname, "./some-folder")]
   }
@@ -82,7 +82,7 @@ module.exports = {
         loaders: ["style", "css", "sass?config=otherSassLoaderConfig"]
       }
     ]
-  }
+  },
   otherSassLoaderConfig: {
     ...
   }
