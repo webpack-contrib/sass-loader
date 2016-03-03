@@ -235,7 +235,14 @@ module.exports = function (content) {
     }
 
     // indentedSyntax is a boolean flag
-    sassOptions.indentedSyntax = Boolean(sassOptions.indentedSyntax);
+    var ext = path.extname(resourcePath);
+
+    // If we are compling sass and indentedSyntax isn't set, automatically set it.
+    if (ext && ext.toLowerCase() === '.sass' && sassOptions.indentedSyntax === undefined) {
+        sassOptions.indentedSyntax = true;
+    } else {
+        sassOptions.indentedSyntax = Boolean(sassOptions.indentedSyntax);
+    }
 
     // Allow passing custom importers to `node-sass`. Accepts `Function` or an array of `Function`s.
     sassOptions.importer = sassOptions.importer ? [].concat(sassOptions.importer) : [];
