@@ -205,10 +205,10 @@ module.exports = function (content) {
 
     this.cacheable();
 
-    sassOptions.data = sassOptions.data ? (sassOptions.data + '\n\n' + content) : content;
+    sassOptions.data = sassOptions.data ? (sassOptions.data + os.EOL + content) : content;
 
     // Skip empty files, otherwise it will stop webpack, see issue #21
-    if (content.trim() === '') {
+    if (sassOptions.data.trim() === '') {
         return isSync ? content : callback(null, content);
     }
 

@@ -126,6 +126,25 @@ describe('sass-loader', function () {
 
     });
 
+    describe('prepending data', function () {
+
+        testSync('should extend the data-option if present', 'prepending-data', function () {
+            return {
+                sassLoader: {
+                    data: '$prepended-data: hotpink;'
+                }
+            };
+        });
+        testAsync('should extend the data-option if present', 'prepending-data', function () {
+            return {
+                sassLoader: {
+                    data: '$prepended-data: hotpink;'
+                }
+            };
+        });
+
+    });
+
     describe('errors', function () {
 
         it('should output understandable errors in entry files', function () {

@@ -1,6 +1,7 @@
 'use strict';
 
 var sass = require('node-sass');
+var os = require('os');
 var fs = require('fs');
 var path = require('path');
 var customImporter = require('./customImporter.js');
@@ -21,10 +22,10 @@ function createSpec(ext) {
         .map(function (file) {
             var fileName = path.join(basePath, file);
             var fileWithoutExt = file.slice(0, -ext.length - 1);
+            var sassOptions;
             var css;
 
-            css = sass.renderSync({
-                file: fileName,
+            sassOptions = {
                 importer: function (url) {
                     if (url === 'import-with-custom-logic') {
                         return customImporter.returnValue;
@@ -43,7 +44,16 @@ function createSpec(ext) {
                     path.join(testFolder, ext, 'another'),
                     path.join(testFolder, ext, 'from-include-path')
                 ]
-            }).css;
+            };
+
+            if (/prepending-data/.test(fileName)) {
+                sassOptions.data = '$prepended-data: hotpink;' + os.EOL + fs.readFileSync(fileName, 'utf8');
+                sassOptions.indentedSyntax = /\.sass$/.test(fileName);
+            } else {
+                sassOptions.file = fileName;
+            }
+
+            css = sass.renderSync(sassOptions).css;
             fs.writeFileSync(path.join(basePath, 'spec', fileWithoutExt + '.css'), css, 'utf8');
         });
 }
