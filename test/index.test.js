@@ -31,12 +31,10 @@ describe('sass-loader', function () {
 
         it('should override sassLoader config with loader query', function () {
             var expectedCss = readCss('sass', 'language');
-            var sassFile = pathToSassFile('sass', 'language');
             var webpackConfig = Object.assign({}, {
-                entry: sassFile,
+                entry: 'raw!' + pathToSassLoader + '?indentedSyntax!' + path.join(__dirname, 'sass', 'language.sass'),
                 sassLoader: {
-                    // Incorrect setting here should be overridden by loader query string given by
-                    // pathToSassFile()
+                    // Incorrect setting here should be overridden by loader query
                     indentedSyntax: false
                 }
             });
@@ -262,5 +260,5 @@ function testSync(name, id, config) {
 }
 
 function pathToSassFile(ext, id) {
-    return 'raw!' + pathToSassLoader + '?' + (ext === 'sass'? 'indentedSyntax' : '') + '!' + path.join(__dirname, ext, id + '.' + ext);
+    return 'raw!' + pathToSassLoader + '!' + path.join(__dirname, ext, id + '.' + ext);
 }
