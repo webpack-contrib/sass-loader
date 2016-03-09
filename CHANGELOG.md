@@ -1,6 +1,12 @@
 Changelog
 ---------
 
+### 3.2.0
+
+- Append file content instead of overwriting when `data`-option is already present [#216](https://github.com/jtangelder/sass-loader/pull/216)
+- Make `indentedSyntax` option a bit smarter [#196](https://github.com/jtangelder/sass-loader/pull/196)
+
+
 ### 3.1.2
 
 - Fix loader query not overriding webpack config [#189](https://github.com/jtangelder/sass-loader/pull/189)
