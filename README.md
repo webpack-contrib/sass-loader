@@ -107,7 +107,7 @@ If you want to prepend Sass code before the actual entry file, you can simply se
 module.exports = {
   ...
   sassLoader: {
-    data: "$env: " + process.env.ENV + ";"
+    data: "$env: " + process.env.NODE_ENV + ";"
   }
 };
 ```
