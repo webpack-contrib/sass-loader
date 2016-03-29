@@ -37,8 +37,8 @@ module.exports = function (content) {
     var callback = this.async();
     var isSync = typeof callback !== 'function';
     var self = this;
-    var resourcePath = this.resourcePath;
     var sassOptions = getLoaderConfig(this);
+    var resourcePath = getThemedResourcePath(this.resourcePath, sassOptions.theme);
     var result;
 
     /**
@@ -93,7 +93,7 @@ module.exports = function (content) {
                 request = utils.urlToRequest(url, sassOptions.root);
                 dirContext = fileToDirContext(fileContext);
 
-                return resolveSync(dirContext, url, getImportsToResolve(request));
+                return resolveSync(dirContext, url, getImportsToResolve(request, sassOptions.theme));
             };
         }
         return function asyncWebpackImporter(url, fileContext, done) {
@@ -105,7 +105,7 @@ module.exports = function (content) {
             request = utils.urlToRequest(url, sassOptions.root);
             dirContext = fileToDirContext(fileContext);
 
-            resolve(dirContext, url, getImportsToResolve(request), done);
+            resolve(dirContext, url, getImportsToResolve(request, sassOptions.theme), done);
         };
     }
 
@@ -327,9 +327,10 @@ function getFileExcerptIfPossible(err) {
  * returns an array of import paths to try.
  *
  * @param {string} originalImport
+ * @param {string} theme to apply
  * @returns {Array}
  */
-function getImportsToResolve(originalImport) {
+function getImportsToResolve(originalImport, theme) {
     var ext = path.extname(originalImport);
     var basename = path.basename(originalImport);
     var dirname = path.dirname(originalImport);
@@ -371,7 +372,13 @@ function getImportsToResolve(originalImport) {
         });
     }
 
-    return paths;
+    if (!theme) {
+      return paths;
+    }
+
+    return paths.map(function(path) {
+      return getThemedPath(path, theme)
+    }).concat(paths);
 }
 
 /**
@@ -389,4 +396,36 @@ function getLoaderConfig(loaderContext) {
     delete query.config;
 
     return assign({}, config, query);
+}
+
+/**
+ * Return path of themed resource if it exists,
+ * otherwise return path of default resource.
+ *
+ * @param {String} resource to import
+ * @param {String} theme to import (optional)
+ * @returns {String}
+ */
+function getThemedResourcePath(resourcePath, theme) {
+  var themedResourcePath = getThemedPath(resourcePath, theme);
+  if (themedResourcePath && fs.existsSync(themedResourcePath)) {
+    return themedResourcePath;
+  }
+
+  return resourcePath;
+}
+
+/**
+ * Return themed version of scss file.
+ *
+ * @param {String} resource to import
+ * @param {String} theme to import (optional)
+ * @returns {String}
+ */
+function getThemedPath(path, theme) {
+  if (theme) {
+    return path.replace(/(\.[^\.]*)$/, '.' + theme + '$1');
+  }
+
+  return path;
 }
