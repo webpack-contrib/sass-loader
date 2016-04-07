@@ -1,7 +1,7 @@
 {
-  "name": "sass-loader",
+  "name": "themed-sass-loader",
   "version": "3.2.0",
-  "description": "Sass loader for webpack",
+  "description": "Sass loader for webpack with themes",
   "main": "index.js",
   "scripts": {
     "create-spec": "node test/tools/runCreateSpec.js",
@@ -22,9 +22,9 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/jtangelder/sass-loader.git"
+    "url": "https://github.com/limscoder/themed-sass-loader"
   },
-  "author": "J. Tangelder",
+  "author": "Dave Thompson",
   "license": "MIT",
   "peerDependencies": {
     "node-sass": "^3.4.2",
