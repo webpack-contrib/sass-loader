@@ -1,10 +1,10 @@
-# Sass loader for [webpack](http://webpack.github.io/)
+# Sass loader for [webpack](http://webpack.github.io/) with the ability to replace individual stylesheets with themed stylesheets.
 
 ## Install
 
-`npm install sass-loader node-sass webpack --save-dev`
+`npm install themed-sass-loader node-sass webpack --save-dev`
 
-The sass-loader requires [node-sass](https://github.com/sass/node-sass) and [webpack](https://github.com/webpack/webpack)
+The themed-sass-loader requires [node-sass](https://github.com/sass/node-sass) and [webpack](https://github.com/webpack/webpack)
 as [`peerDependency`](https://docs.npmjs.com/files/package.json#peerdependencies). Thus you are able to specify the required versions accurately.
 
 ---
@@ -14,22 +14,22 @@ as [`peerDependency`](https://docs.npmjs.com/files/package.json#peerdependencies
 [Documentation: Using loaders](http://webpack.github.io/docs/using-loaders.html)
 
 ``` javascript
-var css = require("!raw!sass!./file.scss");
+var css = require("!raw!themed-sass!./file.scss");
 // returns compiled css code from file.scss, resolves Sass imports
-var css = require("!css!sass!./file.scss");
+var css = require("!css!themed-sass!./file.scss");
 // returns compiled css code from file.scss, resolves Sass and CSS imports and url(...)s
 ```
 
 Use in tandem with the [`style-loader`](https://github.com/webpack/style-loader) and [`css-loader`](https://github.com/webpack/css-loader) to add the css rules to your document:
 
 ``` javascript
-require("!style!css!sass!./file.scss");
+require("!style!css!themed-sass!./file.scss");
 ```
 *Please note: If you encounter module errors complaining about a missing `style` or `css` module, make sure you have installed all required loaders via npm.*
 
 ### Apply via webpack config
 
-It's recommended to adjust your `webpack.config` so `style!css!sass!` is applied automatically on all files ending on `.scss`:
+It's recommended to adjust your `webpack.config` so `style!css!themed-sass!` is applied automatically on all files ending on `.scss`:
 
 ``` javascript
 module.exports = {
@@ -38,7 +38,7 @@ module.exports = {
     loaders: [
       {
         test: /\.scss$/,
-        loaders: ["style", "css", "sass"]
+        loaders: ["style", "css", "themed-sass"]
       }
     ]
   }
@@ -46,6 +46,16 @@ module.exports = {
 ```
 
 Then you only need to write: `require("./file.scss")`.
+
+### Using themes
+
+Themes allow individual stylesheets to be overridden by creating a new stylesheet
+for the theme. For example the file `styles/variables/color.purple.scss` will be used instead of
+the default `styles/variables/color.scss` stylesheet for the `purple` theme.
+Themes do not have to specify every stylesheet, the default un-themed
+stylesheet is used whenever a themed stylesheet does not exist.
+
+Use a theme by specifying the theme option with the loader: `themed-sass?theme=purple`.
 
 ### Sass options
 
@@ -58,7 +68,7 @@ module.exports = {
     loaders: [
       {
         test: /\.scss$/,
-        loaders: ["style", "css", "sass"]
+        loaders: ["style", "css", "themed-sass"]
       }
     ]
   },
@@ -70,7 +80,7 @@ module.exports = {
 
 Passing your options as [query parameters](http://webpack.github.io/docs/using-loaders.html#query-parameters) is also supported, but can get confusing if you need to set a lot of options.
 
-If you need to define two different loader configs, you can also change the config's property name via `sass?config=otherSassLoaderConfig`:
+If you need to define two different loader configs, you can also change the config's property name via `themed-sass?config=otherSassLoaderConfig`:
 
 ```javascript
 module.exports = {
@@ -79,7 +89,7 @@ module.exports = {
     loaders: [
       {
         test: /\.scss$/,
-        loaders: ["style", "css", "sass?config=otherSassLoaderConfig"]
+        loaders: ["style", "css", "themed-sass?config=otherSassLoaderConfig"]
       }
     ]
   },
@@ -91,7 +101,7 @@ module.exports = {
 
 ### Imports
 
-webpack provides an [advanced mechanism to resolve files](http://webpack.github.io/docs/resolving.html). The sass-loader uses node-sass' custom importer feature to pass all queries to the webpack resolving engine. Thus you can import your Sass modules from `node_modules`. Just prepend them with a `~` to tell webpack that this is not a relative import:
+webpack provides an [advanced mechanism to resolve files](http://webpack.github.io/docs/resolving.html). The themed-sass-loader uses node-sass' custom importer feature to pass all queries to the webpack resolving engine. Thus you can import your Sass modules from `node_modules`. Just prepend them with a `~` to tell webpack that this is not a relative import:
 
 ```css
 @import "~bootstrap/less/bootstrap";
@@ -101,7 +111,7 @@ It's important to only prepend it with `~`, because `~/` resolves to the home di
 
 ### Environment variables
 
-If you want to prepend Sass code before the actual entry file, you can simply set the `data`-option. In this case, the sass-loader will not override the `data`-option but just append the entry's content. This is especially useful when some of your Sass variables depend on the environment:
+If you want to prepend Sass code before the actual entry file, you can simply set the `data`-option. In this case, the themed-sass-loader will not override the `data`-option but just append the entry's content. This is especially useful when some of your Sass variables depend on the environment:
 
 ```javascript
 module.exports = {
@@ -112,7 +122,6 @@ module.exports = {
 };
 ```
 
-
 ### Problems with `url(...)`
 
 Since Sass/[libsass](https://github.com/sass/libsass) does not provide [url rewriting](https://github.com/sass/libsass/issues/532), all linked assets must be relative to the output.
@@ -122,8 +131,8 @@ Since Sass/[libsass](https://github.com/sass/libsass) does not provide [url rewr
 
 More likely you will be disrupted by this second issue. It is natural to expect relative references to be resolved against the `.scss`-file in which they are specified (like in regular `.css`-files). Thankfully there are a two solutions to this problem:
 
-- Add the missing url rewriting using the [resolve-url-loader](https://github.com/bholloway/resolve-url-loader). Place it directly after the sass-loader in the loader chain.
-- Library authors usually provide a variable to modify the asset path. [bootstrap-sass](https://github.com/twbs/bootstrap-sass) for example has an `$icon-font-path`. Check out [this working bootstrap example](https://github.com/jtangelder/sass-loader/tree/master/test/bootstrapSass).
+- Add the missing url rewriting using the [resolve-url-loader](https://github.com/bholloway/resolve-url-loader). Place it directly after the themed-sass-loader in the loader chain.
+- Library authors usually provide a variable to modify the asset path. [bootstrap-sass](https://github.com/twbs/bootstrap-sass) for example has an `$icon-font-path`. Check out [this working bootstrap example](https://github.com/jtangelder/themed-sass-loader/tree/master/test/bootstrapSass).
 
 ### Extracting stylesheets
 
@@ -136,7 +145,7 @@ There are two possibilties to extract a stylesheet from the bundle:
 
 ### Source maps
 
-To enable CSS Source maps, you'll need to pass the `sourceMap`-option to the sass- *and* the css-loader. Your `webpack.config.js` should look like this:
+To enable CSS Source maps, you'll need to pass the `sourceMap`-option to the themed-sass- *and* the css-loader. Your `webpack.config.js` should look like this:
 
 ```javascript
 module.exports = {
@@ -146,14 +155,14 @@ module.exports = {
         loaders: [
             {
                 test: /\.scss$/,
-                loaders: ["style", "css?sourceMap", "sass?sourceMap"]
+                loaders: ["style", "css?sourceMap", "themed-sass?sourceMap"]
             }
         ]
     }
 };
 ```
 
-If you want to edit the original Sass files inside Chrome, [there's a good blog post](https://medium.com/@toolmantim/getting-started-with-css-sourcemaps-and-in-browser-sass-editing-b4daab987fb0). Checkout [test/sourceMap](https://github.com/jtangelder/sass-loader/tree/master/test) for a running example.
+If you want to edit the original Sass files inside Chrome, [there's a good blog post](https://medium.com/@toolmantim/getting-started-with-css-sourcemaps-and-in-browser-sass-editing-b4daab987fb0). Checkout [test/sourceMap](https://github.com/jtangelder/themed-sass-loader/tree/master/test) for a running example.
 
 ## License
 
