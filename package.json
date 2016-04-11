@@ -28,7 +28,7 @@
   "license": "MIT",
   "peerDependencies": {
     "node-sass": "^3.4.2",
-    "webpack": "^1.12.6"
+    "webpack": "^1.12.6 || ^2.1.0-beta"
   },
   "dependencies": {
     "async": "^1.4.0",
