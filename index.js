@@ -224,7 +224,7 @@ module.exports = function (content) {
         // deliberately overriding the sourceMap option
         // this value is (currently) ignored by libsass when using the data input instead of file input
         // however, it is still necessary for correct relative paths in result.map.sources
-        sassOptions.sourceMap = this.options.output.path + '/sass.map';
+        sassOptions.sourceMap = this.options.context + '/sass.map';
         sassOptions.omitSourceMapUrl = true;
 
         // If sourceMapContents option is not set, set it to true otherwise maps will be empty/null
@@ -278,7 +278,8 @@ module.exports = function (content) {
             result.map.file = resourcePath;
             // The first source is 'stdin' according to libsass because we've used the data input
             // Now let's override that value with the correct relative path
-            result.map.sources[0] = path.relative(self.options.output.path, resourcePath);
+            result.map.sources[0] = path.relative(self.options.context, resourcePath);
+            result.map.sourceRoot = path.relative(self.options.context, process.cwd());
         } else {
             result.map = null;
         }
