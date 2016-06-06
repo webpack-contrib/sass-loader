@@ -28,7 +28,7 @@
   "license": "MIT",
   "peerDependencies": {
     "node-sass": "^3.4.2",
-    "webpack": "^1.12.6"
+    "webpack": "^1.12.6 || >=2.1.0-beta"
   },
   "dependencies": {
     "async": "^1.4.0",
@@ -46,7 +46,7 @@
     "raw-loader": "^0.5.1",
     "should": "^8.2.2",
     "style-loader": "^0.13.0",
-    "webpack": "^1.12.14",
-    "webpack-dev-server": "^1.7.0"
+    "webpack": "^2.1.0-beta",
+    "webpack-dev-server": ">=2.1.0-beta.0"
   }
 }
