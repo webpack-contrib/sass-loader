@@ -1,6 +1,10 @@
 Changelog
 ---------
 
+### 3.2.2
+
+- Fix incorrect source map paths [#250](https://github.com/jtangelder/sass-loader/pull/250)
+
 ### 3.2.1
 
 - Add `webpack@^2.1.0-beta` as peer dependency [#233](https://github.com/jtangelder/sass-loader/pull/233)
