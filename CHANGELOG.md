@@ -1,6 +1,10 @@
 Changelog
 ---------
 
+### 4.0.0
+
+- **Breaking**: Release new major version because the previous release was a breaking change in certain scenarios [#250](https://github.com/jtangelder/sass-loader/pull/250)
+
 ### 3.2.2
 
 - Fix incorrect source map paths [#250](https://github.com/jtangelder/sass-loader/pull/250)
