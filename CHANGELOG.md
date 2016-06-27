@@ -3,7 +3,11 @@ Changelog
 
 ### 4.0.0
 
-- **Breaking**: Release new major version because the previous release was a breaking change in certain scenarios [#250](https://github.com/jtangelder/sass-loader/pull/250)
+- **Breaking**: Release new major version because `3.2.2` was a breaking change in certain scenarios [#250](https://github.com/jtangelder/sass-loader/pull/250) [#254](https://github.com/jtangelder/sass-loader/issues/254)
+
+### 3.2.3
+
+- Revert changes to `3.2.1` because `3.2.2` contained a potential breaking change [#254](https://github.com/jtangelder/sass-loader/issues/254)
 
 ### 3.2.2
 
