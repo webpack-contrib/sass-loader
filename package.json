@@ -1,6 +1,6 @@
 {
   "name": "sass-loader",
-  "version": "3.2.2",
+  "version": "4.0.0",
   "description": "Sass loader for webpack",
   "main": "index.js",
   "scripts": {
