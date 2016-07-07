@@ -1,0 +1,34 @@
+sudo: false
+
+language: node_js
+
+node_js:
+  - "6"
+  - "5"
+  - "4"
+
+script:
+  - npm run create-spec
+  - npm run pretest
+  - npm run test
+  - npm run test-bootstrap-sass
+  - npm run test-source-map
+  - npm run test-watch
+  - npm run test-hmr
+  - npm run spec
+  - npm run posttest
+
+# Necessary to compile native modules for io.js v3 or Node.js v4
+env:
+  - CXX=g++-4.8
+
+# Necessary to compile native modules for io.js v3 or Node.js v4
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-4.8
+
+before_install:
+      - "npm install -g npm@latest"
