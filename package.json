@@ -1,7 +1,7 @@
 {
-  "name": "sass-loader",
+  "name": "sass-loader-china",
   "version": "4.0.0",
-  "description": "Sass loader for webpack",
+  "description": "Sass loader for webpack(国情版)",
   "main": "index.js",
   "scripts": {
     "create-spec": "node test/tools/runCreateSpec.js",
@@ -22,12 +22,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/jtangelder/sass-loader.git"
+    "url": "git://github.com/roscoe054/sass-loader.git"
   },
-  "author": "J. Tangelder",
+  "author": "Yuhao Ju",
   "license": "MIT",
   "peerDependencies": {
-    "node-sass": "^3.4.2",
+    "node-sass-china": "^3.8.0",
     "webpack": "^1.12.6 || ^2.1.0-beta"
   },
   "dependencies": {
