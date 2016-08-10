@@ -245,7 +245,13 @@ module.exports = function (content) {
     }
 
     // Allow passing custom importers to `node-sass`. Accepts `Function` or an array of `Function`s.
-    sassOptions.importer = sassOptions.importer ? [].concat(sassOptions.importer) : [];
+    sassOptions.importer = sassOptions.importer ? [].concat(sassOptions.importer).map(function(importer) {
+            return function(url, prev, done) {
+                return importer(url, prev === 'stdin' ? resourcePath : prev, done);
+            };
+        })
+        : []
+    ;
     sassOptions.importer.push(getWebpackImporter());
 
     // `node-sass` uses `includePaths` to resolve `@import` paths. Append the currently processed file.
