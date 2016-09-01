@@ -223,7 +223,7 @@ module.exports = function (content) {
     if (sassOptions.sourceMap) {
         // deliberately overriding the sourceMap option
         // this value is (currently) ignored by libsass when using the data input instead of file input
-        // however, it is still necessary for correct relative paths in result.map.sources
+        // however, it is still necessary for correct relative paths in result.map.sources.
         sassOptions.sourceMap = this.options.context + '/sass.map';
         sassOptions.omitSourceMapUrl = true;
 
@@ -234,10 +234,10 @@ module.exports = function (content) {
         }
     }
 
-    // indentedSyntax is a boolean flag
+    // indentedSyntax is a boolean flag.
     var ext = path.extname(resourcePath);
 
-    // If we are compling sass and indentedSyntax isn't set, automatically set it.
+    // If we are compiling sass and indentedSyntax isn't set, automatically set it.
     if (ext && ext.toLowerCase() === '.sass' && sassOptions.indentedSyntax === undefined) {
         sassOptions.indentedSyntax = true;
     } else {
@@ -245,13 +245,7 @@ module.exports = function (content) {
     }
 
     // Allow passing custom importers to `node-sass`. Accepts `Function` or an array of `Function`s.
-    sassOptions.importer = sassOptions.importer ? [].concat(sassOptions.importer).map(function(importer) {
-            return function(url, prev, done) {
-                return importer(url, prev === 'stdin' ? resourcePath : prev, done);
-            };
-        })
-        : []
-    ;
+    sassOptions.importer = sassOptions.importer ? proxyCustomImporters(sassOptions.importer, resourcePath) : [];
     sassOptions.importer.push(getWebpackImporter());
 
     // `node-sass` uses `includePaths` to resolve `@import` paths. Append the currently processed file.
@@ -396,4 +390,26 @@ function getLoaderConfig(loaderContext) {
     delete query.config;
 
     return assign({}, config, query);
+}
+
+/**
+ * Creates new custom importers that use the given `resourcePath` if libsass calls the custom importer with `prev`
+ * being 'stdin'.
+ *
+ * Why do we need this?
+ *
+ * We have to use the `data` option of node-sass in order to compile our sass because the `resourcePath` might
+ * not be an actual file on disk. When using the `data` option, libsass uses the string 'stdin' instead of a
+ * filename. We have to fix this behavior in order to provide a consistent experience to the webpack user.
+ *
+ * @param {function|Array<function>} importer
+ * @param {string} resourcePath
+ * @returns {Array<function>}
+ */
+function proxyCustomImporters(importer, resourcePath) {
+    return [].concat(importer).map(function (importer) {
+        return function (url, prev, done) {
+            return importer(url, prev === 'stdin' ? resourcePath : prev, done);
+        };
+    });
 }

@@ -4,7 +4,7 @@ var should = require('should');
 
 function customImporter(path, prev) {
     path.should.equal('import-with-custom-logic');
-    prev.match(process.cwd() + '/test/(sass|scss)/custom-importer.(scss|sass)').should.not.equal(null);
+    prev.should.match(/(sass|scss)[/\\]custom-importer\.(scss|sass)/);
     return customImporter.returnValue;
 }
 customImporter.returnValue = {
