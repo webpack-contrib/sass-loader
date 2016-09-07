@@ -18,6 +18,7 @@ var SassError = {
 };
 
 // libsass uses this precedence when importing files without extension
+var slice = Array.prototype.slice;
 var extPrecedence = ['.scss', '.sass', '.css'];
 var matchCss = /\.css$/;
 
@@ -409,7 +410,13 @@ function getLoaderConfig(loaderContext) {
 function proxyCustomImporters(importer, resourcePath) {
     return [].concat(importer).map(function (importer) {
         return function (url, prev, done) {
-            return importer(url, prev === 'stdin' ? resourcePath : prev, done);
+            var args = slice.call(arguments);
+            
+            if (args[1] === 'stdin') {
+                args[1] = resourcePath;
+            }
+            
+            return importer.apply(this, args);
         };
     });
 }
