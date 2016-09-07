@@ -1,6 +1,10 @@
 Changelog
 ---------
 
+### 4.0.2
+
+- Fix wrong context in customImporters that was introduced with fd6be1f143a1810f7e5072a865b3d8675ba1b94e [#275](https://github.com/jtangelder/sass-loader/issues/275) [#277](https://github.com/jtangelder/sass-loader/pull/277)
+
 ### 4.0.1
 
 - Fix custom importers receiving `'stdin'` as second argument instead of the actual `resourcePath` [#267](https://github.com/jtangelder/sass-loader/pull/267)
