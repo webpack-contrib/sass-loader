@@ -409,7 +409,7 @@ function getLoaderConfig(loaderContext) {
 function proxyCustomImporters(importer, resourcePath) {
     return [].concat(importer).map(function (importer) {
         return function (url, prev, done) {
-            return importer(url, prev === 'stdin' ? resourcePath : prev, done);
+            return importer.call(this, url, prev === 'stdin' ? resourcePath : prev, done).bind(self);
         };
     });
 }
