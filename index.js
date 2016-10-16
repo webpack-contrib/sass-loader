@@ -218,6 +218,8 @@ module.exports = function (content) {
         sassOptions.outputStyle = 'compressed';
     }
 
+    var context = self.options.context || self.context;
+
     // opt.sourceMap
     // Not using the `this.sourceMap` flag because css source maps are different
     // @see https://github.com/webpack/css-loader/pull/40
@@ -225,7 +227,7 @@ module.exports = function (content) {
         // deliberately overriding the sourceMap option
         // this value is (currently) ignored by libsass when using the data input instead of file input
         // however, it is still necessary for correct relative paths in result.map.sources.
-        sassOptions.sourceMap = this.options.context + '/sass.map';
+        sassOptions.sourceMap = context + '/sass.map';
         sassOptions.omitSourceMapUrl = true;
 
         // If sourceMapContents option is not set, set it to true otherwise maps will be empty/null
@@ -279,8 +281,8 @@ module.exports = function (content) {
             result.map.file = resourcePath;
             // The first source is 'stdin' according to libsass because we've used the data input
             // Now let's override that value with the correct relative path
-            result.map.sources[0] = path.relative(self.options.context, resourcePath);
-            result.map.sourceRoot = path.relative(self.options.context, process.cwd());
+            result.map.sources[0] = path.relative(context, resourcePath);
+            result.map.sourceRoot = path.relative(context, process.cwd());
         } else {
             result.map = null;
         }
