@@ -105,6 +105,13 @@ describe('sass-loader', function () {
 
     });
 
+    describe('image extents functions', function () {
+
+        testSync('should expose image extents functions', 'image-extents-functions');
+        testAsync('should expose image extents functions', 'image-extents-functions');
+
+    });
+
     describe('custom functions', function () {
 
         testSync('should expose custom functions', 'custom-functions', function () {

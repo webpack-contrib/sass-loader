@@ -7,6 +7,7 @@ var os = require('os');
 var fs = require('fs');
 var async = require('async');
 var assign = require('object-assign');
+var sizeOf = require('image-size');
 
 // A typical sass error looks like this
 var SassError = {
@@ -252,6 +253,17 @@ module.exports = function (content) {
     // `node-sass` uses `includePaths` to resolve `@import` paths. Append the currently processed file.
     sassOptions.includePaths = sassOptions.includePaths ? [].concat(sassOptions.includePaths) : [];
     sassOptions.includePaths.push(path.dirname(resourcePath));
+
+    if ( ! sassOptions.functions)
+        sassOptions.functions = {};
+    sassOptions.functions['image-width($path)'] = function(imgPath) {
+        var absImgPath = path.resolve(resourcePath, '..', imgPath.getValue());
+        return sass.types.Number(sizeOf(absImgPath)['width'], 'px');
+    };
+    sassOptions.functions['image-height($path)'] = function(imgPath) {
+        var absImgPath = path.resolve(resourcePath, '..', imgPath.getValue());
+        return sass.types.Number(sizeOf(absImgPath)['height'], 'px');
+    };
 
     // start the actual rendering
     if (isSync) {
