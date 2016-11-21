@@ -49,7 +49,7 @@ Then you only need to write: `require("./file.scss")`.
 
 ### Sass options
 
-You can pass options to node-sass by defining a `sassLoader`-property on your `webpack.config.js`. See [node-sass](https://github.com/andrew/node-sass) for all available Sass-options.
+You can pass options to node-sass by defining a `sassLoader` property on your `webpack.config.js`. See [node-sass](https://github.com/andrew/node-sass) for all available Sass options.
 
 ```javascript
 module.exports = {
@@ -102,11 +102,11 @@ Alternatively, for bootstrap-sass:
 @import "~bootstrap-sass/assets/stylesheets/bootstrap";
 ```
 
-It's important to only prepend it with `~`, because `~/` resolves to the home directory. webpack needs to distinguish between `bootstrap` and `~bootstrap` because CSS- and Sass-files have no special syntax for importing relative files. Writing `@import "file"` is the same as `@import "./file";`
+It's important to only prepend it with `~`, because `~/` resolves to the home directory. webpack needs to distinguish between `bootstrap` and `~bootstrap` because CSS and Sass files have no special syntax for importing relative files. Writing `@import "file"` is the same as `@import "./file";`
 
 ### Environment variables
 
-If you want to prepend Sass code before the actual entry file, you can simply set the `data`-option. In this case, the sass-loader will not override the `data`-option but just append the entry's content. This is especially useful when some of your Sass variables depend on the environment:
+If you want to prepend Sass code before the actual entry file, you can simply set the `data` option. In this case, the sass-loader will not override the `data` option but just append the entry's content. This is especially useful when some of your Sass variables depend on the environment:
 
 ```javascript
 module.exports = {
@@ -125,7 +125,7 @@ Since Sass/[libsass](https://github.com/sass/libsass) does not provide [url rewr
 - If you're just generating CSS without passing it to the css-loader, it must be relative to your web root.
 - If you pass the generated CSS on to the css-loader, all urls must be relative to the entry-file (e.g. `main.scss`).
 
-More likely you will be disrupted by this second issue. It is natural to expect relative references to be resolved against the `.scss`-file in which they are specified (like in regular `.css`-files). Thankfully there are a two solutions to this problem:
+More likely you will be disrupted by this second issue. It is natural to expect relative references to be resolved against the `.scss` file in which they are specified (like in regular `.css` files). Thankfully there are a two solutions to this problem:
 
 - Add the missing url rewriting using the [resolve-url-loader](https://github.com/bholloway/resolve-url-loader). Place it directly after the sass-loader in the loader chain.
 - Library authors usually provide a variable to modify the asset path. [bootstrap-sass](https://github.com/twbs/bootstrap-sass) for example has an `$icon-font-path`. Check out [this working bootstrap example](https://github.com/jtangelder/sass-loader/tree/master/test/bootstrapSass).
@@ -141,7 +141,7 @@ There are two possibilties to extract a stylesheet from the bundle:
 
 ### Source maps
 
-To enable CSS Source maps, you'll need to pass the `sourceMap`-option to the sass- *and* the css-loader. Your `webpack.config.js` should look like this:
+To enable CSS Source maps, you'll need to pass the `sourceMap` option to the sass *and* the css-loader. Your `webpack.config.js` should look like this:
 
 ```javascript
 module.exports = {
