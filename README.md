@@ -104,6 +104,13 @@ Alternatively, for bootstrap-sass:
 
 It's important to only prepend it with `~`, because `~/` resolves to the home directory. webpack needs to distinguish between `bootstrap` and `~bootstrap` because CSS and Sass files have no special syntax for importing relative files. Writing `@import "file"` is the same as `@import "./file";`
 
+### Disabling imports for faster compile time
+
+Function calls associated with the advanced file resolution described above can add up to a significant time on projects with a large number of scss files.
+E.g. on a project with some 130 components each requiring an .scss file, sass build took 240 seconds with the importer, and 3 seconds without. To disable the
+advanced import resolution, pass `noImporter: true` in the `sassLoader` options.
+
+
 ### Environment variables
 
 If you want to prepend Sass code before the actual entry file, you can simply set the `data` option. In this case, the sass-loader will not override the `data` option but just append the entry's content. This is especially useful when some of your Sass variables depend on the environment:

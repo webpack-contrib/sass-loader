@@ -249,6 +249,12 @@ module.exports = function (content) {
     sassOptions.importer = sassOptions.importer ? proxyCustomImporters(sassOptions.importer, resourcePath) : [];
     sassOptions.importer.push(getWebpackImporter());
 
+    // For larger projects, using the webpack importer can really add up: 4 minutes versus 3 seconds on a
+    // modest project with a 130 components and a dozen common definition files required in each scss file
+    if (sassOptions.noImporter === true) {
+        sassOptions.importer = undefined;
+    }
+
     // `node-sass` uses `includePaths` to resolve `@import` paths. Append the currently processed file.
     sassOptions.includePaths = sassOptions.includePaths ? [].concat(sassOptions.includePaths) : [];
     sassOptions.includePaths.push(path.dirname(resourcePath));
