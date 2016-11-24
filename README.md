@@ -14,22 +14,22 @@ as [`peerDependency`](https://docs.npmjs.com/files/package.json#peerdependencies
 [Documentation: Using loaders](http://webpack.github.io/docs/using-loaders.html)
 
 ``` javascript
-var css = require("!raw!sass!./file.scss");
+var css = require("!raw-loader!sass-loader!./file.scss");
 // returns compiled css code from file.scss, resolves Sass imports
-var css = require("!css!sass!./file.scss");
+var css = require("!css-loader!sass-loader!./file.scss");
 // returns compiled css code from file.scss, resolves Sass and CSS imports and url(...)s
 ```
 
 Use in tandem with the [`style-loader`](https://github.com/webpack/style-loader) and [`css-loader`](https://github.com/webpack/css-loader) to add the css rules to your document:
 
 ``` javascript
-require("!style!css!sass!./file.scss");
+require("!style-loader!css-loader!sass-loader!./file.scss");
 ```
 *Please note: If you encounter module errors complaining about a missing `style` or `css` module, make sure you have installed all required loaders via npm.*
 
 ### Apply via webpack config
 
-It's recommended to adjust your `webpack.config` so `style!css!sass!` is applied automatically on all files ending on `.scss`:
+It's recommended to adjust your `webpack.config` so `style-loader!css-loader!sass-loader!` is applied automatically on all files ending on `.scss`:
 
 ``` javascript
 module.exports = {
@@ -38,7 +38,7 @@ module.exports = {
     loaders: [
       {
         test: /\.scss$/,
-        loaders: ["style", "css", "sass"]
+        loaders: ["style-loader", "css-loader", "sass-loader"]
       }
     ]
   }
@@ -58,7 +58,7 @@ module.exports = {
     loaders: [
       {
         test: /\.scss$/,
-        loaders: ["style", "css", "sass"]
+        loaders: ["style-loader", "css-loader", "sass-loader"]
       }
     ]
   },
@@ -70,7 +70,7 @@ module.exports = {
 
 Passing your options as [query parameters](http://webpack.github.io/docs/using-loaders.html#query-parameters) is also supported, but can get confusing if you need to set a lot of options.
 
-If you need to define two different loader configs, you can also change the config's property name via `sass?config=otherSassLoaderConfig`:
+If you need to define two different loader configs, you can also change the config's property name via `sass-loader?config=otherSassLoaderConfig`:
 
 ```javascript
 module.exports = {
@@ -79,7 +79,7 @@ module.exports = {
     loaders: [
       {
         test: /\.scss$/,
-        loaders: ["style", "css", "sass?config=otherSassLoaderConfig"]
+        loaders: ["style-loader", "css-loader", "sass-loader?config=otherSassLoaderConfig"]
       }
     ]
   },
@@ -151,7 +151,7 @@ module.exports = {
         loaders: [
             {
                 test: /\.scss$/,
-                loaders: ["style", "css?sourceMap", "sass?sourceMap"]
+                loaders: ["style-loader", "css-loader?sourceMap", "sass-loader?sourceMap"]
             }
         ]
     }
