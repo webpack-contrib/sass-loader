@@ -27,8 +27,8 @@
   "author": "J. Tangelder",
   "license": "MIT",
   "peerDependencies": {
-    "node-sass": "^3.4.2",
-    "webpack": "^1.12.6 || ^2.1.0-beta"
+    "node-sass": "^3.12.5",
+    "webpack": "^1.13.1 || ^2.1.0-beta"
   },
   "dependencies": {
     "async": "^2.0.1",
@@ -36,17 +36,17 @@
     "object-assign": "^4.1.0"
   },
   "devDependencies": {
-    "bootstrap-sass": "^3.3.5",
-    "css-loader": "^0.24.0",
+    "bootstrap-sass": "^3.3.7",
+    "css-loader": "^0.25.0",
     "enhanced-require": "^0.5.0-beta6",
     "file-loader": "^0.9.0",
     "jshint": "^2.9.2",
     "mocha": "^3.0.2",
-    "node-sass": "^3.8.0",
+    "node-sass": "^3.12.5",
     "raw-loader": "^0.5.1",
     "should": "^11.1.0",
     "style-loader": "^0.13.1",
     "webpack": "^1.13.1",
-    "webpack-dev-server": "^1.7.0"
+    "webpack-dev-server": "^1.16.2"
   }
 }
