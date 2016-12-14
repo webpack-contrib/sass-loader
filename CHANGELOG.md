@@ -1,6 +1,10 @@
 Changelog
 ---------
 
+### 4.1.0
+
+- Update `node-sass@4.0.0` [#319](https://github.com/jtangelder/sass-loader/pull/319)
+
 ### 4.0.2
 
 - Fix wrong context in customImporters that was introduced with fd6be1f143a1810f7e5072a865b3d8675ba1b94e [#275](https://github.com/jtangelder/sass-loader/issues/275) [#277](https://github.com/jtangelder/sass-loader/pull/277)
