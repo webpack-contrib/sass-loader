@@ -290,6 +290,8 @@ module.exports = function (content) {
     });
 };
 
+module.exports.compiler = sass;
+
 /**
  * Tries to get an excerpt of the file where the error happened.
  * Uses err.line and err.column.
