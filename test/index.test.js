@@ -7,8 +7,6 @@ var path = require('path');
 var webpack = require('webpack');
 var fs = require('fs');
 var enhancedReqFactory = require('enhanced-require');
-var nodeSass = require('node-sass');
-var sassLoader = require('../index.js');
 var customImporter = require('./tools/customImporter.js');
 var customFunctions = require('./tools/customFunctions.js');
 
@@ -48,14 +46,6 @@ describe('sass-loader', function () {
 
             fs.writeFileSync(__dirname + '/output/should override sassLoader config with loader query.sass.sync.css', actualCss, 'utf8');
             actualCss.should.eql(expectedCss);
-        });
-
-    });
-
-    describe('compiler instance', function () {
-
-        it('should export instance of node-sass compiler', function () {
-            sassLoader.compiler.should.eql(nodeSass);
         });
 
     });
