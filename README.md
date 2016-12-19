@@ -118,6 +118,81 @@ module.exports = {
 ```
 
 
+#### Advanced: Doing wild things with a custom node-sass importer
+
+node-sass's `importer` API allows you to define custom handlers for Sass's `@import` directive. While sass-loader defines its own importer callback to integrate `@import` with webpack's resolve mechanism, it will also pass along your own importer callback to node-sass. This allows your code a chance to "steal" the import and handle it, or pass on it and let sass-loader handle it as normal.
+
+Why would you want to do this? Well, maybe you want your Sass to be able to `@import` something other than Sass or normal stylesheets... like Stylus, or LESS. You could write an importer that checks for the appropriate file extension, and invokes another compiler, replacing the `@import` with compiled CSS before it gets to node-sass. Or you could even transpile it to Sass.
+
+Luckily, sass-loader won't get in your way if you want to do this. sass-loader will pass along your importer to node-sass and (as of 3.1.3) allow you to access webpack's loader API via `this.options.loaderContext`. For now, you'll have to handle the path resolution logic yourself, though, since path resolution and actual processing of imports are tightly coupled together.
+
+Include your importer function in your sassLoader options, like this:
+
+```javascript
+var sass = require('node-sass');
+module.exports = {
+  ...
+  module: {
+    loaders: [{
+      test: /\.scss$/,
+      loaders: ['style', 'css', 'sass']
+    }]
+  },
+  sassLoader: {
+    importer: stylusImporter
+  }
+};
+```
+And then, use loader-util's and webpack's resolve in your importer:
+
+```javascript
+var loaderUtils = require('loader-utils');
+var sass = require('node-sass');
+
+function specialImporter (url, fileContext, done) {
+  if (!shouldThisFileBeHandledByMyImporter(url)) {
+    // Return sass.NULL in order to declare you wish to "pass" on this url and
+    // let other importers handle it. Be careful, as this doesn't work correctly in
+    // an environment with multiple copies of node-sass (e.g., if your importer is
+    // inside of a symlinked package). This can manifest as a strange Sass error
+    // like "No such mixin foo", when `foo` is @import'd from another Sass file.
+    return sass.NULL;
+  }
+
+  // Let's run the URL through webpack's resolvers. Sass-loader includes the
+  // dirname of the entry point file (the initially require()'d scss file) in
+  // includePaths as the last entry.
+  var includePaths = this.options.includePaths.split(':');
+
+  // If we're given fileContext (and it's not 'stdin'), then fileContext is the
+  // path of the file doing the import--i.e., the import we're processing is the
+  // result of an @import from within Sass, rather than of a require() from
+  // within JS.
+  var workingDir = fileContext && fileContext !== 'stdin'
+    ? path.dirname(fileContext)
+    : includePaths[includePaths.length - 1];
+  var filePath = loaderUtils.urlToRequest(url, workingDir);
+  if (filePath[0] === '.') {
+    filePath = path.resolve(workingDir, filePath);
+  }
+
+  var loaderContext = this.options.loaderContext;
+  var resolve = loaderContext.resolve.bind(loaderContext);
+
+  resolve(workingDir, filePath, function resolveCallback (err, filename) {
+    if (err) done(err);
+
+    // Tell Webpack about the file being part of the build.
+    this.options.loaderContext.addDependency(filename);
+
+    // Return the result or error via the `done` function:
+    done({ contents: '/* Resulting Sass code goes here */' });
+    // If there's an error, send an error object or the error you caught:
+    // done(new Error('Helpful error message about the file'));
+  }.bind(this));
+}
+```
+
 ### Problems with `url(...)`
 
 Since Sass/[libsass](https://github.com/sass/libsass) does not provide [url rewriting](https://github.com/sass/libsass/issues/532), all linked assets must be relative to the output.
