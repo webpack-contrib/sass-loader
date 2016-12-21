@@ -190,7 +190,7 @@ module.exports = function (content) {
         if (fileContext === 'stdin') {
             fileContext = resourcePath;
         }
-        return path.dirname(fileContext);
+        return path.resolve(resourcePath, path.dirname(fileContext));
     }
 
     // When files have been imported via the includePaths-option, these files need to be
