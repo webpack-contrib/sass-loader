@@ -213,6 +213,19 @@ module.exports = function (content) {
         return isSync ? content : callback(null, content);
     }
 
+    // Resolve global dependencies
+    if (sassOptions.globalIncludes) {
+        var globalIncludes = [].concat(sassOptions.globalIncludes);
+
+        // Convert imports list into sass compatible imports list
+        var globalIncludeImports = globalIncludes.map(function (include) {
+            return '@import "' + include + '";';
+        }).join('\n');
+
+        // Inject global dependencies as @imports in the top of the file
+        sassOptions.data = globalIncludeImports + sassOptions.data;
+    }
+
     // opt.outputStyle
     if (!sassOptions.outputStyle && this.minimize) {
         sassOptions.outputStyle = 'compressed';
