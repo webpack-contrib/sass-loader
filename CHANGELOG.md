@@ -1,6 +1,10 @@
 Changelog
 ---------
 
+### 4.1.1
+
+- Update `webpack` peer dependency to support `2.2.0rc`. [#330](https://github.com/jtangelder/sass-loader/pull/330)
+
 ### 4.1.0
 
 - Update `node-sass@4.0.0` [#319](https://github.com/jtangelder/sass-loader/pull/319)
