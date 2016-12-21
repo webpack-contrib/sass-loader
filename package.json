@@ -1,6 +1,6 @@
 {
   "name": "sass-loader",
-  "version": "4.1.0",
+  "version": "4.1.1",
   "description": "Sass loader for webpack",
   "main": "index.js",
   "scripts": {
@@ -28,7 +28,7 @@
   "license": "MIT",
   "peerDependencies": {
     "node-sass": "^3.4.2 || ^4.0.0",
-    "webpack": "^1.12.6 || ^2.1.0-beta"
+    "webpack": "^2 || ^2.2.0-rc.0 || ^2.1.0-beta || ^1.12.6"
   },
   "dependencies": {
     "async": "^2.0.1",
