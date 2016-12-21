@@ -280,7 +280,7 @@ module.exports = function (content) {
             // The first source is 'stdin' according to libsass because we've used the data input
             // Now let's override that value with the correct relative path
             result.map.sources[0] = path.relative(self.options.context, resourcePath);
-            result.map.sourceRoot = path.relative(self.options.context, process.cwd());
+            result.map.sourceRoot = self.options.context;
         } else {
             result.map = null;
         }
