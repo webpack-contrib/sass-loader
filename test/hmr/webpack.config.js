@@ -1,25 +1,25 @@
-'use strict';
+"use strict";
 
-var path = require('path');
-var webpack = require('webpack');
+const path = require("path");
+const webpack = require("webpack");
 
-var pathToSassLoader = path.resolve(__dirname, '../../index.js');
+const pathToSassLoader = path.resolve(__dirname, "../../index.js");
 
 module.exports = {
-    entry: path.resolve(__dirname, './entry.js'),
+    entry: path.resolve(__dirname, "./entry.js"),
     output: {
-        path: path.resolve(__dirname, '../output'),
-        filename: 'bundle.hmr.js'
+        path: path.resolve(__dirname, "../output"),
+        filename: "bundle.hmr.js"
     },
     module: {
         loaders: [
             {
                 test: /\.scss$/,
-                loader: 'style!css!' + pathToSassLoader
+                loader: "style!css!" + pathToSassLoader
             },
             {
                 test: /\.css$/,
-                loader: 'style!css'
+                loader: "style!css"
             }
         ]
     },

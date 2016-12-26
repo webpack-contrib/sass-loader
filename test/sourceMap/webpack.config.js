@@ -1,21 +1,21 @@
-'use strict';
+"use strict";
 
-var path = require('path');
+const path = require("path");
 
-var pathToSassLoader = path.resolve(__dirname, '../../index.js');
+const pathToSassLoader = path.resolve(__dirname, "../../index.js");
 
 module.exports = {
-    entry: path.resolve(__dirname, './entry.js'),
+    entry: path.resolve(__dirname, "./entry.js"),
     output: {
-        path: path.resolve(__dirname, '../output'),
-        filename: 'bundle.sourcemap.js'
+        path: path.resolve(__dirname, "../output"),
+        filename: "bundle.sourcemap.js"
     },
-    devtool: 'inline-source-map',
+    devtool: "inline-source-map",
     module: {
         loaders: [
             {
                 test: /\.scss$/,
-                loaders: ['style', 'css-loader?sourceMap', pathToSassLoader + '?sourceMap']
+                loaders: ["style", "css-loader?sourceMap", pathToSassLoader + "?sourceMap"]
             }
         ]
     }

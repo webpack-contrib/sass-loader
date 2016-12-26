@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 
-var createSpec = require('./createSpec.js');
+const createSpec = require("./createSpec.js");
 
-['scss', 'sass'].forEach(function (ext) {
+["scss", "sass"].forEach((ext) => {
     createSpec(ext);
 });

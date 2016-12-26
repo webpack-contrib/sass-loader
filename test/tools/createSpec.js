@@ -1,33 +1,30 @@
-'use strict';
+"use strict";
 
-var sass = require('node-sass');
-var os = require('os');
-var fs = require('fs');
-var path = require('path');
-var customImporter = require('./customImporter.js');
-var customFunctions = require('./customFunctions.js');
+const sass = require("node-sass");
+const os = require("os");
+const fs = require("fs");
+const path = require("path");
+const customImporter = require("./customImporter.js");
+const customFunctions = require("./customFunctions.js");
 
-var testFolder = path.resolve(__dirname, '../');
-var error = 'error';
+const testFolder = path.resolve(__dirname, "../");
+const error = "error";
 
 function createSpec(ext) {
-    var basePath = path.join(testFolder, ext);
-    var testNodeModules = path.relative(basePath, path.join(testFolder, 'node_modules')) + path.sep;
-    var pathToBootstrap = path.relative(basePath, path.resolve(testFolder, '..', 'node_modules', 'bootstrap-sass'));
+    const basePath = path.join(testFolder, ext);
+    const testNodeModules = path.relative(basePath, path.join(testFolder, "node_modules")) + path.sep;
+    const pathToBootstrap = path.relative(basePath, path.resolve(testFolder, "..", "node_modules", "bootstrap-sass"));
 
     fs.readdirSync(path.join(testFolder, ext))
-        .filter(function (file) {
-            return path.extname(file) === '.' + ext && file.slice(0, error.length) !== error;
+        .filter((file) => {
+            return path.extname(file) === "." + ext && file.slice(0, error.length) !== error;
         })
-        .map(function (file) {
-            var fileName = path.join(basePath, file);
-            var fileWithoutExt = file.slice(0, -ext.length - 1);
-            var sassOptions;
-            var css;
-
-            sassOptions = {
-                importer: function (url) {
-                    if (url === 'import-with-custom-logic') {
+        .map((file) => {
+            const fileName = path.join(basePath, file);
+            const fileWithoutExt = file.slice(0, -ext.length - 1);
+            const sassOptions = {
+                importer(url) {
+                    if (url === "import-with-custom-logic") {
                         return customImporter.returnValue;
                     }
                     if (/\.css$/.test(url) === false) { // Do not transform css imports
@@ -41,20 +38,21 @@ function createSpec(ext) {
                 },
                 functions: customFunctions,
                 includePaths: [
-                    path.join(testFolder, ext, 'another'),
-                    path.join(testFolder, ext, 'from-include-path')
+                    path.join(testFolder, ext, "another"),
+                    path.join(testFolder, ext, "from-include-path")
                 ]
             };
 
             if (/prepending-data/.test(fileName)) {
-                sassOptions.data = '$prepended-data: hotpink;' + os.EOL + fs.readFileSync(fileName, 'utf8');
+                sassOptions.data = "$prepended-data: hotpink;" + os.EOL + fs.readFileSync(fileName, "utf8");
                 sassOptions.indentedSyntax = /\.sass$/.test(fileName);
             } else {
                 sassOptions.file = fileName;
             }
 
-            css = sass.renderSync(sassOptions).css;
-            fs.writeFileSync(path.join(basePath, 'spec', fileWithoutExt + '.css'), css, 'utf8');
+            const css = sass.renderSync(sassOptions).css;
+
+            fs.writeFileSync(path.join(basePath, "spec", fileWithoutExt + ".css"), css, "utf8");
         });
 }
 

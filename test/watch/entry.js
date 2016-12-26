@@ -1,3 +1,3 @@
-'use strict';
+"use strict";
 
-require('../scss/imports.scss');
+require("../scss/imports.scss");
