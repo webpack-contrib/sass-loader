@@ -21,10 +21,8 @@ const pathToErrorImport = path.resolve(__dirname, "./scss/error-import.scss");
 
 describe("sass-loader", () => {
     describe("basic", () => {
-        testSync("should compile simple sass without errors (sync)", "language");
-        testAsync("should compile simple sass without errors (async)", "language");
+        defineTest("should compile simple sass without errors", "language");
     });
-
     describe("config", () => {
         // Will be removed with webpack 2 support
         it.skip("should override sassLoader config with loader query", () => {
@@ -46,68 +44,35 @@ describe("sass-loader", () => {
             // actualCss.should.eql(expectedCss);
         });
     });
-
     describe("imports", () => {
-        testSync("should resolve imports correctly (sync)", "imports");
-        testAsync("should resolve imports correctly (async)", "imports");
-
+        defineTest("should resolve imports correctly", "imports");
         // Test for issue: https://github.com/jtangelder/sass-loader/issues/32
-        testSync("should pass with multiple imports (sync)", "multiple-imports");
-        testAsync("should pass with multiple imports (async)", "multiple-imports");
-
+        defineTest("should pass with multiple imports", "multiple-imports");
         // Test for issue: https://github.com/jtangelder/sass-loader/issues/73
-        testSync("should resolve imports from other language style correctly (sync)", "import-other-style");
-        testAsync("should resolve imports from other language style correctly (async)", "import-other-style");
-
+        defineTest("should resolve imports from other language style correctly", "import-other-style");
         // Test for includePath imports
-        testSync("should resolve imports from another directory declared by includePaths correctly (sync)", "import-include-paths", (ext) => {
+        defineTest("should resolve imports from another directory declared by includePaths correctly", "import-include-paths", (ext) => {
             return {
                 sassLoader: {
                     includePaths: [path.join(__dirname, ext, "from-include-path")]
                 }
             };
         });
-        testAsync("should resolve imports from another directory declared by includePaths correctly (async)", "import-include-paths", (ext) => {
-            return {
-                sassLoader: {
-                    includePaths: [path.join(__dirname, ext, "from-include-path")]
-                }
-            };
-        });
-
-        testSync("should not resolve CSS imports (sync)", "import-css");
-        testAsync("should not resolve CSS imports (async)", "import-css");
-
-        testSync("should compile bootstrap-sass without errors (sync)", "bootstrap-sass");
-        testAsync("should compile bootstrap-sass without errors (async)", "bootstrap-sass");
+        defineTest("should not resolve CSS imports", "import-css");
+        defineTest("should compile bootstrap-sass without errors", "bootstrap-sass");
     });
-
     describe("custom importers", () => {
-        testSync("should use custom importer", "custom-importer", () => {
+        defineTest("should use custom importer", "custom-importer", () => {
             return {
                 sassLoader: {
                     importer: customImporter
                 }
             };
         });
-        testAsync("should use custom importer", "custom-importer", () => {
-            return {
-                sassLoader: {
-                    importer: customImporter
-                }
-            };
-        });
-    });
 
+    });
     describe("custom functions", () => {
-        testSync("should expose custom functions", "custom-functions", () => {
-            return {
-                sassLoader: {
-                    functions: customFunctions
-                }
-            };
-        });
-        testAsync("should expose custom functions", "custom-functions", () => {
+        defineTest("should expose custom functions", "custom-functions", () => {
             return {
                 sassLoader: {
                     functions: customFunctions
@@ -115,16 +80,8 @@ describe("sass-loader", () => {
             };
         });
     });
-
     describe("prepending data", () => {
-        testSync("should extend the data-option if present", "prepending-data", () => {
-            return {
-                sassLoader: {
-                    data: "$prepended-data: hotpink;"
-                }
-            };
-        });
-        testAsync("should extend the data-option if present", "prepending-data", () => {
+        defineTest("should extend the data-option if present", "prepending-data", () => {
             return {
                 sassLoader: {
                     data: "$prepended-data: hotpink;"
@@ -132,7 +89,6 @@ describe("sass-loader", () => {
             };
         });
     });
-
     describe("errors", () => {
         it("should throw an error in synchronous loader environments", () => {
             try {
@@ -144,7 +100,6 @@ describe("sass-loader", () => {
                 err.message.should.equal("Synchronous compilation is not supported anymore. See https://github.com/jtangelder/sass-loader/issues/333");
             }
         });
-
         it("should output understandable errors in entry files", (done) => {
             runWebpack({
                 entry: pathToSassLoader + "!" + pathToErrorFile
@@ -156,7 +111,6 @@ describe("sass-loader", () => {
                 done();
             });
         });
-
         it("should output understandable errors of imported files", (done) => {
             runWebpack({
                 entry: pathToSassLoader + "!" + pathToErrorImport
@@ -169,7 +123,6 @@ describe("sass-loader", () => {
                 done();
             });
         });
-
         it("should output understandable errors when a file could not be found", (done) => {
             runWebpack({
                 entry: pathToSassLoader + "!" + pathToErrorFileNotFound
@@ -181,7 +134,6 @@ describe("sass-loader", () => {
                 done();
             });
         });
-
         it("should not auto-resolve imports with explicit file names", (done) => {
             runWebpack({
                 entry: pathToSassLoader + "!" + pathToErrorFileNotFound2
@@ -200,7 +152,7 @@ function readCss(ext, id) {
     return fs.readFileSync(path.join(__dirname, ext, "spec", id + ".css"), "utf8").replace(CR, "");
 }
 
-function testAsync(name, id, config) {
+function defineTest(name, id, config) {
     syntaxStyles.forEach((ext) => {
         it(name + " (" + ext + ")", (done) => {
             const expectedCss = readCss(ext, id);
@@ -232,10 +184,6 @@ function testAsync(name, id, config) {
     });
 }
 
-function testSync() {
-
-}
-
 function runWebpack(baseConfig, done) {
     const webpackConfig = merge({
         output: {
@@ -245,19 +193,19 @@ function runWebpack(baseConfig, done) {
         }
     }, baseConfig);
 
-    webpack(webpackConfig, (err, stats) => {
-        const notOk = err ||
+    webpack(webpackConfig, (webpackErr, stats) => {
+        const err = webpackErr ||
             (stats.hasErrors && stats.compilation.errors[0]) ||
             (stats.hasWarnings && stats.compilation.warnings[0]);
 
-        if (notOk) {
-            done(notOk);
-            return;
-        }
-        done();
+        done(err || null);
     });
 }
 
 function pathToSassFile(ext, id) {
-    return "raw!" + pathToSassLoader + "!" + path.join(__dirname, ext, id + "." + ext);
+    return [
+        "raw-loader",
+        pathToSassLoader,
+        path.join(__dirname, ext, id + "." + ext)
+    ].join("!");
 }

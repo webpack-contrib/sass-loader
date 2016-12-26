@@ -31,9 +31,10 @@ const asyncSassJobQueue = async.queue(sass.render, threadPoolSize - 1);
 /**
  * The sass-loader makes node-sass available to webpack modules.
  *
+ * @this {LoaderContext}
  * @param {string} content
  */
-module.exports = function (content) {
+function sassLoader(content) {
     const callback = this.async();
     const isSync = typeof callback !== "function";
     const self = this;
@@ -229,7 +230,7 @@ module.exports = function (content) {
         addIncludedFilesToWebpack(result.stats.includedFiles);
         callback(null, result.css.toString(), result.map);
     });
-};
+}
 
 /**
  * Tries to get an excerpt of the file where the error happened.
@@ -241,10 +242,8 @@ module.exports = function (content) {
  * @returns {string}
  */
 function getFileExcerptIfPossible(err) {
-    let content;
-
     try {
-        content = fs.readFileSync(err.file, "utf8");
+        const content = fs.readFileSync(err.file, "utf8");
 
         return os.EOL +
             content.split(os.EOL)[err.line - 1] + os.EOL +
@@ -295,11 +294,9 @@ function getImportsToResolve(originalImport) {
     // We can't just check for ext being defined because ext can also be something like '.datepicker'
     // when the true extension is omitted and the filename contains a dot.
     // @see https://github.com/jtangelder/sass-loader/issues/167
-    /* jshint noempty:false */
     if (ext === ".css") {
         // do not import css files
     } else if (ext === ".scss" || ext === ".sass") {
-    /* jshint noempty:true */
         add(basename);
     } else {
         if (!startsWithUnderscore) {
@@ -320,7 +317,7 @@ function getImportsToResolve(originalImport) {
  * Check the loader query and webpack config for loader options. If an option is defined in both places,
  * the loader query takes precedence.
  *
- * @param {Loader} loaderContext
+ * @param {LoaderContext} loaderContext
  * @returns {Object}
  */
 function getLoaderConfig(loaderContext) {
@@ -361,3 +358,5 @@ function proxyCustomImporters(importer, resourcePath) {
         };
     });
 }
+
+module.exports = sassLoader;
