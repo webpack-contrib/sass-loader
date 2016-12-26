@@ -1,25 +1,25 @@
-'use strict';
+"use strict";
 
-var path = require('path');
+const path = require("path");
 
-var pathToSassLoader = path.resolve(__dirname, '../../index.js');
+const pathToSassLoader = path.resolve(__dirname, "../../index.js");
 
 module.exports = {
-    entry: path.resolve(__dirname, '../scss/bootstrap-sass.scss'),
+    entry: path.resolve(__dirname, "../scss/bootstrap-sass.scss"),
     output: {
-        path: path.resolve(__dirname, '../output'),
-        filename: 'bundle.bootstrap-sass.js'
+        path: path.resolve(__dirname, "../output"),
+        filename: "bundle.bootstrap-sass.js"
     },
-    devtool: 'inline-source-map',
+    devtool: "inline-source-map",
     module: {
         loaders: [
             {
                 test: /\.woff2?$|\.ttf$|\.eot$|\.svg$/,
-                loader: 'file'
+                loader: "file"
             },
             {
                 test: /\.scss$/,
-                loader: 'style-loader!css-loader!' + pathToSassLoader
+                loader: "style-loader!css-loader!" + pathToSassLoader
             }
         ]
     }

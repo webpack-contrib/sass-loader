@@ -1,32 +1,32 @@
-'use strict';
+"use strict";
 
-var utils = require('loader-utils');
-var sass = require('node-sass');
-var path = require('path');
-var os = require('os');
-var fs = require('fs');
-var async = require('async');
-var assign = require('object-assign');
+const utils = require("loader-utils");
+const sass = require("node-sass");
+const path = require("path");
+const os = require("os");
+const fs = require("fs");
+const async = require("async");
+const assign = require("object-assign");
 
 // A typical sass error looks like this
-var SassError = {
-    message: 'invalid property name',
+const SassError = { // eslint-disable-line no-unused-vars
+    message: "invalid property name",
     column: 14,
     line: 1,
-    file: 'stdin',
+    file: "stdin",
     status: 1
 };
 
 // libsass uses this precedence when importing files without extension
-var slice = Array.prototype.slice;
-var extPrecedence = ['.scss', '.sass', '.css'];
-var matchCss = /\.css$/;
+const slice = Array.prototype.slice;
+const extPrecedence = [".scss", ".sass", ".css"];
+const matchCss = /\.css$/;
 
 // This queue makes sure node-sass leaves one thread available for executing
 // fs tasks when running the custom importer code.
 // This can be removed as soon as node-sass implements a fix for this.
-var threadPoolSize = process.env.UV_THREADPOOL_SIZE || 4;
-var asyncSassJobQueue = async.queue(sass.render, threadPoolSize - 1);
+const threadPoolSize = process.env.UV_THREADPOOL_SIZE || 4;
+const asyncSassJobQueue = async.queue(sass.render, threadPoolSize - 1);
 
 /**
  * The sass-loader makes node-sass available to webpack modules.
@@ -34,11 +34,10 @@ var asyncSassJobQueue = async.queue(sass.render, threadPoolSize - 1);
  * @param {string} content
  */
 module.exports = function (content) {
-    var callback = this.async();
-    var isSync = typeof callback !== 'function';
-    var self = this;
-    var resourcePath = this.resourcePath;
-    var sassOptions;
+    const callback = this.async();
+    const isSync = typeof callback !== "function";
+    const self = this;
+    const resourcePath = this.resourcePath;
 
     /**
      * Enhances the sass error with additional information about what actually went wrong.
@@ -56,9 +55,9 @@ module.exports = function (content) {
             return;
         }
 
-        var msg = err.message;
+        let msg = err.message;
 
-        if (err.file === 'stdin') {
+        if (err.file === "stdin") {
             err.file = resourcePath;
         }
         // node-sass returns UNIX-style paths
@@ -66,11 +65,11 @@ module.exports = function (content) {
 
         // The 'Current dir' hint of node-sass does not help us, we're providing
         // additional information by reading the err.file property
-        msg = msg.replace(/\s*Current dir:\s*/, '');
+        msg = msg.replace(/\s*Current dir:\s*/, "");
 
         err.message = getFileExcerptIfPossible(err) +
             msg.charAt(0).toUpperCase() + msg.slice(1) + os.EOL +
-            '      in ' + err.file + ' (line ' + err.line + ', column ' + err.column + ')';
+            "      in " + err.file + " (line " + err.line + ", column " + err.column + ")";
     }
 
     /**
@@ -79,17 +78,14 @@ module.exports = function (content) {
      * It's important that the returned function has the correct number of arguments
      * (based on whether the call is sync or async) because otherwise node-sass doesn't exit.
      *
-     * @returns {function}
+     * @returns {Function}
      */
     function getWebpackImporter() {
         return function asyncWebpackImporter(url, fileContext, done) {
-            var dirContext;
-            var request;
-
             // node-sass returns UNIX-style paths
             fileContext = path.normalize(fileContext);
-            request = utils.urlToRequest(url, sassOptions.root);
-            dirContext = fileToDirContext(fileContext);
+            const request = utils.urlToRequest(url, sassOptions.root);
+            const dirContext = fileToDirContext(fileContext);
 
             resolve(dirContext, url, getImportsToResolve(request), done);
         };
@@ -102,10 +98,10 @@ module.exports = function (content) {
      * @param {string} dirContext
      * @param {string} originalImport
      * @param {Array} importsToResolve
-     * @param {function} done
+     * @param {Function} done
      */
     function resolve(dirContext, originalImport, importsToResolve, done) {
-        var importToResolve = importsToResolve.shift();
+        const importToResolve = importsToResolve.shift();
 
         if (!importToResolve) {
             // No import possibilities left. Let's pass that one back to libsass...
@@ -115,7 +111,7 @@ module.exports = function (content) {
             return;
         }
 
-        self.resolve(dirContext, importToResolve, function onWebpackResolve(err, resolvedFilename) {
+        self.resolve(dirContext, importToResolve, (err, resolvedFilename) => {
             if (err) {
                 resolve(dirContext, originalImport, importsToResolve, done);
                 return;
@@ -124,20 +120,20 @@ module.exports = function (content) {
             // in handy when an error occurs. In this case, we don't get stats.includedFiles from node-sass.
             addNormalizedDependency(resolvedFilename);
             // By removing the CSS file extension, we trigger node-sass to include the CSS file instead of just linking it.
-            resolvedFilename = resolvedFilename.replace(matchCss, '');
+            resolvedFilename = resolvedFilename.replace(matchCss, "");
 
             // Use self.loadModule() before calling done() to make imported files available to
             // other webpack tools like postLoaders etc.?
 
             done({
-                file: resolvedFilename.replace(matchCss, '')
+                file: resolvedFilename.replace(matchCss, "")
             });
         });
     }
 
     function fileToDirContext(fileContext) {
         // The first file is 'stdin' when we're using the data option
-        if (fileContext === 'stdin') {
+        if (fileContext === "stdin") {
             fileContext = resourcePath;
         }
         return path.dirname(fileContext);
@@ -153,25 +149,26 @@ module.exports = function (content) {
         // node-sass returns UNIX-style paths
         self.dependency(path.normalize(file));
     }
-    
+
     if (isSync) {
-        throw new Error('Synchronous compilation is not supported anymore. See https://github.com/jtangelder/sass-loader/issues/333');
+        throw new Error("Synchronous compilation is not supported anymore. See https://github.com/jtangelder/sass-loader/issues/333");
     }
 
     this.cacheable();
 
-    sassOptions = getLoaderConfig(this);
+    const sassOptions = getLoaderConfig(this);
+
     sassOptions.data = sassOptions.data ? (sassOptions.data + os.EOL + content) : content;
 
     // Skip empty files, otherwise it will stop webpack, see issue #21
-    if (sassOptions.data.trim() === '') {
+    if (sassOptions.data.trim() === "") {
         callback(null, content);
         return;
     }
 
     // opt.outputStyle
     if (!sassOptions.outputStyle && this.minimize) {
-        sassOptions.outputStyle = 'compressed';
+        sassOptions.outputStyle = "compressed";
     }
 
     // opt.sourceMap
@@ -181,21 +178,21 @@ module.exports = function (content) {
         // deliberately overriding the sourceMap option
         // this value is (currently) ignored by libsass when using the data input instead of file input
         // however, it is still necessary for correct relative paths in result.map.sources.
-        sassOptions.sourceMap = this.options.context + '/sass.map';
+        sassOptions.sourceMap = this.options.context + "/sass.map";
         sassOptions.omitSourceMapUrl = true;
 
         // If sourceMapContents option is not set, set it to true otherwise maps will be empty/null
         // when exported by webpack-extract-text-plugin.
-        if ('sourceMapContents' in sassOptions === false) {
+        if ("sourceMapContents" in sassOptions === false) {
             sassOptions.sourceMapContents = true;
         }
     }
 
     // indentedSyntax is a boolean flag.
-    var ext = path.extname(resourcePath);
+    const ext = path.extname(resourcePath);
 
     // If we are compiling sass and indentedSyntax isn't set, automatically set it.
-    if (ext && ext.toLowerCase() === '.sass' && sassOptions.indentedSyntax === undefined) {
+    if (ext && ext.toLowerCase() === ".sass" && "indentedSyntax" in sassOptions === false) {
         sassOptions.indentedSyntax = true;
     } else {
         sassOptions.indentedSyntax = Boolean(sassOptions.indentedSyntax);
@@ -210,7 +207,7 @@ module.exports = function (content) {
     sassOptions.includePaths.push(path.dirname(resourcePath));
 
     // start the actual rendering
-    asyncSassJobQueue.push(sassOptions, function onRender(err, result) {
+    asyncSassJobQueue.push(sassOptions, (err, result) => {
         if (err) {
             formatSassError(err);
             err.file && self.dependency(err.file);
@@ -218,7 +215,7 @@ module.exports = function (content) {
             return;
         }
 
-        if (result.map && result.map !== '{}') {
+        if (result.map && result.map !== "{}") {
             result.map = JSON.parse(result.map);
             result.map.file = resourcePath;
             // The first source is 'stdin' according to libsass because we've used the data input
@@ -244,31 +241,23 @@ module.exports = function (content) {
  * @returns {string}
  */
 function getFileExcerptIfPossible(err) {
-    var content;
+    let content;
 
     try {
-        content = fs.readFileSync(err.file, 'utf8');
+        content = fs.readFileSync(err.file, "utf8");
 
         return os.EOL +
             content.split(os.EOL)[err.line - 1] + os.EOL +
-            new Array(err.column - 1).join(' ') + '^' + os.EOL +
-            '      ';
+            new Array(err.column - 1).join(" ") + "^" + os.EOL +
+            "      ";
     } catch (err) {
         // If anything goes wrong here, we don't want any errors to be reported to the user
-        return '';
+        return "";
     }
 }
 
 /**
- * When libsass tries to resolve an import, it uses this "funny" algorithm:
- *
- * - Imports with no file extension:
- *   - Prefer modules starting with '_'
- *   - File extension precedence: .scss, .sass, .css
- * - Imports with file extension:
- *   - If the file is a CSS-file, do not include it all, but just link it via @import url()
- *   - The exact file name must match (no auto-resolving of '_'-modules)
- *
+ * When libsass tries to resolve an import, it uses a special algorithm.
  * Since the sass-loader uses webpack to resolve the modules, we need to simulate that algorithm. This function
  * returns an array of import paths to try.
  *
@@ -276,20 +265,27 @@ function getFileExcerptIfPossible(err) {
  * @returns {Array}
  */
 function getImportsToResolve(originalImport) {
-    var ext = path.extname(originalImport);
-    var basename = path.basename(originalImport);
-    var dirname = path.dirname(originalImport);
-    var startsWithUnderscore = basename.charAt(0) === '_';
-    var paths = [];
+    // libsass' import algorithm works like this:
+    // In case there is no file extension...
+    //   - Prefer modules starting with '_'.
+    //   - File extension precedence: .scss, .sass, .css.
+    // In case there is a file extension...
+    //   - If the file is a CSS-file, do not include it all, but just link it via @import url().
+    //   - The exact file name must match (no auto-resolving of '_'-modules).
+    const ext = path.extname(originalImport);
+    const basename = path.basename(originalImport);
+    const dirname = path.dirname(originalImport);
+    const startsWithUnderscore = basename.charAt(0) === "_";
+    const paths = [];
 
     function add(file) {
         // No path.sep required here, because imports inside SASS are usually with /
-        paths.push(dirname + '/' + file);
+        paths.push(dirname + "/" + file);
     }
 
-    if (originalImport.charAt(0) !== '.') {
+    if (originalImport.charAt(0) !== ".") {
         // If true: originalImport is a module import like 'bootstrap-sass...'
-        if (dirname === '.') {
+        if (dirname === ".") {
             // If true: originalImport is just a module import without a path like 'bootstrap-sass'
             // In this case we don't do that auto-resolving dance at all.
             return [originalImport];
@@ -299,20 +295,20 @@ function getImportsToResolve(originalImport) {
     // We can't just check for ext being defined because ext can also be something like '.datepicker'
     // when the true extension is omitted and the filename contains a dot.
     // @see https://github.com/jtangelder/sass-loader/issues/167
-    /*jshint noempty:false */
-    if (ext === '.css') {
+    /* jshint noempty:false */
+    if (ext === ".css") {
         // do not import css files
-    } else if (ext === '.scss' || ext === '.sass') {
-    /*jshint noempty:true */
+    } else if (ext === ".scss" || ext === ".sass") {
+    /* jshint noempty:true */
         add(basename);
     } else {
         if (!startsWithUnderscore) {
             // Prefer modules starting with '_' first
-            extPrecedence.forEach(function (ext) {
-                add('_' + basename + ext);
+            extPrecedence.forEach((ext) => {
+                add("_" + basename + ext);
             });
         }
-        extPrecedence.forEach(function (ext) {
+        extPrecedence.forEach((ext) => {
             add(basename + ext);
         });
     }
@@ -328,9 +324,9 @@ function getImportsToResolve(originalImport) {
  * @returns {Object}
  */
 function getLoaderConfig(loaderContext) {
-    var query = utils.parseQuery(loaderContext.query);
-    var configKey = query.config || 'sassLoader';
-    var config = loaderContext.options[configKey] || {};
+    const query = utils.parseQuery(loaderContext.query);
+    const configKey = query.config || "sassLoader";
+    const config = loaderContext.options[configKey] || {};
 
     delete query.config;
 
@@ -341,26 +337,27 @@ function getLoaderConfig(loaderContext) {
  * Creates new custom importers that use the given `resourcePath` if libsass calls the custom importer with `prev`
  * being 'stdin'.
  *
- * Why do we need this?
+ * Why do we need this? We have to use the `data` option of node-sass in order to compile our sass because
+ * the `resourcePath` might not be an actual file on disk. When using the `data` option, libsass uses the string
+ * 'stdin' instead of a filename.
  *
- * We have to use the `data` option of node-sass in order to compile our sass because the `resourcePath` might
- * not be an actual file on disk. When using the `data` option, libsass uses the string 'stdin' instead of a
- * filename. We have to fix this behavior in order to provide a consistent experience to the webpack user.
+ * We have to fix this behavior in order to provide a consistent experience to the webpack user.
  *
  * @param {function|Array<function>} importer
  * @param {string} resourcePath
  * @returns {Array<function>}
  */
 function proxyCustomImporters(importer, resourcePath) {
-    return [].concat(importer).map(function (importer) {
+    return [].concat(importer).map((importer) => {
         return function (url, prev, done) {
-            var args = slice.call(arguments);
-            
-            if (args[1] === 'stdin') {
+            const importerContext = this; // eslint-disable-line no-invalid-this
+            const args = slice.call(arguments);
+
+            if (args[1] === "stdin") {
                 args[1] = resourcePath;
             }
-            
-            return importer.apply(this, args);
+
+            return importer.apply(importerContext, args);
         };
     });
 }
