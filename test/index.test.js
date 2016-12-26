@@ -9,7 +9,7 @@ const fs = require("fs");
 const merge = require("webpack-merge");
 const customImporter = require("./tools/customImporter.js");
 const customFunctions = require("./tools/customFunctions.js");
-const pathToSassLoader = require.resolve("../index.js");
+const pathToSassLoader = require.resolve("../lib/loader.js");
 const sassLoader = require(pathToSassLoader);
 
 const CR = /\r/g;
