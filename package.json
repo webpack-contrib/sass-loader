@@ -38,7 +38,6 @@
   "devDependencies": {
     "bootstrap-sass": "^3.3.5",
     "css-loader": "^0.24.0",
-    "enhanced-require": "^0.5.0-beta6",
     "file-loader": "^0.9.0",
     "jshint": "^2.9.2",
     "mocha": "^3.0.2",
@@ -47,6 +46,7 @@
     "should": "^11.1.0",
     "style-loader": "^0.13.1",
     "webpack": "^1.13.1",
-    "webpack-dev-server": "^1.7.0"
+    "webpack-dev-server": "^1.7.0",
+    "webpack-merge": "^2.0.0"
   }
 }
