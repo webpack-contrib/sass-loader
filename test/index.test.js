@@ -6,13 +6,14 @@ var should = require('should');
 var path = require('path');
 var webpack = require('webpack');
 var fs = require('fs');
-var enhancedReqFactory = require('enhanced-require');
+var merge = require('webpack-merge');
 var customImporter = require('./tools/customImporter.js');
 var customFunctions = require('./tools/customFunctions.js');
+var pathToSassLoader = require.resolve('../index.js');
+var sassLoader = require(pathToSassLoader);
 
 var CR = /\r/g;
 var syntaxStyles = ['scss', 'sass'];
-var pathToSassLoader = path.resolve(__dirname, '../index.js');
 var pathToErrorFileNotFound = path.resolve(__dirname, './scss/error-file-not-found.scss');
 var pathToErrorFileNotFound2 = path.resolve(__dirname, './scss/error-file-not-found-2.scss');
 var pathToErrorFile = path.resolve(__dirname, './scss/error.scss');
@@ -29,7 +30,8 @@ describe('sass-loader', function () {
 
     describe('config', function () {
 
-        it('should override sassLoader config with loader query', function () {
+        // Will be removed with webpack 2 support
+        it.skip('should override sassLoader config with loader query', function () {
             var expectedCss = readCss('sass', 'language');
             var webpackConfig = Object.assign({}, {
                 entry: 'raw!' + pathToSassLoader + '?indentedSyntax!' + path.join(__dirname, 'sass', 'language.sass'),
@@ -41,7 +43,7 @@ describe('sass-loader', function () {
             var enhancedReq;
             var actualCss;
 
-            enhancedReq = enhancedReqFactory(module, webpackConfig);
+            //enhancedReq = enhancedReqFactory(module, webpackConfig);
             actualCss = enhancedReq(webpackConfig.entry);
 
             fs.writeFileSync(__dirname + '/output/should override sassLoader config with loader query.sass.sync.css', actualCss, 'utf8');
@@ -144,58 +146,69 @@ describe('sass-loader', function () {
     });
 
     describe('errors', function () {
-
-        it('should output understandable errors in entry files', function () {
-            try {
-                enhancedReqFactory(module)(pathToSassLoader + '!' + pathToErrorFile);
+        
+        it('should throw an error in synchronous loader environments', function () {
+             try {
+                 sassLoader.call({
+                     async: Function.prototype
+                 }, '');
             } catch (err) {
                 // check for file excerpt
+                err.message.should.equal('Synchronous compilation is not supported anymore. See https://github.com/jtangelder/sass-loader/issues/333');
+            }
+        });
+
+        it('should output understandable errors in entry files', function (done) {
+            runWebpack({
+                entry: pathToSassLoader + '!' + pathToErrorFile
+            }, function (err) {
                 err.message.should.match(/\.syntax-error''/);
                 err.message.should.match(/Invalid CSS after/);
                 err.message.should.match(/\(line 1, column 14\)/);
                 err.message.indexOf(pathToErrorFile).should.not.equal(-1);
-            }
+                done();
+            });
         });
 
-        it('should output understandable errors of imported files', function () {
-            try {
-                enhancedReqFactory(module)(pathToSassLoader + '!' + pathToErrorImport);
-            } catch (err) {
+        it('should output understandable errors of imported files', function (done) {
+            runWebpack({
+                entry: pathToSassLoader + '!' + pathToErrorImport
+            }, function (err) {
                 // check for file excerpt
                 err.message.should.match(/\.syntax-error''/);
                 err.message.should.match(/Invalid CSS after "\.syntax-error''": expected "\{", was ""/);
                 err.message.should.match(/\(line 1, column 14\)/);
                 err.message.indexOf(pathToErrorFile).should.not.equal(-1);
-            }
+                done();
+            });
         });
 
-        it('should output understandable errors when a file could not be found', function () {
-            try {
-                enhancedReqFactory(module)(pathToSassLoader + '!' + pathToErrorFileNotFound);
-            } catch (err) {
-                // check for file excerpt
+        it('should output understandable errors when a file could not be found', function (done) {
+            runWebpack({
+                entry: pathToSassLoader + '!' + pathToErrorFileNotFound
+            }, function (err) {
                 err.message.should.match(/@import "does-not-exist";/);
                 err.message.should.match(/File to import not found or unreadable: does-not-exist/);
                 err.message.should.match(/\(line 1, column 1\)/);
                 err.message.indexOf(pathToErrorFileNotFound).should.not.equal(-1);
-            }
+                done();
+            });
         });
 
-        it('should not auto-resolve imports with explicit file names', function () {
-            try {
-                enhancedReqFactory(module)(pathToSassLoader + '!' + pathToErrorFileNotFound2);
-            } catch (err) {
-                // check for file excerpt
+        it('should not auto-resolve imports with explicit file names', function (done) {
+            runWebpack({
+                entry: pathToSassLoader + '!' + pathToErrorFileNotFound2
+            }, function (err) {
                 err.message.should.match(/@import "\.\/another\/_module\.scss";/);
                 err.message.should.match(/File to import not found or unreadable: \.\/another\/_module\.scss/);
                 err.message.should.match(/\(line 1, column 1\)/);
                 err.message.indexOf(pathToErrorFileNotFound2).should.not.equal(-1);
-            }
+                done();
+            });
         });
 
     });
 });
-
 
 function readCss(ext, id) {
     return fs.readFileSync(path.join(__dirname, ext, 'spec', id + '.css'), 'utf8').replace(CR, '');
@@ -206,26 +219,20 @@ function testAsync(name, id, config) {
         it(name + ' (' + ext + ')', function (done) {
             var expectedCss = readCss(ext, id);
             var sassFile = pathToSassFile(ext, id);
-            var webpackConfig = Object.assign(config ? config(ext) : {}, {
+            var baseConfig = merge({
                 entry: sassFile,
                 output: {
-                    path: __dirname + '/output',
-                    filename: 'bundle.' + ext + '.js',
-                    libraryTarget: 'commonjs2'
+                    filename: 'bundle.' + ext + '.js'
                 }
-            });
+            }, config ? config(ext) : {});
             var actualCss;
-
-            webpack(webpackConfig, function onCompilationFinished(err, stats) {
+            
+            runWebpack(baseConfig, function (err) {
                 if (err) {
-                    return done(err);
+                    done(err);
+                    return;
                 }
-                if (stats.hasErrors()) {
-                    return done(stats.compilation.errors[0]);
-                }
-                if (stats.hasWarnings()) {
-                    return done(stats.compilation.warnings[0]);
-                }
+                
                 delete require.cache[path.resolve(__dirname, './output/bundle.' + ext + '.js')];
 
                 actualCss = require('./output/bundle.' + ext + '.js');
@@ -239,23 +246,30 @@ function testAsync(name, id, config) {
     });
 }
 
-function testSync(name, id, config) {
-    syntaxStyles.forEach(function forEachSyntaxStyle(ext) {
-        it(name + ' (' + ext + ')', function () {
-            var expectedCss = readCss(ext, id);
-            var sassFile = pathToSassFile(ext, id);
-            var webpackConfig = Object.assign(config ? config(ext) : {}, {
-                entry: sassFile
-            });
-            var enhancedReq;
-            var actualCss;
+function testSync() {
+    
+}
 
-            enhancedReq = enhancedReqFactory(module, webpackConfig);
-            actualCss = enhancedReq(webpackConfig.entry);
+function runWebpack(baseConfig, done) {
+    var webpackConfig = merge({
+        output: {
+            path: __dirname + '/output',
+            filename: 'bundle.js',
+            libraryTarget: 'commonjs2'
+        }
+    }, baseConfig);
 
-            fs.writeFileSync(__dirname + '/output/' + name + '.' + ext + '.sync.css', actualCss, 'utf8');
-            actualCss.should.eql(expectedCss);
-        });
+    webpack(webpackConfig, function onCompilationFinished(err, stats) {
+        if (err) {
+            return done(err);
+        }
+        if (stats.hasErrors()) {
+            return done(stats.compilation.errors[0]);
+        }
+        if (stats.hasWarnings()) {
+            return done(stats.compilation.warnings[0]);
+        }
+        done();
     });
 }
 

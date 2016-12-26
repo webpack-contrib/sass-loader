@@ -32,15 +32,13 @@ var asyncSassJobQueue = async.queue(sass.render, threadPoolSize - 1);
  * The sass-loader makes node-sass available to webpack modules.
  *
  * @param {string} content
- * @returns {string}
  */
 module.exports = function (content) {
     var callback = this.async();
     var isSync = typeof callback !== 'function';
     var self = this;
     var resourcePath = this.resourcePath;
-    var sassOptions = getLoaderConfig(this);
-    var result;
+    var sassOptions;
 
     /**
      * Enhances the sass error with additional information about what actually went wrong.
@@ -84,19 +82,6 @@ module.exports = function (content) {
      * @returns {function}
      */
     function getWebpackImporter() {
-        if (isSync) {
-            return function syncWebpackImporter(url, fileContext) {
-                var dirContext;
-                var request;
-
-                // node-sass returns UNIX-style paths
-                fileContext = path.normalize(fileContext);
-                request = utils.urlToRequest(url, sassOptions.root);
-                dirContext = fileToDirContext(fileContext);
-
-                return resolveSync(dirContext, url, getImportsToResolve(request));
-            };
-        }
         return function asyncWebpackImporter(url, fileContext, done) {
             var dirContext;
             var request;
@@ -108,41 +93,6 @@ module.exports = function (content) {
 
             resolve(dirContext, url, getImportsToResolve(request), done);
         };
-    }
-
-    /**
-     * Tries to resolve the first url of importsToResolve. If that resolve fails, the next url is tried.
-     * If all imports fail, the import is passed to libsass which also take includePaths into account.
-     *
-     * @param {string} dirContext
-     * @param {string} originalImport
-     * @param {Array} importsToResolve
-     * @returns {object}
-     */
-    function resolveSync(dirContext, originalImport, importsToResolve) {
-        var importToResolve = importsToResolve.shift();
-        var resolvedFilename;
-
-        if (!importToResolve) {
-            // No import possibilities left. Let's pass that one back to libsass...
-            return {
-                file: originalImport
-            };
-        }
-
-        try {
-            resolvedFilename = self.resolveSync(dirContext, importToResolve);
-            // Add the resolvedFilename as dependency. Although we're also using stats.includedFiles, this might come
-            // in handy when an error occurs. In this case, we don't get stats.includedFiles from node-sass.
-            addNormalizedDependency(resolvedFilename);
-            // By removing the CSS file extension, we trigger node-sass to include the CSS file instead of just linking it.
-            resolvedFilename = resolvedFilename.replace(matchCss, '');
-            return {
-                file: resolvedFilename
-            };
-        } catch (err) {
-            return resolveSync(dirContext, originalImport, importsToResolve);
-        }
     }
 
     /**
@@ -203,14 +153,20 @@ module.exports = function (content) {
         // node-sass returns UNIX-style paths
         self.dependency(path.normalize(file));
     }
+    
+    if (isSync) {
+        throw new Error('Synchronous compilation is not supported anymore. See https://github.com/jtangelder/sass-loader/issues/333');
+    }
 
     this.cacheable();
 
+    sassOptions = getLoaderConfig(this);
     sassOptions.data = sassOptions.data ? (sassOptions.data + os.EOL + content) : content;
 
     // Skip empty files, otherwise it will stop webpack, see issue #21
     if (sassOptions.data.trim() === '') {
-        return isSync ? content : callback(null, content);
+        callback(null, content);
+        return;
     }
 
     // opt.outputStyle
@@ -254,18 +210,6 @@ module.exports = function (content) {
     sassOptions.includePaths.push(path.dirname(resourcePath));
 
     // start the actual rendering
-    if (isSync) {
-        try {
-            result = sass.renderSync(sassOptions);
-            addIncludedFilesToWebpack(result.stats.includedFiles);
-            return result.css.toString();
-        } catch (err) {
-            formatSassError(err);
-            err.file && this.dependency(err.file);
-            throw err;
-        }
-    }
-
     asyncSassJobQueue.push(sassOptions, function onRender(err, result) {
         if (err) {
             formatSassError(err);
