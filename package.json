@@ -33,7 +33,9 @@
   "dependencies": {
     "async": "^2.0.1",
     "loader-utils": "^0.2.15",
-    "object-assign": "^4.1.0"
+    "lodash.tail": "^4.1.1",
+    "object-assign": "^4.1.0",
+    "pify": "^2.3.0"
   },
   "devDependencies": {
     "bootstrap-sass": "^3.3.5",
