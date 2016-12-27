@@ -7,23 +7,23 @@ module.exports = {
     entry: path.resolve(__dirname, "./entry.js"),
     output: {
         path: path.resolve(__dirname, "../output"),
-        filename: "bundle.sourcemap.js"
+        filename: "bundle.sourceMap.js"
     },
-    devtool: "inline-source-map",
+    devtool: "source-map",
     module: {
-        rules: [
-            {
-                test: /\.scss$/,
-                use: [
-                    { loader: "style-loader" },
-                    { loader: "css-loader", options: {
-                        sourceMap: true
-                    } },
-                    { loader: sassLoader, options: {
-                        sourceMap: true
-                    } }
-                ]
-            }
-        ]
+        rules: [{
+            test: /\.scss$/,
+            use: [{
+                loader: "style-loader"
+            }, {
+                loader: "css-loader", options: {
+                    sourceMap: true
+                }
+            }, {
+                loader: sassLoader, options: {
+                    sourceMap: true
+                }
+            }]
+        }]
     }
 };
