@@ -48,7 +48,7 @@
     "should": "^11.1.0",
     "style-loader": "^0.13.1",
     "webpack": "^2.2.0-rc.2",
-    "webpack-dev-server": "^1.7.0",
+    "webpack-dev-server": "^2.2.0-rc.0",
     "webpack-merge": "^2.0.0"
   }
 }

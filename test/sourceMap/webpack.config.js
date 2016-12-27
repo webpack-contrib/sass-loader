@@ -1,8 +1,7 @@
 "use strict";
 
 const path = require("path");
-
-const pathToSassLoader = path.resolve(__dirname, "../../index.js");
+const sassLoader = require.resolve("../../lib/loader");
 
 module.exports = {
     entry: path.resolve(__dirname, "./entry.js"),
@@ -12,10 +11,18 @@ module.exports = {
     },
     devtool: "inline-source-map",
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.scss$/,
-                loaders: ["style", "css-loader?sourceMap", pathToSassLoader + "?sourceMap"]
+                use: [
+                    { loader: "style-loader" },
+                    { loader: "css-loader", options: {
+                        sourceMap: true
+                    } },
+                    { loader: sassLoader, options: {
+                        sourceMap: true
+                    } }
+                ]
             }
         ]
     }
