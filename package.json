@@ -33,7 +33,6 @@
     "async": "^2.0.1",
     "loader-utils": "^0.2.15",
     "lodash.tail": "^4.1.1",
-    "object-assign": "^4.1.0",
     "pify": "^2.3.0"
   },
   "devDependencies": {
@@ -48,7 +47,7 @@
     "raw-loader": "^0.5.1",
     "should": "^11.1.0",
     "style-loader": "^0.13.1",
-    "webpack": "^1.13.1",
+    "webpack": "^2.2.0-rc.2",
     "webpack-dev-server": "^1.7.0",
     "webpack-merge": "^2.0.0"
   }

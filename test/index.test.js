@@ -1,6 +1,5 @@
 "use strict";
 
-Object.assign = Object.assign || require("object-assign");
 require("should");
 
 const path = require("path");
@@ -20,15 +19,23 @@ const pathToErrorFile = path.resolve(__dirname, "./scss/error.scss");
 const pathToErrorImport = path.resolve(__dirname, "./scss/error-import.scss");
 
 syntaxStyles.forEach(ext => {
-    function execTest(testId, config) {
+    function execTest(testId, options) {
         return new Promise((resolve, reject) => {
-            const sassFile = pathToSassFile(ext, testId);
             const baseConfig = merge({
-                entry: sassFile,
+                entry: path.join(__dirname, ext, testId + "." + ext),
                 output: {
                     filename: "bundle." + ext + ".js"
+                },
+                module: {
+                    rules: [{
+                        test: new RegExp(`\\.${ ext }$`),
+                        use: [
+                            { loader: "raw-loader" },
+                            { loader: pathToSassLoader, options }
+                        ]
+                    }]
                 }
-            }, config || {});
+            });
 
             runWebpack(baseConfig, (err) => err ? reject(err) : resolve());
         }).then(() => {
@@ -55,32 +62,24 @@ syntaxStyles.forEach(ext => {
             it("should resolve imports from other language style correctly", () => execTest("import-other-style"));
             // Test for includePath imports
             it("should resolve imports from another directory declared by includePaths correctly", () => execTest("import-include-paths", {
-                sassLoader: {
-                    includePaths: [path.join(__dirname, ext, "from-include-path")]
-                }
+                includePaths: [path.join(__dirname, ext, "from-include-path")]
             }));
             it("should not resolve CSS imports", () => execTest("import-css"));
             it("should compile bootstrap-sass without errors", () => execTest("bootstrap-sass"));
         });
         describe("custom importers", () => {
             it("should use custom importer", () => execTest("custom-importer", {
-                sassLoader: {
-                    importer: customImporter
-                }
+                importer: customImporter
             }));
         });
         describe("custom functions", () => {
             it("should expose custom functions", () => execTest("custom-functions", {
-                sassLoader: {
-                    functions: customFunctions
-                }
+                functions: customFunctions
             }));
         });
         describe("prepending data", () => {
             it("should extend the data-option if present", () => execTest("prepending-data", {
-                sassLoader: {
-                    data: "$prepended-data: hotpink;"
-                }
+                data: "$prepended-data: hotpink;"
             }));
         });
     });
@@ -166,12 +165,4 @@ function runWebpack(baseConfig, done) {
 
         done(err || null);
     });
-}
-
-function pathToSassFile(ext, id) {
-    return [
-        "raw-loader",
-        pathToSassLoader,
-        path.join(__dirname, ext, id + "." + ext)
-    ].join("!");
 }
