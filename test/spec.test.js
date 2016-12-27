@@ -10,7 +10,7 @@
  * 2. Run `npm run create-spec`
  * 3. Now install the new version of node-sass
  * 4. Remove .skip( from describe-block in this file to activate the test
- * 5. Run `npm run test-spec`
+ * 5. Run `npm run test`
  */
 
 require("should");
@@ -42,7 +42,7 @@ function writeSpec(folder, spec) {
 }
 
 ["scss", "sass"].forEach((ext) => {
-    describe.skip(ext + " spec", () => {
+    describe(ext + " spec", () => {
         const specFolder = path.resolve(testFolder, ext, "spec");
         const oldSpec = readSpec(specFolder);
 
