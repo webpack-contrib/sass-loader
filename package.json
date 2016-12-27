@@ -11,8 +11,7 @@
     "test-bootstrap-sass": "webpack-dev-server --config test/bootstrapSass/webpack.config.js --content-base ./test/bootstrapSass",
     "test-source-map": "webpack-dev-server --config test/sourceMap/webpack.config.js --content-base ./test/sourceMap",
     "test-watch": "webpack --config test/watch/webpack.config.js",
-    "test-hmr": "webpack-dev-server --config test/hmr/webpack.config.js --content-base ./test/hmr --hot --inline",
-    "test-spec": "mocha -R spec test/spec.test.js"
+    "test-hmr": "webpack-dev-server --config test/hmr/webpack.config.js --content-base ./test/hmr --hot --inline"
   },
   "keywords": [
     "sass",

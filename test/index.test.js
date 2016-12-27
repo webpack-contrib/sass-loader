@@ -19,76 +19,74 @@ const pathToErrorFileNotFound2 = path.resolve(__dirname, "./scss/error-file-not-
 const pathToErrorFile = path.resolve(__dirname, "./scss/error.scss");
 const pathToErrorImport = path.resolve(__dirname, "./scss/error-import.scss");
 
-describe("sass-loader", () => {
-    describe("basic", () => {
-        defineTest("should compile simple sass without errors", "language");
-    });
-    describe("config", () => {
-        // Will be removed with webpack 2 support
-        it.skip("should override sassLoader config with loader query", () => {
-            // const expectedCss = readCss("sass", "language");
-            // const webpackConfig = Object.assign({}, {
-            //     entry: "raw!" + pathToSassLoader + "?indentedSyntax!" + path.join(__dirname, "sass", "language.sass"),
-            //     sassLoader: {
-            //         // Incorrect setting here should be overridden by loader query
-            //         indentedSyntax: false
-            //     }
-            // });
-            // let enhancedReq;
-            // let actualCss;
-            //
-            // enhancedReq = enhancedReqFactory(module, webpackConfig);
-            // const actualCss = enhancedReq(webpackConfig.entry);
-            //
-            // fs.writeFileSync(__dirname + "/output/should override sassLoader config with loader query.sass.sync.css", actualCss, "utf8");
-            // actualCss.should.eql(expectedCss);
+syntaxStyles.forEach(ext => {
+    function execTest(testId, config) {
+        return new Promise((resolve, reject) => {
+            const sassFile = pathToSassFile(ext, testId);
+            const baseConfig = merge({
+                entry: sassFile,
+                output: {
+                    filename: "bundle." + ext + ".js"
+                }
+            }, config || {});
+
+            runWebpack(baseConfig, (err) => err ? reject(err) : resolve());
+        }).then(() => {
+            delete require.cache[path.resolve(__dirname, "./output/bundle." + ext + ".js")];
+
+            const actualCss = require("./output/bundle." + ext + ".js");
+            const expectedCss = readCss(ext, testId);
+
+            // writing the actual css to output-dir for better debugging
+            // fs.writeFileSync(path.join(__dirname, "output", `${ testId }.${ ext }.css`), actualCss, "utf8");
+            actualCss.should.eql(expectedCss);
         });
-    });
-    describe("imports", () => {
-        defineTest("should resolve imports correctly", "imports");
-        // Test for issue: https://github.com/jtangelder/sass-loader/issues/32
-        defineTest("should pass with multiple imports", "multiple-imports");
-        // Test for issue: https://github.com/jtangelder/sass-loader/issues/73
-        defineTest("should resolve imports from other language style correctly", "import-other-style");
-        // Test for includePath imports
-        defineTest("should resolve imports from another directory declared by includePaths correctly", "import-include-paths", (ext) => {
-            return {
+    }
+
+    describe(`sass-loader (${ ext })`, () => {
+        describe("basic", () => {
+            it("should compile simple sass without errors", () => execTest("language"));
+        });
+        describe("imports", () => {
+            it("should resolve imports correctly", () => execTest("imports"));
+            // Test for issue: https://github.com/jtangelder/sass-loader/issues/32
+            it("should pass with multiple imports", () => execTest("multiple-imports"));
+            // Test for issue: https://github.com/jtangelder/sass-loader/issues/73
+            it("should resolve imports from other language style correctly", () => execTest("import-other-style"));
+            // Test for includePath imports
+            it("should resolve imports from another directory declared by includePaths correctly", () => execTest("import-include-paths", {
                 sassLoader: {
                     includePaths: [path.join(__dirname, ext, "from-include-path")]
                 }
-            };
+            }));
+            it("should not resolve CSS imports", () => execTest("import-css"));
+            it("should compile bootstrap-sass without errors", () => execTest("bootstrap-sass"));
         });
-        defineTest("should not resolve CSS imports", "import-css");
-        defineTest("should compile bootstrap-sass without errors", "bootstrap-sass");
-    });
-    describe("custom importers", () => {
-        defineTest("should use custom importer", "custom-importer", () => {
-            return {
+        describe("custom importers", () => {
+            it("should use custom importer", () => execTest("custom-importer", {
                 sassLoader: {
                     importer: customImporter
                 }
-            };
+            }));
         });
-
-    });
-    describe("custom functions", () => {
-        defineTest("should expose custom functions", "custom-functions", () => {
-            return {
+        describe("custom functions", () => {
+            it("should expose custom functions", () => execTest("custom-functions", {
                 sassLoader: {
                     functions: customFunctions
                 }
-            };
+            }));
         });
-    });
-    describe("prepending data", () => {
-        defineTest("should extend the data-option if present", "prepending-data", () => {
-            return {
+        describe("prepending data", () => {
+            it("should extend the data-option if present", () => execTest("prepending-data", {
                 sassLoader: {
                     data: "$prepended-data: hotpink;"
                 }
-            };
+            }));
         });
     });
+});
+
+describe("sass-loader", () => {
     describe("errors", () => {
         it("should throw an error in synchronous loader environments", () => {
             try {
@@ -150,38 +148,6 @@ describe("sass-loader", () => {
 
 function readCss(ext, id) {
     return fs.readFileSync(path.join(__dirname, ext, "spec", id + ".css"), "utf8").replace(CR, "");
-}
-
-function defineTest(name, id, config) {
-    syntaxStyles.forEach((ext) => {
-        it(name + " (" + ext + ")", (done) => {
-            const expectedCss = readCss(ext, id);
-            const sassFile = pathToSassFile(ext, id);
-            const baseConfig = merge({
-                entry: sassFile,
-                output: {
-                    filename: "bundle." + ext + ".js"
-                }
-            }, config ? config(ext) : {});
-            let actualCss;
-
-            runWebpack(baseConfig, (err) => {
-                if (err) {
-                    done(err);
-                    return;
-                }
-
-                delete require.cache[path.resolve(__dirname, "./output/bundle." + ext + ".js")];
-
-                actualCss = require("./output/bundle." + ext + ".js");
-                // writing the actual css to output-dir for better debugging
-                fs.writeFileSync(path.join(__dirname, "output", Number(name) + "." + ext + ".async.css"), actualCss, "utf8");
-                actualCss.should.eql(expectedCss);
-
-                done();
-            });
-        });
-    });
 }
 
 function runWebpack(baseConfig, done) {
