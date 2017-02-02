@@ -1,8 +1,7 @@
 "use strict";
 
 const path = require("path");
-
-const pathToSassLoader = path.resolve(__dirname, "../../index.js");
+const sassLoader = require.resolve("../../lib/loader");
 
 module.exports = {
     entry: path.resolve(__dirname, "../scss/bootstrap-sass.scss"),
@@ -12,15 +11,25 @@ module.exports = {
     },
     devtool: "inline-source-map",
     module: {
-        loaders: [
-            {
-                test: /\.woff2?$|\.ttf$|\.eot$|\.svg$/,
-                loader: "file"
-            },
-            {
-                test: /\.scss$/,
-                loader: "style-loader!css-loader!" + pathToSassLoader
-            }
-        ]
+        rules: [{
+            test: /\.scss$/,
+            use: [{
+                loader: "style-loader"
+            }, {
+                loader: "css-loader"
+            }, {
+                loader: sassLoader,
+                options: {
+                    includePaths: [
+                        path.resolve(__dirname, "../scss/from-include-path")
+                    ]
+                }
+            }]
+        }, {
+            test: /\.woff2?$|\.ttf$|\.eot$|\.svg$/,
+            use: [{
+                loader: "file-loader"
+            }]
+        }]
     }
 };

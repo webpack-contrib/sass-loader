@@ -11,6 +11,7 @@
     "test-bootstrap-sass": "webpack-dev-server --config test/bootstrapSass/webpack.config.js --content-base ./test/bootstrapSass",
     "test-source-map": "webpack-dev-server --config test/sourceMap/webpack.config.js --content-base ./test/sourceMap",
     "test-watch": "webpack --config test/watch/webpack.config.js",
+    "test-extract-text": "webpack --config test/extractText/webpack.config.js",
     "test-hmr": "webpack-dev-server --config test/hmr/webpack.config.js --content-base ./test/hmr --hot --inline"
   },
   "keywords": [
@@ -33,7 +34,6 @@
     "async": "^2.0.1",
     "loader-utils": "^0.2.15",
     "lodash.tail": "^4.1.1",
-    "object-assign": "^4.1.0",
     "pify": "^2.3.0"
   },
   "devDependencies": {
@@ -48,8 +48,8 @@
     "raw-loader": "^0.5.1",
     "should": "^11.1.0",
     "style-loader": "^0.13.1",
-    "webpack": "^1.13.1",
-    "webpack-dev-server": "^1.7.0",
+    "webpack": "^2.2.0-rc.2",
+    "webpack-dev-server": "^2.2.0-rc.0",
     "webpack-merge": "^2.0.0"
   }
 }
