@@ -11,6 +11,7 @@
   </a>
   <h1>sass-loader</h1>
   <p>Compiles Sass to CSS.<br>Use the <a href="https://github.com/webpack/css-loader">css-loader</a> or the <a href="https://github.com/webpack/raw-loader">raw-loader</a> to turn it into a JS module and the <a href="https://github.com/webpack/extract-text-webpack-plugin">ExtractTextPlugin</a> to extract it into a separate file.<p>
+  <p>Looking for the webpack 1 loader? Check out the <a href="https://github.com/jtangelder/sass-loader/tree/archive/webpack-1">archive/webpack-1 branch</a>.</p>
 </div>
 
 ## Install
@@ -45,7 +46,7 @@ module.exports = {
 };
 ```
 
-You can also pass options directly to [node-sass](https://github.com/andrew/node-sass) by specifying an option property like this:
+You can also pass options directly to [node-sass](https://github.com/andrew/node-sass) by specifying an `options` property like this:
 
 ```js
 // webpack.config.js
