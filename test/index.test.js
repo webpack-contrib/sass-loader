@@ -101,9 +101,8 @@ describe("sass-loader", () => {
             runWebpack({
                 entry: pathToSassLoader + "!" + pathToErrorFile
             }, (err) => {
-                err.message.should.match(/\.syntax-error''/);
-                err.message.should.match(/Invalid CSS after/);
-                err.message.should.match(/\(line 1, column 14\)/);
+                err.message.should.match(/Property "some-value" must be followed by a ':'/);
+                err.message.should.match(/\(line 2, column 5\)/);
                 err.message.indexOf(pathToErrorFile).should.not.equal(-1);
                 done();
             });
@@ -113,9 +112,8 @@ describe("sass-loader", () => {
                 entry: pathToSassLoader + "!" + pathToErrorImport
             }, (err) => {
                 // check for file excerpt
-                err.message.should.match(/\.syntax-error''/);
-                err.message.should.match(/Invalid CSS after "\.syntax-error''": expected "\{", was ""/);
-                err.message.should.match(/\(line 1, column 14\)/);
+                err.message.should.match(/Property "some-value" must be followed by a ':'/);
+                err.message.should.match(/\(line 2, column 5\)/);
                 err.message.indexOf(pathToErrorFile).should.not.equal(-1);
                 done();
             });
