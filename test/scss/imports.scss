@@ -2,10 +2,14 @@
 @import "another/module";
 /* @import "another/underscore"; */
 @import "another/underscore";
+/* @import "~scss/underscore"; */
+@import "~scss/underscore";
 // Import a module with a dot in its name
 // @see https://github.com/jtangelder/sass-loader/issues/167
 /* @import "~scss/some.module"; */
 @import "~scss/some.module";
-/* @import "~t~scss/underscore"; */
-@import "~scss/underscore";
+// @see https://github.com/jtangelder/sass-loader/issues/360
+/* @import "~animate.css/animate"; */
+@import "~animate.css/animate";
+/* @import url(http://example.com/something/from/the/interwebs); */
 @import url(http://example.com/something/from/the/interwebs);
