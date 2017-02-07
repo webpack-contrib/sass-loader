@@ -1,6 +1,12 @@
 Changelog
 ---------
 
+### 5.0.0
+
+- **Breaking**: Remove synchronous compilation support. [#334](https://github.com/jtangelder/sass-loader/pull/334)
+- **Breaking**: Remove official node-sass@3 and webpack@1 support. [5a6bcb96d8bd7a7a11c33252ba739ffe09ca38c5](https://github.com/jtangelder/sass-loader/commit/5a6bcb96d8bd7a7a11c33252ba739ffe09ca38c5)
+- **Breaking**: Remove node 0.12 support. [29b30755021a834e622bf4b5bb9db4d6e5913905](https://github.com/jtangelder/sass-loader/commit/29b30755021a834e622bf4b5bb9db4d6e5913905)
+
 ### 4.1.1
 
 - Update `webpack` peer dependency to support `2.2.0rc`. [#330](https://github.com/jtangelder/sass-loader/pull/330)
