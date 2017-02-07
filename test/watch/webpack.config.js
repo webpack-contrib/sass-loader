@@ -1,8 +1,7 @@
 "use strict";
 
 const path = require("path");
-
-const pathToSassLoader = path.resolve(__dirname, "../../index.js");
+const sassLoader = require.resolve("../../lib/loader");
 
 module.exports = {
     entry: [
@@ -15,11 +14,20 @@ module.exports = {
     },
     watch: true,
     module: {
-        loaders: [
-            {
-                test: /\.scss$/,
-                loader: "css-loader!" + pathToSassLoader + "?includePaths[]=" + encodeURIComponent(path.resolve(__dirname, "../scss/from-include-path"))
-            }
-        ]
+        rules: [{
+            test: /\.scss$/,
+            use: [{
+                loader: "style-loader"
+            }, {
+                loader: "css-loader"
+            }, {
+                loader: sassLoader,
+                options: {
+                    includePaths: [
+                        path.resolve(__dirname, "../scss/from-include-path")
+                    ]
+                }
+            }]
+        }]
     }
 };
