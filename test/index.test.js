@@ -39,9 +39,7 @@ syntaxStyles.forEach(ext => {
 
             runWebpack(baseConfig, (err) => err ? reject(err) : resolve());
         }).then(() => {
-            delete require.cache[path.resolve(__dirname, "./output/bundle." + ext + ".js")];
-
-            const actualCss = require("./output/bundle." + ext + ".js");
+            const actualCss = readBundle("bundle." + ext + ".js");
             const expectedCss = readCss(ext, testId);
 
             // writing the actual css to output-dir for better debugging
@@ -86,6 +84,59 @@ syntaxStyles.forEach(ext => {
 });
 
 describe("sass-loader", () => {
+    describe("multiple compilations", () => {
+        it("should not interfere with each other", () =>
+            new Promise((resolve, reject) => {
+                runWebpack({
+                    entry: {
+                        b: path.join(__dirname, "scss", "multipleCompilations", "b.scss"),
+                        c: path.join(__dirname, "scss", "multipleCompilations", "c.scss"),
+                        a: path.join(__dirname, "scss", "multipleCompilations", "a.scss"),
+                        d: path.join(__dirname, "scss", "multipleCompilations", "d.scss"),
+                        e: path.join(__dirname, "scss", "multipleCompilations", "e.scss"),
+                        f: path.join(__dirname, "scss", "multipleCompilations", "f.scss"),
+                        g: path.join(__dirname, "scss", "multipleCompilations", "g.scss"),
+                        h: path.join(__dirname, "scss", "multipleCompilations", "h.scss")
+                    },
+                    output: {
+                        filename: "bundle.multiple-compilations.[name].js"
+                    },
+                    module: {
+                        rules: [{
+                            test: /\.scss$/,
+                            use: [
+                                { loader: "raw-loader" },
+                                // We're specifying an empty options object because otherwise, webpack creates a new object for every loader invocation
+                                // Since we want to ensure that our loader is not tampering with the option object, we are triggering webpack to re-use the options object
+                                // @see https://github.com/jtangelder/sass-loader/issues/368#issuecomment-278330164
+                                { loader: pathToSassLoader, options: {} }
+                            ]
+                        }]
+                    }
+                }, (err) => err ? reject(err) : resolve());
+            })
+                .then(() => {
+                    const expectedCss = readCss("scss", "imports");
+                    const a = readBundle("bundle.multiple-compilations.a.js");
+                    const b = readBundle("bundle.multiple-compilations.b.js");
+                    const c = readBundle("bundle.multiple-compilations.c.js");
+                    const d = readBundle("bundle.multiple-compilations.d.js");
+                    const e = readBundle("bundle.multiple-compilations.e.js");
+                    const f = readBundle("bundle.multiple-compilations.f.js");
+                    const g = readBundle("bundle.multiple-compilations.g.js");
+                    const h = readBundle("bundle.multiple-compilations.h.js");
+
+                    a.should.equal(expectedCss);
+                    b.should.equal(expectedCss);
+                    c.should.equal(expectedCss);
+                    d.should.equal(expectedCss);
+                    e.should.equal(expectedCss);
+                    f.should.equal(expectedCss);
+                    g.should.equal(expectedCss);
+                    h.should.equal(expectedCss);
+                })
+        );
+    });
     describe("errors", () => {
         it("should throw an error in synchronous loader environments", () => {
             try {
@@ -163,4 +214,10 @@ function runWebpack(baseConfig, done) {
 
         done(err || null);
     });
+}
+
+function readBundle(filename) {
+    delete require.cache[path.resolve(__dirname, `./output/${ filename }`)];
+
+    return require(`./output/${ filename }`);
 }
