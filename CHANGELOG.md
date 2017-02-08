@@ -1,6 +1,10 @@
 Changelog
 ---------
 
+### 5.0.1
+
+- Fix bug where multiple compilations interfered with each other. [#369](https://github.com/jtangelder/sass-loader/pull/369)
+
 ### 5.0.0
 
 - **Breaking**: Remove synchronous compilation support. [#334](https://github.com/jtangelder/sass-loader/pull/334)
