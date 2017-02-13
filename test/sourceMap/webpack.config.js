@@ -4,10 +4,9 @@ const path = require("path");
 const sassLoader = require.resolve("../../lib/loader");
 
 module.exports = {
-    entry: path.resolve(__dirname, "./entry.js"),
+    entry: path.resolve(__dirname, "..", "scss", "imports.scss"),
     output: {
-        path: path.resolve(__dirname, "../output"),
-        filename: "bundle.sourceMap.js"
+        filename: "bundle.js"
     },
     devtool: "source-map",
     module: {

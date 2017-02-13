@@ -113,7 +113,7 @@ describe("sass-loader", () => {
                             ]
                         }]
                     }
-                }, (err) => err ? reject(err) : resolve());
+                }, err => err ? reject(err) : resolve());
             })
                 .then(() => {
                     const expectedCss = readCss("scss", "imports");
@@ -135,6 +135,34 @@ describe("sass-loader", () => {
                     g.should.equal(expectedCss);
                     h.should.equal(expectedCss);
                 })
+        );
+    });
+    describe("source maps", () => {
+        it("should compile without errors", () =>
+            new Promise((resolve, reject) => {
+                runWebpack({
+                    entry: path.join(__dirname, "scss", "imports.scss"),
+                    // We know that setting a custom context can confuse webpack when resolving source maps
+                    context: path.join(__dirname, "scss"),
+                    output: {
+                        filename: "bundle.source-maps.compile-without-errors.js"
+                    },
+                    devtool: "source-map",
+                    module: {
+                        rules: [{
+                            test: /\.scss$/,
+                            use: [
+                                { loader: "css-loader", options: {
+                                    sourceMap: true
+                                } },
+                                { loader: pathToSassLoader, options: {
+                                    sourceMap: true
+                                } }
+                            ]
+                        }]
+                    }
+                }, err => err ? reject(err) : resolve());
+            })
         );
     });
     describe("errors", () => {
@@ -209,8 +237,8 @@ function runWebpack(baseConfig, done) {
 
     webpack(webpackConfig, (webpackErr, stats) => {
         const err = webpackErr ||
-            (stats.hasErrors && stats.compilation.errors[0]) ||
-            (stats.hasWarnings && stats.compilation.warnings[0]);
+            (stats.hasErrors() && stats.compilation.errors[0]) ||
+            (stats.hasWarnings() && stats.compilation.warnings[0]);
 
         done(err || null);
     });
