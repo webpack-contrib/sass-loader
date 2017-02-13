@@ -1,6 +1,10 @@
 Changelog
 ---------
 
+### 6.0.0
+
+- **Breaking** (for resolve-url-loader only): Improve source map support. [#374](https://github.com/jtangelder/sass-loader/issues/374)
+
 ### 5.0.1
 
 - Fix bug where multiple compilations interfered with each other. [#369](https://github.com/jtangelder/sass-loader/pull/369)
