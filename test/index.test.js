@@ -60,7 +60,7 @@ syntaxStyles.forEach(ext => {
             it("should resolve imports from other language style correctly", () => execTest("import-other-style"));
             // Test for includePath imports
             it("should resolve imports from another directory declared by includePaths correctly", () => execTest("import-include-paths", {
-                includePaths: [path.join(__dirname, ext, "from-include-path")]
+                includePaths: [path.join(__dirname, ext, "includePath")]
             }));
             it("should not resolve CSS imports", () => execTest("import-css"));
             it("should compile bootstrap-sass without errors", () => execTest("bootstrap-sass"));

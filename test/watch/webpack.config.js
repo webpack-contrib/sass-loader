@@ -24,7 +24,7 @@ module.exports = {
                 loader: sassLoader,
                 options: {
                     includePaths: [
-                        path.resolve(__dirname, "../scss/from-include-path")
+                        path.resolve(__dirname, "../scss/includePath")
                     ]
                 }
             }]

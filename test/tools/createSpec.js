@@ -39,7 +39,7 @@ function createSpec(ext) {
                 functions: customFunctions,
                 includePaths: [
                     path.join(testFolder, ext, "another"),
-                    path.join(testFolder, ext, "from-include-path")
+                    path.join(testFolder, ext, "includePath")
                 ]
             };
 
