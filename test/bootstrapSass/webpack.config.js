@@ -9,7 +9,7 @@ module.exports = {
         path: path.resolve(__dirname, "../output"),
         filename: "bundle.bootstrap-sass.js"
     },
-    devtool: "inline-source-map",
+    devtool: "source-map",
     module: {
         rules: [{
             test: /\.scss$/,

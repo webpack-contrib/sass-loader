@@ -9,6 +9,7 @@ const merge = require("webpack-merge");
 const customImporter = require("./tools/customImporter.js");
 const customFunctions = require("./tools/customFunctions.js");
 const pathToSassLoader = require.resolve("../lib/loader.js");
+const testLoader = require("./tools/testLoader");
 const sassLoader = require(pathToSassLoader);
 
 const CR = /\r/g;
@@ -17,6 +18,18 @@ const pathToErrorFileNotFound = path.resolve(__dirname, "./scss/error-file-not-f
 const pathToErrorFileNotFound2 = path.resolve(__dirname, "./scss/error-file-not-found-2.scss");
 const pathToErrorFile = path.resolve(__dirname, "./scss/error.scss");
 const pathToErrorImport = path.resolve(__dirname, "./scss/error-import.scss");
+const loaderContextMock = {
+    async: Function.prototype,
+    cacheable: Function.prototype,
+    dependency: Function.prototype
+};
+
+Object.defineProperty(loaderContextMock, "options", {
+    set() {},
+    get() {
+        throw new Error("webpack options are not allowed to be accessed anymore.");
+    }
+});
 
 syntaxStyles.forEach(ext => {
     function execTest(testId, options) {
@@ -138,23 +151,19 @@ describe("sass-loader", () => {
         );
     });
     describe("source maps", () => {
-        it("should compile without errors", () =>
-            new Promise((resolve, reject) => {
+        function buildWithSourceMaps() {
+            return new Promise((resolve, reject) => {
                 runWebpack({
                     entry: path.join(__dirname, "scss", "imports.scss"),
-                    // We know that setting a custom context can confuse webpack when resolving source maps
-                    context: path.join(__dirname, "scss"),
                     output: {
-                        filename: "bundle.source-maps.compile-without-errors.js"
+                        filename: "bundle.source-maps.js"
                     },
                     devtool: "source-map",
                     module: {
                         rules: [{
                             test: /\.scss$/,
                             use: [
-                                { loader: "css-loader", options: {
-                                    sourceMap: true
-                                } },
+                                { loader: testLoader.filename },
                                 { loader: pathToSassLoader, options: {
                                     sourceMap: true
                                 } }
@@ -162,15 +171,38 @@ describe("sass-loader", () => {
                         }]
                     }
                 }, err => err ? reject(err) : resolve());
-            })
-        );
+            });
+        }
+
+        it("should compile without errors", () => buildWithSourceMaps());
+        it("should produce a valid source map", () => {
+            const cwdGetter = process.cwd;
+            const fakeCwd = path.join(__dirname, "scss");
+
+            process.cwd = function () {
+                return fakeCwd;
+            };
+
+            return buildWithSourceMaps()
+                .then(() => {
+                    const sourceMap = testLoader.sourceMap;
+
+                    sourceMap.should.not.have.property("file");
+                    sourceMap.should.have.property("sourceRoot", fakeCwd);
+                    // This number needs to be updated if imports.scss or any dependency of that changes
+                    sourceMap.sources.should.have.length(7);
+                    sourceMap.sources.forEach(sourcePath =>
+                        fs.existsSync(path.resolve(sourceMap.sourceRoot, sourcePath))
+                    );
+
+                    process.cwd = cwdGetter;
+                });
+        });
     });
     describe("errors", () => {
         it("should throw an error in synchronous loader environments", () => {
             try {
-                sassLoader.call({
-                    async: Function.prototype
-                }, "");
+                sassLoader.call(Object.create(loaderContextMock), "");
             } catch (err) {
                 // check for file excerpt
                 err.message.should.equal("Synchronous compilation is not supported anymore. See https://github.com/jtangelder/sass-loader/issues/333");
