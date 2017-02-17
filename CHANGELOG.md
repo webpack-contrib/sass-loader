@@ -1,6 +1,10 @@
 Changelog
 ---------
 
+### 6.0.1
+
+- Fix source maps in certain CWDs. [#377](https://github.com/jtangelder/sass-loader/pull/377)
+
 ### 6.0.0
 
 - **Breaking** (for resolve-url-loader only): Improve source map support. [#374](https://github.com/jtangelder/sass-loader/issues/374)
