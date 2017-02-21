@@ -1,6 +1,10 @@
 Changelog
 ---------
 
+### 6.0.2
+
+- Update dependencies [#383](https://github.com/jtangelder/sass-loader/pull/383)
+
 ### 6.0.1
 
 - Fix source maps in certain CWDs. [#377](https://github.com/jtangelder/sass-loader/pull/377)
