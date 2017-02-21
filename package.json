@@ -12,7 +12,8 @@
     "test-source-map": "webpack-dev-server --config test/sourceMap/webpack.config.js --content-base ./test/sourceMap --inline",
     "test-watch": "webpack --config test/watch/webpack.config.js",
     "test-extract-text": "webpack --config test/extractText/webpack.config.js",
-    "test-hmr": "webpack-dev-server --config test/hmr/webpack.config.js --content-base ./test/hmr --hot --inline"
+    "test-hmr": "webpack-dev-server --config test/hmr/webpack.config.js --content-base ./test/hmr --hot --inline",
+    "coverage": "nyc --reporter=lcov npm test"
   },
   "keywords": [
     "sass",
@@ -22,7 +23,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/jtangelder/sass-loader.git"
+    "url": "git://github.com/webpack-contrib/sass-loader.git"
   },
   "author": "J. Tangelder",
   "license": "MIT",
@@ -46,11 +47,17 @@
     "file-loader": "^0.10.0",
     "mocha": "^3.0.2",
     "node-sass": "^4.5.0",
+    "nyc": "^10.1.2",
     "raw-loader": "^0.5.1",
     "should": "^11.2.0",
     "style-loader": "^0.13.1",
     "webpack": "^2.2.1",
     "webpack-dev-server": "^2.4.1",
     "webpack-merge": "^3.0.0"
-  }
+  },
+  "files": [
+    "lib",
+    "README",
+    "LICENSE"
+  ]
 }

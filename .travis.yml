@@ -4,3 +4,7 @@ node_js:
   - "7"
   - "6"
   - "4"
+
+after_success:
+  - npm install coveralls
+  - npm run coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage

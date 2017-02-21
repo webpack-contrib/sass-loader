@@ -67,9 +67,9 @@ syntaxStyles.forEach(ext => {
         });
         describe("imports", () => {
             it("should resolve imports correctly", () => execTest("imports"));
-            // Test for issue: https://github.com/jtangelder/sass-loader/issues/32
+            // Test for issue: https://github.com/webpack-contrib/sass-loader/issues/32
             it("should pass with multiple imports", () => execTest("multiple-imports"));
-            // Test for issue: https://github.com/jtangelder/sass-loader/issues/73
+            // Test for issue: https://github.com/webpack-contrib/sass-loader/issues/73
             it("should resolve imports from other language style correctly", () => execTest("import-other-style"));
             // Test for includePath imports
             it("should resolve imports from another directory declared by includePaths correctly", () => execTest("import-include-paths", {
@@ -121,7 +121,7 @@ describe("sass-loader", () => {
                                 { loader: "raw-loader" },
                                 // We're specifying an empty options object because otherwise, webpack creates a new object for every loader invocation
                                 // Since we want to ensure that our loader is not tampering with the option object, we are triggering webpack to re-use the options object
-                                // @see https://github.com/jtangelder/sass-loader/issues/368#issuecomment-278330164
+                                // @see https://github.com/webpack-contrib/sass-loader/issues/368#issuecomment-278330164
                                 { loader: pathToSassLoader, options: {} }
                             ]
                         }]
@@ -205,7 +205,7 @@ describe("sass-loader", () => {
                 sassLoader.call(Object.create(loaderContextMock), "");
             } catch (err) {
                 // check for file excerpt
-                err.message.should.equal("Synchronous compilation is not supported anymore. See https://github.com/jtangelder/sass-loader/issues/333");
+                err.message.should.equal("Synchronous compilation is not supported anymore. See https://github.com/webpack-contrib/sass-loader/issues/333");
             }
         });
         it("should output understandable errors in entry files", (done) => {

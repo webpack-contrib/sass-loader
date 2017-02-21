@@ -1,6 +1,8 @@
-[![npm][npm]][npm-url]
+[![npm-version][npm-version]][npm-url]
+[![npm-stats][npm-stats]][npm-url]
 [![deps][deps]][deps-url]
-[![test][test]][test-url]
+[![travis][travis]][travis-url]
+[![coverage][coverage]][coverage-url]
 
 <div align="center">
   <img height="100"
@@ -11,7 +13,7 @@
   </a>
   <h1>sass-loader</h1>
   <p>Compiles Sass to CSS.<br>Use the <a href="https://github.com/webpack/css-loader">css-loader</a> or the <a href="https://github.com/webpack/raw-loader">raw-loader</a> to turn it into a JS module and the <a href="https://github.com/webpack/extract-text-webpack-plugin">ExtractTextPlugin</a> to extract it into a separate file.<p>
-  <p>Looking for the webpack 1 loader? Check out the <a href="https://github.com/jtangelder/sass-loader/tree/archive/webpack-1">archive/webpack-1 branch</a>.</p>
+  <p>Looking for the webpack 1 loader? Check out the <a href="https://github.com/webpack-contrib/sass-loader/tree/archive/webpack-1">archive/webpack-1 branch</a>.</p>
 </div>
 
 ## Install
@@ -142,7 +144,7 @@ Since Sass/[libsass](https://github.com/sass/libsass) does not provide [url rewr
 More likely you will be disrupted by this second issue. It is natural to expect relative references to be resolved against the `.scss` file in which they are specified (like in regular `.css` files). Thankfully there are a two solutions to this problem:
 
 - Add the missing url rewriting using the [resolve-url-loader](https://github.com/bholloway/resolve-url-loader). Place it directly after the sass-loader in the loader chain.
-- Library authors usually provide a variable to modify the asset path. [bootstrap-sass](https://github.com/twbs/bootstrap-sass) for example has an `$icon-font-path`. Check out [this working bootstrap example](https://github.com/jtangelder/sass-loader/tree/master/test/bootstrapSass).
+- Library authors usually provide a variable to modify the asset path. [bootstrap-sass](https://github.com/twbs/bootstrap-sass) for example has an `$icon-font-path`. Check out [this working bootstrap example](https://github.com/webpack-contrib/sass-loader/tree/master/test/bootstrapSass).
 
 ### Extracting stylesheets
 
@@ -180,7 +182,7 @@ module.exports = {
 };
 ```
 
-If you want to edit the original Sass files inside Chrome, [there's a good blog post](https://medium.com/@toolmantim/getting-started-with-css-sourcemaps-and-in-browser-sass-editing-b4daab987fb0). Checkout [test/sourceMap](https://github.com/jtangelder/sass-loader/tree/master/test) for a running example.
+If you want to edit the original Sass files inside Chrome, [there's a good blog post](https://medium.com/@toolmantim/getting-started-with-css-sourcemaps-and-in-browser-sass-editing-b4daab987fb0). Checkout [test/sourceMap](https://github.com/webpack-contrib/sass-loader/tree/master/test) for a running example.
 
 
 ## Maintainers
@@ -196,7 +198,7 @@ If you want to edit the original Sass files inside Chrome, [there's a good blog 
       <td align="center">
         <img width="150 height="150"
         src="https://avatars1.githubusercontent.com/u/1243901?v=3&s=460"><br>
-        <a href="https://github.com/jtangelder">Jorik Tangelder</a>
+        <a href="https://github.com/webpack-contrib">Jorik Tangelder</a>
       </td>
       <td align="center">
         <img width="150" height="150"
@@ -212,12 +214,15 @@ If you want to edit the original Sass files inside Chrome, [there's a good blog 
 
 [MIT](http://www.opensource.org/licenses/mit-license.php)
 
-
-[npm]: https://img.shields.io/npm/v/sass-loader.svg
+[npm-version]: https://img.shields.io/npm/v/sass-loader.svg
+[npm-stats]: https://img.shields.io/npm/dm/sass-loader.svg
 [npm-url]: https://npmjs.com/package/sass-loader
 
-[deps]: https://david-dm.org/jtangelder/sass-loader.svg
-[deps-url]: https://david-dm.org/jtangelder/sass-loader
+[deps]: https://david-dm.org/webpack-contrib/sass-loader.svg
+[deps-url]: https://david-dm.org/webpack-contrib/sass-loader
 
-[test]: http://img.shields.io/travis/jtangelder/sass-loader.svg
-[test-url]: https://travis-ci.org/jtangelder/sass-loader
+[travis]: http://img.shields.io/travis/webpack-contrib/sass-loader.svg
+[travis-url]: https://travis-ci.org/webpack-contrib/sass-loader
+
+[coverage]: https://img.shields.io/coveralls/webpack-contrib/sass-loader.svg
+[coverage-url]: https://coveralls.io/r/webpack-contrib/sass-loader?branch=master
