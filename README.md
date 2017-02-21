@@ -1,6 +1,8 @@
-[![npm][npm]][npm-url]
+[![npm-version][npm-version]][npm-url]
+[![npm-stats][npm-stats]][npm-url]
 [![deps][deps]][deps-url]
-[![test][test]][test-url]
+[![travis][travis]][travis-url]
+[![coverage][coverage]][coverage-url]
 
 <div align="center">
   <img height="100"
@@ -212,12 +214,15 @@ If you want to edit the original Sass files inside Chrome, [there's a good blog 
 
 [MIT](http://www.opensource.org/licenses/mit-license.php)
 
-
-[npm]: https://img.shields.io/npm/v/sass-loader.svg
+[npm-version]: https://img.shields.io/npm/v/sass-loader.svg
+[npm-stats]: https://img.shields.io/npm/dm/sass-loader.svg
 [npm-url]: https://npmjs.com/package/sass-loader
 
 [deps]: https://david-dm.org/webpack-contrib/sass-loader.svg
 [deps-url]: https://david-dm.org/webpack-contrib/sass-loader
 
-[test]: http://img.shields.io/travis/webpack-contrib/sass-loader.svg
-[test-url]: https://travis-ci.org/webpack-contrib/sass-loader
+[travis]: http://img.shields.io/travis/webpack-contrib/sass-loader.svg
+[travis-url]: https://travis-ci.org/webpack-contrib/sass-loader
+
+[coverage]: https://img.shields.io/coveralls/webpack-contrib/sass-loader.svg
+[coverage-url]: https://coveralls.io/r/webpack-contrib/sass-loader?branch=master
