@@ -5,10 +5,10 @@
 /* @import "~scss/underscore"; */
 @import "~scss/underscore";
 // Import a module with a dot in its name
-// @see https://github.com/jtangelder/sass-loader/issues/167
+// @see https://github.com/webpack-contrib/sass-loader/issues/167
 /* @import "~scss/some.module"; */
 @import "~scss/some.module";
-// @see https://github.com/jtangelder/sass-loader/issues/360
+// @see https://github.com/webpack-contrib/sass-loader/issues/360
 /* @import "~animate.css/animate"; */
 @import "~animate.css/animate";
 /* @import url(http://example.com/something/from/the/interwebs); */
