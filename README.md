@@ -92,13 +92,13 @@ module.exports = {
         rules: [{
             test: /\.scss$/,
             loader: extractSass.extract({
-                loader: [{
+                use: [{
                     loader: "css-loader"
                 }, {
                     loader: "sass-loader"
                 }],
                 // use style-loader in development
-                fallbackLoader: "style-loader"
+                fallback: "style-loader"
             })
         }]
     },
