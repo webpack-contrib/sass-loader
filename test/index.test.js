@@ -93,6 +93,10 @@ syntaxStyles.forEach(ext => {
                 data: "$prepended-data: hotpink;"
             }));
         });
+        // See https://github.com/webpack-contrib/sass-loader/issues/21
+        describe("empty files", () => {
+            it("should compile without errors", () => execTest("empty"));
+        });
     });
 });
 
