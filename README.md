@@ -12,7 +12,7 @@
       src="https://github.com/webpack/media/raw/master/logo/logo-on-white-bg.png?raw=true">
   </a>
   <h1>sass-loader</h1>
-  <p>Compiles Sass to CSS.<br>Use the <a href="https://github.com/webpack/css-loader">css-loader</a> or the <a href="https://github.com/webpack/raw-loader">raw-loader</a> to turn it into a JS module and the <a href="https://github.com/webpack/extract-text-webpack-plugin">ExtractTextPlugin</a> to extract it into a separate file.<p>
+  <p>Compiles Sass to CSS.<br>Use the <a href="https://github.com/webpack-contrib/css-loader">css-loader</a> or the <a href="https://github.com/webpack-contrib/raw-loader">raw-loader</a> to turn it into a JS module and the <a href="https://github.com/webpack-contrib/extract-text-webpack-plugin">ExtractTextPlugin</a> to extract it into a separate file.<p>
   <p>Looking for the webpack 1 loader? Check out the <a href="https://github.com/webpack-contrib/sass-loader/tree/archive/webpack-1">archive/webpack-1 branch</a>.</p>
 </div>
 
@@ -22,12 +22,12 @@
 npm install sass-loader node-sass webpack --save-dev
 ```
 
-The sass-loader requires [node-sass](https://github.com/sass/node-sass) and [webpack](https://github.com/webpack/webpack)
+The sass-loader requires [node-sass](https://github.com/sass/node-sass) and [webpack](https://github.comwebpack)
 as [`peerDependency`](https://docs.npmjs.com/files/package.json#peerdependencies). Thus you are able to control the versions accurately.
 
 ## Examples
 
-Chain the sass-loader with the [css-loader](https://github.com/webpack/css-loader) and the [style-loader](https://github.com/webpack/style-loader) to immediately apply all styles to the DOM.
+Chain the sass-loader with the [css-loader](https://github.com/webpack-contrib/css-loader) and the [style-loader](https://github.com/webpack-contrib/style-loader) to immediately apply all styles to the DOM.
 
 ```js
 // webpack.config.js
@@ -76,7 +76,7 @@ See [node-sass](https://github.com/andrew/node-sass) for all available Sass opti
 
 ### In production
 
-Usually, it's recommended to extract the stylesheets into a dedicated file in production using the [ExtractTextPlugin](https://github.com/webpack/extract-text-webpack-plugin). This way your styles are not dependent on JavaScript:
+Usually, it's recommended to extract the stylesheets into a dedicated file in production using the [ExtractTextPlugin](https://github.com/webpack-contrib/extract-text-webpack-plugin). This way your styles are not dependent on JavaScript:
 
 ```js
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
@@ -153,7 +153,7 @@ Bundling CSS with webpack has some nice advantages like referencing images and f
 There are two possibilties to extract a stylesheet from the bundle:
 
 - [extract-loader](https://github.com/peerigon/extract-loader) (simpler, but specialized on the css-loader's output)
-- [extract-text-webpack-plugin](https://github.com/webpack/extract-text-webpack-plugin) (more complex, but works in all use-cases)
+- [extract-text-webpack-plugin](https://github.com/webpack-contrib/extract-text-webpack-plugin) (more complex, but works in all use-cases)
 
 ### Source maps
 
