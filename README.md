@@ -190,15 +190,15 @@ If you want to edit the original Sass files inside Chrome, [there's a good blog 
 <table>
     <tr>
       <td align="center">
-        <img width="150" height="150" src="https://avatars0.githubusercontent.com/u/781746?v=3"><br>
+        <a href="https://github.com/jhnns"><img width="150" height="150" src="https://avatars0.githubusercontent.com/u/781746?v=3"></a><br>
         <a href="https://github.com/jhnns">Johannes Ewald</a>
       </td>
       <td align="center">
-        <img width="150" height="150" src="https://avatars1.githubusercontent.com/u/1243901?v=3&s=460"><br>
+        <a href="https://github.com/webpack-contrib"><img width="150" height="150" src="https://avatars1.githubusercontent.com/u/1243901?v=3&s=460"></a><br>
         <a href="https://github.com/webpack-contrib">Jorik Tangelder</a>
       </td>
       <td align="center">
-        <img width="150" height="150" src="https://avatars1.githubusercontent.com/u/3403295?v=3"><br>
+        <a href="https://github.com/akiran"><img width="150" height="150" src="https://avatars1.githubusercontent.com/u/3403295?v=3"></a><br>
         <a href="https://github.com/akiran">Kiran</a>
       </td>
     <tr>
