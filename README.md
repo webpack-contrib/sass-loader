@@ -19,7 +19,7 @@
   <p>Looking for the webpack 1 loader? Check out the <a href="https://github.com/webpack-contrib/sass-loader/tree/archive/webpack-1">archive/webpack-1 branch</a>.</p>
 </div>
 
-## Install
+<h2 align="center">Install</h2>
 
 ```bash
 npm install sass-loader node-sass webpack --save-dev
@@ -28,7 +28,7 @@ npm install sass-loader node-sass webpack --save-dev
 The sass-loader requires [node-sass](https://github.com/sass/node-sass) and [webpack](https://github.comwebpack)
 as [`peerDependency`](https://docs.npmjs.com/files/package.json#peerdependencies). Thus you are able to control the versions accurately.
 
-## Examples
+<h2 align="center">Examples</h2>
 
 Chain the sass-loader with the [css-loader](https://github.com/webpack-contrib/css-loader) and the [style-loader](https://github.com/webpack-contrib/style-loader) to immediately apply all styles to the DOM.
 
@@ -79,7 +79,7 @@ See [node-sass](https://github.com/andrew/node-sass) for all available Sass opti
 
 ### In production
 
-Usually, it's recommended to extract the stylesheets into a dedicated file in production using the [ExtractTextPlugin](https://github.com/webpack-contrib/extract-text-webpack-plugin). This way your styles are not dependent on JavaScript:
+Usually, it's recommended to extract the style sheets into a dedicated file in production using the [ExtractTextPlugin](https://github.com/webpack-contrib/extract-text-webpack-plugin). This way your styles are not dependent on JavaScript:
 
 ```js
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
@@ -111,7 +111,7 @@ module.exports = {
 };
 ```
 
-## Usage
+<h2 align="center">Usage</h2>
 
 ### Imports
 
@@ -186,9 +186,9 @@ If you want to prepend Sass code before the actual entry file, you can set the `
 }
 ```
 
-***Please note:** Since you're injecting code, this will break the source mappings in your entry file. Often there's a simpler solution than this, like multiple Sass entry files.**
+**Please note:** Since you're injecting code, this will break the source mappings in your entry file. Often there's a simpler solution than this, like multiple Sass entry files.
 
-## Maintainers
+<h2 align="center">Maintainers</h2>
 
 <table>
   <tbody>
@@ -213,7 +213,7 @@ If you want to prepend Sass code before the actual entry file, you can set the `
 </table>
 
 
-## License
+<h2 align="center">License</h2>
 
 [MIT](http://www.opensource.org/licenses/mit-license.php)
 
