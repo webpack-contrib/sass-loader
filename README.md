@@ -8,16 +8,16 @@
 [![chat][chat]][chat-url]
 
 <div align="center">
-  <img height="100"
-    src="https://worldvectorlogo.com/logos/sass-1.svg">
-  <a href="https://github.com/webpack/webpack">
-    <img height="100"
-      src="https://github.com/webpack/media/raw/master/logo/logo-on-white-bg.png?raw=true">
-  </a>
-  <h1>sass-loader</h1>
-  <p>Compiles Sass to CSS.<br>Use the <a href="https://github.com/webpack-contrib/css-loader">css-loader</a> or the <a href="https://github.com/webpack-contrib/raw-loader">raw-loader</a> to turn it into a JS module and the <a href="https://github.com/webpack-contrib/extract-text-webpack-plugin">ExtractTextPlugin</a> to extract it into a separate file.<p>
-  <p>Looking for the webpack 1 loader? Check out the <a href="https://github.com/webpack-contrib/sass-loader/tree/archive/webpack-1">archive/webpack-1 branch</a>.</p>
+    <img height="100" src="https://worldvectorlogo.com/logos/sass-1.svg">
+    <a href="https://github.com/webpack/webpack"><img height="100" src="https://github.com/webpack/media/raw/master/logo/logo-on-white-bg.png?raw=true"></a>
 </div>
+
+<h1 align="center">sass-loader</h1>
+<p align="center">
+    Compiles Sass to CSS.
+</p>
+Use the [css-loader](https://github.com/webpack-contrib/css-loader) or the [raw-loader](https://github.com/webpack-contrib/raw-loader) to turn it into a JS module and the [ExtractTextPlugin](https://github.com/webpack-contrib/extract-text-webpack-plugin) to extract it into a separate file.
+Looking for the webpack 1 loader? Check out the [archive/webpack-1 branch](https://github.com/webpack-contrib/sass-loader/tree/archive/webpack-1).
 
 <h2 align="center">Install</h2>
 
@@ -191,25 +191,20 @@ If you want to prepend Sass code before the actual entry file, you can set the `
 <h2 align="center">Maintainers</h2>
 
 <table>
-  <tbody>
     <tr>
       <td align="center">
-        <img width="150 height="150"
-        src="https://avatars0.githubusercontent.com/u/781746?v=3"><br>
+        <a href="https://github.com/jhnns"><img width="150" height="150" src="https://avatars0.githubusercontent.com/u/781746?v=3"></a><br>
         <a href="https://github.com/jhnns">Johannes Ewald</a>
       </td>
       <td align="center">
-        <img width="150 height="150"
-        src="https://avatars1.githubusercontent.com/u/1243901?v=3&s=460"><br>
+        <a href="https://github.com/webpack-contrib"><img width="150" height="150" src="https://avatars1.githubusercontent.com/u/1243901?v=3&s=460"></a><br>
         <a href="https://github.com/webpack-contrib">Jorik Tangelder</a>
       </td>
       <td align="center">
-        <img width="150" height="150"
-        src="https://avatars1.githubusercontent.com/u/3403295?v=3"><br>
+        <a href="https://github.com/akiran"><img width="150" height="150" src="https://avatars1.githubusercontent.com/u/3403295?v=3"></a><br>
         <a href="https://github.com/akiran">Kiran</a>
       </td>
     <tr>
-  <tbody>
 </table>
 
 
