@@ -120,20 +120,6 @@ webpack provides an [advanced mechanism to resolve files](http://webpack.github.
 
 It's important to only prepend it with `~`, because `~/` resolves to the home directory. webpack needs to distinguish between `bootstrap` and `~bootstrap` because CSS and Sass files have no special syntax for importing relative files. Writing `@import "file"` is the same as `@import "./file";`
 
-### Environment variables
-
-If you want to prepend Sass code before the actual entry file, you can simply set the `data` option. In this case, the sass-loader will not override the `data` option but just append the entry's content. This is especially useful when some of your Sass variables depend on the environment:
-
-```javascript
-{
-    loader: "sass-loader",
-    options: {
-        data: "$env: " + process.env.NODE_ENV + ";"
-    }
-}
-```
-
-
 ### Problems with `url(...)`
 
 Since Sass/[libsass](https://github.com/sass/libsass) does not provide [url rewriting](https://github.com/sass/libsass/issues/532), all linked assets must be relative to the output.
@@ -146,11 +132,11 @@ More likely you will be disrupted by this second issue. It is natural to expect 
 - Add the missing url rewriting using the [resolve-url-loader](https://github.com/bholloway/resolve-url-loader). Place it directly after the sass-loader in the loader chain.
 - Library authors usually provide a variable to modify the asset path. [bootstrap-sass](https://github.com/twbs/bootstrap-sass) for example has an `$icon-font-path`. Check out [this working bootstrap example](https://github.com/webpack-contrib/sass-loader/tree/master/test/bootstrapSass).
 
-### Extracting stylesheets
+### Extracting style sheets
 
-Bundling CSS with webpack has some nice advantages like referencing images and fonts with hashed urls or [hot module replacement](http://webpack.github.io/docs/hot-module-replacement-with-webpack.html) in development. In production, on the other hand, it's not a good idea to apply your stylesheets depending on JS execution. Rendering may be delayed or even a [FOUC](https://en.wikipedia.org/wiki/Flash_of_unstyled_content) might be visible. Thus it's often still better to have them as separate files in your final production build.
+Bundling CSS with webpack has some nice advantages like referencing images and fonts with hashed urls or [hot module replacement](https://webpack.js.org/concepts/hot-module-replacement/) in development. In production, on the other hand, it's not a good idea to apply your style sheets depending on JS execution. Rendering may be delayed or even a [FOUC](https://en.wikipedia.org/wiki/Flash_of_unstyled_content) might be visible. Thus it's often still better to have them as separate files in your final production build.
 
-There are two possibilties to extract a stylesheet from the bundle:
+There are two possibilities to extract a style sheet from the bundle:
 
 - [extract-loader](https://github.com/peerigon/extract-loader) (simpler, but specialized on the css-loader's output)
 - [extract-text-webpack-plugin](https://github.com/webpack-contrib/extract-text-webpack-plugin) (more complex, but works in all use-cases)
@@ -184,6 +170,20 @@ module.exports = {
 
 If you want to edit the original Sass files inside Chrome, [there's a good blog post](https://medium.com/@toolmantim/getting-started-with-css-sourcemaps-and-in-browser-sass-editing-b4daab987fb0). Checkout [test/sourceMap](https://github.com/webpack-contrib/sass-loader/tree/master/test) for a running example.
 
+### Environment variables
+
+If you want to prepend Sass code before the actual entry file, you can set the `data` option. In this case, the sass-loader will not override the `data` option but just append the entry's content. This is especially useful when some of your Sass variables depend on the environment:
+
+```javascript
+{
+    loader: "sass-loader",
+    options: {
+        data: "$env: " + process.env.NODE_ENV + ";"
+    }
+}
+```
+
+***Please note:** Since you're injecting code, this will break the source mappings in your entry file. Often there's a simpler solution than this, like multiple Sass entry files.**
 
 ## Maintainers
 
