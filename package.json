@@ -13,7 +13,7 @@
     "test-watch": "webpack --config test/watch/webpack.config.js",
     "test-extract-text": "webpack --config test/extractText/webpack.config.js",
     "test-hmr": "webpack-dev-server --config test/hmr/webpack.config.js --content-base ./test/hmr --hot --inline",
-    "lint": "eslint --ignore-path .gitignore lib test",
+    "lint": "eslint lib test",
     "appveyor:test": "npm test"
   },
   "keywords": [
