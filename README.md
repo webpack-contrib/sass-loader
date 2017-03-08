@@ -1,8 +1,11 @@
-[![npm-version][npm-version]][npm-url]
+[![npm][npm]][npm-url]
+[![node][node]][node-url]
 [![npm-stats][npm-stats]][npm-url]
 [![deps][deps]][deps-url]
 [![travis][travis]][travis-url]
-[![coverage][coverage]][coverage-url]
+[![appveyor][appveyor]][appveyor-url]
+[![coverage][cover]][cover-url]
+[![chat][chat]][chat-url]
 
 <div align="center">
   <img height="100"
@@ -214,9 +217,12 @@ If you want to prepend Sass code before the actual entry file, you can set the `
 
 [MIT](http://www.opensource.org/licenses/mit-license.php)
 
-[npm-version]: https://img.shields.io/npm/v/sass-loader.svg
+[npm]: https://img.shields.io/npm/v/sass-loader.svg
 [npm-stats]: https://img.shields.io/npm/dm/sass-loader.svg
 [npm-url]: https://npmjs.com/package/sass-loader
+
+[node]: https://img.shields.io/node/v/sass-loader.svg
+[node-url]: https://nodejs.org
 
 [deps]: https://david-dm.org/webpack-contrib/sass-loader.svg
 [deps-url]: https://david-dm.org/webpack-contrib/sass-loader
@@ -224,5 +230,11 @@ If you want to prepend Sass code before the actual entry file, you can set the `
 [travis]: http://img.shields.io/travis/webpack-contrib/sass-loader.svg
 [travis-url]: https://travis-ci.org/webpack-contrib/sass-loader
 
-[coverage]: https://img.shields.io/coveralls/webpack-contrib/sass-loader.svg
-[coverage-url]: https://coveralls.io/r/webpack-contrib/sass-loader?branch=master
+[appveyor-url]: https://ci.appveyor.com/project/jhnns/sass-loader/branch/master
+[appveyor]: https://ci.appveyor.com/api/projects/status/github/webpack-contrib/sass-loader?svg=true
+
+[cover]: https://coveralls.io/repos/github/webpack-contrib/sass-loader/badge.svg
+[cover-url]: https://coveralls.io/github/webpack-contrib/sass-loader
+
+[chat]: https://badges.gitter.im/webpack-contrib/webpack.svg
+[chat-url]: https://gitter.im/webpack-contrib/webpack

@@ -28,6 +28,9 @@
   },
   "author": "J. Tangelder",
   "license": "MIT",
+  "engines": {
+    "node": ">=4.0.0"
+  },
   "peerDependencies": {
     "node-sass": "^4.0.0",
     "webpack": "^2.0.0"
