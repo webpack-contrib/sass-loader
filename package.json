@@ -5,15 +5,16 @@
   "main": "lib/loader.js",
   "scripts": {
     "create-spec": "node test/tools/runCreateSpec.js",
-    "pretest": "node test/tools/runCreateSpec.js",
-    "test": "mocha -R spec -t 10000",
-    "posttest": "eslint --fix lib test",
+    "pretest": "npm run create-spec",
+    "test": "nyc --all mocha -R spec -t 10000",
+    "posttest": "npm run lint",
     "test-bootstrap-sass": "webpack-dev-server --config test/bootstrapSass/webpack.config.js --content-base ./test/bootstrapSass",
     "test-source-map": "webpack-dev-server --config test/sourceMap/webpack.config.js --content-base ./test/sourceMap --inline",
     "test-watch": "webpack --config test/watch/webpack.config.js",
     "test-extract-text": "webpack --config test/extractText/webpack.config.js",
     "test-hmr": "webpack-dev-server --config test/hmr/webpack.config.js --content-base ./test/hmr --hot --inline",
-    "coverage": "nyc --reporter=lcov npm test"
+    "lint": "eslint --ignore-path .gitignore lib test",
+    "appveyor:test": "npm test"
   },
   "keywords": [
     "sass",
@@ -27,6 +28,9 @@
   },
   "author": "J. Tangelder",
   "license": "MIT",
+  "engines": {
+    "node": ">=4.0.0"
+  },
   "peerDependencies": {
     "node-sass": "^4.0.0",
     "webpack": "^2.0.0"
