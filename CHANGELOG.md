@@ -1,6 +1,11 @@
 Changelog
 ---------
 
+### 6.0.3
+
+- Fix regression with empty files [#398](https://github.com/webpack-contrib/sass-loader/pull/398)
+- Reduce npm package size by using the [files](https://docs.npmjs.com/files/package.json#files) property in the `package.json`
+
 ### 6.0.2
 
 - Update dependencies [#383](https://github.com/webpack-contrib/sass-loader/pull/383)
