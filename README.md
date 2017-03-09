@@ -94,7 +94,7 @@ module.exports = {
     module: {
         rules: [{
             test: /\.scss$/,
-            loader: extractSass.extract({
+            use: extractSass.extract({
                 use: [{
                     loader: "css-loader"
                 }, {
