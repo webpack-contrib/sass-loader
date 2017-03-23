@@ -16,6 +16,7 @@
 <p align="center">
     Compiles Sass to CSS.
 </p>
+
 Use the [css-loader](https://github.com/webpack-contrib/css-loader) or the [raw-loader](https://github.com/webpack-contrib/raw-loader) to turn it into a JS module and the [ExtractTextPlugin](https://github.com/webpack-contrib/extract-text-webpack-plugin) to extract it into a separate file.
 Looking for the webpack 1 loader? Check out the [archive/webpack-1 branch](https://github.com/webpack-contrib/sass-loader/tree/archive/webpack-1).
 
