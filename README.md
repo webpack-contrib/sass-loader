@@ -232,5 +232,5 @@ If you want to prepend Sass code before the actual entry file, you can set the `
 [cover]: https://coveralls.io/repos/github/webpack-contrib/sass-loader/badge.svg
 [cover-url]: https://coveralls.io/github/webpack-contrib/sass-loader
 
-[chat]: https://badges.gitter.im/webpack-contrib/webpack.svg
-[chat-url]: https://gitter.im/webpack-contrib/webpack
+[chat]: https://badges.gitter.im/webpack/webpack.svg
+[chat-url]: https://gitter.im/webpack/webpack
