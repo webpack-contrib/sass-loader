@@ -26,7 +26,7 @@ Looking for the webpack 1 loader? Check out the [archive/webpack-1 branch](https
 npm install sass-loader node-sass webpack --save-dev
 ```
 
-The sass-loader requires [node-sass](https://github.com/sass/node-sass) and [webpack](https://github.comwebpack)
+The sass-loader requires [node-sass](https://github.com/sass/node-sass) and [webpack](https://github.com/webpack)
 as [`peerDependency`](https://docs.npmjs.com/files/package.json#peerdependencies). Thus you are able to control the versions accurately.
 
 <h2 align="center">Examples</h2>
