@@ -8,14 +8,15 @@
 [![chat][chat]][chat-url]
 
 <div align="center">
-    <img height="100" src="https://worldvectorlogo.com/logos/sass-1.svg">
-    <a href="https://github.com/webpack/webpack"><img height="100" src="https://github.com/webpack/media/raw/master/logo/logo-on-white-bg.png?raw=true"></a>
+  <img height="100"
+    src="https://worldvectorlogo.com/logos/sass-1.svg">
+  <a href="https://github.com/webpack/webpack">
+    <img width="200" height="200"
+      src="https://webpack.js.org/assets/icon-square-big.svg">
+  </a>
+  <h1>SASS Loader</h1>
+  <p>Loads a SASS/SCSS file and and compiles it to CSS.</p>
 </div>
-
-<h1 align="center">sass-loader</h1>
-<p align="center">
-    Compiles Sass to CSS.
-</p>
 
 Use the [css-loader](https://github.com/webpack-contrib/css-loader) or the [raw-loader](https://github.com/webpack-contrib/raw-loader) to turn it into a JS module and the [ExtractTextPlugin](https://github.com/webpack-contrib/extract-text-webpack-plugin) to extract it into a separate file.
 Looking for the webpack 1 loader? Check out the [archive/webpack-1 branch](https://github.com/webpack-contrib/sass-loader/tree/archive/webpack-1).
