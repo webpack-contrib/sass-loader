@@ -194,7 +194,7 @@ describe("sass-loader", () => {
                     sourceMap.should.not.have.property("file");
                     sourceMap.should.have.property("sourceRoot", fakeCwd);
                     // This number needs to be updated if imports.scss or any dependency of that changes
-                    sourceMap.sources.should.have.length(7);
+                    sourceMap.sources.should.have.length(8);
                     sourceMap.sources.forEach(sourcePath =>
                         fs.existsSync(path.resolve(sourceMap.sourceRoot, sourcePath))
                     );
