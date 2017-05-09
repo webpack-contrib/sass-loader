@@ -1,5 +1,8 @@
+@import "another/variables"
+
 $font-stack:    Helvetica, sans-serif
 $primary-color: #333
+$pi:            '\e0C6'
 
 body
   font: 100% $font-stack
@@ -44,4 +47,12 @@ nav
 .warning
   @extend .message
   border-color: yellow
+
+.foo
+  &:before
+    content: $pi
+
+.bar
+  &:before
+    content: $n-ary-summation
 
