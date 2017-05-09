@@ -1,6 +1,10 @@
 Changelog
 ---------
 
+### 6.0.4
+
+- fix: Resolving of scoped npm packages [#447](https://github.com/webpack-contrib/sass-loader/pull/447)
+
 ### 6.0.3
 
 - Fix regression with empty files [#398](https://github.com/webpack-contrib/sass-loader/pull/398)
