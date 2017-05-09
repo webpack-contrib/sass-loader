@@ -77,6 +77,7 @@ syntaxStyles.forEach(ext => {
             }));
             it("should not resolve CSS imports", () => execTest("import-css"));
             it("should compile bootstrap-sass without errors", () => execTest("bootstrap-sass"));
+            it("should correctly import scoped npm packages", () => execTest("import-from-npm-org-pkg"));
         });
         describe("custom importers", () => {
             it("should use custom importer", () => execTest("custom-importer", {
