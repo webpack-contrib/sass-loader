@@ -1,6 +1,10 @@
 Changelog
 ---------
 
+### 6.0.5
+
+- fix: importing file directly from scoped npm package [#450](https://github.com/webpack-contrib/sass-loader/pull/450)
+
 ### 6.0.4
 
 - fix: Resolving of scoped npm packages [#447](https://github.com/webpack-contrib/sass-loader/pull/447)
