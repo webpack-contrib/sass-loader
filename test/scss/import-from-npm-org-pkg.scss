@@ -1,5 +1,7 @@
 /* @import "~@org/pkg"; */
 @import "~@org/pkg";
+/* @import "~@org/bar/foo"; */
+@import "~@org/bar/foo";
 
 .foo {
     background: #000;
