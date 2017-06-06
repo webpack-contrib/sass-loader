@@ -37,27 +37,27 @@
   },
   "dependencies": {
     "async": "^2.1.5",
-    "clone-deep": "^0.2.4",
+    "clone-deep": "^0.3.0",
     "loader-utils": "^1.0.1",
     "lodash.tail": "^4.1.1",
-    "pify": "^2.3.0"
+    "pify": "^3.0.0"
   },
   "devDependencies": {
     "bootstrap-sass": "^3.3.5",
-    "css-loader": "^0.26.1",
+    "css-loader": "^0.28.4",
     "eslint": "^3.16.0",
     "eslint-config-peerigon": "^9.0.0",
     "eslint-plugin-jsdoc": "^2.4.0",
-    "file-loader": "^0.10.0",
+    "file-loader": "^0.11.2",
     "mocha": "^3.0.2",
     "node-sass": "^4.5.0",
-    "nyc": "^10.1.2",
+    "nyc": "^11.0.2",
     "raw-loader": "^0.5.1",
     "should": "^11.2.0",
-    "style-loader": "^0.13.1",
+    "style-loader": "^0.18.2",
     "webpack": "^2.2.1",
     "webpack-dev-server": "^2.4.1",
-    "webpack-merge": "^3.0.0"
+    "webpack-merge": "^4.0.0"
   },
   "files": [
     "lib",
