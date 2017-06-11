@@ -15,7 +15,7 @@
       src="https://webpack.js.org/assets/icon-square-big.svg">
   </a>
   <h1>SASS Loader</h1>
-  <p>Loads a SASS/SCSS file and and compiles it to CSS.</p>
+  <p>Loads a SASS/SCSS file and compiles it to CSS.</p>
 </div>
 
 Use the [css-loader](https://github.com/webpack-contrib/css-loader) or the [raw-loader](https://github.com/webpack-contrib/raw-loader) to turn it into a JS module and the [ExtractTextPlugin](https://github.com/webpack-contrib/extract-text-webpack-plugin) to extract it into a separate file.
