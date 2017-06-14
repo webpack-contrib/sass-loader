@@ -4,17 +4,20 @@
   "description": "Sass loader for webpack",
   "main": "lib/loader.js",
   "scripts": {
+    "appveyor:test": "npm test",
     "create-spec": "node test/tools/runCreateSpec.js",
-    "pretest": "npm run create-spec",
+    "lint": "eslint lib test",
     "test": "nyc --all mocha -R spec -t 10000",
-    "posttest": "npm run lint",
     "test-bootstrap-sass": "webpack-dev-server --config test/bootstrapSass/webpack.config.js --content-base ./test/bootstrapSass",
     "test-source-map": "webpack-dev-server --config test/sourceMap/webpack.config.js --content-base ./test/sourceMap --inline",
     "test-watch": "webpack --config test/watch/webpack.config.js",
     "test-extract-text": "webpack --config test/extractText/webpack.config.js",
     "test-hmr": "webpack-dev-server --config test/hmr/webpack.config.js --content-base ./test/hmr --hot --inline",
-    "lint": "eslint lib test",
-    "appveyor:test": "npm test"
+    "travis:lint": "npm run lint",
+    "travis:test": "npm run test",
+    "travis:coverage": "npm run test",
+    "pretest": "npm run create-spec",
+    "posttest": "npm run lint"
   },
   "keywords": [
     "sass",
@@ -29,11 +32,11 @@
   "author": "J. Tangelder",
   "license": "MIT",
   "engines": {
-    "node": ">=4.0.0"
+    "node": ">= 4.3 < 5.0.0 || >= 5.10"
   },
   "peerDependencies": {
     "node-sass": "^4.0.0",
-    "webpack": "^2.0.0"
+    "webpack": "^2.0.0 || >= 3.0.0-rc.0 || ^3.0.0"
   },
   "dependencies": {
     "async": "^2.1.5",
