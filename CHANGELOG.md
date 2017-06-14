@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="6.0.6"></a>
+## [6.0.6](https://github.com/webpack-contrib/sass-loader/compare/v6.0.5...v6.0.6) (2017-06-14)
+
+
 
 <a name="6.0.5"></a>
 # [6.0.5](https://github.com/webpack-contrib/sass-loader/compare/v6.0.5...v6.0.4) (2017-05-10)
@@ -273,4 +277,3 @@ All notable changes to this project will be documented in this file. See [standa
 * Moved `node-sass^3.0.0-alpha.0` to `peerDependencies` [#28](https://github.com/webpack-contrib/sass-loader/issues/28)
 * Using webpack's module resolver as custom importer [#39](https://github.com/webpack-contrib/sass-loader/issues/31)
 * Add synchronous compilation support for usage with [enhanced-require](https://github.com/webpack/enhanced-require) [#39](https://github.com/webpack-contrib/sass-loader/pull/39)
-
