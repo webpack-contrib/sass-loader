@@ -60,6 +60,10 @@
     "webpack",
     "loader"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/webpack-contrib/sass-loader.git"
+  },
   "bugs": {
     "url": "https://github.com/webpack-contrib/sass-loader/issues"
   },
