@@ -22,7 +22,8 @@
     "travis:test": "npm run test",
     "travis:coverage": "npm run test",
     "pretest": "npm run create-spec",
-    "posttest": "npm run lint"
+    "posttest": "npm run lint",
+    "release": "standard-version"
   },
   "dependencies": {
     "async": "^2.1.5",
