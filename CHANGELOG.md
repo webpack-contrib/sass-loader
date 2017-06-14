@@ -5,6 +5,9 @@ All notable changes to this project will be documented in this file. See [standa
 <a name="6.0.6"></a>
 ## [6.0.6](https://github.com/webpack-contrib/sass-loader/compare/v6.0.5...v6.0.6) (2017-06-14)
 
+### Chore
+
+* Adds Webpack 3.x version range to peerDependencies
 
 
 <a name="6.0.5"></a>
