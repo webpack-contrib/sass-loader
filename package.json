@@ -43,6 +43,7 @@
     "nyc": "^11.0.2",
     "raw-loader": "^0.5.1",
     "should": "^11.2.0",
+    "standard-version": "^4.2.0",
     "style-loader": "^0.18.2",
     "webpack-dev-server": "^2.4.1",
     "webpack-merge": "^4.0.0"
