@@ -32,7 +32,7 @@ Object.defineProperty(loaderContextMock, "options", {
 });
 
 syntaxStyles.forEach(ext => {
-    function execTest(testId, options) {
+    function execTest(testId, options, webpackOptions) {
         return new Promise((resolve, reject) => {
             const baseConfig = merge({
                 entry: path.join(__dirname, ext, testId + "." + ext),
@@ -48,7 +48,7 @@ syntaxStyles.forEach(ext => {
                         ]
                     }]
                 }
-            });
+            }, webpackOptions);
 
             runWebpack(baseConfig, (err) => err ? reject(err) : resolve());
         }).then(() => {
@@ -78,6 +78,15 @@ syntaxStyles.forEach(ext => {
             it("should not resolve CSS imports", () => execTest("import-css"));
             it("should compile bootstrap-sass without errors", () => execTest("bootstrap-sass"));
             it("should correctly import scoped npm packages", () => execTest("import-from-npm-org-pkg"));
+        });
+        describe("aliases", () => {
+            it("should resolve aliases", () => execTest("aliases", {}, {
+                resolve: {
+                    alias: {
+                        "import-foo-as-alias": path.join(__dirname, ext, "alias-foo." + ext)
+                    }
+                }
+            }));
         });
         describe("custom importers", () => {
             it("should use custom importer", () => execTest("custom-importer", {
