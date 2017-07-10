@@ -64,10 +64,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/joy-web/sass-loader-vendor.git"
+    "url": "git://github.com/joy-web/sass-loader.git"
   },
   "bugs": {
-    "url": "https://github.com/joy-web/sass-loader-vendor/issues"
+    "url": "https://github.com/joy-web/sass-loader/issues"
   },
-  "homepage": "https://github.com/joy-web/sass-loader-vendor"
+  "homepage": "https://github.com/joy-web/sass-loader"
 }
