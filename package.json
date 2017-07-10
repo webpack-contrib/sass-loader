@@ -1,5 +1,5 @@
 {
-  "name": "sass-loader",
+  "name": "sass-loader-vendor",
   "version": "6.0.6",
   "description": "Sass loader for webpack",
   "author": "J. Tangelder",
@@ -40,7 +40,7 @@
     "eslint-plugin-jsdoc": "^2.4.0",
     "file-loader": "^0.11.2",
     "mocha": "^3.0.2",
-    "node-sass": "^4.5.0",
+    "node-sass-vendor": "4.5.3",
     "nyc": "^11.0.2",
     "raw-loader": "^0.5.1",
     "should": "^11.2.0",
@@ -53,7 +53,7 @@
     "node": ">= 4.3 < 5.0.0 || >= 5.10"
   },
   "peerDependencies": {
-    "node-sass": "^4.0.0",
+    "node-sass-vendor": "4.5.3",
     "webpack": "^2.0.0 || >= 3.0.0-rc.0 || ^3.0.0"
   },
   "keywords": [
@@ -64,10 +64,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/webpack-contrib/sass-loader.git"
+    "url": "git://github.com/joy-web/sass-loader-vendor.git"
   },
   "bugs": {
-    "url": "https://github.com/webpack-contrib/sass-loader/issues"
+    "url": "https://github.com/joy-web/sass-loader-vendor/issues"
   },
-  "homepage": "https://github.com/webpack-contrib/sass-loader"
+  "homepage": "https://github.com/joy-web/sass-loader-vendor"
 }
