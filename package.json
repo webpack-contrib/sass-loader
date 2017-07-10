@@ -1,5 +1,5 @@
 {
-  "name": "sass-loader-vendor",
+  "name": "sass-loader-joy-vendor",
   "version": "6.0.6",
   "description": "Sass loader for webpack",
   "author": "J. Tangelder",
