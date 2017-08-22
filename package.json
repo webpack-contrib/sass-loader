@@ -53,7 +53,7 @@
     "node": ">= 4.3 < 5.0.0 || >= 5.10"
   },
   "peerDependencies": {
-    "node-sass-vendor": "4.5.3",
+    "node-sass-vendor": "^4.5.3",
     "webpack": "^2.0.0 || >= 3.0.0-rc.0 || ^3.0.0"
   },
   "keywords": [
