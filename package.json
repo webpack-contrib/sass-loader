@@ -50,7 +50,7 @@
     "webpack-merge": "^4.0.0"
   },
   "engines": {
-    "node": ">= 6 || >= 8"
+    "node": ">= 6.9.0 || >= 8.9.0"
   },
   "peerDependencies": {
     "node-sass": "^4.0.0",
