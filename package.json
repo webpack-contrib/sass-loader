@@ -26,10 +26,10 @@
     "release": "standard-version"
   },
   "dependencies": {
-    "async": "^2.1.5",
     "clone-deep": "^2.0.1",
     "loader-utils": "^1.0.1",
     "lodash.tail": "^4.1.1",
+    "neo-async": "^2.5.0",
     "pify": "^3.0.0"
   },
   "devDependencies": {
