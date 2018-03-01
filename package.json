@@ -54,7 +54,7 @@
   },
   "peerDependencies": {
     "node-sass": "^4.0.0",
-    "webpack": "^2.0.0 || >= 3.0.0-rc.0 || ^3.0.0"
+    "webpack": "^2.0.0 || ^3.0.0 || ^4.0.0"
   },
   "keywords": [
     "sass",
@@ -62,12 +62,7 @@
     "webpack",
     "loader"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/webpack-contrib/sass-loader.git"
-  },
-  "bugs": {
-    "url": "https://github.com/webpack-contrib/sass-loader/issues"
-  },
+  "repository": "https://github.com/webpack-contrib/sass-loader.git",
+  "bugs": "https://github.com/webpack-contrib/sass-loader/issues",
   "homepage": "https://github.com/webpack-contrib/sass-loader"
 }
