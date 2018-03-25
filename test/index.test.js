@@ -300,6 +300,7 @@ function readCss(ext, id) {
 
 function runWebpack(baseConfig, done) {
     const webpackConfig = merge({
+        mode: "development",
         output: {
             path: path.join(__dirname, "output"),
             filename: "bundle.js",
