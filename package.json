@@ -1,6 +1,6 @@
 {
   "name": "sass-loader",
-  "version": "6.0.6",
+  "version": "6.0.7",
   "description": "Sass loader for webpack",
   "author": "J. Tangelder",
   "license": "MIT",
@@ -26,10 +26,10 @@
     "release": "standard-version"
   },
   "dependencies": {
-    "async": "^2.1.5",
-    "clone-deep": "^0.3.0",
+    "clone-deep": "^2.0.1",
     "loader-utils": "^1.0.1",
     "lodash.tail": "^4.1.1",
+    "neo-async": "^2.5.0",
     "pify": "^3.0.0"
   },
   "devDependencies": {
@@ -40,21 +40,22 @@
     "eslint-plugin-jsdoc": "^2.4.0",
     "file-loader": "^0.11.2",
     "mocha": "^3.0.2",
+    "mock-require": "^3.0.1",
     "node-sass": "^4.5.0",
     "nyc": "^11.0.2",
     "raw-loader": "^0.5.1",
     "should": "^11.2.0",
     "standard-version": "^4.2.0",
     "style-loader": "^0.18.2",
+    "webpack": "^4.5.0",
     "webpack-dev-server": "^2.4.1",
     "webpack-merge": "^4.0.0"
   },
   "engines": {
-    "node": ">= 4.3 < 5.0.0 || >= 5.10"
+    "node": ">= 6.9.0 || >= 8.9.0"
   },
   "peerDependencies": {
-    "node-sass": "^4.0.0",
-    "webpack": "^2.0.0 || >= 3.0.0-rc.0 || ^3.0.0"
+    "webpack": "^3.0.0 || ^4.0.0"
   },
   "keywords": [
     "sass",
@@ -62,12 +63,7 @@
     "webpack",
     "loader"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/webpack-contrib/sass-loader.git"
-  },
-  "bugs": {
-    "url": "https://github.com/webpack-contrib/sass-loader/issues"
-  },
+  "repository": "https://github.com/webpack-contrib/sass-loader.git",
+  "bugs": "https://github.com/webpack-contrib/sass-loader/issues",
   "homepage": "https://github.com/webpack-contrib/sass-loader"
 }

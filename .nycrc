@@ -7,8 +7,8 @@
         "lib/**/*.js"
     ],
     "lines": 97,
-    "statements": 91,
+    "statements": 97,
     "functions": 100,
-    "branches": 89,
+    "branches": 91,
     "check-coverage": true
 }

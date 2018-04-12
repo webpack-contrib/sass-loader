@@ -14,8 +14,8 @@
     <img width="200" height="200"
       src="https://webpack.js.org/assets/icon-square-big.svg">
   </a>
-  <h1>SASS Loader</h1>
-  <p>Loads a SASS/SCSS file and compiles it to CSS.</p>
+  <h1>Sass Loader</h1>
+  <p>Loads a Sass/SCSS file and compiles it to CSS.</p>
 </div>
 
 Use the [css-loader](https://github.com/webpack-contrib/css-loader) or the [raw-loader](https://github.com/webpack-contrib/raw-loader) to turn it into a JS module and the [ExtractTextPlugin](https://github.com/webpack-contrib/extract-text-webpack-plugin) to extract it into a separate file.
@@ -33,6 +33,10 @@ as [`peerDependency`](https://docs.npmjs.com/files/package.json#peerdependencies
 <h2 align="center">Examples</h2>
 
 Chain the sass-loader with the [css-loader](https://github.com/webpack-contrib/css-loader) and the [style-loader](https://github.com/webpack-contrib/style-loader) to immediately apply all styles to the DOM.
+
+```bash
+npm install style-loader css-loader --save-dev
+```
 
 ```js
 // webpack.config.js
@@ -134,7 +138,7 @@ Since Sass/[libsass](https://github.com/sass/libsass) does not provide [url rewr
 
 More likely you will be disrupted by this second issue. It is natural to expect relative references to be resolved against the `.scss` file in which they are specified (like in regular `.css` files). Thankfully there are a two solutions to this problem:
 
-- Add the missing url rewriting using the [resolve-url-loader](https://github.com/bholloway/resolve-url-loader). Place it directly after the sass-loader in the loader chain.
+- Add the missing url rewriting using the [resolve-url-loader](https://github.com/bholloway/resolve-url-loader). Place it before the sass-loader in the loader chain.
 - Library authors usually provide a variable to modify the asset path. [bootstrap-sass](https://github.com/twbs/bootstrap-sass) for example has an `$icon-font-path`. Check out [this working bootstrap example](https://github.com/webpack-contrib/sass-loader/tree/master/test/bootstrapSass).
 
 ### Extracting style sheets

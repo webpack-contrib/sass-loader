@@ -11,6 +11,7 @@ const customFunctions = require("./tools/customFunctions.js");
 const pathToSassLoader = require.resolve("../lib/loader.js");
 const testLoader = require("./tools/testLoader");
 const sassLoader = require(pathToSassLoader);
+const mockRequire = require("mock-require");
 
 const CR = /\r/g;
 const syntaxStyles = ["scss", "sass"];
@@ -265,6 +266,40 @@ describe("sass-loader", () => {
                 done();
             });
         });
+        it("should output a message when `node-sass` is missing", (done) => {
+            mockRequire.reRequire(pathToSassLoader);
+            const module = require("module");
+            const originalResolve = module._resolveFilename;
+
+            module._resolveFilename = function (filename) {
+                if (!filename.match(/node-sass/)) {
+                    return originalResolve.apply(this, arguments);
+                }
+                const err = new Error();
+
+                err.code = "MODULE_NOT_FOUND";
+                throw err;
+            };
+            runWebpack({
+                entry: pathToSassLoader + "!" + pathToErrorFile
+            }, (err) => {
+                module._resolveFilename = originalResolve;
+                mockRequire.reRequire("node-sass");
+                err.message.should.match(/Please install a compatible version/);
+                done();
+            });
+        });
+        it("should output a message when `node-sass` is an incompatible version", (done) => {
+            mockRequire.reRequire(pathToSassLoader);
+            mockRequire("node-sass/package.json", { version: "3.0.0" });
+            runWebpack({
+                entry: pathToSassLoader + "!" + pathToErrorFile
+            }, (err) => {
+                mockRequire.stop("node-sass");
+                err.message.should.match(/The installed version of `node-sass` is not compatible/);
+                done();
+            });
+        });
     });
 });
 
@@ -274,6 +309,7 @@ function readCss(ext, id) {
 
 function runWebpack(baseConfig, done) {
     const webpackConfig = merge({
+        mode: "development",
         output: {
             path: path.join(__dirname, "output"),
             filename: "bundle.js",
