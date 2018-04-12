@@ -1,6 +1,6 @@
 {
   "name": "sass-loader",
-  "version": "6.0.6",
+  "version": "6.0.7",
   "description": "Sass loader for webpack",
   "author": "J. Tangelder",
   "license": "MIT",
@@ -26,10 +26,10 @@
     "release": "standard-version"
   },
   "dependencies": {
-    "async": "^2.1.5",
     "clone-deep": "^2.0.1",
     "loader-utils": "^1.0.1",
     "lodash.tail": "^4.1.1",
+    "neo-async": "^2.5.0",
     "pify": "^3.0.0"
   },
   "devDependencies": {
@@ -54,7 +54,7 @@
   },
   "peerDependencies": {
     "node-sass": "^4.0.0",
-    "webpack": "^3.0.0 || ^4.0.0-alpha.0 || ^4.0.0"
+    "webpack": "^3.0.0 || ^4.0.0"
   },
   "keywords": [
     "sass",
@@ -62,12 +62,7 @@
     "webpack",
     "loader"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/webpack-contrib/sass-loader.git"
-  },
-  "bugs": {
-    "url": "https://github.com/webpack-contrib/sass-loader/issues"
-  },
+  "repository": "https://github.com/webpack-contrib/sass-loader.git",
+  "bugs": "https://github.com/webpack-contrib/sass-loader/issues",
   "homepage": "https://github.com/webpack-contrib/sass-loader"
 }
