@@ -12,7 +12,7 @@ environment:
       webpack_version: latest
       job_part: test
     - nodejs_version: '8'
-      webpack_version: 4.0.0-alpha.0
+      webpack_version: 4.0.0
       job_part: test
 build: 'off'
 matrix:

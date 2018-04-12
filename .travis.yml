@@ -26,7 +26,7 @@ jobs:
       after_success: 'bash <(curl -s https://codecov.io/bash)'
     - stage: Webpack canary
       node_js: 8
-      env: WEBPACK_VERSION=4.0.0-alpha.0 JOB_PART=test
+      env: WEBPACK_VERSION=4.0.0 JOB_PART=test
       script: npm run travis:$JOB_PART
     - stage: NodeJS Next
       node_js: 9
