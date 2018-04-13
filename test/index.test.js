@@ -82,7 +82,7 @@ syntaxStyles.forEach(ext => {
             it("should resolve aliases", () => execTest("import-alias", {}, {
                 resolve: {
                     alias: {
-                        "path-to-alias": path.join(__dirname, ext, "alias." + ext)
+                        "path-to-alias": path.join(__dirname, ext, "another", "alias." + ext)
                     }
                 }
             }));
@@ -205,7 +205,7 @@ describe("sass-loader", () => {
                     sourceMap.should.not.have.property("file");
                     sourceMap.should.have.property("sourceRoot", fakeCwd);
                     // This number needs to be updated if imports.scss or any dependency of that changes
-                    sourceMap.sources.should.have.length(9);
+                    sourceMap.sources.should.have.length(10);
                     sourceMap.sources.forEach(sourcePath =>
                         fs.existsSync(path.resolve(sourceMap.sourceRoot, sourcePath))
                     );

@@ -19,3 +19,6 @@
 .scoped-import {
     @import "language";
 }
+// The local util file should take precedence over Node's util module
+// See https://github.com/webpack-contrib/sass-loader/issues/556
+@import "util";

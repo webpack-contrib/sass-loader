@@ -1,0 +1,5 @@
+// This file has been named "util" on purpose because in a wrong import setup it would conflict with Node's util
+// See https://github.com/webpack-contrib/sass-loader/issues/556
+.util {
+    color: hotpink;
+}
