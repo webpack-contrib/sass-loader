@@ -14,6 +14,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### BREAKING CHANGES
 
+* Drop official node 4 support
 * This slightly changes the resolving algorithm. Should not break in normal usage, but might break in complex configurations.
 * The sass-loader throws an error at runtime now and refuses to compile if the peer dependency is wrong. This could break applications where npm's peer dependency warning was just ignored.
 
