@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="7.0.0"></a>
+# [7.0.0](https://github.com/webpack-contrib/sass-loader/compare/v6.0.7...v7.0.0) (2018-04-13)
+
+
+### Features
+
+* Refactor resolving and simplify webpack config aliases (#479) ([e0fde1a](https://github.com/webpack-contrib/sass-loader/commit/e0fde1a))
+* Remove `node-sass` from `peerDependencies` (#533) ([6439cef](https://github.com/webpack-contrib/sass-loader/commit/6439cef))
+
+
+### BREAKING CHANGES
+
+* This slightly changes the resolving algorithm. Should not break in normal usage, but might break in complex configurations.
+* The sass-loader throws an error at runtime now and refuses to compile if the peer dependency is wrong. This could break applications where npm's peer dependency warning was just ignored.
+
+
+
 <a name="6.0.7"></a>
 ## [6.0.7](https://github.com/webpack-contrib/sass-loader/compare/v6.0.6...v6.0.7) (2018-03-03)
 
