@@ -26,14 +26,14 @@ const loaderContextMock = {
 };
 
 Object.defineProperty(loaderContextMock, "options", {
-    set() {},
+    set() { },
     get() {
         throw new Error("webpack options are not allowed to be accessed anymore.");
     }
 });
 
 syntaxStyles.forEach(ext => {
-    function execTest(testId, options) {
+    function execTest(testId, loaderOptions, webpackOptions) {
         return new Promise((resolve, reject) => {
             const baseConfig = merge({
                 entry: path.join(__dirname, ext, testId + "." + ext),
@@ -45,11 +45,11 @@ syntaxStyles.forEach(ext => {
                         test: new RegExp(`\\.${ ext }$`),
                         use: [
                             { loader: "raw-loader" },
-                            { loader: pathToSassLoader, options }
+                            { loader: pathToSassLoader, options: loaderOptions }
                         ]
                     }]
                 }
-            });
+            }, webpackOptions);
 
             runWebpack(baseConfig, (err) => err ? reject(err) : resolve());
         }).then(() => {
@@ -79,6 +79,13 @@ syntaxStyles.forEach(ext => {
             it("should not resolve CSS imports", () => execTest("import-css"));
             it("should compile bootstrap-sass without errors", () => execTest("bootstrap-sass"));
             it("should correctly import scoped npm packages", () => execTest("import-from-npm-org-pkg"));
+            it("should resolve aliases", () => execTest("import-alias", {}, {
+                resolve: {
+                    alias: {
+                        "path-to-alias": path.join(__dirname, ext, "alias." + ext)
+                    }
+                }
+            }));
         });
         describe("custom importers", () => {
             it("should use custom importer", () => execTest("custom-importer", {
@@ -170,9 +177,11 @@ describe("sass-loader", () => {
                             test: /\.scss$/,
                             use: [
                                 { loader: testLoader.filename },
-                                { loader: pathToSassLoader, options: {
-                                    sourceMap: true
-                                } }
+                                {
+                                    loader: pathToSassLoader, options: {
+                                        sourceMap: true
+                                    }
+                                }
                             ]
                         }]
                     }
@@ -196,7 +205,7 @@ describe("sass-loader", () => {
                     sourceMap.should.not.have.property("file");
                     sourceMap.should.have.property("sourceRoot", fakeCwd);
                     // This number needs to be updated if imports.scss or any dependency of that changes
-                    sourceMap.sources.should.have.length(8);
+                    sourceMap.sources.should.have.length(9);
                     sourceMap.sources.forEach(sourcePath =>
                         fs.existsSync(path.resolve(sourceMap.sourceRoot, sourcePath))
                     );
