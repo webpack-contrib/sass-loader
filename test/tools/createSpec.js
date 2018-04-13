@@ -15,7 +15,7 @@ function createSpec(ext) {
     const testNodeModules = path.relative(basePath, path.join(testFolder, "node_modules")) + path.sep;
     const pathToBootstrap = path.relative(basePath, path.resolve(testFolder, "..", "node_modules", "bootstrap-sass"));
     const pathToScopedNpmPkg = path.relative(basePath, path.resolve(testFolder, "node_modules", "@org", "pkg", "./index.scss"));
-    const pathToFooAlias = path.relative(basePath, path.resolve(testFolder, ext, "./alias-foo." + ext));
+    const pathToFooAlias = path.relative(basePath, path.resolve(testFolder, ext, "./alias." + ext));
 
     fs.readdirSync(path.join(testFolder, ext))
         .filter((file) => {
@@ -34,7 +34,7 @@ function createSpec(ext) {
                             .replace(/^~bootstrap-sass/, pathToBootstrap)
                             .replace(/^~@org\/pkg/, pathToScopedNpmPkg)
                             .replace(/^~/, testNodeModules)
-                            .replace(/^import-foo-as-alias/, pathToFooAlias);
+                            .replace(/^path-to-alias/, pathToFooAlias);
                     }
                     return {
                         file: url
