@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="7.0.1"></a>
+## [7.0.1](https://github.com/webpack-contrib/sass-loader/compare/v7.0.0...v7.0.1) (2018-04-13)
+
+
+### Bug Fixes
+
+* Wrong import precedence (#557) ([f4eeff1](https://github.com/webpack-contrib/sass-loader/commit/f4eeff1))
+
+
+
 <a name="7.0.0"></a>
 # [7.0.0](https://github.com/webpack-contrib/sass-loader/compare/v6.0.7...v7.0.0) (2018-04-13)
 
