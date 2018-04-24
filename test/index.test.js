@@ -285,7 +285,7 @@ describe("sass-loader", () => {
             }, (err) => {
                 module._resolveFilename = originalResolve;
                 mockRequire.reRequire("node-sass");
-                err.message.should.match(/Please install a compatible version/);
+                err.message.should.match(/Error loading `node-sass`/);
                 done();
             });
         });
