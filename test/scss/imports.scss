@@ -1,8 +1,10 @@
 /* @import "another/module"; */
 @import "another/module";
+/* @import "~another/module"; */
+@import "~another/module";
 /* @import "another/underscore"; */
 @import "another/underscore";
-/* @import "another/underscore"; */
+/* @import "another/_underscore"; */
 @import "another/_underscore";
 /* @import "~scss/underscore"; */
 @import "~scss/underscore";
