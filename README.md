@@ -87,7 +87,6 @@ Usually, it's recommended to extract the style sheets into a dedicated file in p
 
 ```js
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const devMode = process.env.NODE_ENV !== 'production'; // used to fallback to style-loader in development
 
 module.exports = {
 	...
@@ -95,9 +94,10 @@ module.exports = {
         rules: [{
             test: /\.scss$/,
             use: [
-              devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
-              "css-loader",
-              "sass-loader"
+                // fallback to style-loader in development
+                process.env.NODE_ENV !== 'production' ? 'style-loader' : MiniCssExtractPlugin.loader,
+                "css-loader",
+                "sass-loader"
             ]
         }]
     },
