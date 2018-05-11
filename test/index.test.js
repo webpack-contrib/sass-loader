@@ -110,6 +110,18 @@ syntaxStyles.forEach(ext => {
 });
 
 describe("sass-loader", () => {
+    it("should not throw errors when data is undefined", () => {
+        sassLoader.call(Object.assign({}, loaderContextMock, {
+            resourcePath: "",
+            query: {},
+            resolve() {
+                return null;
+            },
+            async() {
+                return () => null;
+            }
+        }), undefined);
+    });
     describe("multiple compilations", () => {
         it("should not interfere with each other", () =>
             new Promise((resolve, reject) => {
