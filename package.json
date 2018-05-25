@@ -30,7 +30,8 @@
     "loader-utils": "^1.0.1",
     "lodash.tail": "^4.1.1",
     "neo-async": "^2.5.0",
-    "pify": "^3.0.0"
+    "pify": "^3.0.0",
+    "semver": "^5.5.0"
   },
   "devDependencies": {
     "bootstrap-sass": "^3.3.5",
@@ -44,6 +45,7 @@
     "node-sass": "^4.5.0",
     "nyc": "^11.0.2",
     "raw-loader": "^0.5.1",
+    "sass": "^1.3.0",
     "should": "^11.2.0",
     "standard-version": "^4.2.0",
     "style-loader": "^0.18.2",
