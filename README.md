@@ -88,14 +88,14 @@ Usually, it's recommended to extract the style sheets into a dedicated file in p
 ```js
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
-module.exports = {
+module.exports = (env, argv) => ({
 	...
     module: {
         rules: [{
             test: /\.scss$/,
             use: [
                 // fallback to style-loader in development
-                process.env.NODE_ENV !== 'production' ? 'style-loader' : MiniCssExtractPlugin.loader,
+                argv.mode !== 'production' ? 'style-loader' : MiniCssExtractPlugin.loader,
                 "css-loader",
                 "sass-loader"
             ]
@@ -109,7 +109,7 @@ module.exports = {
             chunkFilename: "[id].css"
         })
     ]
-};
+});
 ```
 
 <h2 align="center">Usage</h2>
