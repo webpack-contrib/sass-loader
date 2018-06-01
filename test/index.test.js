@@ -266,7 +266,7 @@ describe("sass-loader", () => {
                 done();
             });
         });
-        it("should output a message when `node-sass` is missing", (done) => {
+        it("should not swallow errors when trying to load node-sass", (done) => {
             mockRequire.reRequire(pathToSassLoader);
             const module = require("module");
             const originalResolve = module._resolveFilename;
@@ -275,7 +275,7 @@ describe("sass-loader", () => {
                 if (!filename.match(/node-sass/)) {
                     return originalResolve.apply(this, arguments);
                 }
-                const err = new Error();
+                const err = new Error("Some error");
 
                 err.code = "MODULE_NOT_FOUND";
                 throw err;
@@ -285,7 +285,7 @@ describe("sass-loader", () => {
             }, (err) => {
                 module._resolveFilename = originalResolve;
                 mockRequire.reRequire("node-sass");
-                err.message.should.match(/Error loading `node-sass`/);
+                err.message.should.match(/Some error/);
                 done();
             });
         });
