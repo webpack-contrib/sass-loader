@@ -289,8 +289,28 @@ describe("sass-loader", () => {
                 done();
             });
         });
-        it("should output a message when `node-sass` is an incompatible version", (done) => {
+        it("should output a message when `node-sass` throw other error", (done) => {
             mockRequire.reRequire(pathToSassLoader);
+            const module = require("module");
+            const originalResolve = module._resolveFilename;
+
+            module._resolveFilename = function (filename) {
+                if (!filename.match(/node-sass/)) {
+                    return originalResolve.apply(this, arguments);
+                }
+
+                throw new Error("Other error");
+            };
+            runWebpack({
+                entry: pathToSassLoader + "!" + pathToErrorFile
+            }, (err) => {
+                module._resolveFilename = originalResolve;
+                mockRequire.reRequire("node-sass");
+                err.message.should.match(/Other error/);
+                done();
+            });
+        });
+        it("should output a message when `node-sass` is an incompatible version", (done) => {
             mockRequire("node-sass/package.json", { version: "3.0.0" });
             runWebpack({
                 entry: pathToSassLoader + "!" + pathToErrorFile
