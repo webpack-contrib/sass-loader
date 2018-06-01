@@ -33,6 +33,7 @@ function createSpec(ext) {
                         url = url
                             .replace(/^~bootstrap-sass/, pathToBootstrap)
                             .replace(/^~@org\/pkg/, pathToScopedNpmPkg)
+                            .replace(/^~path-to-alias/, pathToFooAlias)
                             .replace(/^~/, testNodeModules)
                             .replace(/^path-to-alias/, pathToFooAlias);
                     }
