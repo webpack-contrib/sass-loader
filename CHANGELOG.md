@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="7.0.2"></a>
+## [7.0.2](https://github.com/webpack-contrib/sass-loader/compare/v7.0.1...v7.0.2) (2018-06-02)
+
+
+### Bug Fixes
+
+* Errors being swallowed when trying to load node-sass (#576) ([6dfb274](https://github.com/webpack-contrib/sass-loader/commit/6dfb274)), closes [#563](https://github.com/webpack-contrib/sass-loader/issues/563)
+* Report error to user for problems loading node-sass (#562) ([2529c07](https://github.com/webpack-contrib/sass-loader/commit/2529c07))
+
+
+
 <a name="7.0.1"></a>
 ## [7.0.1](https://github.com/webpack-contrib/sass-loader/compare/v7.0.0...v7.0.1) (2018-04-13)
 
