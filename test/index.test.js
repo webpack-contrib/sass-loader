@@ -12,6 +12,7 @@ const pathToSassLoader = require.resolve("../lib/loader.js");
 const testLoader = require("./tools/testLoader");
 const sassLoader = require(pathToSassLoader);
 const mockRequire = require("mock-require");
+const VueLoaderPlugin = require("vue-loader/lib/plugin");
 
 const CR = /\r/g;
 const syntaxStyles = ["scss", "sass"];
@@ -38,7 +39,7 @@ syntaxStyles.forEach(ext => {
             const baseConfig = merge({
                 entry: path.join(__dirname, ext, testId + "." + ext),
                 output: {
-                    filename: "bundle." + ext + ".js"
+                    filename: testId + ".[name]." + ext + ".js"
                 },
                 module: {
                     rules: [{
@@ -51,14 +52,21 @@ syntaxStyles.forEach(ext => {
                 }
             }, webpackOptions);
 
-            runWebpack(baseConfig, (err) => err ? reject(err) : resolve());
-        }).then(() => {
-            const actualCss = readBundle("bundle." + ext + ".js");
-            const expectedCss = readCss(ext, testId);
+            runWebpack(baseConfig, (err, stats) => err ? reject(err) : resolve(stats));
+        }).then((stats) => {
+            stats.compilation.entrypoints.forEach((entrypoint) => {
+                const actualCss = readBundle(testId + "." + entrypoint.name + "." + ext + ".js");
 
-            // writing the actual css to output-dir for better debugging
-            // fs.writeFileSync(path.join(__dirname, "output", `${ testId }.${ ext }.css`), actualCss, "utf8");
-            actualCss.should.eql(expectedCss);
+                if (typeof actualCss !== "string") {
+                    return;
+                }
+
+                const expectedCss = readCss(ext, testId);
+
+                // writing the actual css to output-dir for better debugging
+                // fs.writeFileSync(path.join(__dirname, "output", `${ testId }.${ ext }.css`), actualCss, "utf8");
+                actualCss.should.eql(expectedCss);
+            });
         });
     }
 
@@ -85,6 +93,28 @@ syntaxStyles.forEach(ext => {
                         "path-to-alias": path.join(__dirname, ext, "another", "alias." + ext)
                     }
                 }
+            }));
+            it("should resolve aliases (module request) from multiple loaders", () => execTest("import-alias-module-request", {}, {
+                entry: {
+                    loader: path.join(__dirname, ext, "import-alias-module-request." + ext),
+                    vue: path.join(__dirname, ext, "vue/import-alias-module-request.vue")
+                },
+                resolve: {
+                    alias: {
+                        "path-to-alias": path.join(__dirname, ext, "another", "alias." + ext)
+                    }
+                },
+                module: {
+                    rules: [
+                        {
+                            test: /\.vue$/,
+                            loader: "vue-loader"
+                        }
+                    ]
+                },
+                plugins: [
+                    new VueLoaderPlugin()
+                ]
             }));
         });
         describe("custom importers", () => {
@@ -322,7 +352,7 @@ function runWebpack(baseConfig, done) {
             (stats.hasErrors() && stats.compilation.errors[0]) ||
             (stats.hasWarnings() && stats.compilation.warnings[0]);
 
-        done(err || null);
+        done(err || null, stats);
     });
 }
 
