@@ -159,6 +159,12 @@ implementations.forEach(implementation => {
                                 filename: "bundle.source-maps.js",
                                 libraryTarget: "commonjs2"
                             },
+                            resolve: {
+                                alias: {
+                                    module: 'module.scss',
+                                    'other-module': 'other-module.scss'
+                                }
+                            },
                             devtool: "source-map",
                             module: {
                                 rules: [{
@@ -390,6 +396,12 @@ implementations.forEach(implementation => {
                             }
                         ]
                     }]
+                },
+                resolve: {
+                    alias: {
+                        module: 'module.scss',
+                        'other-module': 'other-module.scss'
+                    }
                 }
             }, baseConfig);
 
