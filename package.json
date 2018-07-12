@@ -30,6 +30,7 @@
     "loader-utils": "^1.0.1",
     "lodash.tail": "^4.1.1",
     "neo-async": "^2.5.0",
+    "node-sass": "^4.5.0",
     "pify": "^3.0.0"
   },
   "devDependencies": {
@@ -41,7 +42,6 @@
     "file-loader": "^0.11.2",
     "mocha": "^3.0.2",
     "mock-require": "^3.0.1",
-    "node-sass": "^4.5.0",
     "nyc": "^11.0.2",
     "raw-loader": "^0.5.1",
     "should": "^11.2.0",
