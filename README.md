@@ -24,7 +24,7 @@ Looking for the webpack 1 loader? Check out the [archive/webpack-1 branch](https
 <h2 align="center">Install</h2>
 
 ```bash
-npm install sass-loader node-sass webpack --save-dev
+npm install sass-loader webpack --save-dev
 ```
 
 The sass-loader requires [[webpack](https://github.com/webpack)
