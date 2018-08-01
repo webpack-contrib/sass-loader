@@ -166,12 +166,6 @@ implementations.forEach(implementation => {
                                 filename: "bundle.source-maps.js",
                                 libraryTarget: "commonjs2"
                             },
-                            resolve: {
-                                alias: {
-                                    module: "module.scss",
-                                    "other-module": "other-module.scss"
-                                }
-                            },
                             devtool: "source-map",
                             module: {
                                 rules: [{
@@ -218,7 +212,7 @@ implementations.forEach(implementation => {
                             sourceMap.should.have.property("sourceRoot", fakeCwd);
                             // This number needs to be updated if imports.scss or any dependency of that changes.
                             // Node Sass includes a duplicate entry, Dart Sass does not.
-                            sourceMap.sources.should.have.length(implementation === nodeSass ? 12 : 11);
+                            sourceMap.sources.should.have.length(implementation === nodeSass ? 11 : 10);
                             sourceMap.sources.forEach(sourcePath =>
                                 fs.existsSync(path.resolve(sourceMap.sourceRoot, sourcePath))
                             );
@@ -403,12 +397,6 @@ implementations.forEach(implementation => {
                             }
                         ]
                     }]
-                },
-                resolve: {
-                    alias: {
-                        module: "module.scss",
-                        "other-module": "other-module.scss"
-                    }
                 }
             }, baseConfig);
 
