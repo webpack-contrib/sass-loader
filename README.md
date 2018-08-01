@@ -27,8 +27,14 @@ Looking for the webpack 1 loader? Check out the [archive/webpack-1 branch](https
 npm install sass-loader node-sass webpack --save-dev
 ```
 
-The sass-loader requires [node-sass](https://github.com/sass/node-sass) and [webpack](https://github.com/webpack)
-as [`peerDependency`](https://docs.npmjs.com/files/package.json#peerdependencies). Thus you are able to control the versions accurately.
+The sass-loader requires [webpack](https://github.com/webpack) as a
+[`peerDependency`](https://docs.npmjs.com/files/package.json#peerdependencies)
+and it requires you to install either [Node Sass][] or [Dart Sass][] on your
+own. This allows you to control the versions of all your dependencies, and to
+choose which Sass implementation to use.
+
+[Node Sass]: https://github.com/sass/node-sass
+[Dart Sass]: http://sass-lang.com/dart-sass
 
 <h2 align="center">Examples</h2>
 
@@ -48,14 +54,14 @@ module.exports = {
             use: [
                 "style-loader", // creates style nodes from JS strings
                 "css-loader", // translates CSS into CommonJS
-                "sass-loader" // compiles Sass to CSS
+                "sass-loader" // compiles Sass to CSS, using Node Sass by default
             ]
         }]
     }
 };
 ```
 
-You can also pass options directly to [node-sass](https://github.com/andrew/node-sass) by specifying an `options` property like this:
+You can also pass options directly to [Node Sass][] or [Dart Sass][]:
 
 ```js
 // webpack.config.js
@@ -79,7 +85,54 @@ module.exports = {
 };
 ```
 
-See [node-sass](https://github.com/andrew/node-sass) for all available Sass options.
+See [the Node Sass documentation](https://github.com/sass/node-sass/blob/master/README.md#options) for all available Sass options.
+
+The special `implementation` option determines which implementation of Sass to
+use. It takes either a [Node Sass][] or a [Dart Sass][] module. For example, to
+use Dart Sass, you'd pass:
+
+```js
+// ...
+    {
+        loader: "sass-loader",
+        options: {
+            implementation: require("sass")
+        }
+    }
+// ...
+```
+
+Note that when using Dart Sass, **synchronous compilation is twice as fast as
+asynchronous compilation** by default, due to the overhead of asynchronous
+callbacks. To avoid this overhead, you can use the
+[`fibers`](https://www.npmjs.com/package/fibers) package to call asynchronous
+importers from the synchronous code path. To enable this, pass the `Fiber` class
+to the `fiber` option:
+
+```js
+// webpack.config.js
+const Fiber = require('fibers');
+
+module.exports = {
+	...
+    module: {
+        rules: [{
+            test: /\.scss$/,
+            use: [{
+                loader: "style-loader"
+            }, {
+                loader: "css-loader"
+            }, {
+                loader: "sass-loader",
+                options: {
+                    implementation: require("sass"),
+                    fiber: Fiber
+                }
+            }]
+        }]
+    }
+};
+```
 
 ### In production
 
@@ -116,7 +169,7 @@ module.exports = {
 
 ### Imports
 
-webpack provides an [advanced mechanism to resolve files](https://webpack.js.org/concepts/module-resolution/). The sass-loader uses node-sass' custom importer feature to pass all queries to the webpack resolving engine. Thus you can import your Sass modules from `node_modules`. Just prepend them with a `~` to tell webpack that this is not a relative import:
+webpack provides an [advanced mechanism to resolve files](https://webpack.js.org/concepts/module-resolution/). The sass-loader uses Sass's custom importer feature to pass all queries to the webpack resolving engine. Thus you can import your Sass modules from `node_modules`. Just prepend them with a `~` to tell webpack that this is not a relative import:
 
 ```css
 @import "~bootstrap/dist/css/bootstrap";
