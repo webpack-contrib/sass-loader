@@ -1,7 +1,5 @@
 /* @import "another/module"; */
 @import "another/module";
-/* @import "~another/module"; */
-@import "~another/module";
 /* @import "another/underscore"; */
 @import "another/underscore";
 /* @import "another/_underscore"; */
@@ -27,5 +25,5 @@
 @import "util";
 /* @import "~module"; */
 @import "~module";
-/* @import "~other-module"; */
-@import "~other-module";
+/* @import "~another"; */
+@import "~another";
