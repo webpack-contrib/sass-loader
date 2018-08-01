@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="7.1.0"></a>
+# [7.1.0](https://github.com/webpack-contrib/sass-loader/compare/v7.0.3...v7.1.0) (2018-08-01)
+
+
+### Features
+
+* Make this package implementation-agnostic (#573) ([bed9fb5](https://github.com/webpack-contrib/sass-loader/commit/bed9fb5)), closes [#435](https://github.com/webpack-contrib/sass-loader/issues/435)
+
+
+
 <a name="7.0.3"></a>
 ## [7.0.3](https://github.com/webpack-contrib/sass-loader/compare/v7.0.2...v7.0.3) (2018-06-05)
 
