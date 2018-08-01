@@ -96,7 +96,7 @@ use Dart Sass, you'd pass:
     {
         loader: "sass-loader",
         options: {
-            implementation: require("sass")
+            implementation: require("dart-sass")
         }
     }
 // ...
@@ -125,7 +125,7 @@ module.exports = {
             }, {
                 loader: "sass-loader",
                 options: {
-                    implementation: require("sass"),
+                    implementation: require("dart-sass"),
                     fiber: Fiber
                 }
             }]
