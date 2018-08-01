@@ -57,9 +57,18 @@ function createSpec(ext) {
             }
 
             implementations.forEach(implementation => {
+                if (fileWithoutExt === "import-css" && implementation !== nodeSass) {
+                    // Skip CSS imports for all implementations that are not node-sass
+                    // CSS imports is a legacy feature that we only support for node-sass
+                    // See discussion https://github.com/webpack-contrib/sass-loader/pull/573/files?#r199109203
+                    return;
+                }
+
                 sassOptions.functions = customFunctions(implementation);
+
                 const name = implementation.info.split("\t")[0];
                 const css = implementation.renderSync(sassOptions).css;
+
                 fs.writeFileSync(path.join(basePath, "spec", name, fileWithoutExt + ".css"), css, "utf8");
             });
         });

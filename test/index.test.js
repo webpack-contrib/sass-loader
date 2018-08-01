@@ -37,10 +37,12 @@ Object.defineProperty(loaderContextMock, "options", {
 
 implementations.forEach(implementation => {
     const implementationName = implementation.info.split("\t")[0];
+
     describe(implementationName, () => {
         syntaxStyles.forEach(ext => {
             function execTest(testId, loaderOptions, webpackOptions) {
                 const bundleName = "bundle." + ext + "." + implementationName + ".js";
+
                 return new Promise((resolve, reject) => {
                     const baseConfig = merge({
                         entry: path.join(__dirname, ext, testId + "." + ext),
@@ -74,6 +76,11 @@ implementations.forEach(implementation => {
                     it("should resolve imports from another directory declared by includePaths correctly", () => execTest("import-include-paths", {
                         includePaths: [path.join(__dirname, ext, "includePath")]
                     }));
+                    // Legacy support for CSS imports with node-sass
+                    // See discussion https://github.com/webpack-contrib/sass-loader/pull/573/files?#r199109203
+                    if (implementation === nodeSass) {
+                        it("should not resolve CSS imports", () => execTest("import-css"));
+                    }
                     it("should compile bootstrap-sass without errors", () => execTest("bootstrap-sass"));
                     it("should correctly import scoped npm packages", () => execTest("import-from-npm-org-pkg"));
                     it("should resolve aliases", () => execTest("import-alias", {}, {
@@ -96,7 +103,7 @@ implementations.forEach(implementation => {
                 });
                 describe("prepending data", () => {
                     it("should extend the data-option if present", () => execTest("prepending-data", {
-                        data: "$prepended-data: hotpink" + (ext == "sass" ? "\n" : ";")
+                        data: "$prepended-data: hotpink" + (ext === "sass" ? "\n" : ";")
                     }));
                 });
                 // See https://github.com/webpack-contrib/sass-loader/issues/21
@@ -161,8 +168,8 @@ implementations.forEach(implementation => {
                             },
                             resolve: {
                                 alias: {
-                                    module: 'module.scss',
-                                    'other-module': 'other-module.scss'
+                                    module: "module.scss",
+                                    "other-module": "other-module.scss"
                                 }
                             },
                             devtool: "source-map",
@@ -211,7 +218,7 @@ implementations.forEach(implementation => {
                             sourceMap.should.have.property("sourceRoot", fakeCwd);
                             // This number needs to be updated if imports.scss or any dependency of that changes.
                             // Node Sass includes a duplicate entry, Dart Sass does not.
-                            sourceMap.sources.should.have.length(implementation == nodeSass ? 12 : 11);
+                            sourceMap.sources.should.have.length(implementation === nodeSass ? 12 : 11);
                             sourceMap.sources.forEach(sourcePath =>
                                 fs.existsSync(path.resolve(sourceMap.sourceRoot, sourcePath))
                             );
@@ -249,7 +256,7 @@ implementations.forEach(implementation => {
                         entry: pathToErrorImport
                     }, {}, (err) => {
                         // check for file excerpt
-                        if (implementation == nodeSass) {
+                        if (implementation === nodeSass) {
                             err.message.should.match(/Property "some-value" must be followed by a ':'/);
                             err.message.should.match(/\(line 2, column 5\)/);
                         } else {
@@ -265,7 +272,7 @@ implementations.forEach(implementation => {
                         entry: pathToErrorFileNotFound
                     }, {}, (err) => {
                         err.message.should.match(/@import "does-not-exist";/);
-                        if (implementation == nodeSass) {
+                        if (implementation === nodeSass) {
                             err.message.should.match(/File to import not found or unreadable: does-not-exist/);
                             err.message.should.match(/\(line 1, column 1\)/);
                         } else {
@@ -281,7 +288,7 @@ implementations.forEach(implementation => {
                         entry: pathToErrorFileNotFound2
                     }, {}, (err) => {
                         err.message.should.match(/@import "\.\/another\/_module\.scss";/);
-                        if (implementation == nodeSass) {
+                        if (implementation === nodeSass) {
                             err.message.should.match(/File to import not found or unreadable: \.\/another\/_module\.scss/);
                             err.message.should.match(/\(line 1, column 1\)/);
                         } else {
@@ -359,14 +366,14 @@ implementations.forEach(implementation => {
                         done();
                     });
                 });
-                it("should output a message for an unknown implementation", (done) => {
+                it("should output a message for an unknown sass implementation", (done) => {
                     mockRequire.reRequire(pathToSassLoader);
                     runWebpack({
                         entry: pathToErrorFile
                     }, {
                         implementation: merge(nodeSass, { info: "strange-sass\t1.0.0" })
                     }, (err) => {
-                        err.message.should.match(/Unknown implementation "strange-sass"\./);
+                        err.message.should.match(/Unknown Sass implementation "strange-sass"\./);
                         done();
                     });
                 });
@@ -399,8 +406,8 @@ implementations.forEach(implementation => {
                 },
                 resolve: {
                     alias: {
-                        module: 'module.scss',
-                        'other-module': 'other-module.scss'
+                        module: "module.scss",
+                        "other-module": "other-module.scss"
                     }
                 }
             }, baseConfig);

@@ -1,0 +1,7 @@
+// Special behavior of node-sass/libsass with CSS-files
+// 1. CSS-files are not included, but linked with @import url(path/to/css)
+@import "~css/some-css-module.css";
+// 2. It does not matter whether the CSS-file exists or not, the file is just linked
+@import "./does/not/exist.css";
+// 3. When the .css extension is missing, the file is included just like scss
+@import "~css/some-css-module";
