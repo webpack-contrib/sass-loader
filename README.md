@@ -227,37 +227,6 @@ module.exports = {
 
 If you want to edit the original Sass files inside Chrome, [there's a good blog post](https://medium.com/@toolmantim/getting-started-with-css-sourcemaps-and-in-browser-sass-editing-b4daab987fb0). Checkout [test/sourceMap](https://github.com/webpack-contrib/sass-loader/tree/master/test) for a running example.
 
-#### Opting out of legacy source maps behavior
-
-To receive source maps as URLs relative to `loader.resourcePath`, set the `legacySourceMaps` option to `false`.
-
-```javascript
-module.exports = {
-    // ...
-    devtool: "source-map",
-    module: {
-        rules: [{
-            test: /\.scss$/,
-            use: [{
-                loader: "style-loader"
-            }, {
-                loader: "css-loader", options: {
-                    sourceMap: true
-                }
-            }, {
-                loader: "sass-loader", options: {
-                    legacySourceMaps: false,
-                    sourceMap: true
-                }
-            }]
-        }]
-    }
-};
-```
-
-_\* If you are using a plugin to extract source maps, such as `webpack.SourceMapDevToolPlugin`, make sure to set `devtool: false`._
-
-
 ### Environment variables
 
 If you want to prepend Sass code before the actual entry file, you can set the `data` option. In this case, the sass-loader will not override the `data` option but just append the entry's content. This is especially useful when some of your Sass variables depend on the environment:
