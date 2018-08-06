@@ -29,7 +29,7 @@ npm install sass-loader node-sass webpack --save-dev
 
 The sass-loader requires [webpack](https://github.com/webpack) as a
 [`peerDependency`](https://docs.npmjs.com/files/package.json#peerdependencies)
-and it requires you to install either [Node Sass][] or [Dart Sass][] on your
+and it requires you to install either [Node Sass](https://github.com/sass/node-sass) or [Dart Sass](https://github.com/sass/dart-sass) on your
 own. This allows you to control the versions of all your dependencies, and to
 choose which Sass implementation to use.
 
