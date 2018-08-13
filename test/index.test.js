@@ -204,18 +204,95 @@ implementations.forEach(implementation => {
                         return fakeCwd;
                     };
 
+                    /**
+                     * Note: this test only tests the "standard" source map
+                     * format. It does not test the "sections" source map
+                     * format.
+                     *
+                     * @see Source Map Revision 3 Proposal's [Proposed Format]{@link https://docs.google.com/document/d/1U1RGAehQwRypUTovF1KRlpiOFze0b-_2gc6fAH0KY0k/edit#heading=h.qz3o9nc69um5}
+                     */
                     return buildWithSourceMaps()
                         .then(() => {
+                            const resourcePath = path.join(__dirname, "scss", "imports.scss");
+                            const fileBase = path.basename(resourcePath);
                             const sourceMap = testLoader.sourceMap;
 
-                            sourceMap.should.not.have.property("file");
-                            sourceMap.should.have.property("sourceRoot", fakeCwd);
-                            // This number needs to be updated if imports.scss or any dependency of that changes.
-                            // Node Sass includes a duplicate entry, Dart Sass does not.
-                            sourceMap.sources.should.have.length(implementation === nodeSass ? 11 : 10);
-                            sourceMap.sources.forEach(sourcePath =>
-                                fs.existsSync(path.resolve(sourceMap.sourceRoot, sourcePath))
-                            );
+                            /**
+                             * The value of the "sourceRoot" as passed to
+                             * node-sass.
+                             *
+                             * @type {String|undefined|null}
+                             */
+                            const sourceRootOption = undefined;
+
+                            /**
+                             * The source map is a single JSON object.
+                             */
+                            (sourceMap).should.be.an.Object();
+
+                            /**
+                             * Required. File version must be a positive
+                             * integer.
+                             */
+                            (sourceMap.version).should.be.a.Number().and.be.greaterThan(0);
+                            (sourceMap.version % 1).should.equal(0);
+
+                            /**
+                             * Optional. File is an optional name of the
+                             * generated code that this source map is associated
+                             * with. This is a URL string that is relative to
+                             * source map. Typically it is just the file name
+                             * and extension.
+                             */
+                            if (sourceMap.file != null) {
+                                (sourceMap.file).should.equal(fileBase);
+                            }
+
+                            /**
+                             * Optional. An optional source root, useful for
+                             * relocating source files on a server or removing
+                             * repeated values in the "sources" entry. This
+                             * value is prepended to the individual entries in
+                             * the "source" field. This is a URL string,
+                             * undefined, or null.
+                             */
+                            if (sourceRootOption != null) {
+                                (sourceMap.sourceRoot).should.equal(sourceRootOption);
+                            } else if (sourceMap.sourceRoot != null) {
+                                (sourceMap.sourceRoot).should.be.a.String();
+                            }
+
+                            /**
+                             * Required. Sources is an array original sources
+                             * used by the "mappings" entry. Sources are
+                             * URLs that are relative to the source map.
+                             */
+                            (sourceMap.sources).should.be.an.Array();
+
+                            /**
+                             * Optional. An optional array of source content,
+                             * useful when the "source" can’t be hosted. The
+                             * contents are listed in the same order as the
+                             * sources in the "sources" entry. "null" may be
+                             * used if some original sources should be retrieved
+                             * by name.
+                             */
+                            if (sourceMap.sourcesContent != null) {
+                                (sourceMap.sourcesContent).should.be.an.Array();
+                                (sourceMap.sourcesContent).should.have.length(sourceMap.sources.length);
+                            }
+
+                            /**
+                             * Required. Names is an array of symbol names used
+                             * by the "mappings" entry.
+                             */
+                            (sourceMap.names).should.be.an.Array();
+
+                            /**
+                             * Required. Mappings is a string with encoded
+                             * mapping data.
+                             */
+                            (sourceMap.mappings).should.be.a.String();
 
                             process.cwd = cwdGetter;
                         });
