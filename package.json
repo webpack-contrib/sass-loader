@@ -50,7 +50,8 @@
     "standard-version": "^4.2.0",
     "style-loader": "^0.18.2",
     "webpack": "^4.5.0",
-    "webpack-dev-server": "^2.4.1",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "^3.1.4",
     "webpack-merge": "^4.0.0"
   },
   "engines": {
