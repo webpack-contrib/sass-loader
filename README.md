@@ -18,7 +18,7 @@
   <p>Loads a Sass/SCSS file and compiles it to CSS.</p>
 </div>
 
-Use the [css-loader](https://github.com/webpack-contrib/css-loader) or the [raw-loader](https://github.com/webpack-contrib/raw-loader) to turn it into a JS module and the [MiniCssExtractPlugin](https://github.com/webpack-contrib/mini-css-extract-plugin) to extract it into a separate file.
+Use the [css-loader](https://github.com/webpack-contrib/css-loader) or the [raw-loader](https://github.com/webpack-contrib/raw-loader) to turn it into a JS module and the [mini-css-extract-plugin](https://github.com/webpack-contrib/mini-css-extract-plugin) to extract it into a separate file.
 Looking for the webpack 1 loader? Check out the [archive/webpack-1 branch](https://github.com/webpack-contrib/sass-loader/tree/archive/webpack-1).
 
 <h2 align="center">Install</h2>
@@ -136,7 +136,7 @@ module.exports = {
 
 ### In production
 
-Usually, it's recommended to extract the style sheets into a dedicated file in production using the [MiniCssExtractPlugin](https://github.com/webpack-contrib/mini-css-extract-plugin). This way your styles are not dependent on JavaScript:
+Usually, it's recommended to extract the style sheets into a dedicated file in production using the [mini-css-extract-plugin](https://github.com/webpack-contrib/mini-css-extract-plugin). This way your styles are not dependent on JavaScript:
 
 ```js
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
@@ -196,7 +196,7 @@ Bundling CSS with webpack has some nice advantages like referencing images and f
 There are two possibilities to extract a style sheet from the bundle:
 
 - [extract-loader](https://github.com/peerigon/extract-loader) (simpler, but specialized on the css-loader's output)
-- [extract-text-webpack-plugin](https://github.com/webpack-contrib/extract-text-webpack-plugin) (more complex, but works in all use-cases)
+- [mini-css-extract-plugin](https://github.com/webpack-contrib/mini-css-extract-plugin) (use this, when using webpack 4 configuration. Works in all use-cases)
 
 ### Source maps
 
