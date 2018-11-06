@@ -299,7 +299,7 @@ implementations.forEach(implementation => {
                     const originalResolve = module._resolveFilename;
 
                     module._resolveFilename = function (filename) {
-                        if (!filename.match(/node-sass/)) {
+                        if (!filename.match(/^(node-sass|sass)$/)) {
                             return originalResolve.apply(this, arguments);
                         }
                         const err = new Error("Some error");
@@ -312,6 +312,29 @@ implementations.forEach(implementation => {
                     }, { implementation: null }, (err) => {
                         module._resolveFilename = originalResolve;
                         mockRequire.reRequire("node-sass");
+                        err.message.should.match(/Some error/);
+                        done();
+                    });
+                });
+                it("should not swallow errors when trying to load dart-sass", (done) => {
+                    mockRequire.reRequire(pathToSassLoader);
+                    const module = require("module");
+                    const originalResolve = module._resolveFilename;
+
+                    module._resolveFilename = function (filename) {
+                        if (!filename.match(/^(node-sass|sass)$/)) {
+                            return originalResolve.apply(this, arguments);
+                        }
+                        const err = new Error("Some error");
+
+                        err.code = "MODULE_NOT_FOUND";
+                        throw err;
+                    };
+                    runWebpack({
+                        entry: pathToSassLoader + "!" + pathToErrorFile
+                    }, { implementation: null }, (err) => {
+                        module._resolveFilename = originalResolve;
+                        mockRequire.reRequire("sass");
                         err.message.should.match(/Some error/);
                         done();
                     });
