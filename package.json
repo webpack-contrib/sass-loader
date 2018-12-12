@@ -18,7 +18,8 @@
     "test-watch": "webpack --config test/watch/webpack.config.js",
     "test-extract-text": "webpack --config test/extractText/webpack.config.js",
     "test-hmr": "webpack-dev-server --config test/hmr/webpack.config.js --content-base ./test/hmr --hot --inline",
-    "travis:lint": "npm run lint",
+    "travis:lint:commits": "commitlint --from=${TRAVIS_BRANCH} --to=${TRAVIS_COMMIT}",
+    "travis:lint": "npm run lint && npm run travis:lint:commits",
     "travis:test": "npm run test",
     "travis:coverage": "npm run test",
     "pretest": "npm run create-spec",
@@ -34,6 +35,8 @@
     "semver": "^5.5.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^7.2.1",
+    "@commitlint/config-conventional": "^7.1.2",
     "bootstrap-sass": "^3.3.5",
     "css-loader": "^2.0.0",
     "eslint": "^5.10.0",
@@ -68,5 +71,10 @@
   ],
   "repository": "https://github.com/webpack-contrib/sass-loader.git",
   "bugs": "https://github.com/webpack-contrib/sass-loader/issues",
-  "homepage": "https://github.com/webpack-contrib/sass-loader"
+  "homepage": "https://github.com/webpack-contrib/sass-loader",
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  }
 }
