@@ -197,6 +197,7 @@ There are two possibilities to extract a style sheet from the bundle:
 
 - [extract-loader](https://github.com/peerigon/extract-loader) (simpler, but specialized on the css-loader's output)
 - [mini-css-extract-plugin](https://github.com/webpack-contrib/mini-css-extract-plugin) (use this, when using webpack 4 configuration. Works in all use-cases)
+- [extract-css-chunks-webpack-plugin](https://github.com/faceyspacey/extract-css-chunks-webpack-plugin) (hot module reload friendly extended version of mini-css-extract-plugin. HMR real CSS files in dev, works like mini-css in non-dev)
 
 ### Source maps
 
