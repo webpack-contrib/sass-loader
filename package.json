@@ -43,6 +43,8 @@
     "eslint-config-peerigon": "^9.0.0",
     "eslint-plugin-jsdoc": "^3.14.0",
     "file-loader": "^2.0.0",
+    "husky": "^1.2.0",
+    "lint-staged": "^8.1.0",
     "mocha": "^5.2.0",
     "mock-require": "^3.0.1",
     "node-sass": "^4.5.0",
@@ -72,6 +74,17 @@
   "repository": "https://github.com/webpack-contrib/sass-loader.git",
   "bugs": "https://github.com/webpack-contrib/sass-loader/issues",
   "homepage": "https://github.com/webpack-contrib/sass-loader",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
   "commitlint": {
     "extends": [
       "@commitlint/config-conventional"
