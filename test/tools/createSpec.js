@@ -1,10 +1,12 @@
 "use strict";
 
-const nodeSass = require("node-sass");
-const dartSass = require("sass");
-const os = require("os");
 const fs = require("fs");
 const path = require("path");
+const os = require("os");
+
+const dartSass = require("sass");
+const nodeSass = require("node-sass");
+
 const customImporter = require("./customImporter.js");
 const customFunctions = require("./customFunctions.js");
 
@@ -19,13 +21,13 @@ function createSpec(ext) {
     const pathToScopedNpmPkg = path.relative(basePath, path.resolve(testFolder, "node_modules", "@org", "pkg", "./index.scss"));
     const pathToModule = path.relative(basePath, path.resolve(testFolder, "node_modules", "module", "module.scss"));
     const pathToAnother = path.relative(basePath, path.resolve(testFolder, "node_modules", "another", "module.scss"));
-    const pathToFooAlias = path.relative(basePath, path.resolve(testFolder, ext, "another", "alias." + ext));
+    const pathToFooAlias = path.relative(basePath, path.resolve(testFolder, ext, "another", `alias.${  ext}`));
 
     fs.readdirSync(path.join(testFolder, ext))
-        .filter((file) => {
-            return path.extname(file) === "." + ext && file.slice(0, error.length) !== error;
-        })
-        .map((file) => {
+        .filter(
+            (file) => path.extname(file) === `.${  ext}` && file.slice(0, error.length) !== error
+        )
+        .forEach((file) => {
             const fileName = path.join(basePath, file);
             const fileWithoutExt = file.slice(0, -ext.length - 1);
             const sassOptions = {
@@ -33,7 +35,9 @@ function createSpec(ext) {
                     if (url === "import-with-custom-logic") {
                         return customImporter.returnValue;
                     }
-                    if (/\.css$/.test(url) === false) { // Do not transform css imports
+                    // Do not transform css imports
+                    if (/\.css$/.test(url) === false) {
+                        // eslint-disable-next-line no-param-reassign
                         url = url
                             .replace(/^~bootstrap-sass/, pathToBootstrap)
                             .replace(/^~@org\/pkg/, pathToScopedNpmPkg)
@@ -54,8 +58,8 @@ function createSpec(ext) {
 
             if (/prepending-data/.test(fileName)) {
                 sassOptions.indentedSyntax = /\.sass$/.test(fileName);
-                sassOptions.data = "$prepended-data: hotpink" + (sassOptions.indentedSyntax ? "\n" : ";") +
-                    os.EOL + fs.readFileSync(fileName, "utf8");
+                sassOptions.data = `$prepended-data: hotpink${  sassOptions.indentedSyntax ? "\n" : ";" 
+                    }${os.EOL  }${fs.readFileSync(fileName, "utf8")}`;
             } else {
                 sassOptions.file = fileName;
             }
@@ -70,10 +74,10 @@ function createSpec(ext) {
 
                 sassOptions.functions = customFunctions(implementation);
 
-                const name = implementation.info.split("\t")[0];
-                const css = implementation.renderSync(sassOptions).css;
+                const [name] = implementation.info.split("\t");
+                const { css } = implementation.renderSync(sassOptions);
 
-                fs.writeFileSync(path.join(basePath, "spec", name, fileWithoutExt + ".css"), css, "utf8");
+                fs.writeFileSync(path.join(basePath, "spec", name, `${fileWithoutExt}.css`), css, "utf8");
             });
         });
 }

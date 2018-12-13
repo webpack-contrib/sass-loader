@@ -3,17 +3,23 @@
 require("should");
 
 const path = require("path");
-const webpack = require("webpack");
+
 const fs = require("fs");
+
+const webpack = require("webpack");
 const merge = require("webpack-merge");
 const nodeSass = require("node-sass");
 const dartSass = require("sass");
+const mockRequire = require("mock-require");
+
 const customImporter = require("./tools/customImporter.js");
 const customFunctions = require("./tools/customFunctions.js");
+
 const pathToSassLoader = require.resolve("../lib/loader.js");
 const testLoader = require("./tools/testLoader");
+
+// eslint-disable-next-line import/no-dynamic-require
 const sassLoader = require(pathToSassLoader);
-const mockRequire = require("mock-require");
 
 const CR = /\r/g;
 const implementations = [nodeSass, dartSass];
@@ -36,16 +42,16 @@ Object.defineProperty(loaderContextMock, "options", {
 });
 
 implementations.forEach(implementation => {
-    const implementationName = implementation.info.split("\t")[0];
+    const [implementationName] = implementation.info.split("\t");
 
     describe(implementationName, () => {
         syntaxStyles.forEach(ext => {
             function execTest(testId, loaderOptions, webpackOptions) {
-                const bundleName = "bundle." + ext + "." + implementationName + ".js";
+                const bundleName = `bundle.${  ext  }.${  implementationName  }.js`;
 
                 return new Promise((resolve, reject) => {
                     const baseConfig = merge({
-                        entry: path.join(__dirname, ext, testId + "." + ext),
+                        entry: path.join(__dirname, ext, `${  testId  }.${  ext  }`),
                         output: {
                             filename: bundleName
                         }
@@ -86,7 +92,7 @@ implementations.forEach(implementation => {
                     it("should resolve aliases", () => execTest("import-alias", {}, {
                         resolve: {
                             alias: {
-                                "path-to-alias": path.join(__dirname, ext, "another", "alias." + ext)
+                                "path-to-alias": path.join(__dirname, ext, "another", `alias.${  ext  }`)
                             }
                         }
                     }));
@@ -103,7 +109,7 @@ implementations.forEach(implementation => {
                 });
                 describe("prepending data", () => {
                     it("should extend the data-option if present", () => execTest("prepending-data", {
-                        data: "$prepended-data: hotpink" + (ext === "sass" ? "\n" : ";")
+                        data: `$prepended-data: hotpink${  ext === "sass" ? "\n" : ";"  }`
                     }));
                 });
                 // See https://github.com/webpack-contrib/sass-loader/issues/21
@@ -200,13 +206,11 @@ implementations.forEach(implementation => {
                     const cwdGetter = process.cwd;
                     const fakeCwd = path.join(__dirname, "scss");
 
-                    process.cwd = function () {
-                        return fakeCwd;
-                    };
+                    process.cwd = () => fakeCwd;
 
                     return buildWithSourceMaps()
                         .then(() => {
-                            const sourceMap = testLoader.sourceMap;
+                            const { sourceMap } = testLoader;
 
                             sourceMap.should.not.have.property("file");
                             sourceMap.should.have.property("sourceRoot", fakeCwd);
@@ -295,21 +299,28 @@ implementations.forEach(implementation => {
                 });
                 it("should not swallow errors when trying to load node-sass", (done) => {
                     mockRequire.reRequire(pathToSassLoader);
+                    // eslint-disable-next-line global-require
                     const module = require("module");
+                    // eslint-disable-next-line no-underscore-dangle
                     const originalResolve = module._resolveFilename;
 
-                    module._resolveFilename = function (filename) {
+                    // eslint-disable-next-line no-underscore-dangle
+                    module._resolveFilename = function _resolveFilename(filename) {
                         if (!filename.match(/node-sass/)) {
+                            // eslint-disable-next-line prefer-rest-params
                             return originalResolve.apply(this, arguments);
                         }
+
                         const err = new Error("Some error");
 
                         err.code = "MODULE_NOT_FOUND";
+
                         throw err;
                     };
                     runWebpack({
-                        entry: pathToSassLoader + "!" + pathToErrorFile
+                        entry: `${  pathToSassLoader  }!${  pathToErrorFile  }`
                     }, { implementation: null }, (err) => {
+                        // eslint-disable-next-line no-underscore-dangle
                         module._resolveFilename = originalResolve;
                         mockRequire.reRequire("node-sass");
                         err.message.should.match(/Some error/);
@@ -375,7 +386,7 @@ implementations.forEach(implementation => {
         });
 
         function readCss(ext, id) {
-            return fs.readFileSync(path.join(__dirname, ext, "spec", implementationName, id + ".css"), "utf8").replace(CR, "");
+            return fs.readFileSync(path.join(__dirname, ext, "spec", implementationName, `${  id  }.css`), "utf8").replace(CR, "");
         }
 
         function runWebpack(baseConfig, loaderOptions, done) {
@@ -414,5 +425,6 @@ implementations.forEach(implementation => {
 function readBundle(filename) {
     delete require.cache[path.resolve(__dirname, `./output/${ filename }`)];
 
+    // eslint-disable-next-line global-require, import/no-dynamic-require
     return require(`./output/${ filename }`);
 }

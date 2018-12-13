@@ -1,6 +1,7 @@
 "use strict";
 
 const path = require("path");
+
 const sassLoader = require.resolve("../../lib/loader");
 
 module.exports = {
