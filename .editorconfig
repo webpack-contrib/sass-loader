@@ -1,15 +1,13 @@
-# This file is for unifying the coding style for different editors and IDEs.
-# More information at http://EditorConfig.org
-
-# No .editorconfig files above the root directory
-root = true
+# editorconfig.org
 
 [*]
-indent_style = space
-indent_size = 4
 charset = utf-8
-trim_trailing_whitespace = true
-insert_final_newline = true
-
-[package.json]
+indent_style = space
 indent_size = 2
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.md]
+insert_final_newline = true
+trim_trailing_whitespace = false

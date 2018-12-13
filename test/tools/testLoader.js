@@ -1,13 +1,13 @@
-"use strict";
+'use strict';
 
 function testLoader(content, sourceMap) {
-    testLoader.content = content;
-    testLoader.sourceMap = sourceMap;
+  testLoader.content = content;
+  testLoader.sourceMap = sourceMap;
 
-    return "";
+  return '';
 }
 
-testLoader.content = "";
+testLoader.content = '';
 testLoader.sourceMap = null;
 testLoader.filename = __filename;
 
