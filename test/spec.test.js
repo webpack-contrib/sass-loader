@@ -16,6 +16,7 @@
 require("should");
 const fs = require("fs");
 const path = require("path");
+
 const createSpec = require("./tools/createSpec.js");
 
 const testFolder = __dirname;
@@ -42,7 +43,7 @@ function writeSpec(folder, spec) {
 }
 
 ["scss", "sass"].forEach((ext) => {
-    describe(ext + " spec", () => {
+    describe(`${ext} spec`, () => {
         const specFolder = path.resolve(testFolder, ext, "spec");
         const oldSpec = readSpec(specFolder);
 
@@ -52,7 +53,7 @@ function writeSpec(folder, spec) {
 
         Object.keys(oldSpec)
             .forEach((specName) => {
-                it(specName + " should not have been changed", () => {
+                it(`${specName} should not have been changed`, () => {
                     oldSpec[specName].should.eql(newSpec[specName]);
                 });
             });

@@ -1,7 +1,10 @@
 "use strict";
 
 const path = require("path");
+
+// eslint-disable-next-line import/no-unresolved
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+
 const sassLoader = require.resolve("../../lib/loader");
 
 const extractSass = new ExtractTextPlugin({
