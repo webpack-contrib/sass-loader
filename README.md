@@ -87,6 +87,40 @@ module.exports = {
 
 See [the Node Sass documentation](https://github.com/sass/node-sass/blob/master/README.md#options) for all available Sass options.
 
+By default the loader resolve the implementation based on your dependencies.
+Just add required implementation to `package.json` 
+(`node-sass` or `sass` package) and install dependencies. 
+
+Example where the `sass-loader` loader uses the `sass` (`dart-sass`) implementation:
+
+**package.json**
+
+```json
+{
+   "devDependencies": {
+      "sass-loader": "*",
+      "sass": "*"
+   }
+}
+```
+
+Example where the `sass-loader` loader uses the `node-sass` implementation:
+
+**package.json**
+
+```json
+{
+   "devDependencies": {
+      "sass-loader": "*",
+      "node-sass": "*"
+   }
+}
+```
+
+Beware the situation 
+when `node-sass` and `sass` was installed, by default the `sass-loader` 
+prefers `node-sass`, to avoid this situation use the `implementation` option. 
+
 The special `implementation` option determines which implementation of Sass to
 use. It takes either a [Node Sass][] or a [Dart Sass][] module. For example, to
 use Dart Sass, you'd pass:

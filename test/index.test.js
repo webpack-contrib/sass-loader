@@ -50,6 +50,52 @@ Object.defineProperty(loaderContextMock, 'options', {
 implementations.forEach((implementation) => {
   const [implementationName] = implementation.info.split('\t');
 
+  function readCss(ext, id) {
+    return fs
+      .readFileSync(
+        path.join(__dirname, ext, 'spec', implementationName, `${id}.css`),
+        'utf8'
+      )
+      .replace(CR, '');
+  }
+
+  function runWebpack(baseConfig, loaderOptions, done) {
+    const webpackConfig = merge(
+      {
+        mode: 'development',
+        output: {
+          path: path.join(__dirname, 'output'),
+          filename: 'bundle.js',
+          libraryTarget: 'commonjs2',
+        },
+        module: {
+          rules: [
+            {
+              test: /\.s[ac]ss$/,
+              use: [
+                { loader: 'raw-loader' },
+                {
+                  loader: pathToSassLoader,
+                  options: merge({ implementation }, loaderOptions),
+                },
+              ],
+            },
+          ],
+        },
+      },
+      baseConfig
+    );
+
+    webpack(webpackConfig, (webpackErr, stats) => {
+      const err =
+        webpackErr ||
+        (stats.hasErrors() && stats.compilation.errors[0]) ||
+        (stats.hasWarnings() && stats.compilation.warnings[0]);
+
+      done(err || null);
+    });
+  }
+
   describe(implementationName, () => {
     syntaxStyles.forEach((ext) => {
       function execTest(testId, loaderOptions, webpackOptions) {
@@ -405,7 +451,7 @@ implementations.forEach((implementation) => {
             }
           );
         });
-        it('should not swallow errors when trying to load node-sass', (done) => {
+        it('should not swallow errors when trying to load sass implementation', (done) => {
           mockRequire.reRequire(pathToSassLoader);
           // eslint-disable-next-line global-require
           const module = require('module');
@@ -414,7 +460,7 @@ implementations.forEach((implementation) => {
 
           // eslint-disable-next-line no-underscore-dangle
           module._resolveFilename = function _resolveFilename(filename) {
-            if (!filename.match(/node-sass/)) {
+            if (!filename.match(/^(node-sass|sass)$/)) {
               // eslint-disable-next-line prefer-rest-params
               return originalResolve.apply(this, arguments);
             }
@@ -520,54 +566,63 @@ implementations.forEach((implementation) => {
             }
           );
         });
+
+        const [implName] = implementation.info.trim().split(/\s/);
+
+        it(`should load ${implName}`, (done) => {
+          mockRequire.reRequire(pathToSassLoader);
+          // eslint-disable-next-line global-require
+          const module = require('module');
+          // eslint-disable-next-line no-underscore-dangle
+          const originalResolve = module._resolveFilename;
+
+          // eslint-disable-next-line no-underscore-dangle
+          module._resolveFilename = function _resolveFilename(filename) {
+            if (implName === 'node-sass' && filename.match(/^sass$/)) {
+              const err = new Error('Some error');
+
+              err.code = 'MODULE_NOT_FOUND';
+
+              throw err;
+            }
+
+            if (implName === 'dart-sass' && filename.match(/^node-sass$/)) {
+              const err = new Error('Some error');
+
+              err.code = 'MODULE_NOT_FOUND';
+
+              throw err;
+            }
+
+            // eslint-disable-next-line prefer-rest-params
+            return originalResolve.apply(this, arguments);
+          };
+
+          const pathToFile = path.resolve(__dirname, './scss/simple.scss');
+
+          runWebpack(
+            {
+              entry: pathToFile,
+            },
+            { implementation: null },
+            (err) => {
+              // eslint-disable-next-line no-underscore-dangle
+              module._resolveFilename = originalResolve;
+
+              if (implName === 'node-sass') {
+                mockRequire.reRequire('node-sass');
+              }
+
+              if (implName === 'dart-sass') {
+                mockRequire.reRequire('sass');
+              }
+
+              done(err);
+            }
+          );
+        });
       });
     });
-
-    function readCss(ext, id) {
-      return fs
-        .readFileSync(
-          path.join(__dirname, ext, 'spec', implementationName, `${id}.css`),
-          'utf8'
-        )
-        .replace(CR, '');
-    }
-
-    function runWebpack(baseConfig, loaderOptions, done) {
-      const webpackConfig = merge(
-        {
-          mode: 'development',
-          output: {
-            path: path.join(__dirname, 'output'),
-            filename: 'bundle.js',
-            libraryTarget: 'commonjs2',
-          },
-          module: {
-            rules: [
-              {
-                test: /\.s[ac]ss$/,
-                use: [
-                  { loader: 'raw-loader' },
-                  {
-                    loader: pathToSassLoader,
-                    options: merge({ implementation }, loaderOptions),
-                  },
-                ],
-              },
-            ],
-          },
-        },
-        baseConfig
-      );
-
-      webpack(webpackConfig, (webpackErr, stats) => {
-        const err =
-          webpackErr ||
-          (stats.hasErrors() && stats.compilation.errors[0]) ||
-          (stats.hasWarnings() && stats.compilation.warnings[0]);
-
-        done(err || null);
-      });
-    }
   });
 });
 
