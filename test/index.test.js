@@ -47,6 +47,8 @@ Object.defineProperty(loaderContextMock, 'options', {
   },
 });
 
+/* global should */
+
 implementations.forEach((implementation) => {
   const [implementationName] = implementation.info.split('\t');
 
@@ -185,9 +187,17 @@ implementations.forEach((implementation) => {
             }));
         });
         describe('prepending data', () => {
-          it('should extend the data-option if present', () =>
+          it('should extend the data option if present and it is string', () =>
             execTest('prepending-data', {
               data: `$prepended-data: hotpink${ext === 'sass' ? '\n' : ';'}`,
+            }));
+          it('should extend the data option if present and it is function', () =>
+            execTest('prepending-data', {
+              data: (loaderContext) => {
+                should.exist(loaderContext);
+
+                return `$prepended-data: hotpink${ext === 'sass' ? '\n' : ';'}`;
+              },
             }));
         });
         // See https://github.com/webpack-contrib/sass-loader/issues/21
