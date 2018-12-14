@@ -169,6 +169,8 @@ implementations.forEach((implementation) => {
                 },
               }
             ));
+          it('should resolve sass field correctly', () =>
+            execTest(`import-sass-field`));
         });
         describe('custom importers', () => {
           it('should use custom importer', () =>

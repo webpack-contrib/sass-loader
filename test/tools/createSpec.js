@@ -38,6 +38,26 @@ function createSpec(ext) {
     basePath,
     path.resolve(testFolder, ext, 'another', `alias.${ext}`)
   );
+  const pathToScssSassField = path.relative(
+    basePath,
+    path.resolve(
+      testFolder,
+      'node_modules',
+      'scss-sass-field',
+      'nested',
+      'style.scss'
+    )
+  );
+  const pathToSASSSassField = path.relative(
+    basePath,
+    path.resolve(
+      testFolder,
+      'node_modules',
+      'sass-sass-field',
+      'nested',
+      'style.sass'
+    )
+  );
 
   fs.readdirSync(path.join(testFolder, ext))
     .filter(
@@ -57,6 +77,8 @@ function createSpec(ext) {
           if (/\.css$/.test(url) === false) {
             // eslint-disable-next-line no-param-reassign
             url = url
+              .replace(/^~scss-sass-field/, pathToScssSassField)
+              .replace(/^~sass-sass-field/, pathToSASSSassField)
               .replace(/^~bootstrap-sass/, pathToBootstrap)
               .replace(/^~@org\/pkg/, pathToScopedNpmPkg)
               .replace(/^~module/, pathToModule)
