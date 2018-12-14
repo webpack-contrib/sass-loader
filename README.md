@@ -274,6 +274,27 @@ If you want to prepend Sass code before the actual entry file, you can set the `
 }
 ```
 
+The `data` option supports `Function` notation:
+
+```javascript
+{
+    loader: "sass-loader",
+    options: {
+        data: (loaderContext) => {
+          // More information about avalaible options https://webpack.js.org/api/loaders/
+          const { resourcePath, rootContext } = loaderContext;
+          const relativePath = path.relative(rootContext,resourcePath);
+          
+          if (relativePath === "styles/foo.scss") {
+             return "$value: 100px;"
+          }
+          
+          return "$value: 200px;"
+        }
+    }
+}
+```
+
 **Please note:** Since you're injecting code, this will break the source mappings in your entry file. Often there's a simpler solution than this, like multiple Sass entry files.
 
 <h2 align="center">Maintainers</h2>
