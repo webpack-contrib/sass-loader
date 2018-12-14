@@ -171,6 +171,11 @@ implementations.forEach((implementation) => {
             ));
           it('should resolve sass field correctly', () =>
             execTest(`import-sass-field`));
+          // Works only in dart-sass implementation
+          if (implementation === dartSass) {
+            it('should resolve index file in module correctly', () =>
+              execTest('import-index'));
+          }
         });
         describe('custom importers', () => {
           it('should use custom importer', () =>

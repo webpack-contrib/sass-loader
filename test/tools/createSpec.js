@@ -113,6 +113,13 @@ function createSpec(ext) {
           return;
         }
 
+        if (fileWithoutExt === 'import-index' && implementation !== dartSass) {
+          // Skip CSS imports for all implementations that are not node-sass
+          // CSS imports is a legacy feature that we only support for node-sass
+          // See discussion https://github.com/webpack-contrib/sass-loader/pull/573/files?#r199109203
+          return;
+        }
+
         sassOptions.functions = customFunctions(implementation);
 
         const [name] = implementation.info.split('\t');
