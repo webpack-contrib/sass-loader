@@ -24,3 +24,6 @@
 @import "~module";
 /* @import "~another"; */
 @import "~another";
+/* @import "~@org/style"; */
+// Should prefer `scss`
+@import "~@org/style";

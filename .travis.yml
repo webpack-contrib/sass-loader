@@ -8,28 +8,21 @@ jobs:
   fast_finish: true
   allow_failures:
     - env: WEBPACK_VERSION=canary
-    - node_js: 9
   include:
-    - &test-latest
-      stage: Webpack latest
-      node_js: 6
-      env: WEBPACK_VERSION=latest JOB_PART=test
-      script: npm run travis:$JOB_PART
-    - <<: *test-latest
-      node_js: 8
+    - node_js: 6
       env: WEBPACK_VERSION=latest JOB_PART=lint
       script: npm run travis:$JOB_PART
-    - <<: *test-latest
-      node_js: 8
+    - node_js: 6
+      env: WEBPACK_VERSION=latest JOB_PART=test
+      script: npm run travis:$JOB_PART
+    - node_js: 8
       env: WEBPACK_VERSION=latest JOB_PART=coverage
       script: npm run travis:$JOB_PART
       after_success: 'bash <(curl -s https://codecov.io/bash)'
-    - stage: Webpack canary
-      node_js: 8
-      env: WEBPACK_VERSION=4.0.0 JOB_PART=test
+    - node_js: 10
+      env: WEBPACK_VERSION=latest JOB_PART=test
       script: npm run travis:$JOB_PART
-    - stage: NodeJS Next
-      node_js: 9
+    - node_js: 11
       env: WEBPACK_VERSION=latest JOB_PART=test
       script: npm run travis:$JOB_PART
 before_install:

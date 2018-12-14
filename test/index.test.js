@@ -295,7 +295,7 @@ implementations.forEach((implementation) => {
             // This number needs to be updated if imports.scss or any dependency of that changes.
             // Node Sass includes a duplicate entry, Dart Sass does not.
             sourceMap.sources.should.have.length(
-              implementation === nodeSass ? 11 : 10
+              implementation === nodeSass ? 12 : 11
             );
             sourceMap.sources.forEach((sourcePath) =>
               fs.existsSync(path.resolve(sourceMap.sourceRoot, sourcePath))
