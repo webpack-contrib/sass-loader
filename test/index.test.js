@@ -190,6 +190,13 @@ implementations.forEach((implementation) => {
             execTest('custom-functions', {
               functions: customFunctions(implementation),
             }));
+          it('should expose custom functions if the option is a function', () =>
+            execTest('custom-functions', {
+              functions: (loaderContext) => {
+                should.exist(loaderContext);
+                return customFunctions(implementation);
+              },
+            }));
         });
         describe('prepending data', () => {
           it('should extend the data option if present and it is string', () =>
