@@ -244,7 +244,9 @@ module.exports = {
         rules: [{
             test: /\.scss$/,
             use: [{
-                loader: "style-loader"
+                loader: "style-loader", options: {
+                    sourceMap: true
+                }
             }, {
                 loader: "css-loader", options: {
                     sourceMap: true
