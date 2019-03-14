@@ -27,8 +27,8 @@
     "release": "standard-version"
   },
   "dependencies": {
-    "clone-deep": "^4.0.1",
     "loader-utils": "^1.0.1",
+    "lodash.clonedeep": "^4.5.0",
     "lodash.tail": "^4.1.1",
     "neo-async": "^2.5.0",
     "pify": "^4.0.1",
