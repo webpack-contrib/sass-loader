@@ -400,7 +400,7 @@ implementations.forEach((implementation) => {
                 err.message.should.match(/\(line 2, column 5\)/);
               } else {
                 err.message.should.match(/Expected "{"./);
-                err.message.should.match(/\(line 3, column 1\)/);
+                err.message.should.match(/\(line 2, column 15\)/);
               }
               err.message.indexOf(pathToErrorFile).should.not.equal(-1);
               done();
@@ -422,7 +422,7 @@ implementations.forEach((implementation) => {
                 err.message.should.match(/\(line 2, column 5\)/);
               } else {
                 err.message.should.match(/Expected "{"./);
-                err.message.should.match(/\(line 3, column 1\)/);
+                err.message.should.match(/\(line 2, column 15\)/);
               }
               err.message.indexOf(pathToErrorFile).should.not.equal(-1);
               done();
