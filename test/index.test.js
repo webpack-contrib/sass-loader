@@ -154,6 +154,10 @@ implementations.forEach((implementation) => {
             execTest('bootstrap-sass'));
           it('should correctly import scoped npm packages', () =>
             execTest('import-from-npm-org-pkg'));
+          it('should directly import scoped npm packages', () =>
+            execTest('import-directly-from-npm-org-pkg', {
+              includePaths: [path.join(__dirname, 'node_modules')],
+            }));
           it('should resolve aliases', () =>
             execTest(
               'import-alias',

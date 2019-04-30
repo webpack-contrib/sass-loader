@@ -18,6 +18,10 @@ function createSpec(ext) {
   const basePath = path.join(testFolder, ext);
   const testNodeModules =
     path.relative(basePath, path.join(testFolder, 'node_modules')) + path.sep;
+  const testDirectNodeModules = path.relative(
+    basePath,
+    path.join(testFolder, 'node_modules', '@')
+  );
   const pathToBootstrap = path.relative(
     basePath,
     path.resolve(testFolder, '..', 'node_modules', 'bootstrap-sass')
@@ -84,6 +88,7 @@ function createSpec(ext) {
               .replace(/^~module/, pathToModule)
               .replace(/^~another/, pathToAnother)
               .replace(/^~/, testNodeModules)
+              .replace(/^@/, testDirectNodeModules)
               .replace(/^path-to-alias/, pathToFooAlias);
           }
           return {
