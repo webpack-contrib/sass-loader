@@ -8,6 +8,7 @@ const dartSass = require('sass');
 const nodeSass = require('node-sass');
 
 const customImporter = require('./customImporter.js');
+const customResolver = require('./customResolver.js');
 const customFunctions = require('./customFunctions.js');
 
 const implementations = [nodeSass, dartSass];
@@ -21,6 +22,10 @@ function createSpec(ext) {
   const pathToBootstrap = path.relative(
     basePath,
     path.resolve(testFolder, '..', 'node_modules', 'bootstrap-sass')
+  );
+  const pathToUnresolvable = path.relative(
+    basePath,
+    path.resolve(testFolder, 'node_modules', 'scss', 'unresolvable.scss')
   );
   const pathToScopedNpmPkg = path.relative(
     basePath,
@@ -73,6 +78,9 @@ function createSpec(ext) {
           if (url === 'import-with-custom-logic') {
             return customImporter.returnValue;
           }
+          if (url === 'import-with-custom-resolver') {
+            return customResolver.returnValue;
+          }
           // Do not transform css imports
           if (/\.css$/.test(url) === false) {
             // eslint-disable-next-line no-param-reassign
@@ -83,6 +91,7 @@ function createSpec(ext) {
               .replace(/^~@org\/pkg/, pathToScopedNpmPkg)
               .replace(/^~module/, pathToModule)
               .replace(/^~another/, pathToAnother)
+              .replace(/^unresolvable/, pathToUnresolvable)
               .replace(/^~/, testNodeModules)
               .replace(/^path-to-alias/, pathToFooAlias);
           }

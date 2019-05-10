@@ -13,6 +13,7 @@ const dartSass = require('sass');
 const mockRequire = require('mock-require');
 
 const customImporter = require('./tools/customImporter.js');
+const customResolver = require('./tools/customResolver.js');
 const customFunctions = require('./tools/customFunctions.js');
 
 const pathToSassLoader = require.resolve('../lib/loader.js');
@@ -183,6 +184,19 @@ implementations.forEach((implementation) => {
           it('should use custom importer', () =>
             execTest('custom-importer', {
               importer: customImporter,
+            }));
+        });
+        describe('custom resolver', () => {
+          it('should use custom resolver', () =>
+            execTest('custom-resolver', {
+              resolver: customResolver,
+            }));
+        });
+        describe('no resolver', () => {
+          it('should use custom resolver', () =>
+            execTest('no-resolver', {
+              resolver: false,
+              includePaths: [path.join(__dirname, 'node_modules', 'scss')],
             }));
         });
         describe('custom functions', () => {
