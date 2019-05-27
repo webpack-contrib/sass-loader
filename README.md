@@ -51,6 +51,9 @@ module.exports = {
     module: {
         rules: [{
             test: /\.scss$/,
+            resolve: {
+                extensions: ['.scss', '.sass'],
+            },
             use: [
                 "style-loader", // creates style nodes from JS strings
                 "css-loader", // translates CSS into CommonJS
@@ -70,6 +73,9 @@ module.exports = {
     module: {
         rules: [{
             test: /\.scss$/,
+            resolve: {
+                extensions: ['.scss', '.sass'],
+            },
             use: [{
                 loader: "style-loader"
             }, {
@@ -152,6 +158,9 @@ module.exports = {
     module: {
         rules: [{
             test: /\.scss$/,
+            resolve: {
+                extensions: ['.scss', '.sass'],
+            },
             use: [{
                 loader: "style-loader"
             }, {
@@ -180,6 +189,9 @@ module.exports = {
     module: {
         rules: [{
             test: /\.scss$/,
+            resolve: {
+                extensions: ['.scss', '.sass'],
+            },
             use: [
                 // fallback to style-loader in development
                 process.env.NODE_ENV !== 'production' ? 'style-loader' : MiniCssExtractPlugin.loader,
@@ -243,6 +255,9 @@ module.exports = {
     module: {
         rules: [{
             test: /\.scss$/,
+            resolve: {
+                extensions: ['.scss', '.sass'],
+            },
             use: [{
                 loader: "style-loader", options: {
                     sourceMap: true
