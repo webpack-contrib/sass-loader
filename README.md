@@ -254,7 +254,7 @@ module.exports = {
             }, {
                 loader: "sass-loader", options: {
                     sourceMap: true,
-                    outputStyle: 'compressed' // for node-sas is very important in order to get accuracy line numbers
+                    outputStyle: 'compressed' // for node-sass is very important in order to get accuracy line numbers
                 }
             }]
         }]
