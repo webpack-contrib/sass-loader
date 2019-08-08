@@ -61,7 +61,7 @@ implementations.forEach((implementation) => {
       .replace(CR, '');
   }
 
-  function runWebpack(baseConfig, loaderOptions, done) {
+  function runWebpack(baseConfig, loaderOptions, resolveOptions = {}, done) {
     const webpackConfig = merge(
       {
         mode: 'development',
@@ -74,6 +74,7 @@ implementations.forEach((implementation) => {
           rules: [
             {
               test: /\.s[ac]ss$/,
+              resolve: resolveOptions,
               use: [
                 { loader: 'raw-loader' },
                 {
@@ -100,7 +101,7 @@ implementations.forEach((implementation) => {
 
   describe(implementationName, () => {
     syntaxStyles.forEach((ext) => {
-      function execTest(testId, loaderOptions, webpackOptions) {
+      function execTest(testId, loaderOptions, webpackOptions, resolveOptions) {
         const bundleName = `bundle.${ext}.${implementationName}.js`;
 
         return new Promise((resolve, reject) => {
@@ -114,7 +115,7 @@ implementations.forEach((implementation) => {
             webpackOptions
           );
 
-          runWebpack(baseConfig, loaderOptions, (err) =>
+          runWebpack(baseConfig, loaderOptions, resolveOptions, (err) =>
             err ? reject(err) : resolve()
           );
         }).then(() => {
@@ -173,6 +174,17 @@ implementations.forEach((implementation) => {
             ));
           it('should resolve sass field correctly', () =>
             execTest(`import-sass-field`));
+          it('should resolve style field correctly', () =>
+            execTest(`import-style-field`));
+          it('should resolve main field correctly', () =>
+            execTest(`import-main-field`));
+          it('should resolve custom-sass field correctly', () =>
+            execTest(
+              `import-custom-sass-field`,
+              {},
+              {},
+              { mainFields: ['custom-sass', '...'] }
+            ));
           // Works only in dart-sass implementation
           if (implementation === dartSass) {
             it('should resolve index file in module correctly', () =>
@@ -279,6 +291,7 @@ implementations.forEach((implementation) => {
                   filename: 'bundle.multiple-compilations.[name].js',
                 },
               },
+              {},
               {},
               (err) => (err ? reject(err) : resolve())
             );
@@ -392,6 +405,7 @@ implementations.forEach((implementation) => {
               entry: pathToErrorFile,
             },
             {},
+            {},
             (err) => {
               if (implementation === nodeSass) {
                 err.message.should.match(
@@ -412,6 +426,7 @@ implementations.forEach((implementation) => {
             {
               entry: pathToErrorImport,
             },
+            {},
             {},
             (err) => {
               // check for file excerpt
@@ -435,6 +450,7 @@ implementations.forEach((implementation) => {
               entry: pathToErrorFileNotFound,
             },
             {},
+            {},
             (err) => {
               err.message.should.match(/@import "does-not-exist";/);
               if (implementation === nodeSass) {
@@ -456,6 +472,7 @@ implementations.forEach((implementation) => {
             {
               entry: pathToErrorFileNotFound2,
             },
+            {},
             {},
             (err) => {
               err.message.should.match(/@import "\.\/another\/_module\.scss";/);
@@ -500,6 +517,7 @@ implementations.forEach((implementation) => {
               entry: `${pathToSassLoader}!${pathToErrorFile}`,
             },
             { implementation: null },
+            {},
             (err) => {
               // eslint-disable-next-line no-underscore-dangle
               module._resolveFilename = originalResolve;
@@ -518,6 +536,7 @@ implementations.forEach((implementation) => {
             {
               implementation: merge(nodeSass, { info: 'asdfj' }),
             },
+            {},
             (err) => {
               err.message.should.match(/Unknown Sass implementation "asdfj"\./);
               done();
@@ -533,6 +552,7 @@ implementations.forEach((implementation) => {
             {
               implementation: merge(nodeSass, { info: 'node-sass\t1' }),
             },
+            {},
             (err) => {
               err.message.should.match(/Invalid Sass version "1"\./);
               done();
@@ -548,6 +568,7 @@ implementations.forEach((implementation) => {
             {
               implementation: merge(nodeSass, { info: 'node-sass\t3.0.0' }),
             },
+            {},
             (err) => {
               err.message.should.match(
                 /Node Sass version 3\.0\.0 is incompatible with \^4\.0\.0\./
@@ -565,6 +586,7 @@ implementations.forEach((implementation) => {
             {
               implementation: merge(nodeSass, { info: 'dart-sass\t1.2.0' }),
             },
+            {},
             (err) => {
               err.message.should.match(
                 /Dart Sass version 1\.2\.0 is incompatible with \^1\.3\.0\./
@@ -582,6 +604,7 @@ implementations.forEach((implementation) => {
             {
               implementation: merge(nodeSass, { info: 'strange-sass\t1.0.0' }),
             },
+            {},
             (err) => {
               err.message.should.match(
                 /Unknown Sass implementation "strange-sass"\./
@@ -629,6 +652,7 @@ implementations.forEach((implementation) => {
               entry: pathToFile,
             },
             { implementation: null },
+            {},
             (err) => {
               // eslint-disable-next-line no-underscore-dangle
               module._resolveFilename = originalResolve;

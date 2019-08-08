@@ -48,12 +48,72 @@ function createSpec(ext) {
       'style.scss'
     )
   );
+  const pathToScssStyleField = path.relative(
+    basePath,
+    path.resolve(
+      testFolder,
+      'node_modules',
+      'scss-style-field',
+      'nested',
+      'style.scss'
+    )
+  );
+  const pathToScssCustomSassField = path.relative(
+    basePath,
+    path.resolve(
+      testFolder,
+      'node_modules',
+      'scss-custom-sass-field',
+      'nested',
+      'style.scss'
+    )
+  );
+  const pathToScssMainField = path.relative(
+    basePath,
+    path.resolve(
+      testFolder,
+      'node_modules',
+      'scss-main-field',
+      'nested',
+      'style.scss'
+    )
+  );
   const pathToSASSSassField = path.relative(
     basePath,
     path.resolve(
       testFolder,
       'node_modules',
       'sass-sass-field',
+      'nested',
+      'style.sass'
+    )
+  );
+  const pathToSASSStyleField = path.relative(
+    basePath,
+    path.resolve(
+      testFolder,
+      'node_modules',
+      'sass-style-field',
+      'nested',
+      'style.sass'
+    )
+  );
+  const pathToSASSCustomSassField = path.relative(
+    basePath,
+    path.resolve(
+      testFolder,
+      'node_modules',
+      'sass-custom-sass-field',
+      'nested',
+      'style.sass'
+    )
+  );
+  const pathToSASSMainField = path.relative(
+    basePath,
+    path.resolve(
+      testFolder,
+      'node_modules',
+      'sass-main-field',
       'nested',
       'style.sass'
     )
@@ -78,7 +138,13 @@ function createSpec(ext) {
             // eslint-disable-next-line no-param-reassign
             url = url
               .replace(/^~scss-sass-field/, pathToScssSassField)
+              .replace(/^~scss-style-field/, pathToScssStyleField)
+              .replace(/^~scss-custom-sass-field/, pathToScssCustomSassField)
+              .replace(/^~scss-main-field/, pathToScssMainField)
               .replace(/^~sass-sass-field/, pathToSASSSassField)
+              .replace(/^~sass-style-field/, pathToSASSStyleField)
+              .replace(/^~sass-custom-sass-field/, pathToSASSCustomSassField)
+              .replace(/^~sass-main-field/, pathToSASSMainField)
               .replace(/^~bootstrap-sass/, pathToBootstrap)
               .replace(/^~@org\/pkg/, pathToScopedNpmPkg)
               .replace(/^~module/, pathToModule)
