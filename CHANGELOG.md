@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="7.2.0"></a>
+# [7.2.0](https://github.com/webpack-contrib/sass-loader/compare/v7.1.0...v7.2.0) (2019-08-08)
+
+
+### Bug Fixes
+
+* better handle stdin in sources ([#681](https://github.com/webpack-contrib/sass-loader/issues/681)) ([e279f2a](https://github.com/webpack-contrib/sass-loader/commit/e279f2a))
+* prefer `sass`/`scss`/`css` extensions ([#711](https://github.com/webpack-contrib/sass-loader/issues/711)) ([6fc9d4e](https://github.com/webpack-contrib/sass-loader/commit/6fc9d4e))
+* relax node engine ([#708](https://github.com/webpack-contrib/sass-loader/issues/708)) ([2a51502](https://github.com/webpack-contrib/sass-loader/commit/2a51502))
+
+
+### Features
+
+* allow passing `functions` option as function ([#651](https://github.com/webpack-contrib/sass-loader/issues/651)) ([6c9654d](https://github.com/webpack-contrib/sass-loader/commit/6c9654d))
+* support `data` as `Function` ([#648](https://github.com/webpack-contrib/sass-loader/issues/648)) ([aa64e1b](https://github.com/webpack-contrib/sass-loader/commit/aa64e1b))
+* support `sass` and `style` fields in `package.json` ([#647](https://github.com/webpack-contrib/sass-loader/issues/647)) ([a8709c9](https://github.com/webpack-contrib/sass-loader/commit/a8709c9))
+* support auto resolving `dart-sass` ([ff90dd6](https://github.com/webpack-contrib/sass-loader/commit/ff90dd6))
+
+
+
 <a name="7.1.0"></a>
 # [7.1.0](https://github.com/webpack-contrib/sass-loader/compare/v7.0.3...v7.1.0) (2018-08-01)
 
