@@ -5,7 +5,7 @@ const path = require('path');
 // eslint-disable-next-line import/no-unresolved
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-const sassLoader = require.resolve('../../lib/loader');
+const sassLoader = require.resolve('../../src/cjs');
 
 const extractSass = new ExtractTextPlugin({
   filename: '[name].[contenthash].css',

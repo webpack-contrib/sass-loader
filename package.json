@@ -4,14 +4,17 @@
   "description": "Sass loader for webpack",
   "author": "J. Tangelder",
   "license": "MIT",
-  "main": "lib/loader.js",
+  "main": "dist/cjs.js",
   "files": [
-    "lib"
+    "dist"
   ],
   "scripts": {
     "appveyor:test": "npm test",
+    "prebuild": "npm run clean",
+    "build": "cross-env NODE_ENV=production babel src -d dist --ignore \"src/**/*.test.js\" --copy-files",
+    "clean": "del-cli dist",
     "create-spec": "node test/tools/runCreateSpec.js",
-    "lint": "eslint lib test",
+    "lint": "eslint src test",
     "test": "nyc mocha -R spec -t 10000",
     "test-bootstrap-sass": "webpack-dev-server --config test/bootstrapSass/webpack.config.js --content-base ./test/bootstrapSass",
     "test-source-map": "webpack-dev-server --config test/sourceMap/webpack.config.js --content-base ./test/sourceMap --inline",
@@ -24,6 +27,7 @@
     "travis:coverage": "npm run test",
     "pretest": "npm run create-spec",
     "posttest": "npm run lint",
+    "prepare": "npm run build",
     "release": "standard-version"
   },
   "dependencies": {
@@ -34,16 +38,21 @@
     "semver": "^6.3.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
     "@commitlint/cli": "^7.2.1",
     "@commitlint/config-conventional": "^7.1.2",
     "@webpack-contrib/eslint-config-webpack": "^3.0.0",
     "bootstrap-sass": "^3.3.5",
     "css-loader": "^2.0.0",
+    "cross-env": "^5.2.0",
     "eslint": "^5.10.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsdoc": "^4.4.3",
     "eslint-plugin-prettier": "^3.0.0",
     "file-loader": "^3.0.1",
+    "del-cli": "^1.1.0",
     "husky": "^1.2.0",
     "lint-staged": "^8.1.0",
     "mocha": "^6.0.2",
