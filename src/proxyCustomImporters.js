@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * Creates new custom importers that use the given `resourcePath` if libsass calls the custom importer with `prev`
  * being 'stdin'.

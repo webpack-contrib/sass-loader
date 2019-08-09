@@ -1,12 +1,3 @@
-[![npm][npm]][npm-url]
-[![node][node]][node-url]
-[![npm-stats][npm-stats]][npm-url]
-[![deps][deps]][deps-url]
-[![travis][travis]][travis-url]
-[![appveyor][appveyor]][appveyor-url]
-[![coverage][cover]][cover-url]
-[![chat][chat]][chat-url]
-
 <div align="center">
   <img height="100"
     src="https://worldvectorlogo.com/logos/sass-1.svg">
@@ -17,6 +8,15 @@
   <h1>Sass Loader</h1>
   <p>Loads a Sass/SCSS file and compiles it to CSS.</p>
 </div>
+
+[![npm][npm]][npm-url]
+[![node][node]][node-url]
+[![npm-stats][npm-stats]][npm-url]
+[![deps][deps]][deps-url]
+[![travis][travis]][travis-url]
+[![appveyor][appveyor]][appveyor-url]
+[![coverage][cover]][cover-url]
+[![chat][chat]][chat-url]
 
 Use the [css-loader](https://github.com/webpack-contrib/css-loader) or the [raw-loader](https://github.com/webpack-contrib/raw-loader) to turn it into a JS module and the [mini-css-extract-plugin](https://github.com/webpack-contrib/mini-css-extract-plugin) to extract it into a separate file.
 Looking for the webpack 1 loader? Check out the [archive/webpack-1 branch](https://github.com/webpack-contrib/sass-loader/tree/archive/webpack-1).
@@ -33,8 +33,8 @@ and it requires you to install either [Node Sass](https://github.com/sass/node-s
 own. This allows you to control the versions of all your dependencies, and to
 choose which Sass implementation to use.
 
-[Node Sass]: https://github.com/sass/node-sass
-[Dart Sass]: http://sass-lang.com/dart-sass
+[node sass]: https://github.com/sass/node-sass
+[dart sass]: http://sass-lang.com/dart-sass
 
 <h2 align="center">Examples</h2>
 
@@ -44,52 +44,59 @@ Chain the sass-loader with the [css-loader](https://github.com/webpack-contrib/c
 npm install style-loader css-loader --save-dev
 ```
 
+**webpack.config.js**
+
 ```js
-// webpack.config.js
 module.exports = {
-	...
-    module: {
-        rules: [{
-            test: /\.scss$/,
-            use: [
-                "style-loader", // creates style nodes from JS strings
-                "css-loader", // translates CSS into CommonJS
-                "sass-loader" // compiles Sass to CSS, using Node Sass by default
-            ]
-        }]
-    }
+  module: {
+    rules: [
+      {
+        test: /\.scss$/,
+        use: [
+          'style-loader', // creates style nodes from JS strings
+          'css-loader', // translates CSS into CommonJS
+          'sass-loader', // compiles Sass to CSS, using Node Sass by default
+        ],
+      },
+    ],
+  },
 };
 ```
 
 You can also pass options directly to [Node Sass][] or [Dart Sass][]:
 
+**webpack.config.js**
+
 ```js
-// webpack.config.js
 module.exports = {
-	...
-    module: {
-        rules: [{
-            test: /\.scss$/,
-            use: [{
-                loader: "style-loader"
-            }, {
-                loader: "css-loader"
-            }, {
-                loader: "sass-loader",
-                options: {
-                    includePaths: ["absolute/path/a", "absolute/path/b"]
-                }
-            }]
-        }]
-    }
+  module: {
+    rules: [
+      {
+        test: /\.scss$/,
+        use: [
+          {
+            loader: 'style-loader',
+          },
+          {
+            loader: 'css-loader',
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              includePaths: ['absolute/path/a', 'absolute/path/b'],
+            },
+          },
+        ],
+      },
+    ],
+  },
 };
 ```
 
 See [the Node Sass documentation](https://github.com/sass/node-sass/blob/master/README.md#options) for all available Sass options.
 
 By default the loader resolve the implementation based on your dependencies.
-Just add required implementation to `package.json` 
-(`node-sass` or `sass` package) and install dependencies. 
+Just add required implementation to `package.json` (`node-sass` or `sass` package) and install dependencies.
 
 Example where the `sass-loader` loader uses the `sass` (`dart-sass`) implementation:
 
@@ -97,10 +104,10 @@ Example where the `sass-loader` loader uses the `sass` (`dart-sass`) implementat
 
 ```json
 {
-   "devDependencies": {
-      "sass-loader": "*",
-      "sass": "*"
-   }
+  "devDependencies": {
+    "sass-loader": "*",
+    "sass": "*"
+  }
 }
 ```
 
@@ -110,20 +117,17 @@ Example where the `sass-loader` loader uses the `node-sass` implementation:
 
 ```json
 {
-   "devDependencies": {
-      "sass-loader": "*",
-      "node-sass": "*"
-   }
+  "devDependencies": {
+    "sass-loader": "*",
+    "node-sass": "*"
+  }
 }
 ```
 
-Beware the situation 
-when `node-sass` and `sass` was installed, by default the `sass-loader` 
-prefers `node-sass`, to avoid this situation use the `implementation` option. 
+Beware the situation when `node-sass` and `sass` was installed, by default the `sass-loader` prefers `node-sass`, to avoid this situation use the `implementation` option.
 
-The special `implementation` option determines which implementation of Sass to
-use. It takes either a [Node Sass][] or a [Dart Sass][] module. For example, to
-use Dart Sass, you'd pass:
+The special `implementation` option determines which implementation of Sass to use.
+It takes either a [Node Sass][] or a [Dart Sass][] module. For example, to use Dart Sass, you'd pass:
 
 ```js
 // ...
@@ -143,28 +147,34 @@ callbacks. To avoid this overhead, you can use the
 importers from the synchronous code path. To enable this, pass the `Fiber` class
 to the `fiber` option:
 
+**webpack.config.js**
+
 ```js
-// webpack.config.js
 const Fiber = require('fibers');
 
 module.exports = {
-	...
-    module: {
-        rules: [{
-            test: /\.scss$/,
-            use: [{
-                loader: "style-loader"
-            }, {
-                loader: "css-loader"
-            }, {
-                loader: "sass-loader",
-                options: {
-                    implementation: require("sass"),
-                    fiber: Fiber
-                }
-            }]
-        }]
-    }
+  module: {
+    rules: [
+      {
+        test: /\.scss$/,
+        use: [
+          {
+            loader: 'style-loader',
+          },
+          {
+            loader: 'css-loader',
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              implementation: require('sass'),
+              fiber: Fiber,
+            },
+          },
+        ],
+      },
+    ],
+  },
 };
 ```
 
@@ -172,30 +182,35 @@ module.exports = {
 
 Usually, it's recommended to extract the style sheets into a dedicated file in production using the [mini-css-extract-plugin](https://github.com/webpack-contrib/mini-css-extract-plugin). This way your styles are not dependent on JavaScript:
 
+**webpack.config.js**
+
 ```js
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
-	...
-    module: {
-        rules: [{
-            test: /\.scss$/,
-            use: [
-                // fallback to style-loader in development
-                process.env.NODE_ENV !== 'production' ? 'style-loader' : MiniCssExtractPlugin.loader,
-                "css-loader",
-                "sass-loader"
-            ]
-        }]
-    },
-    plugins: [
-        new MiniCssExtractPlugin({
-            // Options similar to the same options in webpackOptions.output
-            // both options are optional
-            filename: "[name].css",
-            chunkFilename: "[id].css"
-        })
-    ]
+  module: {
+    rules: [
+      {
+        test: /\.scss$/,
+        use: [
+          // fallback to style-loader in development
+          process.env.NODE_ENV !== 'production'
+            ? 'style-loader'
+            : MiniCssExtractPlugin.loader,
+          'css-loader',
+          'sass-loader',
+        ],
+      },
+    ],
+  },
+  plugins: [
+    new MiniCssExtractPlugin({
+      // Options similar to the same options in webpackOptions.output
+      // both options are optional
+      filename: '[name].css',
+      chunkFilename: '[id].css',
+    }),
+  ],
 };
 ```
 
@@ -206,7 +221,7 @@ module.exports = {
 webpack provides an [advanced mechanism to resolve files](https://webpack.js.org/concepts/module-resolution/). The sass-loader uses Sass's custom importer feature to pass all queries to the webpack resolving engine. Thus you can import your Sass modules from `node_modules`. Just prepend them with a `~` to tell webpack that this is not a relative import:
 
 ```css
-@import "~bootstrap/dist/css/bootstrap";
+@import '~bootstrap/dist/css/bootstrap';
 ```
 
 It's important to only prepend it with `~`, because `~/` resolves to the home directory. webpack needs to distinguish between `bootstrap` and `~bootstrap` because CSS and Sass files have no special syntax for importing relative files. Writing `@import "file"` is the same as `@import "./file";`
@@ -234,30 +249,40 @@ There are two possibilities to extract a style sheet from the bundle:
 
 ### Source maps
 
-To enable CSS source maps, you'll need to pass the `sourceMap` option to the sass-loader *and* the css-loader. Your `webpack.config.js` should look like this:
+To enable CSS source maps, you'll need to pass the `sourceMap` option to the sass-loader _and_ the css-loader. Your `webpack.config.js` should look like this:
+
+**webpack.config.js**
 
 ```javascript
 module.exports = {
-    ...
-    devtool: "source-map", // any "source-map"-like devtool is possible
-    module: {
-        rules: [{
-            test: /\.scss$/,
-            use: [{
-                loader: "style-loader", options: {
-                    sourceMap: true
-                }
-            }, {
-                loader: "css-loader", options: {
-                    sourceMap: true
-                }
-            }, {
-                loader: "sass-loader", options: {
-                    sourceMap: true
-                }
-            }]
-        }]
-    }
+  devtool: 'source-map', // any "source-map"-like devtool is possible
+  module: {
+    rules: [
+      {
+        test: /\.scss$/,
+        use: [
+          {
+            loader: 'style-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
+        ],
+      },
+    ],
+  },
 };
 ```
 
@@ -286,11 +311,11 @@ The `data` option supports `Function` notation:
           // More information about avalaible options https://webpack.js.org/api/loaders/
           const { resourcePath, rootContext } = loaderContext;
           const relativePath = path.relative(rootContext,resourcePath);
-          
+
           if (relativePath === "styles/foo.scss") {
              return "$value: 100px;"
           }
-          
+
           return "$value: 200px;"
         }
     }
@@ -299,48 +324,28 @@ The `data` option supports `Function` notation:
 
 **Please note:** Since you're injecting code, this will break the source mappings in your entry file. Often there's a simpler solution than this, like multiple Sass entry files.
 
-<h2 align="center">Maintainers</h2>
+## Contributing
 
-<table>
-    <tr>
-      <td align="center">
-        <a href="https://github.com/jhnns"><img width="150" height="150" src="https://avatars0.githubusercontent.com/u/781746?v=3"></a><br>
-        <a href="https://github.com/jhnns">Johannes Ewald</a>
-      </td>
-      <td align="center">
-        <a href="https://github.com/webpack-contrib"><img width="150" height="150" src="https://avatars1.githubusercontent.com/u/1243901?v=3&s=460"></a><br>
-        <a href="https://github.com/webpack-contrib">Jorik Tangelder</a>
-      </td>
-      <td align="center">
-        <a href="https://github.com/akiran"><img width="150" height="150" src="https://avatars1.githubusercontent.com/u/3403295?v=3"></a><br>
-        <a href="https://github.com/akiran">Kiran</a>
-      </td>
-    <tr>
-</table>
+Please take a moment to read our contributing guidelines if you haven't yet done so.
 
+[CONTRIBUTING](./.github/CONTRIBUTING.md)
 
-<h2 align="center">License</h2>
+## License
 
-[MIT](http://www.opensource.org/licenses/mit-license.php)
+[MIT](./LICENSE)
 
 [npm]: https://img.shields.io/npm/v/sass-loader.svg
 [npm-stats]: https://img.shields.io/npm/dm/sass-loader.svg
 [npm-url]: https://npmjs.com/package/sass-loader
-
 [node]: https://img.shields.io/node/v/sass-loader.svg
 [node-url]: https://nodejs.org
-
 [deps]: https://david-dm.org/webpack-contrib/sass-loader.svg
 [deps-url]: https://david-dm.org/webpack-contrib/sass-loader
-
 [travis]: http://img.shields.io/travis/webpack-contrib/sass-loader.svg
 [travis-url]: https://travis-ci.org/webpack-contrib/sass-loader
-
 [appveyor-url]: https://ci.appveyor.com/project/webpack-contrib/sass-loader/branch/master
 [appveyor]: https://ci.appveyor.com/api/projects/status/rqpy1vaovh20ttxs/branch/master?svg=true
-
 [cover]: https://codecov.io/gh/webpack-contrib/sass-loader/branch/master/graph/badge.svg
 [cover-url]: https://codecov.io/gh/webpack-contrib/sass-loader
-
 [chat]: https://badges.gitter.im/webpack/webpack.svg
 [chat-url]: https://gitter.im/webpack/webpack
