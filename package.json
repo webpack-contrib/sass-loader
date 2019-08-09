@@ -31,7 +31,7 @@
     "loader-utils": "^1.0.1",
     "neo-async": "^2.5.0",
     "pify": "^4.0.1",
-    "semver": "^5.5.0"
+    "semver": "^6.3.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^7.2.1",
