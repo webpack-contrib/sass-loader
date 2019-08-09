@@ -4,7 +4,7 @@
         "text"
     ],
     "include": [
-        "lib/**/*.js"
+        "src/**/*.js"
     ],
     "lines": 97,
     "statements": 97,

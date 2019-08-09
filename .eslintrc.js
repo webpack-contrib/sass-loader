@@ -1,13 +1,8 @@
 module.exports = {
   root: true,
-  plugins: ['prettier'],
-  extends: ['@webpack-contrib/eslint-config-webpack'],
+  extends: ['@webpack-contrib/eslint-config-webpack', 'prettier'],
   rules: {
-    // Remove strict rule in next major
+    // temporary disable for test before we migrate on jest
     strict: 'off',
-    'prettier/prettier': [
-      'error',
-      { singleQuote: true, trailingComma: 'es5', arrowParens: 'always' },
-    ],
   },
 };

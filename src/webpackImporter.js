@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @name PromisedResolve
  * @type {Function}
