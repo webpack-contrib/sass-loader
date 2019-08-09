@@ -2,7 +2,7 @@
 
 const path = require('path');
 
-const sassLoader = require.resolve('../../lib/loader');
+const sassLoader = require.resolve('../../src/cjs');
 
 module.exports = {
   entry: [

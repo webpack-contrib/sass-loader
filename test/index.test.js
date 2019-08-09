@@ -15,7 +15,7 @@ const mockRequire = require('mock-require');
 const customImporter = require('./tools/customImporter.js');
 const customFunctions = require('./tools/customFunctions.js');
 
-const pathToSassLoader = require.resolve('../lib/loader.js');
+const pathToSassLoader = require.resolve('../src/cjs.js');
 const testLoader = require('./tools/testLoader');
 
 // eslint-disable-next-line import/no-dynamic-require
