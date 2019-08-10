@@ -42,4 +42,4 @@ test_script:
   - node --version
   - npm --version
   - cmd: FOR /F %%I in ('compver --name webpack --gte %webpack_version% --lt latest') do SET COMPARED_VERSION_RESULT=%%I
-  - cmd: IF %COMPARED_VERSION_RESULT% NEQ -1 (npm run appveyor:test) ELSE (ECHO "Next is older than Latest - Skipping Canary Suite")
+  - cmd: IF %COMPARED_VERSION_RESULT% NEQ -1 (npm run test:only) ELSE (ECHO "Next is older than Latest - Skipping Canary Suite")

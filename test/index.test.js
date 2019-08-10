@@ -678,5 +678,5 @@ function readBundle(filename) {
   delete require.cache[path.resolve(__dirname, `./output/${filename}`)];
 
   // eslint-disable-next-line global-require, import/no-dynamic-require
-  return require(`./output/${filename}`);
+  return require(`./output/${filename}`).default;
 }
