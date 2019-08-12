@@ -1,7 +1,18 @@
 // Special behavior of node-sass/libsass with CSS-files
 // 1. CSS-files are not included, but linked with @import url(path/to/css)
-@import ~css/some-css-module.css
+@import "~css/some-css-module.css"
 // 2. It does not matter whether the CSS-file exists or not, the file is just linked
-@import ./does/not/exist.css
+@import "./does/not/exist.css"
 // 3. When the .css extension is missing, the file is included just like scss
-@import ~css/some-css-module
+@import "~css/some-css-module"
+
+// From docs
+
+// 4. Imports where the URL ends with .css.
+@import "theme.css"
+// 5. Imports where the URL begins http:// or https://.
+@import "http://fonts.googleapis.com/css?family=Droid+Sans"
+// 6. Imports where the URL is written as a url().
+@import url(theme)
+// 7. Imports that have media queries.
+@import "landscape" screen and (orientation: landscape)

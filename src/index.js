@@ -138,6 +138,11 @@ function sassLoader(content) {
  */
 function getRenderFuncFromSassImpl(module) {
   const { info } = module;
+
+  if (!info) {
+    throw new Error('Unknown Sass implementation.');
+  }
+
   const components = info.split('\t');
 
   if (components.length < 2) {
