@@ -3,7 +3,6 @@
 /dist
 /node_modules
 /test/fixtures
-/test/output
 CHANGELOG.md
 /test/sass
 /test/scss

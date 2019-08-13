@@ -43,6 +43,7 @@ function formatSassError(err, resourcePath) {
   // The 'Current dir' hint of node-sass does not help us, we're providing
   // additional information by reading the err.file property
   msg = msg.replace(/\s*Current dir:\s*/, '');
+  // msg = msg.replace(/(\s*)(stdin)(\s*)/, `$1${err.file}$3`);
 
   // eslint-disable-next-line no-param-reassign
   err.message = `${getFileExcerptIfPossible(err) +
@@ -65,7 +66,7 @@ function getFileExcerptIfPossible(err) {
     const content = fs.readFileSync(err.file, 'utf8');
 
     return `${os.EOL +
-      content.split(os.EOL)[err.line - 1] +
+      content.split(/\r?\n/)[err.line - 1] +
       os.EOL +
       new Array(err.column - 1).join(' ')}^${os.EOL}      `;
   } catch (ignoreErr) {
