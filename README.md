@@ -5,38 +5,36 @@
     <img width="200" height="200"
       src="https://webpack.js.org/assets/icon-square-big.svg">
   </a>
-  <h1>Sass Loader</h1>
-  <p>Loads a Sass/SCSS file and compiles it to CSS.</p>
 </div>
 
 [![npm][npm]][npm-url]
 [![node][node]][node-url]
-[![npm-stats][npm-stats]][npm-url]
 [![deps][deps]][deps-url]
-[![travis][travis]][travis-url]
-[![appveyor][appveyor]][appveyor-url]
+[![tests][tests]][tests-url]
 [![coverage][cover]][cover-url]
 [![chat][chat]][chat-url]
+[![size][size]][size-url]
+
+# sass-loader
+
+Loads a Sass/SCSS file and compiles it to CSS.
 
 Use the [css-loader](https://github.com/webpack-contrib/css-loader) or the [raw-loader](https://github.com/webpack-contrib/raw-loader) to turn it into a JS module and the [mini-css-extract-plugin](https://github.com/webpack-contrib/mini-css-extract-plugin) to extract it into a separate file.
 Looking for the webpack 1 loader? Check out the [archive/webpack-1 branch](https://github.com/webpack-contrib/sass-loader/tree/archive/webpack-1).
 
-<h2 align="center">Install</h2>
+## Getting Started
 
 ```bash
 npm install sass-loader node-sass webpack --save-dev
 ```
 
-The sass-loader requires [webpack](https://github.com/webpack) as a
-[`peerDependency`](https://docs.npmjs.com/files/package.json#peerdependencies)
-and it requires you to install either [Node Sass](https://github.com/sass/node-sass) or [Dart Sass](https://github.com/sass/dart-sass) on your
-own. This allows you to control the versions of all your dependencies, and to
-choose which Sass implementation to use.
+The sass-loader requires [webpack](https://github.com/webpack) as a[`peerDependency`](https://docs.npmjs.com/files/package.json#peerdependencies) and it requires you to install either [Node Sass](https://github.com/sass/node-sass) or [Dart Sass](https://github.com/sass/dart-sass) on your own.
+This allows you to control the versions of all your dependencies, and to choose which Sass implementation to use.
 
 [node sass]: https://github.com/sass/node-sass
 [dart sass]: http://sass-lang.com/dart-sass
 
-<h2 align="center">Examples</h2>
+## Examples
 
 Chain the sass-loader with the [css-loader](https://github.com/webpack-contrib/css-loader) and the [style-loader](https://github.com/webpack-contrib/style-loader) to immediately apply all styles to the DOM.
 
@@ -140,12 +138,9 @@ It takes either a [Node Sass][] or a [Dart Sass][] module. For example, to use D
 // ...
 ```
 
-Note that when using Dart Sass, **synchronous compilation is twice as fast as
-asynchronous compilation** by default, due to the overhead of asynchronous
-callbacks. To avoid this overhead, you can use the
-[`fibers`](https://www.npmjs.com/package/fibers) package to call asynchronous
-importers from the synchronous code path. To enable this, pass the `Fiber` class
-to the `fiber` option:
+Note that when using Dart Sass, **synchronous compilation is twice as fast as asynchronous compilation** by default, due to the overhead of asynchronous callbacks.
+To avoid this overhead, you can use the [`fibers`](https://www.npmjs.com/package/fibers) package to call asynchronous importers from the synchronous code path.
+To enable this, pass the `Fiber` class to the `fiber` option:
 
 **webpack.config.js**
 
@@ -335,17 +330,16 @@ Please take a moment to read our contributing guidelines if you haven't yet done
 [MIT](./LICENSE)
 
 [npm]: https://img.shields.io/npm/v/sass-loader.svg
-[npm-stats]: https://img.shields.io/npm/dm/sass-loader.svg
 [npm-url]: https://npmjs.com/package/sass-loader
 [node]: https://img.shields.io/node/v/sass-loader.svg
 [node-url]: https://nodejs.org
 [deps]: https://david-dm.org/webpack-contrib/sass-loader.svg
 [deps-url]: https://david-dm.org/webpack-contrib/sass-loader
-[travis]: http://img.shields.io/travis/webpack-contrib/sass-loader.svg
-[travis-url]: https://travis-ci.org/webpack-contrib/sass-loader
-[appveyor-url]: https://ci.appveyor.com/project/webpack-contrib/sass-loader/branch/master
-[appveyor]: https://ci.appveyor.com/api/projects/status/rqpy1vaovh20ttxs/branch/master?svg=true
+[tests]: https://dev.azure.com/webpack-contrib/sass-loader/_apis/build/status/webpack-contrib.sass-loader?branchName=master
+[tests-url]: https://dev.azure.com/webpack-contrib/sass-loader/_build/latest?definitionId=21&branchName=master
 [cover]: https://codecov.io/gh/webpack-contrib/sass-loader/branch/master/graph/badge.svg
 [cover-url]: https://codecov.io/gh/webpack-contrib/sass-loader
 [chat]: https://badges.gitter.im/webpack/webpack.svg
 [chat-url]: https://gitter.im/webpack/webpack
+[size]: https://packagephobia.now.sh/badge?p=css-loader
+[size-url]: https://packagephobia.now.sh/result?p=css-loader

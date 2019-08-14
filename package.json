@@ -9,7 +9,7 @@
   "bugs": "https://github.com/webpack-contrib/sass-loader/issues",
   "main": "dist/cjs.js",
   "engines": {
-    "node": ">= 6.9.0"
+    "node": ">= 8.9.0"
   },
   "scripts": {
     "start": "npm run build -- -w",
@@ -23,9 +23,6 @@
     "prepare": "npm run build",
     "release": "standard-version",
     "security": "npm audit",
-    "test:webpack-watch": "webpack --config test/watch/webpack.config.js",
-    "test:extract-text": "webpack --config test/extractText/webpack.config.js",
-    "test:hmr": "webpack-dev-server --config test/hmr/webpack.config.js --content-base ./test/hmr --hot --inline",
     "test:only": "cross-env NODE_ENV=test jest",
     "test:watch": "cross-env NODE_ENV=test jest --watch",
     "test:coverage": "cross-env NODE_ENV=test jest --collectCoverageFrom=\"src/**/*.js\" --coverage",
@@ -57,6 +54,7 @@
     "babel-jest": "^24.8.0",
     "bootstrap-sass": "^3.3.5",
     "chokidar": "^2.1.6",
+    "commitlint-azure-pipelines-cli": "^1.0.2",
     "cross-env": "^5.2.0",
     "css-loader": "^3.2.0",
     "del": "^4.1.1",
@@ -67,6 +65,7 @@
     "file-loader": "^4.2.0",
     "husky": "^3.0.3",
     "jest": "^24.8.0",
+    "jest-junit": "^7.0.0",
     "lint-staged": "^9.2.1",
     "memory-fs": "^0.4.1",
     "node-sass": "^4.5.0",

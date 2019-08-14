@@ -1,6 +1,4 @@
-'use strict';
-
-module.exports = (implementation) => {
+export default (implementation) => {
   return {
     'headings($from: 0, $to: 6)': (from, to) => {
       const f = from.getValue();
