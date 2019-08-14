@@ -1,6 +1,6 @@
-const path = require('path');
-const os = require('os');
-const fs = require('fs');
+import path from 'path';
+import os from 'os';
+import fs from 'fs';
 
 // A typical sass error looks like this
 // const SassError = {
@@ -14,31 +14,31 @@ const fs = require('fs');
 /**
  * Enhances the sass error with additional information about what actually went wrong.
  *
- * @param {SassError} err
+ * @param {SassError} error
  * @param {string} resourcePath
  */
-function formatSassError(err, resourcePath) {
+function formatSassError(error, resourcePath) {
   // Instruct webpack to hide the JS stack from the console
   // Usually you're only interested in the SASS stack in this case.
   // eslint-disable-next-line no-param-reassign
-  err.hideStack = true;
+  error.hideStack = true;
 
   // The file property is missing in rare cases.
   // No improvement in the error is possible.
-  if (!err.file) {
+  if (!error.file) {
     return;
   }
 
-  let msg = err.message;
+  let msg = error.message;
 
-  if (err.file === 'stdin') {
+  if (error.file === 'stdin') {
     // eslint-disable-next-line no-param-reassign
-    err.file = resourcePath;
+    error.file = resourcePath;
   }
 
   // node-sass returns UNIX-style paths
   // eslint-disable-next-line no-param-reassign
-  err.file = path.normalize(err.file);
+  error.file = path.normalize(error.file);
 
   // The 'Current dir' hint of node-sass does not help us, we're providing
   // additional information by reading the err.file property
@@ -46,10 +46,10 @@ function formatSassError(err, resourcePath) {
   // msg = msg.replace(/(\s*)(stdin)(\s*)/, `$1${err.file}$3`);
 
   // eslint-disable-next-line no-param-reassign
-  err.message = `${getFileExcerptIfPossible(err) +
+  error.message = `${getFileExcerptIfPossible(error) +
     msg.charAt(0).toUpperCase() +
     msg.slice(1) +
-    os.EOL}      in ${err.file} (line ${err.line}, column ${err.column})`;
+    os.EOL}      in ${error.file} (line ${error.line}, column ${error.column})`;
 }
 
 /**
@@ -58,21 +58,21 @@ function formatSassError(err, resourcePath) {
  *
  * Returns an empty string if the excerpt could not be retrieved.
  *
- * @param {SassError} err
+ * @param {SassError} error
  * @returns {string}
  */
-function getFileExcerptIfPossible(err) {
+function getFileExcerptIfPossible(error) {
   try {
-    const content = fs.readFileSync(err.file, 'utf8');
+    const content = fs.readFileSync(error.file, 'utf8');
 
     return `${os.EOL +
-      content.split(/\r?\n/)[err.line - 1] +
+      content.split(/\r?\n/)[error.line - 1] +
       os.EOL +
-      new Array(err.column - 1).join(' ')}^${os.EOL}      `;
-  } catch (ignoreErr) {
+      new Array(error.column - 1).join(' ')}^${os.EOL}      `;
+  } catch (ignoreError) {
     // If anything goes wrong here, we don't want any errors to be reported to the user
     return '';
   }
 }
 
-module.exports = formatSassError;
+export default formatSassError;

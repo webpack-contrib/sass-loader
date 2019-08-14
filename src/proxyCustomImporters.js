@@ -28,4 +28,4 @@ function proxyCustomImporters(importer, resourcePath) {
   );
 }
 
-module.exports = proxyCustomImporters;
+export default proxyCustomImporters;

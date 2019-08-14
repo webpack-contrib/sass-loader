@@ -1,6 +1,6 @@
-const path = require('path');
+import path from 'path';
 
-const utils = require('loader-utils');
+import utils from 'loader-utils';
 
 const matchModuleImport = /^~([^/]+|@[^/]+[/][^/]+)$/;
 
@@ -58,4 +58,4 @@ function importsToResolve(url) {
   ];
 }
 
-module.exports = importsToResolve;
+export default importsToResolve;
