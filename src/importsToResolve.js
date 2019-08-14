@@ -32,7 +32,7 @@ function importsToResolve(url) {
     return [];
   }
 
-  if (['.scss', '.sass'].indexOf(ext) !== -1) {
+  if (['.scss', '.sass'].includes(ext)) {
     return [request, url];
   }
 
