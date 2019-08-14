@@ -1,12 +1,12 @@
-const path = require('path');
+import path from 'path';
 
-const async = require('neo-async');
-const pify = require('pify');
-const semver = require('semver');
+import async from 'neo-async';
+import pify from 'pify';
+import semver from 'semver';
 
-const formatSassError = require('./formatSassError');
-const webpackImporter = require('./webpackImporter');
-const normalizeOptions = require('./normalizeOptions');
+import formatSassError from './formatSassError';
+import webpackImporter from './webpackImporter';
+import normalizeOptions from './normalizeOptions';
 
 let nodeSassJobQueue = null;
 
@@ -33,7 +33,7 @@ function hasGetResolve(loaderContext) {
  * @this {LoaderContext}
  * @param {string} content
  */
-function sassLoader(content) {
+function loader(content) {
   const callback = this.async();
   const isSync = typeof callback !== 'function';
   const self = this;
@@ -77,25 +77,27 @@ function sassLoader(content) {
     options.implementation || getDefaultSassImpl()
   );
 
-  render(options, (err, result) => {
-    if (err) {
-      formatSassError(err, this.resourcePath);
+  render(options, (error, result) => {
+    if (error) {
+      formatSassError(error, this.resourcePath);
 
-      if (err.file) {
-        this.dependency(err.file);
+      if (error.file) {
+        this.dependency(error.file);
       }
 
-      callback(err);
+      callback(error);
       return;
     }
 
     if (result.map && result.map !== '{}') {
       // eslint-disable-next-line no-param-reassign
       result.map = JSON.parse(result.map);
+
       // result.map.file is an optional property that provides the output filename.
       // Since we don't know the final filename in the webpack build chain yet, it makes no sense to have it.
       // eslint-disable-next-line no-param-reassign
       delete result.map.file;
+
       // One of the sources is 'stdin' according to dart-sass/node-sass because we've used the data input.
       // Now let's override that value with the correct relative path.
       // Since we specified options.sourceMap = path.join(process.cwd(), "/sass.map"); in normalizeOptions,
@@ -206,4 +208,4 @@ function getDefaultSassImpl() {
   return require(sassImplPkg);
 }
 
-module.exports = sassLoader;
+export default loader;

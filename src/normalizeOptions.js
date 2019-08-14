@@ -1,10 +1,10 @@
-const os = require('os');
-const path = require('path');
+import os from 'os';
+import path from 'path';
 
-const utils = require('loader-utils');
-const cloneDeep = require('clone-deep');
+import utils from 'loader-utils';
+import cloneDeep from 'clone-deep';
 
-const proxyCustomImporters = require('./proxyCustomImporters');
+import proxyCustomImporters from './proxyCustomImporters';
 
 /**
  * Derives the sass options from the loader context and normalizes its values with sane defaults.
@@ -50,14 +50,17 @@ function normalizeOptions(loaderContext, content, webpackImporter) {
     // all paths in sourceMap.sources will be relative to that path.
     // Pretty complicated... :(
     options.sourceMap = path.join(process.cwd(), '/sass.map');
+
     if ('sourceMapRoot' in options === false) {
       options.sourceMapRoot = process.cwd();
     }
+
     if ('omitSourceMapUrl' in options === false) {
       // The source map url doesn't make sense because we don't know the output path
       // The css-loader will handle that for us
       options.omitSourceMapUrl = true;
     }
+
     if ('sourceMapContents' in options === false) {
       // If sourceMapContents option is not set, set it to true otherwise maps will be empty/null
       // when exported by webpack-extract-text-plugin.
@@ -92,4 +95,4 @@ function normalizeOptions(loaderContext, content, webpackImporter) {
   return options;
 }
 
-module.exports = normalizeOptions;
+export default normalizeOptions;

@@ -21,7 +21,7 @@ const module = (config) => {
                 loader: require.resolve('./testLoader'),
               },
               {
-                loader: path.join(__dirname, '../../src'),
+                loader: path.join(__dirname, '../../src/cjs.js'),
                 options: (config.loader && config.loader.options) || {},
               },
             ],

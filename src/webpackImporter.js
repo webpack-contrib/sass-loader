@@ -14,9 +14,9 @@
  * @param {Function<Error, string>} done
  */
 
-const path = require('path');
+import path from 'path';
 
-const importsToResolve = require('./importsToResolve');
+import importsToResolve from './importsToResolve';
 
 const matchCss = /\.css$/;
 
@@ -73,4 +73,4 @@ function webpackImporter(resourcePath, resolve, addNormalizedDependency) {
   };
 }
 
-module.exports = webpackImporter;
+export default webpackImporter;

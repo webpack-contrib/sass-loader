@@ -2,7 +2,7 @@
 
 exports[`loader should output an understandable error (dart-sass) (sass): errors 1`] = `
 Array [
-  [ModuleBuildError: Module build failed (from ../src/index.js):
+  [ModuleBuildError: Module build failed (from ../src/cjs.js):
 
 a {
  ^
@@ -20,7 +20,7 @@ exports[`loader should output an understandable error (dart-sass) (sass): warnin
 
 exports[`loader should output an understandable error (dart-sass) (scss): errors 1`] = `
 Array [
-  [ModuleBuildError: Module build failed (from ../src/index.js):
+  [ModuleBuildError: Module build failed (from ../src/cjs.js):
 
     some-value
              ^
@@ -38,7 +38,7 @@ exports[`loader should output an understandable error (dart-sass) (scss): warnin
 
 exports[`loader should output an understandable error (node-sass) (sass): errors 1`] = `
 Array [
-  [ModuleBuildError: Module build failed (from ../src/index.js):
+  [ModuleBuildError: Module build failed (from ../src/cjs.js):
 
 a {
   ^
@@ -51,7 +51,7 @@ exports[`loader should output an understandable error (node-sass) (sass): warnin
 
 exports[`loader should output an understandable error (node-sass) (scss): errors 1`] = `
 Array [
-  [ModuleBuildError: Module build failed (from ../src/index.js):
+  [ModuleBuildError: Module build failed (from ../src/cjs.js):
 
     some-value
    ^
@@ -64,7 +64,7 @@ exports[`loader should output an understandable error (node-sass) (scss): warnin
 
 exports[`loader should output an understandable error when a file could not be found (dart-sass) (sass): errors 1`] = `
 Array [
-  [ModuleBuildError: Module build failed (from ../src/index.js):
+  [ModuleBuildError: Module build failed (from ../src/cjs.js):
 
 @import "does-not-exist"
        ^
@@ -82,7 +82,7 @@ exports[`loader should output an understandable error when a file could not be f
 
 exports[`loader should output an understandable error when a file could not be found (dart-sass) (scss): errors 1`] = `
 Array [
-  [ModuleBuildError: Module build failed (from ../src/index.js):
+  [ModuleBuildError: Module build failed (from ../src/cjs.js):
 
 @import "does-not-exist";
        ^
@@ -100,7 +100,7 @@ exports[`loader should output an understandable error when a file could not be f
 
 exports[`loader should output an understandable error when a file could not be found (node-sass) (sass): errors 1`] = `
 Array [
-  [ModuleBuildError: Module build failed (from ../src/index.js):
+  [ModuleBuildError: Module build failed (from ../src/cjs.js):
 
 @import "does-not-exist"
 ^
@@ -113,7 +113,7 @@ exports[`loader should output an understandable error when a file could not be f
 
 exports[`loader should output an understandable error when a file could not be found (node-sass) (scss): errors 1`] = `
 Array [
-  [ModuleBuildError: Module build failed (from ../src/index.js):
+  [ModuleBuildError: Module build failed (from ../src/cjs.js):
 
 @import "does-not-exist";
 ^
@@ -126,7 +126,7 @@ exports[`loader should output an understandable error when a file could not be f
 
 exports[`loader should output an understandable error when the problem in "@import" (dart-sass) (sass): errors 1`] = `
 Array [
-  [ModuleBuildError: Module build failed (from ../src/index.js):
+  [ModuleBuildError: Module build failed (from ../src/cjs.js):
 
 a {
  ^
@@ -145,7 +145,7 @@ exports[`loader should output an understandable error when the problem in "@impo
 
 exports[`loader should output an understandable error when the problem in "@import" (dart-sass) (scss): errors 1`] = `
 Array [
-  [ModuleBuildError: Module build failed (from ../src/index.js):
+  [ModuleBuildError: Module build failed (from ../src/cjs.js):
 
     some-value
              ^
@@ -164,7 +164,7 @@ exports[`loader should output an understandable error when the problem in "@impo
 
 exports[`loader should output an understandable error when the problem in "@import" (node-sass) (sass): errors 1`] = `
 Array [
-  [ModuleBuildError: Module build failed (from ../src/index.js):
+  [ModuleBuildError: Module build failed (from ../src/cjs.js):
 
 a {
   ^
@@ -177,7 +177,7 @@ exports[`loader should output an understandable error when the problem in "@impo
 
 exports[`loader should output an understandable error when the problem in "@import" (node-sass) (scss): errors 1`] = `
 Array [
-  [ModuleBuildError: Module build failed (from ../src/index.js):
+  [ModuleBuildError: Module build failed (from ../src/cjs.js):
 
     some-value
    ^
@@ -190,7 +190,7 @@ exports[`loader should output an understandable error when the problem in "@impo
 
 exports[`loader should throw an error with a explicit file and a file does not exist (dart-sass) (sass): errors 1`] = `
 Array [
-  [ModuleBuildError: Module build failed (from ../src/index.js):
+  [ModuleBuildError: Module build failed (from ../src/cjs.js):
 
 @import "./another/_module.scss"
        ^
@@ -208,7 +208,7 @@ exports[`loader should throw an error with a explicit file and a file does not e
 
 exports[`loader should throw an error with a explicit file and a file does not exist (dart-sass) (scss): errors 1`] = `
 Array [
-  [ModuleBuildError: Module build failed (from ../src/index.js):
+  [ModuleBuildError: Module build failed (from ../src/cjs.js):
 
 @import "./another/_module.scss";
        ^
@@ -226,7 +226,7 @@ exports[`loader should throw an error with a explicit file and a file does not e
 
 exports[`loader should throw an error with a explicit file and a file does not exist (node-sass) (sass): errors 1`] = `
 Array [
-  [ModuleBuildError: Module build failed (from ../src/index.js):
+  [ModuleBuildError: Module build failed (from ../src/cjs.js):
 
 @import "./another/_module.scss"
 ^
@@ -239,7 +239,7 @@ exports[`loader should throw an error with a explicit file and a file does not e
 
 exports[`loader should throw an error with a explicit file and a file does not exist (node-sass) (scss): errors 1`] = `
 Array [
-  [ModuleBuildError: Module build failed (from ../src/index.js):
+  [ModuleBuildError: Module build failed (from ../src/cjs.js):
 
 @import "./another/_module.scss";
 ^
