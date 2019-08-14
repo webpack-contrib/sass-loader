@@ -265,6 +265,48 @@ describe('loader', () => {
         expect(stats.compilation.errors).toMatchSnapshot('errors');
       });
 
+      it(`should work when "@import" at-rules with extensions (${implementationName}) (${syntax})`, async () => {
+        const testId = getTestId('import-with-extension', syntax);
+        const options = {
+          implementation: getImplementationByName(implementationName),
+        };
+        const stats = await compile(testId, { loader: { options } });
+
+        expect(getCode(stats).content).toBe(getPureCode(testId, options));
+
+        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
+        expect(stats.compilation.errors).toMatchSnapshot('errors');
+      });
+
+      it(`should work when "@import" at-rules starting with "_" (${implementationName}) (${syntax})`, async () => {
+        const testId = getTestId('import-with-underscore', syntax);
+        const options = {
+          implementation: getImplementationByName(implementationName),
+        };
+        const stats = await compile(testId, { loader: { options } });
+
+        expect(getCode(stats).content).toBe(getPureCode(testId, options));
+
+        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
+        expect(stats.compilation.errors).toMatchSnapshot('errors');
+      });
+
+      it(`should work when "@import" at-rules without extensions and do not start with "_" (${implementationName}) (${syntax})`, async () => {
+        const testId = getTestId(
+          'import-without-extension-and-underscore',
+          syntax
+        );
+        const options = {
+          implementation: getImplementationByName(implementationName),
+        };
+        const stats = await compile(testId, { loader: { options } });
+
+        expect(getCode(stats).content).toBe(getPureCode(testId, options));
+
+        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
+        expect(stats.compilation.errors).toMatchSnapshot('errors');
+      });
+
       it(`should work and use the "sass" field (${implementationName}) (${syntax})`, async () => {
         const testId = getTestId('import-sass-field', syntax);
         const options = {
@@ -304,6 +346,36 @@ describe('loader', () => {
         expect(stats.compilation.errors).toMatchSnapshot('errors');
       });
 
+      it(`should work and use the "main" field when the "main" value is not in the "mainFields" resolve option (${implementationName}) (${syntax})`, async () => {
+        const testId = getTestId('import-main-field', syntax);
+        const options = {
+          implementation: getImplementationByName(implementationName),
+        };
+        const stats = await compile(testId, {
+          loader: { options, resolve: { mainFields: [] } },
+        });
+
+        expect(getCode(stats).content).toBe(getPureCode(testId, options));
+
+        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
+        expect(stats.compilation.errors).toMatchSnapshot('errors');
+      });
+
+      it(`should work and use the "main" field when the "main" value already in the "mainFields" resolve option (${implementationName}) (${syntax})`, async () => {
+        const testId = getTestId('import-main-field', syntax);
+        const options = {
+          implementation: getImplementationByName(implementationName),
+        };
+        const stats = await compile(testId, {
+          loader: { options, resolve: { mainFields: ['main', '...'] } },
+        });
+
+        expect(getCode(stats).content).toBe(getPureCode(testId, options));
+
+        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
+        expect(stats.compilation.errors).toMatchSnapshot('errors');
+      });
+
       it(`should work and use the "custom-sass" field (${implementationName}) (${syntax})`, async () => {
         const testId = getTestId('import-custom-sass-field', syntax);
         const options = {
@@ -319,8 +391,51 @@ describe('loader', () => {
         expect(stats.compilation.errors).toMatchSnapshot('errors');
       });
 
-      it(`should work and use the "index" property in package (${implementationName}) (${syntax})`, async () => {
+      it(`should work and use the "index" file in package (${implementationName}) (${syntax})`, async () => {
         const testId = getTestId('import-index', syntax);
+        const options = {
+          implementation: getImplementationByName(implementationName),
+        };
+        const stats = await compile(testId, { loader: { options } });
+
+        expect(getCode(stats).content).toBe(getPureCode(testId, options));
+
+        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
+        expect(stats.compilation.errors).toMatchSnapshot('errors');
+      });
+
+      it(`should work and use the "index" file in package when the "index" value is not in the "mainFiles" resolve option (${implementationName}) (${syntax})`, async () => {
+        const testId = getTestId('import-index', syntax);
+        const options = {
+          implementation: getImplementationByName(implementationName),
+        };
+        const stats = await compile(testId, {
+          loader: { options, resolve: { mainFiles: [] } },
+        });
+
+        expect(getCode(stats).content).toBe(getPureCode(testId, options));
+
+        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
+        expect(stats.compilation.errors).toMatchSnapshot('errors');
+      });
+
+      it(`should work and use the "index" file in package when the "index" value already in the "mainFiles" resolve option (${implementationName}) (${syntax})`, async () => {
+        const testId = getTestId('import-index', syntax);
+        const options = {
+          implementation: getImplementationByName(implementationName),
+        };
+        const stats = await compile(testId, {
+          loader: { options, resolve: { mainFiles: ['index', '...'] } },
+        });
+
+        expect(getCode(stats).content).toBe(getPureCode(testId, options));
+
+        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
+        expect(stats.compilation.errors).toMatchSnapshot('errors');
+      });
+
+      it(`should work and use the "_index" file in package (${implementationName}) (${syntax})`, async () => {
+        const testId = getTestId('import-_index', syntax);
         const options = {
           implementation: getImplementationByName(implementationName),
         };

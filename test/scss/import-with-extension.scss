@@ -1,0 +1,18 @@
+@import "example.scss";
+@import "./example.scss";
+@import "../scss/example.scss";
+// TODO https://github.com/sass/dart-sass/issues/798#issuecomment-521229911
+// @import "example-1.SCSS";
+@import "example-2.scss";
+@import "./example-2.scss";
+@import "../scss/example-2.scss";
+// TODO https://github.com/sass/dart-sass/issues/798#issuecomment-521229911
+// @import "example-3.SCSS";
+@import "nested/example-4.scss";
+@import "./nested/example-4.scss";
+@import "../scss/nested/example-4.scss";
+@import "nested/example-5.scss";
+@import "./nested/example-5.scss";
+@import "../scss/nested/example-5.scss";
+// TODO https://github.com/sass/dart-sass/issues/798#issuecomment-521229911
+// @import "nested/example-6.SCSS";

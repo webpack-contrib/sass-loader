@@ -55,7 +55,8 @@ function loader(content) {
   // Supported since v4.36.0
   if (hasGetResolve(self)) {
     resolve = this.getResolve({
-      mainFields: ['sass', 'style', '...'],
+      mainFields: ['sass', 'style', 'main', '...'],
+      mainFiles: ['_index', 'index', '...'],
       extensions: ['.scss', '.sass', '.css', '...'],
     });
   }
