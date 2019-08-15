@@ -512,6 +512,19 @@ describe('loader', () => {
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
       });
+
+      it(`should work with the "bootstrap" package, import as a package (${implementationName}) (${syntax})`, async () => {
+        const testId = getTestId('bootstrap', syntax);
+        const options = {
+          implementation: getImplementationByName(implementationName),
+        };
+        const stats = await compile(testId, { loader: { options } });
+
+        expect(getCode(stats).content).toBe(getPureCode(testId, options));
+
+        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
+        expect(stats.compilation.errors).toMatchSnapshot('errors');
+      });
     });
   });
 });

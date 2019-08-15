@@ -202,13 +202,17 @@ function getPureCode(testId, options) {
     testFolder,
     'node_modules/sass-custom-sass-field/nested/style.sass'
   );
-  const pathToBootstrapEntry = path.resolve(
+  const pathToBootstrap3Entry = path.resolve(
     testFolder,
     '../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap.scss'
   );
-  const pathToBootstrapPackage = path.resolve(
+  const pathToBootstrap3Package = path.resolve(
     testFolder,
     '../node_modules/bootstrap-sass'
+  );
+  const pathToBootstrap4Entry = path.resolve(
+    testFolder,
+    '../node_modules/bootstrap/scss/bootstrap.scss'
   );
   const pathToModule = path.resolve(
     testFolder,
@@ -625,8 +629,9 @@ function getPureCode(testId, options) {
         .replace(/^~scss-custom-sass-field/, pathToSCSSCustomSassField)
         .replace(/^~sass-custom-sass-field/, pathToSassCustomSassField)
         .replace(/^~@org\/pkg/, pathToScopedNpmPkg)
-        .replace(/^~bootstrap-sass$/, pathToBootstrapEntry)
-        .replace(/^~bootstrap-sass/, pathToBootstrapPackage)
+        .replace(/^~bootstrap-sass$/, pathToBootstrap3Entry)
+        .replace(/^~bootstrap-sass/, pathToBootstrap3Package)
+        .replace(/^~bootstrap$/, pathToBootstrap4Entry)
         .replace(/^~module/, pathToModule)
         .replace(/^~another/, pathToAnother)
         .replace(/^~/, testNodeModules);
