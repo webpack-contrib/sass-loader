@@ -19,34 +19,56 @@ function importsToResolve(url) {
   // @see https://github.com/webpack-contrib/sass-loader/issues/167
   const ext = path.extname(request);
 
+  // In case there is module request, send this to webpack resolver
   if (matchModuleImport.test(url)) {
     return [request, url];
   }
 
-  // libsass' import algorithm works like this:
-
-  // In case there is a file extension...
-  //   - If the file is a CSS-file, do not include it all, but just link it via @import url().
-  //   - The exact file name must match (no auto-resolving of '_'-modules).
+  // Because @import is also defined in CSS, Sass needs a way of compiling plain CSS @imports without trying to import the files at compile time.
+  // To accomplish this, and to ensure SCSS is as much of a superset of CSS as possible, Sass will compile any @imports with the following characteristics to plain CSS imports:
+  //  - imports where the URL ends with .css.
+  //  - imports where the URL begins http:// or https://.
+  //  - imports where the URL is written as a url().
+  //  - imports that have media queries.
+  //
+  // The `node-sass` package sends `@import` ending on `.css` to importer, it is bug, so we skip resolve
   if (ext === '.css') {
     return [];
   }
 
-  if (['.scss', '.sass'].includes(ext)) {
-    return [request, url];
-  }
-
-  // In case there is no file extension...
-  //   - Prefer modules starting with '_'.
-  //   - File extension precedence: .scss, .sass, .css.
+  const dirname = path.dirname(request);
   const basename = path.basename(request);
 
-  if (basename.charAt(0) === '_') {
-    return [`${request}.scss`, `${request}.sass`, `${request}.css`, url];
+  // In case there is file extension:
+  //
+  // 1. Try to resolve `_` file.
+  // 2. Try to resolve file without `_`.
+  // 3. Send a original url to webpack resolver, maybe it is alias.
+  if (['.scss', '.sass'].includes(ext)) {
+    return [`${dirname}/_${basename}`, `${dirname}/${basename}`, url];
   }
 
-  const dirname = path.dirname(request);
+  // In case there is no file extension and filename starts with `_`:
+  //
+  // 1. Try to resolve files with `scss`, `sass` and `css` extensions.
+  // 2. Try to resolve directory with `_index` or `index` filename.
+  // 3. Send a original url to webpack resolver, maybe it is alias.
+  if (basename.charAt(0) === '_') {
+    return [
+      `${request}.scss`,
+      `${request}.sass`,
+      `${request}.css`,
+      request,
+      url,
+    ];
+  }
 
+  // In case there is no file extension and filename doesn't start with `_`:
+  //
+  // 1. Try to resolve file starts with `_` and with extensions
+  // 2. Try to resolve file with extensions
+  // 3. Try to resolve directory with `_index` or `index` filename.
+  // 4. Send a original url to webpack resolver, maybe it is alias.
   return [
     `${dirname}/_${basename}.scss`,
     `${dirname}/_${basename}.sass`,
@@ -54,6 +76,7 @@ function importsToResolve(url) {
     `${request}.scss`,
     `${request}.sass`,
     `${request}.css`,
+    request,
     url,
   ];
 }

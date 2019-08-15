@@ -282,6 +282,22 @@ exports[`loader should work and ignore all css "@import" at-rules (node-sass) (s
 
 exports[`loader should work and ignore all css "@import" at-rules (node-sass) (scss): warnings 1`] = `Array []`;
 
+exports[`loader should work and use the "_index" file in package (dart-sass) (sass): errors 1`] = `Array []`;
+
+exports[`loader should work and use the "_index" file in package (dart-sass) (sass): warnings 1`] = `Array []`;
+
+exports[`loader should work and use the "_index" file in package (dart-sass) (scss): errors 1`] = `Array []`;
+
+exports[`loader should work and use the "_index" file in package (dart-sass) (scss): warnings 1`] = `Array []`;
+
+exports[`loader should work and use the "_index" file in package (node-sass) (sass): errors 1`] = `Array []`;
+
+exports[`loader should work and use the "_index" file in package (node-sass) (sass): warnings 1`] = `Array []`;
+
+exports[`loader should work and use the "_index" file in package (node-sass) (scss): errors 1`] = `Array []`;
+
+exports[`loader should work and use the "_index" file in package (node-sass) (scss): warnings 1`] = `Array []`;
+
 exports[`loader should work and use the "custom-sass" field (dart-sass) (sass): errors 1`] = `Array []`;
 
 exports[`loader should work and use the "custom-sass" field (dart-sass) (sass): warnings 1`] = `Array []`;
@@ -298,21 +314,53 @@ exports[`loader should work and use the "custom-sass" field (node-sass) (scss): 
 
 exports[`loader should work and use the "custom-sass" field (node-sass) (scss): warnings 1`] = `Array []`;
 
-exports[`loader should work and use the "index" property in package (dart-sass) (sass): errors 1`] = `Array []`;
+exports[`loader should work and use the "index" file in package (dart-sass) (sass): errors 1`] = `Array []`;
 
-exports[`loader should work and use the "index" property in package (dart-sass) (sass): warnings 1`] = `Array []`;
+exports[`loader should work and use the "index" file in package (dart-sass) (sass): warnings 1`] = `Array []`;
 
-exports[`loader should work and use the "index" property in package (dart-sass) (scss): errors 1`] = `Array []`;
+exports[`loader should work and use the "index" file in package (dart-sass) (scss): errors 1`] = `Array []`;
 
-exports[`loader should work and use the "index" property in package (dart-sass) (scss): warnings 1`] = `Array []`;
+exports[`loader should work and use the "index" file in package (dart-sass) (scss): warnings 1`] = `Array []`;
 
-exports[`loader should work and use the "index" property in package (node-sass) (sass): errors 1`] = `Array []`;
+exports[`loader should work and use the "index" file in package (node-sass) (sass): errors 1`] = `Array []`;
 
-exports[`loader should work and use the "index" property in package (node-sass) (sass): warnings 1`] = `Array []`;
+exports[`loader should work and use the "index" file in package (node-sass) (sass): warnings 1`] = `Array []`;
 
-exports[`loader should work and use the "index" property in package (node-sass) (scss): errors 1`] = `Array []`;
+exports[`loader should work and use the "index" file in package (node-sass) (scss): errors 1`] = `Array []`;
 
-exports[`loader should work and use the "index" property in package (node-sass) (scss): warnings 1`] = `Array []`;
+exports[`loader should work and use the "index" file in package (node-sass) (scss): warnings 1`] = `Array []`;
+
+exports[`loader should work and use the "index" file in package when the "index" value already in the "mainFiles" resolve option (dart-sass) (sass): errors 1`] = `Array []`;
+
+exports[`loader should work and use the "index" file in package when the "index" value already in the "mainFiles" resolve option (dart-sass) (sass): warnings 1`] = `Array []`;
+
+exports[`loader should work and use the "index" file in package when the "index" value already in the "mainFiles" resolve option (dart-sass) (scss): errors 1`] = `Array []`;
+
+exports[`loader should work and use the "index" file in package when the "index" value already in the "mainFiles" resolve option (dart-sass) (scss): warnings 1`] = `Array []`;
+
+exports[`loader should work and use the "index" file in package when the "index" value already in the "mainFiles" resolve option (node-sass) (sass): errors 1`] = `Array []`;
+
+exports[`loader should work and use the "index" file in package when the "index" value already in the "mainFiles" resolve option (node-sass) (sass): warnings 1`] = `Array []`;
+
+exports[`loader should work and use the "index" file in package when the "index" value already in the "mainFiles" resolve option (node-sass) (scss): errors 1`] = `Array []`;
+
+exports[`loader should work and use the "index" file in package when the "index" value already in the "mainFiles" resolve option (node-sass) (scss): warnings 1`] = `Array []`;
+
+exports[`loader should work and use the "index" file in package when the "index" value is not in the "mainFiles" resolve option (dart-sass) (sass): errors 1`] = `Array []`;
+
+exports[`loader should work and use the "index" file in package when the "index" value is not in the "mainFiles" resolve option (dart-sass) (sass): warnings 1`] = `Array []`;
+
+exports[`loader should work and use the "index" file in package when the "index" value is not in the "mainFiles" resolve option (dart-sass) (scss): errors 1`] = `Array []`;
+
+exports[`loader should work and use the "index" file in package when the "index" value is not in the "mainFiles" resolve option (dart-sass) (scss): warnings 1`] = `Array []`;
+
+exports[`loader should work and use the "index" file in package when the "index" value is not in the "mainFiles" resolve option (node-sass) (sass): errors 1`] = `Array []`;
+
+exports[`loader should work and use the "index" file in package when the "index" value is not in the "mainFiles" resolve option (node-sass) (sass): warnings 1`] = `Array []`;
+
+exports[`loader should work and use the "index" file in package when the "index" value is not in the "mainFiles" resolve option (node-sass) (scss): errors 1`] = `Array []`;
+
+exports[`loader should work and use the "index" file in package when the "index" value is not in the "mainFiles" resolve option (node-sass) (scss): warnings 1`] = `Array []`;
 
 exports[`loader should work and use the "main" field (dart-sass) (sass): errors 1`] = `Array []`;
 
@@ -329,6 +377,38 @@ exports[`loader should work and use the "main" field (node-sass) (sass): warning
 exports[`loader should work and use the "main" field (node-sass) (scss): errors 1`] = `Array []`;
 
 exports[`loader should work and use the "main" field (node-sass) (scss): warnings 1`] = `Array []`;
+
+exports[`loader should work and use the "main" field when the "main" value already in the "mainFields" resolve option (dart-sass) (sass): errors 1`] = `Array []`;
+
+exports[`loader should work and use the "main" field when the "main" value already in the "mainFields" resolve option (dart-sass) (sass): warnings 1`] = `Array []`;
+
+exports[`loader should work and use the "main" field when the "main" value already in the "mainFields" resolve option (dart-sass) (scss): errors 1`] = `Array []`;
+
+exports[`loader should work and use the "main" field when the "main" value already in the "mainFields" resolve option (dart-sass) (scss): warnings 1`] = `Array []`;
+
+exports[`loader should work and use the "main" field when the "main" value already in the "mainFields" resolve option (node-sass) (sass): errors 1`] = `Array []`;
+
+exports[`loader should work and use the "main" field when the "main" value already in the "mainFields" resolve option (node-sass) (sass): warnings 1`] = `Array []`;
+
+exports[`loader should work and use the "main" field when the "main" value already in the "mainFields" resolve option (node-sass) (scss): errors 1`] = `Array []`;
+
+exports[`loader should work and use the "main" field when the "main" value already in the "mainFields" resolve option (node-sass) (scss): warnings 1`] = `Array []`;
+
+exports[`loader should work and use the "main" field when the "main" value is not in the "mainFields" resolve option (dart-sass) (sass): errors 1`] = `Array []`;
+
+exports[`loader should work and use the "main" field when the "main" value is not in the "mainFields" resolve option (dart-sass) (sass): warnings 1`] = `Array []`;
+
+exports[`loader should work and use the "main" field when the "main" value is not in the "mainFields" resolve option (dart-sass) (scss): errors 1`] = `Array []`;
+
+exports[`loader should work and use the "main" field when the "main" value is not in the "mainFields" resolve option (dart-sass) (scss): warnings 1`] = `Array []`;
+
+exports[`loader should work and use the "main" field when the "main" value is not in the "mainFields" resolve option (node-sass) (sass): errors 1`] = `Array []`;
+
+exports[`loader should work and use the "main" field when the "main" value is not in the "mainFields" resolve option (node-sass) (sass): warnings 1`] = `Array []`;
+
+exports[`loader should work and use the "main" field when the "main" value is not in the "mainFields" resolve option (node-sass) (scss): errors 1`] = `Array []`;
+
+exports[`loader should work and use the "main" field when the "main" value is not in the "mainFields" resolve option (node-sass) (scss): warnings 1`] = `Array []`;
 
 exports[`loader should work and use the "sass" field (dart-sass) (sass): errors 1`] = `Array []`;
 
@@ -361,6 +441,54 @@ exports[`loader should work and use the "style" field (node-sass) (sass): warnin
 exports[`loader should work and use the "style" field (node-sass) (scss): errors 1`] = `Array []`;
 
 exports[`loader should work and use the "style" field (node-sass) (scss): warnings 1`] = `Array []`;
+
+exports[`loader should work when "@import" at-rules starting with "_" (dart-sass) (sass): errors 1`] = `Array []`;
+
+exports[`loader should work when "@import" at-rules starting with "_" (dart-sass) (sass): warnings 1`] = `Array []`;
+
+exports[`loader should work when "@import" at-rules starting with "_" (dart-sass) (scss): errors 1`] = `Array []`;
+
+exports[`loader should work when "@import" at-rules starting with "_" (dart-sass) (scss): warnings 1`] = `Array []`;
+
+exports[`loader should work when "@import" at-rules starting with "_" (node-sass) (sass): errors 1`] = `Array []`;
+
+exports[`loader should work when "@import" at-rules starting with "_" (node-sass) (sass): warnings 1`] = `Array []`;
+
+exports[`loader should work when "@import" at-rules starting with "_" (node-sass) (scss): errors 1`] = `Array []`;
+
+exports[`loader should work when "@import" at-rules starting with "_" (node-sass) (scss): warnings 1`] = `Array []`;
+
+exports[`loader should work when "@import" at-rules with extensions (dart-sass) (sass): errors 1`] = `Array []`;
+
+exports[`loader should work when "@import" at-rules with extensions (dart-sass) (sass): warnings 1`] = `Array []`;
+
+exports[`loader should work when "@import" at-rules with extensions (dart-sass) (scss): errors 1`] = `Array []`;
+
+exports[`loader should work when "@import" at-rules with extensions (dart-sass) (scss): warnings 1`] = `Array []`;
+
+exports[`loader should work when "@import" at-rules with extensions (node-sass) (sass): errors 1`] = `Array []`;
+
+exports[`loader should work when "@import" at-rules with extensions (node-sass) (sass): warnings 1`] = `Array []`;
+
+exports[`loader should work when "@import" at-rules with extensions (node-sass) (scss): errors 1`] = `Array []`;
+
+exports[`loader should work when "@import" at-rules with extensions (node-sass) (scss): warnings 1`] = `Array []`;
+
+exports[`loader should work when "@import" at-rules without extensions and do not start with "_" (dart-sass) (sass): errors 1`] = `Array []`;
+
+exports[`loader should work when "@import" at-rules without extensions and do not start with "_" (dart-sass) (sass): warnings 1`] = `Array []`;
+
+exports[`loader should work when "@import" at-rules without extensions and do not start with "_" (dart-sass) (scss): errors 1`] = `Array []`;
+
+exports[`loader should work when "@import" at-rules without extensions and do not start with "_" (dart-sass) (scss): warnings 1`] = `Array []`;
+
+exports[`loader should work when "@import" at-rules without extensions and do not start with "_" (node-sass) (sass): errors 1`] = `Array []`;
+
+exports[`loader should work when "@import" at-rules without extensions and do not start with "_" (node-sass) (sass): warnings 1`] = `Array []`;
+
+exports[`loader should work when "@import" at-rules without extensions and do not start with "_" (node-sass) (scss): errors 1`] = `Array []`;
+
+exports[`loader should work when "@import" at-rules without extensions and do not start with "_" (node-sass) (scss): warnings 1`] = `Array []`;
 
 exports[`loader should work when an "@import" at-rule from scoped npm packages (dart-sass) (sass): errors 1`] = `Array []`;
 
