@@ -2,7 +2,14 @@ import path from 'path';
 
 import utils from 'loader-utils';
 
-const matchModuleImport = /^~([^/]+|@[^/]+[/][^/]+)$/;
+// Examples:
+// - ~package
+// - ~package/
+// - ~@org
+// - ~@org/
+// - ~@org/package
+// - ~@org/package/
+const matchModuleImport = /^~([^/]+|[^/]+\/|@[^/]+[/][^/]+|@[^/]+\/?|@[^/]+[/][^/]+\/)$/;
 
 /**
  * When libsass tries to resolve an import, it uses a special algorithm.

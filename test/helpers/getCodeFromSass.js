@@ -651,7 +651,15 @@ function getCodeFromSass(testId, options) {
           pathToSCSSIndexAlias
         )
         .replace(
+          /^~@path-to-scss-dir\/dir-with-underscore-index\/$/,
+          pathToSCSSIndexAlias
+        )
+        .replace(
           /^~@path-to-sass-dir\/dir-with-underscore-index$/,
+          pathToSassIndexAlias
+        )
+        .replace(
+          /^~@path-to-sass-dir\/dir-with-underscore-index\/$/,
           pathToSassIndexAlias
         )
         .replace(
