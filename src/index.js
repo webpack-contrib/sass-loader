@@ -3,10 +3,11 @@ import path from 'path';
 import async from 'neo-async';
 import pify from 'pify';
 import semver from 'semver';
+import { getOptions } from 'loader-utils';
 
 import formatSassError from './formatSassError';
 import webpackImporter from './webpackImporter';
-import normalizeOptions from './normalizeOptions';
+import getSassOptions from './getSassOptions';
 
 let nodeSassJobQueue = null;
 
@@ -34,17 +35,15 @@ function hasGetResolve(loaderContext) {
  * @param {string} content
  */
 function loader(content) {
+  const options = getOptions(this) || {};
+
   const callback = this.async();
-  const isSync = typeof callback !== 'function';
-  const self = this;
-  const { resourcePath } = this;
-
-  function addNormalizedDependency(file) {
+  const addNormalizedDependency = (file) => {
     // node-sass returns POSIX paths
-    self.dependency(path.normalize(file));
-  }
+    this.dependency(path.normalize(file));
+  };
 
-  if (isSync) {
+  if (typeof callback !== 'function') {
     throw new Error(
       'Synchronous compilation is not supported anymore. See https://github.com/webpack-contrib/sass-loader/issues/333'
     );
@@ -53,7 +52,7 @@ function loader(content) {
   let resolve = pify(this.resolve);
 
   // Supported since v4.36.0
-  if (hasGetResolve(self)) {
+  if (hasGetResolve(this)) {
     resolve = this.getResolve({
       mainFields: ['sass', 'style', 'main', '...'],
       mainFiles: ['_index', 'index', '...'],
@@ -61,14 +60,14 @@ function loader(content) {
     });
   }
 
-  const options = normalizeOptions(
-    this,
-    content,
-    webpackImporter(resourcePath, resolve, addNormalizedDependency)
+  const sassOptions = getSassOptions(this, options, content);
+
+  sassOptions.importer.push(
+    webpackImporter(this.resourcePath, resolve, addNormalizedDependency)
   );
 
   // Skip empty files, otherwise it will stop webpack, see issue #21
-  if (options.data.trim() === '') {
+  if (sassOptions.data.trim() === '') {
     callback(null, '');
     return;
   }
@@ -78,7 +77,7 @@ function loader(content) {
     options.implementation || getDefaultSassImpl()
   );
 
-  render(options, (error, result) => {
+  render(sassOptions, (error, result) => {
     if (error) {
       formatSassError(error, this.resourcePath);
 
@@ -101,7 +100,7 @@ function loader(content) {
 
       // One of the sources is 'stdin' according to dart-sass/node-sass because we've used the data input.
       // Now let's override that value with the correct relative path.
-      // Since we specified options.sourceMap = path.join(process.cwd(), "/sass.map"); in normalizeOptions,
+      // Since we specified options.sourceMap = path.join(process.cwd(), "/sass.map"); in getSassOptions,
       // we know that this path is relative to process.cwd(). This is how node-sass works.
       // eslint-disable-next-line no-param-reassign
       const stdinIndex = result.map.sources.findIndex(
@@ -112,9 +111,10 @@ function loader(content) {
         // eslint-disable-next-line no-param-reassign
         result.map.sources[stdinIndex] = path.relative(
           process.cwd(),
-          resourcePath
+          this.resourcePath
         );
       }
+
       // node-sass returns POSIX paths, that's why we need to transform them back to native paths.
       // This fixes an error on windows where the source-map module cannot resolve the source maps.
       // @see https://github.com/webpack-contrib/sass-loader/issues/366#issuecomment-279460722

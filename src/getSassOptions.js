@@ -1,7 +1,6 @@
 import os from 'os';
 import path from 'path';
 
-import utils from 'loader-utils';
 import cloneDeep from 'clone-deep';
 
 import proxyCustomImporters from './proxyCustomImporters';
@@ -13,12 +12,12 @@ import proxyCustomImporters from './proxyCustomImporters';
  * That's why we must not modify the object directly.
  *
  * @param {LoaderContext} loaderContext
- * @param {string} content
- * @param {Function} webpackImporter
+ * @param {string} loaderOptions
+ * @param {object} content
  * @returns {Object}
  */
-function normalizeOptions(loaderContext, content, webpackImporter) {
-  const options = cloneDeep(utils.getOptions(loaderContext)) || {};
+function getSassOptions(loaderContext, loaderOptions, content) {
+  const options = cloneDeep(loaderOptions);
   const { resourcePath } = loaderContext;
 
   // allow opt.functions to be configured WRT loaderContext
@@ -86,7 +85,6 @@ function normalizeOptions(loaderContext, content, webpackImporter) {
   options.importer = options.importer
     ? proxyCustomImporters(options.importer, resourcePath)
     : [];
-  options.importer.push(webpackImporter);
 
   // `node-sass` uses `includePaths` to resolve `@import` paths. Append the currently processed file.
   options.includePaths = options.includePaths || [];
@@ -95,4 +93,4 @@ function normalizeOptions(loaderContext, content, webpackImporter) {
   return options;
 }
 
-export default normalizeOptions;
+export default getSassOptions;
