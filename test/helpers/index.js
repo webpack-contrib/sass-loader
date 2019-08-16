@@ -1,15 +1,15 @@
 import compile from './compiler';
 import getTestId from './getTestId';
-import getCode from './getCode';
-import getPureCode from './getPureCode';
+import getCodeFromBundle from './getCodeFromBundle';
+import getCodeFromSass from './getCodeFromSass';
 import getImplementationByName from './getImplementationByName';
 import normalizeError from './normalizeError';
 
 export {
   compile,
   getTestId,
-  getCode,
-  getPureCode,
+  getCodeFromBundle,
+  getCodeFromSass,
   getImplementationByName,
   normalizeError,
 };

@@ -1,7 +1,7 @@
 'use strict';
 
 function testLoader(content, sourceMap) {
-  const result = { content };
+  const result = { css: content };
 
   if (sourceMap) {
     result.sourceMap = sourceMap;

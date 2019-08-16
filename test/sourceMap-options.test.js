@@ -10,7 +10,7 @@ import dartSass from 'sass';
 import {
   compile,
   getTestId,
-  getCode,
+  getCodeFromBundle,
   getImplementationByName,
 } from './helpers';
 
@@ -30,9 +30,9 @@ describe('sourceMap option', () => {
           sourceMap: undefined,
         };
         const stats = await compile(testId, { loader: { options } });
-        const { content, sourceMap } = getCode(stats);
+        const { css, sourceMap } = getCodeFromBundle(stats);
 
-        expect(content).toBeDefined();
+        expect(css).toBeDefined();
         expect(sourceMap).toBeUndefined();
 
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
@@ -46,9 +46,9 @@ describe('sourceMap option', () => {
           sourceMap: false,
         };
         const stats = await compile(testId, { loader: { options } });
-        const { content, sourceMap } = getCode(stats);
+        const { css, sourceMap } = getCodeFromBundle(stats);
 
-        expect(content).toBeDefined();
+        expect(css).toBeDefined();
         expect(sourceMap).toBeUndefined();
 
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
@@ -64,9 +64,9 @@ describe('sourceMap option', () => {
           sourceMap: true,
         };
         const stats = await compile(testId, { loader: { options } });
-        const { content, sourceMap } = getCode(stats);
+        const { css, sourceMap } = getCodeFromBundle(stats);
 
-        expect(content).toBeDefined();
+        expect(css).toBeDefined();
         expect(sourceMap).toBeDefined();
 
         expect(sourceMap.file).toBeUndefined();

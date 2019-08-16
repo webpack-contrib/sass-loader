@@ -9,8 +9,8 @@ import dartSass from 'sass';
 import {
   compile,
   getTestId,
-  getCode,
-  getPureCode,
+  getCodeFromBundle,
+  getCodeFromSass,
   getImplementationByName,
   normalizeError,
 } from './helpers';
@@ -33,7 +33,9 @@ describe('loader', () => {
         };
         const stats = await compile(testId, { loader: { options } });
 
-        expect(getCode(stats).content).toBe(getPureCode(testId, options));
+        expect(getCodeFromBundle(stats).css).toBe(
+          getCodeFromSass(testId, options).css
+        );
 
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
@@ -47,7 +49,9 @@ describe('loader', () => {
         };
         const stats = await compile(testId, { loader: { options } });
 
-        expect(getCode(stats).content).toBe(getPureCode(testId, options));
+        expect(getCodeFromBundle(stats).css).toBe(
+          getCodeFromSass(testId, options).css
+        );
 
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
@@ -61,7 +65,9 @@ describe('loader', () => {
         };
         const stats = await compile(testId, { loader: { options } });
 
-        expect(getCode(stats).content).toBe(getPureCode(testId, options));
+        expect(getCodeFromBundle(stats).css).toBe(
+          getCodeFromSass(testId, options).css
+        );
 
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
@@ -75,7 +81,9 @@ describe('loader', () => {
         };
         const stats = await compile(testId, { loader: { options } });
 
-        expect(getCode(stats).content).toBe(getPureCode(testId, options));
+        expect(getCodeFromBundle(stats).css).toBe(
+          getCodeFromSass(testId, options).css
+        );
 
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
@@ -93,7 +101,9 @@ describe('loader', () => {
         };
         const stats = await compile(testId, { loader: { options } });
 
-        expect(getCode(stats).content).toBe(getPureCode(testId, options));
+        expect(getCodeFromBundle(stats).css).toBe(
+          getCodeFromSass(testId, options).css
+        );
 
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
@@ -107,7 +117,9 @@ describe('loader', () => {
         };
         const stats = await compile(testId, { loader: { options } });
 
-        expect(getCode(stats).content).toBe(getPureCode(testId, options));
+        expect(getCodeFromBundle(stats).css).toBe(
+          getCodeFromSass(testId, options).css
+        );
 
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
@@ -125,7 +137,9 @@ describe('loader', () => {
         };
         const stats = await compile(testId, { loader: { options } });
 
-        expect(getCode(stats).content).toBe(getPureCode(testId, options));
+        expect(getCodeFromBundle(stats).css).toBe(
+          getCodeFromSass(testId, options).css
+        );
 
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
@@ -139,7 +153,9 @@ describe('loader', () => {
         };
         const stats = await compile(testId, { loader: { options } });
 
-        expect(getCode(stats).content).toBe(getPureCode(testId, options));
+        expect(getCodeFromBundle(stats).css).toBe(
+          getCodeFromSass(testId, options).css
+        );
 
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
@@ -153,7 +169,9 @@ describe('loader', () => {
         };
         const stats = await compile(testId, { loader: { options } });
 
-        expect(getCode(stats).content).toBe(getPureCode(testId, options));
+        expect(getCodeFromBundle(stats).css).toBe(
+          getCodeFromSass(testId, options).css
+        );
 
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
@@ -218,7 +236,9 @@ describe('loader', () => {
         };
         const stats = await compile(testId, { loader: { options } });
 
-        expect(getCode(stats).content).toBe(getPureCode(testId, options));
+        expect(getCodeFromBundle(stats).css).toBe(
+          getCodeFromSass(testId, options).css
+        );
 
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
@@ -232,7 +252,9 @@ describe('loader', () => {
         };
         const stats = await compile(testId, { loader: { options } });
 
-        expect(getCode(stats).content).toBe(getPureCode(testId, options));
+        expect(getCodeFromBundle(stats).css).toBe(
+          getCodeFromSass(testId, options).css
+        );
 
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
@@ -246,7 +268,9 @@ describe('loader', () => {
         };
         const stats = await compile(testId, { loader: { options } });
 
-        expect(getCode(stats).content).toBe(getPureCode(testId, options));
+        expect(getCodeFromBundle(stats).css).toBe(
+          getCodeFromSass(testId, options).css
+        );
 
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
@@ -259,7 +283,9 @@ describe('loader', () => {
         };
         const stats = await compile(testId, { loader: { options } });
 
-        expect(getCode(stats).content).toBe(getPureCode(testId, options));
+        expect(getCodeFromBundle(stats).css).toBe(
+          getCodeFromSass(testId, options).css
+        );
 
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
@@ -272,7 +298,9 @@ describe('loader', () => {
         };
         const stats = await compile(testId, { loader: { options } });
 
-        expect(getCode(stats).content).toBe(getPureCode(testId, options));
+        expect(getCodeFromBundle(stats).css).toBe(
+          getCodeFromSass(testId, options).css
+        );
 
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
@@ -285,7 +313,9 @@ describe('loader', () => {
         };
         const stats = await compile(testId, { loader: { options } });
 
-        expect(getCode(stats).content).toBe(getPureCode(testId, options));
+        expect(getCodeFromBundle(stats).css).toBe(
+          getCodeFromSass(testId, options).css
+        );
 
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
@@ -301,7 +331,9 @@ describe('loader', () => {
         };
         const stats = await compile(testId, { loader: { options } });
 
-        expect(getCode(stats).content).toBe(getPureCode(testId, options));
+        expect(getCodeFromBundle(stats).css).toBe(
+          getCodeFromSass(testId, options).css
+        );
 
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
@@ -314,7 +346,9 @@ describe('loader', () => {
         };
         const stats = await compile(testId, { loader: { options } });
 
-        expect(getCode(stats).content).toBe(getPureCode(testId, options));
+        expect(getCodeFromBundle(stats).css).toBe(
+          getCodeFromSass(testId, options).css
+        );
 
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
@@ -327,7 +361,9 @@ describe('loader', () => {
         };
         const stats = await compile(testId, { loader: { options } });
 
-        expect(getCode(stats).content).toBe(getPureCode(testId, options));
+        expect(getCodeFromBundle(stats).css).toBe(
+          getCodeFromSass(testId, options).css
+        );
 
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
@@ -340,7 +376,9 @@ describe('loader', () => {
         };
         const stats = await compile(testId, { loader: { options } });
 
-        expect(getCode(stats).content).toBe(getPureCode(testId, options));
+        expect(getCodeFromBundle(stats).css).toBe(
+          getCodeFromSass(testId, options).css
+        );
 
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
@@ -355,7 +393,9 @@ describe('loader', () => {
           loader: { options, resolve: { mainFields: [] } },
         });
 
-        expect(getCode(stats).content).toBe(getPureCode(testId, options));
+        expect(getCodeFromBundle(stats).css).toBe(
+          getCodeFromSass(testId, options).css
+        );
 
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
@@ -370,7 +410,9 @@ describe('loader', () => {
           loader: { options, resolve: { mainFields: ['main', '...'] } },
         });
 
-        expect(getCode(stats).content).toBe(getPureCode(testId, options));
+        expect(getCodeFromBundle(stats).css).toBe(
+          getCodeFromSass(testId, options).css
+        );
 
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
@@ -385,7 +427,9 @@ describe('loader', () => {
           loader: { options, resolve: { mainFields: ['custom-sass', '...'] } },
         });
 
-        expect(getCode(stats).content).toBe(getPureCode(testId, options));
+        expect(getCodeFromBundle(stats).css).toBe(
+          getCodeFromSass(testId, options).css
+        );
 
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
@@ -398,7 +442,9 @@ describe('loader', () => {
         };
         const stats = await compile(testId, { loader: { options } });
 
-        expect(getCode(stats).content).toBe(getPureCode(testId, options));
+        expect(getCodeFromBundle(stats).css).toBe(
+          getCodeFromSass(testId, options).css
+        );
 
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
@@ -413,7 +459,9 @@ describe('loader', () => {
           loader: { options, resolve: { mainFiles: [] } },
         });
 
-        expect(getCode(stats).content).toBe(getPureCode(testId, options));
+        expect(getCodeFromBundle(stats).css).toBe(
+          getCodeFromSass(testId, options).css
+        );
 
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
@@ -428,7 +476,9 @@ describe('loader', () => {
           loader: { options, resolve: { mainFiles: ['index', '...'] } },
         });
 
-        expect(getCode(stats).content).toBe(getPureCode(testId, options));
+        expect(getCodeFromBundle(stats).css).toBe(
+          getCodeFromSass(testId, options).css
+        );
 
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
@@ -441,7 +491,9 @@ describe('loader', () => {
         };
         const stats = await compile(testId, { loader: { options } });
 
-        expect(getCode(stats).content).toBe(getPureCode(testId, options));
+        expect(getCodeFromBundle(stats).css).toBe(
+          getCodeFromSass(testId, options).css
+        );
 
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
@@ -456,7 +508,9 @@ describe('loader', () => {
         };
         const stats = await compile(testId, { loader: { options } });
 
-        expect(getCode(stats).content).toBe(getPureCode(testId, options));
+        expect(getCodeFromBundle(stats).css).toBe(
+          getCodeFromSass(testId, options).css
+        );
 
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
@@ -481,7 +535,9 @@ describe('loader', () => {
           loader: { options },
         });
 
-        expect(getCode(stats).content).toBe(getPureCode(testId, options));
+        expect(getCodeFromBundle(stats).css).toBe(
+          getCodeFromSass(testId, options).css
+        );
 
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
@@ -494,7 +550,9 @@ describe('loader', () => {
         };
         const stats = await compile(testId, { loader: { options } });
 
-        expect(getCode(stats).content).toBe(getPureCode(testId, options));
+        expect(getCodeFromBundle(stats).css).toBe(
+          getCodeFromSass(testId, options).css
+        );
 
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
@@ -507,7 +565,9 @@ describe('loader', () => {
         };
         const stats = await compile(testId, { loader: { options } });
 
-        expect(getCode(stats).content).toBe(getPureCode(testId, options));
+        expect(getCodeFromBundle(stats).css).toBe(
+          getCodeFromSass(testId, options).css
+        );
 
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
@@ -520,7 +580,9 @@ describe('loader', () => {
         };
         const stats = await compile(testId, { loader: { options } });
 
-        expect(getCode(stats).content).toBe(getPureCode(testId, options));
+        expect(getCodeFromBundle(stats).css).toBe(
+          getCodeFromSass(testId, options).css
+        );
 
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
@@ -536,13 +598,13 @@ describe('loader', () => {
           loader: { options },
         });
 
-        expect(getCode(stats).content).toBe(
-          getPureCode(
+        expect(getCodeFromBundle(stats).css).toBe(
+          getCodeFromSass(
             testId,
             Object.assign({}, options, {
               outputStyle: 'compressed',
             })
-          )
+          ).css
         );
 
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
