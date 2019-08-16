@@ -8,7 +8,7 @@ import dartSass from 'sass';
 import {
   compile,
   getTestId,
-  getCode,
+  getCodeFromBundle,
   getImplementationByName,
   normalizeError,
 } from './helpers';
@@ -32,9 +32,9 @@ describe('implementation option', () => {
         implementation: getImplementationByName(implementationName),
       };
       const stats = await compile(testId, { loader: { options } });
-      const { content, sourceMap } = getCode(stats);
+      const { css, sourceMap } = getCodeFromBundle(stats);
 
-      expect(content).toBeDefined();
+      expect(css).toBeDefined();
       expect(sourceMap).toBeUndefined();
 
       expect(stats.compilation.warnings).toMatchSnapshot('warnings');
@@ -57,9 +57,9 @@ describe('implementation option', () => {
     const testId = getTestId('language', 'scss');
     const options = {};
     const stats = await compile(testId, { loader: { options } });
-    const { content, sourceMap } = getCode(stats);
+    const { css, sourceMap } = getCodeFromBundle(stats);
 
-    expect(content).toBeDefined();
+    expect(css).toBeDefined();
     expect(sourceMap).toBeUndefined();
 
     expect(stats.compilation.warnings).toMatchSnapshot('warnings');
@@ -80,7 +80,7 @@ describe('implementation option', () => {
     try {
       const stats = await compile(testId, { loader: { options } });
 
-      getCode(stats);
+      getCodeFromBundle(stats);
     } catch (error) {
       expect(normalizeError(error)).toMatchSnapshot();
     }
@@ -97,7 +97,7 @@ describe('implementation option', () => {
     try {
       const stats = await compile(testId, { loader: { options } });
 
-      getCode(stats);
+      getCodeFromBundle(stats);
     } catch (error) {
       expect(normalizeError(error)).toMatchSnapshot();
     }
@@ -114,7 +114,7 @@ describe('implementation option', () => {
     try {
       const stats = await compile(testId, { loader: { options } });
 
-      getCode(stats);
+      getCodeFromBundle(stats);
     } catch (error) {
       expect(normalizeError(error)).toMatchSnapshot();
     }
@@ -129,7 +129,7 @@ describe('implementation option', () => {
     try {
       const stats = await compile(testId, { loader: { options } });
 
-      getCode(stats);
+      getCodeFromBundle(stats);
     } catch (error) {
       expect(normalizeError(error)).toMatchSnapshot();
     }
@@ -144,7 +144,7 @@ describe('implementation option', () => {
     try {
       const stats = await compile(testId, { loader: { options } });
 
-      getCode(stats);
+      getCodeFromBundle(stats);
     } catch (error) {
       expect(normalizeError(error)).toMatchSnapshot();
     }
@@ -160,7 +160,7 @@ describe('implementation option', () => {
     try {
       const stats = await compile(testId, { loader: { options } });
 
-      getCode(stats);
+      getCodeFromBundle(stats);
     } catch (error) {
       expect(normalizeError(error)).toMatchSnapshot();
     }
@@ -191,7 +191,7 @@ describe('implementation option', () => {
     try {
       const stats = await compile(testId, { loader: { options } });
 
-      getCode(stats);
+      getCodeFromBundle(stats);
     } catch (error) {
       expect(error).toMatchSnapshot();
     }

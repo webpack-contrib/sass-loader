@@ -2,7 +2,7 @@ import path from 'path';
 import os from 'os';
 import fs from 'fs';
 
-function getPureCode(testId, options) {
+function getCodeFromSass(testId, options) {
   const sassOptions = Object.assign({}, options);
 
   const { implementation } = sassOptions;
@@ -646,9 +646,9 @@ function getPureCode(testId, options) {
     ? [sassOptions.importer, testImporter]
     : [testImporter];
 
-  const { css } = implementation.renderSync(sassOptions);
+  const { css, map } = implementation.renderSync(sassOptions);
 
-  return css.toString();
+  return { css: css.toString(), sourceMap: map };
 }
 
-export default getPureCode;
+export default getCodeFromSass;

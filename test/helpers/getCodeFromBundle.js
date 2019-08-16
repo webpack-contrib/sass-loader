@@ -1,6 +1,6 @@
 const vm = require('vm');
 
-function getCode(stats, assetName) {
+function getCodeFromBundle(stats, assetName) {
   let code = null;
 
   if (
@@ -23,4 +23,4 @@ function getCode(stats, assetName) {
   return result.default;
 }
 
-export default getCode;
+export default getCodeFromBundle;
