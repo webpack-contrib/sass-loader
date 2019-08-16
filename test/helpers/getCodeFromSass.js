@@ -190,6 +190,22 @@ function getCodeFromSass(testId, options) {
     testFolder,
     'node_modules/sass-main-field/nested/style.sass'
   );
+  const pathToSCSSAlias = path.resolve(
+    testFolder,
+    'scss/directory-6/file/_index.scss'
+  );
+  const pathToSassAlias = path.resolve(
+    testFolder,
+    'sass/directory-6/file/_index.sass'
+  );
+  const pathToSCSSIndexAlias = path.resolve(
+    testFolder,
+    'scss/dir-with-underscore-index/_index.scss'
+  );
+  const pathToSassIndexAlias = path.resolve(
+    testFolder,
+    'sass/dir-with-underscore-index/_index.sass'
+  );
   const pathToScopedNpmPkg = path.resolve(
     testFolder,
     'node_modules/@org/pkg/index.scss'
@@ -628,6 +644,24 @@ function getCodeFromSass(testId, options) {
         .replace(/^~sass-main-field/, pathToSassMainField)
         .replace(/^~scss-custom-sass-field/, pathToSCSSCustomSassField)
         .replace(/^~sass-custom-sass-field/, pathToSassCustomSassField)
+        .replace(/^~@scss$/, pathToSCSSAlias)
+        .replace(/^~@sass$/, pathToSassAlias)
+        .replace(
+          /^~@path-to-scss-dir\/dir-with-underscore-index$/,
+          pathToSCSSIndexAlias
+        )
+        .replace(
+          /^~@path-to-sass-dir\/dir-with-underscore-index$/,
+          pathToSassIndexAlias
+        )
+        .replace(
+          /^~@\/path-to-scss-dir\/dir-with-underscore-index$/,
+          pathToSCSSIndexAlias
+        )
+        .replace(
+          /^~@\/path-to-sass-dir\/dir-with-underscore-index$/,
+          pathToSassIndexAlias
+        )
         .replace(/^~@org\/pkg/, pathToScopedNpmPkg)
         .replace(/^~bootstrap-sass$/, pathToBootstrap3Entry)
         .replace(/^~bootstrap-sass/, pathToBootstrap3Package)
