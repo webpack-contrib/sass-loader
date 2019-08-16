@@ -282,6 +282,22 @@ exports[`loader should work and ignore all css "@import" at-rules (node-sass) (s
 
 exports[`loader should work and ignore all css "@import" at-rules (node-sass) (scss): warnings 1`] = `Array []`;
 
+exports[`loader should work and output the "compressed" outputStyle when "mode" is production (dart-sass) (sass): errors 1`] = `Array []`;
+
+exports[`loader should work and output the "compressed" outputStyle when "mode" is production (dart-sass) (sass): warnings 1`] = `Array []`;
+
+exports[`loader should work and output the "compressed" outputStyle when "mode" is production (dart-sass) (scss): errors 1`] = `Array []`;
+
+exports[`loader should work and output the "compressed" outputStyle when "mode" is production (dart-sass) (scss): warnings 1`] = `Array []`;
+
+exports[`loader should work and output the "compressed" outputStyle when "mode" is production (node-sass) (sass): errors 1`] = `Array []`;
+
+exports[`loader should work and output the "compressed" outputStyle when "mode" is production (node-sass) (sass): warnings 1`] = `Array []`;
+
+exports[`loader should work and output the "compressed" outputStyle when "mode" is production (node-sass) (scss): errors 1`] = `Array []`;
+
+exports[`loader should work and output the "compressed" outputStyle when "mode" is production (node-sass) (scss): warnings 1`] = `Array []`;
+
 exports[`loader should work and use the "_index" file in package (dart-sass) (sass): errors 1`] = `Array []`;
 
 exports[`loader should work and use the "_index" file in package (dart-sass) (sass): warnings 1`] = `Array []`;
