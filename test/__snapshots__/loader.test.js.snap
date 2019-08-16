@@ -602,6 +602,14 @@ exports[`loader should work with multiple "@import" at-rules (node-sass) (scss):
 
 exports[`loader should work with multiple "@import" at-rules (node-sass) (scss): warnings 1`] = `Array []`;
 
+exports[`loader should work with multiple "@import" at-rules without quotes (dart-sass) (sass): errors 1`] = `Array []`;
+
+exports[`loader should work with multiple "@import" at-rules without quotes (dart-sass) (sass): warnings 1`] = `Array []`;
+
+exports[`loader should work with multiple "@import" at-rules without quotes (node-sass) (sass): errors 1`] = `Array []`;
+
+exports[`loader should work with multiple "@import" at-rules without quotes (node-sass) (sass): warnings 1`] = `Array []`;
+
 exports[`loader should work with the "bootstrap" package, import as a package (dart-sass) (sass): errors 1`] = `Array []`;
 
 exports[`loader should work with the "bootstrap" package, import as a package (dart-sass) (sass): warnings 1`] = `Array []`;

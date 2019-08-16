@@ -339,6 +339,25 @@ describe('loader', () => {
         expect(stats.compilation.errors).toMatchSnapshot('errors');
       });
 
+      it(`should work with multiple "@import" at-rules without quotes (${implementationName}) (${syntax})`, async () => {
+        if (syntax === 'scss') {
+          return;
+        }
+
+        const testId = getTestId('import-without-quotes', syntax);
+        const options = {
+          implementation: getImplementationByName(implementationName),
+        };
+        const stats = await compile(testId, { loader: { options } });
+
+        expect(getCodeFromBundle(stats).css).toBe(
+          getCodeFromSass(testId, options).css
+        );
+
+        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
+        expect(stats.compilation.errors).toMatchSnapshot('errors');
+      });
+
       it(`should work and use the "sass" field (${implementationName}) (${syntax})`, async () => {
         const testId = getTestId('import-sass-field', syntax);
         const options = {
