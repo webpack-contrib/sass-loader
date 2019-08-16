@@ -549,6 +549,24 @@ describe('loader', () => {
                 'another',
                 `alias.${syntax}`
               ),
+              '@sass': path.resolve(
+                __dirname,
+                'sass',
+                'directory-6',
+                'file',
+                '_index.sass'
+              ),
+              '@scss': path.resolve(
+                __dirname,
+                'scss',
+                'directory-6',
+                'file',
+                `_index.scss`
+              ),
+              '@path-to-scss-dir': path.resolve(__dirname, 'scss'),
+              '@path-to-sass-dir': path.resolve(__dirname, 'sass'),
+              '@/path-to-scss-dir': path.resolve(__dirname, 'scss'),
+              '@/path-to-sass-dir': path.resolve(__dirname, 'sass'),
             },
           },
           loader: { options },
