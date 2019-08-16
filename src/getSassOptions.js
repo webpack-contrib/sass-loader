@@ -5,6 +5,14 @@ import cloneDeep from 'clone-deep';
 
 import proxyCustomImporters from './proxyCustomImporters';
 
+function isProductionLikeMode(loaderContext) {
+  return (
+    loaderContext.mode === 'production' ||
+    !loaderContext.mode ||
+    loaderContext.minimize
+  );
+}
+
 /**
  * Derives the sass options from the loader context and normalizes its values with sane defaults.
  *
@@ -34,7 +42,7 @@ function getSassOptions(loaderContext, loaderOptions, content) {
   options.data = data ? data + os.EOL + content : content;
 
   // opt.outputStyle
-  if (!options.outputStyle && loaderContext.minimize) {
+  if (!options.outputStyle && isProductionLikeMode(loaderContext)) {
     options.outputStyle = 'compressed';
   }
 

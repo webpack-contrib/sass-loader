@@ -525,6 +525,29 @@ describe('loader', () => {
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
       });
+
+      it(`should work and output the "compressed" outputStyle when "mode" is production (${implementationName}) (${syntax})`, async () => {
+        const testId = getTestId('language', syntax);
+        const options = {
+          implementation: getImplementationByName(implementationName),
+        };
+        const stats = await compile(testId, {
+          mode: 'production',
+          loader: { options },
+        });
+
+        expect(getCode(stats).content).toBe(
+          getPureCode(
+            testId,
+            Object.assign({}, options, {
+              outputStyle: 'compressed',
+            })
+          )
+        );
+
+        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
+        expect(stats.compilation.errors).toMatchSnapshot('errors');
+      });
     });
   });
 });

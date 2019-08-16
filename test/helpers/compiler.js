@@ -55,6 +55,7 @@ export default function(fixture, config = {}, options = {}) {
     plugins: plugins(config),
     optimization: {
       runtimeChunk: false,
+      minimizer: [],
     },
     // eslint-disable-next-line no-undefined
     resolve: config.resolve || undefined,
