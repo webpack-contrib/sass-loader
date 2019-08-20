@@ -14,7 +14,7 @@ function getCodeFromSass(testId, options) {
 
   const isSass = /\.sass$/i.test(testId);
 
-  if (sassOptions.data) {
+  if (sassOptions.prependData) {
     sassOptions.indentedSyntax = isSass;
     sassOptions.data = `$prepended-data: hotpink${
       sassOptions.indentedSyntax ? '\n' : ';'
