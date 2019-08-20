@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`webpackImporter option false (dart-sass) (sass): errors 1`] = `Array []`;
+
+exports[`webpackImporter option false (dart-sass) (sass): warnings 1`] = `Array []`;
+
+exports[`webpackImporter option false (dart-sass) (scss): errors 1`] = `Array []`;
+
+exports[`webpackImporter option false (dart-sass) (scss): warnings 1`] = `Array []`;
+
+exports[`webpackImporter option false (node-sass) (sass): errors 1`] = `Array []`;
+
+exports[`webpackImporter option false (node-sass) (sass): warnings 1`] = `Array []`;
+
+exports[`webpackImporter option false (node-sass) (scss): errors 1`] = `Array []`;
+
+exports[`webpackImporter option false (node-sass) (scss): warnings 1`] = `Array []`;
+
+exports[`webpackImporter option not specify (dart-sass) (sass): errors 1`] = `Array []`;
+
+exports[`webpackImporter option not specify (dart-sass) (sass): warnings 1`] = `Array []`;
+
+exports[`webpackImporter option not specify (dart-sass) (scss): errors 1`] = `Array []`;
+
+exports[`webpackImporter option not specify (dart-sass) (scss): warnings 1`] = `Array []`;
+
+exports[`webpackImporter option not specify (node-sass) (sass): errors 1`] = `Array []`;
+
+exports[`webpackImporter option not specify (node-sass) (sass): warnings 1`] = `Array []`;
+
+exports[`webpackImporter option not specify (node-sass) (scss): errors 1`] = `Array []`;
+
+exports[`webpackImporter option not specify (node-sass) (scss): warnings 1`] = `Array []`;
+
+exports[`webpackImporter option true (dart-sass) (sass): errors 1`] = `Array []`;
+
+exports[`webpackImporter option true (dart-sass) (sass): warnings 1`] = `Array []`;
+
+exports[`webpackImporter option true (dart-sass) (scss): errors 1`] = `Array []`;
+
+exports[`webpackImporter option true (dart-sass) (scss): warnings 1`] = `Array []`;
+
+exports[`webpackImporter option true (node-sass) (sass): errors 1`] = `Array []`;
+
+exports[`webpackImporter option true (node-sass) (sass): warnings 1`] = `Array []`;
+
+exports[`webpackImporter option true (node-sass) (scss): errors 1`] = `Array []`;
+
+exports[`webpackImporter option true (node-sass) (scss): warnings 1`] = `Array []`;

@@ -346,6 +346,39 @@ module.exports = {
 
 > ℹ In some rare case `node-sass` can output invalid source maps (it is `node-sass` bug), to avoid try to update node-sass to latest version or you can try to set the `outputStyle` option to `compressed` value.
 
+### `webpackImporter`
+
+Type: `Boolean`
+Default: `true`
+
+Allows to disable default `webpack` importer.
+
+This can improve performance in some cases. Use it with caution because aliases and `@import` at-rules starts with `~` will not work, but you can pass own `importer` to solve this (see [`importer docs`](https://github.com/sass/node-sass#importer--v200---experimental)).
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              webpackImporter: false,
+            },
+          },
+        ],
+      },
+    ],
+  },
+};
+```
+
 ## Examples
 
 ### Extracts CSS into separate files

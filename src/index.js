@@ -62,9 +62,16 @@ function loader(content) {
 
   const sassOptions = getSassOptions(this, options, content);
 
-  sassOptions.importer.push(
-    webpackImporter(this.resourcePath, resolve, addNormalizedDependency)
-  );
+  const shouldUseWebpackImporter =
+    typeof options.webpackImporter === 'boolean'
+      ? options.webpackImporter
+      : true;
+
+  if (shouldUseWebpackImporter) {
+    sassOptions.importer.push(
+      webpackImporter(this.resourcePath, resolve, addNormalizedDependency)
+    );
+  }
 
   // Skip empty files, otherwise it will stop webpack, see issue #21
   if (sassOptions.data.trim() === '') {
