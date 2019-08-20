@@ -33,13 +33,13 @@ function getSassOptions(loaderContext, loaderOptions, content) {
     options.functions = options.functions(loaderContext);
   }
 
-  let { data } = options;
+  let { prependData } = options;
 
-  if (typeof options.data === 'function') {
-    data = options.data(loaderContext);
+  if (typeof prependData === 'function') {
+    prependData = prependData(loaderContext);
   }
 
-  options.data = data ? data + os.EOL + content : content;
+  options.data = prependData ? prependData + os.EOL + content : content;
 
   // opt.outputStyle
   if (!options.outputStyle && isProductionLikeMode(loaderContext)) {

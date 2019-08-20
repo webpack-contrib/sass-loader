@@ -110,8 +110,11 @@ Thankfully there are a two solutions to this problem:
 By default all options passed to loader also passed to to [Node Sass](https://github.com/sass/node-sass) or [Dart Sass](http://sass-lang.com/dart-sass)
 
 > ℹ️ The `indentedSyntax` option has `true` value for the `sass` extension.
+
 > ℹ️ Options such as `file` and `outFile` are unavailable.
+
 > ℹ️ Only the "expanded" and "compressed" values of outputStyle are supported for `dart-sass`.
+
 > ℹ We recommend don't use `sourceMapContents`, `sourceMapEmbed`, `sourceMapRoot` options because loader automatically setup this options.
 
 There is a slight difference between the `node-sass` and `sass` options. We recommend look documentation before used them:
@@ -236,7 +239,7 @@ module.exports = {
 };
 ```
 
-### `data`
+### `prependData`
 
 Type: `String|Function`
 Default: `undefined`
@@ -262,7 +265,7 @@ module.exports = {
           {
             loader: 'sass-loader',
             options: {
-              data: '$env: ' + process.env.NODE_ENV + ';',
+              prependData: '$env: ' + process.env.NODE_ENV + ';',
             },
           },
         ],
@@ -286,8 +289,8 @@ module.exports = {
           {
             loader: 'sass-loader',
             options: {
-              data: (loaderContext) => {
-                // More information about avalaible options https://webpack.js.org/api/loaders/
+              prependData: (loaderContext) => {
+                // More information about available properties https://webpack.js.org/api/loaders/
                 const { resourcePath, rootContext } = loaderContext;
                 const relativePath = path.relative(rootContext, resourcePath);
 
