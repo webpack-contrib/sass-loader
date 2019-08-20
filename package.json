@@ -9,7 +9,7 @@
   "bugs": "https://github.com/webpack-contrib/sass-loader/issues",
   "main": "dist/cjs.js",
   "engines": {
-    "node": ">= 8.9.0"
+    "node": ">= 6.9.0"
   },
   "scripts": {
     "start": "npm run build -- -w",
