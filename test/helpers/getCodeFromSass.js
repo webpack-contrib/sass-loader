@@ -3,18 +3,23 @@ import os from 'os';
 import fs from 'fs';
 
 function getCodeFromSass(testId, options) {
-  const sassOptions = Object.assign({}, options);
+  const loaderOptions = Object.assign({}, options);
+  let sassOptions = options.sassOptions || {};
 
-  const { implementation } = sassOptions;
-  const isNodeSassImplementation = sassOptions.implementation.info.includes(
+  if (typeof sassOptions === 'function') {
+    sassOptions = sassOptions({ mock: true });
+  }
+
+  const { implementation } = loaderOptions;
+  const isNodeSassImplementation = loaderOptions.implementation.info.includes(
     'node-sass'
   );
 
-  delete sassOptions.implementation;
+  delete loaderOptions.implementation;
 
   const isSass = /\.sass$/i.test(testId);
 
-  if (sassOptions.prependData) {
+  if (loaderOptions.prependData) {
     sassOptions.indentedSyntax = isSass;
     sassOptions.data = `$prepended-data: hotpink${
       sassOptions.indentedSyntax ? '\n' : ';'
@@ -24,10 +29,6 @@ function getCodeFromSass(testId, options) {
     )}`;
   } else {
     sassOptions.file = path.resolve(__dirname, '..', testId);
-  }
-
-  if (typeof sassOptions.functions === 'function') {
-    sassOptions.functions = sassOptions.functions({ moc: true });
   }
 
   const testFolder = path.resolve(__dirname, '../');

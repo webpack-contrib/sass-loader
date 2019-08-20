@@ -15,9 +15,6 @@ import {
   normalizeError,
 } from './helpers';
 
-import customImporter from './helpers/customImporter';
-import customFunctions from './helpers/customFunctions';
-
 const implementations = [nodeSass, dartSass];
 const syntaxStyles = ['scss', 'sass'];
 
@@ -30,90 +27,6 @@ describe('loader', () => {
         const testId = getTestId('language', syntax);
         const options = {
           implementation: getImplementationByName(implementationName),
-        };
-        const stats = await compile(testId, { loader: { options } });
-
-        expect(getCodeFromBundle(stats).css).toBe(
-          getCodeFromSass(testId, options).css
-        );
-
-        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-        expect(stats.compilation.errors).toMatchSnapshot('errors');
-      });
-
-      it(`should work with the "importer" option (${implementationName}) (${syntax})`, async () => {
-        const testId = getTestId('custom-importer', syntax);
-        const options = {
-          importer: customImporter,
-          implementation: getImplementationByName(implementationName),
-        };
-        const stats = await compile(testId, { loader: { options } });
-
-        expect(getCodeFromBundle(stats).css).toBe(
-          getCodeFromSass(testId, options).css
-        );
-
-        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-        expect(stats.compilation.errors).toMatchSnapshot('errors');
-      });
-
-      it(`should work with the "functions" option as an object (${implementationName}) (${syntax})`, async () => {
-        const testId = getTestId('custom-functions', syntax);
-        const options = {
-          functions: customFunctions(implementation),
-          implementation: getImplementationByName(implementationName),
-        };
-        const stats = await compile(testId, { loader: { options } });
-
-        expect(getCodeFromBundle(stats).css).toBe(
-          getCodeFromSass(testId, options).css
-        );
-
-        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-        expect(stats.compilation.errors).toMatchSnapshot('errors');
-      });
-
-      it(`should work with the "functions" option as an object (${implementationName}) (${syntax})`, async () => {
-        const testId = getTestId('custom-functions', syntax);
-        const options = {
-          implementation: getImplementationByName(implementationName),
-          functions: customFunctions(implementation),
-        };
-        const stats = await compile(testId, { loader: { options } });
-
-        expect(getCodeFromBundle(stats).css).toBe(
-          getCodeFromSass(testId, options).css
-        );
-
-        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-        expect(stats.compilation.errors).toMatchSnapshot('errors');
-      });
-
-      it(`should work with the "functions" option as a function (${implementationName}) (${syntax})`, async () => {
-        const testId = getTestId('custom-functions', syntax);
-        const options = {
-          functions: (loaderContext) => {
-            expect(loaderContext).toBeDefined();
-
-            return customFunctions(implementation);
-          },
-          implementation: getImplementationByName(implementationName),
-        };
-        const stats = await compile(testId, { loader: { options } });
-
-        expect(getCodeFromBundle(stats).css).toBe(
-          getCodeFromSass(testId, options).css
-        );
-
-        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-        expect(stats.compilation.errors).toMatchSnapshot('errors');
-      });
-
-      it(`should work with the "includePaths" option (${implementationName}) (${syntax})`, async () => {
-        const testId = getTestId('import-include-paths', syntax);
-        const options = {
-          implementation: getImplementationByName(implementationName),
-          includePaths: [path.resolve(__dirname, syntax, 'includePath')],
         };
         const stats = await compile(testId, { loader: { options } });
 
@@ -603,7 +516,9 @@ describe('loader', () => {
           getCodeFromSass(
             testId,
             Object.assign({}, options, {
-              outputStyle: 'compressed',
+              sassOptions: {
+                outputStyle: 'compressed',
+              },
             })
           ).css
         );

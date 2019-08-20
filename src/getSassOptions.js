@@ -16,30 +16,25 @@ function isProductionLikeMode(loaderContext) {
 /**
  * Derives the sass options from the loader context and normalizes its values with sane defaults.
  *
- * Please note: If loaderContext.query is an options object, it will be re-used across multiple invocations.
- * That's why we must not modify the object directly.
- *
  * @param {LoaderContext} loaderContext
- * @param {string} loaderOptions
- * @param {object} content
+ * @param {object} loaderOptions
+ * @param {string} content
  * @returns {Object}
  */
 function getSassOptions(loaderContext, loaderOptions, content) {
-  const options = cloneDeep(loaderOptions);
-  const { resourcePath } = loaderContext;
+  const options = cloneDeep(
+    loaderOptions.sassOptions
+      ? typeof loaderOptions.sassOptions === 'function'
+        ? loaderOptions.sassOptions(loaderContext)
+        : loaderOptions.sassOptions
+      : {}
+  );
 
-  // allow opt.functions to be configured WRT loaderContext
-  if (typeof options.functions === 'function') {
-    options.functions = options.functions(loaderContext);
-  }
-
-  let { prependData } = options;
-
-  if (typeof prependData === 'function') {
-    prependData = prependData(loaderContext);
-  }
-
-  options.data = prependData ? prependData + os.EOL + content : content;
+  options.data = loaderOptions.prependData
+    ? typeof loaderOptions.prependData === 'function'
+      ? loaderOptions.prependData(loaderContext) + os.EOL + content
+      : loaderOptions.prependData + os.EOL + content
+    : content;
 
   // opt.outputStyle
   if (!options.outputStyle && isProductionLikeMode(loaderContext)) {
@@ -49,7 +44,7 @@ function getSassOptions(loaderContext, loaderOptions, content) {
   // opt.sourceMap
   // Not using the `this.sourceMap` flag because css source maps are different
   // @see https://github.com/webpack/css-loader/pull/40
-  if (options.sourceMap) {
+  if (loaderOptions.sourceMap) {
     // Deliberately overriding the sourceMap option here.
     // node-sass won't produce source maps if the data option is used and options.sourceMap is not a string.
     // In case it is a string, options.sourceMap should be a path where the source map is written.
@@ -75,7 +70,7 @@ function getSassOptions(loaderContext, loaderOptions, content) {
     }
   }
 
-  // indentedSyntax is a boolean flag.
+  const { resourcePath } = loaderContext;
   const ext = path.extname(resourcePath);
 
   // If we are compiling sass and indentedSyntax isn't set, automatically set it.

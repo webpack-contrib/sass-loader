@@ -107,46 +107,6 @@ Thankfully there are a two solutions to this problem:
 
 ## Options
 
-By default all options passed to loader also passed to to [Node Sass](https://github.com/sass/node-sass) or [Dart Sass](http://sass-lang.com/dart-sass)
-
-> ℹ️ The `indentedSyntax` option has `true` value for the `sass` extension.
-
-> ℹ️ Options such as `file` and `outFile` are unavailable.
-
-> ℹ️ Only the "expanded" and "compressed" values of outputStyle are supported for `dart-sass`.
-
-> ℹ We recommend don't use `sourceMapContents`, `sourceMapEmbed`, `sourceMapRoot` options because loader automatically setup this options.
-
-There is a slight difference between the `node-sass` and `sass` options. We recommend look documentation before used them:
-
-- [the Node Sass documentation](https://github.com/sass/node-sass/#options) for all available `node-sass` options.
-- [the Dart Sass documentation](https://github.com/sass/dart-sass#javascript-api) for all available `sass` options.
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  module: {
-    rules: [
-      {
-        test: /\.s[ac]ss$/i,
-        use: [
-          'style-loader',
-          'css-loader',
-          {
-            loader: 'sass-loader',
-            options: {
-              indentWidth: 4,
-              includePaths: ['absolute/path/a', 'absolute/path/b'],
-            },
-          },
-        ],
-      },
-    ],
-  },
-};
-```
-
 ### `implementation`
 
 The special `implementation` option determines which implementation of Sass to use.
@@ -230,6 +190,95 @@ module.exports = {
             options: {
               implementation: require('sass'),
               fiber: require('fibers'),
+            },
+          },
+        ],
+      },
+    ],
+  },
+};
+```
+
+### `sassOptions`
+
+Type: `Object|Function`
+
+Setups options for [Node Sass](https://github.com/sass/node-sass) or [Dart Sass](http://sass-lang.com/dart-sass).
+
+> ℹ️ The `indentedSyntax` option has `true` value for the `sass` extension.
+
+> ℹ️ Options such as `file` and `outFile` are unavailable.
+
+> ℹ We recommend don't use `sourceMapContents`, `sourceMapEmbed`, `sourceMapRoot` options because loader automatically setup this options.
+
+There is a slight difference between the `node-sass` and `sass` (`Dart Sass`) options.
+We recommend look documentation before used them:
+
+- [the Node Sass documentation](https://github.com/sass/node-sass/#options) for all available `node-sass` options.
+- [the Dart Sass documentation](https://github.com/sass/dart-sass#javascript-api) for all available `sass` options.
+
+#### `Object`
+
+Setups option as object for sass implementation.
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              sassOptions: {
+                indentWidth: 4,
+                includePaths: ['absolute/path/a', 'absolute/path/b'],
+              },
+            },
+          },
+        ],
+      },
+    ],
+  },
+};
+```
+
+#### `Function`
+
+Allows setup difference options based on loader context.
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              sassOptions: (loaderContext) => {
+                // More information about available properties https://webpack.js.org/api/loaders/
+                const { resourcePath, rootContext } = loaderContext;
+                const relativePath = path.relative(rootContext, resourcePath);
+
+                if (relativePath === 'styles/foo.scss') {
+                  return {
+                    includePaths: ['absolute/path/c', 'absolute/path/d'],
+                  };
+                }
+
+                return {
+                  includePaths: ['absolute/path/a', 'absolute/path/b'],
+                };
+              },
             },
           },
         ],
