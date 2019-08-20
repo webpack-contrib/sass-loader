@@ -42,6 +42,22 @@ describe('sassOptions option', () => {
         expect(stats.compilation.errors).toMatchSnapshot('errors');
       });
 
+      it(`should work when the option is empty "Object" (${implementationName}) (${syntax})`, async () => {
+        const testId = getTestId('language', syntax);
+        const options = {
+          implementation: getImplementationByName(implementationName),
+          sassOptions: {},
+        };
+        const stats = await compile(testId, { loader: { options } });
+
+        expect(getCodeFromBundle(stats).css).toBe(
+          getCodeFromSass(testId, options).css
+        );
+
+        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
+        expect(stats.compilation.errors).toMatchSnapshot('errors');
+      });
+
       it(`should work when the option like "Function" (${implementationName}) (${syntax})`, async () => {
         expect.assertions(5);
 
@@ -54,6 +70,26 @@ describe('sassOptions option', () => {
             return {
               indentWidth: 10,
             };
+          },
+        };
+        const stats = await compile(testId, { loader: { options } });
+
+        expect(getCodeFromBundle(stats).css).toBe(
+          getCodeFromSass(testId, options).css
+        );
+
+        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
+        expect(stats.compilation.errors).toMatchSnapshot('errors');
+      });
+
+      it(`should work when the option like "Function" and never return (${implementationName}) (${syntax})`, async () => {
+        expect.assertions(5);
+
+        const testId = getTestId('language', syntax);
+        const options = {
+          implementation: getImplementationByName(implementationName),
+          sassOptions: (loaderContext) => {
+            expect(loaderContext).toBeDefined();
           },
         };
         const stats = await compile(testId, { loader: { options } });
