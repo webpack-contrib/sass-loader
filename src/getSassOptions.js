@@ -25,7 +25,7 @@ function getSassOptions(loaderContext, loaderOptions, content) {
   const options = cloneDeep(
     loaderOptions.sassOptions
       ? typeof loaderOptions.sassOptions === 'function'
-        ? loaderOptions.sassOptions(loaderContext)
+        ? loaderOptions.sassOptions(loaderContext) || {}
         : loaderOptions.sassOptions
       : {}
   );

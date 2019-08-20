@@ -1,9 +1,11 @@
 import path from 'path';
 
+import validateOptions from 'schema-utils';
 import async from 'neo-async';
 import semver from 'semver';
 import { getOptions } from 'loader-utils';
 
+import schema from './options.json';
 import formatSassError from './formatSassError';
 import webpackImporter from './webpackImporter';
 import getSassOptions from './getSassOptions';
@@ -18,6 +20,11 @@ let nodeSassJobQueue = null;
  */
 function loader(content) {
   const options = getOptions(this) || {};
+
+  validateOptions(schema, options, {
+    name: 'Sass Loader',
+    baseDataPath: 'options',
+  });
 
   const callback = this.async();
   const addNormalizedDependency = (file) => {
