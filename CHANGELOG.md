@@ -1,6 +1,20 @@
-# Change Log
+# Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+## [7.3.0](https://github.com/webpack-contrib/sass-loader/compare/v7.2.0...v7.3.0) (2019-08-20)
+
+
+### Bug Fixes
+
+* handle module import ending `/` as module ([#728](https://github.com/webpack-contrib/sass-loader/issues/728)) ([997a255](https://github.com/webpack-contrib/sass-loader/commit/997a255))
+* resolution algorithm ([#720](https://github.com/webpack-contrib/sass-loader/issues/720)) ([0e94940](https://github.com/webpack-contrib/sass-loader/commit/0e94940))
+* use "compressed" output when mode is "production" ([#723](https://github.com/webpack-contrib/sass-loader/issues/723)) ([b2af379](https://github.com/webpack-contrib/sass-loader/commit/b2af379))
+
+
+### Features
+
+* `webpackImporter` option ([#732](https://github.com/webpack-contrib/sass-loader/issues/732)) ([6f4ea37](https://github.com/webpack-contrib/sass-loader/commit/6f4ea37))
 
 <a name="7.2.0"></a>
 # [7.2.0](https://github.com/webpack-contrib/sass-loader/compare/v7.1.0...v7.2.0) (2019-08-08)
