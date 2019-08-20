@@ -203,7 +203,7 @@ module.exports = {
 
 Type: `Object|Function`
 
-Setups options for [Node Sass](https://github.com/sass/node-sass) or [Dart Sass](http://sass-lang.com/dart-sass).
+Options for [Node Sass](https://github.com/sass/node-sass) or [Dart Sass](http://sass-lang.com/dart-sass) implementation.
 
 > ℹ️ The `indentedSyntax` option has `true` value for the `sass` extension.
 
@@ -403,7 +403,7 @@ module.exports = {
 Type: `Boolean`
 Default: `true`
 
-Allows to disable default `webpack` importer.
+Enables/Disables default `webpack` importer.
 
 This can improve performance in some cases. Use it with caution because aliases and `@import` at-rules starts with `~` will not work, but you can pass own `importer` to solve this (see [`importer docs`](https://github.com/sass/node-sass#importer--v200---experimental)).
 
@@ -475,6 +475,8 @@ module.exports = {
 ```
 
 ### Source maps
+
+Enables/Disables generation of source maps.
 
 To enable CSS source maps, you'll need to pass the `sourceMap` option to the sass-loader _and_ the css-loader.
 

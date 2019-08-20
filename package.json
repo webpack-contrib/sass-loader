@@ -41,6 +41,7 @@
     "clone-deep": "^4.0.1",
     "loader-utils": "^1.2.3",
     "neo-async": "^2.6.1",
+    "schema-utils": "^2.1.0",
     "semver": "^6.3.0"
   },
   "devDependencies": {
