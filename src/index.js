@@ -1,7 +1,6 @@
 import path from 'path';
 
 import async from 'neo-async';
-import pify from 'pify';
 import semver from 'semver';
 import { getOptions } from 'loader-utils';
 
@@ -10,23 +9,6 @@ import webpackImporter from './webpackImporter';
 import getSassOptions from './getSassOptions';
 
 let nodeSassJobQueue = null;
-
-// Very hacky check
-function hasGetResolve(loaderContext) {
-  return (
-    loaderContext.getResolve &&
-    // eslint-disable-next-line no-underscore-dangle
-    loaderContext._compiler &&
-    // eslint-disable-next-line no-underscore-dangle
-    loaderContext._compiler.resolverFactory &&
-    // eslint-disable-next-line no-underscore-dangle
-    loaderContext._compiler.resolverFactory._create &&
-    /cachedCleverMerge/.test(
-      // eslint-disable-next-line no-underscore-dangle
-      loaderContext._compiler.resolverFactory._create.toString()
-    )
-  );
-}
 
 /**
  * The sass-loader makes node-sass and dart-sass available to webpack modules.
@@ -40,25 +22,8 @@ function loader(content) {
   const callback = this.async();
   const addNormalizedDependency = (file) => {
     // node-sass returns POSIX paths
-    this.dependency(path.normalize(file));
+    this.addDependency(path.normalize(file));
   };
-
-  if (typeof callback !== 'function') {
-    throw new Error(
-      'Synchronous compilation is not supported anymore. See https://github.com/webpack-contrib/sass-loader/issues/333'
-    );
-  }
-
-  let resolve = pify(this.resolve);
-
-  // Supported since v4.36.0
-  if (hasGetResolve(this)) {
-    resolve = this.getResolve({
-      mainFields: ['sass', 'style', 'main', '...'],
-      mainFiles: ['_index', 'index', '...'],
-      extensions: ['.scss', '.sass', '.css', '...'],
-    });
-  }
 
   const sassOptions = getSassOptions(this, options, content);
 
@@ -68,6 +33,12 @@ function loader(content) {
       : true;
 
   if (shouldUseWebpackImporter) {
+    const resolve = this.getResolve({
+      mainFields: ['sass', 'style', 'main', '...'],
+      mainFiles: ['_index', 'index', '...'],
+      extensions: ['.scss', '.sass', '.css', '...'],
+    });
+
     sassOptions.importer.push(
       webpackImporter(this.resourcePath, resolve, addNormalizedDependency)
     );
@@ -80,7 +51,6 @@ function loader(content) {
   }
 
   const render = getRenderFuncFromSassImpl(
-    // eslint-disable-next-line import/no-extraneous-dependencies, global-require
     options.implementation || getDefaultSassImpl()
   );
 
