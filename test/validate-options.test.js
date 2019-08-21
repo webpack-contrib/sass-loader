@@ -36,6 +36,12 @@ it('validate options', () => {
   ).not.toThrow();
   expect(() => validate({ sassOptions: () => {} })).not.toThrow();
   expect(() => validate({ sassOptions: true })).toThrowErrorMatchingSnapshot();
+  expect(() =>
+    validate({ sassOptions: { fiber: { mock: true } } })
+  ).not.toThrow();
+  expect(() =>
+    validate({ sassOptions: { indentWidth: 6, linefeed: 'crlf' } })
+  ).not.toThrow();
 
   expect(() => validate({ prependData: '$color: red;' })).not.toThrow();
   expect(() => validate({ prependData: () => '$color: red;' })).not.toThrow();

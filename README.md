@@ -172,7 +172,7 @@ module.exports = {
 Note that when using `sass` (`Dart Sass`), **synchronous compilation is twice as fast as asynchronous compilation** by default, due to the overhead of asynchronous callbacks.
 To avoid this overhead, you can use the [fibers](https://www.npmjs.com/package/fibers) package to call asynchronous importers from the synchronous code path.
 
-To enable this, pass the `Fiber` class to the `fiber` option:
+To enable this, pass the `Fiber` class to the `sassOptions.fiber` option:
 
 **webpack.config.js**
 
@@ -189,7 +189,9 @@ module.exports = {
             loader: 'sass-loader',
             options: {
               implementation: require('sass'),
-              fiber: require('fibers'),
+              sassOptions: {
+                fiber: require('fibers'),
+              },
             },
           },
         ],
