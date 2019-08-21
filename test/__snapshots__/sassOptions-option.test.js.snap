@@ -1,5 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`sassOptions option should work when the option is empty "Object" (dart-sass) (sass): errors 1`] = `Array []`;
+
+exports[`sassOptions option should work when the option is empty "Object" (dart-sass) (sass): warnings 1`] = `Array []`;
+
+exports[`sassOptions option should work when the option is empty "Object" (dart-sass) (scss): errors 1`] = `Array []`;
+
+exports[`sassOptions option should work when the option is empty "Object" (dart-sass) (scss): warnings 1`] = `Array []`;
+
+exports[`sassOptions option should work when the option is empty "Object" (node-sass) (sass): errors 1`] = `Array []`;
+
+exports[`sassOptions option should work when the option is empty "Object" (node-sass) (sass): warnings 1`] = `Array []`;
+
+exports[`sassOptions option should work when the option is empty "Object" (node-sass) (scss): errors 1`] = `Array []`;
+
+exports[`sassOptions option should work when the option is empty "Object" (node-sass) (scss): warnings 1`] = `Array []`;
+
 exports[`sassOptions option should work when the option like "Function" (dart-sass) (sass): errors 1`] = `Array []`;
 
 exports[`sassOptions option should work when the option like "Function" (dart-sass) (sass): warnings 1`] = `Array []`;
@@ -15,6 +31,22 @@ exports[`sassOptions option should work when the option like "Function" (node-sa
 exports[`sassOptions option should work when the option like "Function" (node-sass) (scss): errors 1`] = `Array []`;
 
 exports[`sassOptions option should work when the option like "Function" (node-sass) (scss): warnings 1`] = `Array []`;
+
+exports[`sassOptions option should work when the option like "Function" and never return (dart-sass) (sass): errors 1`] = `Array []`;
+
+exports[`sassOptions option should work when the option like "Function" and never return (dart-sass) (sass): warnings 1`] = `Array []`;
+
+exports[`sassOptions option should work when the option like "Function" and never return (dart-sass) (scss): errors 1`] = `Array []`;
+
+exports[`sassOptions option should work when the option like "Function" and never return (dart-sass) (scss): warnings 1`] = `Array []`;
+
+exports[`sassOptions option should work when the option like "Function" and never return (node-sass) (sass): errors 1`] = `Array []`;
+
+exports[`sassOptions option should work when the option like "Function" and never return (node-sass) (sass): warnings 1`] = `Array []`;
+
+exports[`sassOptions option should work when the option like "Function" and never return (node-sass) (scss): errors 1`] = `Array []`;
+
+exports[`sassOptions option should work when the option like "Function" and never return (node-sass) (scss): warnings 1`] = `Array []`;
 
 exports[`sassOptions option should work when the option like "Object" (dart-sass) (sass): errors 1`] = `Array []`;
 

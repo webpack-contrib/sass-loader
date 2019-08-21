@@ -7,7 +7,7 @@ function getCodeFromSass(testId, options) {
   let sassOptions = options.sassOptions || {};
 
   if (typeof sassOptions === 'function') {
-    sassOptions = sassOptions({ mock: true });
+    sassOptions = sassOptions({ mock: true }) || {};
   }
 
   const { implementation } = loaderOptions;
