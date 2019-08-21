@@ -3,6 +3,7 @@
  */
 import path from 'path';
 
+import semver from 'semver';
 import nodeSass from 'node-sass';
 import dartSass from 'sass';
 
@@ -110,6 +111,28 @@ describe('sassOptions option', () => {
             includePaths: [path.resolve(__dirname, syntax, 'includePath')],
           },
         };
+        const stats = await compile(testId, { loader: { options } });
+
+        expect(getCodeFromBundle(stats).css).toBe(
+          getCodeFromSass(testId, options).css
+        );
+
+        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
+        expect(stats.compilation.errors).toMatchSnapshot('errors');
+      });
+
+      it(`should work with the "fibers" option (${implementationName}) (${syntax})`, async () => {
+        const testId = getTestId('language', syntax);
+        const options = {
+          implementation: getImplementationByName(implementationName),
+          sassOptions: {},
+        };
+
+        if (semver.satisfies(process.version, '>= 10')) {
+          // eslint-disable-next-line global-require
+          options.sassOptions.fibers = require('fibers');
+        }
+
         const stats = await compile(testId, { loader: { options } });
 
         expect(getCodeFromBundle(stats).css).toBe(
