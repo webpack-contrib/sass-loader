@@ -30,6 +30,23 @@ function getSassOptions(loaderContext, loaderOptions, content) {
       : {}
   );
 
+  if (options.fibers !== false) {
+    let fibers;
+
+    try {
+      fibers = require.resolve('fibers');
+    } catch (_error) {
+      // Nothing
+    }
+
+    if (fibers) {
+      // eslint-disable-next-line global-require, import/no-dynamic-require
+      options.fibers = require(fibers);
+    }
+  } else {
+    delete options.fibers;
+  }
+
   options.data = loaderOptions.prependData
     ? typeof loaderOptions.prependData === 'function'
       ? loaderOptions.prependData(loaderContext) + os.EOL + content

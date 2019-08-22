@@ -178,6 +178,63 @@ describe('sassOptions option', () => {
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
       });
+
+      it(`should automatically use "fibers" package if it is available (${implementationName}) (${syntax})`, async () => {
+        const spy = jest.spyOn(dartSass, 'render');
+
+        const testId = getTestId('language', syntax);
+        const options = {
+          implementation: getImplementationByName(implementationName),
+        };
+
+        const stats = await compile(testId, { loader: { options } });
+
+        if (
+          semver.satisfies(process.version, '>= 10') &&
+          implementationName === 'dart-sass'
+        ) {
+          expect(spy.mock.calls[0][0]).toHaveProperty('fibers');
+        }
+
+        expect(getCodeFromBundle(stats).css).toBe(
+          getCodeFromSass(testId, options).css
+        );
+
+        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
+        expect(stats.compilation.errors).toMatchSnapshot('errors');
+
+        spy.mockRestore();
+      });
+
+      it(`should not use "fibers" package if the "fibers" option is "false" (${implementationName}) (${syntax})`, async () => {
+        const spy = jest.spyOn(dartSass, 'render');
+
+        const testId = getTestId('language', syntax);
+        const options = {
+          implementation: getImplementationByName(implementationName),
+          sassOptions: {
+            fibers: false,
+          },
+        };
+
+        const stats = await compile(testId, { loader: { options } });
+
+        if (
+          semver.satisfies(process.version, '>= 10') &&
+          implementationName === 'dart-sass'
+        ) {
+          expect(spy.mock.calls[0][0]).not.toHaveProperty('fibers');
+        }
+
+        expect(getCodeFromBundle(stats).css).toBe(
+          getCodeFromSass(testId, options).css
+        );
+
+        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
+        expect(stats.compilation.errors).toMatchSnapshot('errors');
+
+        spy.mockRestore();
+      });
     });
   });
 });

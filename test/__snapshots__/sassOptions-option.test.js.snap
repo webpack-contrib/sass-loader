@@ -1,5 +1,37 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`sassOptions option should automatically use "fibers" package if it is available (dart-sass) (sass): errors 1`] = `Array []`;
+
+exports[`sassOptions option should automatically use "fibers" package if it is available (dart-sass) (sass): warnings 1`] = `Array []`;
+
+exports[`sassOptions option should automatically use "fibers" package if it is available (dart-sass) (scss): errors 1`] = `Array []`;
+
+exports[`sassOptions option should automatically use "fibers" package if it is available (dart-sass) (scss): warnings 1`] = `Array []`;
+
+exports[`sassOptions option should automatically use "fibers" package if it is available (node-sass) (sass): errors 1`] = `Array []`;
+
+exports[`sassOptions option should automatically use "fibers" package if it is available (node-sass) (sass): warnings 1`] = `Array []`;
+
+exports[`sassOptions option should automatically use "fibers" package if it is available (node-sass) (scss): errors 1`] = `Array []`;
+
+exports[`sassOptions option should automatically use "fibers" package if it is available (node-sass) (scss): warnings 1`] = `Array []`;
+
+exports[`sassOptions option should not use "fibers" package if the "fibers" option is "false" (dart-sass) (sass): errors 1`] = `Array []`;
+
+exports[`sassOptions option should not use "fibers" package if the "fibers" option is "false" (dart-sass) (sass): warnings 1`] = `Array []`;
+
+exports[`sassOptions option should not use "fibers" package if the "fibers" option is "false" (dart-sass) (scss): errors 1`] = `Array []`;
+
+exports[`sassOptions option should not use "fibers" package if the "fibers" option is "false" (dart-sass) (scss): warnings 1`] = `Array []`;
+
+exports[`sassOptions option should not use "fibers" package if the "fibers" option is "false" (node-sass) (sass): errors 1`] = `Array []`;
+
+exports[`sassOptions option should not use "fibers" package if the "fibers" option is "false" (node-sass) (sass): warnings 1`] = `Array []`;
+
+exports[`sassOptions option should not use "fibers" package if the "fibers" option is "false" (node-sass) (scss): errors 1`] = `Array []`;
+
+exports[`sassOptions option should not use "fibers" package if the "fibers" option is "false" (node-sass) (scss): warnings 1`] = `Array []`;
+
 exports[`sassOptions option should work when the option is empty "Object" (dart-sass) (sass): errors 1`] = `Array []`;
 
 exports[`sassOptions option should work when the option is empty "Object" (dart-sass) (sass): warnings 1`] = `Array []`;
