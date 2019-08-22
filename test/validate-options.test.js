@@ -20,11 +20,17 @@ it('validate options', () => {
       'a { color: red; }'
     );
 
-  // eslint-disable-next-line global-require
-  // expect(() => validate({ implementation: require('node-sass') })).not.toThrow();
-  // eslint-disable-next-line global-require
-  // expect(() => validate({ implementation: require('sass') })).not.toThrow();
-  // expect(() => validate({ implementation: true })).not.toThrow();
+  expect(() =>
+    // eslint-disable-next-line global-require
+    validate({ implementation: require('node-sass') })
+  ).not.toThrow();
+  expect(() =>
+    // eslint-disable-next-line global-require
+    validate({ implementation: require('sass') })
+  ).not.toThrow();
+  expect(() =>
+    validate({ implementation: true })
+  ).toThrowErrorMatchingSnapshot();
 
   expect(() => validate({ sassOptions: {} })).not.toThrow();
   expect(() =>

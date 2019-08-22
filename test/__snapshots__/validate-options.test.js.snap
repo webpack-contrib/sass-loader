@@ -2,6 +2,13 @@
 
 exports[`validate options 1`] = `
 "Invalid options object. Sass Loader has been initialised using an options object that does not match the API schema.
+ - options.implementation should be an object:
+   object { … }
+   -> The implementation of the sass to be used (https://github.com/webpack-contrib/sass-loader#implementation)."
+`;
+
+exports[`validate options 2`] = `
+"Invalid options object. Sass Loader has been initialised using an options object that does not match the API schema.
  - options.sassOptions should be one of these:
    object { … } | function
    -> Options for \`node-sass\` or \`sass\` (\`Dart Sass\`) implementation. (https://github.com/webpack-contrib/sass-loader#implementation).
@@ -11,7 +18,7 @@ exports[`validate options 1`] = `
     * options.sassOptions should be an instance of function."
 `;
 
-exports[`validate options 2`] = `
+exports[`validate options 3`] = `
 "Invalid options object. Sass Loader has been initialised using an options object that does not match the API schema.
  - options.prependData should be one of these:
    string | function
@@ -21,13 +28,13 @@ exports[`validate options 2`] = `
     * options.prependData should be an instance of function."
 `;
 
-exports[`validate options 3`] = `
+exports[`validate options 4`] = `
 "Invalid options object. Sass Loader has been initialised using an options object that does not match the API schema.
  - options.webpackImporter should be a boolean.
    -> Enables/Disables default \`webpack\` importer (https://github.com/webpack-contrib/sass-loader#webpackimporter)."
 `;
 
-exports[`validate options 4`] = `
+exports[`validate options 5`] = `
 "Invalid options object. Sass Loader has been initialised using an options object that does not match the API schema.
  - options has an unknown property 'unknown'. These properties are valid:
    object { implementation?, sassOptions?, prependData?, sourceMap?, webpackImporter? }"
