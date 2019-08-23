@@ -1,6 +1,3 @@
-/**
- * @jest-environment node
- */
 import path from 'path';
 
 import nodeSass from 'node-sass';
@@ -29,11 +26,11 @@ describe('loader', () => {
           implementation: getImplementationByName(implementationName),
         };
         const stats = await compile(testId, { loader: { options } });
+        const codeFromBundle = getCodeFromBundle(stats);
+        const codeFromSass = getCodeFromSass(testId, options);
 
-        expect(getCodeFromBundle(stats).css).toBe(
-          getCodeFromSass(testId, options).css
-        );
-
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot('css');
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
       });
@@ -45,11 +42,11 @@ describe('loader', () => {
           implementation: getImplementationByName(implementationName),
         };
         const stats = await compile(testId, { loader: { options } });
+        const codeFromBundle = getCodeFromBundle(stats);
+        const codeFromSass = getCodeFromSass(testId, options);
 
-        expect(getCodeFromBundle(stats).css).toBe(
-          getCodeFromSass(testId, options).css
-        );
-
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot('css');
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
       });
@@ -112,11 +109,11 @@ describe('loader', () => {
           implementation: getImplementationByName(implementationName),
         };
         const stats = await compile(testId, { loader: { options } });
+        const codeFromBundle = getCodeFromBundle(stats);
+        const codeFromSass = getCodeFromSass(testId, options);
 
-        expect(getCodeFromBundle(stats).css).toBe(
-          getCodeFromSass(testId, options).css
-        );
-
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot('css');
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
       });
@@ -128,42 +125,42 @@ describe('loader', () => {
           implementation: getImplementationByName(implementationName),
         };
         const stats = await compile(testId, { loader: { options } });
+        const codeFromBundle = getCodeFromBundle(stats);
+        const codeFromSass = getCodeFromSass(testId, options);
 
-        expect(getCodeFromBundle(stats).css).toBe(
-          getCodeFromSass(testId, options).css
-        );
-
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot('css');
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
       });
 
       // Test for issue: https://github.com/webpack-contrib/sass-loader/issues/73
-      it(`should work with an "@import" at-rle from other language style (${implementationName}) (${syntax})`, async () => {
+      it(`should work with "@import" at-rules from other language style (${implementationName}) (${syntax})`, async () => {
         const testId = getTestId('import-other-style', syntax);
         const options = {
           implementation: getImplementationByName(implementationName),
         };
         const stats = await compile(testId, { loader: { options } });
+        const codeFromBundle = getCodeFromBundle(stats);
+        const codeFromSass = getCodeFromSass(testId, options);
 
-        expect(getCodeFromBundle(stats).css).toBe(
-          getCodeFromSass(testId, options).css
-        );
-
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot('css');
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
       });
 
-      it(`should work when an "@import" at-rule from scoped npm packages (${implementationName}) (${syntax})`, async () => {
+      it(`should work when "@import" at-rules from scoped npm packages (${implementationName}) (${syntax})`, async () => {
         const testId = getTestId('import-from-npm-org-pkg', syntax);
         const options = {
           implementation: getImplementationByName(implementationName),
         };
         const stats = await compile(testId, { loader: { options } });
+        const codeFromBundle = getCodeFromBundle(stats);
+        const codeFromSass = getCodeFromSass(testId, options);
 
-        expect(getCodeFromBundle(stats).css).toBe(
-          getCodeFromSass(testId, options).css
-        );
-
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot('css');
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
       });
@@ -174,11 +171,11 @@ describe('loader', () => {
           implementation: getImplementationByName(implementationName),
         };
         const stats = await compile(testId, { loader: { options } });
+        const codeFromBundle = getCodeFromBundle(stats);
+        const codeFromSass = getCodeFromSass(testId, options);
 
-        expect(getCodeFromBundle(stats).css).toBe(
-          getCodeFromSass(testId, options).css
-        );
-
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot('css');
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
       });
@@ -189,11 +186,11 @@ describe('loader', () => {
           implementation: getImplementationByName(implementationName),
         };
         const stats = await compile(testId, { loader: { options } });
+        const codeFromBundle = getCodeFromBundle(stats);
+        const codeFromSass = getCodeFromSass(testId, options);
 
-        expect(getCodeFromBundle(stats).css).toBe(
-          getCodeFromSass(testId, options).css
-        );
-
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot('css');
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
       });
@@ -207,11 +204,11 @@ describe('loader', () => {
           implementation: getImplementationByName(implementationName),
         };
         const stats = await compile(testId, { loader: { options } });
+        const codeFromBundle = getCodeFromBundle(stats);
+        const codeFromSass = getCodeFromSass(testId, options);
 
-        expect(getCodeFromBundle(stats).css).toBe(
-          getCodeFromSass(testId, options).css
-        );
-
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot('css');
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
       });
@@ -226,11 +223,11 @@ describe('loader', () => {
           implementation: getImplementationByName(implementationName),
         };
         const stats = await compile(testId, { loader: { options } });
+        const codeFromBundle = getCodeFromBundle(stats);
+        const codeFromSass = getCodeFromSass(testId, options);
 
-        expect(getCodeFromBundle(stats).css).toBe(
-          getCodeFromSass(testId, options).css
-        );
-
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot('css');
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
       });
@@ -241,11 +238,11 @@ describe('loader', () => {
           implementation: getImplementationByName(implementationName),
         };
         const stats = await compile(testId, { loader: { options } });
+        const codeFromBundle = getCodeFromBundle(stats);
+        const codeFromSass = getCodeFromSass(testId, options);
 
-        expect(getCodeFromBundle(stats).css).toBe(
-          getCodeFromSass(testId, options).css
-        );
-
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot('css');
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
       });
@@ -256,11 +253,11 @@ describe('loader', () => {
           implementation: getImplementationByName(implementationName),
         };
         const stats = await compile(testId, { loader: { options } });
+        const codeFromBundle = getCodeFromBundle(stats);
+        const codeFromSass = getCodeFromSass(testId, options);
 
-        expect(getCodeFromBundle(stats).css).toBe(
-          getCodeFromSass(testId, options).css
-        );
-
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot('css');
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
       });
@@ -271,11 +268,11 @@ describe('loader', () => {
           implementation: getImplementationByName(implementationName),
         };
         const stats = await compile(testId, { loader: { options } });
+        const codeFromBundle = getCodeFromBundle(stats);
+        const codeFromSass = getCodeFromSass(testId, options);
 
-        expect(getCodeFromBundle(stats).css).toBe(
-          getCodeFromSass(testId, options).css
-        );
-
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot('css');
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
       });
@@ -288,11 +285,11 @@ describe('loader', () => {
         const stats = await compile(testId, {
           loader: { options, resolve: { mainFields: [] } },
         });
+        const codeFromBundle = getCodeFromBundle(stats);
+        const codeFromSass = getCodeFromSass(testId, options);
 
-        expect(getCodeFromBundle(stats).css).toBe(
-          getCodeFromSass(testId, options).css
-        );
-
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot('css');
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
       });
@@ -305,11 +302,11 @@ describe('loader', () => {
         const stats = await compile(testId, {
           loader: { options, resolve: { mainFields: ['main', '...'] } },
         });
+        const codeFromBundle = getCodeFromBundle(stats);
+        const codeFromSass = getCodeFromSass(testId, options);
 
-        expect(getCodeFromBundle(stats).css).toBe(
-          getCodeFromSass(testId, options).css
-        );
-
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot('css');
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
       });
@@ -322,11 +319,11 @@ describe('loader', () => {
         const stats = await compile(testId, {
           loader: { options, resolve: { mainFields: ['custom-sass', '...'] } },
         });
+        const codeFromBundle = getCodeFromBundle(stats);
+        const codeFromSass = getCodeFromSass(testId, options);
 
-        expect(getCodeFromBundle(stats).css).toBe(
-          getCodeFromSass(testId, options).css
-        );
-
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot('css');
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
       });
@@ -337,11 +334,11 @@ describe('loader', () => {
           implementation: getImplementationByName(implementationName),
         };
         const stats = await compile(testId, { loader: { options } });
+        const codeFromBundle = getCodeFromBundle(stats);
+        const codeFromSass = getCodeFromSass(testId, options);
 
-        expect(getCodeFromBundle(stats).css).toBe(
-          getCodeFromSass(testId, options).css
-        );
-
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot('css');
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
       });
@@ -354,11 +351,11 @@ describe('loader', () => {
         const stats = await compile(testId, {
           loader: { options, resolve: { mainFiles: [] } },
         });
+        const codeFromBundle = getCodeFromBundle(stats);
+        const codeFromSass = getCodeFromSass(testId, options);
 
-        expect(getCodeFromBundle(stats).css).toBe(
-          getCodeFromSass(testId, options).css
-        );
-
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot('css');
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
       });
@@ -371,11 +368,11 @@ describe('loader', () => {
         const stats = await compile(testId, {
           loader: { options, resolve: { mainFiles: ['index', '...'] } },
         });
+        const codeFromBundle = getCodeFromBundle(stats);
+        const codeFromSass = getCodeFromSass(testId, options);
 
-        expect(getCodeFromBundle(stats).css).toBe(
-          getCodeFromSass(testId, options).css
-        );
-
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot('css');
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
       });
@@ -386,11 +383,11 @@ describe('loader', () => {
           implementation: getImplementationByName(implementationName),
         };
         const stats = await compile(testId, { loader: { options } });
+        const codeFromBundle = getCodeFromBundle(stats);
+        const codeFromSass = getCodeFromSass(testId, options);
 
-        expect(getCodeFromBundle(stats).css).toBe(
-          getCodeFromSass(testId, options).css
-        );
-
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot('css');
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
       });
@@ -403,11 +400,11 @@ describe('loader', () => {
           implementation: getImplementationByName(implementationName),
         };
         const stats = await compile(testId, { loader: { options } });
+        const codeFromBundle = getCodeFromBundle(stats);
+        const codeFromSass = getCodeFromSass(testId, options);
 
-        expect(getCodeFromBundle(stats).css).toBe(
-          getCodeFromSass(testId, options).css
-        );
-
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot('css');
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
       });
@@ -448,11 +445,11 @@ describe('loader', () => {
           },
           loader: { options },
         });
+        const codeFromBundle = getCodeFromBundle(stats);
+        const codeFromSass = getCodeFromSass(testId, options);
 
-        expect(getCodeFromBundle(stats).css).toBe(
-          getCodeFromSass(testId, options).css
-        );
-
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot('css');
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
       });
@@ -463,11 +460,11 @@ describe('loader', () => {
           implementation: getImplementationByName(implementationName),
         };
         const stats = await compile(testId, { loader: { options } });
+        const codeFromBundle = getCodeFromBundle(stats);
+        const codeFromSass = getCodeFromSass(testId, options);
 
-        expect(getCodeFromBundle(stats).css).toBe(
-          getCodeFromSass(testId, options).css
-        );
-
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot('css');
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
       });
@@ -478,11 +475,11 @@ describe('loader', () => {
           implementation: getImplementationByName(implementationName),
         };
         const stats = await compile(testId, { loader: { options } });
+        const codeFromBundle = getCodeFromBundle(stats);
+        const codeFromSass = getCodeFromSass(testId, options);
 
-        expect(getCodeFromBundle(stats).css).toBe(
-          getCodeFromSass(testId, options).css
-        );
-
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot('css');
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
       });
@@ -493,11 +490,11 @@ describe('loader', () => {
           implementation: getImplementationByName(implementationName),
         };
         const stats = await compile(testId, { loader: { options } });
+        const codeFromBundle = getCodeFromBundle(stats);
+        const codeFromSass = getCodeFromSass(testId, options);
 
-        expect(getCodeFromBundle(stats).css).toBe(
-          getCodeFromSass(testId, options).css
-        );
-
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot('css');
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
       });
@@ -511,18 +508,18 @@ describe('loader', () => {
           mode: 'production',
           loader: { options },
         });
-
-        expect(getCodeFromBundle(stats).css).toBe(
-          getCodeFromSass(
-            testId,
-            Object.assign({}, options, {
-              sassOptions: {
-                outputStyle: 'compressed',
-              },
-            })
-          ).css
+        const codeFromBundle = getCodeFromBundle(stats);
+        const codeFromSass = getCodeFromSass(
+          testId,
+          Object.assign({}, options, {
+            sassOptions: {
+              outputStyle: 'compressed',
+            },
+          })
         );
 
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot('css');
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
       });

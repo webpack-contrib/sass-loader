@@ -1,6 +1,3 @@
-/**
- * @jest-environment node
- */
 import nodeSass from 'node-sass';
 import dartSass from 'sass';
 
@@ -26,11 +23,11 @@ describe('webpackImporter option', () => {
           implementation: getImplementationByName(implementationName),
         };
         const stats = await compile(testId, { loader: { options } });
+        const codeFromBundle = getCodeFromBundle(stats);
+        const codeFromSass = getCodeFromSass(testId, options);
 
-        expect(getCodeFromBundle(stats).css).toBe(
-          getCodeFromSass(testId, options).css
-        );
-
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot('css');
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
       });
@@ -42,11 +39,11 @@ describe('webpackImporter option', () => {
           implementation: getImplementationByName(implementationName),
         };
         const stats = await compile(testId, { loader: { options } });
+        const codeFromBundle = getCodeFromBundle(stats);
+        const codeFromSass = getCodeFromSass(testId, options);
 
-        expect(getCodeFromBundle(stats).css).toBe(
-          getCodeFromSass(testId, options).css
-        );
-
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot('css');
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
       });
@@ -58,11 +55,11 @@ describe('webpackImporter option', () => {
           implementation: getImplementationByName(implementationName),
         };
         const stats = await compile(testId, { loader: { options } });
+        const codeFromBundle = getCodeFromBundle(stats);
+        const codeFromSass = getCodeFromSass(testId, options);
 
-        expect(getCodeFromBundle(stats).css).toBe(
-          getCodeFromSass(testId, options).css
-        );
-
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot('css');
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
       });

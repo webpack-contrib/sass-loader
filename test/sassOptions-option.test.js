@@ -1,6 +1,3 @@
-/**
- * @jest-environment node
- */
 import path from 'path';
 
 import semver from 'semver';
@@ -34,11 +31,11 @@ describe('sassOptions option', () => {
           },
         };
         const stats = await compile(testId, { loader: { options } });
+        const codeFromBundle = getCodeFromBundle(stats);
+        const codeFromSass = getCodeFromSass(testId, options);
 
-        expect(getCodeFromBundle(stats).css).toBe(
-          getCodeFromSass(testId, options).css
-        );
-
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot('css');
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
       });
@@ -50,17 +47,17 @@ describe('sassOptions option', () => {
           sassOptions: {},
         };
         const stats = await compile(testId, { loader: { options } });
+        const codeFromBundle = getCodeFromBundle(stats);
+        const codeFromSass = getCodeFromSass(testId, options);
 
-        expect(getCodeFromBundle(stats).css).toBe(
-          getCodeFromSass(testId, options).css
-        );
-
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot('css');
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
       });
 
       it(`should work when the option like "Function" (${implementationName}) (${syntax})`, async () => {
-        expect.assertions(5);
+        expect.assertions(6);
 
         const testId = getTestId('language', syntax);
         const options = {
@@ -74,17 +71,17 @@ describe('sassOptions option', () => {
           },
         };
         const stats = await compile(testId, { loader: { options } });
+        const codeFromBundle = getCodeFromBundle(stats);
+        const codeFromSass = getCodeFromSass(testId, options);
 
-        expect(getCodeFromBundle(stats).css).toBe(
-          getCodeFromSass(testId, options).css
-        );
-
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot('css');
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
       });
 
       it(`should work when the option like "Function" and never return (${implementationName}) (${syntax})`, async () => {
-        expect.assertions(5);
+        expect.assertions(6);
 
         const testId = getTestId('language', syntax);
         const options = {
@@ -94,11 +91,11 @@ describe('sassOptions option', () => {
           },
         };
         const stats = await compile(testId, { loader: { options } });
+        const codeFromBundle = getCodeFromBundle(stats);
+        const codeFromSass = getCodeFromSass(testId, options);
 
-        expect(getCodeFromBundle(stats).css).toBe(
-          getCodeFromSass(testId, options).css
-        );
-
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot('css');
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
       });
@@ -112,11 +109,11 @@ describe('sassOptions option', () => {
           },
         };
         const stats = await compile(testId, { loader: { options } });
+        const codeFromBundle = getCodeFromBundle(stats);
+        const codeFromSass = getCodeFromSass(testId, options);
 
-        expect(getCodeFromBundle(stats).css).toBe(
-          getCodeFromSass(testId, options).css
-        );
-
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot('css');
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
       });
@@ -130,11 +127,11 @@ describe('sassOptions option', () => {
           },
         };
         const stats = await compile(testId, { loader: { options } });
+        const codeFromBundle = getCodeFromBundle(stats);
+        const codeFromSass = getCodeFromSass(testId, options);
 
-        expect(getCodeFromBundle(stats).css).toBe(
-          getCodeFromSass(testId, options).css
-        );
-
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot('css');
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
       });
@@ -148,11 +145,11 @@ describe('sassOptions option', () => {
           },
         };
         const stats = await compile(testId, { loader: { options } });
+        const codeFromBundle = getCodeFromBundle(stats);
+        const codeFromSass = getCodeFromSass(testId, options);
 
-        expect(getCodeFromBundle(stats).css).toBe(
-          getCodeFromSass(testId, options).css
-        );
-
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot('css');
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
       });
@@ -170,11 +167,11 @@ describe('sassOptions option', () => {
         }
 
         const stats = await compile(testId, { loader: { options } });
+        const codeFromBundle = getCodeFromBundle(stats);
+        const codeFromSass = getCodeFromSass(testId, options);
 
-        expect(getCodeFromBundle(stats).css).toBe(
-          getCodeFromSass(testId, options).css
-        );
-
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot('css');
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
       });
