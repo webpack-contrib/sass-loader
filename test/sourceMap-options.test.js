@@ -3,6 +3,7 @@ import path from 'path';
 
 import nodeSass from 'node-sass';
 import dartSass from 'sass';
+import Fiber from 'fibers';
 
 import {
   compile,
@@ -15,6 +16,11 @@ const implementations = [nodeSass, dartSass];
 const syntaxStyles = ['scss', 'sass'];
 
 describe('sourceMap option', () => {
+  beforeEach(() => {
+    // The `sass` (`Dart Sass`) package modify the `Function` prototype, but the `jest` lose a prototype
+    Object.setPrototypeOf(Fiber, Function.prototype);
+  });
+
   implementations.forEach((implementation) => {
     syntaxStyles.forEach((syntax) => {
       const [implementationName] = implementation.info.split('\t');

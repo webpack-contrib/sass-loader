@@ -1,5 +1,6 @@
 import nodeSass from 'node-sass';
 import dartSass from 'sass';
+import Fiber from 'fibers';
 
 import {
   compile,
@@ -13,6 +14,8 @@ const implementations = [nodeSass, dartSass];
 
 describe('implementation option', () => {
   beforeEach(() => {
+    // The `sass` (`Dart Sass`) package modify the `Function` prototype, but the `jest` lose a prototype
+    Object.setPrototypeOf(Fiber, Function.prototype);
     jest.clearAllMocks();
   });
 
