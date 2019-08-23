@@ -1,14 +1,14 @@
+import path from 'path';
+
 function normalizeError(error) {
   // eslint-disable-next-line no-param-reassign
-  error.message = error.message.replace(/\\/gm, '/');
+  error.message = error.message.replace(/\sat.*/g, ' at ReplacedStackEntry');
   // eslint-disable-next-line no-param-reassign
-  error.message = error.message.replace(/\r\n/gm, '\n');
-  // eslint-disable-next-line no-param-reassign
-  error.message = error.message.replace(/\sat.*/gm, ' at ReplacedStackEntry');
+  error.message = error.message.replace(/\\/g, '/');
   // eslint-disable-next-line no-param-reassign
   error.message = error.message.replace(
-    / in .*? /g,
-    ' in absolute_path_to_file '
+    new RegExp(path.resolve(__dirname, '..').replace(/\\/g, '/'), 'g'),
+    '/absolute/path/to'
   );
 
   return error;
