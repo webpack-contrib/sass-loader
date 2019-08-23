@@ -1,16 +1,14 @@
 import path from 'path';
 
 import validateOptions from 'schema-utils';
-import async from 'neo-async';
-import semver from 'semver';
 import { getOptions } from 'loader-utils';
 
 import schema from './options.json';
-import formatSassError from './formatSassError';
-import webpackImporter from './webpackImporter';
 import getSassOptions from './getSassOptions';
-
-let nodeSassJobQueue = null;
+import webpackImporter from './webpackImporter';
+import getDefaultSassImplementation from './getDefaultSassImplementation';
+import getRenderFunctionFromSassImplementation from './getRenderFunctionFromSassImplementation';
+import SassError from './SassError';
 
 /**
  * The sass-loader makes node-sass and dart-sass available to webpack modules.
@@ -57,19 +55,18 @@ function loader(content) {
     return;
   }
 
-  const render = getRenderFuncFromSassImpl(
-    options.implementation || getDefaultSassImpl()
+  const render = getRenderFunctionFromSassImplementation(
+    options.implementation || getDefaultSassImplementation()
   );
 
   render(sassOptions, (error, result) => {
     if (error) {
-      formatSassError(error, this.resourcePath);
-
       if (error.file) {
         this.dependency(error.file);
       }
 
-      callback(error);
+      callback(new SassError(error, this.resourcePath));
+
       return;
     }
 
@@ -115,82 +112,6 @@ function loader(content) {
 
     callback(null, result.css.toString(), result.map);
   });
-}
-
-/**
- * Verifies that the implementation and version of Sass is supported by this loader.
- *
- * @param {Object} module
- * @returns {Function}
- */
-function getRenderFuncFromSassImpl(module) {
-  const { info } = module;
-
-  if (!info) {
-    throw new Error('Unknown Sass implementation.');
-  }
-
-  const components = info.split('\t');
-
-  if (components.length < 2) {
-    throw new Error(`Unknown Sass implementation "${info}".`);
-  }
-
-  const [implementation, version] = components;
-
-  if (!semver.valid(version)) {
-    throw new Error(`Invalid Sass version "${version}".`);
-  }
-
-  if (implementation === 'dart-sass') {
-    if (!semver.satisfies(version, '^1.3.0')) {
-      throw new Error(
-        `Dart Sass version ${version} is incompatible with ^1.3.0.`
-      );
-    }
-
-    return module.render.bind(module);
-  } else if (implementation === 'node-sass') {
-    if (!semver.satisfies(version, '^4.0.0')) {
-      throw new Error(
-        `Node Sass version ${version} is incompatible with ^4.0.0.`
-      );
-    }
-
-    // There is an issue with node-sass when async custom importers are used
-    // See https://github.com/sass/node-sass/issues/857#issuecomment-93594360
-    // We need to use a job queue to make sure that one thread is always available to the UV lib
-    if (nodeSassJobQueue === null) {
-      const threadPoolSize = Number(process.env.UV_THREADPOOL_SIZE || 4);
-
-      nodeSassJobQueue = async.queue(
-        module.render.bind(module),
-        threadPoolSize - 1
-      );
-    }
-
-    return nodeSassJobQueue.push.bind(nodeSassJobQueue);
-  }
-
-  throw new Error(`Unknown Sass implementation "${implementation}".`);
-}
-
-function getDefaultSassImpl() {
-  let sassImplPkg = 'node-sass';
-
-  try {
-    require.resolve('node-sass');
-  } catch (error) {
-    try {
-      require.resolve('sass');
-      sassImplPkg = 'sass';
-    } catch (ignoreError) {
-      sassImplPkg = 'node-sass';
-    }
-  }
-
-  // eslint-disable-next-line import/no-dynamic-require, global-require
-  return require(sassImplPkg);
 }
 
 export default loader;

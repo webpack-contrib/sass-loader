@@ -89,9 +89,9 @@ function getSassOptions(loaderContext, loaderOptions, content) {
     ? proxyCustomImporters(options.importer, resourcePath)
     : [];
 
-  // `node-sass` uses `includePaths` to resolve `@import` paths. Append the currently processed file.
-  options.includePaths = options.includePaths || [];
-  options.includePaths.push(path.dirname(resourcePath));
+  options.includePaths = (options.includePaths || []).concat(
+    path.dirname(resourcePath)
+  );
 
   return options;
 }
