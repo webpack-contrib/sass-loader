@@ -26,7 +26,7 @@ Error: Unknown Sass implementation "strange-sass".
 
 exports[`implementation option should throw an error when the "info" is unparseable #2 1`] = `
 [Error: Module build failed (from ../src/cjs.js):
-Error: Invalid Sass version "1".
+Error: Node Sass version 1 is incompatible with ^4.0.0.
     at ReplacedStackEntry
     at ReplacedStackEntry]
 `;

@@ -1,7 +1,3 @@
-/**
- * @jest-environment node
- */
-
 import nodeSass from 'node-sass';
 import dartSass from 'sass';
 
@@ -138,7 +134,7 @@ describe('implementation option', () => {
   it('should throw an error when the "info" is unparseable #2', async () => {
     const testId = getTestId('language', 'scss');
     const options = {
-      implementation: Object.assign({}, dartSass, { info: 'node-sass\t1' }),
+      implementation: Object.assign({}, nodeSass, { info: 'node-sass\t1' }),
     };
 
     try {

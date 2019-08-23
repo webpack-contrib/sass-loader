@@ -4,9 +4,9 @@ import validateOptions from 'schema-utils';
 import { getOptions } from 'loader-utils';
 
 import schema from './options.json';
+import getSassImplementation from './getSassImplementation';
 import getSassOptions from './getSassOptions';
 import webpackImporter from './webpackImporter';
-import getDefaultSassImplementation from './getDefaultSassImplementation';
 import getRenderFunctionFromSassImplementation from './getRenderFunctionFromSassImplementation';
 import SassError from './SassError';
 
@@ -23,6 +23,8 @@ function loader(content) {
     name: 'Sass Loader',
     baseDataPath: 'options',
   });
+
+  const implementation = getSassImplementation(options.implementation);
 
   const callback = this.async();
   const addNormalizedDependency = (file) => {
@@ -55,9 +57,7 @@ function loader(content) {
     return;
   }
 
-  const render = getRenderFunctionFromSassImplementation(
-    options.implementation || getDefaultSassImplementation()
-  );
+  const render = getRenderFunctionFromSassImplementation(implementation);
 
   render(sassOptions, (error, result) => {
     if (error) {
