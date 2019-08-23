@@ -3,6 +3,7 @@ import path from 'path';
 import semver from 'semver';
 import nodeSass from 'node-sass';
 import dartSass from 'sass';
+import Fiber from 'fibers';
 
 import {
   compile,
@@ -18,6 +19,11 @@ const implementations = [nodeSass, dartSass];
 const syntaxStyles = ['scss', 'sass'];
 
 describe('sassOptions option', () => {
+  beforeEach(() => {
+    // The `sass` (`Dart Sass`) package modify the `Function` prototype, but the `jest` lose a prototype
+    Object.setPrototypeOf(Fiber, Function.prototype);
+  });
+
   implementations.forEach((implementation) => {
     const [implementationName] = implementation.info.split('\t');
 
@@ -154,7 +160,7 @@ describe('sassOptions option', () => {
         expect(stats.compilation.errors).toMatchSnapshot('errors');
       });
 
-      it(`should work with the "fibers" option (${implementationName}) (${syntax})`, async () => {
+      it(`should work with the "fiber" option (${implementationName}) (${syntax})`, async () => {
         const testId = getTestId('language', syntax);
         const options = {
           implementation: getImplementationByName(implementationName),
@@ -163,7 +169,7 @@ describe('sassOptions option', () => {
 
         if (semver.satisfies(process.version, '>= 10')) {
           // eslint-disable-next-line global-require
-          options.sassOptions.fibers = require('fibers');
+          options.sassOptions.fiber = Fiber;
         }
 
         const stats = await compile(testId, { loader: { options } });
