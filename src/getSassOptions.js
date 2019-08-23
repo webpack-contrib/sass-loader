@@ -41,10 +41,15 @@ function getSassOptions(loaderContext, loaderOptions, content) {
     options.outputStyle = 'compressed';
   }
 
+  const useSourceMap =
+    typeof loaderOptions.sourceMap === 'boolean'
+      ? loaderOptions.sourceMap
+      : loaderContext.sourceMap;
+
   // opt.sourceMap
   // Not using the `this.sourceMap` flag because css source maps are different
   // @see https://github.com/webpack/css-loader/pull/40
-  if (loaderOptions.sourceMap) {
+  if (useSourceMap) {
     // Deliberately overriding the sourceMap option here.
     // node-sass won't produce source maps if the data option is used and options.sourceMap is not a string.
     // In case it is a string, options.sourceMap should be a path where the source map is written.

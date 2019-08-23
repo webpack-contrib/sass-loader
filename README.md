@@ -363,11 +363,11 @@ module.exports = {
 ### `sourceMap`
 
 Type: `Boolean`
-Default: `false`
+Default: depends on the `compiler.devtool` value
 
 Enables/Disables generation of source maps.
 
-They are not enabled by default because they expose a runtime overhead and increase in bundle size (JS source maps do not).
+By default generation of source maps depends on the [`devtool`](https://webpack.js.org/configuration/devtool/) option, all values enable source map generation except `eval` and `false` value.
 
 **webpack.config.js**
 
