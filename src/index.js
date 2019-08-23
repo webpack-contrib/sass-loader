@@ -62,7 +62,7 @@ function loader(content) {
   render(sassOptions, (error, result) => {
     if (error) {
       if (error.file) {
-        this.dependency(error.file);
+        addNormalizedDependency(error.file);
       }
 
       callback(new SassError(error, this.resourcePath));
