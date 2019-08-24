@@ -13,7 +13,7 @@ import SassError from './SassError';
 /**
  * The sass-loader makes node-sass and dart-sass available to webpack modules.
  *
- * @this {LoaderContext}
+ * @this {object}
  * @param {string} content
  */
 function loader(content) {
@@ -32,7 +32,7 @@ function loader(content) {
     this.addDependency(path.normalize(file));
   };
 
-  const sassOptions = getSassOptions(this, options, content);
+  const sassOptions = getSassOptions(this, options, content, implementation);
 
   const shouldUseWebpackImporter =
     typeof options.webpackImporter === 'boolean'

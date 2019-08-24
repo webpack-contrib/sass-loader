@@ -161,13 +161,17 @@ describe('sassOptions option', () => {
       });
 
       it(`should work with the "fiber" option (${implementationName}) (${syntax})`, async () => {
+        const dartSassSpy = jest.spyOn(dartSass, 'render');
         const testId = getTestId('language', syntax);
         const options = {
           implementation: getImplementationByName(implementationName),
           sassOptions: {},
         };
 
-        if (semver.satisfies(process.version, '>= 10')) {
+        if (
+          implementationName === 'dart-sass' &&
+          semver.satisfies(process.version, '>= 10')
+        ) {
           // eslint-disable-next-line global-require
           options.sassOptions.fiber = Fiber;
         }
@@ -176,10 +180,73 @@ describe('sassOptions option', () => {
         const codeFromBundle = getCodeFromBundle(stats);
         const codeFromSass = getCodeFromSass(testId, options);
 
+        if (
+          implementationName === 'dart-sass' &&
+          semver.satisfies(process.version, '>= 10')
+        ) {
+          expect(dartSassSpy.mock.calls[0][0]).toHaveProperty('fiber');
+        }
+
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot('css');
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
+
+        dartSassSpy.mockRestore();
+      });
+
+      it(`should use the "fibers" package if it is possible (${implementationName}) (${syntax})`, async () => {
+        const dartSassSpy = jest.spyOn(dartSass, 'render');
+        const testId = getTestId('language', syntax);
+        const options = {
+          implementation: getImplementationByName(implementationName),
+          sassOptions: {},
+        };
+
+        const stats = await compile(testId, { loader: { options } });
+        const codeFromBundle = getCodeFromBundle(stats);
+        const codeFromSass = getCodeFromSass(testId, options);
+
+        if (
+          implementationName === 'dart-sass' &&
+          semver.satisfies(process.version, '>= 10')
+        ) {
+          expect(dartSassSpy.mock.calls[0][0]).toHaveProperty('fiber');
+        }
+
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot('css');
+        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
+        expect(stats.compilation.errors).toMatchSnapshot('errors');
+
+        dartSassSpy.mockRestore();
+      });
+
+      it(`should don't use the "fibers" package when the "fiber" option is "false" (${implementationName}) (${syntax})`, async () => {
+        const dartSassSpy = jest.spyOn(dartSass, 'render');
+        const testId = getTestId('language', syntax);
+        const options = {
+          implementation: getImplementationByName(implementationName),
+          sassOptions: { fiber: false },
+        };
+
+        const stats = await compile(testId, { loader: { options } });
+        const codeFromBundle = getCodeFromBundle(stats);
+        const codeFromSass = getCodeFromSass(testId, options);
+
+        if (
+          implementationName === 'dart-sass' &&
+          semver.satisfies(process.version, '>= 10')
+        ) {
+          expect(dartSassSpy.mock.calls[0][0]).not.toHaveProperty('fiber');
+        }
+
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot('css');
+        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
+        expect(stats.compilation.errors).toMatchSnapshot('errors');
+
+        dartSassSpy.mockRestore();
       });
     });
   });

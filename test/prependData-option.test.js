@@ -1,5 +1,6 @@
 import nodeSass from 'node-sass';
 import dartSass from 'sass';
+import Fiber from 'fibers';
 
 import {
   compile,
@@ -13,6 +14,11 @@ const implementations = [nodeSass, dartSass];
 const syntaxStyles = ['scss', 'sass'];
 
 describe('prependData option', () => {
+  beforeEach(() => {
+    // The `sass` (`Dart Sass`) package modify the `Function` prototype, but the `jest` lose a prototype
+    Object.setPrototypeOf(Fiber, Function.prototype);
+  });
+
   implementations.forEach((implementation) => {
     const [implementationName] = implementation.info.split('\t');
 

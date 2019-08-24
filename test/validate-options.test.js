@@ -1,4 +1,11 @@
+import Fiber from 'fibers';
+
 import loader from '../src/cjs';
+
+beforeEach(() => {
+  // The `sass` (`Dart Sass`) package modify the `Function` prototype, but the `jest` lose a prototype
+  Object.setPrototypeOf(Fiber, Function.prototype);
+});
 
 it('validate options', () => {
   const validate = (options) =>
