@@ -21,8 +21,11 @@ module.exports = {
           {
             loader: require.resolve('../../dist/cjs.js'),
             options: {
-              // eslint-disable-next-line global-require
-              implementation: require('sass'),
+              implementation: process.env.SASS_IMPLEMENTATION
+                ? // eslint-disable-next-line global-require, import/no-dynamic-require
+                  require(process.env.SASS_IMPLEMENTATION)
+                : // eslint-disable-next-line global-require
+                  require('sass'),
               sourceMap: true,
             },
           },
@@ -33,5 +36,6 @@ module.exports = {
   devServer: {
     hot: true,
     contentBase: __dirname,
+    overlay: true,
   },
 };

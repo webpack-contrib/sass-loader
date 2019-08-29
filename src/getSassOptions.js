@@ -16,40 +16,68 @@ function isProductionLikeMode(loaderContext) {
 /**
  * Derives the sass options from the loader context and normalizes its values with sane defaults.
  *
- * Please note: If loaderContext.query is an options object, it will be re-used across multiple invocations.
- * That's why we must not modify the object directly.
- *
- * @param {LoaderContext} loaderContext
- * @param {string} loaderOptions
- * @param {object} content
+ * @param {object} loaderContext
+ * @param {object} loaderOptions
+ * @param {string} content
+ * @param {object} implementation
  * @returns {Object}
  */
-function getSassOptions(loaderContext, loaderOptions, content) {
-  const options = cloneDeep(loaderOptions);
-  const { resourcePath } = loaderContext;
+function getSassOptions(loaderContext, loaderOptions, content, implementation) {
+  const options = cloneDeep(
+    loaderOptions.sassOptions
+      ? typeof loaderOptions.sassOptions === 'function'
+        ? loaderOptions.sassOptions(loaderContext) || {}
+        : loaderOptions.sassOptions
+      : {}
+  );
 
-  // allow opt.functions to be configured WRT loaderContext
-  if (typeof options.functions === 'function') {
-    options.functions = options.functions(loaderContext);
+  const isDartSass = implementation.info.includes('dart-sass');
+
+  if (isDartSass) {
+    const shouldTryToResolveFibers = !options.fiber && options.fiber !== false;
+
+    if (shouldTryToResolveFibers) {
+      let fibers;
+
+      try {
+        fibers = require.resolve('fibers');
+      } catch (_error) {
+        // Nothing
+      }
+
+      if (fibers) {
+        // eslint-disable-next-line global-require, import/no-dynamic-require
+        options.fiber = require(fibers);
+      }
+    } else if (options.fiber === false) {
+      // Don't pass the `fiber` option for `sass` (`Dart Sass`)
+      delete options.fiber;
+    }
+  } else {
+    // Don't pass the `fiber` option for `node-sass`
+    delete options.fiber;
   }
 
-  let { data } = options;
-
-  if (typeof options.data === 'function') {
-    data = options.data(loaderContext);
-  }
-
-  options.data = data ? data + os.EOL + content : content;
+  options.data = loaderOptions.prependData
+    ? typeof loaderOptions.prependData === 'function'
+      ? loaderOptions.prependData(loaderContext) + os.EOL + content
+      : loaderOptions.prependData + os.EOL + content
+    : content;
 
   // opt.outputStyle
   if (!options.outputStyle && isProductionLikeMode(loaderContext)) {
     options.outputStyle = 'compressed';
   }
 
+  const useSourceMap =
+    typeof loaderOptions.sourceMap === 'boolean'
+      ? loaderOptions.sourceMap
+      : loaderContext.sourceMap;
+
   // opt.sourceMap
   // Not using the `this.sourceMap` flag because css source maps are different
   // @see https://github.com/webpack/css-loader/pull/40
-  if (options.sourceMap) {
+  if (useSourceMap) {
     // Deliberately overriding the sourceMap option here.
     // node-sass won't produce source maps if the data option is used and options.sourceMap is not a string.
     // In case it is a string, options.sourceMap should be a path where the source map is written.
@@ -75,7 +103,7 @@ function getSassOptions(loaderContext, loaderOptions, content) {
     }
   }
 
-  // indentedSyntax is a boolean flag.
+  const { resourcePath } = loaderContext;
   const ext = path.extname(resourcePath);
 
   // If we are compiling sass and indentedSyntax isn't set, automatically set it.
@@ -94,9 +122,9 @@ function getSassOptions(loaderContext, loaderOptions, content) {
     ? proxyCustomImporters(options.importer, resourcePath)
     : [];
 
-  // `node-sass` uses `includePaths` to resolve `@import` paths. Append the currently processed file.
-  options.includePaths = options.includePaths || [];
-  options.includePaths.push(path.dirname(resourcePath));
+  options.includePaths = (options.includePaths || []).concat(
+    path.dirname(resourcePath)
+  );
 
   return options;
 }

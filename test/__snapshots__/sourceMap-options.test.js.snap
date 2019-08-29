@@ -1,49 +1,97 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`sourceMap option false (dart-sass) (sass): errors 1`] = `Array []`;
+exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "false" value (dart-sass) (sass): errors 1`] = `Array []`;
 
-exports[`sourceMap option false (dart-sass) (sass): warnings 1`] = `Array []`;
+exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "false" value (dart-sass) (sass): warnings 1`] = `Array []`;
 
-exports[`sourceMap option false (dart-sass) (scss): errors 1`] = `Array []`;
+exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "false" value (dart-sass) (scss): errors 1`] = `Array []`;
 
-exports[`sourceMap option false (dart-sass) (scss): warnings 1`] = `Array []`;
+exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "false" value (dart-sass) (scss): warnings 1`] = `Array []`;
 
-exports[`sourceMap option false (node-sass) (sass): errors 1`] = `Array []`;
+exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "false" value (node-sass) (sass): errors 1`] = `Array []`;
 
-exports[`sourceMap option false (node-sass) (sass): warnings 1`] = `Array []`;
+exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "false" value (node-sass) (sass): warnings 1`] = `Array []`;
 
-exports[`sourceMap option false (node-sass) (scss): errors 1`] = `Array []`;
+exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "false" value (node-sass) (scss): errors 1`] = `Array []`;
 
-exports[`sourceMap option false (node-sass) (scss): warnings 1`] = `Array []`;
+exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "false" value (node-sass) (scss): warnings 1`] = `Array []`;
 
-exports[`sourceMap option not specify (dart-sass) (sass): errors 1`] = `Array []`;
+exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "source-map" value (dart-sass) (sass): errors 1`] = `Array []`;
 
-exports[`sourceMap option not specify (dart-sass) (sass): warnings 1`] = `Array []`;
+exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "source-map" value (dart-sass) (sass): warnings 1`] = `Array []`;
 
-exports[`sourceMap option not specify (dart-sass) (scss): errors 1`] = `Array []`;
+exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "source-map" value (dart-sass) (scss): errors 1`] = `Array []`;
 
-exports[`sourceMap option not specify (dart-sass) (scss): warnings 1`] = `Array []`;
+exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "source-map" value (dart-sass) (scss): warnings 1`] = `Array []`;
 
-exports[`sourceMap option not specify (node-sass) (sass): errors 1`] = `Array []`;
+exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "source-map" value (node-sass) (sass): errors 1`] = `Array []`;
 
-exports[`sourceMap option not specify (node-sass) (sass): warnings 1`] = `Array []`;
+exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "source-map" value (node-sass) (sass): warnings 1`] = `Array []`;
 
-exports[`sourceMap option not specify (node-sass) (scss): errors 1`] = `Array []`;
+exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "source-map" value (node-sass) (scss): errors 1`] = `Array []`;
 
-exports[`sourceMap option not specify (node-sass) (scss): warnings 1`] = `Array []`;
+exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "source-map" value (node-sass) (scss): warnings 1`] = `Array []`;
 
-exports[`sourceMap option true (dart-sass) (sass): errors 1`] = `Array []`;
+exports[`sourceMap option should generate source maps when value is not specify and the "devtool" option has "source-map" value (dart-sass) (sass): errors 1`] = `Array []`;
 
-exports[`sourceMap option true (dart-sass) (sass): warnings 1`] = `Array []`;
+exports[`sourceMap option should generate source maps when value is not specify and the "devtool" option has "source-map" value (dart-sass) (sass): warnings 1`] = `Array []`;
 
-exports[`sourceMap option true (dart-sass) (scss): errors 1`] = `Array []`;
+exports[`sourceMap option should generate source maps when value is not specify and the "devtool" option has "source-map" value (dart-sass) (scss): errors 1`] = `Array []`;
 
-exports[`sourceMap option true (dart-sass) (scss): warnings 1`] = `Array []`;
+exports[`sourceMap option should generate source maps when value is not specify and the "devtool" option has "source-map" value (dart-sass) (scss): warnings 1`] = `Array []`;
 
-exports[`sourceMap option true (node-sass) (sass): errors 1`] = `Array []`;
+exports[`sourceMap option should generate source maps when value is not specify and the "devtool" option has "source-map" value (node-sass) (sass): errors 1`] = `Array []`;
 
-exports[`sourceMap option true (node-sass) (sass): warnings 1`] = `Array []`;
+exports[`sourceMap option should generate source maps when value is not specify and the "devtool" option has "source-map" value (node-sass) (sass): warnings 1`] = `Array []`;
 
-exports[`sourceMap option true (node-sass) (scss): errors 1`] = `Array []`;
+exports[`sourceMap option should generate source maps when value is not specify and the "devtool" option has "source-map" value (node-sass) (scss): errors 1`] = `Array []`;
 
-exports[`sourceMap option true (node-sass) (scss): warnings 1`] = `Array []`;
+exports[`sourceMap option should generate source maps when value is not specify and the "devtool" option has "source-map" value (node-sass) (scss): warnings 1`] = `Array []`;
+
+exports[`sourceMap option should not generate source maps when value has "false" and the "devtool" option has "false" value (dart-sass) (sass): errors 1`] = `Array []`;
+
+exports[`sourceMap option should not generate source maps when value has "false" and the "devtool" option has "false" value (dart-sass) (sass): warnings 1`] = `Array []`;
+
+exports[`sourceMap option should not generate source maps when value has "false" and the "devtool" option has "false" value (dart-sass) (scss): errors 1`] = `Array []`;
+
+exports[`sourceMap option should not generate source maps when value has "false" and the "devtool" option has "false" value (dart-sass) (scss): warnings 1`] = `Array []`;
+
+exports[`sourceMap option should not generate source maps when value has "false" and the "devtool" option has "false" value (node-sass) (sass): errors 1`] = `Array []`;
+
+exports[`sourceMap option should not generate source maps when value has "false" and the "devtool" option has "false" value (node-sass) (sass): warnings 1`] = `Array []`;
+
+exports[`sourceMap option should not generate source maps when value has "false" and the "devtool" option has "false" value (node-sass) (scss): errors 1`] = `Array []`;
+
+exports[`sourceMap option should not generate source maps when value has "false" and the "devtool" option has "false" value (node-sass) (scss): warnings 1`] = `Array []`;
+
+exports[`sourceMap option should not generate source maps when value has "false" and the "devtool" option has "source-map" value (dart-sass) (sass): errors 1`] = `Array []`;
+
+exports[`sourceMap option should not generate source maps when value has "false" and the "devtool" option has "source-map" value (dart-sass) (sass): warnings 1`] = `Array []`;
+
+exports[`sourceMap option should not generate source maps when value has "false" and the "devtool" option has "source-map" value (dart-sass) (scss): errors 1`] = `Array []`;
+
+exports[`sourceMap option should not generate source maps when value has "false" and the "devtool" option has "source-map" value (dart-sass) (scss): warnings 1`] = `Array []`;
+
+exports[`sourceMap option should not generate source maps when value has "false" and the "devtool" option has "source-map" value (node-sass) (sass): errors 1`] = `Array []`;
+
+exports[`sourceMap option should not generate source maps when value has "false" and the "devtool" option has "source-map" value (node-sass) (sass): warnings 1`] = `Array []`;
+
+exports[`sourceMap option should not generate source maps when value has "false" and the "devtool" option has "source-map" value (node-sass) (scss): errors 1`] = `Array []`;
+
+exports[`sourceMap option should not generate source maps when value has "false" and the "devtool" option has "source-map" value (node-sass) (scss): warnings 1`] = `Array []`;
+
+exports[`sourceMap option should not generate source maps when value is not specify and the "devtool" option has "false" value (dart-sass) (sass): errors 1`] = `Array []`;
+
+exports[`sourceMap option should not generate source maps when value is not specify and the "devtool" option has "false" value (dart-sass) (sass): warnings 1`] = `Array []`;
+
+exports[`sourceMap option should not generate source maps when value is not specify and the "devtool" option has "false" value (dart-sass) (scss): errors 1`] = `Array []`;
+
+exports[`sourceMap option should not generate source maps when value is not specify and the "devtool" option has "false" value (dart-sass) (scss): warnings 1`] = `Array []`;
+
+exports[`sourceMap option should not generate source maps when value is not specify and the "devtool" option has "false" value (node-sass) (sass): errors 1`] = `Array []`;
+
+exports[`sourceMap option should not generate source maps when value is not specify and the "devtool" option has "false" value (node-sass) (sass): warnings 1`] = `Array []`;
+
+exports[`sourceMap option should not generate source maps when value is not specify and the "devtool" option has "false" value (node-sass) (scss): errors 1`] = `Array []`;
+
+exports[`sourceMap option should not generate source maps when value is not specify and the "devtool" option has "false" value (node-sass) (scss): warnings 1`] = `Array []`;

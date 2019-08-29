@@ -24,7 +24,7 @@ function importsToResolve(url) {
   const request = utils.urlToRequest(url);
   // Keep in mind: ext can also be something like '.datepicker' when the true extension is omitted and the filename contains a dot.
   // @see https://github.com/webpack-contrib/sass-loader/issues/167
-  const ext = path.extname(request);
+  const ext = path.extname(request).toLowerCase();
 
   // In case there is module request, send this to webpack resolver
   if (matchModuleImport.test(url)) {

@@ -107,43 +107,6 @@ Thankfully there are a two solutions to this problem:
 
 ## Options
 
-By default all options passed to loader also passed to to [Node Sass](https://github.com/sass/node-sass) or [Dart Sass](http://sass-lang.com/dart-sass)
-
-> ℹ️ The `indentedSyntax` option has `true` value for the `sass` extension.
-> ℹ️ Options such as `file` and `outFile` are unavailable.
-> ℹ️ Only the "expanded" and "compressed" values of outputStyle are supported for `dart-sass`.
-> ℹ We recommend don't use `sourceMapContents`, `sourceMapEmbed`, `sourceMapRoot` options because loader automatically setup this options.
-
-There is a slight difference between the `node-sass` and `sass` options. We recommend look documentation before used them:
-
-- [the Node Sass documentation](https://github.com/sass/node-sass/#options) for all available `node-sass` options.
-- [the Dart Sass documentation](https://github.com/sass/dart-sass#javascript-api) for all available `sass` options.
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  module: {
-    rules: [
-      {
-        test: /\.s[ac]ss$/i,
-        use: [
-          'style-loader',
-          'css-loader',
-          {
-            loader: 'sass-loader',
-            options: {
-              indentWidth: 4,
-              includePaths: ['absolute/path/a', 'absolute/path/b'],
-            },
-          },
-        ],
-      },
-    ],
-  },
-};
-```
-
 ### `implementation`
 
 The special `implementation` option determines which implementation of Sass to use.
@@ -209,7 +172,21 @@ module.exports = {
 Note that when using `sass` (`Dart Sass`), **synchronous compilation is twice as fast as asynchronous compilation** by default, due to the overhead of asynchronous callbacks.
 To avoid this overhead, you can use the [fibers](https://www.npmjs.com/package/fibers) package to call asynchronous importers from the synchronous code path.
 
-To enable this, pass the `Fiber` class to the `fiber` option:
+We automatically inject the [`fibers`](https://github.com/laverdet/node-fibers) package (setup `sassOptions.fiber`) if is possible (i.e. you need install the [`fibers`](https://github.com/laverdet/node-fibers) package).
+
+**package.json**
+
+```json
+{
+  "devDependencies": {
+    "sass-loader": "^7.2.0",
+    "sass": "^1.22.10",
+    "fibers": "^4.0.1"
+  }
+}
+```
+
+You can disable automatically inject the [`fibers`](https://github.com/laverdet/node-fibers) package pass the `false` value for the `sassOptions.fiber` option.
 
 **webpack.config.js**
 
@@ -226,7 +203,9 @@ module.exports = {
             loader: 'sass-loader',
             options: {
               implementation: require('sass'),
-              fiber: require('fibers'),
+              sassOptions: {
+                fiber: false,
+              },
             },
           },
         ],
@@ -236,7 +215,125 @@ module.exports = {
 };
 ```
 
-### `data`
+Also you can pass own the `fiber` value using this code:
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              implementation: require('sass'),
+              sassOptions: {
+                fiber: require('fibers'),
+              },
+            },
+          },
+        ],
+      },
+    ],
+  },
+};
+```
+
+### `sassOptions`
+
+Type: `Object|Function`
+
+Options for [Node Sass](https://github.com/sass/node-sass) or [Dart Sass](http://sass-lang.com/dart-sass) implementation.
+
+> ℹ️ The `indentedSyntax` option has `true` value for the `sass` extension.
+
+> ℹ️ Options such as `file` and `outFile` are unavailable.
+
+> ℹ We recommend don't use `sourceMapContents`, `sourceMapEmbed`, `sourceMapRoot` options because loader automatically setup this options.
+
+There is a slight difference between the `node-sass` and `sass` (`Dart Sass`) options.
+We recommend look documentation before used them:
+
+- [the Node Sass documentation](https://github.com/sass/node-sass/#options) for all available `node-sass` options.
+- [the Dart Sass documentation](https://github.com/sass/dart-sass#javascript-api) for all available `sass` options.
+
+#### `Object`
+
+Setups option as object for sass implementation.
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              sassOptions: {
+                indentWidth: 4,
+                includePaths: ['absolute/path/a', 'absolute/path/b'],
+              },
+            },
+          },
+        ],
+      },
+    ],
+  },
+};
+```
+
+#### `Function`
+
+Allows setup difference options based on loader context.
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              sassOptions: (loaderContext) => {
+                // More information about available properties https://webpack.js.org/api/loaders/
+                const { resourcePath, rootContext } = loaderContext;
+                const relativePath = path.relative(rootContext, resourcePath);
+
+                if (relativePath === 'styles/foo.scss') {
+                  return {
+                    includePaths: ['absolute/path/c', 'absolute/path/d'],
+                  };
+                }
+
+                return {
+                  includePaths: ['absolute/path/a', 'absolute/path/b'],
+                };
+              },
+            },
+          },
+        ],
+      },
+    ],
+  },
+};
+```
+
+### `prependData`
 
 Type: `String|Function`
 Default: `undefined`
@@ -262,7 +359,7 @@ module.exports = {
           {
             loader: 'sass-loader',
             options: {
-              data: '$env: ' + process.env.NODE_ENV + ';',
+              prependData: '$env: ' + process.env.NODE_ENV + ';',
             },
           },
         ],
@@ -286,8 +383,8 @@ module.exports = {
           {
             loader: 'sass-loader',
             options: {
-              data: (loaderContext) => {
-                // More information about avalaible options https://webpack.js.org/api/loaders/
+              prependData: (loaderContext) => {
+                // More information about available properties https://webpack.js.org/api/loaders/
                 const { resourcePath, rootContext } = loaderContext;
                 const relativePath = path.relative(rootContext, resourcePath);
 
@@ -309,11 +406,11 @@ module.exports = {
 ### `sourceMap`
 
 Type: `Boolean`
-Default: `false`
+Default: depends on the `compiler.devtool` value
 
 Enables/Disables generation of source maps.
 
-They are not enabled by default because they expose a runtime overhead and increase in bundle size (JS source maps do not).
+By default generation of source maps depends on the [`devtool`](https://webpack.js.org/configuration/devtool/) option, all values enable source map generation except `eval` and `false` value.
 
 **webpack.config.js**
 
@@ -351,7 +448,7 @@ module.exports = {
 Type: `Boolean`
 Default: `true`
 
-Allows to disable default `webpack` importer.
+Enables/Disables default `webpack` importer.
 
 This can improve performance in some cases. Use it with caution because aliases and `@import` at-rules starts with `~` will not work, but you can pass own `importer` to solve this (see [`importer docs`](https://github.com/sass/node-sass#importer--v200---experimental)).
 
@@ -423,6 +520,8 @@ module.exports = {
 ```
 
 ### Source maps
+
+Enables/Disables generation of source maps.
 
 To enable CSS source maps, you'll need to pass the `sourceMap` option to the sass-loader _and_ the css-loader.
 

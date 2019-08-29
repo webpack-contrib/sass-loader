@@ -13,20 +13,23 @@ import {
 const implementations = [nodeSass, dartSass];
 const syntaxStyles = ['scss', 'sass'];
 
-describe('webpackImporter option', () => {
+describe('prependData option', () => {
   beforeEach(() => {
     // The `sass` (`Dart Sass`) package modify the `Function` prototype, but the `jest` lose a prototype
     Object.setPrototypeOf(Fiber, Function.prototype);
   });
 
   implementations.forEach((implementation) => {
+    const [implementationName] = implementation.info.split('\t');
+
     syntaxStyles.forEach((syntax) => {
-      const [implementationName] = implementation.info.split('\t');
-
-      it(`not specify (${implementationName}) (${syntax})`, async () => {
-        const testId = getTestId('language', syntax);
+      it(`should work with the "data" option as a string (${implementationName}) (${syntax})`, async () => {
+        const testId = getTestId('prepending-data', syntax);
         const options = {
           implementation: getImplementationByName(implementationName),
+          prependData: `$prepended-data: hotpink${
+            syntax === 'sass' ? '\n' : ';'
+          }`,
         };
         const stats = await compile(testId, { loader: { options } });
         const codeFromBundle = getCodeFromBundle(stats);
@@ -38,27 +41,15 @@ describe('webpackImporter option', () => {
         expect(stats.compilation.errors).toMatchSnapshot('errors');
       });
 
-      it(`false (${implementationName}) (${syntax})`, async () => {
-        const testId = getTestId('language', syntax);
+      it(`should work with the "data" option as a function (${implementationName}) (${syntax})`, async () => {
+        const testId = getTestId('prepending-data', syntax);
         const options = {
-          webpackImporter: false,
           implementation: getImplementationByName(implementationName),
-        };
-        const stats = await compile(testId, { loader: { options } });
-        const codeFromBundle = getCodeFromBundle(stats);
-        const codeFromSass = getCodeFromSass(testId, options);
+          prependData: (loaderContext) => {
+            expect(loaderContext).toBeDefined();
 
-        expect(codeFromBundle.css).toBe(codeFromSass.css);
-        expect(codeFromBundle.css).toMatchSnapshot('css');
-        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-        expect(stats.compilation.errors).toMatchSnapshot('errors');
-      });
-
-      it(`true (${implementationName}) (${syntax})`, async () => {
-        const testId = getTestId('language', syntax);
-        const options = {
-          webpackImporter: true,
-          implementation: getImplementationByName(implementationName),
+            return `$prepended-data: hotpink${syntax === 'sass' ? '\n' : ';'}`;
+          },
         };
         const stats = await compile(testId, { loader: { options } });
         const codeFromBundle = getCodeFromBundle(stats);

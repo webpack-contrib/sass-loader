@@ -18,7 +18,7 @@ import path from 'path';
 
 import importsToResolve from './importsToResolve';
 
-const matchCss = /\.css$/;
+const matchCss = /\.css$/i;
 
 /**
  * Returns an importer that uses webpack's resolving algorithm.

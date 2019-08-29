@@ -10,7 +10,6 @@ module.exports = {
         'test/helpers/testLoader.js',
       ],
       rules: {
-        // temporary disable for test before we migrate on jest
         strict: 'off',
       },
     },
