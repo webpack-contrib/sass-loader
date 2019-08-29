@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.0.0](https://github.com/webpack-contrib/sass-loader/compare/v7.3.1...v8.0.0) (2019-08-29)
+
+
+### ⚠ BREAKING CHANGES
+
+* minimum required `webpack` version is `4.36.0`
+* minimum required `node.js` version is `8.9.0`
+* move all sass (`includePaths`, `importer`, `functions`) options to the `sassOptions` option. The `functions` option can't be used as `Function`, you should use `sassOption` as `Function` to achieve this.
+* the `data` option was renamed to the `prependData` option
+* default value of the `sourceMap` option depends on the `devtool` value (`eval`/`false` values don't enable source map generation)
+
+
+### Features
+
+* automatically use the `fibers` package if it is possible ([#744](https://github.com/webpack-contrib/sass-loader/issues/744)) ([96184e1](https://github.com/webpack-contrib/sass-loader/commit/96184e1))
+* source map generation depends on the `devtool` option ([#743](https://github.com/webpack-contrib/sass-loader/issues/743)) ([fcea88e](https://github.com/webpack-contrib/sass-loader/commit/fcea88e))
+* validate loader options ([#737](https://github.com/webpack-contrib/sass-loader/issues/737)) ([7b543fc](https://github.com/webpack-contrib/sass-loader/commit/7b543fc))
+* reworked error handling from `node-sass`/`sass`
+* improve resolution for `@import` (including support `_index` and `index` files in a directory)
+
+### Bug Fixes
+
+* compatibility with `pnp`
+
+
 ### [7.3.1](https://github.com/webpack-contrib/sass-loader/compare/v7.3.0...v7.3.1) (2019-08-20)
 
 
