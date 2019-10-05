@@ -1,0 +1,4 @@
+/* Importing a sass module does not require to set the extension explicitly... */
+@use "../sass/another/module" as module1;
+/* ...but it is allowed */
+@use "../sass/another/module.sass" as module2;

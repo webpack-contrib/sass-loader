@@ -1,0 +1,18 @@
+@use "example.scss" as module1;
+@use "./example.scss" as module2;
+@use "../scss/example.scss" as module3;
+// TODO https://github.com/sass/dart-sass/issues/798#issuecomment-521229911
+// @use "example-1.SCSS" as module4;
+@use "example-2.scss" as module5;
+@use "./example-2.scss" as module6;
+@use "../scss/example-2.scss" as module7;
+// TODO https://github.com/sass/dart-sass/issues/798#issuecomment-521229911
+// @use "example-3.SCSS" as module8;
+@use "nested/example-4.scss" as module9;
+@use "./nested/example-4.scss" as module10;
+@use "../scss/nested/example-4.scss" as module11;
+@use "nested/example-5.scss" as module12;
+@use "./nested/example-5.scss" as module13;
+@use "../scss/nested/example-5.scss" as module14;
+// TODO https://github.com/sass/dart-sass/issues/798#issuecomment-521229911
+// @use "nested/example-6.SCSS" as module15;

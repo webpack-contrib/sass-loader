@@ -1,0 +1,8 @@
+/* @use "~@org/pkg"; */
+@use "~@org/pkg";
+/* @use "~@org/bar/foo"; */
+@use "~@org/bar/foo";
+
+.foo {
+    background: #000;
+}
