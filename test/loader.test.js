@@ -529,6 +529,393 @@ describe('loader', () => {
         expect(stats.compilation.warnings).toMatchSnapshot('warnings');
         expect(stats.compilation.errors).toMatchSnapshot('errors');
       });
+
+      if (implementation === dartSass) {
+        it(`should output an understandable error with a problem in "@use" (${implementationName}) (${syntax})`, async () => {
+          const testId = getTestId('error-use', syntax);
+          const options = {
+            implementation: getImplementationByName(implementationName),
+          };
+          const stats = await compile(testId, { loader: { options } });
+
+          expect(stats.compilation.warnings).toMatchSnapshot('warnings');
+          expect(
+            stats.compilation.errors.map((error) => normalizeError(error))
+          ).toMatchSnapshot('errors');
+        });
+
+        it(`should output an understandable error when a file could not be found using "@use" rule (${implementationName}) (${syntax})`, async () => {
+          const testId = getTestId('error-file-not-found-use', syntax);
+          const options = {
+            implementation: getImplementationByName(implementationName),
+          };
+          const stats = await compile(testId, { loader: { options } });
+
+          expect(stats.compilation.warnings).toMatchSnapshot('warnings');
+          expect(
+            stats.compilation.errors.map((error) => normalizeError(error))
+          ).toMatchSnapshot('errors');
+        });
+
+        it(`should throw an error with a explicit file and a file does not exist using "@use" rule (${implementationName}) (${syntax})`, async () => {
+          const testId = getTestId('error-file-not-found-use-2', syntax);
+          const options = {
+            implementation: getImplementationByName(implementationName),
+          };
+          const stats = await compile(testId, { loader: { options } });
+
+          expect(stats.compilation.warnings).toMatchSnapshot('warnings');
+          expect(
+            stats.compilation.errors.map((error) => normalizeError(error))
+          ).toMatchSnapshot('errors');
+        });
+
+        it(`should work with different "@use" at-rules (${implementationName}) (${syntax})`, async () => {
+          const testId = getTestId('uses', syntax);
+          const options = {
+            implementation: getImplementationByName(implementationName),
+          };
+          const stats = await compile(testId, { loader: { options } });
+          const codeFromBundle = getCodeFromBundle(stats);
+          const codeFromSass = getCodeFromSass(testId, options);
+
+          expect(codeFromBundle.css).toBe(codeFromSass.css);
+          expect(codeFromBundle.css).toMatchSnapshot('css');
+          expect(stats.compilation.warnings).toMatchSnapshot('warnings');
+          expect(stats.compilation.errors).toMatchSnapshot('errors');
+        });
+
+        it(`should work with "@use" at-rules from other language style (${implementationName}) (${syntax})`, async () => {
+          const testId = getTestId('use-other-style', syntax);
+          const options = {
+            implementation: getImplementationByName(implementationName),
+          };
+          const stats = await compile(testId, { loader: { options } });
+          const codeFromBundle = getCodeFromBundle(stats);
+          const codeFromSass = getCodeFromSass(testId, options);
+
+          expect(codeFromBundle.css).toBe(codeFromSass.css);
+          expect(codeFromBundle.css).toMatchSnapshot('css');
+          expect(stats.compilation.warnings).toMatchSnapshot('warnings');
+          expect(stats.compilation.errors).toMatchSnapshot('errors');
+        });
+
+        it(`should work when "@use" at-rules from scoped npm packages (${implementationName}) (${syntax})`, async () => {
+          const testId = getTestId('use-from-npm-org-pkg', syntax);
+          const options = {
+            implementation: getImplementationByName(implementationName),
+          };
+          const stats = await compile(testId, { loader: { options } });
+          const codeFromBundle = getCodeFromBundle(stats);
+          const codeFromSass = getCodeFromSass(testId, options);
+
+          expect(codeFromBundle.css).toBe(codeFromSass.css);
+          expect(codeFromBundle.css).toMatchSnapshot('css');
+          expect(stats.compilation.warnings).toMatchSnapshot('warnings');
+          expect(stats.compilation.errors).toMatchSnapshot('errors');
+        });
+
+        it(`should work when "@use" at-rules with extensions (${implementationName}) (${syntax})`, async () => {
+          const testId = getTestId('use-with-extension', syntax);
+          const options = {
+            implementation: getImplementationByName(implementationName),
+          };
+          const stats = await compile(testId, { loader: { options } });
+          const codeFromBundle = getCodeFromBundle(stats);
+          const codeFromSass = getCodeFromSass(testId, options);
+
+          expect(codeFromBundle.css).toBe(codeFromSass.css);
+          expect(codeFromBundle.css).toMatchSnapshot('css');
+          expect(stats.compilation.warnings).toMatchSnapshot('warnings');
+          expect(stats.compilation.errors).toMatchSnapshot('errors');
+        });
+
+        it(`should work when "@use" at-rules starting with "_" (${implementationName}) (${syntax})`, async () => {
+          const testId = getTestId('use-with-underscore', syntax);
+          const options = {
+            implementation: getImplementationByName(implementationName),
+          };
+          const stats = await compile(testId, { loader: { options } });
+          const codeFromBundle = getCodeFromBundle(stats);
+          const codeFromSass = getCodeFromSass(testId, options);
+
+          expect(codeFromBundle.css).toBe(codeFromSass.css);
+          expect(codeFromBundle.css).toMatchSnapshot('css');
+          expect(stats.compilation.warnings).toMatchSnapshot('warnings');
+          expect(stats.compilation.errors).toMatchSnapshot('errors');
+        });
+
+        it(`should work when "@use" at-rules without extensions and do not start with "_" (${implementationName}) (${syntax})`, async () => {
+          const testId = getTestId(
+            'use-without-extension-and-underscore',
+            syntax
+          );
+          const options = {
+            implementation: getImplementationByName(implementationName),
+          };
+          const stats = await compile(testId, { loader: { options } });
+          const codeFromBundle = getCodeFromBundle(stats);
+          const codeFromSass = getCodeFromSass(testId, options);
+
+          expect(codeFromBundle.css).toBe(codeFromSass.css);
+          expect(codeFromBundle.css).toMatchSnapshot('css');
+          expect(stats.compilation.warnings).toMatchSnapshot('warnings');
+          expect(stats.compilation.errors).toMatchSnapshot('errors');
+        });
+
+        it(`should work when "@use" and use the "sass" field (${implementationName}) (${syntax})`, async () => {
+          const testId = getTestId('use-sass-field', syntax);
+          const options = {
+            implementation: getImplementationByName(implementationName),
+          };
+          const stats = await compile(testId, { loader: { options } });
+          const codeFromBundle = getCodeFromBundle(stats);
+          const codeFromSass = getCodeFromSass(testId, options);
+
+          expect(codeFromBundle.css).toBe(codeFromSass.css);
+          expect(codeFromBundle.css).toMatchSnapshot('css');
+          expect(stats.compilation.warnings).toMatchSnapshot('warnings');
+          expect(stats.compilation.errors).toMatchSnapshot('errors');
+        });
+
+        it(`should work when "@use" and use the "style" field (${implementationName}) (${syntax})`, async () => {
+          const testId = getTestId('use-style-field', syntax);
+          const options = {
+            implementation: getImplementationByName(implementationName),
+          };
+          const stats = await compile(testId, { loader: { options } });
+          const codeFromBundle = getCodeFromBundle(stats);
+          const codeFromSass = getCodeFromSass(testId, options);
+
+          expect(codeFromBundle.css).toBe(codeFromSass.css);
+          expect(codeFromBundle.css).toMatchSnapshot('css');
+          expect(stats.compilation.warnings).toMatchSnapshot('warnings');
+          expect(stats.compilation.errors).toMatchSnapshot('errors');
+        });
+
+        it(`should work when "@use" and use the "main" field (${implementationName}) (${syntax})`, async () => {
+          const testId = getTestId('use-main-field', syntax);
+          const options = {
+            implementation: getImplementationByName(implementationName),
+          };
+          const stats = await compile(testId, { loader: { options } });
+          const codeFromBundle = getCodeFromBundle(stats);
+          const codeFromSass = getCodeFromSass(testId, options);
+
+          expect(codeFromBundle.css).toBe(codeFromSass.css);
+          expect(codeFromBundle.css).toMatchSnapshot('css');
+          expect(stats.compilation.warnings).toMatchSnapshot('warnings');
+          expect(stats.compilation.errors).toMatchSnapshot('errors');
+        });
+
+        it(`should work when "@use" and use the "main" field when the "main" value is not in the "mainFields" resolve option (${implementationName}) (${syntax})`, async () => {
+          const testId = getTestId('use-main-field', syntax);
+          const options = {
+            implementation: getImplementationByName(implementationName),
+          };
+          const stats = await compile(testId, {
+            loader: { options, resolve: { mainFields: [] } },
+          });
+          const codeFromBundle = getCodeFromBundle(stats);
+          const codeFromSass = getCodeFromSass(testId, options);
+
+          expect(codeFromBundle.css).toBe(codeFromSass.css);
+          expect(codeFromBundle.css).toMatchSnapshot('css');
+          expect(stats.compilation.warnings).toMatchSnapshot('warnings');
+          expect(stats.compilation.errors).toMatchSnapshot('errors');
+        });
+
+        it(`should work when "@use" and use the "main" field when the "main" value already in the "mainFields" resolve option (${implementationName}) (${syntax})`, async () => {
+          const testId = getTestId('use-main-field', syntax);
+          const options = {
+            implementation: getImplementationByName(implementationName),
+          };
+          const stats = await compile(testId, {
+            loader: { options, resolve: { mainFields: ['main', '...'] } },
+          });
+          const codeFromBundle = getCodeFromBundle(stats);
+          const codeFromSass = getCodeFromSass(testId, options);
+
+          expect(codeFromBundle.css).toBe(codeFromSass.css);
+          expect(codeFromBundle.css).toMatchSnapshot('css');
+          expect(stats.compilation.warnings).toMatchSnapshot('warnings');
+          expect(stats.compilation.errors).toMatchSnapshot('errors');
+        });
+
+        it(`should work when "@use" and use the "custom-sass" field (${implementationName}) (${syntax})`, async () => {
+          const testId = getTestId('use-custom-sass-field', syntax);
+          const options = {
+            implementation: getImplementationByName(implementationName),
+          };
+          const stats = await compile(testId, {
+            loader: {
+              options,
+              resolve: { mainFields: ['custom-sass', '...'] },
+            },
+          });
+          const codeFromBundle = getCodeFromBundle(stats);
+          const codeFromSass = getCodeFromSass(testId, options);
+
+          expect(codeFromBundle.css).toBe(codeFromSass.css);
+          expect(codeFromBundle.css).toMatchSnapshot('css');
+          expect(stats.compilation.warnings).toMatchSnapshot('warnings');
+          expect(stats.compilation.errors).toMatchSnapshot('errors');
+        });
+
+        it(`should work when "@use" and use the "index" file in package (${implementationName}) (${syntax})`, async () => {
+          const testId = getTestId('use-index', syntax);
+          const options = {
+            implementation: getImplementationByName(implementationName),
+          };
+          const stats = await compile(testId, { loader: { options } });
+          const codeFromBundle = getCodeFromBundle(stats);
+          const codeFromSass = getCodeFromSass(testId, options);
+
+          expect(codeFromBundle.css).toBe(codeFromSass.css);
+          expect(codeFromBundle.css).toMatchSnapshot('css');
+          expect(stats.compilation.warnings).toMatchSnapshot('warnings');
+          expect(stats.compilation.errors).toMatchSnapshot('errors');
+        });
+
+        it(`should work when "@use" and use the "index" file in package when the "index" value is not in the "mainFiles" resolve option (${implementationName}) (${syntax})`, async () => {
+          const testId = getTestId('use-index', syntax);
+          const options = {
+            implementation: getImplementationByName(implementationName),
+          };
+          const stats = await compile(testId, {
+            loader: { options, resolve: { mainFiles: [] } },
+          });
+          const codeFromBundle = getCodeFromBundle(stats);
+          const codeFromSass = getCodeFromSass(testId, options);
+
+          expect(codeFromBundle.css).toBe(codeFromSass.css);
+          expect(codeFromBundle.css).toMatchSnapshot('css');
+          expect(stats.compilation.warnings).toMatchSnapshot('warnings');
+          expect(stats.compilation.errors).toMatchSnapshot('errors');
+        });
+
+        it(`should work when "@use" and use the "index" file in package when the "index" value already in the "mainFiles" resolve option (${implementationName}) (${syntax})`, async () => {
+          const testId = getTestId('use-index', syntax);
+          const options = {
+            implementation: getImplementationByName(implementationName),
+          };
+          const stats = await compile(testId, {
+            loader: { options, resolve: { mainFiles: ['index', '...'] } },
+          });
+          const codeFromBundle = getCodeFromBundle(stats);
+          const codeFromSass = getCodeFromSass(testId, options);
+
+          expect(codeFromBundle.css).toBe(codeFromSass.css);
+          expect(codeFromBundle.css).toMatchSnapshot('css');
+          expect(stats.compilation.warnings).toMatchSnapshot('warnings');
+          expect(stats.compilation.errors).toMatchSnapshot('errors');
+        });
+
+        it(`should work when "@use"and use the "_index" file in package (${implementationName}) (${syntax})`, async () => {
+          const testId = getTestId('use-_index', syntax);
+          const options = {
+            implementation: getImplementationByName(implementationName),
+          };
+          const stats = await compile(testId, { loader: { options } });
+          const codeFromBundle = getCodeFromBundle(stats);
+          const codeFromSass = getCodeFromSass(testId, options);
+
+          expect(codeFromBundle.css).toBe(codeFromSass.css);
+          expect(codeFromBundle.css).toMatchSnapshot('css');
+          expect(stats.compilation.warnings).toMatchSnapshot('warnings');
+          expect(stats.compilation.errors).toMatchSnapshot('errors');
+        });
+
+        it(`should work when "@use" with an alias (${implementationName}) (${syntax})`, async () => {
+          const testId = getTestId('use-alias', syntax);
+          const options = {
+            implementation: getImplementationByName(implementationName),
+          };
+          const stats = await compile(testId, {
+            resolve: {
+              alias: {
+                'path-to-alias': path.resolve(
+                  __dirname,
+                  syntax,
+                  'another',
+                  `alias.${syntax}`
+                ),
+                '@sass': path.resolve(
+                  __dirname,
+                  'sass',
+                  'directory-6',
+                  'file',
+                  '_index.sass'
+                ),
+                '@scss': path.resolve(
+                  __dirname,
+                  'scss',
+                  'directory-6',
+                  'file',
+                  `_index.scss`
+                ),
+                '@path-to-scss-dir': path.resolve(__dirname, 'scss'),
+                '@path-to-sass-dir': path.resolve(__dirname, 'sass'),
+                '@/path-to-scss-dir': path.resolve(__dirname, 'scss'),
+                '@/path-to-sass-dir': path.resolve(__dirname, 'sass'),
+              },
+            },
+            loader: { options },
+          });
+          const codeFromBundle = getCodeFromBundle(stats);
+          const codeFromSass = getCodeFromSass(testId, options);
+
+          expect(codeFromBundle.css).toBe(codeFromSass.css);
+          expect(codeFromBundle.css).toMatchSnapshot('css');
+          expect(stats.compilation.warnings).toMatchSnapshot('warnings');
+          expect(stats.compilation.errors).toMatchSnapshot('errors');
+        });
+
+        it(`should work when "@use" with the "bootstrap-sass" package, directly import (${implementationName}) (${syntax})`, async () => {
+          const testId = getTestId('use-bootstrap-sass', syntax);
+          const options = {
+            implementation: getImplementationByName(implementationName),
+          };
+          const stats = await compile(testId, { loader: { options } });
+          const codeFromBundle = getCodeFromBundle(stats);
+          const codeFromSass = getCodeFromSass(testId, options);
+
+          expect(codeFromBundle.css).toBe(codeFromSass.css);
+          expect(codeFromBundle.css).toMatchSnapshot('css');
+          expect(stats.compilation.warnings).toMatchSnapshot('warnings');
+          expect(stats.compilation.errors).toMatchSnapshot('errors');
+        });
+
+        it(`should work when "@use" with the "bootstrap-sass" package, import as a package (${implementationName}) (${syntax})`, async () => {
+          const testId = getTestId('use-bootstrap-sass-package', syntax);
+          const options = {
+            implementation: getImplementationByName(implementationName),
+          };
+          const stats = await compile(testId, { loader: { options } });
+          const codeFromBundle = getCodeFromBundle(stats);
+          const codeFromSass = getCodeFromSass(testId, options);
+
+          expect(codeFromBundle.css).toBe(codeFromSass.css);
+          expect(codeFromBundle.css).toMatchSnapshot('css');
+          expect(stats.compilation.warnings).toMatchSnapshot('warnings');
+          expect(stats.compilation.errors).toMatchSnapshot('errors');
+        });
+
+        it(`should work when "@use" with the "bootstrap" package, import as a package (${implementationName}) (${syntax})`, async () => {
+          const testId = getTestId('use-bootstrap', syntax);
+          const options = {
+            implementation: getImplementationByName(implementationName),
+          };
+          const stats = await compile(testId, { loader: { options } });
+          const codeFromBundle = getCodeFromBundle(stats);
+          const codeFromSass = getCodeFromSass(testId, options);
+
+          expect(codeFromBundle.css).toBe(codeFromSass.css);
+          expect(codeFromBundle.css).toMatchSnapshot('css');
+          expect(stats.compilation.warnings).toMatchSnapshot('warnings');
+          expect(stats.compilation.errors).toMatchSnapshot('errors');
+        });
+      }
     });
   });
 });
