@@ -27,23 +27,20 @@ To begin, you'll need to install `sass-loader`:
 npm install sass-loader node-sass webpack --save-dev
 ```
 
-The sass-loader requires you to install either [Node Sass](https://github.com/sass/node-sass) or [Dart Sass](https://github.com/sass/dart-sass) on your own (more documentation you can find below).
+`sass-loader` requires you to install either [Node Sass](https://github.com/sass/node-sass) or [Dart Sass](https://github.com/sass/dart-sass) on your own (more documentation can be found below).
 This allows you to control the versions of all your dependencies, and to choose which Sass implementation to use.
 
-- [node sass](https://github.com/sass/node-sass)
-- [dart sass](http://sass-lang.com/dart-sass)
+Chain the `sass-loader` with the [css-loader](https://github.com/webpack-contrib/css-loader) and the [style-loader](https://github.com/webpack-contrib/style-loader) to immediately apply all styles to the DOM or the [mini-css-extract-plugin](https://github.com/webpack-contrib/mini-css-extract-plugin) to extract it into a separate file.
 
-Chain the sass-loader with the [css-loader](https://github.com/webpack-contrib/css-loader) and the [style-loader](https://github.com/webpack-contrib/style-loader) to immediately apply all styles to the DOM or the [mini-css-extract-plugin](https://github.com/webpack-contrib/mini-css-extract-plugin) to extract it into a separate file.
+Then add the loader to your Webpack configuration. For example:
 
-Then add the loader to your `webpack` config. For example:
-
-**file.js**
+**app.js**
 
 ```js
-import style from './style.scss';
+import './style.scss';
 ```
 
-**file.scss**
+**style.scss**
 
 ```scss
 $body-color: red;
@@ -75,34 +72,34 @@ module.exports = {
 };
 ```
 
-And run `webpack` via your preferred method.
+Finally run `webpack` via your preferred method.
 
 ### Resolving `import` at-rules
 
-The webpack provides an [advanced mechanism to resolve files](https://webpack.js.org/concepts/module-resolution/).
+Webpack provides an [advanced mechanism to resolve files](https://webpack.js.org/concepts/module-resolution/).
 
-The sass-loader uses Sass's custom importer feature to pass all queries to the webpack resolving engine. Thus you can import your Sass modules from `node_modules`. Just prepend them with a `~` to tell webpack that this is not a relative import:
+The `sass-loader` uses Sass's custom importer feature to pass all queries to the Webpack resolving engine. Thus you can import your Sass modules from `node_modules`. Just prepend them with a `~` to tell Webpack that this is not a relative import:
 
-```css
+```scss
 @import '~bootstrap';
 ```
 
 It's important to only prepend it with `~`, because `~/` resolves to the home directory.
-The webpack needs to distinguish between `bootstrap` and `~bootstrap` because CSS and Sass files have no special syntax for importing relative files.
-Writing `@import "file"` is the same as `@import "./file";`
+Webpack needs to distinguish between `bootstrap` and `~bootstrap` because CSS and Sass files have no special syntax for importing relative files.
+Writing `@import "style.scss"` is the same as `@import "./style.scss";`
 
 ### Problems with `url(...)`
 
-Since sass implementations don't provide [url rewriting](https://github.com/sass/libsass/issues/532), all linked assets must be relative to the output.
+Since Sass implementations don't provide [url rewriting](https://github.com/sass/libsass/issues/532), all linked assets must be relative to the output.
 
-- If you pass the generated CSS on to the css-loader, all urls must be relative to the entry-file (e.g. `main.scss`).
-- If you're just generating CSS without passing it to the css-loader, it must be relative to your web root.
+- If you pass the generated CSS on to the `css-loader`, all urls must be relative to the entry-file (e.g. `main.scss`).
+- If you're just generating CSS without passing it to the `css-loader`, it must be relative to your web root.
 
 You will be disrupted by this first issue. It is natural to expect relative references to be resolved against the `.sass`/`.scss` file in which they are specified (like in regular `.css` files).
 
 Thankfully there are a two solutions to this problem:
 
-- Add the missing url rewriting using the [resolve-url-loader](https://github.com/bholloway/resolve-url-loader). Place it before the sass-loader in the loader chain.
+- Add the missing url rewriting using the [resolve-url-loader](https://github.com/bholloway/resolve-url-loader). Place it before `sass-loader` in the loader chain.
 - Library authors usually provide a variable to modify the asset path. [bootstrap-sass](https://github.com/twbs/bootstrap-sass) for example has an `$icon-font-path`.
 
 ## Options
@@ -140,9 +137,9 @@ Example where the `sass-loader` loader uses the `node-sass` implementation:
 }
 ```
 
-Beware the situation when `node-sass` and `sass` was installed, by default the `sass-loader` prefers `node-sass`, to avoid this situation use the `implementation` option.
+Beware the situation when `node-sass` and `sass` were installed! By default the `sass-loader` prefers `node-sass`. In order to avoid this situation you can use the `implementation` option.
 
-It takes either `node-sass` or `sass` (`Dart Sass`) module.
+The `implementation` options either accepts `node-sass` or `sass` (`Dart Sass`) as a module.
 
 For example, to use Dart Sass, you'd pass:
 
@@ -186,7 +183,7 @@ We automatically inject the [`fibers`](https://github.com/laverdet/node-fibers) 
 }
 ```
 
-You can disable automatically inject the [`fibers`](https://github.com/laverdet/node-fibers) package pass the `false` value for the `sassOptions.fiber` option.
+You can disable automatically injecting the [`fibers`](https://github.com/laverdet/node-fibers) package by passing a `false` value for the `sassOptions.fiber` option.
 
 **webpack.config.js**
 
@@ -215,7 +212,7 @@ module.exports = {
 };
 ```
 
-Also you can pass own the `fiber` value using this code:
+You can also pass the `fiber` value using this code:
 
 **webpack.config.js**
 
@@ -254,17 +251,17 @@ Options for [Node Sass](https://github.com/sass/node-sass) or [Dart Sass](http:/
 
 > ℹ️ Options such as `file` and `outFile` are unavailable.
 
-> ℹ We recommend don't use `sourceMapContents`, `sourceMapEmbed`, `sourceMapRoot` options because loader automatically setup this options.
+> ℹ We recommend not to use the `sourceMapContents`, `sourceMapEmbed`, `sourceMapRoot` options because `sass-loader` automatically sets these options.
 
 There is a slight difference between the `node-sass` and `sass` (`Dart Sass`) options.
-We recommend look documentation before used them:
+Please consult documentation before using them:
 
-- [the Node Sass documentation](https://github.com/sass/node-sass/#options) for all available `node-sass` options.
-- [the Dart Sass documentation](https://github.com/sass/dart-sass#javascript-api) for all available `sass` options.
+- [Node Sass documentation](https://github.com/sass/node-sass/#options) for all available `node-sass` options.
+- [Dart Sass documentation](https://github.com/sass/dart-sass#javascript-api) for all available `sass` options.
 
 #### `Object`
 
-Setups option as object for sass implementation.
+Use and object for the Sass implementation setup.
 
 **webpack.config.js**
 
@@ -295,7 +292,7 @@ module.exports = {
 
 #### `Function`
 
-Allows setup difference options based on loader context.
+Allows to setup the Sass implementation by setting different options based on the loader context.
 
 ```js
 module.exports = {
@@ -410,7 +407,7 @@ Default: depends on the `compiler.devtool` value
 
 Enables/Disables generation of source maps.
 
-By default generation of source maps depends on the [`devtool`](https://webpack.js.org/configuration/devtool/) option, all values enable source map generation except `eval` and `false` value.
+By default generation of source maps depends on the [`devtool`](https://webpack.js.org/configuration/devtool/) option. All values enable source map generation except `eval` and `false` value.
 
 **webpack.config.js**
 
@@ -441,16 +438,16 @@ module.exports = {
 };
 ```
 
-> ℹ In some rare case `node-sass` can output invalid source maps (it is `node-sass` bug), to avoid try to update node-sass to latest version or you can try to set the `outputStyle` option to `compressed` value.
+> ℹ In some rare cases `node-sass` can output invalid source maps (it is a `node-sass` bug). In order to avoid this, you can try to update `node-sass` to latest version or you can try to set the `outputStyle` option to `compressed`.
 
 ### `webpackImporter`
 
 Type: `Boolean`
 Default: `true`
 
-Enables/Disables default `webpack` importer.
+Enables/Disables the default Webpack importer.
 
-This can improve performance in some cases. Use it with caution because aliases and `@import` at-rules starts with `~` will not work, but you can pass own `importer` to solve this (see [`importer docs`](https://github.com/sass/node-sass#importer--v200---experimental)).
+This can improve performance in some cases. Use it with caution because aliases and `@import` at-rules starting with `~` will not work. You can pass own `importer` to solve this (see [`importer docs`](https://github.com/sass/node-sass#importer--v200---experimental)).
 
 **webpack.config.js**
 
@@ -523,7 +520,7 @@ module.exports = {
 
 Enables/Disables generation of source maps.
 
-To enable CSS source maps, you'll need to pass the `sourceMap` option to the sass-loader _and_ the css-loader.
+To enable CSS source maps, you'll need to pass the `sourceMap` option to the `sass-loader` _and_ the css-loader.
 
 **webpack.config.js**
 
