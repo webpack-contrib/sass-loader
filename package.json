@@ -49,6 +49,9 @@
     },
     "fibers": {
       "optional": true
+    },
+    "webpack": {
+      "optional": true
     }
   },
   "dependencies": {
