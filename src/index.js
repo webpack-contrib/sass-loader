@@ -85,7 +85,7 @@ function loader(content) {
       // we know that this path is relative to process.cwd(). This is how node-sass works.
       // eslint-disable-next-line no-param-reassign
       const stdinIndex = result.map.sources.findIndex(
-        (source) => source.indexOf('stdin') !== -1
+        (source) => source.includes('stdin')
       );
 
       if (stdinIndex !== -1) {
