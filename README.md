@@ -24,7 +24,7 @@ Loads a Sass/SCSS file and compiles it to CSS.
 To begin, you'll need to install `sass-loader`:
 
 ```console
-npm install sass-loader node-sass webpack --save-dev
+npm install sass-loader node-sass style-loader webpack --save-dev
 ```
 
 `sass-loader` requires you to install either [Node Sass](https://github.com/sass/node-sass) or [Dart Sass](https://github.com/sass/dart-sass) on your own (more documentation can be found below).
