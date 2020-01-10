@@ -7,9 +7,11 @@ import Fiber from 'fibers';
 
 import {
   compile,
-  getTestId,
   getCodeFromBundle,
+  getErrors,
   getImplementationByName,
+  getTestId,
+  getWarnings,
 } from './helpers';
 
 const implementations = [nodeSass, dartSass];
@@ -38,9 +40,8 @@ describe('sourceMap option', () => {
 
         expect(css).toBeDefined();
         expect(sourceMap).toBeDefined();
-
-        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-        expect(stats.compilation.errors).toMatchSnapshot('errors');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
       it(`should not generate source maps when value is not specify and the "devtool" option has "false" value (${implementationName}) (${syntax})`, async () => {
@@ -53,9 +54,8 @@ describe('sourceMap option', () => {
 
         expect(css).toBeDefined();
         expect(sourceMap).toBeUndefined();
-
-        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-        expect(stats.compilation.errors).toMatchSnapshot('errors');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
       it(`should not generate source maps when value has "false" and the "devtool" option has "source-map" value (${implementationName}) (${syntax})`, async () => {
@@ -72,9 +72,8 @@ describe('sourceMap option', () => {
 
         expect(css).toBeDefined();
         expect(sourceMap).toBeUndefined();
-
-        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-        expect(stats.compilation.errors).toMatchSnapshot('errors');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
       it(`should not generate source maps when value has "false" and the "devtool" option has "false" value (${implementationName}) (${syntax})`, async () => {
@@ -88,9 +87,8 @@ describe('sourceMap option', () => {
 
         expect(css).toBeDefined();
         expect(sourceMap).toBeUndefined();
-
-        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-        expect(stats.compilation.errors).toMatchSnapshot('errors');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
       it(`should generate source maps when value has "true" value and the "devtool" option has "source-map" value (${implementationName}) (${syntax})`, async () => {
@@ -112,7 +110,6 @@ describe('sourceMap option', () => {
 
         expect(sourceMap.file).toBeUndefined();
         expect(sourceMap.sourceRoot).toBeDefined();
-
         expect(sourceMap.sources).toHaveLength(2);
 
         sourceMap.sources.forEach((sourcePath) => {
@@ -121,8 +118,8 @@ describe('sourceMap option', () => {
           ).toBe(true);
         });
 
-        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-        expect(stats.compilation.errors).toMatchSnapshot('errors');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
       it(`should generate source maps when value has "true" value and the "devtool" option has "false" value (${implementationName}) (${syntax})`, async () => {
@@ -144,7 +141,6 @@ describe('sourceMap option', () => {
 
         expect(sourceMap.file).toBeUndefined();
         expect(sourceMap.sourceRoot).toBeDefined();
-
         expect(sourceMap.sources).toHaveLength(2);
 
         sourceMap.sources.forEach((sourcePath) => {
@@ -153,8 +149,8 @@ describe('sourceMap option', () => {
           ).toBe(true);
         });
 
-        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-        expect(stats.compilation.errors).toMatchSnapshot('errors');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
       });
     });
   });

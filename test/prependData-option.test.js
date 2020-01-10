@@ -4,10 +4,12 @@ import Fiber from 'fibers';
 
 import {
   compile,
-  getTestId,
   getCodeFromBundle,
   getCodeFromSass,
+  getErrors,
   getImplementationByName,
+  getTestId,
+  getWarnings,
 } from './helpers';
 
 const implementations = [nodeSass, dartSass];
@@ -37,8 +39,8 @@ describe('prependData option', () => {
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot('css');
-        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-        expect(stats.compilation.errors).toMatchSnapshot('errors');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
       it(`should work with the "data" option as a function (${implementationName}) (${syntax})`, async () => {
@@ -57,8 +59,8 @@ describe('prependData option', () => {
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot('css');
-        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-        expect(stats.compilation.errors).toMatchSnapshot('errors');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
       });
     });
   });

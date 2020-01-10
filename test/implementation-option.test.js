@@ -4,10 +4,12 @@ import Fiber from 'fibers';
 
 import {
   compile,
-  getTestId,
   getCodeFromBundle,
+  getErrors,
   getImplementationByName,
-  normalizeError,
+  getTestId,
+  getWarnings,
+  normalizeImplementationError,
 } from './helpers';
 
 const implementations = [nodeSass, dartSass];
@@ -36,8 +38,8 @@ describe('implementation option', () => {
       expect(css).toBeDefined();
       expect(sourceMap).toBeUndefined();
 
-      expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-      expect(stats.compilation.errors).toMatchSnapshot('errors');
+      expect(getWarnings(stats)).toMatchSnapshot('warnings');
+      expect(getErrors(stats)).toMatchSnapshot('errors');
 
       if (implementationName === 'node-sass') {
         expect(nodeSassSpy).toHaveBeenCalledTimes(1);
@@ -61,8 +63,8 @@ describe('implementation option', () => {
     expect(css).toBeDefined();
     expect(sourceMap).toBeUndefined();
 
-    expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-    expect(stats.compilation.errors).toMatchSnapshot('errors');
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
 
     expect(nodeSassSpy).toHaveBeenCalledTimes(1);
     expect(dartSassSpy).toHaveBeenCalledTimes(0);
@@ -81,7 +83,7 @@ describe('implementation option', () => {
 
       getCodeFromBundle(stats);
     } catch (error) {
-      expect(normalizeError(error)).toMatchSnapshot();
+      expect(normalizeImplementationError(error)).toMatchSnapshot();
     }
   });
 
@@ -98,7 +100,7 @@ describe('implementation option', () => {
 
       getCodeFromBundle(stats);
     } catch (error) {
-      expect(normalizeError(error)).toMatchSnapshot();
+      expect(normalizeImplementationError(error)).toMatchSnapshot();
     }
   });
 
@@ -115,7 +117,7 @@ describe('implementation option', () => {
 
       getCodeFromBundle(stats);
     } catch (error) {
-      expect(normalizeError(error)).toMatchSnapshot();
+      expect(normalizeImplementationError(error)).toMatchSnapshot();
     }
   });
 
@@ -130,7 +132,7 @@ describe('implementation option', () => {
 
       getCodeFromBundle(stats);
     } catch (error) {
-      expect(normalizeError(error)).toMatchSnapshot();
+      expect(normalizeImplementationError(error)).toMatchSnapshot();
     }
   });
 
@@ -145,7 +147,7 @@ describe('implementation option', () => {
 
       getCodeFromBundle(stats);
     } catch (error) {
-      expect(normalizeError(error)).toMatchSnapshot();
+      expect(normalizeImplementationError(error)).toMatchSnapshot();
     }
   });
 
@@ -161,7 +163,7 @@ describe('implementation option', () => {
 
       getCodeFromBundle(stats);
     } catch (error) {
-      expect(normalizeError(error)).toMatchSnapshot();
+      expect(normalizeImplementationError(error)).toMatchSnapshot();
     }
   });
 

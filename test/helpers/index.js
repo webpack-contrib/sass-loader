@@ -1,15 +1,23 @@
 import compile from './compiler';
-import getTestId from './getTestId';
+import customFunctions from './customFunctions';
+import customImporter from './customImporter';
 import getCodeFromBundle from './getCodeFromBundle';
 import getCodeFromSass from './getCodeFromSass';
+import getErrors from './getErrors';
 import getImplementationByName from './getImplementationByName';
-import normalizeError from './normalizeError';
+import getTestId from './getTestId';
+import getWarnings from './getWarnings';
+import normalizeImplementationError from './normalizeImplementationError';
 
 export {
   compile,
-  getTestId,
+  customFunctions,
+  customImporter,
   getCodeFromBundle,
   getCodeFromSass,
+  getErrors,
   getImplementationByName,
-  normalizeError,
+  getTestId,
+  getWarnings,
+  normalizeImplementationError,
 };

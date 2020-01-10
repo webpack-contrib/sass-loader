@@ -6,11 +6,12 @@ import Fiber from 'fibers';
 
 import {
   compile,
-  getTestId,
   getCodeFromBundle,
   getCodeFromSass,
+  getErrors,
   getImplementationByName,
-  normalizeError,
+  getTestId,
+  getWarnings,
 } from './helpers';
 
 const implementations = [nodeSass, dartSass];
@@ -37,8 +38,8 @@ describe('loader', () => {
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot('css');
-        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-        expect(stats.compilation.errors).toMatchSnapshot('errors');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
       // See https://github.com/webpack-contrib/sass-loader/issues/21
@@ -53,8 +54,8 @@ describe('loader', () => {
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot('css');
-        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-        expect(stats.compilation.errors).toMatchSnapshot('errors');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
       it(`should output an understandable error (${implementationName}) (${syntax})`, async () => {
@@ -64,10 +65,8 @@ describe('loader', () => {
         };
         const stats = await compile(testId, { loader: { options } });
 
-        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-        expect(
-          stats.compilation.errors.map((error) => normalizeError(error))
-        ).toMatchSnapshot('errors');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
       it(`should output an understandable error when the problem in "@import" (${implementationName}) (${syntax})`, async () => {
@@ -77,10 +76,8 @@ describe('loader', () => {
         };
         const stats = await compile(testId, { loader: { options } });
 
-        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-        expect(
-          stats.compilation.errors.map((error) => normalizeError(error))
-        ).toMatchSnapshot('errors');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
       it(`should output an understandable error when a file could not be found (${implementationName}) (${syntax})`, async () => {
@@ -90,10 +87,8 @@ describe('loader', () => {
         };
         const stats = await compile(testId, { loader: { options } });
 
-        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-        expect(
-          stats.compilation.errors.map((error) => normalizeError(error))
-        ).toMatchSnapshot('errors');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
       it(`should throw an error with a explicit file and a file does not exist (${implementationName}) (${syntax})`, async () => {
@@ -103,10 +98,8 @@ describe('loader', () => {
         };
         const stats = await compile(testId, { loader: { options } });
 
-        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-        expect(
-          stats.compilation.errors.map((error) => normalizeError(error))
-        ).toMatchSnapshot('errors');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
       it(`should work with difference "@import" at-rules (${implementationName}) (${syntax})`, async () => {
@@ -120,8 +113,8 @@ describe('loader', () => {
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot('css');
-        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-        expect(stats.compilation.errors).toMatchSnapshot('errors');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
       // Test for issue: https://github.com/webpack-contrib/sass-loader/issues/32
@@ -136,8 +129,8 @@ describe('loader', () => {
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot('css');
-        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-        expect(stats.compilation.errors).toMatchSnapshot('errors');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
       // Test for issue: https://github.com/webpack-contrib/sass-loader/issues/73
@@ -152,8 +145,8 @@ describe('loader', () => {
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot('css');
-        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-        expect(stats.compilation.errors).toMatchSnapshot('errors');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
       it(`should work when "@import" at-rules from scoped npm packages (${implementationName}) (${syntax})`, async () => {
@@ -167,8 +160,8 @@ describe('loader', () => {
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot('css');
-        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-        expect(stats.compilation.errors).toMatchSnapshot('errors');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
       it(`should work when "@import" at-rules with extensions (${implementationName}) (${syntax})`, async () => {
@@ -182,8 +175,8 @@ describe('loader', () => {
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot('css');
-        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-        expect(stats.compilation.errors).toMatchSnapshot('errors');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
       it(`should work when "@import" at-rules starting with "_" (${implementationName}) (${syntax})`, async () => {
@@ -197,8 +190,8 @@ describe('loader', () => {
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot('css');
-        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-        expect(stats.compilation.errors).toMatchSnapshot('errors');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
       it(`should work when "@import" at-rules without extensions and do not start with "_" (${implementationName}) (${syntax})`, async () => {
@@ -215,8 +208,8 @@ describe('loader', () => {
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot('css');
-        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-        expect(stats.compilation.errors).toMatchSnapshot('errors');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
       it(`should work with multiple "@import" at-rules without quotes (${implementationName}) (${syntax})`, async () => {
@@ -234,8 +227,8 @@ describe('loader', () => {
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot('css');
-        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-        expect(stats.compilation.errors).toMatchSnapshot('errors');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
       it(`should work and use the "sass" field (${implementationName}) (${syntax})`, async () => {
@@ -249,8 +242,8 @@ describe('loader', () => {
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot('css');
-        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-        expect(stats.compilation.errors).toMatchSnapshot('errors');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
       it(`should work and use the "style" field (${implementationName}) (${syntax})`, async () => {
@@ -264,8 +257,8 @@ describe('loader', () => {
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot('css');
-        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-        expect(stats.compilation.errors).toMatchSnapshot('errors');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
       it(`should work and use the "main" field (${implementationName}) (${syntax})`, async () => {
@@ -279,8 +272,8 @@ describe('loader', () => {
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot('css');
-        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-        expect(stats.compilation.errors).toMatchSnapshot('errors');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
       it(`should work and use the "main" field when the "main" value is not in the "mainFields" resolve option (${implementationName}) (${syntax})`, async () => {
@@ -296,8 +289,8 @@ describe('loader', () => {
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot('css');
-        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-        expect(stats.compilation.errors).toMatchSnapshot('errors');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
       it(`should work and use the "main" field when the "main" value already in the "mainFields" resolve option (${implementationName}) (${syntax})`, async () => {
@@ -313,8 +306,8 @@ describe('loader', () => {
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot('css');
-        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-        expect(stats.compilation.errors).toMatchSnapshot('errors');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
       it(`should work and use the "custom-sass" field (${implementationName}) (${syntax})`, async () => {
@@ -330,8 +323,8 @@ describe('loader', () => {
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot('css');
-        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-        expect(stats.compilation.errors).toMatchSnapshot('errors');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
       it(`should work and use the "index" file in package (${implementationName}) (${syntax})`, async () => {
@@ -345,8 +338,8 @@ describe('loader', () => {
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot('css');
-        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-        expect(stats.compilation.errors).toMatchSnapshot('errors');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
       it(`should work and use the "index" file in package when the "index" value is not in the "mainFiles" resolve option (${implementationName}) (${syntax})`, async () => {
@@ -362,8 +355,8 @@ describe('loader', () => {
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot('css');
-        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-        expect(stats.compilation.errors).toMatchSnapshot('errors');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
       it(`should work and use the "index" file in package when the "index" value already in the "mainFiles" resolve option (${implementationName}) (${syntax})`, async () => {
@@ -379,8 +372,8 @@ describe('loader', () => {
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot('css');
-        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-        expect(stats.compilation.errors).toMatchSnapshot('errors');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
       it(`should work and use the "_index" file in package (${implementationName}) (${syntax})`, async () => {
@@ -394,8 +387,8 @@ describe('loader', () => {
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot('css');
-        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-        expect(stats.compilation.errors).toMatchSnapshot('errors');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
       // Legacy support for CSS imports with node-sass
@@ -411,8 +404,8 @@ describe('loader', () => {
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot('css');
-        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-        expect(stats.compilation.errors).toMatchSnapshot('errors');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
       it(`should work with an alias (${implementationName}) (${syntax})`, async () => {
@@ -456,8 +449,8 @@ describe('loader', () => {
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot('css');
-        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-        expect(stats.compilation.errors).toMatchSnapshot('errors');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
       it(`should work with the "bootstrap-sass" package, directly import (${implementationName}) (${syntax})`, async () => {
@@ -471,8 +464,8 @@ describe('loader', () => {
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot('css');
-        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-        expect(stats.compilation.errors).toMatchSnapshot('errors');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
       it(`should work with the "bootstrap-sass" package, import as a package (${implementationName}) (${syntax})`, async () => {
@@ -486,8 +479,8 @@ describe('loader', () => {
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot('css');
-        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-        expect(stats.compilation.errors).toMatchSnapshot('errors');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
       it(`should work with the "bootstrap" package, import as a package (${implementationName}) (${syntax})`, async () => {
@@ -501,8 +494,8 @@ describe('loader', () => {
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot('css');
-        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-        expect(stats.compilation.errors).toMatchSnapshot('errors');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
       it(`should work and output the "compressed" outputStyle when "mode" is production (${implementationName}) (${syntax})`, async () => {
@@ -526,8 +519,8 @@ describe('loader', () => {
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot('css');
-        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-        expect(stats.compilation.errors).toMatchSnapshot('errors');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
       if (implementation === dartSass) {
@@ -538,10 +531,8 @@ describe('loader', () => {
           };
           const stats = await compile(testId, { loader: { options } });
 
-          expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-          expect(
-            stats.compilation.errors.map((error) => normalizeError(error))
-          ).toMatchSnapshot('errors');
+          expect(getWarnings(stats)).toMatchSnapshot('warnings');
+          expect(getErrors(stats)).toMatchSnapshot('errors');
         });
 
         it(`should output an understandable error when a file could not be found using "@use" rule (${implementationName}) (${syntax})`, async () => {
@@ -551,10 +542,8 @@ describe('loader', () => {
           };
           const stats = await compile(testId, { loader: { options } });
 
-          expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-          expect(
-            stats.compilation.errors.map((error) => normalizeError(error))
-          ).toMatchSnapshot('errors');
+          expect(getWarnings(stats)).toMatchSnapshot('warnings');
+          expect(getErrors(stats)).toMatchSnapshot('errors');
         });
 
         it(`should throw an error with a explicit file and a file does not exist using "@use" rule (${implementationName}) (${syntax})`, async () => {
@@ -564,10 +553,8 @@ describe('loader', () => {
           };
           const stats = await compile(testId, { loader: { options } });
 
-          expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-          expect(
-            stats.compilation.errors.map((error) => normalizeError(error))
-          ).toMatchSnapshot('errors');
+          expect(getWarnings(stats)).toMatchSnapshot('warnings');
+          expect(getErrors(stats)).toMatchSnapshot('errors');
         });
 
         it(`should work with different "@use" at-rules (${implementationName}) (${syntax})`, async () => {
@@ -581,8 +568,8 @@ describe('loader', () => {
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
           expect(codeFromBundle.css).toMatchSnapshot('css');
-          expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-          expect(stats.compilation.errors).toMatchSnapshot('errors');
+          expect(getWarnings(stats)).toMatchSnapshot('warnings');
+          expect(getErrors(stats)).toMatchSnapshot('errors');
         });
 
         it(`should work with "@use" at-rules from other language style (${implementationName}) (${syntax})`, async () => {
@@ -596,8 +583,8 @@ describe('loader', () => {
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
           expect(codeFromBundle.css).toMatchSnapshot('css');
-          expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-          expect(stats.compilation.errors).toMatchSnapshot('errors');
+          expect(getWarnings(stats)).toMatchSnapshot('warnings');
+          expect(getErrors(stats)).toMatchSnapshot('errors');
         });
 
         it(`should work when "@use" at-rules from scoped npm packages (${implementationName}) (${syntax})`, async () => {
@@ -611,8 +598,8 @@ describe('loader', () => {
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
           expect(codeFromBundle.css).toMatchSnapshot('css');
-          expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-          expect(stats.compilation.errors).toMatchSnapshot('errors');
+          expect(getWarnings(stats)).toMatchSnapshot('warnings');
+          expect(getErrors(stats)).toMatchSnapshot('errors');
         });
 
         it(`should work when "@use" at-rules with extensions (${implementationName}) (${syntax})`, async () => {
@@ -626,8 +613,8 @@ describe('loader', () => {
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
           expect(codeFromBundle.css).toMatchSnapshot('css');
-          expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-          expect(stats.compilation.errors).toMatchSnapshot('errors');
+          expect(getWarnings(stats)).toMatchSnapshot('warnings');
+          expect(getErrors(stats)).toMatchSnapshot('errors');
         });
 
         it(`should work when "@use" at-rules starting with "_" (${implementationName}) (${syntax})`, async () => {
@@ -641,8 +628,8 @@ describe('loader', () => {
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
           expect(codeFromBundle.css).toMatchSnapshot('css');
-          expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-          expect(stats.compilation.errors).toMatchSnapshot('errors');
+          expect(getWarnings(stats)).toMatchSnapshot('warnings');
+          expect(getErrors(stats)).toMatchSnapshot('errors');
         });
 
         it(`should work when "@use" at-rules without extensions and do not start with "_" (${implementationName}) (${syntax})`, async () => {
@@ -659,8 +646,8 @@ describe('loader', () => {
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
           expect(codeFromBundle.css).toMatchSnapshot('css');
-          expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-          expect(stats.compilation.errors).toMatchSnapshot('errors');
+          expect(getWarnings(stats)).toMatchSnapshot('warnings');
+          expect(getErrors(stats)).toMatchSnapshot('errors');
         });
 
         it(`should work when "@use" and use the "sass" field (${implementationName}) (${syntax})`, async () => {
@@ -674,8 +661,8 @@ describe('loader', () => {
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
           expect(codeFromBundle.css).toMatchSnapshot('css');
-          expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-          expect(stats.compilation.errors).toMatchSnapshot('errors');
+          expect(getWarnings(stats)).toMatchSnapshot('warnings');
+          expect(getErrors(stats)).toMatchSnapshot('errors');
         });
 
         it(`should work when "@use" and use the "style" field (${implementationName}) (${syntax})`, async () => {
@@ -689,8 +676,8 @@ describe('loader', () => {
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
           expect(codeFromBundle.css).toMatchSnapshot('css');
-          expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-          expect(stats.compilation.errors).toMatchSnapshot('errors');
+          expect(getWarnings(stats)).toMatchSnapshot('warnings');
+          expect(getErrors(stats)).toMatchSnapshot('errors');
         });
 
         it(`should work when "@use" and use the "main" field (${implementationName}) (${syntax})`, async () => {
@@ -704,8 +691,8 @@ describe('loader', () => {
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
           expect(codeFromBundle.css).toMatchSnapshot('css');
-          expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-          expect(stats.compilation.errors).toMatchSnapshot('errors');
+          expect(getWarnings(stats)).toMatchSnapshot('warnings');
+          expect(getErrors(stats)).toMatchSnapshot('errors');
         });
 
         it(`should work when "@use" and use the "main" field when the "main" value is not in the "mainFields" resolve option (${implementationName}) (${syntax})`, async () => {
@@ -721,8 +708,8 @@ describe('loader', () => {
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
           expect(codeFromBundle.css).toMatchSnapshot('css');
-          expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-          expect(stats.compilation.errors).toMatchSnapshot('errors');
+          expect(getWarnings(stats)).toMatchSnapshot('warnings');
+          expect(getErrors(stats)).toMatchSnapshot('errors');
         });
 
         it(`should work when "@use" and use the "main" field when the "main" value already in the "mainFields" resolve option (${implementationName}) (${syntax})`, async () => {
@@ -738,8 +725,8 @@ describe('loader', () => {
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
           expect(codeFromBundle.css).toMatchSnapshot('css');
-          expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-          expect(stats.compilation.errors).toMatchSnapshot('errors');
+          expect(getWarnings(stats)).toMatchSnapshot('warnings');
+          expect(getErrors(stats)).toMatchSnapshot('errors');
         });
 
         it(`should work when "@use" and use the "custom-sass" field (${implementationName}) (${syntax})`, async () => {
@@ -758,8 +745,8 @@ describe('loader', () => {
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
           expect(codeFromBundle.css).toMatchSnapshot('css');
-          expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-          expect(stats.compilation.errors).toMatchSnapshot('errors');
+          expect(getWarnings(stats)).toMatchSnapshot('warnings');
+          expect(getErrors(stats)).toMatchSnapshot('errors');
         });
 
         it(`should work when "@use" and use the "index" file in package (${implementationName}) (${syntax})`, async () => {
@@ -773,8 +760,8 @@ describe('loader', () => {
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
           expect(codeFromBundle.css).toMatchSnapshot('css');
-          expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-          expect(stats.compilation.errors).toMatchSnapshot('errors');
+          expect(getWarnings(stats)).toMatchSnapshot('warnings');
+          expect(getErrors(stats)).toMatchSnapshot('errors');
         });
 
         it(`should work when "@use" and use the "index" file in package when the "index" value is not in the "mainFiles" resolve option (${implementationName}) (${syntax})`, async () => {
@@ -790,8 +777,8 @@ describe('loader', () => {
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
           expect(codeFromBundle.css).toMatchSnapshot('css');
-          expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-          expect(stats.compilation.errors).toMatchSnapshot('errors');
+          expect(getWarnings(stats)).toMatchSnapshot('warnings');
+          expect(getErrors(stats)).toMatchSnapshot('errors');
         });
 
         it(`should work when "@use" and use the "index" file in package when the "index" value already in the "mainFiles" resolve option (${implementationName}) (${syntax})`, async () => {
@@ -807,8 +794,8 @@ describe('loader', () => {
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
           expect(codeFromBundle.css).toMatchSnapshot('css');
-          expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-          expect(stats.compilation.errors).toMatchSnapshot('errors');
+          expect(getWarnings(stats)).toMatchSnapshot('warnings');
+          expect(getErrors(stats)).toMatchSnapshot('errors');
         });
 
         it(`should work when "@use"and use the "_index" file in package (${implementationName}) (${syntax})`, async () => {
@@ -822,8 +809,8 @@ describe('loader', () => {
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
           expect(codeFromBundle.css).toMatchSnapshot('css');
-          expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-          expect(stats.compilation.errors).toMatchSnapshot('errors');
+          expect(getWarnings(stats)).toMatchSnapshot('warnings');
+          expect(getErrors(stats)).toMatchSnapshot('errors');
         });
 
         it(`should work when "@use" with an alias (${implementationName}) (${syntax})`, async () => {
@@ -867,8 +854,8 @@ describe('loader', () => {
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
           expect(codeFromBundle.css).toMatchSnapshot('css');
-          expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-          expect(stats.compilation.errors).toMatchSnapshot('errors');
+          expect(getWarnings(stats)).toMatchSnapshot('warnings');
+          expect(getErrors(stats)).toMatchSnapshot('errors');
         });
 
         it(`should work when "@use" with the "bootstrap-sass" package, directly import (${implementationName}) (${syntax})`, async () => {
@@ -882,8 +869,8 @@ describe('loader', () => {
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
           expect(codeFromBundle.css).toMatchSnapshot('css');
-          expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-          expect(stats.compilation.errors).toMatchSnapshot('errors');
+          expect(getWarnings(stats)).toMatchSnapshot('warnings');
+          expect(getErrors(stats)).toMatchSnapshot('errors');
         });
 
         it(`should work when "@use" with the "bootstrap-sass" package, import as a package (${implementationName}) (${syntax})`, async () => {
@@ -897,8 +884,8 @@ describe('loader', () => {
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
           expect(codeFromBundle.css).toMatchSnapshot('css');
-          expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-          expect(stats.compilation.errors).toMatchSnapshot('errors');
+          expect(getWarnings(stats)).toMatchSnapshot('warnings');
+          expect(getErrors(stats)).toMatchSnapshot('errors');
         });
 
         it(`should work when "@use" with the "bootstrap" package, import as a package (${implementationName}) (${syntax})`, async () => {
@@ -912,8 +899,8 @@ describe('loader', () => {
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
           expect(codeFromBundle.css).toMatchSnapshot('css');
-          expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-          expect(stats.compilation.errors).toMatchSnapshot('errors');
+          expect(getWarnings(stats)).toMatchSnapshot('warnings');
+          expect(getErrors(stats)).toMatchSnapshot('errors');
         });
       }
     });
