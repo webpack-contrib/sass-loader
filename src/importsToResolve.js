@@ -60,7 +60,7 @@ function importsToResolve(url) {
   // 1. Try to resolve files with `scss`, `sass` and `css` extensions.
   // 2. Try to resolve directory with `_index` or `index` filename.
   // 3. Send the original url to webpack resolver, maybe it's alias.
-  if (basename.charAt(0) === '_') {
+  if (basename.startsWith('_')) {
     return [
       `${request}.scss`,
       `${request}.sass`,

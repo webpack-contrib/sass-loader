@@ -6,7 +6,7 @@
 import del from 'del';
 import path from 'path';
 import webpack from 'webpack';
-import MemoryFS from 'memory-fs';
+import { createFsFromVolume, Volume } from 'memfs';
 
 const module = (config) => {
   return {
@@ -70,7 +70,8 @@ export default function(fixture, config = {}, options = {}) {
   const compiler = webpack(config);
 
   if (!options.output) {
-    compiler.outputFileSystem = new MemoryFS();
+    compiler.outputFileSystem = new createFsFromVolume(new Volume()); // eslint-disable-line
+    compiler.outputFileSystem.join = path.join.bind(path);
   }
 
   return new Promise((resolve, reject) =>
