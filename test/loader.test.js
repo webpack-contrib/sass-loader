@@ -8,6 +8,7 @@ import {
   compile,
   getCodeFromBundle,
   getCodeFromSass,
+  getCompiler,
   getErrors,
   getImplementationByName,
   getTestId,
@@ -32,8 +33,9 @@ describe('loader', () => {
         const options = {
           implementation: getImplementationByName(implementationName),
         };
-        const stats = await compile(testId, { loader: { options } });
-        const codeFromBundle = getCodeFromBundle(stats);
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
         const codeFromSass = getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
@@ -48,8 +50,9 @@ describe('loader', () => {
         const options = {
           implementation: getImplementationByName(implementationName),
         };
-        const stats = await compile(testId, { loader: { options } });
-        const codeFromBundle = getCodeFromBundle(stats);
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
         const codeFromSass = getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
@@ -63,7 +66,8 @@ describe('loader', () => {
         const options = {
           implementation: getImplementationByName(implementationName),
         };
-        const stats = await compile(testId, { loader: { options } });
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
 
         expect(getWarnings(stats)).toMatchSnapshot('warnings');
         expect(getErrors(stats)).toMatchSnapshot('errors');
@@ -74,7 +78,8 @@ describe('loader', () => {
         const options = {
           implementation: getImplementationByName(implementationName),
         };
-        const stats = await compile(testId, { loader: { options } });
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
 
         expect(getWarnings(stats)).toMatchSnapshot('warnings');
         expect(getErrors(stats)).toMatchSnapshot('errors');
@@ -85,7 +90,8 @@ describe('loader', () => {
         const options = {
           implementation: getImplementationByName(implementationName),
         };
-        const stats = await compile(testId, { loader: { options } });
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
 
         expect(getWarnings(stats)).toMatchSnapshot('warnings');
         expect(getErrors(stats)).toMatchSnapshot('errors');
@@ -96,7 +102,8 @@ describe('loader', () => {
         const options = {
           implementation: getImplementationByName(implementationName),
         };
-        const stats = await compile(testId, { loader: { options } });
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
 
         expect(getWarnings(stats)).toMatchSnapshot('warnings');
         expect(getErrors(stats)).toMatchSnapshot('errors');
@@ -107,8 +114,9 @@ describe('loader', () => {
         const options = {
           implementation: getImplementationByName(implementationName),
         };
-        const stats = await compile(testId, { loader: { options } });
-        const codeFromBundle = getCodeFromBundle(stats);
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
         const codeFromSass = getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
@@ -123,8 +131,9 @@ describe('loader', () => {
         const options = {
           implementation: getImplementationByName(implementationName),
         };
-        const stats = await compile(testId, { loader: { options } });
-        const codeFromBundle = getCodeFromBundle(stats);
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
         const codeFromSass = getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
@@ -139,8 +148,9 @@ describe('loader', () => {
         const options = {
           implementation: getImplementationByName(implementationName),
         };
-        const stats = await compile(testId, { loader: { options } });
-        const codeFromBundle = getCodeFromBundle(stats);
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
         const codeFromSass = getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
@@ -154,8 +164,9 @@ describe('loader', () => {
         const options = {
           implementation: getImplementationByName(implementationName),
         };
-        const stats = await compile(testId, { loader: { options } });
-        const codeFromBundle = getCodeFromBundle(stats);
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
         const codeFromSass = getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
@@ -169,8 +180,9 @@ describe('loader', () => {
         const options = {
           implementation: getImplementationByName(implementationName),
         };
-        const stats = await compile(testId, { loader: { options } });
-        const codeFromBundle = getCodeFromBundle(stats);
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
         const codeFromSass = getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
@@ -184,8 +196,9 @@ describe('loader', () => {
         const options = {
           implementation: getImplementationByName(implementationName),
         };
-        const stats = await compile(testId, { loader: { options } });
-        const codeFromBundle = getCodeFromBundle(stats);
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
         const codeFromSass = getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
@@ -202,8 +215,9 @@ describe('loader', () => {
         const options = {
           implementation: getImplementationByName(implementationName),
         };
-        const stats = await compile(testId, { loader: { options } });
-        const codeFromBundle = getCodeFromBundle(stats);
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
         const codeFromSass = getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
@@ -221,8 +235,9 @@ describe('loader', () => {
         const options = {
           implementation: getImplementationByName(implementationName),
         };
-        const stats = await compile(testId, { loader: { options } });
-        const codeFromBundle = getCodeFromBundle(stats);
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
         const codeFromSass = getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
@@ -236,8 +251,9 @@ describe('loader', () => {
         const options = {
           implementation: getImplementationByName(implementationName),
         };
-        const stats = await compile(testId, { loader: { options } });
-        const codeFromBundle = getCodeFromBundle(stats);
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
         const codeFromSass = getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
@@ -251,8 +267,9 @@ describe('loader', () => {
         const options = {
           implementation: getImplementationByName(implementationName),
         };
-        const stats = await compile(testId, { loader: { options } });
-        const codeFromBundle = getCodeFromBundle(stats);
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
         const codeFromSass = getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
@@ -266,8 +283,9 @@ describe('loader', () => {
         const options = {
           implementation: getImplementationByName(implementationName),
         };
-        const stats = await compile(testId, { loader: { options } });
-        const codeFromBundle = getCodeFromBundle(stats);
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
         const codeFromSass = getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
@@ -281,10 +299,11 @@ describe('loader', () => {
         const options = {
           implementation: getImplementationByName(implementationName),
         };
-        const stats = await compile(testId, {
+        const compiler = getCompiler(testId, {
           loader: { options, resolve: { mainFields: [] } },
         });
-        const codeFromBundle = getCodeFromBundle(stats);
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
         const codeFromSass = getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
@@ -298,10 +317,11 @@ describe('loader', () => {
         const options = {
           implementation: getImplementationByName(implementationName),
         };
-        const stats = await compile(testId, {
+        const compiler = getCompiler(testId, {
           loader: { options, resolve: { mainFields: ['main', '...'] } },
         });
-        const codeFromBundle = getCodeFromBundle(stats);
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
         const codeFromSass = getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
@@ -315,10 +335,11 @@ describe('loader', () => {
         const options = {
           implementation: getImplementationByName(implementationName),
         };
-        const stats = await compile(testId, {
+        const compiler = getCompiler(testId, {
           loader: { options, resolve: { mainFields: ['custom-sass', '...'] } },
         });
-        const codeFromBundle = getCodeFromBundle(stats);
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
         const codeFromSass = getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
@@ -332,8 +353,9 @@ describe('loader', () => {
         const options = {
           implementation: getImplementationByName(implementationName),
         };
-        const stats = await compile(testId, { loader: { options } });
-        const codeFromBundle = getCodeFromBundle(stats);
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
         const codeFromSass = getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
@@ -347,10 +369,11 @@ describe('loader', () => {
         const options = {
           implementation: getImplementationByName(implementationName),
         };
-        const stats = await compile(testId, {
+        const compiler = getCompiler(testId, {
           loader: { options, resolve: { mainFiles: [] } },
         });
-        const codeFromBundle = getCodeFromBundle(stats);
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
         const codeFromSass = getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
@@ -364,10 +387,11 @@ describe('loader', () => {
         const options = {
           implementation: getImplementationByName(implementationName),
         };
-        const stats = await compile(testId, {
+        const compiler = getCompiler(testId, {
           loader: { options, resolve: { mainFiles: ['index', '...'] } },
         });
-        const codeFromBundle = getCodeFromBundle(stats);
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
         const codeFromSass = getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
@@ -381,8 +405,9 @@ describe('loader', () => {
         const options = {
           implementation: getImplementationByName(implementationName),
         };
-        const stats = await compile(testId, { loader: { options } });
-        const codeFromBundle = getCodeFromBundle(stats);
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
         const codeFromSass = getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
@@ -398,8 +423,9 @@ describe('loader', () => {
         const options = {
           implementation: getImplementationByName(implementationName),
         };
-        const stats = await compile(testId, { loader: { options } });
-        const codeFromBundle = getCodeFromBundle(stats);
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
         const codeFromSass = getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
@@ -413,7 +439,7 @@ describe('loader', () => {
         const options = {
           implementation: getImplementationByName(implementationName),
         };
-        const stats = await compile(testId, {
+        const compiler = getCompiler(testId, {
           resolve: {
             alias: {
               'path-to-alias': path.resolve(
@@ -444,7 +470,8 @@ describe('loader', () => {
           },
           loader: { options },
         });
-        const codeFromBundle = getCodeFromBundle(stats);
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
         const codeFromSass = getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
@@ -458,8 +485,9 @@ describe('loader', () => {
         const options = {
           implementation: getImplementationByName(implementationName),
         };
-        const stats = await compile(testId, { loader: { options } });
-        const codeFromBundle = getCodeFromBundle(stats);
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
         const codeFromSass = getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
@@ -473,8 +501,9 @@ describe('loader', () => {
         const options = {
           implementation: getImplementationByName(implementationName),
         };
-        const stats = await compile(testId, { loader: { options } });
-        const codeFromBundle = getCodeFromBundle(stats);
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
         const codeFromSass = getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
@@ -488,8 +517,9 @@ describe('loader', () => {
         const options = {
           implementation: getImplementationByName(implementationName),
         };
-        const stats = await compile(testId, { loader: { options } });
-        const codeFromBundle = getCodeFromBundle(stats);
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
         const codeFromSass = getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
@@ -503,11 +533,12 @@ describe('loader', () => {
         const options = {
           implementation: getImplementationByName(implementationName),
         };
-        const stats = await compile(testId, {
+        const compiler = getCompiler(testId, {
           mode: 'production',
           loader: { options },
         });
-        const codeFromBundle = getCodeFromBundle(stats);
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
         const codeFromSass = getCodeFromSass(
           testId,
           Object.assign({}, options, {
@@ -529,7 +560,8 @@ describe('loader', () => {
           const options = {
             implementation: getImplementationByName(implementationName),
           };
-          const stats = await compile(testId, { loader: { options } });
+          const compiler = getCompiler(testId, { loader: { options } });
+          const stats = await compile(compiler);
 
           expect(getWarnings(stats)).toMatchSnapshot('warnings');
           expect(getErrors(stats)).toMatchSnapshot('errors');
@@ -540,7 +572,8 @@ describe('loader', () => {
           const options = {
             implementation: getImplementationByName(implementationName),
           };
-          const stats = await compile(testId, { loader: { options } });
+          const compiler = getCompiler(testId, { loader: { options } });
+          const stats = await compile(compiler);
 
           expect(getWarnings(stats)).toMatchSnapshot('warnings');
           expect(getErrors(stats)).toMatchSnapshot('errors');
@@ -551,7 +584,8 @@ describe('loader', () => {
           const options = {
             implementation: getImplementationByName(implementationName),
           };
-          const stats = await compile(testId, { loader: { options } });
+          const compiler = getCompiler(testId, { loader: { options } });
+          const stats = await compile(compiler);
 
           expect(getWarnings(stats)).toMatchSnapshot('warnings');
           expect(getErrors(stats)).toMatchSnapshot('errors');
@@ -562,8 +596,9 @@ describe('loader', () => {
           const options = {
             implementation: getImplementationByName(implementationName),
           };
-          const stats = await compile(testId, { loader: { options } });
-          const codeFromBundle = getCodeFromBundle(stats);
+          const compiler = getCompiler(testId, { loader: { options } });
+          const stats = await compile(compiler);
+          const codeFromBundle = getCodeFromBundle(stats, compiler);
           const codeFromSass = getCodeFromSass(testId, options);
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
@@ -577,8 +612,9 @@ describe('loader', () => {
           const options = {
             implementation: getImplementationByName(implementationName),
           };
-          const stats = await compile(testId, { loader: { options } });
-          const codeFromBundle = getCodeFromBundle(stats);
+          const compiler = getCompiler(testId, { loader: { options } });
+          const stats = await compile(compiler);
+          const codeFromBundle = getCodeFromBundle(stats, compiler);
           const codeFromSass = getCodeFromSass(testId, options);
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
@@ -592,8 +628,9 @@ describe('loader', () => {
           const options = {
             implementation: getImplementationByName(implementationName),
           };
-          const stats = await compile(testId, { loader: { options } });
-          const codeFromBundle = getCodeFromBundle(stats);
+          const compiler = getCompiler(testId, { loader: { options } });
+          const stats = await compile(compiler);
+          const codeFromBundle = getCodeFromBundle(stats, compiler);
           const codeFromSass = getCodeFromSass(testId, options);
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
@@ -607,8 +644,9 @@ describe('loader', () => {
           const options = {
             implementation: getImplementationByName(implementationName),
           };
-          const stats = await compile(testId, { loader: { options } });
-          const codeFromBundle = getCodeFromBundle(stats);
+          const compiler = getCompiler(testId, { loader: { options } });
+          const stats = await compile(compiler);
+          const codeFromBundle = getCodeFromBundle(stats, compiler);
           const codeFromSass = getCodeFromSass(testId, options);
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
@@ -622,8 +660,9 @@ describe('loader', () => {
           const options = {
             implementation: getImplementationByName(implementationName),
           };
-          const stats = await compile(testId, { loader: { options } });
-          const codeFromBundle = getCodeFromBundle(stats);
+          const compiler = getCompiler(testId, { loader: { options } });
+          const stats = await compile(compiler);
+          const codeFromBundle = getCodeFromBundle(stats, compiler);
           const codeFromSass = getCodeFromSass(testId, options);
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
@@ -640,8 +679,9 @@ describe('loader', () => {
           const options = {
             implementation: getImplementationByName(implementationName),
           };
-          const stats = await compile(testId, { loader: { options } });
-          const codeFromBundle = getCodeFromBundle(stats);
+          const compiler = getCompiler(testId, { loader: { options } });
+          const stats = await compile(compiler);
+          const codeFromBundle = getCodeFromBundle(stats, compiler);
           const codeFromSass = getCodeFromSass(testId, options);
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
@@ -655,8 +695,9 @@ describe('loader', () => {
           const options = {
             implementation: getImplementationByName(implementationName),
           };
-          const stats = await compile(testId, { loader: { options } });
-          const codeFromBundle = getCodeFromBundle(stats);
+          const compiler = getCompiler(testId, { loader: { options } });
+          const stats = await compile(compiler);
+          const codeFromBundle = getCodeFromBundle(stats, compiler);
           const codeFromSass = getCodeFromSass(testId, options);
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
@@ -670,8 +711,9 @@ describe('loader', () => {
           const options = {
             implementation: getImplementationByName(implementationName),
           };
-          const stats = await compile(testId, { loader: { options } });
-          const codeFromBundle = getCodeFromBundle(stats);
+          const compiler = getCompiler(testId, { loader: { options } });
+          const stats = await compile(compiler);
+          const codeFromBundle = getCodeFromBundle(stats, compiler);
           const codeFromSass = getCodeFromSass(testId, options);
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
@@ -685,8 +727,9 @@ describe('loader', () => {
           const options = {
             implementation: getImplementationByName(implementationName),
           };
-          const stats = await compile(testId, { loader: { options } });
-          const codeFromBundle = getCodeFromBundle(stats);
+          const compiler = getCompiler(testId, { loader: { options } });
+          const stats = await compile(compiler);
+          const codeFromBundle = getCodeFromBundle(stats, compiler);
           const codeFromSass = getCodeFromSass(testId, options);
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
@@ -700,10 +743,11 @@ describe('loader', () => {
           const options = {
             implementation: getImplementationByName(implementationName),
           };
-          const stats = await compile(testId, {
+          const compiler = getCompiler(testId, {
             loader: { options, resolve: { mainFields: [] } },
           });
-          const codeFromBundle = getCodeFromBundle(stats);
+          const stats = await compile(compiler);
+          const codeFromBundle = getCodeFromBundle(stats, compiler);
           const codeFromSass = getCodeFromSass(testId, options);
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
@@ -717,10 +761,11 @@ describe('loader', () => {
           const options = {
             implementation: getImplementationByName(implementationName),
           };
-          const stats = await compile(testId, {
+          const compiler = getCompiler(testId, {
             loader: { options, resolve: { mainFields: ['main', '...'] } },
           });
-          const codeFromBundle = getCodeFromBundle(stats);
+          const stats = await compile(compiler);
+          const codeFromBundle = getCodeFromBundle(stats, compiler);
           const codeFromSass = getCodeFromSass(testId, options);
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
@@ -734,13 +779,14 @@ describe('loader', () => {
           const options = {
             implementation: getImplementationByName(implementationName),
           };
-          const stats = await compile(testId, {
+          const compiler = getCompiler(testId, {
             loader: {
               options,
               resolve: { mainFields: ['custom-sass', '...'] },
             },
           });
-          const codeFromBundle = getCodeFromBundle(stats);
+          const stats = await compile(compiler);
+          const codeFromBundle = getCodeFromBundle(stats, compiler);
           const codeFromSass = getCodeFromSass(testId, options);
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
@@ -754,8 +800,9 @@ describe('loader', () => {
           const options = {
             implementation: getImplementationByName(implementationName),
           };
-          const stats = await compile(testId, { loader: { options } });
-          const codeFromBundle = getCodeFromBundle(stats);
+          const compiler = getCompiler(testId, { loader: { options } });
+          const stats = await compile(compiler);
+          const codeFromBundle = getCodeFromBundle(stats, compiler);
           const codeFromSass = getCodeFromSass(testId, options);
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
@@ -769,10 +816,11 @@ describe('loader', () => {
           const options = {
             implementation: getImplementationByName(implementationName),
           };
-          const stats = await compile(testId, {
+          const compiler = getCompiler(testId, {
             loader: { options, resolve: { mainFiles: [] } },
           });
-          const codeFromBundle = getCodeFromBundle(stats);
+          const stats = await compile(compiler);
+          const codeFromBundle = getCodeFromBundle(stats, compiler);
           const codeFromSass = getCodeFromSass(testId, options);
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
@@ -786,10 +834,11 @@ describe('loader', () => {
           const options = {
             implementation: getImplementationByName(implementationName),
           };
-          const stats = await compile(testId, {
+          const compiler = getCompiler(testId, {
             loader: { options, resolve: { mainFiles: ['index', '...'] } },
           });
-          const codeFromBundle = getCodeFromBundle(stats);
+          const stats = await compile(compiler);
+          const codeFromBundle = getCodeFromBundle(stats, compiler);
           const codeFromSass = getCodeFromSass(testId, options);
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
@@ -803,8 +852,9 @@ describe('loader', () => {
           const options = {
             implementation: getImplementationByName(implementationName),
           };
-          const stats = await compile(testId, { loader: { options } });
-          const codeFromBundle = getCodeFromBundle(stats);
+          const compiler = getCompiler(testId, { loader: { options } });
+          const stats = await compile(compiler);
+          const codeFromBundle = getCodeFromBundle(stats, compiler);
           const codeFromSass = getCodeFromSass(testId, options);
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
@@ -818,7 +868,7 @@ describe('loader', () => {
           const options = {
             implementation: getImplementationByName(implementationName),
           };
-          const stats = await compile(testId, {
+          const compiler = getCompiler(testId, {
             resolve: {
               alias: {
                 'path-to-alias': path.resolve(
@@ -849,7 +899,8 @@ describe('loader', () => {
             },
             loader: { options },
           });
-          const codeFromBundle = getCodeFromBundle(stats);
+          const stats = await compile(compiler);
+          const codeFromBundle = getCodeFromBundle(stats, compiler);
           const codeFromSass = getCodeFromSass(testId, options);
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
@@ -863,8 +914,9 @@ describe('loader', () => {
           const options = {
             implementation: getImplementationByName(implementationName),
           };
-          const stats = await compile(testId, { loader: { options } });
-          const codeFromBundle = getCodeFromBundle(stats);
+          const compiler = getCompiler(testId, { loader: { options } });
+          const stats = await compile(compiler);
+          const codeFromBundle = getCodeFromBundle(stats, compiler);
           const codeFromSass = getCodeFromSass(testId, options);
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
@@ -878,8 +930,9 @@ describe('loader', () => {
           const options = {
             implementation: getImplementationByName(implementationName),
           };
-          const stats = await compile(testId, { loader: { options } });
-          const codeFromBundle = getCodeFromBundle(stats);
+          const compiler = getCompiler(testId, { loader: { options } });
+          const stats = await compile(compiler);
+          const codeFromBundle = getCodeFromBundle(stats, compiler);
           const codeFromSass = getCodeFromSass(testId, options);
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
@@ -893,8 +946,9 @@ describe('loader', () => {
           const options = {
             implementation: getImplementationByName(implementationName),
           };
-          const stats = await compile(testId, { loader: { options } });
-          const codeFromBundle = getCodeFromBundle(stats);
+          const compiler = getCompiler(testId, { loader: { options } });
+          const stats = await compile(compiler);
+          const codeFromBundle = getCodeFromBundle(stats, compiler);
           const codeFromSass = getCodeFromSass(testId, options);
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);

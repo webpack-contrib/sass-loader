@@ -8,6 +8,7 @@ import Fiber from 'fibers';
 import {
   compile,
   getCodeFromBundle,
+  getCompiler,
   getErrors,
   getImplementationByName,
   getTestId,
@@ -32,11 +33,12 @@ describe('sourceMap option', () => {
         const options = {
           implementation: getImplementationByName(implementationName),
         };
-        const stats = await compile(testId, {
+        const compiler = getCompiler(testId, {
           devtool: 'source-map',
           loader: { options },
         });
-        const { css, sourceMap } = getCodeFromBundle(stats);
+        const stats = await compile(compiler);
+        const { css, sourceMap } = getCodeFromBundle(stats, compiler);
 
         expect(css).toBeDefined();
         expect(sourceMap).toBeDefined();
@@ -49,8 +51,9 @@ describe('sourceMap option', () => {
         const options = {
           implementation: getImplementationByName(implementationName),
         };
-        const stats = await compile(testId, { loader: { options } });
-        const { css, sourceMap } = getCodeFromBundle(stats);
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const { css, sourceMap } = getCodeFromBundle(stats, compiler);
 
         expect(css).toBeDefined();
         expect(sourceMap).toBeUndefined();
@@ -64,11 +67,12 @@ describe('sourceMap option', () => {
           implementation: getImplementationByName(implementationName),
           sourceMap: false,
         };
-        const stats = await compile(testId, {
+        const compiler = getCompiler(testId, {
           devtool: 'source-map',
           loader: { options },
         });
-        const { css, sourceMap } = getCodeFromBundle(stats);
+        const stats = await compile(compiler);
+        const { css, sourceMap } = getCodeFromBundle(stats, compiler);
 
         expect(css).toBeDefined();
         expect(sourceMap).toBeUndefined();
@@ -82,8 +86,9 @@ describe('sourceMap option', () => {
           implementation: getImplementationByName(implementationName),
           sourceMap: false,
         };
-        const stats = await compile(testId, { loader: { options } });
-        const { css, sourceMap } = getCodeFromBundle(stats);
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const { css, sourceMap } = getCodeFromBundle(stats, compiler);
 
         expect(css).toBeDefined();
         expect(sourceMap).toBeUndefined();
@@ -99,11 +104,12 @@ describe('sourceMap option', () => {
           implementation: getImplementationByName(implementationName),
           sourceMap: true,
         };
-        const stats = await compile(testId, {
+        const compiler = getCompiler(testId, {
           devtool: 'source-map',
           loader: { options },
         });
-        const { css, sourceMap } = getCodeFromBundle(stats);
+        const stats = await compile(compiler);
+        const { css, sourceMap } = getCodeFromBundle(stats, compiler);
 
         expect(css).toBeDefined();
         expect(sourceMap).toBeDefined();
@@ -130,11 +136,12 @@ describe('sourceMap option', () => {
           implementation: getImplementationByName(implementationName),
           sourceMap: true,
         };
-        const stats = await compile(testId, {
+        const compiler = getCompiler(testId, {
           devtool: false,
           loader: { options },
         });
-        const { css, sourceMap } = getCodeFromBundle(stats);
+        const stats = await compile(compiler);
+        const { css, sourceMap } = getCodeFromBundle(stats, compiler);
 
         expect(css).toBeDefined();
         expect(sourceMap).toBeDefined();

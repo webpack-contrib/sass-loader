@@ -6,6 +6,7 @@ import {
   compile,
   getCodeFromBundle,
   getCodeFromSass,
+  getCompiler,
   getErrors,
   getImplementationByName,
   getTestId,
@@ -33,8 +34,9 @@ describe('prependData option', () => {
             syntax === 'sass' ? '\n' : ';'
           }`,
         };
-        const stats = await compile(testId, { loader: { options } });
-        const codeFromBundle = getCodeFromBundle(stats);
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
         const codeFromSass = getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
@@ -53,8 +55,9 @@ describe('prependData option', () => {
             return `$prepended-data: hotpink${syntax === 'sass' ? '\n' : ';'}`;
           },
         };
-        const stats = await compile(testId, { loader: { options } });
-        const codeFromBundle = getCodeFromBundle(stats);
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
         const codeFromSass = getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);

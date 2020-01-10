@@ -6,6 +6,7 @@ import {
   compile,
   getCodeFromBundle,
   getCodeFromSass,
+  getCompiler,
   getErrors,
   getImplementationByName,
   getTestId,
@@ -30,8 +31,9 @@ describe('webpackImporter option', () => {
         const options = {
           implementation: getImplementationByName(implementationName),
         };
-        const stats = await compile(testId, { loader: { options } });
-        const codeFromBundle = getCodeFromBundle(stats);
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
         const codeFromSass = getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
@@ -46,8 +48,9 @@ describe('webpackImporter option', () => {
           webpackImporter: false,
           implementation: getImplementationByName(implementationName),
         };
-        const stats = await compile(testId, { loader: { options } });
-        const codeFromBundle = getCodeFromBundle(stats);
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
         const codeFromSass = getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
@@ -62,8 +65,9 @@ describe('webpackImporter option', () => {
           webpackImporter: true,
           implementation: getImplementationByName(implementationName),
         };
-        const stats = await compile(testId, { loader: { options } });
-        const codeFromBundle = getCodeFromBundle(stats);
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
         const codeFromSass = getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
