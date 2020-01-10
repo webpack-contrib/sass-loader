@@ -1,24 +1,29 @@
-const vm = require('vm');
+import vm from 'vm';
 
-function getCodeFromBundle(stats, assetName) {
+import readAsset from './readAsset';
+
+function getCodeFromBundle(stats, compiler, asset) {
   let code = null;
 
   if (
     stats &&
     stats.compilation &&
     stats.compilation.assets &&
-    stats.compilation.assets[assetName || 'main.bundle.js']
+    stats.compilation.assets[asset || 'main.bundle.js']
   ) {
-    code = stats.compilation.assets[assetName || 'main.bundle.js'].source();
+    code = readAsset(asset || 'main.bundle.js', compiler, stats);
   }
 
   if (!code) {
     throw new Error("Can't find compiled code");
   }
 
-  const result = vm.runInNewContext(`module.export = ${code}`, {
-    module: {},
-  });
+  const result = vm.runInNewContext(
+    `${code};\nmodule.exports = sassLoaderExport;`,
+    {
+      module: {},
+    }
+  );
 
   return result.default;
 }

@@ -438,21 +438,33 @@ module.exports = {
 };
 ```
 
-> ℹ In some rare cases `node-sass` can output invalid source maps (it is a `node-sass` bug). In order to avoid this, you can try to update `node-sass` to latest version or you can try to set within `sassOptions` the `outputStyle` option to `compressed`.
+> ℹ In some rare cases `node-sass` can output invalid source maps (it is a `node-sass` bug).
+> In order to avoid this, you can try to update `node-sass` to latest version or you can try to set within `sassOptions` the `outputStyle` option to `compressed`.
 
-```js  
-{
-  loader: 'sass-loader',
-  options: {
-    sassOptions: {
-      outputStyle: 'compressed',
-    },
-    sourceMap: true,
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: 'sass-loader',
+            sourceMap: true,
+            sassOptions: {
+              outputStyle: 'compressed',
+            },
+          },
+        ],
+      },
+    ],
   },
-}
+};
 ```
-
-
 
 ### `webpackImporter`
 

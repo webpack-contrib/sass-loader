@@ -1,6 +1,6 @@
 import path from 'path';
 
-function normalizeError(error) {
+function normalizeImplementationError(error) {
   // eslint-disable-next-line no-param-reassign
   error.message = error.message.replace(/\sat.*/g, ' at ReplacedStackEntry');
   // eslint-disable-next-line no-param-reassign
@@ -14,4 +14,4 @@ function normalizeError(error) {
   return error;
 }
 
-export default normalizeError;
+export default normalizeImplementationError;

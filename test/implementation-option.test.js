@@ -4,10 +4,13 @@ import Fiber from 'fibers';
 
 import {
   compile,
-  getTestId,
   getCodeFromBundle,
+  getCompiler,
+  getErrors,
   getImplementationByName,
-  normalizeError,
+  getTestId,
+  getWarnings,
+  normalizeImplementationError,
 } from './helpers';
 
 const implementations = [nodeSass, dartSass];
@@ -30,14 +33,15 @@ describe('implementation option', () => {
       const options = {
         implementation: getImplementationByName(implementationName),
       };
-      const stats = await compile(testId, { loader: { options } });
-      const { css, sourceMap } = getCodeFromBundle(stats);
+      const compiler = getCompiler(testId, { loader: { options } });
+      const stats = await compile(compiler);
+      const { css, sourceMap } = getCodeFromBundle(stats, compiler);
 
       expect(css).toBeDefined();
       expect(sourceMap).toBeUndefined();
 
-      expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-      expect(stats.compilation.errors).toMatchSnapshot('errors');
+      expect(getWarnings(stats)).toMatchSnapshot('warnings');
+      expect(getErrors(stats)).toMatchSnapshot('errors');
 
       if (implementationName === 'node-sass') {
         expect(nodeSassSpy).toHaveBeenCalledTimes(1);
@@ -55,14 +59,15 @@ describe('implementation option', () => {
 
     const testId = getTestId('language', 'scss');
     const options = {};
-    const stats = await compile(testId, { loader: { options } });
-    const { css, sourceMap } = getCodeFromBundle(stats);
+    const compiler = getCompiler(testId, { loader: { options } });
+    const stats = await compile(compiler);
+    const { css, sourceMap } = getCodeFromBundle(stats, compiler);
 
     expect(css).toBeDefined();
     expect(sourceMap).toBeUndefined();
 
-    expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-    expect(stats.compilation.errors).toMatchSnapshot('errors');
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
 
     expect(nodeSassSpy).toHaveBeenCalledTimes(1);
     expect(dartSassSpy).toHaveBeenCalledTimes(0);
@@ -76,12 +81,14 @@ describe('implementation option', () => {
       }),
     };
 
-    try {
-      const stats = await compile(testId, { loader: { options } });
+    const compiler = getCompiler(testId, { loader: { options } });
 
-      getCodeFromBundle(stats);
+    try {
+      const stats = await compile(compiler);
+
+      getCodeFromBundle(stats, compiler);
     } catch (error) {
-      expect(normalizeError(error)).toMatchSnapshot();
+      expect(normalizeImplementationError(error)).toMatchSnapshot();
     }
   });
 
@@ -93,12 +100,14 @@ describe('implementation option', () => {
       }),
     };
 
-    try {
-      const stats = await compile(testId, { loader: { options } });
+    const compiler = getCompiler(testId, { loader: { options } });
 
-      getCodeFromBundle(stats);
+    try {
+      const stats = await compile(compiler);
+
+      getCodeFromBundle(stats, compiler);
     } catch (error) {
-      expect(normalizeError(error)).toMatchSnapshot();
+      expect(normalizeImplementationError(error)).toMatchSnapshot();
     }
   });
 
@@ -110,12 +119,14 @@ describe('implementation option', () => {
       }),
     };
 
-    try {
-      const stats = await compile(testId, { loader: { options } });
+    const compiler = getCompiler(testId, { loader: { options } });
 
-      getCodeFromBundle(stats);
+    try {
+      const stats = await compile(compiler);
+
+      getCodeFromBundle(stats, compiler);
     } catch (error) {
-      expect(normalizeError(error)).toMatchSnapshot();
+      expect(normalizeImplementationError(error)).toMatchSnapshot();
     }
   });
 
@@ -125,12 +136,14 @@ describe('implementation option', () => {
       implementation: Object.assign({}, dartSass, { info: 'asdfj' }),
     };
 
-    try {
-      const stats = await compile(testId, { loader: { options } });
+    const compiler = getCompiler(testId, { loader: { options } });
 
-      getCodeFromBundle(stats);
+    try {
+      const stats = await compile(compiler);
+
+      getCodeFromBundle(stats, compiler);
     } catch (error) {
-      expect(normalizeError(error)).toMatchSnapshot();
+      expect(normalizeImplementationError(error)).toMatchSnapshot();
     }
   });
 
@@ -140,12 +153,14 @@ describe('implementation option', () => {
       implementation: Object.assign({}, nodeSass, { info: 'node-sass\t1' }),
     };
 
-    try {
-      const stats = await compile(testId, { loader: { options } });
+    const compiler = getCompiler(testId, { loader: { options } });
 
-      getCodeFromBundle(stats);
+    try {
+      const stats = await compile(compiler);
+
+      getCodeFromBundle(stats, compiler);
     } catch (error) {
-      expect(normalizeError(error)).toMatchSnapshot();
+      expect(normalizeImplementationError(error)).toMatchSnapshot();
     }
   });
 
@@ -156,12 +171,14 @@ describe('implementation option', () => {
       implementation: Object.assign({}, dartSass, { info: undefined }),
     };
 
-    try {
-      const stats = await compile(testId, { loader: { options } });
+    const compiler = getCompiler(testId, { loader: { options } });
 
-      getCodeFromBundle(stats);
+    try {
+      const stats = await compile(compiler);
+
+      getCodeFromBundle(stats, compiler);
     } catch (error) {
-      expect(normalizeError(error)).toMatchSnapshot();
+      expect(normalizeImplementationError(error)).toMatchSnapshot();
     }
   });
 
@@ -187,10 +204,12 @@ describe('implementation option', () => {
     const testId = getTestId('language', 'scss');
     const options = {};
 
-    try {
-      const stats = await compile(testId, { loader: { options } });
+    const compiler = getCompiler(testId, { loader: { options } });
 
-      getCodeFromBundle(stats);
+    try {
+      const stats = await compile(compiler);
+
+      getCodeFromBundle(stats, compiler);
     } catch (error) {
       expect(error).toMatchSnapshot();
     }

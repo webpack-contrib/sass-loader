@@ -7,13 +7,16 @@ import Fiber from 'fibers';
 
 import {
   compile,
-  getTestId,
+  customImporter,
+  customFunctions,
   getCodeFromBundle,
   getCodeFromSass,
+  getErrors,
   getImplementationByName,
+  getTestId,
+  getWarnings,
+  getCompiler,
 } from './helpers';
-import customImporter from './helpers/customImporter';
-import customFunctions from './helpers/customFunctions';
 
 const implementations = [nodeSass, dartSass];
 const syntaxStyles = ['scss', 'sass'];
@@ -36,14 +39,15 @@ describe('sassOptions option', () => {
             indentWidth: 10,
           },
         };
-        const stats = await compile(testId, { loader: { options } });
-        const codeFromBundle = getCodeFromBundle(stats);
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
         const codeFromSass = getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot('css');
-        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-        expect(stats.compilation.errors).toMatchSnapshot('errors');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
       it(`should work when the option is empty "Object" (${implementationName}) (${syntax})`, async () => {
@@ -52,14 +56,15 @@ describe('sassOptions option', () => {
           implementation: getImplementationByName(implementationName),
           sassOptions: {},
         };
-        const stats = await compile(testId, { loader: { options } });
-        const codeFromBundle = getCodeFromBundle(stats);
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
         const codeFromSass = getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot('css');
-        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-        expect(stats.compilation.errors).toMatchSnapshot('errors');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
       it(`should work when the option like "Function" (${implementationName}) (${syntax})`, async () => {
@@ -76,14 +81,15 @@ describe('sassOptions option', () => {
             };
           },
         };
-        const stats = await compile(testId, { loader: { options } });
-        const codeFromBundle = getCodeFromBundle(stats);
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
         const codeFromSass = getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot('css');
-        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-        expect(stats.compilation.errors).toMatchSnapshot('errors');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
       it(`should work when the option like "Function" and never return (${implementationName}) (${syntax})`, async () => {
@@ -96,14 +102,15 @@ describe('sassOptions option', () => {
             expect(loaderContext).toBeDefined();
           },
         };
-        const stats = await compile(testId, { loader: { options } });
-        const codeFromBundle = getCodeFromBundle(stats);
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
         const codeFromSass = getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot('css');
-        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-        expect(stats.compilation.errors).toMatchSnapshot('errors');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
       it(`should work with the "importer" option (${implementationName}) (${syntax})`, async () => {
@@ -114,14 +121,15 @@ describe('sassOptions option', () => {
             importer: customImporter,
           },
         };
-        const stats = await compile(testId, { loader: { options } });
-        const codeFromBundle = getCodeFromBundle(stats);
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
         const codeFromSass = getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot('css');
-        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-        expect(stats.compilation.errors).toMatchSnapshot('errors');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
       it(`should work with the "functions" option (${implementationName}) (${syntax})`, async () => {
@@ -132,14 +140,15 @@ describe('sassOptions option', () => {
             functions: customFunctions(implementation),
           },
         };
-        const stats = await compile(testId, { loader: { options } });
-        const codeFromBundle = getCodeFromBundle(stats);
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
         const codeFromSass = getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot('css');
-        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-        expect(stats.compilation.errors).toMatchSnapshot('errors');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
       it(`should work with the "includePaths" option (${implementationName}) (${syntax})`, async () => {
@@ -150,14 +159,15 @@ describe('sassOptions option', () => {
             includePaths: [path.resolve(__dirname, syntax, 'includePath')],
           },
         };
-        const stats = await compile(testId, { loader: { options } });
-        const codeFromBundle = getCodeFromBundle(stats);
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
         const codeFromSass = getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot('css');
-        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-        expect(stats.compilation.errors).toMatchSnapshot('errors');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
       it(`should work with the "fiber" option (${implementationName}) (${syntax})`, async () => {
@@ -176,8 +186,9 @@ describe('sassOptions option', () => {
           options.sassOptions.fiber = Fiber;
         }
 
-        const stats = await compile(testId, { loader: { options } });
-        const codeFromBundle = getCodeFromBundle(stats);
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
         const codeFromSass = getCodeFromSass(testId, options);
 
         if (
@@ -189,8 +200,8 @@ describe('sassOptions option', () => {
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot('css');
-        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-        expect(stats.compilation.errors).toMatchSnapshot('errors');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
 
         dartSassSpy.mockRestore();
       });
@@ -202,9 +213,9 @@ describe('sassOptions option', () => {
           implementation: getImplementationByName(implementationName),
           sassOptions: {},
         };
-
-        const stats = await compile(testId, { loader: { options } });
-        const codeFromBundle = getCodeFromBundle(stats);
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
         const codeFromSass = getCodeFromSass(testId, options);
 
         if (
@@ -216,8 +227,8 @@ describe('sassOptions option', () => {
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot('css');
-        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-        expect(stats.compilation.errors).toMatchSnapshot('errors');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
 
         dartSassSpy.mockRestore();
       });
@@ -229,9 +240,9 @@ describe('sassOptions option', () => {
           implementation: getImplementationByName(implementationName),
           sassOptions: { fiber: false },
         };
-
-        const stats = await compile(testId, { loader: { options } });
-        const codeFromBundle = getCodeFromBundle(stats);
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
         const codeFromSass = getCodeFromSass(testId, options);
 
         if (
@@ -243,8 +254,8 @@ describe('sassOptions option', () => {
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot('css');
-        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-        expect(stats.compilation.errors).toMatchSnapshot('errors');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
 
         dartSassSpy.mockRestore();
       });

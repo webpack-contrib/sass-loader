@@ -4,10 +4,13 @@ import Fiber from 'fibers';
 
 import {
   compile,
-  getTestId,
   getCodeFromBundle,
   getCodeFromSass,
+  getCompiler,
+  getErrors,
   getImplementationByName,
+  getTestId,
+  getWarnings,
 } from './helpers';
 
 const implementations = [nodeSass, dartSass];
@@ -28,14 +31,15 @@ describe('webpackImporter option', () => {
         const options = {
           implementation: getImplementationByName(implementationName),
         };
-        const stats = await compile(testId, { loader: { options } });
-        const codeFromBundle = getCodeFromBundle(stats);
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
         const codeFromSass = getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot('css');
-        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-        expect(stats.compilation.errors).toMatchSnapshot('errors');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
       it(`false (${implementationName}) (${syntax})`, async () => {
@@ -44,14 +48,15 @@ describe('webpackImporter option', () => {
           webpackImporter: false,
           implementation: getImplementationByName(implementationName),
         };
-        const stats = await compile(testId, { loader: { options } });
-        const codeFromBundle = getCodeFromBundle(stats);
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
         const codeFromSass = getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot('css');
-        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-        expect(stats.compilation.errors).toMatchSnapshot('errors');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
       it(`true (${implementationName}) (${syntax})`, async () => {
@@ -60,14 +65,15 @@ describe('webpackImporter option', () => {
           webpackImporter: true,
           implementation: getImplementationByName(implementationName),
         };
-        const stats = await compile(testId, { loader: { options } });
-        const codeFromBundle = getCodeFromBundle(stats);
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
         const codeFromSass = getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot('css');
-        expect(stats.compilation.warnings).toMatchSnapshot('warnings');
-        expect(stats.compilation.errors).toMatchSnapshot('errors');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
       });
     });
   });
