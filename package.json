@@ -79,7 +79,7 @@
     "eslint-plugin-import": "^2.18.2",
     "fibers": "^4.0.1",
     "file-loader": "^4.2.0",
-    "husky": "^3.0.8",
+    "husky": "^4.0.6",
     "jest": "^24.9.0",
     "jest-junit": "^8.0.0",
     "jquery": "^3.4.1",
