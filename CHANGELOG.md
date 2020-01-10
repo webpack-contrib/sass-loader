@@ -9,7 +9,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 * minimum required `webpack` version is `4.36.0`
 * minimum required `node.js` version is `8.9.0`
-* move all sass (`includePaths`, `importer`, `functions`) options to the `sassOptions` option. The `functions` option can't be used as `Function`, you should use `sassOption` as `Function` to achieve this.
+* move all sass (`includePaths`, `importer`, `functions`, `outputStyle`) options to the `sassOptions` option. The `functions` option can't be used as `Function`, you should use `sassOption` as `Function` to achieve this.
 * the `data` option was renamed to the `prependData` option
 * default value of the `sourceMap` option depends on the `devtool` value (`eval`/`false` values don't enable source map generation)
 
