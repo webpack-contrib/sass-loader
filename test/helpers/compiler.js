@@ -71,6 +71,7 @@ export default function(fixture, config = {}, options = {}) {
 
   if (!options.output) {
     compiler.outputFileSystem = new createFsFromVolume(new Volume()); // eslint-disable-line
+    compiler.outputFileSystem.join = path.join.bind(path);
   }
 
   return new Promise((resolve, reject) =>
