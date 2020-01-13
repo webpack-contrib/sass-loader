@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [8.0.2](https://github.com/webpack-contrib/sass-loader/compare/v8.0.1...v8.0.2) (2020-01-13)
+
+
+### Bug Fixes
+
+* compatibility with node@8 ([#798](https://github.com/webpack-contrib/sass-loader/issues/798)) ([6f3852f](https://github.com/webpack-contrib/sass-loader/commit/6f3852f7d393dd0bc8f8d264d81ecc941bc72511))
+
 ### [8.0.1](https://github.com/webpack-contrib/sass-loader/compare/v8.0.0...v8.0.1) (2020-01-10)
 
 
