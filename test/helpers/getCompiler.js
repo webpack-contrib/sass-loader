@@ -69,7 +69,7 @@ export default function(fixture, config = {}, options = {}) {
   const compiler = webpack(config);
 
   if (!options.output) {
-    compiler.outputFileSystem = new createFsFromVolume(new Volume()); // eslint-disable-line
+    compiler.outputFileSystem = createFsFromVolume(new Volume());
     compiler.outputFileSystem.join = path.join.bind(path);
   }
 
