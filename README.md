@@ -454,9 +454,11 @@ module.exports = {
           'css-loader',
           {
             loader: 'sass-loader',
-            sourceMap: true,
-            sassOptions: {
-              outputStyle: 'compressed',
+            options: {
+              sourceMap: true,
+              sassOptions: {
+                outputStyle: 'compressed',
+              },
             },
           },
         ],
