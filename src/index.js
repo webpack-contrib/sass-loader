@@ -44,6 +44,7 @@ function loader(content) {
       mainFields: ['sass', 'style', 'main', '...'],
       mainFiles: ['_index', 'index', '...'],
       extensions: ['.scss', '.sass', '.css', '...'],
+      enforceExtension: true,
     });
 
     sassOptions.importer.push(
