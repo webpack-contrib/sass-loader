@@ -51,7 +51,10 @@ describe('sourceMap option', () => {
         const options = {
           implementation: getImplementationByName(implementationName),
         };
-        const compiler = getCompiler(testId, { loader: { options } });
+        const compiler = getCompiler(testId, {
+          devtool: false,
+          loader: { options },
+        });
         const stats = await compile(compiler);
         const { css, sourceMap } = getCodeFromBundle(stats, compiler);
 
@@ -86,7 +89,10 @@ describe('sourceMap option', () => {
           implementation: getImplementationByName(implementationName),
           sourceMap: false,
         };
-        const compiler = getCompiler(testId, { loader: { options } });
+        const compiler = getCompiler(testId, {
+          devtool: false,
+          loader: { options },
+        });
         const stats = await compile(compiler);
         const { css, sourceMap } = getCodeFromBundle(stats, compiler);
 
