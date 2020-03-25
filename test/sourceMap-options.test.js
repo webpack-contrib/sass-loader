@@ -28,7 +28,7 @@ describe('sourceMap option', () => {
     syntaxStyles.forEach((syntax) => {
       const [implementationName] = implementation.info.split('\t');
 
-      it(`should generate source maps when value is not specify and the "devtool" option has "source-map" value (${implementationName}) (${syntax})`, async () => {
+      it(`should generate source maps when value is not specified and the "devtool" option has "source-map" value (${implementationName}) (${syntax})`, async () => {
         const testId = getTestId('language', syntax);
         const options = {
           implementation: getImplementationByName(implementationName),
@@ -46,7 +46,7 @@ describe('sourceMap option', () => {
         expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
-      it(`should not generate source maps when value is not specify and the "devtool" option has "false" value (${implementationName}) (${syntax})`, async () => {
+      it(`should not generate source maps when value is not specified and the "devtool" option has "false" value (${implementationName}) (${syntax})`, async () => {
         const testId = getTestId('language', syntax);
         const options = {
           implementation: getImplementationByName(implementationName),
@@ -64,7 +64,7 @@ describe('sourceMap option', () => {
         expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
-      it(`should not generate source maps when value has "false" and the "devtool" option has "source-map" value (${implementationName}) (${syntax})`, async () => {
+      it(`should not generate source maps when value has "false" value and the "devtool" option has "source-map" value (${implementationName}) (${syntax})`, async () => {
         const testId = getTestId('language', syntax);
         const options = {
           implementation: getImplementationByName(implementationName),
@@ -83,7 +83,7 @@ describe('sourceMap option', () => {
         expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
-      it(`should not generate source maps when value has "false" and the "devtool" option has "false" value (${implementationName}) (${syntax})`, async () => {
+      it(`should not generate source maps when value has "false" value and the "devtool" option has "false" value (${implementationName}) (${syntax})`, async () => {
         const testId = getTestId('language', syntax);
         const options = {
           implementation: getImplementationByName(implementationName),
