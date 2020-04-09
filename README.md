@@ -598,8 +598,8 @@ Please take a moment to read our contributing guidelines if you haven't yet done
 [node-url]: https://nodejs.org
 [deps]: https://david-dm.org/webpack-contrib/sass-loader.svg
 [deps-url]: https://david-dm.org/webpack-contrib/sass-loader
-[tests]: https://dev.azure.com/webpack-contrib/sass-loader/_apis/build/status/webpack-contrib.sass-loader?branchName=master
-[tests-url]: https://dev.azure.com/webpack-contrib/sass-loader/_build/latest?definitionId=21&branchName=master
+[tests]: https://github.com/webpack-contrib/sass-loader/workflows/sass-loader/badge.svg
+[tests-url]: https://github.com/webpack-contrib/sass-loader/actions
 [cover]: https://codecov.io/gh/webpack-contrib/sass-loader/branch/master/graph/badge.svg
 [cover-url]: https://codecov.io/gh/webpack-contrib/sass-loader
 [chat]: https://badges.gitter.im/webpack/webpack.svg
