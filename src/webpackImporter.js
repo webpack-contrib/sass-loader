@@ -26,16 +26,12 @@ const matchCss = /\.css$/i;
  * It's important that the returned function has the correct number of arguments
  * (based on whether the call is sync or async) because otherwise node-sass doesn't exit.
  *
- * @param {string} resourcePath
- * @param {PromisedResolve} resolve
- * @param {Function<string>} addNormalizedDependency
- * @returns {Importer}
  */
-function webpackImporter(resourcePath, resolve, addNormalizedDependency) {
+function webpackImporter(loaderContext, resolve) {
   function dirContextFrom(fileContext) {
     return path.dirname(
       // The first file is 'stdin' when we're using the data option
-      fileContext === 'stdin' ? resourcePath : fileContext
+      fileContext === 'stdin' ? loaderContext.resourcePath : fileContext
     );
   }
 
@@ -47,7 +43,8 @@ function webpackImporter(resourcePath, resolve, addNormalizedDependency) {
           (resolvedFile) => {
             // Add the resolvedFilename as dependency. Although we're also using stats.includedFiles, this might come
             // in handy when an error occurs. In this case, we don't get stats.includedFiles from node-sass.
-            addNormalizedDependency(resolvedFile);
+            loaderContext.addDependency(path.normalize(resolvedFile));
+
             return {
               // By removing the CSS file extension, we trigger node-sass to include the CSS file instead of just linking it.
               file: resolvedFile.replace(matchCss, ''),

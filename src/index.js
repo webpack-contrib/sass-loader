@@ -25,13 +25,6 @@ function loader(content) {
   });
 
   const implementation = getSassImplementation(options.implementation);
-
-  const callback = this.async();
-  const addNormalizedDependency = (file) => {
-    // node-sass returns POSIX paths
-    this.addDependency(path.normalize(file));
-  };
-
   const sassOptions = getSassOptions(this, options, content, implementation);
 
   const shouldUseWebpackImporter =
@@ -53,14 +46,15 @@ function loader(content) {
       extensions: ['.scss', '.sass', '.css', '...'],
     });
 
-    sassOptions.importer.push(
-      webpackImporter(this.resourcePath, resolve, addNormalizedDependency)
-    );
+    sassOptions.importer.push(webpackImporter(this, resolve));
   }
+
+  const callback = this.async();
 
   // Skip empty files, otherwise it will stop webpack, see issue #21
   if (sassOptions.data.trim() === '') {
     callback(null, '');
+
     return;
   }
 
@@ -69,7 +63,7 @@ function loader(content) {
   render(sassOptions, (error, result) => {
     if (error) {
       if (error.file) {
-        addNormalizedDependency(error.file);
+        this.addDependency(path.normalize(error.file));
       }
 
       callback(new SassError(error, this.resourcePath));
@@ -115,7 +109,9 @@ function loader(content) {
       result.map = null;
     }
 
-    result.stats.includedFiles.forEach(addNormalizedDependency);
+    result.stats.includedFiles.forEach((includedFile) => {
+      this.addDependency(path.normalize(includedFile));
+    });
 
     callback(null, result.css.toString(), result.map);
   });
