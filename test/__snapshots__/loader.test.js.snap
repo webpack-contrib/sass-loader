@@ -198,6 +198,26 @@ SassError: Can't find stylesheet to import.",
 
 exports[`loader should throw an error with a explicit file and a file does not exist using "@use" rule (dart-sass) (scss): warnings 1`] = `Array []`;
 
+exports[`loader should watch firstly in the "includePaths" values (dart-sass) (sass): css 1`] = `
+".bar {
+  color: red;
+}"
+`;
+
+exports[`loader should watch firstly in the "includePaths" values (dart-sass) (sass): errors 1`] = `Array []`;
+
+exports[`loader should watch firstly in the "includePaths" values (dart-sass) (sass): warnings 1`] = `Array []`;
+
+exports[`loader should watch firstly in the "includePaths" values (dart-sass) (scss): css 1`] = `
+".bar {
+  color: red;
+}"
+`;
+
+exports[`loader should watch firstly in the "includePaths" values (dart-sass) (scss): errors 1`] = `Array []`;
+
+exports[`loader should watch firstly in the "includePaths" values (dart-sass) (scss): warnings 1`] = `Array []`;
+
 exports[`loader should work (dart-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
 body {

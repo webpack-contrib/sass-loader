@@ -40,7 +40,14 @@ function loader(content) {
       : true;
 
   if (shouldUseWebpackImporter) {
+    let modules = ['...'];
+
+    if (options.sassOptions && options.sassOptions.includePaths) {
+      modules = options.sassOptions.includePaths.concat(modules);
+    }
+
     const resolve = this.getResolve({
+      modules,
       mainFields: ['sass', 'style', 'main', '...'],
       mainFiles: ['_index', 'index', '...'],
       extensions: ['.scss', '.sass', '.css', '...'],
