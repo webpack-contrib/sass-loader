@@ -239,6 +239,15 @@ function getCodeFromSass(testId, options) {
     testFolder,
     'node_modules/another/module.scss'
   );
+  const pathToPackageWithStyleFieldAndCss = isSass
+    ? path.resolve(
+        testFolder,
+        'node_modules/package-with-style-field-and-css/sass/package-with-style-field-and-css.sass'
+      )
+    : path.resolve(
+        testFolder,
+        'node_modules/package-with-style-field-and-css/scss/package-with-style-field-and-css.scss'
+      );
 
   // Pseudo importer for tests
   function testImporter(url) {
@@ -637,6 +646,10 @@ function getCodeFromSass(testId, options) {
       // eslint-disable-next-line no-param-reassign
       url = url
         .replace(/^path-to-alias/, pathToAlias)
+        .replace(
+          /^package-with-style-field-and-css/,
+          pathToPackageWithStyleFieldAndCss
+        )
         .replace(/^~scss-sass-field/, pathToSCSSSassField)
         .replace(/^~sass-sass-field/, pathToSassSassField)
         .replace(/^~scss-style-field/, pathToSCSSStyleField)
