@@ -69,8 +69,8 @@ describe('implementation option', () => {
     expect(getWarnings(stats)).toMatchSnapshot('warnings');
     expect(getErrors(stats)).toMatchSnapshot('errors');
 
-    expect(nodeSassSpy).toHaveBeenCalledTimes(1);
-    expect(dartSassSpy).toHaveBeenCalledTimes(0);
+    expect(nodeSassSpy).toHaveBeenCalledTimes(0);
+    expect(dartSassSpy).toHaveBeenCalledTimes(1);
   });
 
   it('should throw an error when the "node-sass" package is an incompatible version', async () => {

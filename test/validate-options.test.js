@@ -50,9 +50,6 @@ it('validate options', () => {
   expect(() => validate({ sassOptions: () => {} })).not.toThrow();
   expect(() => validate({ sassOptions: true })).toThrowErrorMatchingSnapshot();
   expect(() =>
-    validate({ sassOptions: { fiber: { mock: true } } })
-  ).not.toThrow();
-  expect(() =>
     validate({ sassOptions: { indentWidth: 6, linefeed: 'crlf' } })
   ).not.toThrow();
 
