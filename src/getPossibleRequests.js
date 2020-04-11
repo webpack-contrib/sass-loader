@@ -20,7 +20,7 @@ const matchModuleImport = /^~([^/]+|[^/]+\/|@[^/]+[/][^/]+|@[^/]+\/?|@[^/]+[/][^
  * @param {string} url
  * @returns {Array<string>}
  */
-function importsToResolve(url) {
+export default function getPossibleRequests(url) {
   const request = utils.urlToRequest(url);
   // Keep in mind: ext can also be something like '.datepicker' when the true extension is omitted and the filename contains a dot.
   // @see https://github.com/webpack-contrib/sass-loader/issues/167
@@ -87,5 +87,3 @@ function importsToResolve(url) {
     url,
   ];
 }
-
-export default importsToResolve;

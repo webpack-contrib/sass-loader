@@ -16,7 +16,7 @@
 
 import path from 'path';
 
-import importsToResolve from './importsToResolve';
+import getPossibleRequests from './getPossibleRequests';
 
 const matchCss = /\.css$/i;
 
@@ -35,36 +35,34 @@ function webpackImporter(loaderContext, resolve) {
     );
   }
 
-  // eslint-disable-next-line no-shadow
-  function startResolving(dir, importsToResolve) {
-    return importsToResolve.length === 0
-      ? Promise.reject()
-      : resolve(dir, importsToResolve[0]).then(
-          (resolvedFile) => {
-            // Add the resolvedFilename as dependency. Although we're also using stats.includedFiles, this might come
-            // in handy when an error occurs. In this case, we don't get stats.includedFiles from node-sass.
-            loaderContext.addDependency(path.normalize(resolvedFile));
+  function startResolving(context, possibleRequests) {
+    if (possibleRequests.length === 0) {
+      return Promise.resolve();
+    }
 
-            return {
-              // By removing the CSS file extension, we trigger node-sass to include the CSS file instead of just linking it.
-              file: resolvedFile.replace(matchCss, ''),
-            };
-          },
-          () => {
-            const [, ...tailResult] = importsToResolve;
+    return resolve(context, possibleRequests[0])
+      .then((result) => {
+        // Add the resolvedFilename as dependency. Although we're also using stats.includedFiles, this might come
+        // in handy when an error occurs. In this case, we don't get stats.includedFiles from node-sass.
+        loaderContext.addDependency(path.normalize(result));
 
-            return startResolving(dir, tailResult);
-          }
-        );
+        // By removing the CSS file extension, we trigger node-sass to include the CSS file instead of just linking it.
+        return { file: result.replace(matchCss, '') };
+      })
+      .catch(() => {
+        const [, ...tailResult] = possibleRequests;
+
+        return startResolving(context, tailResult);
+      });
   }
 
   return (url, prev, done) => {
-    startResolving(dirContextFrom(prev), importsToResolve(url))
+    const possibleRequests = getPossibleRequests(url);
+
+    startResolving(dirContextFrom(prev), possibleRequests)
       // Catch all resolving errors, return the original file and pass responsibility back to other custom importers
       .catch(() => {
-        return {
-          file: url,
-        };
+        return { file: url };
       })
       .then(done);
   };
