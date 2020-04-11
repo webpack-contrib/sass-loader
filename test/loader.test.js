@@ -416,24 +416,6 @@ describe('loader', () => {
         expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
-      // Legacy support for CSS imports with node-sass
-      // See discussion https://github.com/webpack-contrib/sass-loader/pull/573/files?#r199109203
-      it(`should work and ignore all css "@import" at-rules (${implementationName}) (${syntax})`, async () => {
-        const testId = getTestId('import-css', syntax);
-        const options = {
-          implementation: getImplementationByName(implementationName),
-        };
-        const compiler = getCompiler(testId, { loader: { options } });
-        const stats = await compile(compiler);
-        const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = getCodeFromSass(testId, options);
-
-        expect(codeFromBundle.css).toBe(codeFromSass.css);
-        expect(codeFromBundle.css).toMatchSnapshot('css');
-        expect(getWarnings(stats)).toMatchSnapshot('warnings');
-        expect(getErrors(stats)).toMatchSnapshot('errors');
-      });
-
       it(`should work with an alias (${implementationName}) (${syntax})`, async () => {
         const testId = getTestId('import-alias', syntax);
         const options = {
@@ -470,6 +452,24 @@ describe('loader', () => {
           },
           loader: { options },
         });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
+        const codeFromSass = getCodeFromSass(testId, options);
+
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot('css');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
+      });
+
+      // Legacy support for CSS imports with node-sass
+      // See discussion https://github.com/webpack-contrib/sass-loader/pull/573/files?#r199109203
+      it(`should work and ignore all css "@import" at-rules (${implementationName}) (${syntax})`, async () => {
+        const testId = getTestId('import-css', syntax);
+        const options = {
+          implementation: getImplementationByName(implementationName),
+        };
+        const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
         const codeFromSass = getCodeFromSass(testId, options);
