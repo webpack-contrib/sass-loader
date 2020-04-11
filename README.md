@@ -24,10 +24,10 @@ Loads a Sass/SCSS file and compiles it to CSS.
 To begin, you'll need to install `sass-loader`:
 
 ```console
-npm install sass-loader node-sass webpack --save-dev
+npm install sass-loader sass webpack --save-dev
 ```
 
-`sass-loader` requires you to install either [Node Sass](https://github.com/sass/node-sass) or [Dart Sass](https://github.com/sass/dart-sass) on your own (more documentation can be found below).
+`sass-loader` requires you to install either [Dart Sass](https://github.com/sass/dart-sass) on your own (more documentation can be found below) or [Node Sass](https://github.com/sass/node-sass).
 This allows you to control the versions of all your dependencies, and to choose which Sass implementation to use.
 
 Chain the `sass-loader` with the [css-loader](https://github.com/webpack-contrib/css-loader) and the [style-loader](https://github.com/webpack-contrib/style-loader) to immediately apply all styles to the DOM or the [mini-css-extract-plugin](https://github.com/webpack-contrib/mini-css-extract-plugin) to extract it into a separate file.
@@ -106,10 +106,12 @@ Thankfully there are a two solutions to this problem:
 
 ### `implementation`
 
+Default: `sass`
+
 The special `implementation` option determines which implementation of Sass to use.
 
 By default the loader resolve the implementation based on your dependencies.
-Just add required implementation to `package.json` (`node-sass` or `sass` package) and install dependencies.
+Just add required implementation to `package.json` (`sass` or `node-sass` package) and install dependencies.
 
 Example where the `sass-loader` loader uses the `sass` (`dart-sass`) implementation:
 
@@ -137,9 +139,10 @@ Example where the `sass-loader` loader uses the `node-sass` implementation:
 }
 ```
 
-Beware the situation when `node-sass` and `sass` were installed! By default the `sass-loader` prefers `node-sass`. In order to avoid this situation you can use the `implementation` option.
+Beware the situation when `node-sass` and `sass` were installed! By default the `sass-loader` prefers `sass`.
+In order to avoid this situation you can use the `implementation` option.
 
-The `implementation` options either accepts `node-sass` or `sass` (`Dart Sass`) as a module.
+The `implementation` options either accepts `sass` (`Dart Sass`) or `node-sass` as a module.
 
 For example, to use Dart Sass, you'd pass:
 
@@ -245,7 +248,7 @@ module.exports = {
 
 Type: `Object|Function`
 
-Options for [Node Sass](https://github.com/sass/node-sass) or [Dart Sass](http://sass-lang.com/dart-sass) implementation.
+Options for [Dart Sass](http://sass-lang.com/dart-sass) or [Node Sass](https://github.com/sass/node-sass) implementation.
 
 > ℹ️ The `indentedSyntax` option has `true` value for the `sass` extension.
 
@@ -253,11 +256,12 @@ Options for [Node Sass](https://github.com/sass/node-sass) or [Dart Sass](http:/
 
 > ℹ We recommend not to use the `sourceMapContents`, `sourceMapEmbed`, `sourceMapRoot` options because `sass-loader` automatically sets these options.
 
-There is a slight difference between the `node-sass` and `sass` (`Dart Sass`) options.
+There is a slight difference between the `sass` (`dart-sass`) and `node-sass` options.
+
 Please consult documentation before using them:
 
-- [Node Sass documentation](https://github.com/sass/node-sass/#options) for all available `node-sass` options.
 - [Dart Sass documentation](https://github.com/sass/dart-sass#javascript-api) for all available `sass` options.
+- [Node Sass documentation](https://github.com/sass/node-sass/#options) for all available `node-sass` options.
 
 #### `Object`
 

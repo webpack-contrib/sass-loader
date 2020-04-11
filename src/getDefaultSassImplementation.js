@@ -1,14 +1,14 @@
 function getDefaultSassImplementation() {
-  let sassImplPkg = 'node-sass';
+  let sassImplPkg = 'sass';
 
   try {
-    require.resolve('node-sass');
+    require.resolve('sass');
   } catch (error) {
     try {
-      require.resolve('sass');
-      sassImplPkg = 'sass';
-    } catch (ignoreError) {
+      require.resolve('node-sass');
       sassImplPkg = 'node-sass';
+    } catch (ignoreError) {
+      sassImplPkg = 'sass';
     }
   }
 
