@@ -554,6 +554,27 @@ describe('loader', () => {
         expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
+      it(`should watch firstly in the "includePaths" values (${implementationName}) (${syntax})`, async () => {
+        const testId = getTestId('prefer-include-paths', syntax);
+        const options = {
+          sassOptions: {
+            includePaths: [
+              `node_modules/package-with-style-field-and-css/${syntax}`,
+            ],
+          },
+          implementation: getImplementationByName(implementationName),
+        };
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
+        const codeFromSass = getCodeFromSass(testId, options);
+
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot('css');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
+      });
+
       if (implementation === dartSass) {
         it(`should output an understandable error with a problem in "@use" (${implementationName}) (${syntax})`, async () => {
           const testId = getTestId('error-use', syntax);
@@ -944,27 +965,6 @@ describe('loader', () => {
         it(`should work when "@use" with the "bootstrap" package, import as a package (${implementationName}) (${syntax})`, async () => {
           const testId = getTestId('use-bootstrap', syntax);
           const options = {
-            implementation: getImplementationByName(implementationName),
-          };
-          const compiler = getCompiler(testId, { loader: { options } });
-          const stats = await compile(compiler);
-          const codeFromBundle = getCodeFromBundle(stats, compiler);
-          const codeFromSass = getCodeFromSass(testId, options);
-
-          expect(codeFromBundle.css).toBe(codeFromSass.css);
-          expect(codeFromBundle.css).toMatchSnapshot('css');
-          expect(getWarnings(stats)).toMatchSnapshot('warnings');
-          expect(getErrors(stats)).toMatchSnapshot('errors');
-        });
-
-        it(`should watch firstly in the "includePaths" values (${implementationName}) (${syntax})`, async () => {
-          const testId = getTestId('prefer-include-paths', syntax);
-          const options = {
-            sassOptions: {
-              includePaths: [
-                `node_modules/package-with-style-field-and-css/${syntax}`,
-              ],
-            },
             implementation: getImplementationByName(implementationName),
           };
           const compiler = getCompiler(testId, { loader: { options } });
