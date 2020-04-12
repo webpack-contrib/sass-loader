@@ -462,9 +462,9 @@ exports[`loader should work and ignore all css "@import" at-rules (node-sass) (s
 "@import url(~css/some-css-module.css);
 @import url(./does/not/exist.css);
 @import url(theme.css);
-@import \\"http://fonts.googleapis.com/css?family=Droid+Sans\\";
+@import http://fonts.googleapis.com/css?family=Droid+Sans;
 @import url(theme);
-@import \\"landscape\\" screen and (orientation: landscape);
+@import landscape screen and (orientation: landscape);
 .some-css-module {
   background: hotpink; }
 "
@@ -478,9 +478,9 @@ exports[`loader should work and ignore all css "@import" at-rules (node-sass) (s
 "@import url(~css/some-css-module.css);
 @import url(./does/not/exist.css);
 @import url(theme.css);
-@import \\"http://fonts.googleapis.com/css?family=Droid+Sans\\";
+@import http://fonts.googleapis.com/css?family=Droid+Sans;
 @import url(theme);
-@import \\"landscape\\" screen and (orientation: landscape);
+@import landscape screen and (orientation: landscape);
 .some-css-module {
   background: hotpink; }
 "

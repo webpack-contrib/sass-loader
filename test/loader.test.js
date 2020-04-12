@@ -559,7 +559,9 @@ describe('loader', () => {
         const options = {
           sassOptions: {
             includePaths: [
-              `node_modules/package-with-style-field-and-css/${syntax}`,
+              path.resolve(
+                `./test/node_modules/package-with-style-field-and-css/${syntax}`
+              ),
             ],
           },
           implementation: getImplementationByName(implementationName),

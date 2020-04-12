@@ -33,20 +33,18 @@ function loader(content) {
       : true;
 
   if (shouldUseWebpackImporter) {
-    let modules = ['...'];
-
-    if (options.sassOptions && options.sassOptions.includePaths) {
-      modules = options.sassOptions.includePaths.concat(modules);
-    }
-
     const resolve = this.getResolve({
-      modules,
       mainFields: ['sass', 'style', 'main', '...'],
       mainFiles: ['_index', 'index', '...'],
       extensions: ['.scss', '.sass', '.css', '...'],
     });
 
-    sassOptions.importer.push(webpackImporter(this, resolve));
+    const includePaths =
+      options.sassOptions && options.sassOptions.includePaths
+        ? options.sassOptions.includePaths
+        : [];
+
+    sassOptions.importer.push(webpackImporter(this, resolve, includePaths));
   }
 
   const callback = this.async();
