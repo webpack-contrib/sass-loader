@@ -27,7 +27,7 @@ const matchCss = /\.css$/i;
  * (based on whether the call is sync or async) because otherwise node-sass doesn't exit.
  *
  */
-function webpackImporter(loaderContext, resolve) {
+function webpackImporter(loaderContext, resolve, includePaths) {
   function dirContextFrom(fileContext) {
     return path.dirname(
       // The first file is 'stdin' when we're using the data option
@@ -35,15 +35,18 @@ function webpackImporter(loaderContext, resolve) {
     );
   }
 
-  function startResolving(context, possibleRequests) {
-    if (possibleRequests.length === 0) {
-      return Promise.resolve();
+  function startResolving(resolutionMap) {
+    if (resolutionMap.length === 0) {
+      return Promise.reject();
     }
+
+    const [{ context, possibleRequests }] = resolutionMap;
 
     return resolve(context, possibleRequests[0])
       .then((result) => {
-        // Add the resolvedFilename as dependency. Although we're also using stats.includedFiles, this might come
-        // in handy when an error occurs. In this case, we don't get stats.includedFiles from node-sass.
+        // Add the result as dependency.
+        // Although we're also using stats.includedFiles, this might come in handy when an error occurs.
+        // In this case, we don't get stats.includedFiles from node-sass/sass.
         loaderContext.addDependency(path.normalize(result));
 
         // By removing the CSS file extension, we trigger node-sass to include the CSS file instead of just linking it.
@@ -52,18 +55,29 @@ function webpackImporter(loaderContext, resolve) {
       .catch(() => {
         const [, ...tailResult] = possibleRequests;
 
-        return startResolving(context, tailResult);
+        if (tailResult.length === 0) {
+          const [, ...tailResolutionMap] = resolutionMap;
+
+          return startResolving(tailResolutionMap);
+        }
+
+        // eslint-disable-next-line no-param-reassign
+        resolutionMap[0].possibleRequests = tailResult;
+
+        return startResolving(resolutionMap);
       });
   }
 
   return (url, prev, done) => {
     const possibleRequests = getPossibleRequests(url);
+    const resolutionMap = []
+      .concat(includePaths)
+      .concat(dirContextFrom(prev))
+      .map((context) => ({ context, possibleRequests }));
 
-    startResolving(dirContextFrom(prev), possibleRequests)
+    startResolving(resolutionMap)
       // Catch all resolving errors, return the original file and pass responsibility back to other custom importers
-      .catch(() => {
-        return { file: url };
-      })
+      .catch(() => ({ file: url }))
       .then(done);
   };
 }

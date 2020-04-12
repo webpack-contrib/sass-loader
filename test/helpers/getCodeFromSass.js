@@ -693,14 +693,6 @@ function getCodeFromSass(testId, options) {
         .replace(/^~/, testNodeModules);
     }
 
-    if (
-      isNodeSassImplementation &&
-      (url === 'landscape' || url.startsWith('http://'))
-    ) {
-      // eslint-disable-next-line consistent-return
-      return;
-    }
-
     return {
       file: url,
     };
