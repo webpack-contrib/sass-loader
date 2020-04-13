@@ -18,6 +18,8 @@ import {
 const implementations = [nodeSass, dartSass];
 const syntaxStyles = ['scss', 'sass'];
 
+jest.setTimeout(30000);
+
 describe('loader', () => {
   beforeEach(() => {
     // The `sass` (`Dart Sass`) package modify the `Function` prototype, but the `jest` lose a prototype
@@ -516,6 +518,47 @@ describe('loader', () => {
         const testId = getTestId('bootstrap', syntax);
         const options = {
           implementation: getImplementationByName(implementationName),
+        };
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
+        const codeFromSass = getCodeFromSass(testId, options);
+
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot('css');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
+      });
+
+      it(`should work with the "foundation-sites" package, import as a package (${implementationName}) (${syntax})`, async () => {
+        const testId = getTestId('foundation-sites', syntax);
+        const options = {
+          implementation: getImplementationByName(implementationName),
+          sassOptions: {
+            includePaths: ['node_modules/foundation-sites/scss'],
+          },
+        };
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
+        const codeFromSass = getCodeFromSass(testId, options);
+
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot('css');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
+      });
+
+      it(`should work with the "foundation-sites" package, adjusting CSS output (${implementationName}) (${syntax})`, async () => {
+        const testId = getTestId(
+          'foundation-sites-adjusting-css-output',
+          syntax
+        );
+        const options = {
+          implementation: getImplementationByName(implementationName),
+          sassOptions: {
+            includePaths: ['node_modules/foundation-sites/scss'],
+          },
         };
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
