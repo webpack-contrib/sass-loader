@@ -1,5 +1,4 @@
 import path from 'path';
-import os from 'os';
 import fs from 'fs';
 
 function getCodeFromSass(testId, options) {
@@ -23,10 +22,7 @@ function getCodeFromSass(testId, options) {
     sassOptions.indentedSyntax = isSass;
     sassOptions.data = `$prepended-data: hotpink${
       sassOptions.indentedSyntax ? '\n' : ';'
-    }${os.EOL}${fs.readFileSync(
-      path.resolve(__dirname, '..', testId),
-      'utf8'
-    )}`;
+    }\n${fs.readFileSync(path.resolve(__dirname, '..', testId), 'utf8')}`;
   } else {
     sassOptions.file = path.resolve(__dirname, '..', testId);
   }

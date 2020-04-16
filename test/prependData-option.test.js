@@ -65,6 +65,30 @@ describe('prependData option', () => {
         expect(getWarnings(stats)).toMatchSnapshot('warnings');
         expect(getErrors(stats)).toMatchSnapshot('errors');
       });
+
+      it(`should use same EOL on all os (${implementationName}) (${syntax})`, async () => {
+        const testId = getTestId('prepending-data', syntax);
+        const prependData =
+          syntax === 'sass'
+            ? `$prepended-data: hotpink
+a
+  color: $prepended-data`
+            : `$prepended-data: hotpink;
+a {
+  color: red;
+}`;
+        const options = {
+          implementation: getImplementationByName(implementationName),
+          prependData,
+        };
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
+
+        expect(codeFromBundle.css).toMatchSnapshot('css');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
+      });
     });
   });
 });
