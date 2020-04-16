@@ -655,6 +655,39 @@ describe('loader', () => {
         expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
+      it(`should respect the "SASS_PATH" environment variable (${implementationName}) (${syntax})`, async () => {
+        const OLD_SASS_PATH = process.env.SASS_PATH;
+
+        process.env.SASS_PATH =
+          process.platform === 'win32'
+            ? `${path.resolve('test', syntax, 'sass_path')};${path.resolve(
+                'test',
+                syntax,
+                'sass_path_other'
+              )}`
+            : `${path.resolve('test', syntax, 'sass_path')}:${path.resolve(
+                'test',
+                syntax,
+                'sass_path_other'
+              )}`;
+
+        const testId = getTestId('sass_path-env', syntax);
+        const options = {
+          implementation: getImplementationByName(implementationName),
+        };
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
+        const codeFromSass = getCodeFromSass(testId, options);
+
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot('css');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
+
+        process.env.SASS_PATH = OLD_SASS_PATH;
+      });
+
       if (implementation === dartSass) {
         it(`should output an understandable error with a problem in "@use" (${implementationName}) (${syntax})`, async () => {
           const testId = getTestId('error-use', syntax);

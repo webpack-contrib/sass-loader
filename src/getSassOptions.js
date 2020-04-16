@@ -106,9 +106,14 @@ function getSassOptions(loaderContext, loaderOptions, content, implementation) {
     ? proxyCustomImporters(options.importer, resourcePath)
     : [];
 
-  options.includePaths = (options.includePaths || []).concat(
-    path.dirname(resourcePath)
-  );
+  options.includePaths = []
+    .concat(options.includePaths || [])
+    .concat(
+      process.env.SASS_PATH
+        ? process.env.SASS_PATH.split(process.platform === 'win32' ? ';' : ':')
+        : []
+    )
+    .concat(path.dirname(resourcePath));
 
   return options;
 }
