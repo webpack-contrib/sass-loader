@@ -36,7 +36,7 @@ function loader(content) {
     const resolve = this.getResolve({
       mainFields: ['sass', 'style', 'main', '...'],
       mainFiles: ['_index', 'index', '...'],
-      extensions: ['.scss', '.sass', '.css', '...'],
+      extensions: ['.scss', '.sass', '.css'],
     });
 
     const includePaths =
