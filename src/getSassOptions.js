@@ -1,4 +1,3 @@
-import os from 'os';
 import path from 'path';
 
 import cloneDeep from 'clone-deep';
@@ -60,8 +59,8 @@ function getSassOptions(loaderContext, loaderOptions, content, implementation) {
 
   options.data = loaderOptions.prependData
     ? typeof loaderOptions.prependData === 'function'
-      ? loaderOptions.prependData(loaderContext) + os.EOL + content
-      : loaderOptions.prependData + os.EOL + content
+      ? `${loaderOptions.prependData(loaderContext)}\n${content}`
+      : `${loaderOptions.prependData}\n${content}`
     : content;
 
   // opt.outputStyle
