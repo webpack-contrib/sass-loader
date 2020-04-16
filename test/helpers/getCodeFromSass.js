@@ -248,9 +248,9 @@ function getCodeFromSass(testId, options) {
         testFolder,
         'node_modules/package-with-style-field-and-css/scss/package-with-style-field-and-css.scss'
       );
-  const pathToPackageWithMainJsField = path.resolve(
+  const pathToPackageWithJsAndCssMainFiles = path.resolve(
     testFolder,
-    'node_modules/package-with-main-js-field/file.css'
+    'node_modules/package-with-js-and-css-main-files/index'
   );
 
   // Pseudo importer for tests
@@ -694,7 +694,10 @@ function getCodeFromSass(testId, options) {
         .replace(/^~bootstrap$/, pathToBootstrap4Entry)
         .replace(/^~module/, pathToModule)
         .replace(/^~another/, pathToAnother)
-        .replace(/^~package-with-main-js-field/, pathToPackageWithMainJsField)
+        .replace(
+          /^~package-with-js-and-css-main-files/,
+          pathToPackageWithJsAndCssMainFiles
+        )
         .replace(/^~/, testNodeModules);
     }
 
