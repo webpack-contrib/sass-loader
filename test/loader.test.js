@@ -620,6 +620,18 @@ describe('loader', () => {
         expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
+      it(`should load only sass/scss files for the "mainFiles" (${implementationName}) (${syntax})`, async () => {
+        const testId = getTestId('import-js-package', syntax);
+        const options = {
+          implementation: getImplementationByName(implementationName),
+        };
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
+      });
+
       if (implementation === dartSass) {
         it(`should output an understandable error with a problem in "@use" (${implementationName}) (${syntax})`, async () => {
           const testId = getTestId('error-use', syntax);
