@@ -73,9 +73,6 @@ function getSassOptions(loaderContext, loaderOptions, content, implementation) {
       ? loaderOptions.sourceMap
       : loaderContext.sourceMap;
 
-  // opt.sourceMap
-  // Not using the `this.sourceMap` flag because css source maps are different
-  // @see https://github.com/webpack/css-loader/pull/40
   if (useSourceMap) {
     // Deliberately overriding the sourceMap option here.
     // node-sass won't produce source maps if the data option is used and options.sourceMap is not a string.
@@ -84,22 +81,10 @@ function getSassOptions(loaderContext, loaderOptions, content, implementation) {
     // all paths in sourceMap.sources will be relative to that path.
     // Pretty complicated... :(
     options.sourceMap = path.join(process.cwd(), '/sass.map');
-
-    if ('sourceMapRoot' in options === false) {
-      options.sourceMapRoot = process.cwd();
-    }
-
-    if ('omitSourceMapUrl' in options === false) {
-      // The source map url doesn't make sense because we don't know the output path
-      // The css-loader will handle that for us
-      options.omitSourceMapUrl = true;
-    }
-
-    if ('sourceMapContents' in options === false) {
-      // If sourceMapContents option is not set, set it to true otherwise maps will be empty/null
-      // when exported by webpack-extract-text-plugin.
-      options.sourceMapContents = true;
-    }
+    options.sourceMapRoot = process.cwd();
+    options.sourceMapContents = true;
+    options.omitSourceMapUrl = true;
+    options.sourceMapEmbed = false;
   }
 
   const { resourcePath } = loaderContext;
@@ -109,7 +94,7 @@ function getSassOptions(loaderContext, loaderOptions, content, implementation) {
   if (
     ext &&
     ext.toLowerCase() === '.sass' &&
-    'indentedSyntax' in options === false
+    typeof options.indentedSyntax === 'undefined'
   ) {
     options.indentedSyntax = true;
   } else {

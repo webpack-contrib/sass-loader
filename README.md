@@ -252,9 +252,9 @@ Options for [Dart Sass](http://sass-lang.com/dart-sass) or [Node Sass](https://g
 
 > ℹ️ The `indentedSyntax` option has `true` value for the `sass` extension.
 
-> ℹ️ Options such as `file` and `outFile` are unavailable.
+> ℹ️ Options such as `data` and `file` are unavailable and will be ignored.
 
-> ℹ We recommend not to use the `sourceMapContents`, `sourceMapEmbed`, `sourceMapRoot` options because `sass-loader` automatically sets these options.
+> ℹ We recommend not to set the `outFile`, `sourceMapContents`, `sourceMapEmbed`, `sourceMapRoot` options because `sass-loader` automatically sets these options when the `sourceMap` option is `true`.
 
 There is a slight difference between the `sass` (`dart-sass`) and `node-sass` options.
 
@@ -411,7 +411,10 @@ Default: depends on the `compiler.devtool` value
 
 Enables/Disables generation of source maps.
 
-By default generation of source maps depends on the [`devtool`](https://webpack.js.org/configuration/devtool/) option. All values enable source map generation except `eval` and `false` value.
+By default generation of source maps depends on the [`devtool`](https://webpack.js.org/configuration/devtool/) option.
+All values enable source map generation except `eval` and `false` value.
+
+> ℹ If a `true` the `sourceMap`, `sourceMapRoot`, `sourceMapEmbed`, `sourceMapContents` and `omitSourceMapUrl` from `sassOptions` will be ignored.
 
 **webpack.config.js**
 

@@ -113,12 +113,31 @@ describe('sassOptions option', () => {
         expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
-      it(`should work with the "importer" option (${implementationName}) (${syntax})`, async () => {
-        const testId = getTestId('custom-importer', syntax);
+      it(`should ignore the "file" option (${implementationName}) (${syntax})`, async () => {
+        const testId = getTestId('language', syntax);
         const options = {
           implementation: getImplementationByName(implementationName),
           sassOptions: {
-            importer: customImporter,
+            file: 'test',
+          },
+        };
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
+        const codeFromSass = getCodeFromSass(testId, options);
+
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot('css');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
+      });
+
+      it(`should ignore the "data" option (${implementationName}) (${syntax})`, async () => {
+        const testId = getTestId('language', syntax);
+        const options = {
+          implementation: getImplementationByName(implementationName),
+          sassOptions: {
+            data: 'test',
           },
         };
         const compiler = getCompiler(testId, { loader: { options } });
@@ -151,12 +170,107 @@ describe('sassOptions option', () => {
         expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
+      it(`should work with the "importer" option (${implementationName}) (${syntax})`, async () => {
+        const testId = getTestId('custom-importer', syntax);
+        const options = {
+          implementation: getImplementationByName(implementationName),
+          sassOptions: {
+            importer: customImporter,
+          },
+        };
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
+        const codeFromSass = getCodeFromSass(testId, options);
+
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot('css');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
+      });
+
       it(`should work with the "includePaths" option (${implementationName}) (${syntax})`, async () => {
         const testId = getTestId('import-include-paths', syntax);
         const options = {
           implementation: getImplementationByName(implementationName),
           sassOptions: {
             includePaths: [path.resolve(__dirname, syntax, 'includePath')],
+          },
+        };
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
+        const codeFromSass = getCodeFromSass(testId, options);
+
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot('css');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
+      });
+
+      it(`should work with the "indentType" option (${implementationName}) (${syntax})`, async () => {
+        const testId = getTestId('language', syntax);
+        const options = {
+          implementation: getImplementationByName(implementationName),
+          sassOptions: {
+            indentType: 'tab',
+          },
+        };
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
+        const codeFromSass = getCodeFromSass(testId, options);
+
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot('css');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
+      });
+
+      it(`should work with the "indentWidth" option (${implementationName}) (${syntax})`, async () => {
+        const testId = getTestId('language', syntax);
+        const options = {
+          implementation: getImplementationByName(implementationName),
+          sassOptions: {
+            indentWidth: 4,
+          },
+        };
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
+        const codeFromSass = getCodeFromSass(testId, options);
+
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot('css');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
+      });
+
+      it(`should work with the "indentedSyntax" option (${implementationName}) (${syntax})`, async () => {
+        const testId = getTestId('language', syntax);
+        const options = {
+          implementation: getImplementationByName(implementationName),
+          sassOptions: {
+            indentedSyntax: syntax === 'sass',
+          },
+        };
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
+        const codeFromSass = getCodeFromSass(testId, options);
+
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot('css');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
+      });
+
+      it(`should work with the "linefeed" option (${implementationName}) (${syntax})`, async () => {
+        const testId = getTestId('language', syntax);
+        const options = {
+          implementation: getImplementationByName(implementationName),
+          sassOptions: {
+            linefeed: 'lf',
           },
         };
         const compiler = getCompiler(testId, { loader: { options } });

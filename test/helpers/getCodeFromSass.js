@@ -9,6 +9,10 @@ function getCodeFromSass(testId, options) {
     sassOptions = sassOptions({ mock: true }) || {};
   }
 
+  if (sassOptions.data) {
+    delete sassOptions.data;
+  }
+
   const { implementation } = loaderOptions;
   const isNodeSassImplementation = loaderOptions.implementation.info.includes(
     'node-sass'
