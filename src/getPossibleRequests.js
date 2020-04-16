@@ -22,14 +22,15 @@ const matchModuleImport = /^~([^/]+|[^/]+\/|@[^/]+[/][^/]+|@[^/]+\/?|@[^/]+[/][^
  */
 export default function getPossibleRequests(url) {
   const request = utils.urlToRequest(url);
-  // Keep in mind: ext can also be something like '.datepicker' when the true extension is omitted and the filename contains a dot.
-  // @see https://github.com/webpack-contrib/sass-loader/issues/167
-  const ext = path.extname(request).toLowerCase();
 
   // In case there is module request, send this to webpack resolver
   if (matchModuleImport.test(url)) {
     return [request, url];
   }
+
+  // Keep in mind: ext can also be something like '.datepicker' when the true extension is omitted and the filename contains a dot.
+  // @see https://github.com/webpack-contrib/sass-loader/issues/167
+  const ext = path.extname(request).toLowerCase();
 
   // Because @import is also defined in CSS, Sass needs a way of compiling plain CSS @imports without trying to import the files at compile time.
   // To accomplish this, and to ensure SCSS is as much of a superset of CSS as possible, Sass will compile any @imports with the following characteristics to plain CSS imports:
@@ -55,34 +56,17 @@ export default function getPossibleRequests(url) {
     return [`${dirname}/_${basename}`, `${dirname}/${basename}`, url];
   }
 
-  // In case there is no file extension and filename starts with `_`:
+  // In case there is no file extension
   //
-  // 1. Try to resolve files with `scss`, `sass` and `css` extensions.
-  // 2. Try to resolve directory with `_index` or `index` filename.
-  // 3. Send the original url to webpack resolver, maybe it's alias.
-  if (basename.startsWith('_')) {
-    return [
-      `${request}.scss`,
-      `${request}.sass`,
-      `${request}.css`,
-      request,
-      url,
-    ];
-  }
-
-  // In case there is no file extension and filename doesn't start with `_`:
-  //
-  // 1. Try to resolve file starts with `_` and with extensions
-  // 2. Try to resolve file with extensions
-  // 3. Try to resolve directory with `_index` or `index` filename.
-  // 4. Send a original url to webpack resolver, maybe it is alias.
+  // 1. Try to resolve files starts with `_` and normal with order `sass`, `scss` and `css`
+  // 2. Send a original url to webpack resolver, maybe it is alias.
   return [
-    `${dirname}/_${basename}.scss`,
     `${dirname}/_${basename}.sass`,
+    `${dirname}/${basename}.sass`,
+    `${dirname}/_${basename}.scss`,
+    `${dirname}/${basename}.scss`,
     `${dirname}/_${basename}.css`,
-    `${request}.scss`,
-    `${request}.sass`,
-    `${request}.css`,
+    `${dirname}/${basename}.css`,
     request,
     url,
   ];

@@ -1,5 +1,45 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`loader should load files with underscore in the name (dart-sass) (sass): css 1`] = `
+"a {
+  color: red;
+}"
+`;
+
+exports[`loader should load files with underscore in the name (dart-sass) (sass): errors 1`] = `Array []`;
+
+exports[`loader should load files with underscore in the name (dart-sass) (sass): warnings 1`] = `Array []`;
+
+exports[`loader should load files with underscore in the name (dart-sass) (scss): css 1`] = `
+"a {
+  color: red;
+}"
+`;
+
+exports[`loader should load files with underscore in the name (dart-sass) (scss): errors 1`] = `Array []`;
+
+exports[`loader should load files with underscore in the name (dart-sass) (scss): warnings 1`] = `Array []`;
+
+exports[`loader should load files with underscore in the name (node-sass) (sass): css 1`] = `
+"a {
+  color: red; }
+"
+`;
+
+exports[`loader should load files with underscore in the name (node-sass) (sass): errors 1`] = `Array []`;
+
+exports[`loader should load files with underscore in the name (node-sass) (sass): warnings 1`] = `Array []`;
+
+exports[`loader should load files with underscore in the name (node-sass) (scss): css 1`] = `
+"a {
+  color: red; }
+"
+`;
+
+exports[`loader should load files with underscore in the name (node-sass) (scss): errors 1`] = `Array []`;
+
+exports[`loader should load files with underscore in the name (node-sass) (scss): warnings 1`] = `Array []`;
+
 exports[`loader should load only sass/scss files for the "mainFiles" (dart-sass) (sass): css 1`] = `
 "a {
   color: red;
