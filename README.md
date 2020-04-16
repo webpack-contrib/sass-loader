@@ -104,8 +104,17 @@ Thankfully there are a two solutions to this problem:
 
 ## Options
 
+|                   Name                    |         Type         |                 Default                 | Description                                               |
+| :---------------------------------------: | :------------------: | :-------------------------------------: | :-------------------------------------------------------- |
+|  **[`implementation`](#implementation)**  |      `{Object}`      |                 `sass`                  | Setup Sass implementation to use.                         |
+|     **[`sassOptions`](#sassoptions)**     | `{Object\|Function}` | defaults values for Sass implementation | Options for Sass.                                         |
+|       **[`sourceMap`](#sourcemap)**       |     `{Boolean}`      |           `compiler.devtool`            | Enables/Disables generation of source maps.               |
+|     **[`prependData`](#sassoptions)**     | `{String\|Function}` |               `undefined`               | Prepends `Sass`/`SCSS` code before the actual entry file. |
+| **[`webpackImporter`](#webpackimporter)** |     `{Boolean}`      |                 `true`                  | Enables/Disables the default Webpack importer.            |
+
 ### `implementation`
 
+Type: `Object`
 Default: `sass`
 
 The special `implementation` option determines which implementation of Sass to use.
@@ -247,6 +256,7 @@ module.exports = {
 ### `sassOptions`
 
 Type: `Object|Function`
+Default: defaults values for Sass implementation
 
 Options for [Dart Sass](http://sass-lang.com/dart-sass) or [Node Sass](https://github.com/sass/node-sass) implementation.
 
@@ -334,76 +344,6 @@ module.exports = {
 };
 ```
 
-### `prependData`
-
-Type: `String|Function`
-Default: `undefined`
-
-Prepends `Sass`/`SCSS` code before the actual entry file.
-In this case, the `sass-loader` will not override the `data` option but just append the entry's content.
-
-This is especially useful when some of your Sass variables depend on the environment:
-
-> ℹ Since you're injecting code, this will break the source mappings in your entry file. Often there's a simpler solution than this, like multiple Sass entry files.
-
-#### `String`
-
-```js
-module.exports = {
-  module: {
-    rules: [
-      {
-        test: /\.s[ac]ss$/i,
-        use: [
-          'style-loader',
-          'css-loader',
-          {
-            loader: 'sass-loader',
-            options: {
-              prependData: '$env: ' + process.env.NODE_ENV + ';',
-            },
-          },
-        ],
-      },
-    ],
-  },
-};
-```
-
-#### `Function`
-
-```js
-module.exports = {
-  module: {
-    rules: [
-      {
-        test: /\.s[ac]ss$/i,
-        use: [
-          'style-loader',
-          'css-loader',
-          {
-            loader: 'sass-loader',
-            options: {
-              prependData: (loaderContext) => {
-                // More information about available properties https://webpack.js.org/api/loaders/
-                const { resourcePath, rootContext } = loaderContext;
-                const relativePath = path.relative(rootContext, resourcePath);
-
-                if (relativePath === 'styles/foo.scss') {
-                  return '$value: 100px;';
-                }
-
-                return '$value: 200px;';
-              },
-            },
-          },
-        ],
-      },
-    ],
-  },
-};
-```
-
 ### `sourceMap`
 
 Type: `Boolean`
@@ -475,6 +415,76 @@ module.exports = {
 };
 ```
 
+### `prependData`
+
+Type: `String|Function`
+Default: `undefined`
+
+Prepends `Sass`/`SCSS` code before the actual entry file.
+In this case, the `sass-loader` will not override the `data` option but just append the entry's content.
+
+This is especially useful when some of your Sass variables depend on the environment:
+
+> ℹ Since you're injecting code, this will break the source mappings in your entry file. Often there's a simpler solution than this, like multiple Sass entry files.
+
+#### `String`
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              prependData: '$env: ' + process.env.NODE_ENV + ';',
+            },
+          },
+        ],
+      },
+    ],
+  },
+};
+```
+
+#### `Function`
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              prependData: (loaderContext) => {
+                // More information about available properties https://webpack.js.org/api/loaders/
+                const { resourcePath, rootContext } = loaderContext;
+                const relativePath = path.relative(rootContext, resourcePath);
+
+                if (relativePath === 'styles/foo.scss') {
+                  return '$value: 100px;';
+                }
+
+                return '$value: 200px;';
+              },
+            },
+          },
+        ],
+      },
+    ],
+  },
+};
+```
+
 ### `webpackImporter`
 
 Type: `Boolean`
@@ -482,7 +492,8 @@ Default: `true`
 
 Enables/Disables the default Webpack importer.
 
-This can improve performance in some cases. Use it with caution because aliases and `@import` at-rules starting with `~` will not work. You can pass own `importer` to solve this (see [`importer docs`](https://github.com/sass/node-sass#importer--v200---experimental)).
+This can improve performance in some cases. Use it with caution because aliases and `@import` at-rules starting with `~` will not work.
+You can pass own `importer` to solve this (see [`importer docs`](https://github.com/sass/node-sass#importer--v200---experimental)).
 
 **webpack.config.js**
 
