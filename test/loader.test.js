@@ -621,7 +621,10 @@ describe('loader', () => {
       });
 
       it(`should load only sass/scss files for the "mainFiles" (${implementationName}) (${syntax})`, async () => {
-        const testId = getTestId('import-js-package', syntax);
+        const testId = getTestId(
+          'import-package-with-js-and-css-main-files',
+          syntax
+        );
         const options = {
           implementation: getImplementationByName(implementationName),
         };
