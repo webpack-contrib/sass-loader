@@ -224,7 +224,51 @@ SassError: expected \\"{\\".",
 
 exports[`loader should output an understandable error with a problem in "@use" (dart-sass) (scss): warnings 1`] = `Array []`;
 
-exports[`loader should respect the "SASS_PATH" environment variable (dart-sass) (sass): css 1`] = `
+exports[`loader should respect resolving from "process.cwd()" (dart-sass) (sass): css 1`] = `
+"body {
+  font: 100% Helvetica, sans-serif;
+  color: #333;
+}"
+`;
+
+exports[`loader should respect resolving from "process.cwd()" (dart-sass) (sass): errors 1`] = `Array []`;
+
+exports[`loader should respect resolving from "process.cwd()" (dart-sass) (sass): warnings 1`] = `Array []`;
+
+exports[`loader should respect resolving from "process.cwd()" (dart-sass) (scss): css 1`] = `
+"body {
+  font: 100% Helvetica, sans-serif;
+  color: #333;
+}"
+`;
+
+exports[`loader should respect resolving from "process.cwd()" (dart-sass) (scss): errors 1`] = `Array []`;
+
+exports[`loader should respect resolving from "process.cwd()" (dart-sass) (scss): warnings 1`] = `Array []`;
+
+exports[`loader should respect resolving from "process.cwd()" (node-sass) (sass): css 1`] = `
+"body {
+  font: 100% Helvetica, sans-serif;
+  color: #333; }
+"
+`;
+
+exports[`loader should respect resolving from "process.cwd()" (node-sass) (sass): errors 1`] = `Array []`;
+
+exports[`loader should respect resolving from "process.cwd()" (node-sass) (sass): warnings 1`] = `Array []`;
+
+exports[`loader should respect resolving from "process.cwd()" (node-sass) (scss): css 1`] = `
+"body {
+  font: 100% Helvetica, sans-serif;
+  color: #333; }
+"
+`;
+
+exports[`loader should respect resolving from "process.cwd()" (node-sass) (scss): errors 1`] = `Array []`;
+
+exports[`loader should respect resolving from "process.cwd()" (node-sass) (scss): warnings 1`] = `Array []`;
+
+exports[`loader should respect resolving from the "SASS_PATH" environment variable (dart-sass) (sass): css 1`] = `
 ".foo {
   color: red;
 }
@@ -234,11 +278,11 @@ exports[`loader should respect the "SASS_PATH" environment variable (dart-sass) 
 }"
 `;
 
-exports[`loader should respect the "SASS_PATH" environment variable (dart-sass) (sass): errors 1`] = `Array []`;
+exports[`loader should respect resolving from the "SASS_PATH" environment variable (dart-sass) (sass): errors 1`] = `Array []`;
 
-exports[`loader should respect the "SASS_PATH" environment variable (dart-sass) (sass): warnings 1`] = `Array []`;
+exports[`loader should respect resolving from the "SASS_PATH" environment variable (dart-sass) (sass): warnings 1`] = `Array []`;
 
-exports[`loader should respect the "SASS_PATH" environment variable (dart-sass) (scss): css 1`] = `
+exports[`loader should respect resolving from the "SASS_PATH" environment variable (dart-sass) (scss): css 1`] = `
 ".foo {
   color: red;
 }
@@ -248,11 +292,11 @@ exports[`loader should respect the "SASS_PATH" environment variable (dart-sass) 
 }"
 `;
 
-exports[`loader should respect the "SASS_PATH" environment variable (dart-sass) (scss): errors 1`] = `Array []`;
+exports[`loader should respect resolving from the "SASS_PATH" environment variable (dart-sass) (scss): errors 1`] = `Array []`;
 
-exports[`loader should respect the "SASS_PATH" environment variable (dart-sass) (scss): warnings 1`] = `Array []`;
+exports[`loader should respect resolving from the "SASS_PATH" environment variable (dart-sass) (scss): warnings 1`] = `Array []`;
 
-exports[`loader should respect the "SASS_PATH" environment variable (node-sass) (sass): css 1`] = `
+exports[`loader should respect resolving from the "SASS_PATH" environment variable (node-sass) (sass): css 1`] = `
 ".foo {
   color: red; }
 
@@ -261,11 +305,11 @@ exports[`loader should respect the "SASS_PATH" environment variable (node-sass) 
 "
 `;
 
-exports[`loader should respect the "SASS_PATH" environment variable (node-sass) (sass): errors 1`] = `Array []`;
+exports[`loader should respect resolving from the "SASS_PATH" environment variable (node-sass) (sass): errors 1`] = `Array []`;
 
-exports[`loader should respect the "SASS_PATH" environment variable (node-sass) (sass): warnings 1`] = `Array []`;
+exports[`loader should respect resolving from the "SASS_PATH" environment variable (node-sass) (sass): warnings 1`] = `Array []`;
 
-exports[`loader should respect the "SASS_PATH" environment variable (node-sass) (scss): css 1`] = `
+exports[`loader should respect resolving from the "SASS_PATH" environment variable (node-sass) (scss): css 1`] = `
 ".foo {
   color: red; }
 
@@ -274,9 +318,9 @@ exports[`loader should respect the "SASS_PATH" environment variable (node-sass) 
 "
 `;
 
-exports[`loader should respect the "SASS_PATH" environment variable (node-sass) (scss): errors 1`] = `Array []`;
+exports[`loader should respect resolving from the "SASS_PATH" environment variable (node-sass) (scss): errors 1`] = `Array []`;
 
-exports[`loader should respect the "SASS_PATH" environment variable (node-sass) (scss): warnings 1`] = `Array []`;
+exports[`loader should respect resolving from the "SASS_PATH" environment variable (node-sass) (scss): warnings 1`] = `Array []`;
 
 exports[`loader should throw an error with a explicit file and a file does not exist (dart-sass) (sass): errors 1`] = `
 Array [

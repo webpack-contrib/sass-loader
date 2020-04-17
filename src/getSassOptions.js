@@ -113,6 +113,7 @@ function getSassOptions(loaderContext, loaderOptions, content, implementation) {
         ? process.env.SASS_PATH.split(process.platform === 'win32' ? ';' : ':')
         : []
     )
+    .concat(process.cwd())
     .concat(path.dirname(resourcePath));
 
   return options;
