@@ -70,5 +70,11 @@ export default function getPossibleRequests(url, forWebpackResolver = false) {
     `${dirname}/${basename}.scss`,
     `${dirname}/_${basename}.css`,
     `${dirname}/${basename}.css`,
+    `${dirname}/${basename}/_index.sass`,
+    `${dirname}/${basename}/index.sass`,
+    `${dirname}/${basename}/_index.scss`,
+    `${dirname}/${basename}/index.scss`,
+    `${dirname}/${basename}/_index.css`,
+    `${dirname}/${basename}/index.css`,
   ].concat(forWebpackResolver ? [request, url] : []);
 }
