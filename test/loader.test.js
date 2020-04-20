@@ -656,8 +656,6 @@ describe('loader', () => {
       });
 
       it(`should respect resolving from the "SASS_PATH" environment variable (${implementationName}) (${syntax})`, async () => {
-        const OLD_SASS_PATH = process.env.SASS_PATH;
-
         process.env.SASS_PATH =
           process.platform === 'win32'
             ? `${path.resolve('test', syntax, 'sass_path')};${path.resolve(
@@ -685,7 +683,7 @@ describe('loader', () => {
         expect(getWarnings(stats)).toMatchSnapshot('warnings');
         expect(getErrors(stats)).toMatchSnapshot('errors');
 
-        process.env.SASS_PATH = OLD_SASS_PATH;
+        delete process.env.SASS_PATH;
       });
 
       it(`should respect resolving from "process.cwd()" (${implementationName}) (${syntax})`, async () => {
