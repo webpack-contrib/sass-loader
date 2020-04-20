@@ -19,7 +19,7 @@ const matchCss = /\.css$/i;
  * (based on whether the call is sync or async) because otherwise node-sass doesn't exit.
  *
  */
-function webpackImporter(loaderContext, resolve, includePaths) {
+function webpackImporter(loaderContext, includePaths) {
   function dirContextFrom(fileContext) {
     return path.dirname(
       // The first file is 'stdin' when we're using the data option
@@ -32,7 +32,7 @@ function webpackImporter(loaderContext, resolve, includePaths) {
       return Promise.reject();
     }
 
-    const [{ context, possibleRequests }] = resolutionMap;
+    const [{ resolve, context, possibleRequests }] = resolutionMap;
 
     return resolve(context, possibleRequests[0])
       .then((result) => {
@@ -60,6 +60,22 @@ function webpackImporter(loaderContext, resolve, includePaths) {
       });
   }
 
+  // We can't use `loaderContext.resolve` because it resolves values from default `extensions`/`mainFields`/etc from webpack configuration
+  const sassResolve = loaderContext.getResolve({
+    alias: [],
+    aliasFields: [],
+    descriptionFiles: [],
+    extensions: [],
+    mainFields: [],
+    mainFiles: [],
+    modules: [],
+  });
+  const webpackResolve = loaderContext.getResolve({
+    mainFields: ['sass', 'style', 'main', '...'],
+    mainFiles: ['_index', 'index', '...'],
+    extensions: ['.sass', '.scss', '.css'],
+  });
+
   return (url, prev, done) => {
     // The order of import precedence is as follows:
     //
@@ -75,11 +91,13 @@ function webpackImporter(loaderContext, resolve, includePaths) {
     const resolutionMap = []
       .concat(
         includePaths.map((context) => ({
+          resolve: sassResolve,
           context,
           possibleRequests: sassPossibleRequests,
         }))
       )
       .concat({
+        resolve: webpackResolve,
         context: dirContextFrom(prev),
         possibleRequests: webpackPossibleRequests,
       });

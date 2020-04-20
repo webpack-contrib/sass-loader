@@ -33,15 +33,9 @@ function loader(content) {
       : true;
 
   if (shouldUseWebpackImporter) {
-    const resolve = this.getResolve({
-      mainFields: ['sass', 'style', 'main', '...'],
-      mainFiles: ['_index', 'index', '...'],
-      extensions: ['.sass', '.scss', '.css'],
-    });
-
     const { includePaths } = sassOptions;
 
-    sassOptions.importer.push(webpackImporter(this, resolve, includePaths));
+    sassOptions.importer.push(webpackImporter(this, includePaths));
   }
 
   const callback = this.async();
