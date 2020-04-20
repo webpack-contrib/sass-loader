@@ -57,6 +57,7 @@ function getSassOptions(loaderContext, loaderOptions, content, implementation) {
     delete options.fiber;
   }
 
+  options.file = loaderContext.resourcePath;
   options.data = loaderOptions.prependData
     ? typeof loaderOptions.prependData === 'function'
       ? `${loaderOptions.prependData(loaderContext)}\n${content}`
@@ -107,13 +108,13 @@ function getSassOptions(loaderContext, loaderOptions, content, implementation) {
     : [];
 
   options.includePaths = []
+    .concat(process.cwd())
     .concat(options.includePaths || [])
     .concat(
       process.env.SASS_PATH
         ? process.env.SASS_PATH.split(process.platform === 'win32' ? ';' : ':')
         : []
-    )
-    .concat(process.cwd());
+    );
 
   return options;
 }
