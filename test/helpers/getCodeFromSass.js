@@ -259,6 +259,18 @@ function getCodeFromSass(testId, options) {
     if (/\.css$/i.test(url) === false) {
       // Polyfill for node-sass implementation
       if (isNodeSassImplementation) {
+        if (url === 'test/scss/dir-with-underscore-index') {
+          return {
+            file: pathToSCSSIndexAlias,
+          };
+        }
+
+        if (url === 'test/sass/dir-with-underscore-index') {
+          return {
+            file: pathToSassIndexAlias,
+          };
+        }
+
         if (url === '~sass-package-with-index') {
           return {
             file: pathToSassPackageWithIndexFile,

@@ -18,13 +18,14 @@ const matchModuleImport = /^~([^/]+|[^/]+\/|@[^/]+[/][^/]+|@[^/]+\/?|@[^/]+[/][^
  * to enable straight-forward webpack.config aliases.
  *
  * @param {string} url
+ * @param {boolean} forWebpackResolver
  * @returns {Array<string>}
  */
-export default function getPossibleRequests(url) {
+export default function getPossibleRequests(url, forWebpackResolver = false) {
   const request = utils.urlToRequest(url);
 
   // In case there is module request, send this to webpack resolver
-  if (matchModuleImport.test(url)) {
+  if (forWebpackResolver && matchModuleImport.test(url)) {
     return [request, url];
   }
 
@@ -51,15 +52,17 @@ export default function getPossibleRequests(url) {
   //
   // 1. Try to resolve `_` file.
   // 2. Try to resolve file without `_`.
-  // 3. Send a original url to webpack resolver, maybe it is alias.
-  if (['.scss', '.sass'].includes(ext)) {
-    return [`${dirname}/_${basename}`, `${dirname}/${basename}`, url];
+  // 3. Send a original url to webpack resolver, maybe it is alias for webpack resolving.
+  if (['.scss', '.sass', '.css'].includes(ext)) {
+    return [`${dirname}/_${basename}`, `${dirname}/${basename}`].concat(
+      forWebpackResolver ? [url] : []
+    );
   }
 
   // In case there is no file extension
   //
-  // 1. Try to resolve files starts with `_` and normal with order `sass`, `scss` and `css`
-  // 2. Send a original url to webpack resolver, maybe it is alias.
+  // 1. Try to resolve files starts with `_` and normal with order `sass`, `scss` and `css`.
+  // 2. Send a original url to webpack resolver, maybe it is alias for webpack resolving.
   return [
     `${dirname}/_${basename}.sass`,
     `${dirname}/${basename}.sass`,
@@ -67,7 +70,11 @@ export default function getPossibleRequests(url) {
     `${dirname}/${basename}.scss`,
     `${dirname}/_${basename}.css`,
     `${dirname}/${basename}.css`,
-    request,
-    url,
-  ];
+    `${dirname}/${basename}/_index.sass`,
+    `${dirname}/${basename}/index.sass`,
+    `${dirname}/${basename}/_index.scss`,
+    `${dirname}/${basename}/index.scss`,
+    `${dirname}/${basename}/_index.css`,
+    `${dirname}/${basename}/index.css`,
+  ].concat(forWebpackResolver ? [request, url] : []);
 }
