@@ -36,13 +36,10 @@ function loader(content) {
     const resolve = this.getResolve({
       mainFields: ['sass', 'style', 'main', '...'],
       mainFiles: ['_index', 'index', '...'],
-      extensions: ['.scss', '.sass', '.css'],
+      extensions: ['.sass', '.scss', '.css'],
     });
 
-    const includePaths =
-      options.sassOptions && options.sassOptions.includePaths
-        ? options.sassOptions.includePaths
-        : [];
+    const { includePaths } = sassOptions;
 
     sassOptions.importer.push(webpackImporter(this, resolve, includePaths));
   }

@@ -1,12 +1,4 @@
 /**
- * @name PromisedResolve
- * @type {Function}
- * @param {string} dir
- * @param {string} request
- * @returns Promise
- */
-
-/**
  * @name Importer
  * @type {Function}
  * @param {string} url
@@ -69,11 +61,28 @@ function webpackImporter(loaderContext, resolve, includePaths) {
   }
 
   return (url, prev, done) => {
-    const possibleRequests = getPossibleRequests(url);
+    // The order of import precedence is as follows:
+    //
+    // 1. Filesystem imports relative to the base file.
+    // 2. Custom importer imports.
+    // 3. Filesystem imports relative to the working directory.
+    // 4. Filesystem imports relative to an `includePaths` path.
+    // 5. Filesystem imports relative to a `SASS_PATH` path.
+    //
+    // Because `sass`/`node-sass` run custom importers after `3`, `4` and `5` points, we need to emulate this behavior to avoid wrong resolution.
+    const sassPossibleRequests = getPossibleRequests(url);
+    const webpackPossibleRequests = getPossibleRequests(url, true);
     const resolutionMap = []
-      .concat(includePaths)
-      .concat(dirContextFrom(prev))
-      .map((context) => ({ context, possibleRequests }));
+      .concat(
+        includePaths.map((context) => ({
+          context,
+          possibleRequests: sassPossibleRequests,
+        }))
+      )
+      .concat({
+        context: dirContextFrom(prev),
+        possibleRequests: webpackPossibleRequests,
+      });
 
     startResolving(resolutionMap)
       // Catch all resolving errors, return the original file and pass responsibility back to other custom importers
