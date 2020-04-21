@@ -252,6 +252,9 @@ function getCodeFromSass(testId, options) {
     testFolder,
     'node_modules/package-with-js-and-css-main-files/index'
   );
+  const pathToLanguage = isSass
+    ? path.resolve(testFolder, 'sass/language.sass')
+    : path.resolve(testFolder, 'scss/language.scss');
 
   // Pseudo importer for tests
   function testImporter(url) {
@@ -710,6 +713,7 @@ function getCodeFromSass(testId, options) {
           /^~package-with-js-and-css-main-files/,
           pathToPackageWithJsAndCssMainFiles
         )
+        .replace(/^file:language/, pathToLanguage)
         .replace(/^~/, testNodeModules);
     }
 

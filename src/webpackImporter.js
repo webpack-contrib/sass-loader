@@ -79,35 +79,50 @@ function webpackImporter(loaderContext, includePaths) {
     extensions: ['.sass', '.scss', '.css'],
   });
 
-  return (url, prev, done) => {
-    // The order of import precedence is as follows:
-    //
-    // 1. Filesystem imports relative to the base file.
-    // 2. Custom importer imports.
-    // 3. Filesystem imports relative to the working directory.
-    // 4. Filesystem imports relative to an `includePaths` path.
-    // 5. Filesystem imports relative to a `SASS_PATH` path.
-    //
-    // Because `sass`/`node-sass` run custom importers before `3`, `4` and `5` points, we need to emulate this behavior to avoid wrong resolution.
-    const sassPossibleRequests = getPossibleRequests(url);
-    const webpackPossibleRequests = getPossibleRequests(url, true);
-    const resolutionMap = []
-      .concat(
+  return (originalUrl, prev, done) => {
+    let url = originalUrl;
+
+    const isFileScheme = originalUrl.startsWith('file:');
+
+    if (isFileScheme) {
+      // eslint-disable-next-line no-param-reassign
+      url = originalUrl.slice(5);
+    }
+
+    let resolutionMap = [];
+
+    if (includePaths.length > 0 && !isFileScheme) {
+      // The order of import precedence is as follows:
+      //
+      // 1. Filesystem imports relative to the base file.
+      // 2. Custom importer imports.
+      // 3. Filesystem imports relative to the working directory.
+      // 4. Filesystem imports relative to an `includePaths` path.
+      // 5. Filesystem imports relative to a `SASS_PATH` path.
+      //
+      // Because `sass`/`node-sass` run custom importers before `3`, `4` and `5` points, we need to emulate this behavior to avoid wrong resolution.
+      const sassPossibleRequests = getPossibleRequests(url);
+
+      resolutionMap = resolutionMap.concat(
         includePaths.map((context) => ({
           resolve: sassResolve,
           context,
           possibleRequests: sassPossibleRequests,
         }))
-      )
-      .concat({
-        resolve: webpackResolve,
-        context: dirContextFrom(prev),
-        possibleRequests: webpackPossibleRequests,
-      });
+      );
+    }
+
+    const webpackPossibleRequests = getPossibleRequests(url, true);
+
+    resolutionMap = resolutionMap.concat({
+      resolve: webpackResolve,
+      context: isFileScheme ? '/' : dirContextFrom(prev),
+      possibleRequests: webpackPossibleRequests,
+    });
 
     startResolving(resolutionMap)
       // Catch all resolving errors, return the original file and pass responsibility back to other custom importers
-      .catch(() => ({ file: url }))
+      .catch(() => ({ file: originalUrl }))
       .then(done);
   };
 }
