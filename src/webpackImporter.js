@@ -70,6 +70,7 @@ function webpackImporter(loaderContext, includePaths) {
     mainFiles: [],
     modules: [],
   });
+  // TODO implement the `restrictions` option for `enhanced-resolve` and avoid resolution `js` files from the `mainFields`
   const webpackResolve = loaderContext.getResolve({
     mainFields: ['sass', 'style', 'main', '...'],
     mainFiles: ['_index', 'index', '...'],
@@ -85,7 +86,7 @@ function webpackImporter(loaderContext, includePaths) {
     // 4. Filesystem imports relative to an `includePaths` path.
     // 5. Filesystem imports relative to a `SASS_PATH` path.
     //
-    // Because `sass`/`node-sass` run custom importers after `3`, `4` and `5` points, we need to emulate this behavior to avoid wrong resolution.
+    // Because `sass`/`node-sass` run custom importers before `3`, `4` and `5` points, we need to emulate this behavior to avoid wrong resolution.
     const sassPossibleRequests = getPossibleRequests(url);
     const webpackPossibleRequests = getPossibleRequests(url, true);
     const resolutionMap = []
