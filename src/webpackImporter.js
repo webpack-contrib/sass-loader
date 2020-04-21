@@ -71,6 +71,8 @@ function webpackImporter(loaderContext, includePaths) {
     modules: [],
   });
   // TODO implement the `restrictions` option for `enhanced-resolve` and avoid resolution `js` files from the `mainFields`
+  // TODO avoid resolsing `_index`, `index` and files without extensions
+  // TODO avoid resolving with multiple extensions - `file.sass.sass`/`file.sass.scss`/`file.sass.css`
   const webpackResolve = loaderContext.getResolve({
     mainFields: ['sass', 'style', 'main', '...'],
     mainFiles: ['_index', 'index', '...'],
