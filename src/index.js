@@ -45,6 +45,8 @@ function loader(content) {
     if (error) {
       // eslint-disable-next-line no-console
       console.log(error.file);
+      // eslint-disable-next-line no-console
+      console.log(path.normalize(error.file));
 
       this.addDependency(error.file);
 
