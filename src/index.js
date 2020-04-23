@@ -45,7 +45,7 @@ function loader(content) {
     if (error) {
       this.addDependency(path.normalize(error.file));
 
-      callback(new SassError(error, this.resourcePath));
+      callback(new SassError(error));
 
       return;
     }
