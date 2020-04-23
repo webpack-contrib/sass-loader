@@ -1,5 +1,5 @@
-function customImporter(path, prev) {
-  expect(path).toBe('import-with-custom-logic');
+function customImporter(url, prev) {
+  expect(url).toBe('import-with-custom-logic');
   expect(prev).toMatch(/(sass|scss)[/\\]custom-importer\.(scss|sass)/);
   expect(this.options).toBeDefined();
 

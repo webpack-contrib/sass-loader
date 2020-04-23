@@ -69,23 +69,6 @@ function loader(content) {
       // eslint-disable-next-line no-param-reassign
       delete result.map.file;
 
-      // One of the sources is 'stdin' according to dart-sass/node-sass because we've used the data input.
-      // Now let's override that value with the correct relative path.
-      // Since we specified options.sourceMap = path.join(process.cwd(), "/sass.map"); in getSassOptions,
-      // we know that this path is relative to process.cwd(). This is how node-sass works.
-      // eslint-disable-next-line no-param-reassign
-      const stdinIndex = result.map.sources.findIndex((source) =>
-        source.includes('stdin')
-      );
-
-      if (stdinIndex !== -1) {
-        // eslint-disable-next-line no-param-reassign
-        result.map.sources[stdinIndex] = path.relative(
-          process.cwd(),
-          this.resourcePath
-        );
-      }
-
       // node-sass returns POSIX paths, that's why we need to transform them back to native paths.
       // This fixes an error on windows where the source-map module cannot resolve the source maps.
       // @see https://github.com/webpack-contrib/sass-loader/issues/366#issuecomment-279460722
