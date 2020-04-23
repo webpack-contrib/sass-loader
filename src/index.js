@@ -43,12 +43,8 @@ function loader(content) {
 
   render(sassOptions, (error, result) => {
     if (error) {
-      // eslint-disable-next-line no-console
-      console.log(error.file);
-      // eslint-disable-next-line no-console
-      console.log(path.normalize(error.file));
-
-      this.addDependency(error.file);
+      // `node-sass` returns POSIX paths
+      this.addDependency(path.normalize(error.file));
 
       callback(new SassError(error));
 
@@ -58,6 +54,11 @@ function loader(content) {
     if (result.map) {
       // eslint-disable-next-line no-param-reassign
       result.map = JSON.parse(result.map);
+
+      // eslint-disable-next-line no-console
+      console.log(result.map);
+      // eslint-disable-next-line no-console
+      console.log(result.stats);
 
       // result.map.file is an optional property that provides the output filename.
       // Since we don't know the final filename in the webpack build chain yet, it makes no sense to have it.
