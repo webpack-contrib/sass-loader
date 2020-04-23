@@ -89,7 +89,7 @@ SassError: Expected newline.",
 
 exports[`loader should output an understandable error (dart-sass) (sass): file dependencies 1`] = `
 Array [
-  "/home/evilebottnawi/IdeaProjects/sass-loader/test/sass/error.sass",
+  "test/sass/error.sass",
 ]
 `;
 
@@ -104,7 +104,7 @@ SassError: expected \\"{\\".",
 
 exports[`loader should output an understandable error (dart-sass) (scss): file dependencies 1`] = `
 Array [
-  "/home/evilebottnawi/IdeaProjects/sass-loader/test/scss/error.scss",
+  "test/scss/error.scss",
 ]
 `;
 
@@ -119,7 +119,7 @@ SassError: Invalid CSS after \\"a {\\": expected \\"}\\", was \\"{}\\"",
 
 exports[`loader should output an understandable error (node-sass) (sass): file dependencies 1`] = `
 Array [
-  "/home/evilebottnawi/IdeaProjects/sass-loader/test/sass/error.sass",
+  "test/sass/error.sass",
 ]
 `;
 
@@ -134,7 +134,7 @@ SassError: property \\"some-value\\" must be followed by a ':'",
 
 exports[`loader should output an understandable error (node-sass) (scss): file dependencies 1`] = `
 Array [
-  "/home/evilebottnawi/IdeaProjects/sass-loader/test/scss/error.scss",
+  "test/scss/error.scss",
 ]
 `;
 
@@ -149,7 +149,7 @@ SassError: Can't find stylesheet to import.",
 
 exports[`loader should output an understandable error when a file could not be found (dart-sass) (sass): file dependencies 1`] = `
 Array [
-  "/home/evilebottnawi/IdeaProjects/sass-loader/test/sass/error-file-not-found.sass",
+  "test/sass/error-file-not-found.sass",
 ]
 `;
 
@@ -164,7 +164,7 @@ SassError: Can't find stylesheet to import.",
 
 exports[`loader should output an understandable error when a file could not be found (dart-sass) (scss): file dependencies 1`] = `
 Array [
-  "/home/evilebottnawi/IdeaProjects/sass-loader/test/scss/error-file-not-found.scss",
+  "test/scss/error-file-not-found.scss",
 ]
 `;
 
@@ -179,7 +179,7 @@ SassError: File to import not found or unreadable: does-not-exist.",
 
 exports[`loader should output an understandable error when a file could not be found (node-sass) (sass): file dependencies 1`] = `
 Array [
-  "/home/evilebottnawi/IdeaProjects/sass-loader/test/sass/error-file-not-found.sass",
+  "test/sass/error-file-not-found.sass",
 ]
 `;
 
@@ -194,7 +194,7 @@ SassError: File to import not found or unreadable: does-not-exist.",
 
 exports[`loader should output an understandable error when a file could not be found (node-sass) (scss): file dependencies 1`] = `
 Array [
-  "/home/evilebottnawi/IdeaProjects/sass-loader/test/scss/error-file-not-found.scss",
+  "test/scss/error-file-not-found.scss",
 ]
 `;
 
@@ -209,7 +209,7 @@ SassError: Can't find stylesheet to import.",
 
 exports[`loader should output an understandable error when a file could not be found using "@use" rule (dart-sass) (sass): file dependencies 1`] = `
 Array [
-  "/home/evilebottnawi/IdeaProjects/sass-loader/test/sass/error-file-not-found-use.sass",
+  "test/sass/error-file-not-found-use.sass",
 ]
 `;
 
@@ -224,7 +224,7 @@ SassError: Can't find stylesheet to import.",
 
 exports[`loader should output an understandable error when a file could not be found using "@use" rule (dart-sass) (scss): file dependencies 1`] = `
 Array [
-  "/home/evilebottnawi/IdeaProjects/sass-loader/test/scss/error-file-not-found-use.scss",
+  "test/scss/error-file-not-found-use.scss",
 ]
 `;
 
@@ -239,8 +239,8 @@ SassError: Expected newline.",
 
 exports[`loader should output an understandable error when the problem in "@import" (dart-sass) (sass): file dependencies 1`] = `
 Array [
-  "/home/evilebottnawi/IdeaProjects/sass-loader/test/sass/error-import.sass",
-  "/home/evilebottnawi/IdeaProjects/sass-loader/test/sass/error.sass",
+  "test/sass/error-import.sass",
+  "test/sass/error.sass",
 ]
 `;
 
@@ -255,8 +255,8 @@ SassError: expected \\"{\\".",
 
 exports[`loader should output an understandable error when the problem in "@import" (dart-sass) (scss): file dependencies 1`] = `
 Array [
-  "/home/evilebottnawi/IdeaProjects/sass-loader/test/scss/error-import.scss",
-  "/home/evilebottnawi/IdeaProjects/sass-loader/test/scss/error.scss",
+  "test/scss/error-import.scss",
+  "test/scss/error.scss",
 ]
 `;
 
@@ -271,8 +271,8 @@ SassError: Invalid CSS after \\"a {\\": expected \\"}\\", was \\"{}\\"",
 
 exports[`loader should output an understandable error when the problem in "@import" (node-sass) (sass): file dependencies 1`] = `
 Array [
-  "/home/evilebottnawi/IdeaProjects/sass-loader/test/sass/error-import.sass",
-  "/home/evilebottnawi/IdeaProjects/sass-loader/test/sass/error.sass",
+  "test/sass/error-import.sass",
+  "test/sass/error.sass",
 ]
 `;
 
@@ -287,8 +287,8 @@ SassError: property \\"some-value\\" must be followed by a ':'",
 
 exports[`loader should output an understandable error when the problem in "@import" (node-sass) (scss): file dependencies 1`] = `
 Array [
-  "/home/evilebottnawi/IdeaProjects/sass-loader/test/scss/error-import.scss",
-  "/home/evilebottnawi/IdeaProjects/sass-loader/test/scss/error.scss",
+  "test/scss/error-import.scss",
+  "test/scss/error.scss",
 ]
 `;
 
@@ -303,8 +303,8 @@ SassError: Expected newline.",
 
 exports[`loader should output an understandable error with a problem in "@use" (dart-sass) (sass): file dependencies 1`] = `
 Array [
-  "/home/evilebottnawi/IdeaProjects/sass-loader/test/sass/error-use.sass",
-  "/home/evilebottnawi/IdeaProjects/sass-loader/test/sass/error.sass",
+  "test/sass/error-use.sass",
+  "test/sass/error.sass",
 ]
 `;
 
@@ -319,8 +319,8 @@ SassError: expected \\"{\\".",
 
 exports[`loader should output an understandable error with a problem in "@use" (dart-sass) (scss): file dependencies 1`] = `
 Array [
-  "/home/evilebottnawi/IdeaProjects/sass-loader/test/scss/error-use.scss",
-  "/home/evilebottnawi/IdeaProjects/sass-loader/test/scss/error.scss",
+  "test/scss/error-use.scss",
+  "test/scss/error.scss",
 ]
 `;
 
@@ -473,7 +473,7 @@ SassError: Can't find stylesheet to import.",
 
 exports[`loader should throw an error with a explicit file and a file does not exist (dart-sass) (sass): file dependencies 1`] = `
 Array [
-  "/home/evilebottnawi/IdeaProjects/sass-loader/test/sass/error-file-not-found-2.sass",
+  "test/sass/error-file-not-found-2.sass",
 ]
 `;
 
@@ -488,7 +488,7 @@ SassError: Can't find stylesheet to import.",
 
 exports[`loader should throw an error with a explicit file and a file does not exist (dart-sass) (scss): file dependencies 1`] = `
 Array [
-  "/home/evilebottnawi/IdeaProjects/sass-loader/test/scss/error-file-not-found-2.scss",
+  "test/scss/error-file-not-found-2.scss",
 ]
 `;
 
@@ -503,7 +503,7 @@ SassError: File to import not found or unreadable: ./another/_module.scss.",
 
 exports[`loader should throw an error with a explicit file and a file does not exist (node-sass) (sass): file dependencies 1`] = `
 Array [
-  "/home/evilebottnawi/IdeaProjects/sass-loader/test/sass/error-file-not-found-2.sass",
+  "test/sass/error-file-not-found-2.sass",
 ]
 `;
 
@@ -518,7 +518,7 @@ SassError: File to import not found or unreadable: ./another/_module.scss.",
 
 exports[`loader should throw an error with a explicit file and a file does not exist (node-sass) (scss): file dependencies 1`] = `
 Array [
-  "/home/evilebottnawi/IdeaProjects/sass-loader/test/scss/error-file-not-found-2.scss",
+  "test/scss/error-file-not-found-2.scss",
 ]
 `;
 
@@ -533,7 +533,7 @@ SassError: Can't find stylesheet to import.",
 
 exports[`loader should throw an error with a explicit file and a file does not exist using "@use" rule (dart-sass) (sass): file dependencies 1`] = `
 Array [
-  "/home/evilebottnawi/IdeaProjects/sass-loader/test/sass/error-file-not-found-use-2.sass",
+  "test/sass/error-file-not-found-use-2.sass",
 ]
 `;
 
@@ -548,7 +548,7 @@ SassError: Can't find stylesheet to import.",
 
 exports[`loader should throw an error with a explicit file and a file does not exist using "@use" rule (dart-sass) (scss): file dependencies 1`] = `
 Array [
-  "/home/evilebottnawi/IdeaProjects/sass-loader/test/scss/error-file-not-found-use-2.scss",
+  "test/scss/error-file-not-found-use-2.scss",
 ]
 `;
 

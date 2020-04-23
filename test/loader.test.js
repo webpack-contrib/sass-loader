@@ -13,6 +13,7 @@ import {
   getImplementationByName,
   getTestId,
   getWarnings,
+  toRelative,
 } from './helpers';
 
 const implementations = [nodeSass, dartSass];
@@ -70,7 +71,7 @@ describe('loader', () => {
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
 
-        expect(Array.from(stats.compilation.fileDependencies)).toMatchSnapshot(
+        expect(toRelative(stats.compilation.fileDependencies)).toMatchSnapshot(
           'file dependencies'
         );
         expect(getWarnings(stats)).toMatchSnapshot('warnings');
@@ -85,7 +86,7 @@ describe('loader', () => {
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
 
-        expect(Array.from(stats.compilation.fileDependencies)).toMatchSnapshot(
+        expect(toRelative(stats.compilation.fileDependencies)).toMatchSnapshot(
           'file dependencies'
         );
         expect(getWarnings(stats)).toMatchSnapshot('warnings');
@@ -100,7 +101,7 @@ describe('loader', () => {
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
 
-        expect(Array.from(stats.compilation.fileDependencies)).toMatchSnapshot(
+        expect(toRelative(stats.compilation.fileDependencies)).toMatchSnapshot(
           'file dependencies'
         );
         expect(getWarnings(stats)).toMatchSnapshot('warnings');
@@ -115,7 +116,7 @@ describe('loader', () => {
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
 
-        expect(Array.from(stats.compilation.fileDependencies)).toMatchSnapshot(
+        expect(toRelative(stats.compilation.fileDependencies)).toMatchSnapshot(
           'file dependencies'
         );
         expect(getWarnings(stats)).toMatchSnapshot('warnings');
@@ -766,7 +767,7 @@ describe('loader', () => {
           const stats = await compile(compiler);
 
           expect(
-            Array.from(stats.compilation.fileDependencies)
+            toRelative(stats.compilation.fileDependencies)
           ).toMatchSnapshot('file dependencies');
           expect(getWarnings(stats)).toMatchSnapshot('warnings');
           expect(getErrors(stats)).toMatchSnapshot('errors');
@@ -781,7 +782,7 @@ describe('loader', () => {
           const stats = await compile(compiler);
 
           expect(
-            Array.from(stats.compilation.fileDependencies)
+            toRelative(stats.compilation.fileDependencies)
           ).toMatchSnapshot('file dependencies');
           expect(getWarnings(stats)).toMatchSnapshot('warnings');
           expect(getErrors(stats)).toMatchSnapshot('errors');
@@ -796,7 +797,7 @@ describe('loader', () => {
           const stats = await compile(compiler);
 
           expect(
-            Array.from(stats.compilation.fileDependencies)
+            toRelative(stats.compilation.fileDependencies)
           ).toMatchSnapshot('file dependencies');
           expect(getWarnings(stats)).toMatchSnapshot('warnings');
           expect(getErrors(stats)).toMatchSnapshot('errors');
