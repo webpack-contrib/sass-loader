@@ -2,8 +2,6 @@ import path from 'path';
 
 import cloneDeep from 'clone-deep';
 
-import proxyCustomImporters from './proxyCustomImporters';
-
 function isProductionLikeMode(loaderContext) {
   return loaderContext.mode === 'production' || !loaderContext.mode;
 }
@@ -100,7 +98,9 @@ function getSassOptions(loaderContext, loaderOptions, content, implementation) {
 
   // Allow passing custom importers to `sass`/`node-sass`. Accepts `Function` or an array of `Function`s.
   options.importer = options.importer
-    ? proxyCustomImporters(options.importer, resourcePath)
+    ? Array.isArray(options.importer)
+      ? options.importer
+      : [options.importer]
     : [];
 
   options.includePaths = []
