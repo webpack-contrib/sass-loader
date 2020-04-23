@@ -170,7 +170,7 @@ describe('sassOptions option', () => {
         expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
-      it(`should work with the "importer" option (${implementationName}) (${syntax})`, async () => {
+      it(`should work with the "importer" as a single function option (${implementationName}) (${syntax})`, async () => {
         const testId = getTestId('custom-importer', syntax);
         const options = {
           implementation: getImplementationByName(implementationName),
