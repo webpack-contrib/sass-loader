@@ -43,7 +43,10 @@ function loader(content) {
 
   render(sassOptions, (error, result) => {
     if (error) {
-      this.addDependency(path.normalize(error.file));
+      // eslint-disable-next-line no-console
+      console.log(error.file);
+
+      this.addDependency(error.file);
 
       callback(new SassError(error));
 

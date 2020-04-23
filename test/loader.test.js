@@ -70,6 +70,9 @@ describe('loader', () => {
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
 
+        expect(Array.from(stats.compilation.fileDependencies)).toMatchSnapshot(
+          'file dependencies'
+        );
         expect(getWarnings(stats)).toMatchSnapshot('warnings');
         expect(getErrors(stats)).toMatchSnapshot('errors');
       });
@@ -82,6 +85,9 @@ describe('loader', () => {
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
 
+        expect(Array.from(stats.compilation.fileDependencies)).toMatchSnapshot(
+          'file dependencies'
+        );
         expect(getWarnings(stats)).toMatchSnapshot('warnings');
         expect(getErrors(stats)).toMatchSnapshot('errors');
       });
@@ -94,6 +100,9 @@ describe('loader', () => {
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
 
+        expect(Array.from(stats.compilation.fileDependencies)).toMatchSnapshot(
+          'file dependencies'
+        );
         expect(getWarnings(stats)).toMatchSnapshot('warnings');
         expect(getErrors(stats)).toMatchSnapshot('errors');
       });
@@ -106,6 +115,9 @@ describe('loader', () => {
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
 
+        expect(Array.from(stats.compilation.fileDependencies)).toMatchSnapshot(
+          'file dependencies'
+        );
         expect(getWarnings(stats)).toMatchSnapshot('warnings');
         expect(getErrors(stats)).toMatchSnapshot('errors');
       });
@@ -753,6 +765,9 @@ describe('loader', () => {
           const compiler = getCompiler(testId, { loader: { options } });
           const stats = await compile(compiler);
 
+          expect(
+            Array.from(stats.compilation.fileDependencies)
+          ).toMatchSnapshot('file dependencies');
           expect(getWarnings(stats)).toMatchSnapshot('warnings');
           expect(getErrors(stats)).toMatchSnapshot('errors');
         });
@@ -765,6 +780,9 @@ describe('loader', () => {
           const compiler = getCompiler(testId, { loader: { options } });
           const stats = await compile(compiler);
 
+          expect(
+            Array.from(stats.compilation.fileDependencies)
+          ).toMatchSnapshot('file dependencies');
           expect(getWarnings(stats)).toMatchSnapshot('warnings');
           expect(getErrors(stats)).toMatchSnapshot('errors');
         });
@@ -777,6 +795,9 @@ describe('loader', () => {
           const compiler = getCompiler(testId, { loader: { options } });
           const stats = await compile(compiler);
 
+          expect(
+            Array.from(stats.compilation.fileDependencies)
+          ).toMatchSnapshot('file dependencies');
           expect(getWarnings(stats)).toMatchSnapshot('warnings');
           expect(getErrors(stats)).toMatchSnapshot('errors');
         });
