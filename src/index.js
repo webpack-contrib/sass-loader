@@ -17,7 +17,7 @@ import SassError from './SassError';
  * @param {string} content
  */
 function loader(content) {
-  const options = getOptions(this) || {};
+  const options = getOptions(this);
 
   validateOptions(schema, options, {
     name: 'Sass Loader',
