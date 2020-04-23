@@ -46,7 +46,6 @@ describe('loader', () => {
         expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
-      // See https://github.com/webpack-contrib/sass-loader/issues/21
       it(`should work with an empty file (${implementationName}) (${syntax})`, async () => {
         const testId = getTestId('empty', syntax);
         const options = {

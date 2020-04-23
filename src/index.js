@@ -39,14 +39,6 @@ function loader(content) {
   }
 
   const callback = this.async();
-
-  // Skip empty files, otherwise it will stop webpack, see issue #21
-  if (sassOptions.data.trim() === '') {
-    callback(null, '');
-
-    return;
-  }
-
   const render = getRenderFunctionFromSassImplementation(implementation);
 
   render(sassOptions, (error, result) => {
