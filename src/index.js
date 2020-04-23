@@ -50,7 +50,7 @@ function loader(content) {
       return;
     }
 
-    if (result.map && result.map !== '{}') {
+    if (result.map) {
       // eslint-disable-next-line no-param-reassign
       result.map = JSON.parse(result.map);
 
@@ -66,9 +66,6 @@ function loader(content) {
       result.map.sourceRoot = path.normalize(result.map.sourceRoot);
       // eslint-disable-next-line no-param-reassign
       result.map.sources = result.map.sources.map(path.normalize);
-    } else {
-      // eslint-disable-next-line no-param-reassign
-      result.map = null;
     }
 
     result.stats.includedFiles.forEach((includedFile) => {
