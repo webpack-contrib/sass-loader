@@ -87,24 +87,12 @@ SassError: Expected newline.",
 ]
 `;
 
-exports[`loader should output an understandable error (dart-sass) (sass): file dependencies 1`] = `
-Array [
-  "test/sass/error.sass",
-]
-`;
-
 exports[`loader should output an understandable error (dart-sass) (sass): warnings 1`] = `Array []`;
 
 exports[`loader should output an understandable error (dart-sass) (scss): errors 1`] = `
 Array [
   "ModuleBuildError: Module build failed (from ../src/cjs.js):
 SassError: expected \\"{\\".",
-]
-`;
-
-exports[`loader should output an understandable error (dart-sass) (scss): file dependencies 1`] = `
-Array [
-  "test/scss/error.scss",
 ]
 `;
 
@@ -117,24 +105,12 @@ SassError: Invalid CSS after \\"a {\\": expected \\"}\\", was \\"{}\\"",
 ]
 `;
 
-exports[`loader should output an understandable error (node-sass) (sass): file dependencies 1`] = `
-Array [
-  "test/sass/error.sass",
-]
-`;
-
 exports[`loader should output an understandable error (node-sass) (sass): warnings 1`] = `Array []`;
 
 exports[`loader should output an understandable error (node-sass) (scss): errors 1`] = `
 Array [
   "ModuleBuildError: Module build failed (from ../src/cjs.js):
 SassError: property \\"some-value\\" must be followed by a ':'",
-]
-`;
-
-exports[`loader should output an understandable error (node-sass) (scss): file dependencies 1`] = `
-Array [
-  "test/scss/error.scss",
 ]
 `;
 
@@ -147,24 +123,12 @@ SassError: Can't find stylesheet to import.",
 ]
 `;
 
-exports[`loader should output an understandable error when a file could not be found (dart-sass) (sass): file dependencies 1`] = `
-Array [
-  "test/sass/error-file-not-found.sass",
-]
-`;
-
 exports[`loader should output an understandable error when a file could not be found (dart-sass) (sass): warnings 1`] = `Array []`;
 
 exports[`loader should output an understandable error when a file could not be found (dart-sass) (scss): errors 1`] = `
 Array [
   "ModuleBuildError: Module build failed (from ../src/cjs.js):
 SassError: Can't find stylesheet to import.",
-]
-`;
-
-exports[`loader should output an understandable error when a file could not be found (dart-sass) (scss): file dependencies 1`] = `
-Array [
-  "test/scss/error-file-not-found.scss",
 ]
 `;
 
@@ -177,24 +141,12 @@ SassError: File to import not found or unreadable: does-not-exist.",
 ]
 `;
 
-exports[`loader should output an understandable error when a file could not be found (node-sass) (sass): file dependencies 1`] = `
-Array [
-  "test/sass/error-file-not-found.sass",
-]
-`;
-
 exports[`loader should output an understandable error when a file could not be found (node-sass) (sass): warnings 1`] = `Array []`;
 
 exports[`loader should output an understandable error when a file could not be found (node-sass) (scss): errors 1`] = `
 Array [
   "ModuleBuildError: Module build failed (from ../src/cjs.js):
 SassError: File to import not found or unreadable: does-not-exist.",
-]
-`;
-
-exports[`loader should output an understandable error when a file could not be found (node-sass) (scss): file dependencies 1`] = `
-Array [
-  "test/scss/error-file-not-found.scss",
 ]
 `;
 
@@ -207,24 +159,12 @@ SassError: Can't find stylesheet to import.",
 ]
 `;
 
-exports[`loader should output an understandable error when a file could not be found using "@use" rule (dart-sass) (sass): file dependencies 1`] = `
-Array [
-  "test/sass/error-file-not-found-use.sass",
-]
-`;
-
 exports[`loader should output an understandable error when a file could not be found using "@use" rule (dart-sass) (sass): warnings 1`] = `Array []`;
 
 exports[`loader should output an understandable error when a file could not be found using "@use" rule (dart-sass) (scss): errors 1`] = `
 Array [
   "ModuleBuildError: Module build failed (from ../src/cjs.js):
 SassError: Can't find stylesheet to import.",
-]
-`;
-
-exports[`loader should output an understandable error when a file could not be found using "@use" rule (dart-sass) (scss): file dependencies 1`] = `
-Array [
-  "test/scss/error-file-not-found-use.scss",
 ]
 `;
 
@@ -237,26 +177,12 @@ SassError: Expected newline.",
 ]
 `;
 
-exports[`loader should output an understandable error when the problem in "@import" (dart-sass) (sass): file dependencies 1`] = `
-Array [
-  "test/sass/error-import.sass",
-  "test/sass/error.sass",
-]
-`;
-
 exports[`loader should output an understandable error when the problem in "@import" (dart-sass) (sass): warnings 1`] = `Array []`;
 
 exports[`loader should output an understandable error when the problem in "@import" (dart-sass) (scss): errors 1`] = `
 Array [
   "ModuleBuildError: Module build failed (from ../src/cjs.js):
 SassError: expected \\"{\\".",
-]
-`;
-
-exports[`loader should output an understandable error when the problem in "@import" (dart-sass) (scss): file dependencies 1`] = `
-Array [
-  "test/scss/error-import.scss",
-  "test/scss/error.scss",
 ]
 `;
 
@@ -269,26 +195,12 @@ SassError: Invalid CSS after \\"a {\\": expected \\"}\\", was \\"{}\\"",
 ]
 `;
 
-exports[`loader should output an understandable error when the problem in "@import" (node-sass) (sass): file dependencies 1`] = `
-Array [
-  "test/sass/error-import.sass",
-  "test/sass/error.sass",
-]
-`;
-
 exports[`loader should output an understandable error when the problem in "@import" (node-sass) (sass): warnings 1`] = `Array []`;
 
 exports[`loader should output an understandable error when the problem in "@import" (node-sass) (scss): errors 1`] = `
 Array [
   "ModuleBuildError: Module build failed (from ../src/cjs.js):
 SassError: property \\"some-value\\" must be followed by a ':'",
-]
-`;
-
-exports[`loader should output an understandable error when the problem in "@import" (node-sass) (scss): file dependencies 1`] = `
-Array [
-  "test/scss/error-import.scss",
-  "test/scss/error.scss",
 ]
 `;
 
@@ -301,26 +213,12 @@ SassError: Expected newline.",
 ]
 `;
 
-exports[`loader should output an understandable error with a problem in "@use" (dart-sass) (sass): file dependencies 1`] = `
-Array [
-  "test/sass/error-use.sass",
-  "test/sass/error.sass",
-]
-`;
-
 exports[`loader should output an understandable error with a problem in "@use" (dart-sass) (sass): warnings 1`] = `Array []`;
 
 exports[`loader should output an understandable error with a problem in "@use" (dart-sass) (scss): errors 1`] = `
 Array [
   "ModuleBuildError: Module build failed (from ../src/cjs.js):
 SassError: expected \\"{\\".",
-]
-`;
-
-exports[`loader should output an understandable error with a problem in "@use" (dart-sass) (scss): file dependencies 1`] = `
-Array [
-  "test/scss/error-use.scss",
-  "test/scss/error.scss",
 ]
 `;
 
@@ -471,24 +369,12 @@ SassError: Can't find stylesheet to import.",
 ]
 `;
 
-exports[`loader should throw an error with a explicit file and a file does not exist (dart-sass) (sass): file dependencies 1`] = `
-Array [
-  "test/sass/error-file-not-found-2.sass",
-]
-`;
-
 exports[`loader should throw an error with a explicit file and a file does not exist (dart-sass) (sass): warnings 1`] = `Array []`;
 
 exports[`loader should throw an error with a explicit file and a file does not exist (dart-sass) (scss): errors 1`] = `
 Array [
   "ModuleBuildError: Module build failed (from ../src/cjs.js):
 SassError: Can't find stylesheet to import.",
-]
-`;
-
-exports[`loader should throw an error with a explicit file and a file does not exist (dart-sass) (scss): file dependencies 1`] = `
-Array [
-  "test/scss/error-file-not-found-2.scss",
 ]
 `;
 
@@ -501,24 +387,12 @@ SassError: File to import not found or unreadable: ./another/_module.scss.",
 ]
 `;
 
-exports[`loader should throw an error with a explicit file and a file does not exist (node-sass) (sass): file dependencies 1`] = `
-Array [
-  "test/sass/error-file-not-found-2.sass",
-]
-`;
-
 exports[`loader should throw an error with a explicit file and a file does not exist (node-sass) (sass): warnings 1`] = `Array []`;
 
 exports[`loader should throw an error with a explicit file and a file does not exist (node-sass) (scss): errors 1`] = `
 Array [
   "ModuleBuildError: Module build failed (from ../src/cjs.js):
 SassError: File to import not found or unreadable: ./another/_module.scss.",
-]
-`;
-
-exports[`loader should throw an error with a explicit file and a file does not exist (node-sass) (scss): file dependencies 1`] = `
-Array [
-  "test/scss/error-file-not-found-2.scss",
 ]
 `;
 
@@ -531,24 +405,12 @@ SassError: Can't find stylesheet to import.",
 ]
 `;
 
-exports[`loader should throw an error with a explicit file and a file does not exist using "@use" rule (dart-sass) (sass): file dependencies 1`] = `
-Array [
-  "test/sass/error-file-not-found-use-2.sass",
-]
-`;
-
 exports[`loader should throw an error with a explicit file and a file does not exist using "@use" rule (dart-sass) (sass): warnings 1`] = `Array []`;
 
 exports[`loader should throw an error with a explicit file and a file does not exist using "@use" rule (dart-sass) (scss): errors 1`] = `
 Array [
   "ModuleBuildError: Module build failed (from ../src/cjs.js):
 SassError: Can't find stylesheet to import.",
-]
-`;
-
-exports[`loader should throw an error with a explicit file and a file does not exist using "@use" rule (dart-sass) (scss): file dependencies 1`] = `
-Array [
-  "test/scss/error-file-not-found-use-2.scss",
 ]
 `;
 
