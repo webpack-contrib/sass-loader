@@ -13,7 +13,6 @@ import {
   getImplementationByName,
   getTestId,
   getWarnings,
-  // toRelative,
 } from './helpers';
 
 const implementations = [nodeSass, dartSass];
@@ -71,9 +70,11 @@ describe('loader', () => {
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
 
-        // expect(toRelative(stats.compilation.fileDependencies)).toMatchSnapshot(
-        //   'file dependencies'
-        // );
+        expect(
+          stats.compilation.fileDependencies.has(
+            path.resolve(`./test/${syntax}/error.${syntax}`)
+          )
+        ).toBe(true);
         expect(getWarnings(stats)).toMatchSnapshot('warnings');
         expect(getErrors(stats)).toMatchSnapshot('errors');
       });
@@ -86,9 +87,16 @@ describe('loader', () => {
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
 
-        // expect(toRelative(stats.compilation.fileDependencies)).toMatchSnapshot(
-        //   'file dependencies'
-        // );
+        expect(
+          stats.compilation.fileDependencies.has(
+            path.resolve(`./test/${syntax}/error-import.${syntax}`)
+          )
+        ).toBe(true);
+        expect(
+          stats.compilation.fileDependencies.has(
+            path.resolve(`./test/${syntax}/error.${syntax}`)
+          )
+        ).toBe(true);
         expect(getWarnings(stats)).toMatchSnapshot('warnings');
         expect(getErrors(stats)).toMatchSnapshot('errors');
       });
@@ -101,9 +109,11 @@ describe('loader', () => {
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
 
-        // expect(toRelative(stats.compilation.fileDependencies)).toMatchSnapshot(
-        //   'file dependencies'
-        // );
+        expect(
+          stats.compilation.fileDependencies.has(
+            path.resolve(`./test/${syntax}/error-file-not-found.${syntax}`)
+          )
+        ).toBe(true);
         expect(getWarnings(stats)).toMatchSnapshot('warnings');
         expect(getErrors(stats)).toMatchSnapshot('errors');
       });
@@ -116,9 +126,11 @@ describe('loader', () => {
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
 
-        // expect(toRelative(stats.compilation.fileDependencies)).toMatchSnapshot(
-        //   'file dependencies'
-        // );
+        expect(
+          stats.compilation.fileDependencies.has(
+            path.resolve(`./test/${syntax}/error-file-not-found-2.${syntax}`)
+          )
+        ).toBe(true);
         expect(getWarnings(stats)).toMatchSnapshot('warnings');
         expect(getErrors(stats)).toMatchSnapshot('errors');
       });
@@ -766,9 +778,16 @@ describe('loader', () => {
           const compiler = getCompiler(testId, { loader: { options } });
           const stats = await compile(compiler);
 
-          // expect(
-          //   toRelative(stats.compilation.fileDependencies)
-          // ).toMatchSnapshot('file dependencies');
+          expect(
+            stats.compilation.fileDependencies.has(
+              path.resolve(`./test/${syntax}/error-use.${syntax}`)
+            )
+          ).toBe(true);
+          expect(
+            stats.compilation.fileDependencies.has(
+              path.resolve(`./test/${syntax}/error.${syntax}`)
+            )
+          ).toBe(true);
           expect(getWarnings(stats)).toMatchSnapshot('warnings');
           expect(getErrors(stats)).toMatchSnapshot('errors');
         });
@@ -781,9 +800,13 @@ describe('loader', () => {
           const compiler = getCompiler(testId, { loader: { options } });
           const stats = await compile(compiler);
 
-          // expect(
-          //   toRelative(stats.compilation.fileDependencies)
-          // ).toMatchSnapshot('file dependencies');
+          expect(
+            stats.compilation.fileDependencies.has(
+              path.resolve(
+                `./test/${syntax}/error-file-not-found-use.${syntax}`
+              )
+            )
+          ).toBe(true);
           expect(getWarnings(stats)).toMatchSnapshot('warnings');
           expect(getErrors(stats)).toMatchSnapshot('errors');
         });
@@ -796,9 +819,13 @@ describe('loader', () => {
           const compiler = getCompiler(testId, { loader: { options } });
           const stats = await compile(compiler);
 
-          // expect(
-          //   toRelative(stats.compilation.fileDependencies)
-          // ).toMatchSnapshot('file dependencies');
+          expect(
+            stats.compilation.fileDependencies.has(
+              path.resolve(
+                `./test/${syntax}/error-file-not-found-use-2.${syntax}`
+              )
+            )
+          ).toBe(true);
           expect(getWarnings(stats)).toMatchSnapshot('warnings');
           expect(getErrors(stats)).toMatchSnapshot('errors');
         });

@@ -10,7 +10,6 @@ import getTestId from './getTestId';
 import getWarnings from './getWarnings';
 import normalizeImplementationError from './normalizeImplementationError';
 import readAsset from './readAsset';
-import toRelative from './toRelative';
 
 export {
   compile,
@@ -25,5 +24,4 @@ export {
   getWarnings,
   normalizeImplementationError,
   readAsset,
-  toRelative,
 };
