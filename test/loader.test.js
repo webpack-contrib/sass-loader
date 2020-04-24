@@ -46,7 +46,6 @@ describe('loader', () => {
         expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
-      // See https://github.com/webpack-contrib/sass-loader/issues/21
       it(`should work with an empty file (${implementationName}) (${syntax})`, async () => {
         const testId = getTestId('empty', syntax);
         const options = {
@@ -71,6 +70,11 @@ describe('loader', () => {
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
 
+        expect(
+          stats.compilation.fileDependencies.has(
+            path.resolve(`./test/${syntax}/error.${syntax}`)
+          )
+        ).toBe(true);
         expect(getWarnings(stats)).toMatchSnapshot('warnings');
         expect(getErrors(stats)).toMatchSnapshot('errors');
       });
@@ -83,6 +87,16 @@ describe('loader', () => {
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
 
+        expect(
+          stats.compilation.fileDependencies.has(
+            path.resolve(`./test/${syntax}/error-import.${syntax}`)
+          )
+        ).toBe(true);
+        expect(
+          stats.compilation.fileDependencies.has(
+            path.resolve(`./test/${syntax}/error.${syntax}`)
+          )
+        ).toBe(true);
         expect(getWarnings(stats)).toMatchSnapshot('warnings');
         expect(getErrors(stats)).toMatchSnapshot('errors');
       });
@@ -95,6 +109,11 @@ describe('loader', () => {
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
 
+        expect(
+          stats.compilation.fileDependencies.has(
+            path.resolve(`./test/${syntax}/error-file-not-found.${syntax}`)
+          )
+        ).toBe(true);
         expect(getWarnings(stats)).toMatchSnapshot('warnings');
         expect(getErrors(stats)).toMatchSnapshot('errors');
       });
@@ -107,6 +126,11 @@ describe('loader', () => {
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
 
+        expect(
+          stats.compilation.fileDependencies.has(
+            path.resolve(`./test/${syntax}/error-file-not-found-2.${syntax}`)
+          )
+        ).toBe(true);
         expect(getWarnings(stats)).toMatchSnapshot('warnings');
         expect(getErrors(stats)).toMatchSnapshot('errors');
       });
@@ -754,6 +778,16 @@ describe('loader', () => {
           const compiler = getCompiler(testId, { loader: { options } });
           const stats = await compile(compiler);
 
+          expect(
+            stats.compilation.fileDependencies.has(
+              path.resolve(`./test/${syntax}/error-use.${syntax}`)
+            )
+          ).toBe(true);
+          expect(
+            stats.compilation.fileDependencies.has(
+              path.resolve(`./test/${syntax}/error.${syntax}`)
+            )
+          ).toBe(true);
           expect(getWarnings(stats)).toMatchSnapshot('warnings');
           expect(getErrors(stats)).toMatchSnapshot('errors');
         });
@@ -766,6 +800,13 @@ describe('loader', () => {
           const compiler = getCompiler(testId, { loader: { options } });
           const stats = await compile(compiler);
 
+          expect(
+            stats.compilation.fileDependencies.has(
+              path.resolve(
+                `./test/${syntax}/error-file-not-found-use.${syntax}`
+              )
+            )
+          ).toBe(true);
           expect(getWarnings(stats)).toMatchSnapshot('warnings');
           expect(getErrors(stats)).toMatchSnapshot('errors');
         });
@@ -778,6 +819,13 @@ describe('loader', () => {
           const compiler = getCompiler(testId, { loader: { options } });
           const stats = await compile(compiler);
 
+          expect(
+            stats.compilation.fileDependencies.has(
+              path.resolve(
+                `./test/${syntax}/error-file-not-found-use-2.${syntax}`
+              )
+            )
+          ).toBe(true);
           expect(getWarnings(stats)).toMatchSnapshot('warnings');
           expect(getErrors(stats)).toMatchSnapshot('errors');
         });

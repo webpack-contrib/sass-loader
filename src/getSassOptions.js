@@ -2,14 +2,8 @@ import path from 'path';
 
 import cloneDeep from 'clone-deep';
 
-import proxyCustomImporters from './proxyCustomImporters';
-
 function isProductionLikeMode(loaderContext) {
-  return (
-    loaderContext.mode === 'production' ||
-    !loaderContext.mode ||
-    loaderContext.minimize
-  );
+  return loaderContext.mode === 'production' || !loaderContext.mode;
 }
 
 /**
@@ -81,7 +75,7 @@ function getSassOptions(loaderContext, loaderOptions, content, implementation) {
     // But since we're using the data option, the source map will not actually be written, but
     // all paths in sourceMap.sources will be relative to that path.
     // Pretty complicated... :(
-    options.sourceMap = path.join(process.cwd(), '/sass.map');
+    options.sourceMap = path.join(process.cwd(), '/sass.css.map');
     options.sourceMapRoot = process.cwd();
     options.sourceMapContents = true;
     options.omitSourceMapUrl = true;
@@ -102,9 +96,11 @@ function getSassOptions(loaderContext, loaderOptions, content, implementation) {
     options.indentedSyntax = Boolean(options.indentedSyntax);
   }
 
-  // Allow passing custom importers to `node-sass`. Accepts `Function` or an array of `Function`s.
+  // Allow passing custom importers to `sass`/`node-sass`. Accepts `Function` or an array of `Function`s.
   options.importer = options.importer
-    ? proxyCustomImporters(options.importer, resourcePath)
+    ? Array.isArray(options.importer)
+      ? options.importer
+      : [options.importer]
     : [];
 
   options.includePaths = []

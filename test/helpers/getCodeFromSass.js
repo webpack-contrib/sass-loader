@@ -723,7 +723,13 @@ function getCodeFromSass(testId, options) {
   }
 
   sassOptions.importer = sassOptions.importer
-    ? [sassOptions.importer, testImporter]
+    ? []
+        .concat(
+          Array.isArray(sassOptions.importer)
+            ? [...sassOptions.importer]
+            : [sassOptions.importer]
+        )
+        .concat([testImporter])
     : [testImporter];
 
   const { css, map } = implementation.renderSync(sassOptions);

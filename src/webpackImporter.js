@@ -20,13 +20,6 @@ const matchCss = /\.css$/i;
  *
  */
 function webpackImporter(loaderContext, includePaths) {
-  function dirContextFrom(fileContext) {
-    return path.dirname(
-      // The first file is 'stdin' when we're using the data option
-      fileContext === 'stdin' ? loaderContext.resourcePath : fileContext
-    );
-  }
-
   function startResolving(resolutionMap) {
     if (resolutionMap.length === 0) {
       return Promise.reject();
@@ -116,7 +109,7 @@ function webpackImporter(loaderContext, includePaths) {
 
     resolutionMap = resolutionMap.concat({
       resolve: webpackResolve,
-      context: isFileScheme ? '/' : dirContextFrom(prev),
+      context: isFileScheme ? '/' : path.dirname(prev),
       possibleRequests: webpackPossibleRequests,
     });
 

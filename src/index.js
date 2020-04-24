@@ -17,7 +17,7 @@ import SassError from './SassError';
  * @param {string} content
  */
 function loader(content) {
-  const options = getOptions(this) || {};
+  const options = getOptions(this);
 
   validateOptions(schema, options, {
     name: 'Sass Loader',
@@ -39,28 +39,19 @@ function loader(content) {
   }
 
   const callback = this.async();
-
-  // Skip empty files, otherwise it will stop webpack, see issue #21
-  if (sassOptions.data.trim() === '') {
-    callback(null, '');
-
-    return;
-  }
-
   const render = getRenderFunctionFromSassImplementation(implementation);
 
   render(sassOptions, (error, result) => {
     if (error) {
-      if (error.file) {
-        this.addDependency(path.normalize(error.file));
-      }
+      // `node-sass` returns POSIX paths
+      this.addDependency(path.normalize(error.file));
 
-      callback(new SassError(error, this.resourcePath));
+      callback(new SassError(error));
 
       return;
     }
 
-    if (result.map && result.map !== '{}') {
+    if (result.map) {
       // eslint-disable-next-line no-param-reassign
       result.map = JSON.parse(result.map);
 
@@ -69,23 +60,6 @@ function loader(content) {
       // eslint-disable-next-line no-param-reassign
       delete result.map.file;
 
-      // One of the sources is 'stdin' according to dart-sass/node-sass because we've used the data input.
-      // Now let's override that value with the correct relative path.
-      // Since we specified options.sourceMap = path.join(process.cwd(), "/sass.map"); in getSassOptions,
-      // we know that this path is relative to process.cwd(). This is how node-sass works.
-      // eslint-disable-next-line no-param-reassign
-      const stdinIndex = result.map.sources.findIndex((source) =>
-        source.includes('stdin')
-      );
-
-      if (stdinIndex !== -1) {
-        // eslint-disable-next-line no-param-reassign
-        result.map.sources[stdinIndex] = path.relative(
-          process.cwd(),
-          this.resourcePath
-        );
-      }
-
       // node-sass returns POSIX paths, that's why we need to transform them back to native paths.
       // This fixes an error on windows where the source-map module cannot resolve the source maps.
       // @see https://github.com/webpack-contrib/sass-loader/issues/366#issuecomment-279460722
@@ -93,9 +67,6 @@ function loader(content) {
       result.map.sourceRoot = path.normalize(result.map.sourceRoot);
       // eslint-disable-next-line no-param-reassign
       result.map.sources = result.map.sources.map(path.normalize);
-    } else {
-      // eslint-disable-next-line no-param-reassign
-      result.map = null;
     }
 
     result.stats.includedFiles.forEach((includedFile) => {

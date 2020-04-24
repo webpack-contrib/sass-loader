@@ -1,5 +1,5 @@
 class SassError extends Error {
-  constructor(sassError, resourcePath) {
+  constructor(sassError) {
     super();
 
     this.name = 'SassError';
@@ -13,13 +13,13 @@ class SassError extends Error {
     this.message = `${this.name}: ${this.originalSassError.message}`;
 
     if (this.originalSassError.formatted) {
-      this.message = `${this.name}: ${this.originalSassError.formatted
-        .replace(/^Error: /, '')
-        .replace(/(\s*)stdin(\s*)/, `$1${resourcePath}$2`)}`;
+      this.message = `${this.name}: ${this.originalSassError.formatted.replace(
+        /^Error: /,
+        ''
+      )}`;
 
       // Instruct webpack to hide the JS stack from the console.
       // Usually you're only interested in the SASS stack in this case.
-      // eslint-disable-next-line no-param-reassign
       this.hideStack = true;
 
       Error.captureStackTrace(this, this.constructor);

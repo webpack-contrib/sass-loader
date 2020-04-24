@@ -1732,29 +1732,53 @@ exports[`sassOptions option should work with the "functions" option (node-sass) 
 
 exports[`sassOptions option should work with the "functions" option (node-sass) (scss): warnings 1`] = `Array []`;
 
-exports[`sassOptions option should work with the "importer" option (dart-sass) (sass): css 1`] = `""`;
+exports[`sassOptions option should work with the "importer" as a array of functions option (dart-sass) (sass): css 1`] = `""`;
 
-exports[`sassOptions option should work with the "importer" option (dart-sass) (sass): errors 1`] = `Array []`;
+exports[`sassOptions option should work with the "importer" as a array of functions option (dart-sass) (sass): errors 1`] = `Array []`;
 
-exports[`sassOptions option should work with the "importer" option (dart-sass) (sass): warnings 1`] = `Array []`;
+exports[`sassOptions option should work with the "importer" as a array of functions option (dart-sass) (sass): warnings 1`] = `Array []`;
 
-exports[`sassOptions option should work with the "importer" option (dart-sass) (scss): css 1`] = `""`;
+exports[`sassOptions option should work with the "importer" as a array of functions option (dart-sass) (scss): css 1`] = `""`;
 
-exports[`sassOptions option should work with the "importer" option (dart-sass) (scss): errors 1`] = `Array []`;
+exports[`sassOptions option should work with the "importer" as a array of functions option (dart-sass) (scss): errors 1`] = `Array []`;
 
-exports[`sassOptions option should work with the "importer" option (dart-sass) (scss): warnings 1`] = `Array []`;
+exports[`sassOptions option should work with the "importer" as a array of functions option (dart-sass) (scss): warnings 1`] = `Array []`;
 
-exports[`sassOptions option should work with the "importer" option (node-sass) (sass): css 1`] = `""`;
+exports[`sassOptions option should work with the "importer" as a array of functions option (node-sass) (sass): css 1`] = `""`;
 
-exports[`sassOptions option should work with the "importer" option (node-sass) (sass): errors 1`] = `Array []`;
+exports[`sassOptions option should work with the "importer" as a array of functions option (node-sass) (sass): errors 1`] = `Array []`;
 
-exports[`sassOptions option should work with the "importer" option (node-sass) (sass): warnings 1`] = `Array []`;
+exports[`sassOptions option should work with the "importer" as a array of functions option (node-sass) (sass): warnings 1`] = `Array []`;
 
-exports[`sassOptions option should work with the "importer" option (node-sass) (scss): css 1`] = `""`;
+exports[`sassOptions option should work with the "importer" as a array of functions option (node-sass) (scss): css 1`] = `""`;
 
-exports[`sassOptions option should work with the "importer" option (node-sass) (scss): errors 1`] = `Array []`;
+exports[`sassOptions option should work with the "importer" as a array of functions option (node-sass) (scss): errors 1`] = `Array []`;
 
-exports[`sassOptions option should work with the "importer" option (node-sass) (scss): warnings 1`] = `Array []`;
+exports[`sassOptions option should work with the "importer" as a array of functions option (node-sass) (scss): warnings 1`] = `Array []`;
+
+exports[`sassOptions option should work with the "importer" as a single function option (dart-sass) (sass): css 1`] = `""`;
+
+exports[`sassOptions option should work with the "importer" as a single function option (dart-sass) (sass): errors 1`] = `Array []`;
+
+exports[`sassOptions option should work with the "importer" as a single function option (dart-sass) (sass): warnings 1`] = `Array []`;
+
+exports[`sassOptions option should work with the "importer" as a single function option (dart-sass) (scss): css 1`] = `""`;
+
+exports[`sassOptions option should work with the "importer" as a single function option (dart-sass) (scss): errors 1`] = `Array []`;
+
+exports[`sassOptions option should work with the "importer" as a single function option (dart-sass) (scss): warnings 1`] = `Array []`;
+
+exports[`sassOptions option should work with the "importer" as a single function option (node-sass) (sass): css 1`] = `""`;
+
+exports[`sassOptions option should work with the "importer" as a single function option (node-sass) (sass): errors 1`] = `Array []`;
+
+exports[`sassOptions option should work with the "importer" as a single function option (node-sass) (sass): warnings 1`] = `Array []`;
+
+exports[`sassOptions option should work with the "importer" as a single function option (node-sass) (scss): css 1`] = `""`;
+
+exports[`sassOptions option should work with the "importer" as a single function option (node-sass) (scss): errors 1`] = `Array []`;
+
+exports[`sassOptions option should work with the "importer" as a single function option (node-sass) (scss): warnings 1`] = `Array []`;
 
 exports[`sassOptions option should work with the "includePaths" option (dart-sass) (sass): css 1`] = `
 ".include-path-module {
