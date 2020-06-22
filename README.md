@@ -28,7 +28,12 @@ npm install sass-loader sass webpack --save-dev
 ```
 
 `sass-loader` requires you to install either [Dart Sass](https://github.com/sass/dart-sass) on your own (more documentation can be found below) or [Node Sass](https://github.com/sass/node-sass).
+
 This allows you to control the versions of all your dependencies, and to choose which Sass implementation to use.
+
+> ℹ️ We recommend using [Dart Sass](https://github.com/sass/dart-sass).
+
+> ⚠ [Node Sass](https://github.com/sass/node-sass) does not work with [Yarn PnP](https://classic.yarnpkg.com/en/docs/pnp/) feature.
 
 Chain the `sass-loader` with the [css-loader](https://github.com/webpack-contrib/css-loader) and the [style-loader](https://github.com/webpack-contrib/style-loader) to immediately apply all styles to the DOM or the [mini-css-extract-plugin](https://github.com/webpack-contrib/mini-css-extract-plugin) to extract it into a separate file.
 
@@ -388,7 +393,8 @@ module.exports = {
 ```
 
 > ℹ In some rare cases `node-sass` can output invalid source maps (it is a `node-sass` bug).
-> In order to avoid this, you can try to update `node-sass` to latest version or you can try to set within `sassOptions` the `outputStyle` option to `compressed`.
+
+> > In order to avoid this, you can try to update `node-sass` to latest version or you can try to set within `sassOptions` the `outputStyle` option to `compressed`.
 
 **webpack.config.js**
 
