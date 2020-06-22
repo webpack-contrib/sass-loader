@@ -208,6 +208,29 @@ describe('sassOptions option', () => {
         expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
+      it(`should work with the "importer" as a single function option (${implementationName}) (${syntax})`, async () => {
+        expect.assertions(4);
+
+        const testId = getTestId('custom-importer', syntax);
+        const options = {
+          implementation: getImplementationByName(implementationName),
+          sassOptions: {
+            importer(url, prev, done) {
+              expect(this.webpackLoaderContext).toBeDefined();
+
+              return done({ contents: '.a { color: red; }' });
+            },
+          },
+        };
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
+
+        expect(codeFromBundle.css).toMatchSnapshot('css');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
+      });
+
       it(`should work with the "includePaths" option (${implementationName}) (${syntax})`, async () => {
         const testId = getTestId('import-include-paths', syntax);
         const options = {

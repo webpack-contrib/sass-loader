@@ -6,6 +6,16 @@ function isProductionLikeMode(loaderContext) {
   return loaderContext.mode === 'production' || !loaderContext.mode;
 }
 
+function proxyCustomImporters(importers, loaderContext) {
+  return [].concat(importers).map((importer) => {
+    return function proxyImporter(...args) {
+      this.webpackLoaderContext = loaderContext;
+
+      return importer.apply(this, args);
+    };
+  });
+}
+
 /**
  * Derives the sass options from the loader context and normalizes its values with sane defaults.
  *
@@ -98,9 +108,10 @@ function getSassOptions(loaderContext, loaderOptions, content, implementation) {
 
   // Allow passing custom importers to `sass`/`node-sass`. Accepts `Function` or an array of `Function`s.
   options.importer = options.importer
-    ? Array.isArray(options.importer)
-      ? options.importer
-      : [options.importer]
+    ? proxyCustomImporters(
+        Array.isArray(options.importer) ? options.importer : [options.importer],
+        loaderContext
+      )
     : [];
 
   options.includePaths = []
