@@ -415,6 +415,52 @@ describe('sassOptions option', () => {
 
         dartSassSpy.mockRestore();
       });
+
+      it(`should respect the "outputStyle" option (${implementationName}) (${syntax})`, async () => {
+        const testId = getTestId('language', syntax);
+        const options = {
+          implementation: getImplementationByName(implementationName),
+          sassOptions: {
+            outputStyle: 'expanded',
+          },
+        };
+        const compiler = getCompiler(testId, {
+          mode: 'production',
+          loader: { options },
+        });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
+        const codeFromSass = getCodeFromSass(testId, options);
+
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot('css');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
+      });
+
+      it(`should use "compressed" output style in the "production" mode (${implementationName}) (${syntax})`, async () => {
+        const testId = getTestId('language', syntax);
+        const options = {
+          implementation: getImplementationByName(implementationName),
+        };
+        const compiler = getCompiler(testId, {
+          mode: 'production',
+          loader: { options },
+        });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
+        const codeFromSass = getCodeFromSass(testId, {
+          ...options,
+          sassOptions: {
+            outputStyle: 'compressed',
+          },
+        });
+
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot('css');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
+      });
     });
   });
 });

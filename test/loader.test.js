@@ -810,7 +810,7 @@ describe('loader', () => {
         expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
-      it.only(`should throw an error on ambiguous import (only on "dart-sass") (${implementationName}) (${syntax})`, async () => {
+      it(`should throw an error on ambiguous import (only on "dart-sass") (${implementationName}) (${syntax})`, async () => {
         const testId = getTestId('import-ambiguous', syntax);
         const options = {
           implementation: getImplementationByName(implementationName),

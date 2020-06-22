@@ -4,10 +4,12 @@ import validateOptions from 'schema-utils';
 import { getOptions } from 'loader-utils';
 
 import schema from './options.json';
-import getSassImplementation from './getSassImplementation';
-import getSassOptions from './getSassOptions';
-import webpackImporter from './webpackImporter';
-import getRenderFunctionFromSassImplementation from './getRenderFunctionFromSassImplementation';
+import {
+  getSassImplementation,
+  getSassOptions,
+  getWebpackImporter,
+  getRenderFunctionFromSassImplementation,
+} from './utils';
 import SassError from './SassError';
 
 /**
@@ -35,7 +37,7 @@ function loader(content) {
   if (shouldUseWebpackImporter) {
     const { includePaths } = sassOptions;
 
-    sassOptions.importer.push(webpackImporter(this, includePaths));
+    sassOptions.importer.push(getWebpackImporter(this, includePaths));
   }
 
   const callback = this.async();
