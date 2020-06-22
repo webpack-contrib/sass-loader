@@ -43,8 +43,8 @@ jobs:
       - name: Lint
         run: npm run lint
 
-      - name: Security audit
-        run: npm run security
+      # - name: Security audit
+      #  run: npm run security
 
       - name: Check commit message
         uses: wagoid/commitlint-github-action@v1
