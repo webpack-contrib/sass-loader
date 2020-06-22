@@ -12,10 +12,13 @@ import { urlToRequest } from 'loader-utils';
 const isModuleImport = /^~([^/]+|[^/]+\/|@[^/]+[/][^/]+|@[^/]+\/?|@[^/]+[/][^/]+\/)$/;
 
 /**
- * When libsass tries to resolve an import, it uses a special algorithm.
- * Since the sass-loader uses webpack to resolve the modules, we need to simulate that algorithm. This function
- * returns an array of import paths to try. The last entry in the array is always the original url
- * to enable straight-forward webpack.config aliases.
+ * When `sass`/`node-sass` tries to resolve an import, it uses a special algorithm.
+ * Since the `sass-loader` uses webpack to resolve the modules, we need to simulate that algorithm.
+ * This function returns an array of import paths to try.
+ * The last entry in the array is always the original url to enable straight-forward webpack.config aliases.
+ *
+ * We don't need emulate `dart-sass` "It's not clear which file to import." errors (when "file.ext" and "_file.ext" files are present simultaneously in the same directory).
+ * This reduces performance and `dart-sass` always do it on own side.
  *
  * @param {string} url
  * @param {boolean} forWebpackResolver
