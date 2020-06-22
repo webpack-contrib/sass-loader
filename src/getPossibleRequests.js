@@ -1,6 +1,6 @@
 import path from 'path';
 
-import utils from 'loader-utils';
+import { urlToRequest } from 'loader-utils';
 
 // Examples:
 // - ~package
@@ -9,7 +9,7 @@ import utils from 'loader-utils';
 // - ~@org/
 // - ~@org/package
 // - ~@org/package/
-const matchModuleImport = /^~([^/]+|[^/]+\/|@[^/]+[/][^/]+|@[^/]+\/?|@[^/]+[/][^/]+\/)$/;
+const isModuleImport = /^~([^/]+|[^/]+\/|@[^/]+[/][^/]+|@[^/]+\/?|@[^/]+[/][^/]+\/)$/;
 
 /**
  * When libsass tries to resolve an import, it uses a special algorithm.
@@ -22,10 +22,10 @@ const matchModuleImport = /^~([^/]+|[^/]+\/|@[^/]+[/][^/]+|@[^/]+\/?|@[^/]+[/][^
  * @returns {Array<string>}
  */
 export default function getPossibleRequests(url, forWebpackResolver = false) {
-  const request = utils.urlToRequest(url);
+  const request = urlToRequest(url);
 
   // In case there is module request, send this to webpack resolver
-  if (forWebpackResolver && matchModuleImport.test(url)) {
+  if (forWebpackResolver && isModuleImport.test(url)) {
     return [request, url];
   }
 

@@ -292,6 +292,60 @@ exports[`loader should prefer "mainFiles" over "mainFields" when the field conta
 
 exports[`loader should prefer "mainFiles" over "mainFields" when the field contains "js" file (node-sass) (scss): warnings 1`] = `Array []`;
 
+exports[`loader should prefer "mainFiles" with extension over without (dart-sass) (sass): css 1`] = `
+".load-me {
+  color: red;
+}
+
+.class {
+  color: blue;
+}"
+`;
+
+exports[`loader should prefer "mainFiles" with extension over without (dart-sass) (sass): errors 1`] = `Array []`;
+
+exports[`loader should prefer "mainFiles" with extension over without (dart-sass) (sass): warnings 1`] = `Array []`;
+
+exports[`loader should prefer "mainFiles" with extension over without (dart-sass) (scss): css 1`] = `
+".load-me {
+  color: red;
+}
+
+.class {
+  color: blue;
+}"
+`;
+
+exports[`loader should prefer "mainFiles" with extension over without (dart-sass) (scss): errors 1`] = `Array []`;
+
+exports[`loader should prefer "mainFiles" with extension over without (dart-sass) (scss): warnings 1`] = `Array []`;
+
+exports[`loader should prefer "mainFiles" with extension over without (node-sass) (sass): css 1`] = `
+".load-me {
+  color: red; }
+
+.class {
+  color: blue; }
+"
+`;
+
+exports[`loader should prefer "mainFiles" with extension over without (node-sass) (sass): errors 1`] = `Array []`;
+
+exports[`loader should prefer "mainFiles" with extension over without (node-sass) (sass): warnings 1`] = `Array []`;
+
+exports[`loader should prefer "mainFiles" with extension over without (node-sass) (scss): css 1`] = `
+".load-me {
+  color: red; }
+
+.class {
+  color: blue; }
+"
+`;
+
+exports[`loader should prefer "mainFiles" with extension over without (node-sass) (scss): errors 1`] = `Array []`;
+
+exports[`loader should prefer "mainFiles" with extension over without (node-sass) (scss): warnings 1`] = `Array []`;
+
 exports[`loader should respect resolving directory with the "index" file from "process.cwd()"  (dart-sass) (sass): css 1`] = `
 ".dir-with-underscore-index {
   color: red;

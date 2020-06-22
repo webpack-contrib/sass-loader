@@ -445,6 +445,28 @@ describe('loader', () => {
         expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
+      it(`should prefer "mainFiles" with extension over without (${implementationName}) (${syntax})`, async () => {
+        const testId = getTestId(
+          'import-prefer-main-files-with-extension',
+          syntax
+        );
+        const options = {
+          implementation: getImplementationByName(implementationName),
+          sassOptions: {
+            includePaths: ['node_modules/foundation-sites/scss'],
+          },
+        };
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
+        const codeFromSass = getCodeFromSass(testId, options);
+
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot('css');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
+      });
+
       it(`should work and use the "_index" file in package (${implementationName}) (${syntax})`, async () => {
         const testId = getTestId('import-_index', syntax);
         const options = {
