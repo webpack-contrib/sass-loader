@@ -266,6 +266,8 @@ Options for [Dart Sass](http://sass-lang.com/dart-sass) or [Node Sass](https://g
 
 > ℹ We recommend not to set the `outFile`, `sourceMapContents`, `sourceMapEmbed`, `sourceMapRoot` options because `sass-loader` automatically sets these options when the `sourceMap` option is `true`.
 
+> ℹ️ Access to the [loader context](https://webpack.js.org/api/loaders/#the-loader-context) inside the custom importer can be done using the `this.webpackLoaderContext` property.
+
 There is a slight difference between the `sass` (`dart-sass`) and `node-sass` options.
 
 Please consult documentation before using them:

@@ -11,7 +11,7 @@ import path from 'path';
 import getPossibleRequests from './getPossibleRequests';
 
 const matchCss = /\.css$/i;
-const isModuleImport = /^~([^/]+|[^/]+\/|@[^/]+[/][^/]+|@[^/]+\/?|@[^/]+[/][^/]+\/)$/;
+const isSpecialModuleImport = /^~[^/]+$/;
 
 /**
  * Returns an importer that uses webpack's resolving algorithm.
@@ -64,8 +64,6 @@ function webpackImporter(loaderContext, includePaths) {
     mainFiles: [],
     modules: [],
   });
-  // TODO avoid resolsing `_index`, `index` and files without extensions
-  // TODO avoid resolving with multiple extensions - `file.sass.sass`/`file.sass.scss`/`file.sass.css`
   const webpackResolve = loaderContext.getResolve({
     mainFields: ['sass', 'style', 'main', '...'],
     mainFiles: ['_index', 'index', '...'],
@@ -85,7 +83,11 @@ function webpackImporter(loaderContext, includePaths) {
 
     let resolutionMap = [];
 
-    if (includePaths.length > 0 && !isFileScheme && !isModuleImport.test(url)) {
+    if (
+      includePaths.length > 0 &&
+      !isFileScheme &&
+      !isSpecialModuleImport.test(url)
+    ) {
       // The order of import precedence is as follows:
       //
       // 1. Filesystem imports relative to the base file.
