@@ -109,7 +109,7 @@ Thankfully there are a two solutions to this problem:
 |  **[`implementation`](#implementation)**  |      `{Object}`      |                 `sass`                  | Setup Sass implementation to use.                         |
 |     **[`sassOptions`](#sassoptions)**     | `{Object\|Function}` | defaults values for Sass implementation | Options for Sass.                                         |
 |       **[`sourceMap`](#sourcemap)**       |     `{Boolean}`      |           `compiler.devtool`            | Enables/Disables generation of source maps.               |
-|     **[`prependData`](#sassoptions)**     | `{String\|Function}` |               `undefined`               | Prepends `Sass`/`SCSS` code before the actual entry file. |
+|     **[`prependData`](#prependdata)**     | `{String\|Function}` |               `undefined`               | Prepends `Sass`/`SCSS` code before the actual entry file. |
 | **[`webpackImporter`](#webpackimporter)** |     `{Boolean}`      |                 `true`                  | Enables/Disables the default Webpack importer.            |
 
 ### `implementation`
