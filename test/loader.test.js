@@ -810,6 +810,18 @@ describe('loader', () => {
         expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
+      it.only(`should throw an error on ambiguous import (only on "dart-sass") (${implementationName}) (${syntax})`, async () => {
+        const testId = getTestId('import-ambiguous', syntax);
+        const options = {
+          implementation: getImplementationByName(implementationName),
+        };
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
+      });
+
       if (implementation === dartSass) {
         it(`should output an understandable error with a problem in "@use" (${implementationName}) (${syntax})`, async () => {
           const testId = getTestId('error-use', syntax);
