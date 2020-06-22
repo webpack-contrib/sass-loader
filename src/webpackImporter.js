@@ -11,6 +11,7 @@ import path from 'path';
 import getPossibleRequests from './getPossibleRequests';
 
 const matchCss = /\.css$/i;
+const isModuleImport = /^~([^/]+|[^/]+\/|@[^/]+[/][^/]+|@[^/]+\/?|@[^/]+[/][^/]+\/)$/;
 
 /**
  * Returns an importer that uses webpack's resolving algorithm.
@@ -84,7 +85,7 @@ function webpackImporter(loaderContext, includePaths) {
 
     let resolutionMap = [];
 
-    if (includePaths.length > 0 && !isFileScheme) {
+    if (includePaths.length > 0 && !isFileScheme && !isModuleImport.test(url)) {
       // The order of import precedence is as follows:
       //
       // 1. Filesystem imports relative to the base file.

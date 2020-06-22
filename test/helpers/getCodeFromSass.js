@@ -256,6 +256,10 @@ function getCodeFromSass(testId, options) {
     testFolder,
     'node_modules/package-with-js-main-field/index.scss'
   );
+  const pathToPackageWithIndex = path.resolve(
+    testFolder,
+    'node_modules/package-with-index/_index.scss'
+  );
   const pathToLanguage = isSass
     ? path.resolve(testFolder, 'sass/language.sass')
     : path.resolve(testFolder, 'scss/language.scss');
@@ -718,6 +722,7 @@ function getCodeFromSass(testId, options) {
           pathToPackageWithJsAndCssMainFiles
         )
         .replace(/^~package-with-js-main-field/, pathToPackageWithJsMainField)
+        .replace(/^~package-with-index/, pathToPackageWithIndex)
         .replace(/^file:language/, pathToLanguage)
         .replace(/^~/, testNodeModules);
     }
