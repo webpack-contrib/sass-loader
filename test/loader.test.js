@@ -426,6 +426,25 @@ describe('loader', () => {
         expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
+      it(`should prefer "mainFiles" over "mainFields" when the field contains "js" file (${implementationName}) (${syntax})`, async () => {
+        const testId = getTestId(
+          'import-prefer-main-files-over-main-fields',
+          syntax
+        );
+        const options = {
+          implementation: getImplementationByName(implementationName),
+        };
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
+        const codeFromSass = getCodeFromSass(testId, options);
+
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot('css');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
+      });
+
       it(`should work and use the "_index" file in package (${implementationName}) (${syntax})`, async () => {
         const testId = getTestId('import-_index', syntax);
         const options = {
