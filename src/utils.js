@@ -126,10 +126,10 @@ function getSassOptions(loaderContext, loaderOptions, content, implementation) {
   }
 
   options.file = loaderContext.resourcePath;
-  options.data = loaderOptions.prependData
-    ? typeof loaderOptions.prependData === 'function'
-      ? `${loaderOptions.prependData(loaderContext)}\n${content}`
-      : `${loaderOptions.prependData}\n${content}`
+  options.data = loaderOptions.additionalData
+    ? typeof loaderOptions.additionalData === 'function'
+      ? `${loaderOptions.additionalData(content, loaderContext)}`
+      : `${loaderOptions.additionalData}\n${content}`
     : content;
 
   // opt.outputStyle

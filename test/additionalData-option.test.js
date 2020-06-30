@@ -16,7 +16,7 @@ import {
 const implementations = [nodeSass, dartSass];
 const syntaxStyles = ['scss', 'sass'];
 
-describe('prependData option', () => {
+describe('additionalData option', () => {
   beforeEach(() => {
     // The `sass` (`Dart Sass`) package modify the `Function` prototype, but the `jest` lose a prototype
     Object.setPrototypeOf(Fiber, Function.prototype);
@@ -30,7 +30,7 @@ describe('prependData option', () => {
         const testId = getTestId('prepending-data', syntax);
         const options = {
           implementation: getImplementationByName(implementationName),
-          prependData: `$prepended-data: hotpink${
+          additionalData: `$prepended-data: hotpink${
             syntax === 'sass' ? '\n' : ';'
           }`,
         };
@@ -49,10 +49,13 @@ describe('prependData option', () => {
         const testId = getTestId('prepending-data', syntax);
         const options = {
           implementation: getImplementationByName(implementationName),
-          prependData: (loaderContext) => {
+          additionalData: (content, loaderContext) => {
             expect(loaderContext).toBeDefined();
+            expect(content).toBeDefined();
 
-            return `$prepended-data: hotpink${syntax === 'sass' ? '\n' : ';'}`;
+            return `$prepended-data: hotpink${
+              syntax === 'sass' ? '\n' : ';\n'
+            }${content}`;
           },
         };
         const compiler = getCompiler(testId, { loader: { options } });
@@ -68,7 +71,7 @@ describe('prependData option', () => {
 
       it(`should use same EOL on all os (${implementationName}) (${syntax})`, async () => {
         const testId = getTestId('prepending-data', syntax);
-        const prependData =
+        const additionalData =
           syntax === 'sass'
             ? `$prepended-data: hotpink
 a
@@ -79,7 +82,7 @@ a {
 }`;
         const options = {
           implementation: getImplementationByName(implementationName),
-          prependData,
+          additionalData,
         };
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
