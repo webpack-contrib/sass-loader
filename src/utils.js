@@ -217,7 +217,7 @@ export default function getPossibleRequests(url, forWebpackResolver = false) {
 
   // In case there is module request, send this to webpack resolver
   if (forWebpackResolver && isModuleImport.test(url)) {
-    return [request, url];
+    return [...new Set([request, url])];
   }
 
   // Keep in mind: ext can also be something like '.datepicker' when the true extension is omitted and the filename contains a dot.
@@ -239,47 +239,18 @@ export default function getPossibleRequests(url, forWebpackResolver = false) {
   const dirname = path.dirname(request);
   const basename = path.basename(request);
 
-  // In case there is file extension:
-  //
-  // 1. Try to resolve `_` file.
-  // 2. Try to resolve file without `_`.
-  // 3. Send a original url to webpack resolver, maybe it is alias for webpack resolving.
-  if (['.scss', '.sass', '.css'].includes(ext)) {
-    return [`${dirname}/_${basename}`, `${dirname}/${basename}`].concat(
-      forWebpackResolver ? [url] : []
-    );
-  }
-
-  // In case there is no file extension
-  //
-  // 1. Try to resolve files starts with `_` and normal with order `sass`, `scss` and `css`.
-  // 2. Send a original url to webpack resolver, maybe it is alias for webpack resolving.
   return [
-    `${dirname}/_${basename}.sass`,
-    `${dirname}/${basename}.sass`,
-    `${dirname}/_${basename}.scss`,
-    `${dirname}/${basename}.scss`,
-    `${dirname}/_${basename}.css`,
-    `${dirname}/${basename}.css`,
-    `${dirname}/${basename}/_index.sass`,
-    `${dirname}/${basename}/index.sass`,
-    `${dirname}/${basename}/_index.scss`,
-    `${dirname}/${basename}/index.scss`,
-    `${dirname}/${basename}/_index.css`,
-    `${dirname}/${basename}/index.css`,
-  ].concat(forWebpackResolver ? [request, url] : []);
+    ...new Set(
+      [`${dirname}/_${basename}`, request].concat(
+        forWebpackResolver ? [url] : []
+      )
+    ),
+  ];
 }
 
 const matchCss = /\.css$/i;
 const isSpecialModuleImport = /^~[^/]+$/;
 
-/**
- * Returns an importer that uses webpack's resolving algorithm.
- *
- * It's important that the returned function has the correct number of arguments
- * (based on whether the call is sync or async) because otherwise node-sass doesn't exit.
- *
- */
 function getWebpackImporter(loaderContext, includePaths) {
   function startResolving(resolutionMap) {
     if (resolutionMap.length === 0) {
@@ -314,15 +285,17 @@ function getWebpackImporter(loaderContext, includePaths) {
       });
   }
 
-  // We can't use `loaderContext.resolve` because it resolves values from default `extensions`/`mainFields`/etc from webpack configuration
   const sassResolve = loaderContext.getResolve({
     alias: [],
     aliasFields: [],
+    conditionNames: [],
     descriptionFiles: [],
-    extensions: [],
+    extensions: ['.sass', '.scss', '.css'],
+    exportsFields: [],
     mainFields: [],
-    mainFiles: [],
+    mainFiles: ['_index', 'index'],
     modules: [],
+    restrictions: [/\.((sa|sc|c)ss)$/i],
   });
   const webpackResolve = loaderContext.getResolve({
     mainFields: ['sass', 'style', 'main', '...'],
