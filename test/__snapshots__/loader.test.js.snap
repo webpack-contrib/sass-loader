@@ -54059,6 +54059,46 @@ exports[`loader should work with "@use" at-rules from other language style (dart
 
 exports[`loader should work with "@use" at-rules from other language style (dart-sass) (scss): warnings 1`] = `Array []`;
 
+exports[`loader should work with a package with "sass" and "exports" fields (dart-sass) (sass): css 1`] = `
+".load-me {
+  color: red;
+}"
+`;
+
+exports[`loader should work with a package with "sass" and "exports" fields (dart-sass) (sass): errors 1`] = `Array []`;
+
+exports[`loader should work with a package with "sass" and "exports" fields (dart-sass) (sass): warnings 1`] = `Array []`;
+
+exports[`loader should work with a package with "sass" and "exports" fields (dart-sass) (scss): css 1`] = `
+".load-me {
+  color: red;
+}"
+`;
+
+exports[`loader should work with a package with "sass" and "exports" fields (dart-sass) (scss): errors 1`] = `Array []`;
+
+exports[`loader should work with a package with "sass" and "exports" fields (dart-sass) (scss): warnings 1`] = `Array []`;
+
+exports[`loader should work with a package with "sass" and "exports" fields (node-sass) (sass): css 1`] = `
+".load-me {
+  color: red; }
+"
+`;
+
+exports[`loader should work with a package with "sass" and "exports" fields (node-sass) (sass): errors 1`] = `Array []`;
+
+exports[`loader should work with a package with "sass" and "exports" fields (node-sass) (sass): warnings 1`] = `Array []`;
+
+exports[`loader should work with a package with "sass" and "exports" fields (node-sass) (scss): css 1`] = `
+".load-me {
+  color: red; }
+"
+`;
+
+exports[`loader should work with a package with "sass" and "exports" fields (node-sass) (scss): errors 1`] = `Array []`;
+
+exports[`loader should work with a package with "sass" and "exports" fields (node-sass) (scss): warnings 1`] = `Array []`;
+
 exports[`loader should work with an alias (dart-sass) (sass): css 1`] = `
 "a {
   color: red;
