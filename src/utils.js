@@ -299,6 +299,7 @@ function getWebpackImporter(loaderContext, includePaths) {
     restrictions: [/\.((sa|sc|c)ss)$/i],
   });
   const webpackResolve = loaderContext.getResolve({
+    conditionNames: [],
     mainFields: ['sass', 'style', 'main', '...'],
     mainFiles: ['_index', 'index', '...'],
     extensions: ['.sass', '.scss', '.css'],
