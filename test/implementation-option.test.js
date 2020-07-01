@@ -15,6 +15,8 @@ import {
 
 const implementations = [nodeSass, dartSass];
 
+jest.setTimeout(30000);
+
 describe('implementation option', () => {
   beforeEach(() => {
     // The `sass` (`Dart Sass`) package modify the `Function` prototype, but the `jest` lose a prototype

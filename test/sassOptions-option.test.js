@@ -21,6 +21,8 @@ import {
 const implementations = [nodeSass, dartSass];
 const syntaxStyles = ['scss', 'sass'];
 
+jest.setTimeout(30000);
+
 describe('sassOptions option', () => {
   beforeEach(() => {
     // The `sass` (`Dart Sass`) package modify the `Function` prototype, but the `jest` lose a prototype
