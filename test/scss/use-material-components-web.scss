@@ -1,0 +1,5 @@
+@use '@material/button/mixins' as button;
+
+.test {
+  @include button.core-styles();
+}
