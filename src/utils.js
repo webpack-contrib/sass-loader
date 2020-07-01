@@ -306,13 +306,13 @@ function getWebpackImporter(loaderContext, includePaths) {
   });
 
   return (originalUrl, prev, done) => {
-    let possibleUrl = originalUrl;
+    let request = originalUrl;
 
     const isFileScheme = originalUrl.slice(0, 5).toLowerCase() === 'file:';
 
     if (isFileScheme) {
       // eslint-disable-next-line no-param-reassign
-      possibleUrl = url.fileURLToPath(originalUrl);
+      request = url.fileURLToPath(originalUrl);
     }
 
     let resolutionMap = [];
@@ -320,7 +320,7 @@ function getWebpackImporter(loaderContext, includePaths) {
     if (
       includePaths.length > 0 &&
       !isFileScheme &&
-      !isSpecialModuleImport.test(possibleUrl)
+      !isSpecialModuleImport.test(request)
     ) {
       // The order of import precedence is as follows:
       //
@@ -331,7 +331,7 @@ function getWebpackImporter(loaderContext, includePaths) {
       // 5. Filesystem imports relative to a `SASS_PATH` path.
       //
       // Because `sass`/`node-sass` run custom importers before `3`, `4` and `5` points, we need to emulate this behavior to avoid wrong resolution.
-      const sassPossibleRequests = getPossibleRequests(possibleUrl);
+      const sassPossibleRequests = getPossibleRequests(request);
 
       resolutionMap = resolutionMap.concat(
         includePaths.map((context) => ({
@@ -342,7 +342,7 @@ function getWebpackImporter(loaderContext, includePaths) {
       );
     }
 
-    const webpackPossibleRequests = getPossibleRequests(possibleUrl, true);
+    const webpackPossibleRequests = getPossibleRequests(request, true);
 
     resolutionMap = resolutionMap.concat({
       resolve: webpackResolve,
