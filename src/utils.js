@@ -211,14 +211,22 @@ const isModuleImport = /^~([^/]+|[^/]+\/|@[^/]+[/][^/]+|@[^/]+\/?|@[^/]+[/][^/]+
  *
  * @param {string} url
  * @param {boolean} forWebpackResolver
+ * @param {Object} loaderContext
  * @returns {Array<string>}
  */
 export default function getPossibleRequests(
+  loaderContext,
   // eslint-disable-next-line no-shadow
   url,
   forWebpackResolver = false
 ) {
-  const request = urlToRequest(url);
+  const request = urlToRequest(
+    url,
+    forWebpackResolver && url.charAt(0) === '/'
+      ? loaderContext.rootContext
+      : // eslint-disable-next-line no-undefined
+        undefined
+  );
 
   // In case there is module request, send this to webpack resolver
   if (forWebpackResolver && isModuleImport.test(url)) {
@@ -336,7 +344,7 @@ function getWebpackImporter(loaderContext, includePaths) {
       // 5. Filesystem imports relative to a `SASS_PATH` path.
       //
       // Because `sass`/`node-sass` run custom importers before `3`, `4` and `5` points, we need to emulate this behavior to avoid wrong resolution.
-      const sassPossibleRequests = getPossibleRequests(request);
+      const sassPossibleRequests = getPossibleRequests(loaderContext, request);
 
       resolutionMap = resolutionMap.concat(
         includePaths.map((context) => ({
@@ -347,7 +355,11 @@ function getWebpackImporter(loaderContext, includePaths) {
       );
     }
 
-    const webpackPossibleRequests = getPossibleRequests(request, true);
+    const webpackPossibleRequests = getPossibleRequests(
+      loaderContext,
+      request,
+      true
+    );
 
     resolutionMap = resolutionMap.concat({
       resolve: webpackResolve,
