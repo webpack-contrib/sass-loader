@@ -729,6 +729,10 @@ function getCodeFromSass(testId, options) {
         .replace(/^~package-with-index/, pathToPackageWithIndex)
         .replace(/^package-with-exports/, pathToSassPackageWithExportsFields)
         .replace(/^file:\/\/\/language/, pathToLanguage)
+        .replace(/^\/sass\/language.sass/, pathToLanguage)
+        .replace(/^\/scss\/language.scss/, pathToLanguage)
+        .replace(/^file:\/\/\/scss\/language.scss/, pathToLanguage)
+        .replace(/^file:\/\/\/sass\/language.sass/, pathToLanguage)
         .replace(/^~/, testNodeModules);
     }
 

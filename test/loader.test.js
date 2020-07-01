@@ -825,6 +825,49 @@ describe('loader', () => {
         expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
+      it(`should resolve server-relative URLs (${implementationName}) (${syntax})`, async () => {
+        const testId = getTestId('import-absolute-path', syntax);
+        const options = {
+          implementation: getImplementationByName(implementationName),
+        };
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
+        const codeFromSass = getCodeFromSass(testId, options);
+
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot('css');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
+      });
+
+      it(`should resolve absolute paths (${implementationName}) (${syntax})`, async () => {
+        const testId = getTestId('import-absolute-path', syntax);
+        const options = {
+          implementation: getImplementationByName(implementationName),
+          additionalData: (content) => {
+            return content
+              .replace(
+                /\/scss\/language.scss/g,
+                path.resolve(__dirname, 'scss/language.scss')
+              )
+              .replace(
+                /\/sass\/language.sass/g,
+                path.resolve(__dirname, 'sass/language.sass')
+              );
+          },
+        };
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
+        const codeFromSass = getCodeFromSass(testId, options);
+
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot('css');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
+      });
+
       it(`should throw an error on ambiguous import (only on "dart-sass") (${implementationName}) (${syntax})`, async () => {
         const testId = getTestId('import-ambiguous', syntax);
         const options = {

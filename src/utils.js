@@ -129,7 +129,7 @@ function getSassOptions(loaderContext, loaderOptions, content, implementation) {
   options.file = loaderContext.resourcePath;
   options.data = loaderOptions.additionalData
     ? typeof loaderOptions.additionalData === 'function'
-      ? `${loaderOptions.additionalData(content, loaderContext)}`
+      ? loaderOptions.additionalData(content, loaderContext)
       : `${loaderOptions.additionalData}\n${content}`
     : content;
 
@@ -222,6 +222,7 @@ export default function getPossibleRequests(
 ) {
   const request = urlToRequest(
     url,
+    // Maybe it is server-relative URLs
     forWebpackResolver && url.charAt(0) === '/'
       ? loaderContext.rootContext
       : // eslint-disable-next-line no-undefined
@@ -263,6 +264,8 @@ export default function getPossibleRequests(
 
 const matchCss = /\.css$/i;
 const isSpecialModuleImport = /^~[^/]+$/;
+// `[drive_letter]:\` + `\\[server]\[sharename]\`
+const isNativeWin32Path = /^[a-zA-Z]:[/\\]|^\\\\/i;
 
 function getWebpackImporter(loaderContext, includePaths) {
   function startResolving(resolutionMap) {
@@ -330,11 +333,18 @@ function getWebpackImporter(loaderContext, includePaths) {
 
     let resolutionMap = [];
 
-    if (
-      includePaths.length > 0 &&
+    const needEmulateSassResolver =
+      // `sass` doesn't support module import
+      !isSpecialModuleImport.test(request) &&
+      // We need improve absolute paths handling.
+      // Absolute paths should be resolved:
+      // - Server-relative URLs - `<context>/path/to/file.ext` (where `<context>` is root context)
+      // - Absolute path - `/full/path/to/file.ext` or `C:\\full\path\to\file.ext`
       !isFileScheme &&
-      !isSpecialModuleImport.test(request)
-    ) {
+      !originalUrl.startsWith('/') &&
+      !isNativeWin32Path.test(originalUrl);
+
+    if (includePaths.length > 0 && needEmulateSassResolver) {
       // The order of import precedence is as follows:
       //
       // 1. Filesystem imports relative to the base file.
@@ -363,7 +373,7 @@ function getWebpackImporter(loaderContext, includePaths) {
 
     resolutionMap = resolutionMap.concat({
       resolve: webpackResolve,
-      context: isFileScheme ? '/' : path.dirname(prev),
+      context: path.dirname(prev),
       possibleRequests: webpackPossibleRequests,
     });
 
