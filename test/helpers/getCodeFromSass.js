@@ -723,7 +723,7 @@ function getCodeFromSass(testId, options) {
         )
         .replace(/^~package-with-js-main-field/, pathToPackageWithJsMainField)
         .replace(/^~package-with-index/, pathToPackageWithIndex)
-        .replace(/^file:language/, pathToLanguage)
+        .replace(/^file:\/\/\/language/, pathToLanguage)
         .replace(/^~/, testNodeModules);
     }
 

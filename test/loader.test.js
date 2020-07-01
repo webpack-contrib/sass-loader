@@ -786,8 +786,7 @@ describe('loader', () => {
         expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
-      // TODO need fix on webpack@5 side
-      it.skip(`should support resolving using the "file" schema (${implementationName}) (${syntax})`, async () => {
+      it(`should support resolving using the "file" schema (${implementationName}) (${syntax})`, async () => {
         const testId = getTestId('import-file-scheme', syntax);
         const options = {
           implementation: getImplementationByName(implementationName),
