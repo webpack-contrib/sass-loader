@@ -825,7 +825,7 @@ describe('loader', () => {
         expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
-      it(`should resolve server-relative URLs (${implementationName}) (${syntax})`, async () => {
+      it.skip(`should resolve server-relative URLs (${implementationName}) (${syntax})`, async () => {
         const testId = getTestId('import-absolute-path', syntax);
         const options = {
           implementation: getImplementationByName(implementationName),
