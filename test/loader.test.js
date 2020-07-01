@@ -787,10 +787,7 @@ describe('loader', () => {
       });
 
       it(`should work with a package with "sass" and "exports" fields (${implementationName}) (${syntax})`, async () => {
-        const testId = getTestId(
-          'import-package-with-exports',
-          syntax
-        );
+        const testId = getTestId('import-package-with-exports', syntax);
         const options = {
           implementation: getImplementationByName(implementationName),
         };
