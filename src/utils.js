@@ -213,7 +213,11 @@ const isModuleImport = /^~([^/]+|[^/]+\/|@[^/]+[/][^/]+|@[^/]+\/?|@[^/]+[/][^/]+
  * @param {boolean} forWebpackResolver
  * @returns {Array<string>}
  */
-export default function getPossibleRequests(url, forWebpackResolver = false) {
+export default function getPossibleRequests(
+  // eslint-disable-next-line no-shadow
+  url,
+  forWebpackResolver = false
+) {
   const request = urlToRequest(url);
 
   // In case there is module request, send this to webpack resolver
@@ -299,7 +303,7 @@ function getWebpackImporter(loaderContext, includePaths) {
     restrictions: [/\.((sa|sc|c)ss)$/i],
   });
   const webpackResolve = loaderContext.getResolve({
-    exportsFields: [],
+    conditionNames: ['sass', 'style'],
     mainFields: ['sass', 'style', 'main', '...'],
     mainFiles: ['_index', 'index', '...'],
     extensions: ['.sass', '.scss', '.css'],
