@@ -802,7 +802,7 @@ describe('loader', () => {
         expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
-      it(`should support resolving using the "file" schema (${implementationName}) (${syntax})`, async () => {
+      it.only(`should support resolving using the "file" schema (${implementationName}) (${syntax})`, async () => {
         const testId = getTestId('import-file-scheme', syntax);
         const options = {
           implementation: getImplementationByName(implementationName),

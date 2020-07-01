@@ -327,6 +327,10 @@ function getWebpackImporter(loaderContext, includePaths) {
     const isFileScheme = originalUrl.slice(0, 5).toLowerCase() === 'file:';
 
     if (isFileScheme) {
+      // eslint-disable-next-line no-console
+      console.log(originalUrl);
+      console.log(url.fileURLToPath(originalUrl));
+
       // eslint-disable-next-line no-param-reassign
       request = url.fileURLToPath(originalUrl);
     }
