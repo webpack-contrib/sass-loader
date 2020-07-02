@@ -841,7 +841,7 @@ describe('loader', () => {
         expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
-      it.only(`should resolve absolute paths (${implementationName}) (${syntax})`, async () => {
+      it(`should resolve absolute paths (${implementationName}) (${syntax})`, async () => {
         const testId = getTestId('import-absolute-path', syntax);
         const options = {
           implementation: getImplementationByName(implementationName),
