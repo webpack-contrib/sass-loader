@@ -331,7 +331,7 @@ function getWebpackImporter(loaderContext, includePaths) {
         // eslint-disable-next-line no-param-reassign
         request = url.fileURLToPath(originalUrl);
       } catch (ignoreError) {
-        request = request.slice(0, 7);
+        request = request.slice(7);
       }
     }
 
