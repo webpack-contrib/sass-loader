@@ -802,7 +802,7 @@ describe('loader', () => {
         expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
-      it.only(`should support resolving using the "file" schema (${implementationName}) (${syntax})`, async () => {
+      it(`should support resolving using the "file" schema (${implementationName}) (${syntax})`, async () => {
         const testId = getTestId('import-file-scheme', syntax);
         const options = {
           implementation: getImplementationByName(implementationName),
@@ -825,7 +825,7 @@ describe('loader', () => {
         expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
-      it.skip(`should resolve server-relative URLs (${implementationName}) (${syntax})`, async () => {
+      it(`should resolve server-relative URLs (${implementationName}) (${syntax})`, async () => {
         const testId = getTestId('import-absolute-path', syntax);
         const options = {
           implementation: getImplementationByName(implementationName),
@@ -841,7 +841,7 @@ describe('loader', () => {
         expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
-      it.skip(`should resolve absolute paths (${implementationName}) (${syntax})`, async () => {
+      it(`should resolve absolute paths (${implementationName}) (${syntax})`, async () => {
         const testId = getTestId('import-absolute-path', syntax);
         const options = {
           implementation: getImplementationByName(implementationName),
