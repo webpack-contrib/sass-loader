@@ -22,7 +22,7 @@ function getCodeFromSass(testId, options) {
 
   const isSass = /\.sass$/i.test(testId);
 
-  if (loaderOptions.prependData) {
+  if (loaderOptions.additionalData) {
     sassOptions.indentedSyntax = isSass;
     sassOptions.data = `$prepended-data: hotpink${
       sassOptions.indentedSyntax ? '\n' : ';'
@@ -36,6 +36,10 @@ function getCodeFromSass(testId, options) {
   const pathToSassPackageWithIndexFile = path.resolve(
     testFolder,
     'node_modules/sass-package-with-index/index.sass'
+  );
+  const pathToSassPackageWithExportsFields = path.resolve(
+    testFolder,
+    'node_modules/package-with-exports/style.scss'
   );
   const pathToSCSSPackageWithIndexFile = path.resolve(
     testFolder,
@@ -723,7 +727,12 @@ function getCodeFromSass(testId, options) {
         )
         .replace(/^~package-with-js-main-field/, pathToPackageWithJsMainField)
         .replace(/^~package-with-index/, pathToPackageWithIndex)
-        .replace(/^file:language/, pathToLanguage)
+        .replace(/^package-with-exports/, pathToSassPackageWithExportsFields)
+        .replace(/^file:\/\/\/language/, pathToLanguage)
+        .replace(/^\/sass\/language.sass/, pathToLanguage)
+        .replace(/^\/scss\/language.scss/, pathToLanguage)
+        .replace(/^file:\/\/\/scss\/language.scss/, pathToLanguage)
+        .replace(/^file:\/\/\/sass\/language.sass/, pathToLanguage)
         .replace(/^~/, testNodeModules);
     }
 

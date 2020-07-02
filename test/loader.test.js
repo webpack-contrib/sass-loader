@@ -18,7 +18,7 @@ import {
 const implementations = [nodeSass, dartSass];
 const syntaxStyles = ['scss', 'sass'];
 
-jest.setTimeout(30000);
+jest.setTimeout(60000);
 
 describe('loader', () => {
   beforeEach(() => {
@@ -786,8 +786,23 @@ describe('loader', () => {
         expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
-      // TODO need fix on webpack@5 side
-      it.skip(`should support resolving using the "file" schema (${implementationName}) (${syntax})`, async () => {
+      it(`should work with a package with "sass" and "exports" fields (${implementationName}) (${syntax})`, async () => {
+        const testId = getTestId('import-package-with-exports', syntax);
+        const options = {
+          implementation: getImplementationByName(implementationName),
+        };
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
+        const codeFromSass = getCodeFromSass(testId, options);
+
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot('css');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
+      });
+
+      it(`should support resolving using the "file" schema (${implementationName}) (${syntax})`, async () => {
         const testId = getTestId('import-file-scheme', syntax);
         const options = {
           implementation: getImplementationByName(implementationName),
@@ -810,7 +825,54 @@ describe('loader', () => {
         expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
-      it.only(`should throw an error on ambiguous import (only on "dart-sass") (${implementationName}) (${syntax})`, async () => {
+      it(`should resolve server-relative URLs (${implementationName}) (${syntax})`, async () => {
+        const testId = getTestId('import-absolute-path', syntax);
+        const options = {
+          implementation: getImplementationByName(implementationName),
+        };
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
+        const codeFromSass = getCodeFromSass(testId, options);
+
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot('css');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
+      });
+
+      it(`should resolve absolute paths (${implementationName}) (${syntax})`, async () => {
+        const testId = getTestId('import-absolute-path', syntax);
+        const options = {
+          implementation: getImplementationByName(implementationName),
+          additionalData: (content) => {
+            return content
+              .replace(
+                /\/scss\/language.scss/g,
+                `file:///${path
+                  .resolve(__dirname, 'scss/language.scss')
+                  .replace(/\\/g, '/')}`
+              )
+              .replace(
+                /\/sass\/language.sass/g,
+                `file:///${path
+                  .resolve(__dirname, 'sass/language.sass')
+                  .replace(/\\/g, '/')}`
+              );
+          },
+        };
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
+        const codeFromSass = getCodeFromSass(testId, options);
+
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot('css');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
+      });
+
+      it(`should throw an error on ambiguous import (only on "dart-sass") (${implementationName}) (${syntax})`, async () => {
         const testId = getTestId('import-ambiguous', syntax);
         const options = {
           implementation: getImplementationByName(implementationName),
@@ -1237,6 +1299,44 @@ describe('loader', () => {
           const testId = getTestId('use-bootstrap', syntax);
           const options = {
             implementation: getImplementationByName(implementationName),
+          };
+          const compiler = getCompiler(testId, { loader: { options } });
+          const stats = await compile(compiler);
+          const codeFromBundle = getCodeFromBundle(stats, compiler);
+          const codeFromSass = getCodeFromSass(testId, options);
+
+          expect(codeFromBundle.css).toBe(codeFromSass.css);
+          expect(codeFromBundle.css).toMatchSnapshot('css');
+          expect(getWarnings(stats)).toMatchSnapshot('warnings');
+          expect(getErrors(stats)).toMatchSnapshot('errors');
+        });
+
+        it(`should work with the "material-components-web" package (${implementationName}) (${syntax})`, async () => {
+          const testId = getTestId('import-material-components-web', syntax);
+          const options = {
+            implementation: getImplementationByName(implementationName),
+            sassOptions: {
+              includePaths: ['node_modules'],
+            },
+          };
+          const compiler = getCompiler(testId, { loader: { options } });
+          const stats = await compile(compiler);
+          const codeFromBundle = getCodeFromBundle(stats, compiler);
+          const codeFromSass = getCodeFromSass(testId, options);
+
+          expect(codeFromBundle.css).toBe(codeFromSass.css);
+          expect(codeFromBundle.css).toMatchSnapshot('css');
+          expect(getWarnings(stats)).toMatchSnapshot('warnings');
+          expect(getErrors(stats)).toMatchSnapshot('errors');
+        });
+
+        it(`should work with the "material-components-web" package (${implementationName}) (${syntax})`, async () => {
+          const testId = getTestId('use-material-components-web', syntax);
+          const options = {
+            implementation: getImplementationByName(implementationName),
+            sassOptions: {
+              includePaths: ['node_modules'],
+            },
           };
           const compiler = getCompiler(testId, { loader: { options } });
           const stats = await compile(compiler);

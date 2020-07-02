@@ -17,8 +17,8 @@
         }
       ]
     },
-    "prependData": {
-      "description": "Prepends `Sass`/`SCSS` code before the actual entry file (https://github.com/webpack-contrib/sass-loader#prependdata).",
+    "additionalData": {
+      "description": "Prepends/Appends `Sass`/`SCSS` code before the actual entry file (https://github.com/webpack-contrib/sass-loader#additionaldata).",
       "anyOf": [
         {
           "type": "string"

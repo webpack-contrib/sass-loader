@@ -39,7 +39,7 @@ const output = (config) => {
   };
 };
 
-export default function (fixture, config = {}, options = {}) {
+export default function getCompiler(fixture, config = {}, options = {}) {
   // webpack Config
   // eslint-disable-next-line no-param-reassign
   config = {

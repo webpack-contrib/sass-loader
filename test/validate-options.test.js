@@ -23,8 +23,8 @@ describe('validate options', () => {
       success: [{}, { indentWidth: 6 }, () => ({ indentWidth: 6 })],
       failure: [true, 'string'],
     },
-    prependData: {
-      success: ['$color: red;', () => '$color: red;'],
+    additionalData: {
+      success: ['$color: red;', (content) => `$color: red;\n${content}`],
       failure: [true],
     },
     sourceMap: {
