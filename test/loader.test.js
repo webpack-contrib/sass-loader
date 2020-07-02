@@ -843,24 +843,17 @@ describe('loader', () => {
 
       it.only(`should resolve absolute paths (${implementationName}) (${syntax})`, async () => {
         const testId = getTestId('import-absolute-path', syntax);
-        const isWindows = process.platform === 'win32';
         const options = {
           implementation: getImplementationByName(implementationName),
           additionalData: (content) => {
             return content
               .replace(
                 /\/scss\/language.scss/g,
-                `${isWindows ? 'file:///' : ''}${path.resolve(
-                  __dirname,
-                  'scss/language.scss'
-                )}`
+                `file:///${path.resolve(__dirname, 'scss/language.scss')}`
               )
               .replace(
                 /\/sass\/language.sass/g,
-                `${isWindows ? 'file:///' : ''}${path.resolve(
-                  __dirname,
-                  'sass/language.sass'
-                )}`
+                `file:///${path.resolve(__dirname, 'sass/language.sass')}`
               );
           },
         };
