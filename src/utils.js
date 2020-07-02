@@ -381,8 +381,6 @@ function getWebpackImporter(loaderContext, includePaths) {
       possibleRequests: webpackPossibleRequests,
     });
 
-    console.log(resolutionMap);
-
     startResolving(resolutionMap)
       // Catch all resolving errors, return the original file and pass responsibility back to other custom importers
       .catch(() => ({ file: originalUrl }))
