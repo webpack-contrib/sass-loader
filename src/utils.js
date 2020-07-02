@@ -327,12 +327,12 @@ function getWebpackImporter(loaderContext, includePaths) {
     const isFileScheme = originalUrl.slice(0, 5).toLowerCase() === 'file:';
 
     if (isFileScheme) {
-      // eslint-disable-next-line no-console
-      console.log(originalUrl);
-      console.log(url.fileURLToPath(originalUrl));
-
-      // eslint-disable-next-line no-param-reassign
-      request = url.fileURLToPath(originalUrl);
+      try {
+        // eslint-disable-next-line no-param-reassign
+        request = url.fileURLToPath(originalUrl);
+      } catch (ignoreError) {
+        request = request.slice(0, 7);
+      }
     }
 
     let resolutionMap = [];
@@ -380,6 +380,8 @@ function getWebpackImporter(loaderContext, includePaths) {
       context: path.dirname(prev),
       possibleRequests: webpackPossibleRequests,
     });
+
+    console.log(resolutionMap);
 
     startResolving(resolutionMap)
       // Catch all resolving errors, return the original file and pass responsibility back to other custom importers
