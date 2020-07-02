@@ -1,6 +1,6 @@
 {
   "name": "sass-loader",
-  "version": "8.0.2",
+  "version": "9.0.0",
   "description": "Sass loader for webpack",
   "license": "MIT",
   "repository": "webpack-contrib/sass-loader",

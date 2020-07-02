@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [9.0.0](https://github.com/webpack-contrib/sass-loader/compare/v8.0.2...v9.0.0) (2020-07-02)
+
+
+### ⚠ BREAKING CHANGES
+
+* minimum supported Nodejs version is `10.13`
+* prefer `sass` (`dart-sass`) by default, it is strongly recommended to migrate on `sass` (`dart-sass`)
+* the `prependData` option was removed in favor the `additionalData` option, see [docs](https://github.com/webpack-contrib/sass-loader#additionaldata)
+* when the `sourceMap` is `true`, `sassOptions.sourceMap`, `sassOptions.sourceMapContents`, `sassOptions.sourceMapEmbed`, `sassOptions.sourceMapRoot` and `sassOptions.omitSourceMapUrl` will be ignored.
+
+### Features
+
+* pass the loader context to custom importers under the `this.webpackLoaderContext` property ([#853](https://github.com/webpack-contrib/sass-loader/issues/853)) ([d487683](https://github.com/webpack-contrib/sass-loader/commit/d487683221fcd1e5a173e083b4b40644751c8cb1))
+* supports for `process.cwd()` resolution logic by default ([#837](https://github.com/webpack-contrib/sass-loader/issues/837)) ([0c8d3b3](https://github.com/webpack-contrib/sass-loader/commit/0c8d3b3fb1cf371779b4a886cfc4e60facf68759))
+* supports for `SASS-PATH` env variable resolution logic by default ([#836](https://github.com/webpack-contrib/sass-loader/issues/836)) ([8376179](https://github.com/webpack-contrib/sass-loader/commit/83761798380dcccc5a2badde3b3affe2bac385e8))
+* supports for the `sass` property for the `exports` field from `package.json` (conditional exports, for more information read [docs](https://nodejs.org/api/esm.html))
+
+### Bug Fixes
+
+* avoid different content on different os ([#832](https://github.com/webpack-contrib/sass-loader/issues/832)) ([68dd278](https://github.com/webpack-contrib/sass-loader/commit/68dd27883ce0536adc5bc170816242c67fb118ff))
+* resolution logic when the `includePaths` option used was improved ([#827](https://github.com/webpack-contrib/sass-loader/issues/827)) ([cbe5ad4](https://github.com/webpack-contrib/sass-loader/commit/cbe5ad407582a617be097d3eadd3ad8619e52507))
+* resolution logic for `file://` scheme was improved ([17832fd](https://github.com/webpack-contrib/sass-loader/commit/17832fdb11f91593f4e2995003d67aebefb3be90))
+* resolution logic for absolute paths and server relative URLs was improved
+* source maps generation was improved
+
 ### [8.0.2](https://github.com/webpack-contrib/sass-loader/compare/v8.0.1...v8.0.2) (2020-01-13)
 
 
