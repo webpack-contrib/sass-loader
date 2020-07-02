@@ -846,6 +846,18 @@ describe('loader', () => {
         const options = {
           implementation: getImplementationByName(implementationName),
           additionalData: (content) => {
+            console.log(
+              content
+                .replace(
+                  /\/scss\/language.scss/g,
+                  `file:///${path.resolve(__dirname, 'scss/language.scss')}`
+                )
+                .replace(
+                  /\/sass\/language.sass/g,
+                  `file:///${path.resolve(__dirname, 'sass/language.sass')}`
+                )
+            );
+
             return content
               .replace(
                 /\/scss\/language.scss/g,
