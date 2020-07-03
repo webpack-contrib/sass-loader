@@ -56,7 +56,7 @@
     }
   },
   "dependencies": {
-    "clone-deep": "^4.0.1",
+    "klona": "^1.1.1",
     "loader-utils": "^2.0.0",
     "neo-async": "^2.6.1",
     "schema-utils": "^2.7.0",

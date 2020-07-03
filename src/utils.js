@@ -2,7 +2,7 @@ import url from 'url';
 import path from 'path';
 
 import semver from 'semver';
-import cloneDeep from 'clone-deep';
+import klona from 'klona';
 import { urlToRequest } from 'loader-utils';
 import async from 'neo-async';
 
@@ -91,7 +91,7 @@ function proxyCustomImporters(importers, loaderContext) {
  * @returns {Object}
  */
 function getSassOptions(loaderContext, loaderOptions, content, implementation) {
-  const options = cloneDeep(
+  const options = klona(
     loaderOptions.sassOptions
       ? typeof loaderOptions.sassOptions === 'function'
         ? loaderOptions.sassOptions(loaderContext) || {}
