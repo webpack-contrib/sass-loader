@@ -45,8 +45,11 @@ function loader(content) {
 
   render(sassOptions, (error, result) => {
     if (error) {
-      // `node-sass` returns POSIX paths
-      this.addDependency(path.normalize(error.file));
+      // There are situations when the `file` property do not exist
+      if (error.file) {
+        // `node-sass` returns POSIX paths
+        this.addDependency(path.normalize(error.file));
+      }
 
       callback(new SassError(error));
 
