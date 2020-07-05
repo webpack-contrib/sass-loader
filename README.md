@@ -27,7 +27,7 @@ To begin, you'll need to install `sass-loader`:
 npm install sass-loader sass webpack --save-dev
 ```
 
-`sass-loader` requires you to install either [Dart Sass](https://github.com/sass/dart-sass) on your own (more documentation can be found below) or [Node Sass](https://github.com/sass/node-sass).
+`sass-loader` requires you to install either [Dart Sass](https://github.com/sass/dart-sass) or [Node Sass](https://github.com/sass/node-sass) on your own (more documentation can be found below).
 
 This allows you to control the versions of all your dependencies, and to choose which Sass implementation to use.
 
@@ -628,5 +628,5 @@ Please take a moment to read our contributing guidelines if you haven't yet done
 [cover-url]: https://codecov.io/gh/webpack-contrib/sass-loader
 [chat]: https://badges.gitter.im/webpack/webpack.svg
 [chat-url]: https://gitter.im/webpack/webpack
-[size]: https://packagephobia.now.sh/badge?p=css-loader
-[size-url]: https://packagephobia.now.sh/result?p=css-loader
+[size]: https://packagephobia.now.sh/badge?p=sass-loader
+[size-url]: https://packagephobia.now.sh/result?p=sass-loader
