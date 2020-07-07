@@ -267,7 +267,7 @@ const isSpecialModuleImport = /^~[^/]+$/;
 // `[drive_letter]:\` + `\\[server]\[sharename]\`
 const isNativeWin32Path = /^[a-zA-Z]:[/\\]|^\\\\/i;
 
-function getWebpackImporter(loaderContext, includePaths) {
+function getWebpackImporter(loaderContext, implementation, includePaths) {
   function startResolving(resolutionMap) {
     if (resolutionMap.length === 0) {
       return Promise.reject();
@@ -359,6 +359,16 @@ function getWebpackImporter(loaderContext, includePaths) {
       //
       // Because `sass`/`node-sass` run custom importers before `3`, `4` and `5` points, we need to emulate this behavior to avoid wrong resolution.
       const sassPossibleRequests = getPossibleRequests(loaderContext, request);
+      const isDartSass = implementation.info.includes('dart-sass');
+
+      // `node-sass` calls our importer before `1. Filesystem imports relative to the base file.`, so we need emulate this too
+      if (!isDartSass) {
+        resolutionMap = resolutionMap.concat({
+          resolve: sassResolve,
+          context: path.dirname(prev),
+          possibleRequests: sassPossibleRequests,
+        });
+      }
 
       resolutionMap = resolutionMap.concat(
         includePaths.map((context) => ({

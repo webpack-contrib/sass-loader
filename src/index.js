@@ -37,7 +37,9 @@ function loader(content) {
   if (shouldUseWebpackImporter) {
     const { includePaths } = sassOptions;
 
-    sassOptions.importer.push(getWebpackImporter(this, includePaths));
+    sassOptions.importer.push(
+      getWebpackImporter(this, implementation, includePaths)
+    );
   }
 
   const callback = this.async();
