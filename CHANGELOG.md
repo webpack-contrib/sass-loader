@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [9.0.2](https://github.com/webpack-contrib/sass-loader/compare/v9.0.1...v9.0.2) (2020-07-07)
+
+
+### Bug Fixes
+
+* resolution algorithm for `node-sass` ([#866](https://github.com/webpack-contrib/sass-loader/issues/866)) ([4584c90](https://github.com/webpack-contrib/sass-loader/commit/4584c9054befbc56661e2781a55df96fb9f94673))
+
 ### [9.0.1](https://github.com/webpack-contrib/sass-loader/compare/v9.0.0...v9.0.1) (2020-07-03)
 
 
