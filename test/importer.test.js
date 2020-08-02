@@ -19,4 +19,26 @@ describe('importer', () => {
       }
     );
   });
+
+  it('should pass `null` to `done()` when resolution fails', (done) => {
+    let spy;
+    // eslint-disable-next-line no-shadow
+    const importer = (url, prev, done) => {
+      spy = jest.fn(done);
+      createSassImporter(resolve.create, sass)(url, prev, spy);
+    };
+
+    sass.render(
+      {
+        file: 'test/sass/error-file-not-found.sass',
+        importer,
+      },
+      (err) => {
+        expect(spy).toHaveBeenCalledWith(null);
+        expect(err.toString()).toMatch("Can't find stylesheet to import.");
+
+        done();
+      }
+    );
+  });
 });
