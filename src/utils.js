@@ -256,7 +256,7 @@ export default function getPossibleRequests(
   return [
     ...new Set(
       [`${dirname}/_${basename}`, request].concat(
-        forWebpackResolver ? [url] : []
+        forWebpackResolver ? [`${path.dirname(url)}/_${basename}`, url] : []
       )
     ),
   ];

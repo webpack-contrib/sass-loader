@@ -271,6 +271,10 @@ function getCodeFromSass(testId, options) {
     testFolder,
     'node_modules/package-with-same-import/style.scss'
   );
+  const pathToMaterial = path.resolve(
+    __dirname,
+    '../../node_modules/@material'
+  );
 
   // Pseudo importer for tests
   function testImporter(url) {
@@ -741,6 +745,7 @@ function getCodeFromSass(testId, options) {
           /^package-with-same-import\/style/,
           pathToPackageWithSameImport
         )
+        .replace(/@material/, pathToMaterial)
         .replace(/^~/, testNodeModules);
     }
 

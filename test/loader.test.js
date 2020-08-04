@@ -1346,6 +1346,22 @@ describe('loader', () => {
           expect(getErrors(stats)).toMatchSnapshot('errors');
         });
 
+        it(`should work with the "material-components-web" package without the "includePaths" option (${implementationName}) (${syntax})`, async () => {
+          const testId = getTestId('import-material-components-web', syntax);
+          const options = {
+            implementation: getImplementationByName(implementationName),
+          };
+          const compiler = getCompiler(testId, { loader: { options } });
+          const stats = await compile(compiler);
+          const codeFromBundle = getCodeFromBundle(stats, compiler);
+          const codeFromSass = getCodeFromSass(testId, options);
+
+          expect(codeFromBundle.css).toBe(codeFromSass.css);
+          expect(codeFromBundle.css).toMatchSnapshot('css');
+          expect(getWarnings(stats)).toMatchSnapshot('warnings');
+          expect(getErrors(stats)).toMatchSnapshot('errors');
+        });
+
         it(`should work with the "material-components-web" package (${implementationName}) (${syntax})`, async () => {
           const testId = getTestId('use-material-components-web', syntax);
           const options = {
@@ -1353,6 +1369,22 @@ describe('loader', () => {
             sassOptions: {
               includePaths: ['node_modules'],
             },
+          };
+          const compiler = getCompiler(testId, { loader: { options } });
+          const stats = await compile(compiler);
+          const codeFromBundle = getCodeFromBundle(stats, compiler);
+          const codeFromSass = getCodeFromSass(testId, options);
+
+          expect(codeFromBundle.css).toBe(codeFromSass.css);
+          expect(codeFromBundle.css).toMatchSnapshot('css');
+          expect(getWarnings(stats)).toMatchSnapshot('warnings');
+          expect(getErrors(stats)).toMatchSnapshot('errors');
+        });
+
+        it(`should work with the "material-components-web" package without the "includePaths" option (${implementationName}) (${syntax})`, async () => {
+          const testId = getTestId('use-material-components-web', syntax);
+          const options = {
+            implementation: getImplementationByName(implementationName),
           };
           const compiler = getCompiler(testId, { loader: { options } });
           const stats = await compile(compiler);
