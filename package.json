@@ -77,7 +77,6 @@
     "css-loader": "^4.2.0",
     "del": "^5.1.0",
     "del-cli": "^3.0.1",
-    "enhanced-resolve": "^4.3.0",
     "eslint": "^7.6.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-import": "^2.21.2",

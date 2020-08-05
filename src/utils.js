@@ -24,6 +24,11 @@ function getDefaultSassImplementation() {
   return require(sassImplPkg);
 }
 
+/**
+ * @public
+ * This function is not Webpack-specific and can be used by tools wishing to
+ * mimic `sass-loader`'s behaviour, so its signature should not be changed.
+ */
 function getSassImplementation(implementation) {
   let resolvedImplementation = implementation;
 
@@ -273,6 +278,22 @@ const isSpecialModuleImport = /^~[^/]+$/;
 // `[drive_letter]:\` + `\\[server]\[sharename]\`
 const isNativeWin32Path = /^[a-zA-Z]:[/\\]|^\\\\/i;
 
+/**
+ * @public
+ * Create the resolve function used in the custom Sass importer.
+ *
+ * Can be used by external tools to mimic how `sass-loader` works, for example
+ * in a Jest transform. Such usages will want to wrap `resolve.create` from
+ * [`enhanced-resolve`]{@link https://github.com/webpack/enhanced-resolve} to
+ * pass as the `resolverFactory` argument.
+ *
+ * @param {Object} implementation - The imported Sass implementation, both
+ *   `sass` (Dart Sass) and `node-sass` are supported.
+ * @param {Function} resolverFactory - A factory function for creating a Webpack
+ *   resolver.
+ * @param {string[]} [includePaths] - The list of include paths passed to Sass.
+ * @param {boolean} [rootContext] - The configured Webpack root context.
+ */
 function getWebpackResolver(
   implementation,
   resolverFactory,
