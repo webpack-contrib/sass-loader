@@ -268,37 +268,39 @@ const isSpecialModuleImport = /^~[^/]+$/;
 const isNativeWin32Path = /^[a-zA-Z]:[/\\]|^\\\\/i;
 
 function getWebpackImporter(loaderContext, implementation, includePaths) {
-  function startResolving(resolutionMap) {
+  async function startResolving(resolutionMap) {
     if (resolutionMap.length === 0) {
       return Promise.reject();
     }
 
     const [{ resolve, context, possibleRequests }] = resolutionMap;
 
-    return resolve(context, possibleRequests[0])
-      .then((result) => {
-        // Add the result as dependency.
-        // Although we're also using stats.includedFiles, this might come in handy when an error occurs.
-        // In this case, we don't get stats.includedFiles from node-sass/sass.
-        loaderContext.addDependency(path.normalize(result));
+    let result;
 
-        // By removing the CSS file extension, we trigger node-sass to include the CSS file instead of just linking it.
-        return { file: result.replace(matchCss, '') };
-      })
-      .catch(() => {
-        const [, ...tailResult] = possibleRequests;
+    try {
+      result = await resolve(context, possibleRequests[0]);
+    } catch (_ignoreError) {
+      const [, ...tailResult] = possibleRequests;
 
-        if (tailResult.length === 0) {
-          const [, ...tailResolutionMap] = resolutionMap;
+      if (tailResult.length === 0) {
+        const [, ...tailResolutionMap] = resolutionMap;
 
-          return startResolving(tailResolutionMap);
-        }
+        return startResolving(tailResolutionMap);
+      }
 
-        // eslint-disable-next-line no-param-reassign
-        resolutionMap[0].possibleRequests = tailResult;
+      // eslint-disable-next-line no-param-reassign
+      resolutionMap[0].possibleRequests = tailResult;
 
-        return startResolving(resolutionMap);
-      });
+      return startResolving(resolutionMap);
+    }
+
+    // Add the result as dependency.
+    // Although we're also using stats.includedFiles, this might come in handy when an error occurs.
+    // In this case, we don't get stats.includedFiles from node-sass/sass.
+    loaderContext.addDependency(path.normalize(result));
+
+    // By removing the CSS file extension, we trigger node-sass to include the CSS file instead of just linking it.
+    return { file: result.replace(matchCss, '') };
   }
 
   const sassResolve = loaderContext.getResolve({
@@ -394,7 +396,7 @@ function getWebpackImporter(loaderContext, implementation, includePaths) {
     startResolving(resolutionMap)
       // Catch all resolving errors, return the original file and pass responsibility back to other custom importers
       .catch(() => ({ file: originalUrl }))
-      .then(done);
+      .then((result) => done(result));
   };
 }
 
