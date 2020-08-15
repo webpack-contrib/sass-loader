@@ -24,11 +24,6 @@ function getDefaultSassImplementation() {
   return require(sassImplPkg);
 }
 
-/**
- * @public
- * This function is not Webpack-specific and can be used by tools wishing to
- * mimic `sass-loader`'s behaviour, so its signature should not be changed.
- */
 function getSassImplementation(implementation) {
   let resolvedImplementation = implementation;
 
@@ -287,16 +282,19 @@ const isNativeWin32Path = /^[a-zA-Z]:[/\\]|^\\\\/i;
  * [`enhanced-resolve`]{@link https://github.com/webpack/enhanced-resolve} to
  * pass as the `resolverFactory` argument.
  *
- * @param {Object} implementation - The imported Sass implementation, both
- *   `sass` (Dart Sass) and `node-sass` are supported.
  * @param {Function} resolverFactory - A factory function for creating a Webpack
  *   resolver.
+ * @param {Object} [implementation] - The imported Sass implementation, both
+ *   `sass` (Dart Sass) and `node-sass` are supported. Defaults to `sass` if it
+ *   is available.
  * @param {string[]} [includePaths] - The list of include paths passed to Sass.
  * @param {boolean} [rootContext] - The configured Webpack root context.
+ *
+ * @throws If a compatible Sass implementation cannot be found.
  */
 function getWebpackResolver(
-  implementation,
   resolverFactory,
+  implementation,
   includePaths = [],
   rootContext = false
 ) {
@@ -325,6 +323,9 @@ function getWebpackResolver(
     }
   }
 
+  const isDartSass = getSassImplementation(implementation).info.includes(
+    'dart-sass'
+  );
   const sassResolve = promiseResolve(
     resolverFactory({
       alias: [],
@@ -387,7 +388,6 @@ function getWebpackResolver(
       //
       // Because `sass`/`node-sass` run custom importers before `3`, `4` and `5` points, we need to emulate this behavior to avoid wrong resolution.
       const sassPossibleRequests = getPossibleRequests(request);
-      const isDartSass = implementation.info.includes('dart-sass');
 
       // `node-sass` calls our importer before `1. Filesystem imports relative to the base file.`, so we need emulate this too
       if (!isDartSass) {
@@ -428,8 +428,8 @@ const matchCss = /\.css$/i;
 
 function getWebpackImporter(loaderContext, implementation, includePaths) {
   const resolve = getWebpackResolver(
-    implementation,
     loaderContext.getResolve,
+    implementation,
     includePaths,
     loaderContext.rootContext
   );
