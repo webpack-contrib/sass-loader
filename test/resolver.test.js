@@ -27,10 +27,17 @@ describe('getWebpackResolver', () => {
     await expect(resolve('foo/bar/baz')).rejects.toBe();
   });
 
-  it('should strip an invalid file URL of its scheme', async () => {
-    const invalidFileURL = 'file://scss/empty';
+  if (process.platform !== 'win32') {
+    // a `file:` URI with two `/`s indicates the next segment is a hostname,
+    // which Node restricts to `localhost` on Unix platforms. Because it is
+    // nevertheless commonly used, the resolver converts it to a relative path.
+    // Node does allow specifying remote hosts in the Windows environment, so
+    // this test is restricted to Unix platforms.
+    it('should convert an invalid file URL with an erroneous hostname to a relative path', async () => {
+      const invalidFileURL = 'file://scss/empty';
 
-    expect(() => fileURLToPath(invalidFileURL)).toThrow();
-    expect(await resolve(invalidFileURL)).toMatch(/empty\.scss$/);
-  });
+      expect(() => fileURLToPath(invalidFileURL)).toThrow();
+      expect(await resolve(invalidFileURL)).toMatch(/empty\.scss$/);
+    });
+  }
 });
