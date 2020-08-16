@@ -1,6 +1,7 @@
 import { fileURLToPath } from 'url';
 
 import enhanced from 'enhanced-resolve';
+import sass from 'sass';
 
 import { getWebpackResolver } from '../src/utils';
 
@@ -11,14 +12,14 @@ import { getWebpackResolver } from '../src/utils';
  */
 describe('getWebpackResolver', () => {
   const resolve = (request, ...options) =>
-    getWebpackResolver(enhanced.create, ...options)(__filename, request);
+    getWebpackResolver(enhanced.create, sass, ...options)(__filename, request);
 
   it('should resolve .scss from node_modules', async () => {
     expect(await resolve('scss/style')).toMatch(/style\.scss$/);
   });
 
   it('should resolve from passed `includePaths`', async () => {
-    expect(await resolve('empty', null, [`${__dirname}/scss`])).toMatch(
+    expect(await resolve('empty', [`${__dirname}/scss`])).toMatch(
       /empty\.scss$/
     );
   });

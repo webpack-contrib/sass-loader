@@ -24,6 +24,11 @@ function getDefaultSassImplementation() {
   return require(sassImplPkg);
 }
 
+/**
+ * @public
+ * This function is not Webpack-specific and can be used by tools wishing to
+ * mimic `sass-loader`'s behaviour, so its signature should not be changed.
+ */
 function getSassImplementation(implementation) {
   let resolvedImplementation = implementation;
 
@@ -284,9 +289,8 @@ const isNativeWin32Path = /^[a-zA-Z]:[/\\]|^\\\\/i;
  *
  * @param {Function} resolverFactory - A factory function for creating a Webpack
  *   resolver.
- * @param {Object} [implementation] - The imported Sass implementation, both
- *   `sass` (Dart Sass) and `node-sass` are supported. Defaults to `sass` if it
- *   is available.
+ * @param {Object} implementation - The imported Sass implementation, both
+ *   `sass` (Dart Sass) and `node-sass` are supported.
  * @param {string[]} [includePaths] - The list of include paths passed to Sass.
  * @param {boolean} [rootContext] - The configured Webpack root context.
  *
@@ -323,9 +327,7 @@ function getWebpackResolver(
     }
   }
 
-  const isDartSass = getSassImplementation(implementation).info.includes(
-    'dart-sass'
-  );
+  const isDartSass = implementation.info.includes('dart-sass');
   const sassResolve = promiseResolve(
     resolverFactory({
       alias: [],
