@@ -40,6 +40,8 @@ describe('sourceMap option', () => {
         const stats = await compile(compiler);
         const { css, sourceMap } = getCodeFromBundle(stats, compiler);
 
+        sourceMap.sourceRoot = '';
+
         expect(css).toMatchSnapshot('css');
         expect(sourceMap).toMatchSnapshot('source map');
         expect(getWarnings(stats)).toMatchSnapshot('warnings');
@@ -57,6 +59,8 @@ describe('sourceMap option', () => {
         });
         const stats = await compile(compiler);
         const { css, sourceMap } = getCodeFromBundle(stats, compiler);
+
+        sourceMap.sourceRoot = '';
 
         expect(css).toMatchSnapshot('css');
         expect(sourceMap).toMatchSnapshot('source map');
@@ -77,6 +81,8 @@ describe('sourceMap option', () => {
         const stats = await compile(compiler);
         const { css, sourceMap } = getCodeFromBundle(stats, compiler);
 
+        sourceMap.sourceRoot = '';
+
         expect(css).toMatchSnapshot('css');
         expect(sourceMap).toMatchSnapshot('source map');
         expect(getWarnings(stats)).toMatchSnapshot('warnings');
@@ -95,6 +101,8 @@ describe('sourceMap option', () => {
         });
         const stats = await compile(compiler);
         const { css, sourceMap } = getCodeFromBundle(stats, compiler);
+
+        sourceMap.sourceRoot = '';
 
         expect(css).toMatchSnapshot('css');
         expect(sourceMap).toMatchSnapshot('source map');
@@ -116,6 +124,8 @@ describe('sourceMap option', () => {
         });
         const stats = await compile(compiler);
         const { css, sourceMap } = getCodeFromBundle(stats, compiler);
+
+        sourceMap.sourceRoot = '';
 
         expect(css).toMatchSnapshot('css');
         expect(sourceMap).toMatchSnapshot('source map');
@@ -144,6 +154,8 @@ describe('sourceMap option', () => {
         });
         const stats = await compile(compiler);
         const { css, sourceMap } = getCodeFromBundle(stats, compiler);
+
+        sourceMap.sourceRoot = '';
 
         expect(css).toMatchSnapshot('css');
         expect(sourceMap).toMatchSnapshot('source map');

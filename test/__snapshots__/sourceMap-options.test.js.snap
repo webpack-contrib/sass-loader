@@ -61,7 +61,7 @@ exports[`sourceMap option should generate source maps when value is not specifie
 Object {
   "mappings": ";AAMA;EACE;EACA,OALc;;;AAQd;EACE;EACA;EACA;;AAEF;EACE;;AAEF;EACE;EACA;EACA;;;AAQJ;EALE,uBAMe;EALf,oBAKe;EAJf,mBAIe;EAHf,eAGe;;;AAEjB;EACE;EACA;EACA;;;AAEF;EAEE;;;AAEF;EAEE;;;AAEF;EAEE;;;AAGA;EACE,SAhDY;;;AAmDd;EACE,SCxDc",
   "names": Array [],
-  "sourceRoot": "/home/evilebottnawi/IdeaProjects/sass-loader",
+  "sourceRoot": "",
   "sources": Array [
     "test/sass/language.sass",
     "test/sass/another/variables.sass",
@@ -178,7 +178,7 @@ exports[`sourceMap option should generate source maps when value is not specifie
 Object {
   "mappings": ";AAMA;EACE;EACA,OALc;;;AASd;EACE;EACA;EACA;;AAGF;EAAK;;AAEL;EACE;EACA;EACA;;;AAWJ;EANE,uBAM4B;EALzB,oBAKyB;EAJxB,mBAIwB;EAHpB,eAGoB;;;AAG5B;EACE,SAlCY;;;AAuCd;EACE,SC5Cc",
   "names": Array [],
-  "sourceRoot": "/home/evilebottnawi/IdeaProjects/sass-loader",
+  "sourceRoot": "",
   "sources": Array [
     "test/scss/language.scss",
     "test/scss/another/_variables.scss",
@@ -294,7 +294,7 @@ exports[`sourceMap option should generate source maps when value is not specifie
 Object {
   "mappings": ";AAMA,AAAA,IAAI,CAAC;EACH,IAAI,EAAE,IAAI,CALI,SAAS,EAAE,UAAU;EAMnC,KAAK,EALS,IAAI,GAKM;;AAE1B,AACE,GADC,CACD,EAAE,CAAC;EACD,MAAM,EAAE,CAAC;EACT,OAAO,EAAE,CAAC;EACV,UAAU,EAAE,IAAI,GAAG;;AAJvB,AAME,GANC,CAMD,EAAE,CAAC;EACD,OAAO,EAAE,YAAY,GAAG;;AAP5B,AASE,GATC,CASD,CAAC,CAAC;EACA,OAAO,EAAE,KAAK;EACd,OAAO,EAAE,QAAQ;EACjB,eAAe,EAAE,IAAI,GAAG;;AAQ5B,AAAA,IAAI,CAAC;EALH,qBAAqB,EAME,IAAI;EAL3B,kBAAkB,EAKK,IAAI;EAJ3B,iBAAiB,EAIM,IAAI;EAH3B,aAAa,EAGU,IAAI,GAAI;;AAEjC,AAAA,QAAQ,EAKR,QAAQ,EAIR,MAAM,EAIN,QAAQ,CAbC;EACP,MAAM,EAAE,cAAc;EACtB,OAAO,EAAE,IAAI;EACb,KAAK,EAAE,IAAI,GAAG;;AAEhB,AAAA,QAAQ,CAAC;EAEP,YAAY,EAAE,KAAK,GAAG;;AAExB,AAAA,MAAM,CAAC;EAEL,YAAY,EAAE,GAAG,GAAG;;AAEtB,AAAA,QAAQ,CAAC;EAEP,YAAY,EAAE,MAAM,GAAG;;AAEzB,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,EAhDK,IAAO,GAgDJ;;AAEnB,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,ECxDO,IAAO,GDwDO",
   "names": Array [],
-  "sourceRoot": "/home/evilebottnawi/IdeaProjects/sass-loader",
+  "sourceRoot": "",
   "sources": Array [
     "test/sass/language.sass",
     "test/sass/another/variables.sass",
@@ -407,7 +407,7 @@ exports[`sourceMap option should generate source maps when value is not specifie
 Object {
   "mappings": ";AAMA,AAAA,IAAI,CAAC;EACH,IAAI,EAAE,IAAI,CALI,SAAS,EAAE,UAAU;EAMnC,KAAK,EALS,IAAI,GAMnB;;AAED,AACE,GADC,CACD,EAAE,CAAC;EACD,MAAM,EAAE,CAAC;EACT,OAAO,EAAE,CAAC;EACV,UAAU,EAAE,IAAI,GACjB;;AALH,AAOE,GAPC,CAOD,EAAE,CAAC;EAAE,OAAO,EAAE,YAAY,GAAI;;AAPhC,AASE,GATC,CASD,CAAC,CAAC;EACA,OAAO,EAAE,KAAK;EACd,OAAO,EAAE,QAAQ;EACjB,eAAe,EAAE,IAAI,GACtB;;AAUH,AAAA,IAAI,CAAC;EANH,qBAAqB,EAMO,IAAI;EAL7B,kBAAkB,EAKO,IAAI;EAJ5B,iBAAiB,EAIO,IAAI;EAHxB,aAAa,EAGO,IAAI,GAAK;;AAEvC,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,EAlCK,IAAO,GAmCpB;;AAGH,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,EC5CO,IAAO,GD6CtB",
   "names": Array [],
-  "sourceRoot": "/home/evilebottnawi/IdeaProjects/sass-loader",
+  "sourceRoot": "",
   "sources": Array [
     "test/scss/language.scss",
     "test/scss/another/_variables.scss",
