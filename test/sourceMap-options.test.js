@@ -40,8 +40,13 @@ describe('sourceMap option', () => {
         const stats = await compile(compiler);
         const { css, sourceMap } = getCodeFromBundle(stats, compiler);
 
-        expect(css).toBeDefined();
-        expect(sourceMap).toBeDefined();
+        sourceMap.sourceRoot = '';
+        sourceMap.sources = sourceMap.sources.map((source) =>
+          source.replace(/\\/g, '/')
+        );
+
+        expect(css).toMatchSnapshot('css');
+        expect(sourceMap).toMatchSnapshot('source map');
         expect(getWarnings(stats)).toMatchSnapshot('warnings');
         expect(getErrors(stats)).toMatchSnapshot('errors');
       });
@@ -58,8 +63,8 @@ describe('sourceMap option', () => {
         const stats = await compile(compiler);
         const { css, sourceMap } = getCodeFromBundle(stats, compiler);
 
-        expect(css).toBeDefined();
-        expect(sourceMap).toBeUndefined();
+        expect(css).toMatchSnapshot('css');
+        expect(sourceMap).toMatchSnapshot('source map');
         expect(getWarnings(stats)).toMatchSnapshot('warnings');
         expect(getErrors(stats)).toMatchSnapshot('errors');
       });
@@ -77,8 +82,8 @@ describe('sourceMap option', () => {
         const stats = await compile(compiler);
         const { css, sourceMap } = getCodeFromBundle(stats, compiler);
 
-        expect(css).toBeDefined();
-        expect(sourceMap).toBeUndefined();
+        expect(css).toMatchSnapshot('css');
+        expect(sourceMap).toMatchSnapshot('source map');
         expect(getWarnings(stats)).toMatchSnapshot('warnings');
         expect(getErrors(stats)).toMatchSnapshot('errors');
       });
@@ -96,14 +101,14 @@ describe('sourceMap option', () => {
         const stats = await compile(compiler);
         const { css, sourceMap } = getCodeFromBundle(stats, compiler);
 
-        expect(css).toBeDefined();
-        expect(sourceMap).toBeUndefined();
+        expect(css).toMatchSnapshot('css');
+        expect(sourceMap).toMatchSnapshot('source map');
         expect(getWarnings(stats)).toMatchSnapshot('warnings');
         expect(getErrors(stats)).toMatchSnapshot('errors');
       });
 
       it(`should generate source maps when value has "true" value and the "devtool" option has "source-map" value (${implementationName}) (${syntax})`, async () => {
-        expect.assertions(9);
+        expect.assertions(6);
 
         const testId = getTestId('language', syntax);
         const options = {
@@ -117,12 +122,13 @@ describe('sourceMap option', () => {
         const stats = await compile(compiler);
         const { css, sourceMap } = getCodeFromBundle(stats, compiler);
 
-        expect(css).toBeDefined();
-        expect(sourceMap).toBeDefined();
+        sourceMap.sourceRoot = '';
+        sourceMap.sources = sourceMap.sources.map((source) =>
+          source.replace(/\\/g, '/')
+        );
 
-        expect(sourceMap.file).toBeUndefined();
-        expect(sourceMap.sourceRoot).toBeDefined();
-        expect(sourceMap.sources).toHaveLength(2);
+        expect(css).toMatchSnapshot('css');
+        expect(sourceMap).toMatchSnapshot('source map');
 
         sourceMap.sources.forEach((sourcePath) => {
           expect(
@@ -135,7 +141,7 @@ describe('sourceMap option', () => {
       });
 
       it(`should generate source maps when value has "true" value and the "devtool" option has "false" value (${implementationName}) (${syntax})`, async () => {
-        expect.assertions(9);
+        expect.assertions(6);
 
         const testId = getTestId('language', syntax);
         const options = {
@@ -149,12 +155,13 @@ describe('sourceMap option', () => {
         const stats = await compile(compiler);
         const { css, sourceMap } = getCodeFromBundle(stats, compiler);
 
-        expect(css).toBeDefined();
-        expect(sourceMap).toBeDefined();
+        sourceMap.sourceRoot = '';
+        sourceMap.sources = sourceMap.sources.map((source) =>
+          source.replace(/\\/g, '/')
+        );
 
-        expect(sourceMap.file).toBeUndefined();
-        expect(sourceMap.sourceRoot).toBeDefined();
-        expect(sourceMap.sources).toHaveLength(2);
+        expect(css).toMatchSnapshot('css');
+        expect(sourceMap).toMatchSnapshot('source map');
 
         sourceMap.sources.forEach((sourcePath) => {
           expect(
