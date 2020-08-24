@@ -24,6 +24,11 @@ function getDefaultSassImplementation() {
   return require(sassImplPkg);
 }
 
+/**
+ * @public
+ * This function is not Webpack-specific and can be used by tools wishing to
+ * mimic `sass-loader`'s behaviour, so its signature should not be changed.
+ */
 function getSassImplementation(implementation) {
   let resolvedImplementation = implementation;
 
@@ -211,22 +216,19 @@ const isModuleImport = /^~([^/]+|[^/]+\/|@[^/]+[/][^/]+|@[^/]+\/?|@[^/]+[/][^/]+
  *
  * @param {string} url
  * @param {boolean} forWebpackResolver
- * @param {Object} loaderContext
+ * @param {string} rootContext
  * @returns {Array<string>}
  */
-export default function getPossibleRequests(
-  loaderContext,
+function getPossibleRequests(
   // eslint-disable-next-line no-shadow
   url,
-  forWebpackResolver = false
+  forWebpackResolver = false,
+  rootContext = false
 ) {
   const request = urlToRequest(
     url,
     // Maybe it is server-relative URLs
-    forWebpackResolver && url.charAt(0) === '/'
-      ? loaderContext.rootContext
-      : // eslint-disable-next-line no-undefined
-        undefined
+    forWebpackResolver && rootContext
   );
 
   // In case there is module request, send this to webpack resolver
@@ -262,12 +264,44 @@ export default function getPossibleRequests(
   ];
 }
 
-const matchCss = /\.css$/i;
+function promiseResolve(callbackResolve) {
+  return (context, request) =>
+    new Promise((resolve, reject) => {
+      callbackResolve(context, request, (err, result) => {
+        if (err) reject(err);
+        else resolve(result);
+      });
+    });
+}
+
 const isSpecialModuleImport = /^~[^/]+$/;
 // `[drive_letter]:\` + `\\[server]\[sharename]\`
 const isNativeWin32Path = /^[a-zA-Z]:[/\\]|^\\\\/i;
 
-function getWebpackImporter(loaderContext, implementation, includePaths) {
+/**
+ * @public
+ * Create the resolve function used in the custom Sass importer.
+ *
+ * Can be used by external tools to mimic how `sass-loader` works, for example
+ * in a Jest transform. Such usages will want to wrap `resolve.create` from
+ * [`enhanced-resolve`]{@link https://github.com/webpack/enhanced-resolve} to
+ * pass as the `resolverFactory` argument.
+ *
+ * @param {Function} resolverFactory - A factory function for creating a Webpack
+ *   resolver.
+ * @param {Object} implementation - The imported Sass implementation, both
+ *   `sass` (Dart Sass) and `node-sass` are supported.
+ * @param {string[]} [includePaths] - The list of include paths passed to Sass.
+ * @param {boolean} [rootContext] - The configured Webpack root context.
+ *
+ * @throws If a compatible Sass implementation cannot be found.
+ */
+function getWebpackResolver(
+  resolverFactory,
+  implementation,
+  includePaths = [],
+  rootContext = false
+) {
   async function startResolving(resolutionMap) {
     if (resolutionMap.length === 0) {
       return Promise.reject();
@@ -275,10 +309,8 @@ function getWebpackImporter(loaderContext, implementation, includePaths) {
 
     const [{ resolve, context, possibleRequests }] = resolutionMap;
 
-    let result;
-
     try {
-      result = await resolve(context, possibleRequests[0]);
+      return await resolve(context, possibleRequests[0]);
     } catch (_ignoreError) {
       const [, ...tailResult] = possibleRequests;
 
@@ -293,46 +325,43 @@ function getWebpackImporter(loaderContext, implementation, includePaths) {
 
       return startResolving(resolutionMap);
     }
-
-    // Add the result as dependency.
-    // Although we're also using stats.includedFiles, this might come in handy when an error occurs.
-    // In this case, we don't get stats.includedFiles from node-sass/sass.
-    loaderContext.addDependency(path.normalize(result));
-
-    // By removing the CSS file extension, we trigger node-sass to include the CSS file instead of just linking it.
-    return { file: result.replace(matchCss, '') };
   }
 
-  const sassResolve = loaderContext.getResolve({
-    alias: [],
-    aliasFields: [],
-    conditionNames: [],
-    descriptionFiles: [],
-    extensions: ['.sass', '.scss', '.css'],
-    exportsFields: [],
-    mainFields: [],
-    mainFiles: ['_index', 'index'],
-    modules: [],
-    restrictions: [/\.((sa|sc|c)ss)$/i],
-  });
-  const webpackResolve = loaderContext.getResolve({
-    conditionNames: ['sass', 'style'],
-    mainFields: ['sass', 'style', 'main', '...'],
-    mainFiles: ['_index', 'index', '...'],
-    extensions: ['.sass', '.scss', '.css'],
-    restrictions: [/\.((sa|sc|c)ss)$/i],
-  });
+  const isDartSass = implementation.info.includes('dart-sass');
+  const sassResolve = promiseResolve(
+    resolverFactory({
+      alias: [],
+      aliasFields: [],
+      conditionNames: [],
+      descriptionFiles: [],
+      extensions: ['.sass', '.scss', '.css'],
+      exportsFields: [],
+      mainFields: [],
+      mainFiles: ['_index', 'index'],
+      modules: [],
+      restrictions: [/\.((sa|sc|c)ss)$/i],
+    })
+  );
+  const webpackResolve = promiseResolve(
+    resolverFactory({
+      conditionNames: ['sass', 'style'],
+      mainFields: ['sass', 'style', 'main', '...'],
+      mainFiles: ['_index', 'index', '...'],
+      extensions: ['.sass', '.scss', '.css'],
+      restrictions: [/\.((sa|sc|c)ss)$/i],
+    })
+  );
 
-  return (originalUrl, prev, done) => {
-    let request = originalUrl;
-
-    const isFileScheme = originalUrl.slice(0, 5).toLowerCase() === 'file:';
+  return (context, request) => {
+    const originalRequest = request;
+    const isFileScheme = originalRequest.slice(0, 5).toLowerCase() === 'file:';
 
     if (isFileScheme) {
       try {
         // eslint-disable-next-line no-param-reassign
-        request = url.fileURLToPath(originalUrl);
+        request = url.fileURLToPath(originalRequest);
       } catch (ignoreError) {
+        // eslint-disable-next-line no-param-reassign
         request = request.slice(7);
       }
     }
@@ -347,8 +376,8 @@ function getWebpackImporter(loaderContext, implementation, includePaths) {
       // - Server-relative URLs - `<context>/path/to/file.ext` (where `<context>` is root context)
       // - Absolute path - `/full/path/to/file.ext` or `C:\\full\path\to\file.ext`
       !isFileScheme &&
-      !originalUrl.startsWith('/') &&
-      !isNativeWin32Path.test(originalUrl);
+      !originalRequest.startsWith('/') &&
+      !isNativeWin32Path.test(originalRequest);
 
     if (includePaths.length > 0 && needEmulateSassResolver) {
       // The order of import precedence is as follows:
@@ -360,19 +389,19 @@ function getWebpackImporter(loaderContext, implementation, includePaths) {
       // 5. Filesystem imports relative to a `SASS_PATH` path.
       //
       // Because `sass`/`node-sass` run custom importers before `3`, `4` and `5` points, we need to emulate this behavior to avoid wrong resolution.
-      const sassPossibleRequests = getPossibleRequests(loaderContext, request);
-      const isDartSass = implementation.info.includes('dart-sass');
+      const sassPossibleRequests = getPossibleRequests(request);
 
       // `node-sass` calls our importer before `1. Filesystem imports relative to the base file.`, so we need emulate this too
       if (!isDartSass) {
         resolutionMap = resolutionMap.concat({
           resolve: sassResolve,
-          context: path.dirname(prev),
+          context: path.dirname(context),
           possibleRequests: sassPossibleRequests,
         });
       }
 
       resolutionMap = resolutionMap.concat(
+        // eslint-disable-next-line no-shadow
         includePaths.map((context) => ({
           resolve: sassResolve,
           context,
@@ -382,21 +411,45 @@ function getWebpackImporter(loaderContext, implementation, includePaths) {
     }
 
     const webpackPossibleRequests = getPossibleRequests(
-      loaderContext,
       request,
-      true
+      true,
+      rootContext
     );
 
     resolutionMap = resolutionMap.concat({
       resolve: webpackResolve,
-      context: path.dirname(prev),
+      context: path.dirname(context),
       possibleRequests: webpackPossibleRequests,
     });
 
-    startResolving(resolutionMap)
+    return startResolving(resolutionMap);
+  };
+}
+
+const matchCss = /\.css$/i;
+
+function getWebpackImporter(loaderContext, implementation, includePaths) {
+  const resolve = getWebpackResolver(
+    loaderContext.getResolve,
+    implementation,
+    includePaths,
+    loaderContext.rootContext
+  );
+
+  return (originalUrl, prev, done) => {
+    resolve(prev, originalUrl)
+      .then((result) => {
+        // Add the result as dependency.
+        // Although we're also using stats.includedFiles, this might come in handy when an error occurs.
+        // In this case, we don't get stats.includedFiles from node-sass/sass.
+        loaderContext.addDependency(path.normalize(result));
+        // By removing the CSS file extension, we trigger node-sass to include the CSS file instead of just linking it.
+        done({ file: result.replace(matchCss, '') });
+      })
       // Catch all resolving errors, return the original file and pass responsibility back to other custom importers
-      .catch(() => ({ file: originalUrl }))
-      .then((result) => done(result));
+      .catch(() => {
+        done({ file: originalUrl });
+      });
   };
 }
 
@@ -433,6 +486,7 @@ function getRenderFunctionFromSassImplementation(implementation) {
 export {
   getSassImplementation,
   getSassOptions,
+  getWebpackResolver,
   getWebpackImporter,
   getRenderFunctionFromSassImplementation,
 };
