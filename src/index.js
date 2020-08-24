@@ -9,6 +9,7 @@ import {
   getSassOptions,
   getWebpackImporter,
   getRenderFunctionFromSassImplementation,
+  absolutifySourceMapSource,
 } from './utils';
 import SassError from './SassError';
 
@@ -27,8 +28,15 @@ function loader(content) {
   });
 
   const implementation = getSassImplementation(options.implementation);
-  const sassOptions = getSassOptions(this, options, content, implementation);
-
+  const useSourceMap =
+    typeof options.sourceMap === 'boolean' ? options.sourceMap : this.sourceMap;
+  const sassOptions = getSassOptions(
+    this,
+    options,
+    content,
+    implementation,
+    useSourceMap
+  );
   const shouldUseWebpackImporter =
     typeof options.webpackImporter === 'boolean'
       ? options.webpackImporter
@@ -58,7 +66,8 @@ function loader(content) {
       return;
     }
 
-    if (result.map) {
+    // Modify source paths only for webpack, otherwise we do nothing
+    if (result.map && useSourceMap) {
       // eslint-disable-next-line no-param-reassign
       result.map = JSON.parse(result.map);
 
@@ -67,13 +76,16 @@ function loader(content) {
       // eslint-disable-next-line no-param-reassign
       delete result.map.file;
 
+      // eslint-disable-next-line no-param-reassign
+      result.sourceRoot = '';
+
       // node-sass returns POSIX paths, that's why we need to transform them back to native paths.
       // This fixes an error on windows where the source-map module cannot resolve the source maps.
       // @see https://github.com/webpack-contrib/sass-loader/issues/366#issuecomment-279460722
       // eslint-disable-next-line no-param-reassign
-      result.map.sourceRoot = path.normalize(result.map.sourceRoot);
-      // eslint-disable-next-line no-param-reassign
-      result.map.sources = result.map.sources.map(path.normalize);
+      result.map.sources = result.map.sources.map((source) =>
+        absolutifySourceMapSource(this.rootContext, source)
+      );
     }
 
     result.stats.includedFiles.forEach((includedFile) => {

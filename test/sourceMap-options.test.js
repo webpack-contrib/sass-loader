@@ -42,7 +42,9 @@ describe('sourceMap option', () => {
 
         sourceMap.sourceRoot = '';
         sourceMap.sources = sourceMap.sources.map((source) =>
-          source.replace(/\\/g, '/')
+          path
+            .relative(path.resolve(__dirname, '..'), source)
+            .replace(/\\/g, '/')
         );
 
         expect(css).toMatchSnapshot('css');
@@ -124,7 +126,9 @@ describe('sourceMap option', () => {
 
         sourceMap.sourceRoot = '';
         sourceMap.sources = sourceMap.sources.map((source) =>
-          source.replace(/\\/g, '/')
+          path
+            .relative(path.resolve(__dirname, '..'), source)
+            .replace(/\\/g, '/')
         );
 
         expect(css).toMatchSnapshot('css');
@@ -157,7 +161,9 @@ describe('sourceMap option', () => {
 
         sourceMap.sourceRoot = '';
         sourceMap.sources = sourceMap.sources.map((source) =>
-          source.replace(/\\/g, '/')
+          path
+            .relative(path.resolve(__dirname, '..'), source)
+            .replace(/\\/g, '/')
         );
 
         expect(css).toMatchSnapshot('css');

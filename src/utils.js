@@ -93,9 +93,16 @@ function proxyCustomImporters(importers, loaderContext) {
  * @param {object} loaderOptions
  * @param {string} content
  * @param {object} implementation
+ * @param {boolean} useSourceMap
  * @returns {Object}
  */
-function getSassOptions(loaderContext, loaderOptions, content, implementation) {
+function getSassOptions(
+  loaderContext,
+  loaderOptions,
+  content,
+  implementation,
+  useSourceMap
+) {
   const options = klona(
     loaderOptions.sassOptions
       ? typeof loaderOptions.sassOptions === 'function'
@@ -143,11 +150,6 @@ function getSassOptions(loaderContext, loaderOptions, content, implementation) {
     options.outputStyle = 'compressed';
   }
 
-  const useSourceMap =
-    typeof loaderOptions.sourceMap === 'boolean'
-      ? loaderOptions.sourceMap
-      : loaderContext.sourceMap;
-
   if (useSourceMap) {
     // Deliberately overriding the sourceMap option here.
     // node-sass won't produce source maps if the data option is used and options.sourceMap is not a string.
@@ -155,11 +157,12 @@ function getSassOptions(loaderContext, loaderOptions, content, implementation) {
     // But since we're using the data option, the source map will not actually be written, but
     // all paths in sourceMap.sources will be relative to that path.
     // Pretty complicated... :(
-    options.sourceMap = path.join(process.cwd(), '/sass.css.map');
-    options.sourceMapRoot = process.cwd();
+    options.sourceMap = true;
+    options.outFile = path.join(loaderContext.rootContext, 'style.css.map');
+    // options.sourceMapRoot = process.cwd();
     options.sourceMapContents = true;
     options.omitSourceMapUrl = true;
-    options.sourceMapEmbed = false;
+    // options.sourceMapEmbed = false;
   }
 
   const { resourcePath } = loaderContext;
@@ -483,10 +486,36 @@ function getRenderFunctionFromSassImplementation(implementation) {
   return nodeSassJobQueue.push.bind(nodeSassJobQueue);
 }
 
+const ABSOLUTE_SCHEME = /^[A-Za-z0-9+\-.]+:/;
+
+function getURLType(source) {
+  if (source[0] === '/') {
+    if (source[1] === '/') {
+      return 'scheme-relative';
+    }
+
+    return 'path-absolute';
+  }
+
+  return ABSOLUTE_SCHEME.test(source) ? 'absolute' : 'path-relative';
+}
+
+function absolutifySourceMapSource(sourceRoot, source) {
+  const sourceType = getURLType(source);
+
+  // Do no touch `scheme-relative`, `path-absolute` and `absolute` types
+  if (sourceType === 'path-relative') {
+    return path.resolve(sourceRoot, path.normalize(source));
+  }
+
+  return source;
+}
+
 export {
   getSassImplementation,
   getSassOptions,
   getWebpackResolver,
   getWebpackImporter,
   getRenderFunctionFromSassImplementation,
+  absolutifySourceMapSource,
 };
