@@ -67,13 +67,16 @@ function loader(content) {
       // eslint-disable-next-line no-param-reassign
       delete result.map.file;
 
+      // eslint-disable-next-line no-param-reassign
+      result.sourceRoot = '';
+
       // node-sass returns POSIX paths, that's why we need to transform them back to native paths.
       // This fixes an error on windows where the source-map module cannot resolve the source maps.
       // @see https://github.com/webpack-contrib/sass-loader/issues/366#issuecomment-279460722
       // eslint-disable-next-line no-param-reassign
-      result.map.sourceRoot = path.normalize(result.map.sourceRoot);
-      // eslint-disable-next-line no-param-reassign
-      result.map.sources = result.map.sources.map(path.normalize);
+      result.map.sources = result.map.sources.map((source) =>
+        path.resolve(this.rootContext, path.normalize(source))
+      );
     }
 
     result.stats.includedFiles.forEach((includedFile) => {

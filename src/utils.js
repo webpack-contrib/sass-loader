@@ -150,11 +150,12 @@ function getSassOptions(loaderContext, loaderOptions, content, implementation) {
     // But since we're using the data option, the source map will not actually be written, but
     // all paths in sourceMap.sources will be relative to that path.
     // Pretty complicated... :(
-    options.sourceMap = path.join(process.cwd(), '/sass.css.map');
-    options.sourceMapRoot = process.cwd();
+    options.sourceMap = true;
+    options.outFile = path.join(loaderContext.rootContext, 'style.css.map');
+    // options.sourceMapRoot = process.cwd();
     options.sourceMapContents = true;
     options.omitSourceMapUrl = true;
-    options.sourceMapEmbed = false;
+    // options.sourceMapEmbed = false;
   }
 
   const { resourcePath } = loaderContext;
