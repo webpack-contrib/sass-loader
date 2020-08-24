@@ -88,9 +88,16 @@ function proxyCustomImporters(importers, loaderContext) {
  * @param {object} loaderOptions
  * @param {string} content
  * @param {object} implementation
+ * @param {boolean} useSourceMap
  * @returns {Object}
  */
-function getSassOptions(loaderContext, loaderOptions, content, implementation) {
+function getSassOptions(
+  loaderContext,
+  loaderOptions,
+  content,
+  implementation,
+  useSourceMap
+) {
   const options = klona(
     loaderOptions.sassOptions
       ? typeof loaderOptions.sassOptions === 'function'
@@ -137,11 +144,6 @@ function getSassOptions(loaderContext, loaderOptions, content, implementation) {
   if (!options.outputStyle && isProductionLikeMode(loaderContext)) {
     options.outputStyle = 'compressed';
   }
-
-  const useSourceMap =
-    typeof loaderOptions.sourceMap === 'boolean'
-      ? loaderOptions.sourceMap
-      : loaderContext.sourceMap;
 
   if (useSourceMap) {
     // Deliberately overriding the sourceMap option here.
@@ -431,9 +433,35 @@ function getRenderFunctionFromSassImplementation(implementation) {
   return nodeSassJobQueue.push.bind(nodeSassJobQueue);
 }
 
+const ABSOLUTE_SCHEME = /^[A-Za-z0-9+\-.]+:/;
+
+function getURLType(source) {
+  if (source[0] === '/') {
+    if (source[1] === '/') {
+      return 'scheme-relative';
+    }
+
+    return 'path-absolute';
+  }
+
+  return ABSOLUTE_SCHEME.test(source) ? 'absolute' : 'path-relative';
+}
+
+function absolutifySourceMapSources(sourceRoot, source) {
+  const sourceType = getURLType(source);
+
+  // Do no touch `scheme-relative`, `path-absolute` and `absolute` types
+  if (sourceType === 'path-relative') {
+    return path.resolve(sourceRoot, path.normalize(source));
+  }
+
+  return source;
+}
+
 export {
   getSassImplementation,
   getSassOptions,
   getWebpackImporter,
   getRenderFunctionFromSassImplementation,
+  absolutifySourceMapSources,
 };

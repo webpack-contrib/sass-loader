@@ -9,6 +9,7 @@ import {
   getSassOptions,
   getWebpackImporter,
   getRenderFunctionFromSassImplementation,
+  absolutifySourceMapSources,
 } from './utils';
 import SassError from './SassError';
 
@@ -27,8 +28,15 @@ function loader(content) {
   });
 
   const implementation = getSassImplementation(options.implementation);
-  const sassOptions = getSassOptions(this, options, content, implementation);
-
+  const useSourceMap =
+    typeof options.sourceMap === 'boolean' ? options.sourceMap : this.sourceMap;
+  const sassOptions = getSassOptions(
+    this,
+    options,
+    content,
+    implementation,
+    useSourceMap
+  );
   const shouldUseWebpackImporter =
     typeof options.webpackImporter === 'boolean'
       ? options.webpackImporter
@@ -58,14 +66,10 @@ function loader(content) {
       return;
     }
 
-    if (result.map) {
+    // Modify source paths only for webpack, otherwise we do nothing
+    if (result.map && useSourceMap) {
       // eslint-disable-next-line no-param-reassign
       result.map = JSON.parse(result.map);
-
-      // eslint-disable-next-line no-console
-      console.log('FROM SASS:');
-      // eslint-disable-next-line no-console
-      console.log(result.map);
 
       // result.map.file is an optional property that provides the output filename.
       // Since we don't know the final filename in the webpack build chain yet, it makes no sense to have it.
@@ -80,13 +84,8 @@ function loader(content) {
       // @see https://github.com/webpack-contrib/sass-loader/issues/366#issuecomment-279460722
       // eslint-disable-next-line no-param-reassign
       result.map.sources = result.map.sources.map((source) =>
-        path.resolve(this.rootContext, path.normalize(source))
+        absolutifySourceMapSources(this.rootContext, source)
       );
-
-      // eslint-disable-next-line no-console
-      console.log('FROM LOADER:');
-      // eslint-disable-next-line no-console
-      console.log(result.map);
     }
 
     result.stats.includedFiles.forEach((includedFile) => {
