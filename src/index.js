@@ -62,6 +62,11 @@ function loader(content) {
       // eslint-disable-next-line no-param-reassign
       result.map = JSON.parse(result.map);
 
+      // eslint-disable-next-line no-console
+      console.log('FROM SASS:');
+      // eslint-disable-next-line no-console
+      console.log(result.map);
+
       // result.map.file is an optional property that provides the output filename.
       // Since we don't know the final filename in the webpack build chain yet, it makes no sense to have it.
       // eslint-disable-next-line no-param-reassign
@@ -77,6 +82,11 @@ function loader(content) {
       result.map.sources = result.map.sources.map((source) =>
         path.resolve(this.rootContext, path.normalize(source))
       );
+
+      // eslint-disable-next-line no-console
+      console.log('FROM LOADER:');
+      // eslint-disable-next-line no-console
+      console.log(result.map);
     }
 
     result.stats.includedFiles.forEach((includedFile) => {
