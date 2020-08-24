@@ -9,7 +9,7 @@ import {
   getSassOptions,
   getWebpackImporter,
   getRenderFunctionFromSassImplementation,
-  absolutifySourceMapSources,
+  absolutifySourceMapSource,
 } from './utils';
 import SassError from './SassError';
 
@@ -84,7 +84,7 @@ function loader(content) {
       // @see https://github.com/webpack-contrib/sass-loader/issues/366#issuecomment-279460722
       // eslint-disable-next-line no-param-reassign
       result.map.sources = result.map.sources.map((source) =>
-        absolutifySourceMapSources(this.rootContext, source)
+        absolutifySourceMapSource(this.rootContext, source)
       );
     }
 

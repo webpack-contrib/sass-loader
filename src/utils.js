@@ -447,7 +447,7 @@ function getURLType(source) {
   return ABSOLUTE_SCHEME.test(source) ? 'absolute' : 'path-relative';
 }
 
-function absolutifySourceMapSources(sourceRoot, source) {
+function absolutifySourceMapSource(sourceRoot, source) {
   const sourceType = getURLType(source);
 
   // Do no touch `scheme-relative`, `path-absolute` and `absolute` types
@@ -463,5 +463,5 @@ export {
   getSassOptions,
   getWebpackImporter,
   getRenderFunctionFromSassImplementation,
-  absolutifySourceMapSources,
+  absolutifySourceMapSource,
 };
