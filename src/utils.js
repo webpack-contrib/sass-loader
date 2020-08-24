@@ -162,7 +162,7 @@ function getSassOptions(
     // options.sourceMapRoot = process.cwd();
     options.sourceMapContents = true;
     options.omitSourceMapUrl = true;
-    // options.sourceMapEmbed = false;
+    options.sourceMapEmbed = false;
   }
 
   const { resourcePath } = loaderContext;
@@ -270,16 +270,19 @@ function getPossibleRequests(
 function promiseResolve(callbackResolve) {
   return (context, request) =>
     new Promise((resolve, reject) => {
-      callbackResolve(context, request, (err, result) => {
-        if (err) reject(err);
-        else resolve(result);
+      callbackResolve(context, request, (error, result) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(result);
+        }
       });
     });
 }
 
-const isSpecialModuleImport = /^~[^/]+$/;
+const IS_SPECIAL_MODULE_IMPORT = /^~[^/]+$/;
 // `[drive_letter]:\` + `\\[server]\[sharename]\`
-const isNativeWin32Path = /^[a-zA-Z]:[/\\]|^\\\\/i;
+const IS_NATIVE_WIN32_PATH = /^[a-z]:[/\\]|^\\\\/i;
 
 /**
  * @public
@@ -373,14 +376,14 @@ function getWebpackResolver(
 
     const needEmulateSassResolver =
       // `sass` doesn't support module import
-      !isSpecialModuleImport.test(request) &&
+      !IS_SPECIAL_MODULE_IMPORT.test(request) &&
       // We need improve absolute paths handling.
       // Absolute paths should be resolved:
       // - Server-relative URLs - `<context>/path/to/file.ext` (where `<context>` is root context)
       // - Absolute path - `/full/path/to/file.ext` or `C:\\full\path\to\file.ext`
       !isFileScheme &&
       !originalRequest.startsWith('/') &&
-      !isNativeWin32Path.test(originalRequest);
+      !IS_NATIVE_WIN32_PATH.test(originalRequest);
 
     if (includePaths.length > 0 && needEmulateSassResolver) {
       // The order of import precedence is as follows:
@@ -494,6 +497,10 @@ function getURLType(source) {
       return 'scheme-relative';
     }
 
+    return 'path-absolute';
+  }
+
+  if (IS_NATIVE_WIN32_PATH.test(source)) {
     return 'path-absolute';
   }
 
