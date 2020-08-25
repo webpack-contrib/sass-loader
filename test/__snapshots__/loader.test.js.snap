@@ -5316,7 +5316,7 @@ exports[`loader should work when "@use" with an alias (dart-sass) (scss): warnin
 exports[`loader should work when "@use" with the "bootstrap" package, import as a package (dart-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
 /*!
- * Bootstrap v4.5.1 (https://getbootstrap.com/)
+ * Bootstrap v4.5.2 (https://getbootstrap.com/)
  * Copyright 2011-2020 The Bootstrap Authors
  * Copyright 2011-2020 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
@@ -5882,7 +5882,6 @@ pre code {
 }
 .row {
   display: flex;
-  flex: 1 0 100%;
   flex-wrap: wrap;
   margin-right: -15px;
   margin-left: -15px;
@@ -15219,7 +15218,7 @@ exports[`loader should work when "@use" with the "bootstrap" package, import as 
 exports[`loader should work when "@use" with the "bootstrap" package, import as a package (dart-sass) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
 /*!
- * Bootstrap v4.5.1 (https://getbootstrap.com/)
+ * Bootstrap v4.5.2 (https://getbootstrap.com/)
  * Copyright 2011-2020 The Bootstrap Authors
  * Copyright 2011-2020 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
@@ -15785,7 +15784,6 @@ pre code {
 }
 .row {
   display: flex;
-  flex: 1 0 100%;
   flex-wrap: wrap;
   margin-right: -15px;
   margin-left: -15px;
@@ -55441,7 +55439,7 @@ exports[`loader should work with multiple "@import" at-rules without quotes (nod
 exports[`loader should work with the "bootstrap" package, import as a package (dart-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
 /*!
- * Bootstrap v4.5.1 (https://getbootstrap.com/)
+ * Bootstrap v4.5.2 (https://getbootstrap.com/)
  * Copyright 2011-2020 The Bootstrap Authors
  * Copyright 2011-2020 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
@@ -56007,7 +56005,6 @@ pre code {
 }
 .row {
   display: flex;
-  flex: 1 0 100%;
   flex-wrap: wrap;
   margin-right: -15px;
   margin-left: -15px;
@@ -65344,7 +65341,7 @@ exports[`loader should work with the "bootstrap" package, import as a package (d
 exports[`loader should work with the "bootstrap" package, import as a package (dart-sass) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
 /*!
- * Bootstrap v4.5.1 (https://getbootstrap.com/)
+ * Bootstrap v4.5.2 (https://getbootstrap.com/)
  * Copyright 2011-2020 The Bootstrap Authors
  * Copyright 2011-2020 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
@@ -65910,7 +65907,6 @@ pre code {
 }
 .row {
   display: flex;
-  flex: 1 0 100%;
   flex-wrap: wrap;
   margin-right: -15px;
   margin-left: -15px;
@@ -75246,7 +75242,7 @@ exports[`loader should work with the "bootstrap" package, import as a package (d
 
 exports[`loader should work with the "bootstrap" package, import as a package (node-sass) (sass): css 1`] = `
 "/*!
- * Bootstrap v4.5.1 (https://getbootstrap.com/)
+ * Bootstrap v4.5.2 (https://getbootstrap.com/)
  * Copyright 2011-2020 The Bootstrap Authors
  * Copyright 2011-2020 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
@@ -75715,7 +75711,6 @@ pre {
 
 .row {
   display: flex;
-  flex: 1 0 100%;
   flex-wrap: wrap;
   margin-right: -15px;
   margin-left: -15px; }
@@ -82409,7 +82404,7 @@ exports[`loader should work with the "bootstrap" package, import as a package (n
 
 exports[`loader should work with the "bootstrap" package, import as a package (node-sass) (scss): css 1`] = `
 "/*!
- * Bootstrap v4.5.1 (https://getbootstrap.com/)
+ * Bootstrap v4.5.2 (https://getbootstrap.com/)
  * Copyright 2011-2020 The Bootstrap Authors
  * Copyright 2011-2020 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
@@ -82878,7 +82873,6 @@ pre {
 
 .row {
   display: flex;
-  flex: 1 0 100%;
   flex-wrap: wrap;
   margin-right: -15px;
   margin-left: -15px; }
