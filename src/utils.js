@@ -2,7 +2,7 @@ import url from 'url';
 import path from 'path';
 
 import semver from 'semver';
-import klona from 'klona';
+import { klona } from 'klona/full';
 import { urlToRequest } from 'loader-utils';
 import async from 'neo-async';
 
