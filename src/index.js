@@ -9,7 +9,7 @@ import {
   getSassOptions,
   getWebpackImporter,
   getRenderFunctionFromSassImplementation,
-  absolutifySourceMapSource,
+  normalizeSourceMap,
 } from './utils';
 import SassError from './SassError';
 
@@ -66,33 +66,18 @@ function loader(content) {
       return;
     }
 
+    let map = result.map ? JSON.parse(result.map) : null;
+
     // Modify source paths only for webpack, otherwise we do nothing
-    if (result.map && useSourceMap) {
-      // eslint-disable-next-line no-param-reassign
-      result.map = JSON.parse(result.map);
-
-      // result.map.file is an optional property that provides the output filename.
-      // Since we don't know the final filename in the webpack build chain yet, it makes no sense to have it.
-      // eslint-disable-next-line no-param-reassign
-      delete result.map.file;
-
-      // eslint-disable-next-line no-param-reassign
-      result.sourceRoot = '';
-
-      // node-sass returns POSIX paths, that's why we need to transform them back to native paths.
-      // This fixes an error on windows where the source-map module cannot resolve the source maps.
-      // @see https://github.com/webpack-contrib/sass-loader/issues/366#issuecomment-279460722
-      // eslint-disable-next-line no-param-reassign
-      result.map.sources = result.map.sources.map((source) =>
-        absolutifySourceMapSource(this.rootContext, source)
-      );
+    if (map && useSourceMap) {
+      map = normalizeSourceMap(map, this.rootContext);
     }
 
     result.stats.includedFiles.forEach((includedFile) => {
       this.addDependency(path.normalize(includedFile));
     });
 
-    callback(null, result.css.toString(), result.map);
+    callback(null, result.css.toString(), map);
   });
 }
 

@@ -40,6 +40,8 @@ describe('sourceMap option', () => {
         const stats = await compile(compiler);
         const { css, sourceMap } = getCodeFromBundle(stats, compiler);
 
+        console.log(sourceMap);
+
         sourceMap.sourceRoot = '';
         sourceMap.sources = sourceMap.sources.map((source) =>
           path
@@ -173,6 +175,44 @@ describe('sourceMap option', () => {
           expect(
             fs.existsSync(path.resolve(sourceMap.sourceRoot, sourcePath))
           ).toBe(true);
+        });
+
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
+      });
+
+      it(`should generate source maps when value has "false" value, but the "sassOptions.sourceMap" has the "true" value (${implementationName}) (${syntax})`, async () => {
+        expect.assertions(6);
+
+        const testId = getTestId('language', syntax);
+        const options = {
+          implementation: getImplementationByName(implementationName),
+          sourceMap: false,
+          sassOptions: {
+            sourceMap: true,
+            outFile: path.join(__dirname, 'style.css.map'),
+            sourceMapContents: true,
+            omitSourceMapUrl: true,
+            sourceMapEmbed: false,
+          },
+        };
+        const compiler = getCompiler(testId, {
+          devtool: false,
+          loader: { options },
+        });
+        const stats = await compile(compiler);
+        const { css, sourceMap } = getCodeFromBundle(stats, compiler);
+
+        sourceMap.sourceRoot = '';
+        sourceMap.sources = sourceMap.sources.map((source) =>
+          source.replace(/\\/g, '/')
+        );
+
+        expect(css).toMatchSnapshot('css');
+        expect(sourceMap).toMatchSnapshot('source map');
+
+        sourceMap.sources.forEach((sourcePath) => {
+          expect(fs.existsSync(path.resolve(__dirname, sourcePath))).toBe(true);
         });
 
         expect(getWarnings(stats)).toMatchSnapshot('warnings');

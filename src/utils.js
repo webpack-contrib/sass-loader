@@ -159,7 +159,6 @@ function getSassOptions(
     // Pretty complicated... :(
     options.sourceMap = true;
     options.outFile = path.join(loaderContext.rootContext, 'style.css.map');
-    // options.sourceMapRoot = process.cwd();
     options.sourceMapContents = true;
     options.omitSourceMapUrl = true;
     options.sourceMapEmbed = false;
@@ -507,15 +506,33 @@ function getURLType(source) {
   return ABSOLUTE_SCHEME.test(source) ? 'absolute' : 'path-relative';
 }
 
-function absolutifySourceMapSource(sourceRoot, source) {
-  const sourceType = getURLType(source);
+function normalizeSourceMap(map, rootContext) {
+  const newMap = map;
 
-  // Do no touch `scheme-relative`, `path-absolute` and `absolute` types
-  if (sourceType === 'path-relative') {
-    return path.resolve(sourceRoot, path.normalize(source));
-  }
+  // result.map.file is an optional property that provides the output filename.
+  // Since we don't know the final filename in the webpack build chain yet, it makes no sense to have it.
+  // eslint-disable-next-line no-param-reassign
+  delete newMap.file;
 
-  return source;
+  // eslint-disable-next-line no-param-reassign
+  newMap.sourceRoot = '';
+
+  // node-sass returns POSIX paths, that's why we need to transform them back to native paths.
+  // This fixes an error on windows where the source-map module cannot resolve the source maps.
+  // @see https://github.com/webpack-contrib/sass-loader/issues/366#issuecomment-279460722
+  // eslint-disable-next-line no-param-reassign
+  newMap.sources = newMap.sources.map((source) => {
+    const sourceType = getURLType(source);
+
+    // Do no touch `scheme-relative`, `path-absolute` and `absolute` types
+    if (sourceType === 'path-relative') {
+      return path.resolve(rootContext, path.normalize(source));
+    }
+
+    return source;
+  });
+
+  return newMap;
 }
 
 export {
@@ -524,5 +541,5 @@ export {
   getWebpackResolver,
   getWebpackImporter,
   getRenderFunctionFromSassImplementation,
-  absolutifySourceMapSource,
+  normalizeSourceMap,
 };
