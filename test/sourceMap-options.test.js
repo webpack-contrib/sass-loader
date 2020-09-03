@@ -130,7 +130,7 @@ describe('sourceMap option', () => {
       });
 
       it(`should generate source maps when value has "false" value, but the "sassOptions.sourceMap" has the "true" value (${implementationName}) (${syntax})`, async () => {
-        expect.assertions(10);
+        expect.assertions(8);
 
         const testId = getTestId('language', syntax);
         const options = {
