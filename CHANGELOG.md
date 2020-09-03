@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [10.0.2](https://github.com/webpack-contrib/sass-loader/compare/v10.0.1...v10.0.2) (2020-09-03)
+
+
+### Bug Fixes
+
+* source maps generation ([#886](https://github.com/webpack-contrib/sass-loader/issues/886)) ([8327d55](https://github.com/webpack-contrib/sass-loader/commit/8327d55df9e8fc6e24d2759d7bd50174ed1ff1e4))
+
 ### [10.0.1](https://github.com/webpack-contrib/sass-loader/compare/v10.0.0...v10.0.1) (2020-08-25)
 
 ### Chore
