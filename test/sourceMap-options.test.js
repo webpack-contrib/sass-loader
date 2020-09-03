@@ -154,11 +154,9 @@ describe('sourceMap option', () => {
         sourceMap.sourceRoot = '';
         sourceMap.sources = sourceMap.sources.map((source) => {
           expect(path.isAbsolute(source)).toBe(false);
-          // `node-sass` generate invalid `path.sep` on windows
-          expect(source).toBe(
-            implementationName === 'dart-sass' ? path.normalize(source) : source
-          );
-          expect(fs.existsSync(path.resolve(__dirname, source))).toBe(true);
+          expect(
+            fs.existsSync(path.resolve(__dirname, path.normalize(source)))
+          ).toBe(true);
 
           return path
             .relative(path.resolve(__dirname, '..'), source)
