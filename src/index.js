@@ -1,6 +1,6 @@
 import path from 'path';
 
-import validateOptions from 'schema-utils';
+import { validate } from 'schema-utils';
 import { getOptions } from 'loader-utils';
 
 import schema from './options.json';
@@ -22,7 +22,7 @@ import SassError from './SassError';
 function loader(content) {
   const options = getOptions(this);
 
-  validateOptions(schema, options, {
+  validate(schema, options, {
     name: 'Sass Loader',
     baseDataPath: 'options',
   });
