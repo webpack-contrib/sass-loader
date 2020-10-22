@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [10.0.4](https://github.com/webpack-contrib/sass-loader/compare/v10.0.3...v10.0.4) (2020-10-22)
+
+
+### Bug Fixes
+
+* compatibility with the filesystem cache ([#896](https://github.com/webpack-contrib/sass-loader/issues/896)) ([e31f9b6](https://github.com/webpack-contrib/sass-loader/commit/e31f9b682f62e957fd2075582c3cf6cf0daf6b52))
+
 ### [10.0.3](https://github.com/webpack-contrib/sass-loader/compare/v10.0.2...v10.0.3) (2020-10-09)
 
 ### Chore
