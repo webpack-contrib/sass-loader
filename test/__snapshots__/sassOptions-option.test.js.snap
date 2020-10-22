@@ -2,6 +2,7 @@
 
 exports[`sassOptions option should don't use the "fibers" package when the "fiber" option is "false" (dart-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
+@import \\"./file.css\\";
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -61,6 +62,7 @@ exports[`sassOptions option should don't use the "fibers" package when the "fibe
 
 exports[`sassOptions option should don't use the "fibers" package when the "fiber" option is "false" (dart-sass) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
+@import \\"./file.css\\";
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -102,6 +104,7 @@ exports[`sassOptions option should don't use the "fibers" package when the "fibe
 
 exports[`sassOptions option should don't use the "fibers" package when the "fiber" option is "false" (node-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
+@import url(./file.css);
 body {
   font: 100% Helvetica, sans-serif;
   color: #333; }
@@ -153,6 +156,7 @@ exports[`sassOptions option should don't use the "fibers" package when the "fibe
 
 exports[`sassOptions option should don't use the "fibers" package when the "fiber" option is "false" (node-sass) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
+@import url(./file.css);
 body {
   font: 100% Helvetica, sans-serif;
   color: #333; }
@@ -190,6 +194,7 @@ exports[`sassOptions option should don't use the "fibers" package when the "fibe
 
 exports[`sassOptions option should ignore the "data" option (dart-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
+@import \\"./file.css\\";
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -249,6 +254,7 @@ exports[`sassOptions option should ignore the "data" option (dart-sass) (sass): 
 
 exports[`sassOptions option should ignore the "data" option (dart-sass) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
+@import \\"./file.css\\";
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -290,6 +296,7 @@ exports[`sassOptions option should ignore the "data" option (dart-sass) (scss): 
 
 exports[`sassOptions option should ignore the "data" option (node-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
+@import url(./file.css);
 body {
   font: 100% Helvetica, sans-serif;
   color: #333; }
@@ -341,6 +348,7 @@ exports[`sassOptions option should ignore the "data" option (node-sass) (sass): 
 
 exports[`sassOptions option should ignore the "data" option (node-sass) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
+@import url(./file.css);
 body {
   font: 100% Helvetica, sans-serif;
   color: #333; }
@@ -378,6 +386,7 @@ exports[`sassOptions option should ignore the "data" option (node-sass) (scss): 
 
 exports[`sassOptions option should ignore the "file" option (dart-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
+@import \\"./file.css\\";
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -437,6 +446,7 @@ exports[`sassOptions option should ignore the "file" option (dart-sass) (sass): 
 
 exports[`sassOptions option should ignore the "file" option (dart-sass) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
+@import \\"./file.css\\";
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -478,6 +488,7 @@ exports[`sassOptions option should ignore the "file" option (dart-sass) (scss): 
 
 exports[`sassOptions option should ignore the "file" option (node-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
+@import url(./file.css);
 body {
   font: 100% Helvetica, sans-serif;
   color: #333; }
@@ -529,6 +540,7 @@ exports[`sassOptions option should ignore the "file" option (node-sass) (sass): 
 
 exports[`sassOptions option should ignore the "file" option (node-sass) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
+@import url(./file.css);
 body {
   font: 100% Helvetica, sans-serif;
   color: #333; }
@@ -566,6 +578,7 @@ exports[`sassOptions option should ignore the "file" option (node-sass) (scss): 
 
 exports[`sassOptions option should respect the "outputStyle" option (dart-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
+@import \\"./file.css\\";
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -625,6 +638,7 @@ exports[`sassOptions option should respect the "outputStyle" option (dart-sass) 
 
 exports[`sassOptions option should respect the "outputStyle" option (dart-sass) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
+@import \\"./file.css\\";
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -666,6 +680,7 @@ exports[`sassOptions option should respect the "outputStyle" option (dart-sass) 
 
 exports[`sassOptions option should respect the "outputStyle" option (node-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
+@import url(./file.css);
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -728,6 +743,7 @@ exports[`sassOptions option should respect the "outputStyle" option (node-sass) 
 
 exports[`sassOptions option should respect the "outputStyle" option (node-sass) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
+@import url(./file.css);
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -770,20 +786,20 @@ exports[`sassOptions option should respect the "outputStyle" option (node-sass) 
 
 exports[`sassOptions option should respect the "outputStyle" option (node-sass) (scss): warnings 1`] = `Array []`;
 
-exports[`sassOptions option should use "compressed" output style in the "production" mode (dart-sass) (sass): css 1`] = `"﻿body{font:100% Helvetica,sans-serif;color:#333}nav ul{margin:0;padding:0;list-style:none}nav li{display:inline-block}nav a{display:block;padding:6px 12px;text-decoration:none}.box{-webkit-border-radius:10px;-moz-border-radius:10px;-ms-border-radius:10px;border-radius:10px}.message,.warning,.error,.success{border:1px solid #ccc;padding:10px;color:#333}.success{border-color:green}.error{border-color:red}.warning{border-color:#ff0}.foo:before{content:\\"\\"}.bar:before{content:\\"∑\\"}"`;
+exports[`sassOptions option should use "compressed" output style in the "production" mode (dart-sass) (sass): css 1`] = `"﻿@import\\"./file.css\\";body{font:100% Helvetica,sans-serif;color:#333}nav ul{margin:0;padding:0;list-style:none}nav li{display:inline-block}nav a{display:block;padding:6px 12px;text-decoration:none}.box{-webkit-border-radius:10px;-moz-border-radius:10px;-ms-border-radius:10px;border-radius:10px}.message,.warning,.error,.success{border:1px solid #ccc;padding:10px;color:#333}.success{border-color:green}.error{border-color:red}.warning{border-color:#ff0}.foo:before{content:\\"\\"}.bar:before{content:\\"∑\\"}"`;
 
 exports[`sassOptions option should use "compressed" output style in the "production" mode (dart-sass) (sass): errors 1`] = `Array []`;
 
 exports[`sassOptions option should use "compressed" output style in the "production" mode (dart-sass) (sass): warnings 1`] = `Array []`;
 
-exports[`sassOptions option should use "compressed" output style in the "production" mode (dart-sass) (scss): css 1`] = `"﻿body{font:100% Helvetica,sans-serif;color:#333}nav ul{margin:0;padding:0;list-style:none}nav li{display:inline-block}nav a{display:block;padding:6px 12px;text-decoration:none}.box{-webkit-border-radius:10px;-moz-border-radius:10px;-ms-border-radius:10px;border-radius:10px}.foo:before{content:\\"\\"}.bar:before{content:\\"∑\\"}"`;
+exports[`sassOptions option should use "compressed" output style in the "production" mode (dart-sass) (scss): css 1`] = `"﻿@import\\"./file.css\\";body{font:100% Helvetica,sans-serif;color:#333}nav ul{margin:0;padding:0;list-style:none}nav li{display:inline-block}nav a{display:block;padding:6px 12px;text-decoration:none}.box{-webkit-border-radius:10px;-moz-border-radius:10px;-ms-border-radius:10px;border-radius:10px}.foo:before{content:\\"\\"}.bar:before{content:\\"∑\\"}"`;
 
 exports[`sassOptions option should use "compressed" output style in the "production" mode (dart-sass) (scss): errors 1`] = `Array []`;
 
 exports[`sassOptions option should use "compressed" output style in the "production" mode (dart-sass) (scss): warnings 1`] = `Array []`;
 
 exports[`sassOptions option should use "compressed" output style in the "production" mode (node-sass) (sass): css 1`] = `
-"﻿body{font:100% Helvetica,sans-serif;color:#333}nav ul{margin:0;padding:0;list-style:none}nav li{display:inline-block}nav a{display:block;padding:6px 12px;text-decoration:none}.box{-webkit-border-radius:10px;-moz-border-radius:10px;-ms-border-radius:10px;border-radius:10px}.message,.success,.error,.warning{border:1px solid #ccc;padding:10px;color:#333}.success{border-color:green}.error{border-color:red}.warning{border-color:yellow}.foo:before{content:\\"\\"}.bar:before{content:\\"∑\\"}
+"﻿@import url(./file.css);body{font:100% Helvetica,sans-serif;color:#333}nav ul{margin:0;padding:0;list-style:none}nav li{display:inline-block}nav a{display:block;padding:6px 12px;text-decoration:none}.box{-webkit-border-radius:10px;-moz-border-radius:10px;-ms-border-radius:10px;border-radius:10px}.message,.success,.error,.warning{border:1px solid #ccc;padding:10px;color:#333}.success{border-color:green}.error{border-color:red}.warning{border-color:yellow}.foo:before{content:\\"\\"}.bar:before{content:\\"∑\\"}
 "
 `;
 
@@ -792,7 +808,7 @@ exports[`sassOptions option should use "compressed" output style in the "product
 exports[`sassOptions option should use "compressed" output style in the "production" mode (node-sass) (sass): warnings 1`] = `Array []`;
 
 exports[`sassOptions option should use "compressed" output style in the "production" mode (node-sass) (scss): css 1`] = `
-"﻿body{font:100% Helvetica,sans-serif;color:#333}nav ul{margin:0;padding:0;list-style:none}nav li{display:inline-block}nav a{display:block;padding:6px 12px;text-decoration:none}.box{-webkit-border-radius:10px;-moz-border-radius:10px;-ms-border-radius:10px;border-radius:10px}.foo:before{content:\\"\\"}.bar:before{content:\\"∑\\"}
+"﻿@import url(./file.css);body{font:100% Helvetica,sans-serif;color:#333}nav ul{margin:0;padding:0;list-style:none}nav li{display:inline-block}nav a{display:block;padding:6px 12px;text-decoration:none}.box{-webkit-border-radius:10px;-moz-border-radius:10px;-ms-border-radius:10px;border-radius:10px}.foo:before{content:\\"\\"}.bar:before{content:\\"∑\\"}
 "
 `;
 
@@ -802,6 +818,7 @@ exports[`sassOptions option should use "compressed" output style in the "product
 
 exports[`sassOptions option should use the "fibers" package if it is possible (dart-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
+@import \\"./file.css\\";
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -861,6 +878,7 @@ exports[`sassOptions option should use the "fibers" package if it is possible (d
 
 exports[`sassOptions option should use the "fibers" package if it is possible (dart-sass) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
+@import \\"./file.css\\";
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -902,6 +920,7 @@ exports[`sassOptions option should use the "fibers" package if it is possible (d
 
 exports[`sassOptions option should use the "fibers" package if it is possible (node-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
+@import url(./file.css);
 body {
   font: 100% Helvetica, sans-serif;
   color: #333; }
@@ -953,6 +972,7 @@ exports[`sassOptions option should use the "fibers" package if it is possible (n
 
 exports[`sassOptions option should use the "fibers" package if it is possible (node-sass) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
+@import url(./file.css);
 body {
   font: 100% Helvetica, sans-serif;
   color: #333; }
@@ -990,6 +1010,7 @@ exports[`sassOptions option should use the "fibers" package if it is possible (n
 
 exports[`sassOptions option should work when the option is empty "Object" (dart-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
+@import \\"./file.css\\";
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -1049,6 +1070,7 @@ exports[`sassOptions option should work when the option is empty "Object" (dart-
 
 exports[`sassOptions option should work when the option is empty "Object" (dart-sass) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
+@import \\"./file.css\\";
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -1090,6 +1112,7 @@ exports[`sassOptions option should work when the option is empty "Object" (dart-
 
 exports[`sassOptions option should work when the option is empty "Object" (node-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
+@import url(./file.css);
 body {
   font: 100% Helvetica, sans-serif;
   color: #333; }
@@ -1141,6 +1164,7 @@ exports[`sassOptions option should work when the option is empty "Object" (node-
 
 exports[`sassOptions option should work when the option is empty "Object" (node-sass) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
+@import url(./file.css);
 body {
   font: 100% Helvetica, sans-serif;
   color: #333; }
@@ -1178,6 +1202,7 @@ exports[`sassOptions option should work when the option is empty "Object" (node-
 
 exports[`sassOptions option should work when the option like "Function" (dart-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
+@import \\"./file.css\\";
 body {
           font: 100% Helvetica, sans-serif;
           color: #333;
@@ -1237,6 +1262,7 @@ exports[`sassOptions option should work when the option like "Function" (dart-sa
 
 exports[`sassOptions option should work when the option like "Function" (dart-sass) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
+@import \\"./file.css\\";
 body {
           font: 100% Helvetica, sans-serif;
           color: #333;
@@ -1278,6 +1304,7 @@ exports[`sassOptions option should work when the option like "Function" (dart-sa
 
 exports[`sassOptions option should work when the option like "Function" (node-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
+@import url(./file.css);
 body {
           font: 100% Helvetica, sans-serif;
           color: #333; }
@@ -1329,6 +1356,7 @@ exports[`sassOptions option should work when the option like "Function" (node-sa
 
 exports[`sassOptions option should work when the option like "Function" (node-sass) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
+@import url(./file.css);
 body {
           font: 100% Helvetica, sans-serif;
           color: #333; }
@@ -1366,6 +1394,7 @@ exports[`sassOptions option should work when the option like "Function" (node-sa
 
 exports[`sassOptions option should work when the option like "Function" and never return (dart-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
+@import \\"./file.css\\";
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -1425,6 +1454,7 @@ exports[`sassOptions option should work when the option like "Function" and neve
 
 exports[`sassOptions option should work when the option like "Function" and never return (dart-sass) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
+@import \\"./file.css\\";
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -1466,6 +1496,7 @@ exports[`sassOptions option should work when the option like "Function" and neve
 
 exports[`sassOptions option should work when the option like "Function" and never return (node-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
+@import url(./file.css);
 body {
   font: 100% Helvetica, sans-serif;
   color: #333; }
@@ -1517,6 +1548,7 @@ exports[`sassOptions option should work when the option like "Function" and neve
 
 exports[`sassOptions option should work when the option like "Function" and never return (node-sass) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
+@import url(./file.css);
 body {
   font: 100% Helvetica, sans-serif;
   color: #333; }
@@ -1554,6 +1586,7 @@ exports[`sassOptions option should work when the option like "Function" and neve
 
 exports[`sassOptions option should work when the option like "Object" (dart-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
+@import \\"./file.css\\";
 body {
           font: 100% Helvetica, sans-serif;
           color: #333;
@@ -1613,6 +1646,7 @@ exports[`sassOptions option should work when the option like "Object" (dart-sass
 
 exports[`sassOptions option should work when the option like "Object" (dart-sass) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
+@import \\"./file.css\\";
 body {
           font: 100% Helvetica, sans-serif;
           color: #333;
@@ -1654,6 +1688,7 @@ exports[`sassOptions option should work when the option like "Object" (dart-sass
 
 exports[`sassOptions option should work when the option like "Object" (node-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
+@import url(./file.css);
 body {
           font: 100% Helvetica, sans-serif;
           color: #333; }
@@ -1705,6 +1740,7 @@ exports[`sassOptions option should work when the option like "Object" (node-sass
 
 exports[`sassOptions option should work when the option like "Object" (node-sass) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
+@import url(./file.css);
 body {
           font: 100% Helvetica, sans-serif;
           color: #333; }
@@ -1742,6 +1778,7 @@ exports[`sassOptions option should work when the option like "Object" (node-sass
 
 exports[`sassOptions option should work with the "fiber" option (dart-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
+@import \\"./file.css\\";
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -1801,6 +1838,7 @@ exports[`sassOptions option should work with the "fiber" option (dart-sass) (sas
 
 exports[`sassOptions option should work with the "fiber" option (dart-sass) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
+@import \\"./file.css\\";
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -1842,6 +1880,7 @@ exports[`sassOptions option should work with the "fiber" option (dart-sass) (scs
 
 exports[`sassOptions option should work with the "fiber" option (node-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
+@import url(./file.css);
 body {
   font: 100% Helvetica, sans-serif;
   color: #333; }
@@ -1893,6 +1932,7 @@ exports[`sassOptions option should work with the "fiber" option (node-sass) (sas
 
 exports[`sassOptions option should work with the "fiber" option (node-sass) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
+@import url(./file.css);
 body {
   font: 100% Helvetica, sans-serif;
   color: #333; }
@@ -2112,6 +2152,7 @@ exports[`sassOptions option should work with the "includePaths" option (node-sas
 
 exports[`sassOptions option should work with the "indentType" option (dart-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
+@import \\"./file.css\\";
 body {
 		font: 100% Helvetica, sans-serif;
 		color: #333;
@@ -2171,6 +2212,7 @@ exports[`sassOptions option should work with the "indentType" option (dart-sass)
 
 exports[`sassOptions option should work with the "indentType" option (dart-sass) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
+@import \\"./file.css\\";
 body {
 		font: 100% Helvetica, sans-serif;
 		color: #333;
@@ -2212,6 +2254,7 @@ exports[`sassOptions option should work with the "indentType" option (dart-sass)
 
 exports[`sassOptions option should work with the "indentType" option (node-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
+@import url(./file.css);
 body {
 		font: 100% Helvetica, sans-serif;
 		color: #333; }
@@ -2263,6 +2306,7 @@ exports[`sassOptions option should work with the "indentType" option (node-sass)
 
 exports[`sassOptions option should work with the "indentType" option (node-sass) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
+@import url(./file.css);
 body {
 		font: 100% Helvetica, sans-serif;
 		color: #333; }
@@ -2300,6 +2344,7 @@ exports[`sassOptions option should work with the "indentType" option (node-sass)
 
 exports[`sassOptions option should work with the "indentWidth" option (dart-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
+@import \\"./file.css\\";
 body {
     font: 100% Helvetica, sans-serif;
     color: #333;
@@ -2359,6 +2404,7 @@ exports[`sassOptions option should work with the "indentWidth" option (dart-sass
 
 exports[`sassOptions option should work with the "indentWidth" option (dart-sass) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
+@import \\"./file.css\\";
 body {
     font: 100% Helvetica, sans-serif;
     color: #333;
@@ -2400,6 +2446,7 @@ exports[`sassOptions option should work with the "indentWidth" option (dart-sass
 
 exports[`sassOptions option should work with the "indentWidth" option (node-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
+@import url(./file.css);
 body {
     font: 100% Helvetica, sans-serif;
     color: #333; }
@@ -2451,6 +2498,7 @@ exports[`sassOptions option should work with the "indentWidth" option (node-sass
 
 exports[`sassOptions option should work with the "indentWidth" option (node-sass) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
+@import url(./file.css);
 body {
     font: 100% Helvetica, sans-serif;
     color: #333; }
@@ -2488,6 +2536,7 @@ exports[`sassOptions option should work with the "indentWidth" option (node-sass
 
 exports[`sassOptions option should work with the "indentedSyntax" option (dart-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
+@import \\"./file.css\\";
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -2547,6 +2596,7 @@ exports[`sassOptions option should work with the "indentedSyntax" option (dart-s
 
 exports[`sassOptions option should work with the "indentedSyntax" option (dart-sass) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
+@import \\"./file.css\\";
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -2588,6 +2638,7 @@ exports[`sassOptions option should work with the "indentedSyntax" option (dart-s
 
 exports[`sassOptions option should work with the "indentedSyntax" option (node-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
+@import url(./file.css);
 body {
   font: 100% Helvetica, sans-serif;
   color: #333; }
@@ -2639,6 +2690,7 @@ exports[`sassOptions option should work with the "indentedSyntax" option (node-s
 
 exports[`sassOptions option should work with the "indentedSyntax" option (node-sass) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
+@import url(./file.css);
 body {
   font: 100% Helvetica, sans-serif;
   color: #333; }
@@ -2676,6 +2728,7 @@ exports[`sassOptions option should work with the "indentedSyntax" option (node-s
 
 exports[`sassOptions option should work with the "linefeed" option (dart-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
+@import \\"./file.css\\";
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -2735,6 +2788,7 @@ exports[`sassOptions option should work with the "linefeed" option (dart-sass) (
 
 exports[`sassOptions option should work with the "linefeed" option (dart-sass) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
+@import \\"./file.css\\";
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -2776,6 +2830,7 @@ exports[`sassOptions option should work with the "linefeed" option (dart-sass) (
 
 exports[`sassOptions option should work with the "linefeed" option (node-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
+@import url(./file.css);
 body {
   font: 100% Helvetica, sans-serif;
   color: #333; }
@@ -2827,6 +2882,7 @@ exports[`sassOptions option should work with the "linefeed" option (node-sass) (
 
 exports[`sassOptions option should work with the "linefeed" option (node-sass) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
+@import url(./file.css);
 body {
   font: 100% Helvetica, sans-serif;
   color: #333; }
