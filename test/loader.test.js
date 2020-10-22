@@ -3,6 +3,7 @@ import path from 'path';
 import nodeSass from 'node-sass';
 import dartSass from 'sass';
 import Fiber from 'fibers';
+import del from 'del';
 
 import {
   compile,
@@ -36,6 +37,63 @@ describe('loader', () => {
           implementation: getImplementationByName(implementationName),
         };
         const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
+        const codeFromSass = getCodeFromSass(testId, options);
+
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot('css');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
+      });
+
+      it(`should work (${implementationName}) (${syntax}) with the "memory" cache`, async () => {
+        const cache = path.resolve(
+          __dirname,
+          `./outputs/.cache/sass-loader/${implementationName}/${syntax}`
+        );
+
+        await del(cache);
+
+        const testId = getTestId('language', syntax);
+        const options = {
+          implementation: getImplementationByName(implementationName),
+        };
+        const compiler = getCompiler(testId, {
+          loader: { options },
+          cache: {
+            type: 'memory',
+          },
+        });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
+        const codeFromSass = getCodeFromSass(testId, options);
+
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot('css');
+        expect(getWarnings(stats)).toMatchSnapshot('warnings');
+        expect(getErrors(stats)).toMatchSnapshot('errors');
+      });
+
+      it(`should work (${implementationName}) (${syntax}) with the "filesystem" cache`, async () => {
+        const cache = path.resolve(
+          __dirname,
+          `./outputs/.cache/sass-loader/${implementationName}/${syntax}`
+        );
+
+        await del(cache);
+
+        const testId = getTestId('language', syntax);
+        const options = {
+          implementation: getImplementationByName(implementationName),
+        };
+        const compiler = getCompiler(testId, {
+          loader: { options },
+          cache: {
+            type: 'filesystem',
+            cacheDirectory: cache,
+          },
+        });
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
         const codeFromSass = getCodeFromSass(testId, options);

@@ -43,6 +43,7 @@ export default function getCompiler(fixture, config = {}, options = {}) {
   // webpack Config
   // eslint-disable-next-line no-param-reassign
   config = {
+    cache: config.cache ? config.cache : false,
     mode: config.mode || 'development',
     devtool: config.devtool || false,
     // context: path.resolve(__dirname, '..', 'fixtures'),

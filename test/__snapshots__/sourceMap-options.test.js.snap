@@ -2,6 +2,7 @@
 
 exports[`sourceMap option should generate source maps when value has "false" value, but the "sassOptions.sourceMap" has the "true" value (dart-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
+@import \\"./file.css\\";
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -60,7 +61,7 @@ exports[`sourceMap option should generate source maps when value has "false" val
 exports[`sourceMap option should generate source maps when value has "false" value, but the "sassOptions.sourceMap" has the "true" value (dart-sass) (sass): source map 1`] = `
 Object {
   "file": "style.css.map",
-  "mappings": ";AAMA;EACE;EACA,OALc;;;AAQd;EACE;EACA;EACA;;AAEF;EACE;;AAEF;EACE;EACA;EACA;;;AAQJ;EALE,uBAMe;EALf,oBAKe;EAJf,mBAIe;EAHf,eAGe;;;AAEjB;EACE;EACA;EACA;;;AAEF;EAEE;;;AAEF;EAEE;;;AAEF;EAEE;;;AAGA;EACE,SAhDY;;;AAmDd;EACE,SCxDc",
+  "mappings": ";AACQ;AAMR;EACE;EACA,OALc;;;AAQd;EACE;EACA;EACA;;AAEF;EACE;;AAEF;EACE;EACA;EACA;;;AAQJ;EALE,uBAMe;EALf,oBAKe;EAJf,mBAIe;EAHf,eAGe;;;AAEjB;EACE;EACA;EACA;;;AAEF;EAEE;;;AAEF;EAEE;;;AAEF;EAEE;;;AAGA;EACE,SAhDY;;;AAmDd;EACE,SCzDc",
   "names": Array [],
   "sourceRoot": "",
   "sources": Array [
@@ -69,6 +70,7 @@ Object {
   ],
   "sourcesContent": Array [
     "@import \\"another/variables\\"
+@import \\"./file.css\\"
 
 $font-stack:    Helvetica, sans-serif
 $primary-color: #333
@@ -138,6 +140,7 @@ exports[`sourceMap option should generate source maps when value has "false" val
 
 exports[`sourceMap option should generate source maps when value has "false" value, but the "sassOptions.sourceMap" has the "true" value (dart-sass) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
+@import \\"./file.css\\";
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -178,7 +181,7 @@ exports[`sourceMap option should generate source maps when value has "false" val
 exports[`sourceMap option should generate source maps when value has "false" value, but the "sassOptions.sourceMap" has the "true" value (dart-sass) (scss): source map 1`] = `
 Object {
   "file": "style.css.map",
-  "mappings": ";AAMA;EACE;EACA,OALc;;;AASd;EACE;EACA;EACA;;AAGF;EAAK;;AAEL;EACE;EACA;EACA;;;AAWJ;EANE,uBAM4B;EALzB,oBAKyB;EAJxB,mBAIwB;EAHpB,eAGoB;;;AAG5B;EACE,SAlCY;;;AAuCd;EACE,SC5Cc",
+  "mappings": ";AACQ;AAMR;EACE;EACA,OALc;;;AASd;EACE;EACA;EACA;;AAGF;EAAK;;AAEL;EACE;EACA;EACA;;;AAWJ;EANE,uBAM4B;EALzB,oBAKyB;EAJxB,mBAIwB;EAHpB,eAGoB;;;AAG5B;EACE,SAlCY;;;AAuCd;EACE,SC7Cc",
   "names": Array [],
   "sourceRoot": "",
   "sources": Array [
@@ -187,6 +190,7 @@ Object {
   ],
   "sourcesContent": Array [
     "@import \\"another/variables\\";
+@import \\"./file.css\\";
 
 $font-stack:    Helvetica, sans-serif;
 $primary-color: #333;
@@ -245,6 +249,7 @@ exports[`sourceMap option should generate source maps when value has "false" val
 
 exports[`sourceMap option should generate source maps when value has "false" value, but the "sassOptions.sourceMap" has the "true" value (node-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
+@import url(./file.css);
 body {
   font: 100% Helvetica, sans-serif;
   color: #333; }
@@ -295,7 +300,7 @@ exports[`sourceMap option should generate source maps when value has "false" val
 exports[`sourceMap option should generate source maps when value has "false" value, but the "sassOptions.sourceMap" has the "true" value (node-sass) (sass): source map 1`] = `
 Object {
   "file": "style.css.map",
-  "mappings": ";AAMA,AAAA,IAAI,CAAC;EACH,IAAI,EAAE,IAAI,CALI,SAAS,EAAE,UAAU;EAMnC,KAAK,EALS,IAAI,GAKM;;AAE1B,AACE,GADC,CACD,EAAE,CAAC;EACD,MAAM,EAAE,CAAC;EACT,OAAO,EAAE,CAAC;EACV,UAAU,EAAE,IAAI,GAAG;;AAJvB,AAME,GANC,CAMD,EAAE,CAAC;EACD,OAAO,EAAE,YAAY,GAAG;;AAP5B,AASE,GATC,CASD,CAAC,CAAC;EACA,OAAO,EAAE,KAAK;EACd,OAAO,EAAE,QAAQ;EACjB,eAAe,EAAE,IAAI,GAAG;;AAQ5B,AAAA,IAAI,CAAC;EALH,qBAAqB,EAME,IAAI;EAL3B,kBAAkB,EAKK,IAAI;EAJ3B,iBAAiB,EAIM,IAAI;EAH3B,aAAa,EAGU,IAAI,GAAI;;AAEjC,AAAA,QAAQ,EAKR,QAAQ,EAIR,MAAM,EAIN,QAAQ,CAbC;EACP,MAAM,EAAE,cAAc;EACtB,OAAO,EAAE,IAAI;EACb,KAAK,EAAE,IAAI,GAAG;;AAEhB,AAAA,QAAQ,CAAC;EAEP,YAAY,EAAE,KAAK,GAAG;;AAExB,AAAA,MAAM,CAAC;EAEL,YAAY,EAAE,GAAG,GAAG;;AAEtB,AAAA,QAAQ,CAAC;EAEP,YAAY,EAAE,MAAM,GAAG;;AAEzB,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,EAhDK,IAAO,GAgDJ;;AAEnB,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,ECxDO,IAAO,GDwDO",
+  "mappings": ";AACA,OAAO,CAAP,eAAO;AAMP,AAAA,IAAI,CAAC;EACH,IAAI,EAAE,IAAI,CALI,SAAS,EAAE,UAAU;EAMnC,KAAK,EALS,IAAI,GAKM;;AAE1B,AACE,GADC,CACD,EAAE,CAAC;EACD,MAAM,EAAE,CAAC;EACT,OAAO,EAAE,CAAC;EACV,UAAU,EAAE,IAAI,GAAG;;AAJvB,AAME,GANC,CAMD,EAAE,CAAC;EACD,OAAO,EAAE,YAAY,GAAG;;AAP5B,AASE,GATC,CASD,CAAC,CAAC;EACA,OAAO,EAAE,KAAK;EACd,OAAO,EAAE,QAAQ;EACjB,eAAe,EAAE,IAAI,GAAG;;AAQ5B,AAAA,IAAI,CAAC;EALH,qBAAqB,EAME,IAAI;EAL3B,kBAAkB,EAKK,IAAI;EAJ3B,iBAAiB,EAIM,IAAI;EAH3B,aAAa,EAGU,IAAI,GAAI;;AAEjC,AAAA,QAAQ,EAKR,QAAQ,EAIR,MAAM,EAIN,QAAQ,CAbC;EACP,MAAM,EAAE,cAAc;EACtB,OAAO,EAAE,IAAI;EACb,KAAK,EAAE,IAAI,GAAG;;AAEhB,AAAA,QAAQ,CAAC;EAEP,YAAY,EAAE,KAAK,GAAG;;AAExB,AAAA,MAAM,CAAC;EAEL,YAAY,EAAE,GAAG,GAAG;;AAEtB,AAAA,QAAQ,CAAC;EAEP,YAAY,EAAE,MAAM,GAAG;;AAEzB,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,EAhDK,IAAO,GAgDJ;;AAEnB,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,ECzDO,IAAO,GDyDO",
   "names": Array [],
   "sourceRoot": "",
   "sources": Array [
@@ -304,6 +309,7 @@ Object {
   ],
   "sourcesContent": Array [
     "@import \\"another/variables\\";
+@import \\"./file.css\\";
 
 $font-stack:    Helvetica, sans-serif;
 $primary-color: #333;
@@ -373,6 +379,7 @@ exports[`sourceMap option should generate source maps when value has "false" val
 
 exports[`sourceMap option should generate source maps when value has "false" value, but the "sassOptions.sourceMap" has the "true" value (node-sass) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
+@import url(./file.css);
 body {
   font: 100% Helvetica, sans-serif;
   color: #333; }
@@ -409,7 +416,7 @@ exports[`sourceMap option should generate source maps when value has "false" val
 exports[`sourceMap option should generate source maps when value has "false" value, but the "sassOptions.sourceMap" has the "true" value (node-sass) (scss): source map 1`] = `
 Object {
   "file": "style.css.map",
-  "mappings": ";AAMA,AAAA,IAAI,CAAC;EACH,IAAI,EAAE,IAAI,CALI,SAAS,EAAE,UAAU;EAMnC,KAAK,EALS,IAAI,GAMnB;;AAED,AACE,GADC,CACD,EAAE,CAAC;EACD,MAAM,EAAE,CAAC;EACT,OAAO,EAAE,CAAC;EACV,UAAU,EAAE,IAAI,GACjB;;AALH,AAOE,GAPC,CAOD,EAAE,CAAC;EAAE,OAAO,EAAE,YAAY,GAAI;;AAPhC,AASE,GATC,CASD,CAAC,CAAC;EACA,OAAO,EAAE,KAAK;EACd,OAAO,EAAE,QAAQ;EACjB,eAAe,EAAE,IAAI,GACtB;;AAUH,AAAA,IAAI,CAAC;EANH,qBAAqB,EAMO,IAAI;EAL7B,kBAAkB,EAKO,IAAI;EAJ5B,iBAAiB,EAIO,IAAI;EAHxB,aAAa,EAGO,IAAI,GAAK;;AAEvC,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,EAlCK,IAAO,GAmCpB;;AAGH,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,EC5CO,IAAO,GD6CtB",
+  "mappings": ";AACA,OAAO,CAAP,eAAO;AAMP,AAAA,IAAI,CAAC;EACH,IAAI,EAAE,IAAI,CALI,SAAS,EAAE,UAAU;EAMnC,KAAK,EALS,IAAI,GAMnB;;AAED,AACE,GADC,CACD,EAAE,CAAC;EACD,MAAM,EAAE,CAAC;EACT,OAAO,EAAE,CAAC;EACV,UAAU,EAAE,IAAI,GACjB;;AALH,AAOE,GAPC,CAOD,EAAE,CAAC;EAAE,OAAO,EAAE,YAAY,GAAI;;AAPhC,AASE,GATC,CASD,CAAC,CAAC;EACA,OAAO,EAAE,KAAK;EACd,OAAO,EAAE,QAAQ;EACjB,eAAe,EAAE,IAAI,GACtB;;AAUH,AAAA,IAAI,CAAC;EANH,qBAAqB,EAMO,IAAI;EAL7B,kBAAkB,EAKO,IAAI;EAJ5B,iBAAiB,EAIO,IAAI;EAHxB,aAAa,EAGO,IAAI,GAAK;;AAEvC,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,EAlCK,IAAO,GAmCpB;;AAGH,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,EC7CO,IAAO,GD8CtB",
   "names": Array [],
   "sourceRoot": "",
   "sources": Array [
@@ -418,6 +425,7 @@ Object {
   ],
   "sourcesContent": Array [
     "@import \\"another/variables\\";
+@import \\"./file.css\\";
 
 $font-stack:    Helvetica, sans-serif;
 $primary-color: #333;
@@ -476,6 +484,7 @@ exports[`sourceMap option should generate source maps when value has "false" val
 
 exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "false" value (dart-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
+@import \\"./file.css\\";
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -533,7 +542,7 @@ exports[`sourceMap option should generate source maps when value has "true" valu
 
 exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "false" value (dart-sass) (sass): source map 1`] = `
 Object {
-  "mappings": ";AAMA;EACE;EACA,OALc;;;AAQd;EACE;EACA;EACA;;AAEF;EACE;;AAEF;EACE;EACA;EACA;;;AAQJ;EALE,uBAMe;EALf,oBAKe;EAJf,mBAIe;EAHf,eAGe;;;AAEjB;EACE;EACA;EACA;;;AAEF;EAEE;;;AAEF;EAEE;;;AAEF;EAEE;;;AAGA;EACE,SAhDY;;;AAmDd;EACE,SCxDc",
+  "mappings": ";AACQ;AAMR;EACE;EACA,OALc;;;AAQd;EACE;EACA;EACA;;AAEF;EACE;;AAEF;EACE;EACA;EACA;;;AAQJ;EALE,uBAMe;EALf,oBAKe;EAJf,mBAIe;EAHf,eAGe;;;AAEjB;EACE;EACA;EACA;;;AAEF;EAEE;;;AAEF;EAEE;;;AAEF;EAEE;;;AAGA;EACE,SAhDY;;;AAmDd;EACE,SCzDc",
   "names": Array [],
   "sourceRoot": "",
   "sources": Array [
@@ -542,6 +551,7 @@ Object {
   ],
   "sourcesContent": Array [
     "@import \\"another/variables\\"
+@import \\"./file.css\\"
 
 $font-stack:    Helvetica, sans-serif
 $primary-color: #333
@@ -611,6 +621,7 @@ exports[`sourceMap option should generate source maps when value has "true" valu
 
 exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "false" value (dart-sass) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
+@import \\"./file.css\\";
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -650,7 +661,7 @@ exports[`sourceMap option should generate source maps when value has "true" valu
 
 exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "false" value (dart-sass) (scss): source map 1`] = `
 Object {
-  "mappings": ";AAMA;EACE;EACA,OALc;;;AASd;EACE;EACA;EACA;;AAGF;EAAK;;AAEL;EACE;EACA;EACA;;;AAWJ;EANE,uBAM4B;EALzB,oBAKyB;EAJxB,mBAIwB;EAHpB,eAGoB;;;AAG5B;EACE,SAlCY;;;AAuCd;EACE,SC5Cc",
+  "mappings": ";AACQ;AAMR;EACE;EACA,OALc;;;AASd;EACE;EACA;EACA;;AAGF;EAAK;;AAEL;EACE;EACA;EACA;;;AAWJ;EANE,uBAM4B;EALzB,oBAKyB;EAJxB,mBAIwB;EAHpB,eAGoB;;;AAG5B;EACE,SAlCY;;;AAuCd;EACE,SC7Cc",
   "names": Array [],
   "sourceRoot": "",
   "sources": Array [
@@ -659,6 +670,7 @@ Object {
   ],
   "sourcesContent": Array [
     "@import \\"another/variables\\";
+@import \\"./file.css\\";
 
 $font-stack:    Helvetica, sans-serif;
 $primary-color: #333;
@@ -717,6 +729,7 @@ exports[`sourceMap option should generate source maps when value has "true" valu
 
 exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "false" value (node-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
+@import url(./file.css);
 body {
   font: 100% Helvetica, sans-serif;
   color: #333; }
@@ -766,7 +779,7 @@ exports[`sourceMap option should generate source maps when value has "true" valu
 
 exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "false" value (node-sass) (sass): source map 1`] = `
 Object {
-  "mappings": ";AAMA,AAAA,IAAI,CAAC;EACH,IAAI,EAAE,IAAI,CALI,SAAS,EAAE,UAAU;EAMnC,KAAK,EALS,IAAI,GAKM;;AAE1B,AACE,GADC,CACD,EAAE,CAAC;EACD,MAAM,EAAE,CAAC;EACT,OAAO,EAAE,CAAC;EACV,UAAU,EAAE,IAAI,GAAG;;AAJvB,AAME,GANC,CAMD,EAAE,CAAC;EACD,OAAO,EAAE,YAAY,GAAG;;AAP5B,AASE,GATC,CASD,CAAC,CAAC;EACA,OAAO,EAAE,KAAK;EACd,OAAO,EAAE,QAAQ;EACjB,eAAe,EAAE,IAAI,GAAG;;AAQ5B,AAAA,IAAI,CAAC;EALH,qBAAqB,EAME,IAAI;EAL3B,kBAAkB,EAKK,IAAI;EAJ3B,iBAAiB,EAIM,IAAI;EAH3B,aAAa,EAGU,IAAI,GAAI;;AAEjC,AAAA,QAAQ,EAKR,QAAQ,EAIR,MAAM,EAIN,QAAQ,CAbC;EACP,MAAM,EAAE,cAAc;EACtB,OAAO,EAAE,IAAI;EACb,KAAK,EAAE,IAAI,GAAG;;AAEhB,AAAA,QAAQ,CAAC;EAEP,YAAY,EAAE,KAAK,GAAG;;AAExB,AAAA,MAAM,CAAC;EAEL,YAAY,EAAE,GAAG,GAAG;;AAEtB,AAAA,QAAQ,CAAC;EAEP,YAAY,EAAE,MAAM,GAAG;;AAEzB,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,EAhDK,IAAO,GAgDJ;;AAEnB,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,ECxDO,IAAO,GDwDO",
+  "mappings": ";AACA,OAAO,CAAP,eAAO;AAMP,AAAA,IAAI,CAAC;EACH,IAAI,EAAE,IAAI,CALI,SAAS,EAAE,UAAU;EAMnC,KAAK,EALS,IAAI,GAKM;;AAE1B,AACE,GADC,CACD,EAAE,CAAC;EACD,MAAM,EAAE,CAAC;EACT,OAAO,EAAE,CAAC;EACV,UAAU,EAAE,IAAI,GAAG;;AAJvB,AAME,GANC,CAMD,EAAE,CAAC;EACD,OAAO,EAAE,YAAY,GAAG;;AAP5B,AASE,GATC,CASD,CAAC,CAAC;EACA,OAAO,EAAE,KAAK;EACd,OAAO,EAAE,QAAQ;EACjB,eAAe,EAAE,IAAI,GAAG;;AAQ5B,AAAA,IAAI,CAAC;EALH,qBAAqB,EAME,IAAI;EAL3B,kBAAkB,EAKK,IAAI;EAJ3B,iBAAiB,EAIM,IAAI;EAH3B,aAAa,EAGU,IAAI,GAAI;;AAEjC,AAAA,QAAQ,EAKR,QAAQ,EAIR,MAAM,EAIN,QAAQ,CAbC;EACP,MAAM,EAAE,cAAc;EACtB,OAAO,EAAE,IAAI;EACb,KAAK,EAAE,IAAI,GAAG;;AAEhB,AAAA,QAAQ,CAAC;EAEP,YAAY,EAAE,KAAK,GAAG;;AAExB,AAAA,MAAM,CAAC;EAEL,YAAY,EAAE,GAAG,GAAG;;AAEtB,AAAA,QAAQ,CAAC;EAEP,YAAY,EAAE,MAAM,GAAG;;AAEzB,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,EAhDK,IAAO,GAgDJ;;AAEnB,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,ECzDO,IAAO,GDyDO",
   "names": Array [],
   "sourceRoot": "",
   "sources": Array [
@@ -775,6 +788,7 @@ Object {
   ],
   "sourcesContent": Array [
     "@import \\"another/variables\\";
+@import \\"./file.css\\";
 
 $font-stack:    Helvetica, sans-serif;
 $primary-color: #333;
@@ -844,6 +858,7 @@ exports[`sourceMap option should generate source maps when value has "true" valu
 
 exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "false" value (node-sass) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
+@import url(./file.css);
 body {
   font: 100% Helvetica, sans-serif;
   color: #333; }
@@ -879,7 +894,7 @@ exports[`sourceMap option should generate source maps when value has "true" valu
 
 exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "false" value (node-sass) (scss): source map 1`] = `
 Object {
-  "mappings": ";AAMA,AAAA,IAAI,CAAC;EACH,IAAI,EAAE,IAAI,CALI,SAAS,EAAE,UAAU;EAMnC,KAAK,EALS,IAAI,GAMnB;;AAED,AACE,GADC,CACD,EAAE,CAAC;EACD,MAAM,EAAE,CAAC;EACT,OAAO,EAAE,CAAC;EACV,UAAU,EAAE,IAAI,GACjB;;AALH,AAOE,GAPC,CAOD,EAAE,CAAC;EAAE,OAAO,EAAE,YAAY,GAAI;;AAPhC,AASE,GATC,CASD,CAAC,CAAC;EACA,OAAO,EAAE,KAAK;EACd,OAAO,EAAE,QAAQ;EACjB,eAAe,EAAE,IAAI,GACtB;;AAUH,AAAA,IAAI,CAAC;EANH,qBAAqB,EAMO,IAAI;EAL7B,kBAAkB,EAKO,IAAI;EAJ5B,iBAAiB,EAIO,IAAI;EAHxB,aAAa,EAGO,IAAI,GAAK;;AAEvC,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,EAlCK,IAAO,GAmCpB;;AAGH,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,EC5CO,IAAO,GD6CtB",
+  "mappings": ";AACA,OAAO,CAAP,eAAO;AAMP,AAAA,IAAI,CAAC;EACH,IAAI,EAAE,IAAI,CALI,SAAS,EAAE,UAAU;EAMnC,KAAK,EALS,IAAI,GAMnB;;AAED,AACE,GADC,CACD,EAAE,CAAC;EACD,MAAM,EAAE,CAAC;EACT,OAAO,EAAE,CAAC;EACV,UAAU,EAAE,IAAI,GACjB;;AALH,AAOE,GAPC,CAOD,EAAE,CAAC;EAAE,OAAO,EAAE,YAAY,GAAI;;AAPhC,AASE,GATC,CASD,CAAC,CAAC;EACA,OAAO,EAAE,KAAK;EACd,OAAO,EAAE,QAAQ;EACjB,eAAe,EAAE,IAAI,GACtB;;AAUH,AAAA,IAAI,CAAC;EANH,qBAAqB,EAMO,IAAI;EAL7B,kBAAkB,EAKO,IAAI;EAJ5B,iBAAiB,EAIO,IAAI;EAHxB,aAAa,EAGO,IAAI,GAAK;;AAEvC,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,EAlCK,IAAO,GAmCpB;;AAGH,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,EC7CO,IAAO,GD8CtB",
   "names": Array [],
   "sourceRoot": "",
   "sources": Array [
@@ -888,6 +903,7 @@ Object {
   ],
   "sourcesContent": Array [
     "@import \\"another/variables\\";
+@import \\"./file.css\\";
 
 $font-stack:    Helvetica, sans-serif;
 $primary-color: #333;
@@ -946,6 +962,7 @@ exports[`sourceMap option should generate source maps when value has "true" valu
 
 exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "source-map" value (dart-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
+@import \\"./file.css\\";
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -1003,7 +1020,7 @@ exports[`sourceMap option should generate source maps when value has "true" valu
 
 exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "source-map" value (dart-sass) (sass): source map 1`] = `
 Object {
-  "mappings": ";AAMA;EACE;EACA,OALc;;;AAQd;EACE;EACA;EACA;;AAEF;EACE;;AAEF;EACE;EACA;EACA;;;AAQJ;EALE,uBAMe;EALf,oBAKe;EAJf,mBAIe;EAHf,eAGe;;;AAEjB;EACE;EACA;EACA;;;AAEF;EAEE;;;AAEF;EAEE;;;AAEF;EAEE;;;AAGA;EACE,SAhDY;;;AAmDd;EACE,SCxDc",
+  "mappings": ";AACQ;AAMR;EACE;EACA,OALc;;;AAQd;EACE;EACA;EACA;;AAEF;EACE;;AAEF;EACE;EACA;EACA;;;AAQJ;EALE,uBAMe;EALf,oBAKe;EAJf,mBAIe;EAHf,eAGe;;;AAEjB;EACE;EACA;EACA;;;AAEF;EAEE;;;AAEF;EAEE;;;AAEF;EAEE;;;AAGA;EACE,SAhDY;;;AAmDd;EACE,SCzDc",
   "names": Array [],
   "sourceRoot": "",
   "sources": Array [
@@ -1012,6 +1029,7 @@ Object {
   ],
   "sourcesContent": Array [
     "@import \\"another/variables\\"
+@import \\"./file.css\\"
 
 $font-stack:    Helvetica, sans-serif
 $primary-color: #333
@@ -1081,6 +1099,7 @@ exports[`sourceMap option should generate source maps when value has "true" valu
 
 exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "source-map" value (dart-sass) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
+@import \\"./file.css\\";
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -1120,7 +1139,7 @@ exports[`sourceMap option should generate source maps when value has "true" valu
 
 exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "source-map" value (dart-sass) (scss): source map 1`] = `
 Object {
-  "mappings": ";AAMA;EACE;EACA,OALc;;;AASd;EACE;EACA;EACA;;AAGF;EAAK;;AAEL;EACE;EACA;EACA;;;AAWJ;EANE,uBAM4B;EALzB,oBAKyB;EAJxB,mBAIwB;EAHpB,eAGoB;;;AAG5B;EACE,SAlCY;;;AAuCd;EACE,SC5Cc",
+  "mappings": ";AACQ;AAMR;EACE;EACA,OALc;;;AASd;EACE;EACA;EACA;;AAGF;EAAK;;AAEL;EACE;EACA;EACA;;;AAWJ;EANE,uBAM4B;EALzB,oBAKyB;EAJxB,mBAIwB;EAHpB,eAGoB;;;AAG5B;EACE,SAlCY;;;AAuCd;EACE,SC7Cc",
   "names": Array [],
   "sourceRoot": "",
   "sources": Array [
@@ -1129,6 +1148,7 @@ Object {
   ],
   "sourcesContent": Array [
     "@import \\"another/variables\\";
+@import \\"./file.css\\";
 
 $font-stack:    Helvetica, sans-serif;
 $primary-color: #333;
@@ -1187,6 +1207,7 @@ exports[`sourceMap option should generate source maps when value has "true" valu
 
 exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "source-map" value (node-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
+@import url(./file.css);
 body {
   font: 100% Helvetica, sans-serif;
   color: #333; }
@@ -1236,7 +1257,7 @@ exports[`sourceMap option should generate source maps when value has "true" valu
 
 exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "source-map" value (node-sass) (sass): source map 1`] = `
 Object {
-  "mappings": ";AAMA,AAAA,IAAI,CAAC;EACH,IAAI,EAAE,IAAI,CALI,SAAS,EAAE,UAAU;EAMnC,KAAK,EALS,IAAI,GAKM;;AAE1B,AACE,GADC,CACD,EAAE,CAAC;EACD,MAAM,EAAE,CAAC;EACT,OAAO,EAAE,CAAC;EACV,UAAU,EAAE,IAAI,GAAG;;AAJvB,AAME,GANC,CAMD,EAAE,CAAC;EACD,OAAO,EAAE,YAAY,GAAG;;AAP5B,AASE,GATC,CASD,CAAC,CAAC;EACA,OAAO,EAAE,KAAK;EACd,OAAO,EAAE,QAAQ;EACjB,eAAe,EAAE,IAAI,GAAG;;AAQ5B,AAAA,IAAI,CAAC;EALH,qBAAqB,EAME,IAAI;EAL3B,kBAAkB,EAKK,IAAI;EAJ3B,iBAAiB,EAIM,IAAI;EAH3B,aAAa,EAGU,IAAI,GAAI;;AAEjC,AAAA,QAAQ,EAKR,QAAQ,EAIR,MAAM,EAIN,QAAQ,CAbC;EACP,MAAM,EAAE,cAAc;EACtB,OAAO,EAAE,IAAI;EACb,KAAK,EAAE,IAAI,GAAG;;AAEhB,AAAA,QAAQ,CAAC;EAEP,YAAY,EAAE,KAAK,GAAG;;AAExB,AAAA,MAAM,CAAC;EAEL,YAAY,EAAE,GAAG,GAAG;;AAEtB,AAAA,QAAQ,CAAC;EAEP,YAAY,EAAE,MAAM,GAAG;;AAEzB,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,EAhDK,IAAO,GAgDJ;;AAEnB,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,ECxDO,IAAO,GDwDO",
+  "mappings": ";AACA,OAAO,CAAP,eAAO;AAMP,AAAA,IAAI,CAAC;EACH,IAAI,EAAE,IAAI,CALI,SAAS,EAAE,UAAU;EAMnC,KAAK,EALS,IAAI,GAKM;;AAE1B,AACE,GADC,CACD,EAAE,CAAC;EACD,MAAM,EAAE,CAAC;EACT,OAAO,EAAE,CAAC;EACV,UAAU,EAAE,IAAI,GAAG;;AAJvB,AAME,GANC,CAMD,EAAE,CAAC;EACD,OAAO,EAAE,YAAY,GAAG;;AAP5B,AASE,GATC,CASD,CAAC,CAAC;EACA,OAAO,EAAE,KAAK;EACd,OAAO,EAAE,QAAQ;EACjB,eAAe,EAAE,IAAI,GAAG;;AAQ5B,AAAA,IAAI,CAAC;EALH,qBAAqB,EAME,IAAI;EAL3B,kBAAkB,EAKK,IAAI;EAJ3B,iBAAiB,EAIM,IAAI;EAH3B,aAAa,EAGU,IAAI,GAAI;;AAEjC,AAAA,QAAQ,EAKR,QAAQ,EAIR,MAAM,EAIN,QAAQ,CAbC;EACP,MAAM,EAAE,cAAc;EACtB,OAAO,EAAE,IAAI;EACb,KAAK,EAAE,IAAI,GAAG;;AAEhB,AAAA,QAAQ,CAAC;EAEP,YAAY,EAAE,KAAK,GAAG;;AAExB,AAAA,MAAM,CAAC;EAEL,YAAY,EAAE,GAAG,GAAG;;AAEtB,AAAA,QAAQ,CAAC;EAEP,YAAY,EAAE,MAAM,GAAG;;AAEzB,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,EAhDK,IAAO,GAgDJ;;AAEnB,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,ECzDO,IAAO,GDyDO",
   "names": Array [],
   "sourceRoot": "",
   "sources": Array [
@@ -1245,6 +1266,7 @@ Object {
   ],
   "sourcesContent": Array [
     "@import \\"another/variables\\";
+@import \\"./file.css\\";
 
 $font-stack:    Helvetica, sans-serif;
 $primary-color: #333;
@@ -1314,6 +1336,7 @@ exports[`sourceMap option should generate source maps when value has "true" valu
 
 exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "source-map" value (node-sass) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
+@import url(./file.css);
 body {
   font: 100% Helvetica, sans-serif;
   color: #333; }
@@ -1349,7 +1372,7 @@ exports[`sourceMap option should generate source maps when value has "true" valu
 
 exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "source-map" value (node-sass) (scss): source map 1`] = `
 Object {
-  "mappings": ";AAMA,AAAA,IAAI,CAAC;EACH,IAAI,EAAE,IAAI,CALI,SAAS,EAAE,UAAU;EAMnC,KAAK,EALS,IAAI,GAMnB;;AAED,AACE,GADC,CACD,EAAE,CAAC;EACD,MAAM,EAAE,CAAC;EACT,OAAO,EAAE,CAAC;EACV,UAAU,EAAE,IAAI,GACjB;;AALH,AAOE,GAPC,CAOD,EAAE,CAAC;EAAE,OAAO,EAAE,YAAY,GAAI;;AAPhC,AASE,GATC,CASD,CAAC,CAAC;EACA,OAAO,EAAE,KAAK;EACd,OAAO,EAAE,QAAQ;EACjB,eAAe,EAAE,IAAI,GACtB;;AAUH,AAAA,IAAI,CAAC;EANH,qBAAqB,EAMO,IAAI;EAL7B,kBAAkB,EAKO,IAAI;EAJ5B,iBAAiB,EAIO,IAAI;EAHxB,aAAa,EAGO,IAAI,GAAK;;AAEvC,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,EAlCK,IAAO,GAmCpB;;AAGH,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,EC5CO,IAAO,GD6CtB",
+  "mappings": ";AACA,OAAO,CAAP,eAAO;AAMP,AAAA,IAAI,CAAC;EACH,IAAI,EAAE,IAAI,CALI,SAAS,EAAE,UAAU;EAMnC,KAAK,EALS,IAAI,GAMnB;;AAED,AACE,GADC,CACD,EAAE,CAAC;EACD,MAAM,EAAE,CAAC;EACT,OAAO,EAAE,CAAC;EACV,UAAU,EAAE,IAAI,GACjB;;AALH,AAOE,GAPC,CAOD,EAAE,CAAC;EAAE,OAAO,EAAE,YAAY,GAAI;;AAPhC,AASE,GATC,CASD,CAAC,CAAC;EACA,OAAO,EAAE,KAAK;EACd,OAAO,EAAE,QAAQ;EACjB,eAAe,EAAE,IAAI,GACtB;;AAUH,AAAA,IAAI,CAAC;EANH,qBAAqB,EAMO,IAAI;EAL7B,kBAAkB,EAKO,IAAI;EAJ5B,iBAAiB,EAIO,IAAI;EAHxB,aAAa,EAGO,IAAI,GAAK;;AAEvC,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,EAlCK,IAAO,GAmCpB;;AAGH,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,EC7CO,IAAO,GD8CtB",
   "names": Array [],
   "sourceRoot": "",
   "sources": Array [
@@ -1358,6 +1381,7 @@ Object {
   ],
   "sourcesContent": Array [
     "@import \\"another/variables\\";
+@import \\"./file.css\\";
 
 $font-stack:    Helvetica, sans-serif;
 $primary-color: #333;
@@ -1416,6 +1440,7 @@ exports[`sourceMap option should generate source maps when value has "true" valu
 
 exports[`sourceMap option should generate source maps when value is not specified and the "devtool" option has "source-map" value (dart-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
+@import \\"./file.css\\";
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -1473,7 +1498,7 @@ exports[`sourceMap option should generate source maps when value is not specifie
 
 exports[`sourceMap option should generate source maps when value is not specified and the "devtool" option has "source-map" value (dart-sass) (sass): source map 1`] = `
 Object {
-  "mappings": ";AAMA;EACE;EACA,OALc;;;AAQd;EACE;EACA;EACA;;AAEF;EACE;;AAEF;EACE;EACA;EACA;;;AAQJ;EALE,uBAMe;EALf,oBAKe;EAJf,mBAIe;EAHf,eAGe;;;AAEjB;EACE;EACA;EACA;;;AAEF;EAEE;;;AAEF;EAEE;;;AAEF;EAEE;;;AAGA;EACE,SAhDY;;;AAmDd;EACE,SCxDc",
+  "mappings": ";AACQ;AAMR;EACE;EACA,OALc;;;AAQd;EACE;EACA;EACA;;AAEF;EACE;;AAEF;EACE;EACA;EACA;;;AAQJ;EALE,uBAMe;EALf,oBAKe;EAJf,mBAIe;EAHf,eAGe;;;AAEjB;EACE;EACA;EACA;;;AAEF;EAEE;;;AAEF;EAEE;;;AAEF;EAEE;;;AAGA;EACE,SAhDY;;;AAmDd;EACE,SCzDc",
   "names": Array [],
   "sourceRoot": "",
   "sources": Array [
@@ -1482,6 +1507,7 @@ Object {
   ],
   "sourcesContent": Array [
     "@import \\"another/variables\\"
+@import \\"./file.css\\"
 
 $font-stack:    Helvetica, sans-serif
 $primary-color: #333
@@ -1551,6 +1577,7 @@ exports[`sourceMap option should generate source maps when value is not specifie
 
 exports[`sourceMap option should generate source maps when value is not specified and the "devtool" option has "source-map" value (dart-sass) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
+@import \\"./file.css\\";
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -1590,7 +1617,7 @@ exports[`sourceMap option should generate source maps when value is not specifie
 
 exports[`sourceMap option should generate source maps when value is not specified and the "devtool" option has "source-map" value (dart-sass) (scss): source map 1`] = `
 Object {
-  "mappings": ";AAMA;EACE;EACA,OALc;;;AASd;EACE;EACA;EACA;;AAGF;EAAK;;AAEL;EACE;EACA;EACA;;;AAWJ;EANE,uBAM4B;EALzB,oBAKyB;EAJxB,mBAIwB;EAHpB,eAGoB;;;AAG5B;EACE,SAlCY;;;AAuCd;EACE,SC5Cc",
+  "mappings": ";AACQ;AAMR;EACE;EACA,OALc;;;AASd;EACE;EACA;EACA;;AAGF;EAAK;;AAEL;EACE;EACA;EACA;;;AAWJ;EANE,uBAM4B;EALzB,oBAKyB;EAJxB,mBAIwB;EAHpB,eAGoB;;;AAG5B;EACE,SAlCY;;;AAuCd;EACE,SC7Cc",
   "names": Array [],
   "sourceRoot": "",
   "sources": Array [
@@ -1599,6 +1626,7 @@ Object {
   ],
   "sourcesContent": Array [
     "@import \\"another/variables\\";
+@import \\"./file.css\\";
 
 $font-stack:    Helvetica, sans-serif;
 $primary-color: #333;
@@ -1657,6 +1685,7 @@ exports[`sourceMap option should generate source maps when value is not specifie
 
 exports[`sourceMap option should generate source maps when value is not specified and the "devtool" option has "source-map" value (node-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
+@import url(./file.css);
 body {
   font: 100% Helvetica, sans-serif;
   color: #333; }
@@ -1706,7 +1735,7 @@ exports[`sourceMap option should generate source maps when value is not specifie
 
 exports[`sourceMap option should generate source maps when value is not specified and the "devtool" option has "source-map" value (node-sass) (sass): source map 1`] = `
 Object {
-  "mappings": ";AAMA,AAAA,IAAI,CAAC;EACH,IAAI,EAAE,IAAI,CALI,SAAS,EAAE,UAAU;EAMnC,KAAK,EALS,IAAI,GAKM;;AAE1B,AACE,GADC,CACD,EAAE,CAAC;EACD,MAAM,EAAE,CAAC;EACT,OAAO,EAAE,CAAC;EACV,UAAU,EAAE,IAAI,GAAG;;AAJvB,AAME,GANC,CAMD,EAAE,CAAC;EACD,OAAO,EAAE,YAAY,GAAG;;AAP5B,AASE,GATC,CASD,CAAC,CAAC;EACA,OAAO,EAAE,KAAK;EACd,OAAO,EAAE,QAAQ;EACjB,eAAe,EAAE,IAAI,GAAG;;AAQ5B,AAAA,IAAI,CAAC;EALH,qBAAqB,EAME,IAAI;EAL3B,kBAAkB,EAKK,IAAI;EAJ3B,iBAAiB,EAIM,IAAI;EAH3B,aAAa,EAGU,IAAI,GAAI;;AAEjC,AAAA,QAAQ,EAKR,QAAQ,EAIR,MAAM,EAIN,QAAQ,CAbC;EACP,MAAM,EAAE,cAAc;EACtB,OAAO,EAAE,IAAI;EACb,KAAK,EAAE,IAAI,GAAG;;AAEhB,AAAA,QAAQ,CAAC;EAEP,YAAY,EAAE,KAAK,GAAG;;AAExB,AAAA,MAAM,CAAC;EAEL,YAAY,EAAE,GAAG,GAAG;;AAEtB,AAAA,QAAQ,CAAC;EAEP,YAAY,EAAE,MAAM,GAAG;;AAEzB,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,EAhDK,IAAO,GAgDJ;;AAEnB,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,ECxDO,IAAO,GDwDO",
+  "mappings": ";AACA,OAAO,CAAP,eAAO;AAMP,AAAA,IAAI,CAAC;EACH,IAAI,EAAE,IAAI,CALI,SAAS,EAAE,UAAU;EAMnC,KAAK,EALS,IAAI,GAKM;;AAE1B,AACE,GADC,CACD,EAAE,CAAC;EACD,MAAM,EAAE,CAAC;EACT,OAAO,EAAE,CAAC;EACV,UAAU,EAAE,IAAI,GAAG;;AAJvB,AAME,GANC,CAMD,EAAE,CAAC;EACD,OAAO,EAAE,YAAY,GAAG;;AAP5B,AASE,GATC,CASD,CAAC,CAAC;EACA,OAAO,EAAE,KAAK;EACd,OAAO,EAAE,QAAQ;EACjB,eAAe,EAAE,IAAI,GAAG;;AAQ5B,AAAA,IAAI,CAAC;EALH,qBAAqB,EAME,IAAI;EAL3B,kBAAkB,EAKK,IAAI;EAJ3B,iBAAiB,EAIM,IAAI;EAH3B,aAAa,EAGU,IAAI,GAAI;;AAEjC,AAAA,QAAQ,EAKR,QAAQ,EAIR,MAAM,EAIN,QAAQ,CAbC;EACP,MAAM,EAAE,cAAc;EACtB,OAAO,EAAE,IAAI;EACb,KAAK,EAAE,IAAI,GAAG;;AAEhB,AAAA,QAAQ,CAAC;EAEP,YAAY,EAAE,KAAK,GAAG;;AAExB,AAAA,MAAM,CAAC;EAEL,YAAY,EAAE,GAAG,GAAG;;AAEtB,AAAA,QAAQ,CAAC;EAEP,YAAY,EAAE,MAAM,GAAG;;AAEzB,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,EAhDK,IAAO,GAgDJ;;AAEnB,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,ECzDO,IAAO,GDyDO",
   "names": Array [],
   "sourceRoot": "",
   "sources": Array [
@@ -1715,6 +1744,7 @@ Object {
   ],
   "sourcesContent": Array [
     "@import \\"another/variables\\";
+@import \\"./file.css\\";
 
 $font-stack:    Helvetica, sans-serif;
 $primary-color: #333;
@@ -1784,6 +1814,7 @@ exports[`sourceMap option should generate source maps when value is not specifie
 
 exports[`sourceMap option should generate source maps when value is not specified and the "devtool" option has "source-map" value (node-sass) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
+@import url(./file.css);
 body {
   font: 100% Helvetica, sans-serif;
   color: #333; }
@@ -1819,7 +1850,7 @@ exports[`sourceMap option should generate source maps when value is not specifie
 
 exports[`sourceMap option should generate source maps when value is not specified and the "devtool" option has "source-map" value (node-sass) (scss): source map 1`] = `
 Object {
-  "mappings": ";AAMA,AAAA,IAAI,CAAC;EACH,IAAI,EAAE,IAAI,CALI,SAAS,EAAE,UAAU;EAMnC,KAAK,EALS,IAAI,GAMnB;;AAED,AACE,GADC,CACD,EAAE,CAAC;EACD,MAAM,EAAE,CAAC;EACT,OAAO,EAAE,CAAC;EACV,UAAU,EAAE,IAAI,GACjB;;AALH,AAOE,GAPC,CAOD,EAAE,CAAC;EAAE,OAAO,EAAE,YAAY,GAAI;;AAPhC,AASE,GATC,CASD,CAAC,CAAC;EACA,OAAO,EAAE,KAAK;EACd,OAAO,EAAE,QAAQ;EACjB,eAAe,EAAE,IAAI,GACtB;;AAUH,AAAA,IAAI,CAAC;EANH,qBAAqB,EAMO,IAAI;EAL7B,kBAAkB,EAKO,IAAI;EAJ5B,iBAAiB,EAIO,IAAI;EAHxB,aAAa,EAGO,IAAI,GAAK;;AAEvC,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,EAlCK,IAAO,GAmCpB;;AAGH,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,EC5CO,IAAO,GD6CtB",
+  "mappings": ";AACA,OAAO,CAAP,eAAO;AAMP,AAAA,IAAI,CAAC;EACH,IAAI,EAAE,IAAI,CALI,SAAS,EAAE,UAAU;EAMnC,KAAK,EALS,IAAI,GAMnB;;AAED,AACE,GADC,CACD,EAAE,CAAC;EACD,MAAM,EAAE,CAAC;EACT,OAAO,EAAE,CAAC;EACV,UAAU,EAAE,IAAI,GACjB;;AALH,AAOE,GAPC,CAOD,EAAE,CAAC;EAAE,OAAO,EAAE,YAAY,GAAI;;AAPhC,AASE,GATC,CASD,CAAC,CAAC;EACA,OAAO,EAAE,KAAK;EACd,OAAO,EAAE,QAAQ;EACjB,eAAe,EAAE,IAAI,GACtB;;AAUH,AAAA,IAAI,CAAC;EANH,qBAAqB,EAMO,IAAI;EAL7B,kBAAkB,EAKO,IAAI;EAJ5B,iBAAiB,EAIO,IAAI;EAHxB,aAAa,EAGO,IAAI,GAAK;;AAEvC,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,EAlCK,IAAO,GAmCpB;;AAGH,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,EC7CO,IAAO,GD8CtB",
   "names": Array [],
   "sourceRoot": "",
   "sources": Array [
@@ -1828,6 +1859,7 @@ Object {
   ],
   "sourcesContent": Array [
     "@import \\"another/variables\\";
+@import \\"./file.css\\";
 
 $font-stack:    Helvetica, sans-serif;
 $primary-color: #333;
@@ -1886,6 +1918,7 @@ exports[`sourceMap option should generate source maps when value is not specifie
 
 exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "false" value (dart-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
+@import \\"./file.css\\";
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -1947,6 +1980,7 @@ exports[`sourceMap option should not generate source maps when value has "false"
 
 exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "false" value (dart-sass) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
+@import \\"./file.css\\";
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -1990,6 +2024,7 @@ exports[`sourceMap option should not generate source maps when value has "false"
 
 exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "false" value (node-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
+@import url(./file.css);
 body {
   font: 100% Helvetica, sans-serif;
   color: #333; }
@@ -2043,6 +2078,7 @@ exports[`sourceMap option should not generate source maps when value has "false"
 
 exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "false" value (node-sass) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
+@import url(./file.css);
 body {
   font: 100% Helvetica, sans-serif;
   color: #333; }
@@ -2082,6 +2118,7 @@ exports[`sourceMap option should not generate source maps when value has "false"
 
 exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "source-map" value (dart-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
+@import \\"./file.css\\";
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -2143,6 +2180,7 @@ exports[`sourceMap option should not generate source maps when value has "false"
 
 exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "source-map" value (dart-sass) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
+@import \\"./file.css\\";
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -2186,6 +2224,7 @@ exports[`sourceMap option should not generate source maps when value has "false"
 
 exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "source-map" value (node-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
+@import url(./file.css);
 body {
   font: 100% Helvetica, sans-serif;
   color: #333; }
@@ -2239,6 +2278,7 @@ exports[`sourceMap option should not generate source maps when value has "false"
 
 exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "source-map" value (node-sass) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
+@import url(./file.css);
 body {
   font: 100% Helvetica, sans-serif;
   color: #333; }
@@ -2278,6 +2318,7 @@ exports[`sourceMap option should not generate source maps when value has "false"
 
 exports[`sourceMap option should not generate source maps when value is not specified and the "devtool" option has "false" value (dart-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
+@import \\"./file.css\\";
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -2339,6 +2380,7 @@ exports[`sourceMap option should not generate source maps when value is not spec
 
 exports[`sourceMap option should not generate source maps when value is not specified and the "devtool" option has "false" value (dart-sass) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
+@import \\"./file.css\\";
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -2382,6 +2424,7 @@ exports[`sourceMap option should not generate source maps when value is not spec
 
 exports[`sourceMap option should not generate source maps when value is not specified and the "devtool" option has "false" value (node-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
+@import url(./file.css);
 body {
   font: 100% Helvetica, sans-serif;
   color: #333; }
@@ -2435,6 +2478,7 @@ exports[`sourceMap option should not generate source maps when value is not spec
 
 exports[`sourceMap option should not generate source maps when value is not specified and the "devtool" option has "false" value (node-sass) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
+@import url(./file.css);
 body {
   font: 100% Helvetica, sans-serif;
   color: #333; }

@@ -17,4 +17,4 @@ Thumbs.db
 *.sublime-project
 *.sublime-workspace
 .nyc_output
-test/output
+test/outputs

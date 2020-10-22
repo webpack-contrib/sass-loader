@@ -2,6 +2,7 @@
 
 exports[`webpackImporter option false (dart-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
+@import \\"./file.css\\";
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -61,6 +62,7 @@ exports[`webpackImporter option false (dart-sass) (sass): warnings 1`] = `Array 
 
 exports[`webpackImporter option false (dart-sass) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
+@import \\"./file.css\\";
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -102,6 +104,7 @@ exports[`webpackImporter option false (dart-sass) (scss): warnings 1`] = `Array 
 
 exports[`webpackImporter option false (node-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
+@import url(./file.css);
 body {
   font: 100% Helvetica, sans-serif;
   color: #333; }
@@ -153,6 +156,7 @@ exports[`webpackImporter option false (node-sass) (sass): warnings 1`] = `Array 
 
 exports[`webpackImporter option false (node-sass) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
+@import url(./file.css);
 body {
   font: 100% Helvetica, sans-serif;
   color: #333; }
@@ -190,6 +194,7 @@ exports[`webpackImporter option false (node-sass) (scss): warnings 1`] = `Array 
 
 exports[`webpackImporter option not specify (dart-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
+@import \\"./file.css\\";
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -249,6 +254,7 @@ exports[`webpackImporter option not specify (dart-sass) (sass): warnings 1`] = `
 
 exports[`webpackImporter option not specify (dart-sass) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
+@import \\"./file.css\\";
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -290,6 +296,7 @@ exports[`webpackImporter option not specify (dart-sass) (scss): warnings 1`] = `
 
 exports[`webpackImporter option not specify (node-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
+@import url(./file.css);
 body {
   font: 100% Helvetica, sans-serif;
   color: #333; }
@@ -341,6 +348,7 @@ exports[`webpackImporter option not specify (node-sass) (sass): warnings 1`] = `
 
 exports[`webpackImporter option not specify (node-sass) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
+@import url(./file.css);
 body {
   font: 100% Helvetica, sans-serif;
   color: #333; }
@@ -378,6 +386,7 @@ exports[`webpackImporter option not specify (node-sass) (scss): warnings 1`] = `
 
 exports[`webpackImporter option true (dart-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
+@import \\"./file.css\\";
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -437,6 +446,7 @@ exports[`webpackImporter option true (dart-sass) (sass): warnings 1`] = `Array [
 
 exports[`webpackImporter option true (dart-sass) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
+@import \\"./file.css\\";
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -478,6 +488,7 @@ exports[`webpackImporter option true (dart-sass) (scss): warnings 1`] = `Array [
 
 exports[`webpackImporter option true (node-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
+@import url(./file.css);
 body {
   font: 100% Helvetica, sans-serif;
   color: #333; }
@@ -529,6 +540,7 @@ exports[`webpackImporter option true (node-sass) (sass): warnings 1`] = `Array [
 
 exports[`webpackImporter option true (node-sass) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
+@import url(./file.css);
 body {
   font: 100% Helvetica, sans-serif;
   color: #333; }
