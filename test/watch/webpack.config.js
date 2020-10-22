@@ -10,7 +10,7 @@ module.exports = {
     path.resolve(__dirname, '../scss/import-include-paths.scss'),
   ],
   output: {
-    path: path.resolve(__dirname, '../output'),
+    path: path.resolve(__dirname, '../outputs/watch'),
     filename: 'bundle.watch.js',
   },
   watch: true,

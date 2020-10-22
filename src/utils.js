@@ -312,7 +312,13 @@ function getWebpackResolver(
       return Promise.reject();
     }
 
-    const [{ resolve, context, possibleRequests }] = resolutionMap;
+    const [{ possibleRequests }] = resolutionMap;
+
+    if (possibleRequests.length === 0) {
+      return Promise.reject();
+    }
+
+    const [{ resolve, context }] = resolutionMap;
 
     try {
       return await resolve(context, possibleRequests[0]);

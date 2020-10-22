@@ -402,6 +402,7 @@ exports[`loader should prefer relative import (node-sass) (scss): warnings 1`] =
 
 exports[`loader should resolve absolute paths (dart-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
+@import \\"./file.css\\";
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -461,6 +462,7 @@ exports[`loader should resolve absolute paths (dart-sass) (sass): warnings 1`] =
 
 exports[`loader should resolve absolute paths (dart-sass) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
+@import \\"./file.css\\";
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -502,6 +504,7 @@ exports[`loader should resolve absolute paths (dart-sass) (scss): warnings 1`] =
 
 exports[`loader should resolve absolute paths (node-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
+@import url(./file.css);
 body {
   font: 100% Helvetica, sans-serif;
   color: #333; }
@@ -553,6 +556,7 @@ exports[`loader should resolve absolute paths (node-sass) (sass): warnings 1`] =
 
 exports[`loader should resolve absolute paths (node-sass) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
+@import url(./file.css);
 body {
   font: 100% Helvetica, sans-serif;
   color: #333; }
@@ -590,6 +594,7 @@ exports[`loader should resolve absolute paths (node-sass) (scss): warnings 1`] =
 
 exports[`loader should resolve server-relative URLs (dart-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
+@import \\"./file.css\\";
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -649,6 +654,7 @@ exports[`loader should resolve server-relative URLs (dart-sass) (sass): warnings
 
 exports[`loader should resolve server-relative URLs (dart-sass) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
+@import \\"./file.css\\";
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -690,6 +696,7 @@ exports[`loader should resolve server-relative URLs (dart-sass) (scss): warnings
 
 exports[`loader should resolve server-relative URLs (node-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
+@import url(./file.css);
 body {
   font: 100% Helvetica, sans-serif;
   color: #333; }
@@ -741,6 +748,7 @@ exports[`loader should resolve server-relative URLs (node-sass) (sass): warnings
 
 exports[`loader should resolve server-relative URLs (node-sass) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
+@import url(./file.css);
 body {
   font: 100% Helvetica, sans-serif;
   color: #333; }
@@ -861,7 +869,7 @@ exports[`loader should respect resolving from "process.cwd()" (node-sass) (scss)
 exports[`loader should respect resolving from "process.cwd()" (node-sass) (scss): warnings 1`] = `Array []`;
 
 exports[`loader should respect resolving from the "SASS_PATH" environment variable (dart-sass) (sass): css 1`] = `
-".foo {
+".color-red {
   color: red;
 }
 
@@ -875,7 +883,7 @@ exports[`loader should respect resolving from the "SASS_PATH" environment variab
 exports[`loader should respect resolving from the "SASS_PATH" environment variable (dart-sass) (sass): warnings 1`] = `Array []`;
 
 exports[`loader should respect resolving from the "SASS_PATH" environment variable (dart-sass) (scss): css 1`] = `
-".foo {
+".color-red {
   color: red;
 }
 
@@ -889,7 +897,7 @@ exports[`loader should respect resolving from the "SASS_PATH" environment variab
 exports[`loader should respect resolving from the "SASS_PATH" environment variable (dart-sass) (scss): warnings 1`] = `Array []`;
 
 exports[`loader should respect resolving from the "SASS_PATH" environment variable (node-sass) (sass): css 1`] = `
-".foo {
+".color-red {
   color: red; }
 
 .bar {
@@ -902,7 +910,7 @@ exports[`loader should respect resolving from the "SASS_PATH" environment variab
 exports[`loader should respect resolving from the "SASS_PATH" environment variable (node-sass) (sass): warnings 1`] = `Array []`;
 
 exports[`loader should respect resolving from the "SASS_PATH" environment variable (node-sass) (scss): css 1`] = `
-".foo {
+".color-red {
   color: red; }
 
 .bar {
@@ -916,6 +924,7 @@ exports[`loader should respect resolving from the "SASS_PATH" environment variab
 
 exports[`loader should support resolving using the "file" schema (dart-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
+@import \\"./file.css\\";
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -975,6 +984,7 @@ exports[`loader should support resolving using the "file" schema (dart-sass) (sa
 
 exports[`loader should support resolving using the "file" schema (dart-sass) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
+@import \\"./file.css\\";
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -1016,6 +1026,7 @@ exports[`loader should support resolving using the "file" schema (dart-sass) (sc
 
 exports[`loader should support resolving using the "file" schema (node-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
+@import url(./file.css);
 body {
   font: 100% Helvetica, sans-serif;
   color: #333; }
@@ -1067,6 +1078,7 @@ exports[`loader should support resolving using the "file" schema (node-sass) (sa
 
 exports[`loader should support resolving using the "file" schema (node-sass) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
+@import url(./file.css);
 body {
   font: 100% Helvetica, sans-serif;
   color: #333; }
@@ -1222,8 +1234,129 @@ exports[`loader should watch firstly in the "includePaths" values (node-sass) (s
 
 exports[`loader should watch firstly in the "includePaths" values (node-sass) (scss): warnings 1`] = `Array []`;
 
+exports[`loader should work (dart-sass) (sass) with the "filesystem" cache: css 1`] = `
+"@charset \\"UTF-8\\";
+@import \\"./file.css\\";
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+nav li {
+  display: inline-block;
+}
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none;
+}
+
+.box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.message, .warning, .error, .success {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333;
+}
+
+.success {
+  border-color: green;
+}
+
+.error {
+  border-color: red;
+}
+
+.warning {
+  border-color: yellow;
+}
+
+.foo:before {
+  content: \\"\\";
+}
+
+.bar:before {
+  content: \\"∑\\";
+}"
+`;
+
+exports[`loader should work (dart-sass) (sass) with the "filesystem" cache: errors 1`] = `Array []`;
+
+exports[`loader should work (dart-sass) (sass) with the "filesystem" cache: warnings 1`] = `Array []`;
+
+exports[`loader should work (dart-sass) (sass) with the "memory" cache: css 1`] = `
+"@charset \\"UTF-8\\";
+@import \\"./file.css\\";
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+nav li {
+  display: inline-block;
+}
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none;
+}
+
+.box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.message, .warning, .error, .success {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333;
+}
+
+.success {
+  border-color: green;
+}
+
+.error {
+  border-color: red;
+}
+
+.warning {
+  border-color: yellow;
+}
+
+.foo:before {
+  content: \\"\\";
+}
+
+.bar:before {
+  content: \\"∑\\";
+}"
+`;
+
+exports[`loader should work (dart-sass) (sass) with the "memory" cache: errors 1`] = `Array []`;
+
+exports[`loader should work (dart-sass) (sass) with the "memory" cache: warnings 1`] = `Array []`;
+
 exports[`loader should work (dart-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
+@import \\"./file.css\\";
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -1281,8 +1414,93 @@ exports[`loader should work (dart-sass) (sass): errors 1`] = `Array []`;
 
 exports[`loader should work (dart-sass) (sass): warnings 1`] = `Array []`;
 
+exports[`loader should work (dart-sass) (scss) with the "filesystem" cache: css 1`] = `
+"@charset \\"UTF-8\\";
+@import \\"./file.css\\";
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+nav li {
+  display: inline-block;
+}
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none;
+}
+
+.box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.foo:before {
+  content: \\"\\";
+}
+
+.bar:before {
+  content: \\"∑\\";
+}"
+`;
+
+exports[`loader should work (dart-sass) (scss) with the "filesystem" cache: errors 1`] = `Array []`;
+
+exports[`loader should work (dart-sass) (scss) with the "filesystem" cache: warnings 1`] = `Array []`;
+
+exports[`loader should work (dart-sass) (scss) with the "memory" cache: css 1`] = `
+"@charset \\"UTF-8\\";
+@import \\"./file.css\\";
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+nav li {
+  display: inline-block;
+}
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none;
+}
+
+.box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.foo:before {
+  content: \\"\\";
+}
+
+.bar:before {
+  content: \\"∑\\";
+}"
+`;
+
+exports[`loader should work (dart-sass) (scss) with the "memory" cache: errors 1`] = `Array []`;
+
+exports[`loader should work (dart-sass) (scss) with the "memory" cache: warnings 1`] = `Array []`;
+
 exports[`loader should work (dart-sass) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
+@import \\"./file.css\\";
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -1322,8 +1540,113 @@ exports[`loader should work (dart-sass) (scss): errors 1`] = `Array []`;
 
 exports[`loader should work (dart-sass) (scss): warnings 1`] = `Array []`;
 
+exports[`loader should work (node-sass) (sass) with the "filesystem" cache: css 1`] = `
+"@charset \\"UTF-8\\";
+@import url(./file.css);
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333; }
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+
+nav li {
+  display: inline-block; }
+
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none; }
+
+.box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px; }
+
+.message, .success, .error, .warning {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333; }
+
+.success {
+  border-color: green; }
+
+.error {
+  border-color: red; }
+
+.warning {
+  border-color: yellow; }
+
+.foo:before {
+  content: \\"\\"; }
+
+.bar:before {
+  content: \\"∑\\"; }
+"
+`;
+
+exports[`loader should work (node-sass) (sass) with the "filesystem" cache: errors 1`] = `Array []`;
+
+exports[`loader should work (node-sass) (sass) with the "filesystem" cache: warnings 1`] = `Array []`;
+
+exports[`loader should work (node-sass) (sass) with the "memory" cache: css 1`] = `
+"@charset \\"UTF-8\\";
+@import url(./file.css);
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333; }
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+
+nav li {
+  display: inline-block; }
+
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none; }
+
+.box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px; }
+
+.message, .success, .error, .warning {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333; }
+
+.success {
+  border-color: green; }
+
+.error {
+  border-color: red; }
+
+.warning {
+  border-color: yellow; }
+
+.foo:before {
+  content: \\"\\"; }
+
+.bar:before {
+  content: \\"∑\\"; }
+"
+`;
+
+exports[`loader should work (node-sass) (sass) with the "memory" cache: errors 1`] = `Array []`;
+
+exports[`loader should work (node-sass) (sass) with the "memory" cache: warnings 1`] = `Array []`;
+
 exports[`loader should work (node-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
+@import url(./file.css);
 body {
   font: 100% Helvetica, sans-serif;
   color: #333; }
@@ -1373,8 +1696,85 @@ exports[`loader should work (node-sass) (sass): errors 1`] = `Array []`;
 
 exports[`loader should work (node-sass) (sass): warnings 1`] = `Array []`;
 
+exports[`loader should work (node-sass) (scss) with the "filesystem" cache: css 1`] = `
+"@charset \\"UTF-8\\";
+@import url(./file.css);
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333; }
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+
+nav li {
+  display: inline-block; }
+
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none; }
+
+.box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px; }
+
+.foo:before {
+  content: \\"\\"; }
+
+.bar:before {
+  content: \\"∑\\"; }
+"
+`;
+
+exports[`loader should work (node-sass) (scss) with the "filesystem" cache: errors 1`] = `Array []`;
+
+exports[`loader should work (node-sass) (scss) with the "filesystem" cache: warnings 1`] = `Array []`;
+
+exports[`loader should work (node-sass) (scss) with the "memory" cache: css 1`] = `
+"@charset \\"UTF-8\\";
+@import url(./file.css);
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333; }
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+
+nav li {
+  display: inline-block; }
+
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none; }
+
+.box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px; }
+
+.foo:before {
+  content: \\"\\"; }
+
+.bar:before {
+  content: \\"∑\\"; }
+"
+`;
+
+exports[`loader should work (node-sass) (scss) with the "memory" cache: errors 1`] = `Array []`;
+
+exports[`loader should work (node-sass) (scss) with the "memory" cache: warnings 1`] = `Array []`;
+
 exports[`loader should work (node-sass) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
+@import url(./file.css);
 body {
   font: 100% Helvetica, sans-serif;
   color: #333; }
@@ -1474,20 +1874,20 @@ exports[`loader should work and ignore all css "@import" at-rules (node-sass) (s
 
 exports[`loader should work and ignore all css "@import" at-rules (node-sass) (scss): warnings 1`] = `Array []`;
 
-exports[`loader should work and output the "compressed" outputStyle when "mode" is production (dart-sass) (sass): css 1`] = `"﻿body{font:100% Helvetica,sans-serif;color:#333}nav ul{margin:0;padding:0;list-style:none}nav li{display:inline-block}nav a{display:block;padding:6px 12px;text-decoration:none}.box{-webkit-border-radius:10px;-moz-border-radius:10px;-ms-border-radius:10px;border-radius:10px}.message,.warning,.error,.success{border:1px solid #ccc;padding:10px;color:#333}.success{border-color:green}.error{border-color:red}.warning{border-color:#ff0}.foo:before{content:\\"\\"}.bar:before{content:\\"∑\\"}"`;
+exports[`loader should work and output the "compressed" outputStyle when "mode" is production (dart-sass) (sass): css 1`] = `"﻿@import\\"./file.css\\";body{font:100% Helvetica,sans-serif;color:#333}nav ul{margin:0;padding:0;list-style:none}nav li{display:inline-block}nav a{display:block;padding:6px 12px;text-decoration:none}.box{-webkit-border-radius:10px;-moz-border-radius:10px;-ms-border-radius:10px;border-radius:10px}.message,.warning,.error,.success{border:1px solid #ccc;padding:10px;color:#333}.success{border-color:green}.error{border-color:red}.warning{border-color:#ff0}.foo:before{content:\\"\\"}.bar:before{content:\\"∑\\"}"`;
 
 exports[`loader should work and output the "compressed" outputStyle when "mode" is production (dart-sass) (sass): errors 1`] = `Array []`;
 
 exports[`loader should work and output the "compressed" outputStyle when "mode" is production (dart-sass) (sass): warnings 1`] = `Array []`;
 
-exports[`loader should work and output the "compressed" outputStyle when "mode" is production (dart-sass) (scss): css 1`] = `"﻿body{font:100% Helvetica,sans-serif;color:#333}nav ul{margin:0;padding:0;list-style:none}nav li{display:inline-block}nav a{display:block;padding:6px 12px;text-decoration:none}.box{-webkit-border-radius:10px;-moz-border-radius:10px;-ms-border-radius:10px;border-radius:10px}.foo:before{content:\\"\\"}.bar:before{content:\\"∑\\"}"`;
+exports[`loader should work and output the "compressed" outputStyle when "mode" is production (dart-sass) (scss): css 1`] = `"﻿@import\\"./file.css\\";body{font:100% Helvetica,sans-serif;color:#333}nav ul{margin:0;padding:0;list-style:none}nav li{display:inline-block}nav a{display:block;padding:6px 12px;text-decoration:none}.box{-webkit-border-radius:10px;-moz-border-radius:10px;-ms-border-radius:10px;border-radius:10px}.foo:before{content:\\"\\"}.bar:before{content:\\"∑\\"}"`;
 
 exports[`loader should work and output the "compressed" outputStyle when "mode" is production (dart-sass) (scss): errors 1`] = `Array []`;
 
 exports[`loader should work and output the "compressed" outputStyle when "mode" is production (dart-sass) (scss): warnings 1`] = `Array []`;
 
 exports[`loader should work and output the "compressed" outputStyle when "mode" is production (node-sass) (sass): css 1`] = `
-"﻿body{font:100% Helvetica,sans-serif;color:#333}nav ul{margin:0;padding:0;list-style:none}nav li{display:inline-block}nav a{display:block;padding:6px 12px;text-decoration:none}.box{-webkit-border-radius:10px;-moz-border-radius:10px;-ms-border-radius:10px;border-radius:10px}.message,.success,.error,.warning{border:1px solid #ccc;padding:10px;color:#333}.success{border-color:green}.error{border-color:red}.warning{border-color:yellow}.foo:before{content:\\"\\"}.bar:before{content:\\"∑\\"}
+"﻿@import url(./file.css);body{font:100% Helvetica,sans-serif;color:#333}nav ul{margin:0;padding:0;list-style:none}nav li{display:inline-block}nav a{display:block;padding:6px 12px;text-decoration:none}.box{-webkit-border-radius:10px;-moz-border-radius:10px;-ms-border-radius:10px;border-radius:10px}.message,.success,.error,.warning{border:1px solid #ccc;padding:10px;color:#333}.success{border-color:green}.error{border-color:red}.warning{border-color:yellow}.foo:before{content:\\"\\"}.bar:before{content:\\"∑\\"}
 "
 `;
 
@@ -1496,7 +1896,7 @@ exports[`loader should work and output the "compressed" outputStyle when "mode" 
 exports[`loader should work and output the "compressed" outputStyle when "mode" is production (node-sass) (sass): warnings 1`] = `Array []`;
 
 exports[`loader should work and output the "compressed" outputStyle when "mode" is production (node-sass) (scss): css 1`] = `
-"﻿body{font:100% Helvetica,sans-serif;color:#333}nav ul{margin:0;padding:0;list-style:none}nav li{display:inline-block}nav a{display:block;padding:6px 12px;text-decoration:none}.box{-webkit-border-radius:10px;-moz-border-radius:10px;-ms-border-radius:10px;border-radius:10px}.foo:before{content:\\"\\"}.bar:before{content:\\"∑\\"}
+"﻿@import url(./file.css);body{font:100% Helvetica,sans-serif;color:#333}nav ul{margin:0;padding:0;list-style:none}nav li{display:inline-block}nav a{display:block;padding:6px 12px;text-decoration:none}.box{-webkit-border-radius:10px;-moz-border-radius:10px;-ms-border-radius:10px;border-radius:10px}.foo:before{content:\\"\\"}.bar:before{content:\\"∑\\"}
 "
 `;
 
@@ -54653,6 +55053,9 @@ exports[`loader should work with difference "@import" at-rules (dart-sass) (sass
 
 /* @import url(http://example.com/something/from/the/interwebs); */
 /* scoped import @import language */
+.scoped-import {
+  @import \\"./file.css\\";
+}
 .scoped-import body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -54751,6 +55154,9 @@ exports[`loader should work with difference "@import" at-rules (dart-sass) (scss
 
 /* @import url(http://example.com/something/from/the/interwebs); */
 /* scoped import @import \\"language\\"; */
+.scoped-import {
+  @import \\"./file.css\\";
+}
 .scoped-import body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -54810,6 +55216,7 @@ exports[`loader should work with difference "@import" at-rules (node-sass) (sass
 "@charset \\"UTF-8\\";
 /* @import another/module */
 @import url(http://example.com/something/from/the/interwebs);
+@import url(./file.css);
 .another-sass-module {
   background: hotpink; }
 
@@ -54831,48 +55238,39 @@ exports[`loader should work with difference "@import" at-rules (node-sass) (sass
 
 /* @import url(http://example.com/something/from/the/interwebs); */
 /* scoped import @import language */
-.scoped-import body {
-  font: 100% Helvetica, sans-serif;
-  color: #333; }
-
-.scoped-import nav ul {
-  margin: 0;
-  padding: 0;
-  list-style: none; }
-
-.scoped-import nav li {
-  display: inline-block; }
-
-.scoped-import nav a {
-  display: block;
-  padding: 6px 12px;
-  text-decoration: none; }
-
-.scoped-import .box {
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  -ms-border-radius: 10px;
-  border-radius: 10px; }
-
-.scoped-import .message, .scoped-import .success, .scoped-import .error, .scoped-import .warning {
-  border: 1px solid #ccc;
-  padding: 10px;
-  color: #333; }
-
-.scoped-import .success {
-  border-color: green; }
-
-.scoped-import .error {
-  border-color: red; }
-
-.scoped-import .warning {
-  border-color: yellow; }
-
-.scoped-import .foo:before {
-  content: \\"\\"; }
-
-.scoped-import .bar:before {
-  content: \\"∑\\"; }
+.scoped-import { }
+  .scoped-import body {
+    font: 100% Helvetica, sans-serif;
+    color: #333; }
+  .scoped-import nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none; }
+  .scoped-import nav li {
+    display: inline-block; }
+  .scoped-import nav a {
+    display: block;
+    padding: 6px 12px;
+    text-decoration: none; }
+  .scoped-import .box {
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    border-radius: 10px; }
+  .scoped-import .message, .scoped-import .success, .scoped-import .error, .scoped-import .warning {
+    border: 1px solid #ccc;
+    padding: 10px;
+    color: #333; }
+  .scoped-import .success {
+    border-color: green; }
+  .scoped-import .error {
+    border-color: red; }
+  .scoped-import .warning {
+    border-color: yellow; }
+  .scoped-import .foo:before {
+    content: \\"\\"; }
+  .scoped-import .bar:before {
+    content: \\"∑\\"; }
 
 /* @import util */
 .util {
@@ -54899,6 +55297,7 @@ exports[`loader should work with difference "@import" at-rules (node-sass) (scss
 "@charset \\"UTF-8\\";
 /* @import \\"another/module\\"; */
 @import url(http://example.com/something/from/the/interwebs);
+@import url(./file.css);
 .another-scss-module {
   background: hotpink; }
 
@@ -54920,34 +55319,29 @@ exports[`loader should work with difference "@import" at-rules (node-sass) (scss
 
 /* @import url(http://example.com/something/from/the/interwebs); */
 /* scoped import @import \\"language\\"; */
-.scoped-import body {
-  font: 100% Helvetica, sans-serif;
-  color: #333; }
-
-.scoped-import nav ul {
-  margin: 0;
-  padding: 0;
-  list-style: none; }
-
-.scoped-import nav li {
-  display: inline-block; }
-
-.scoped-import nav a {
-  display: block;
-  padding: 6px 12px;
-  text-decoration: none; }
-
-.scoped-import .box {
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  -ms-border-radius: 10px;
-  border-radius: 10px; }
-
-.scoped-import .foo:before {
-  content: \\"\\"; }
-
-.scoped-import .bar:before {
-  content: \\"∑\\"; }
+.scoped-import { }
+  .scoped-import body {
+    font: 100% Helvetica, sans-serif;
+    color: #333; }
+  .scoped-import nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none; }
+  .scoped-import nav li {
+    display: inline-block; }
+  .scoped-import nav a {
+    display: block;
+    padding: 6px 12px;
+    text-decoration: none; }
+  .scoped-import .box {
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    border-radius: 10px; }
+  .scoped-import .foo:before {
+    content: \\"\\"; }
+  .scoped-import .bar:before {
+    content: \\"∑\\"; }
 
 /* @import \\"util\\"; */
 .util {
@@ -55068,6 +55462,7 @@ exports[`loader should work with different "@use" at-rules (dart-sass) (scss): w
 
 exports[`loader should work with multiple "@import" at-rules (dart-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
+@import \\"./file.css\\";
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -55135,6 +55530,7 @@ exports[`loader should work with multiple "@import" at-rules (dart-sass) (sass):
 
 exports[`loader should work with multiple "@import" at-rules (dart-sass) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
+@import \\"./file.css\\";
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -55184,6 +55580,7 @@ exports[`loader should work with multiple "@import" at-rules (dart-sass) (scss):
 
 exports[`loader should work with multiple "@import" at-rules (node-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
+@import url(./file.css);
 body {
   font: 100% Helvetica, sans-serif;
   color: #333; }
@@ -55241,6 +55638,7 @@ exports[`loader should work with multiple "@import" at-rules (node-sass) (sass):
 
 exports[`loader should work with multiple "@import" at-rules (node-sass) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
+@import url(./file.css);
 body {
   font: 100% Helvetica, sans-serif;
   color: #333; }
