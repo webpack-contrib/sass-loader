@@ -60,9 +60,9 @@ function getSassImplementation(implementation) {
 
     return resolvedImplementation;
   } else if (implementationName === 'node-sass') {
-    if (!semver.satisfies(version, '^4.0.0')) {
+    if (!semver.satisfies(version, '>4.0.0')) {
       throw new Error(
-        `Node Sass version ${version} is incompatible with ^4.0.0.`
+        `Node Sass version ${version} is incompatible with >4.0.0.`
       );
     }
 
