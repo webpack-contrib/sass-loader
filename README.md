@@ -148,7 +148,7 @@ Example where the `sass-loader` loader uses the `node-sass` implementation:
 {
   "devDependencies": {
     "sass-loader": "^7.2.0",
-    "node-sass": "^4.0.0"
+    "node-sass": "^5.0.0"
   }
 }
 ```
