@@ -1,6 +1,6 @@
 export default (implementation) => {
   return {
-    'headings($from: 0, $to: 6)': (from, to) => {
+    "headings($from: 0, $to: 6)": (from, to) => {
       const f = from.getValue();
       const t = to.getValue();
       const list = new implementation.types.List(t - f + 1);

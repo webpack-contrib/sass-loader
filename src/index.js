@@ -1,17 +1,17 @@
-import path from 'path';
+import path from "path";
 
-import { validate } from 'schema-utils';
-import { getOptions } from 'loader-utils';
+import { validate } from "schema-utils";
+import { getOptions } from "loader-utils";
 
-import schema from './options.json';
+import schema from "./options.json";
 import {
   getSassImplementation,
   getSassOptions,
   getWebpackImporter,
   getRenderFunctionFromSassImplementation,
   normalizeSourceMap,
-} from './utils';
-import SassError from './SassError';
+} from "./utils";
+import SassError from "./SassError";
 
 /**
  * The sass-loader makes node-sass and dart-sass available to webpack modules.
@@ -23,13 +23,13 @@ function loader(content) {
   const options = getOptions(this);
 
   validate(schema, options, {
-    name: 'Sass Loader',
-    baseDataPath: 'options',
+    name: "Sass Loader",
+    baseDataPath: "options",
   });
 
   const implementation = getSassImplementation(options.implementation);
   const useSourceMap =
-    typeof options.sourceMap === 'boolean' ? options.sourceMap : this.sourceMap;
+    typeof options.sourceMap === "boolean" ? options.sourceMap : this.sourceMap;
   const sassOptions = getSassOptions(
     this,
     options,
@@ -38,7 +38,7 @@ function loader(content) {
     useSourceMap
   );
   const shouldUseWebpackImporter =
-    typeof options.webpackImporter === 'boolean'
+    typeof options.webpackImporter === "boolean"
       ? options.webpackImporter
       : true;
 

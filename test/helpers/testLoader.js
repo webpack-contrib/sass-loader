@@ -1,5 +1,3 @@
-'use strict';
-
 function testLoader(content, sourceMap) {
   const result = { css: content };
 

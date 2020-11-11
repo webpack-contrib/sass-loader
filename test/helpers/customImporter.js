@@ -1,5 +1,5 @@
 function customImporter(url, prev, done) {
-  expect(url).toBe('import-with-custom-logic');
+  expect(url).toBe("import-with-custom-logic");
   expect(prev).toMatch(/(sass|scss)[/\\]custom-importer\.(scss|sass)/);
   expect(this.options).toBeDefined();
 
@@ -14,7 +14,7 @@ function customImporter(url, prev, done) {
 }
 
 customImporter.returnValue = {
-  contents: '.custom-imported {}',
+  contents: ".custom-imported {}",
 };
 
 export default customImporter;

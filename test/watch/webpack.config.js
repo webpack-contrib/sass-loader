@@ -1,17 +1,15 @@
-'use strict';
+const path = require("path");
 
-const path = require('path');
-
-const sassLoader = require.resolve('../../src/cjs');
+const sassLoader = require.resolve("../../src/cjs");
 
 module.exports = {
   entry: [
-    path.resolve(__dirname, '../scss/imports.scss'),
-    path.resolve(__dirname, '../scss/import-include-paths.scss'),
+    path.resolve(__dirname, "../scss/imports.scss"),
+    path.resolve(__dirname, "../scss/import-include-paths.scss"),
   ],
   output: {
-    path: path.resolve(__dirname, '../outputs/watch'),
-    filename: 'bundle.watch.js',
+    path: path.resolve(__dirname, "../outputs/watch"),
+    filename: "bundle.watch.js",
   },
   watch: true,
   module: {
@@ -20,15 +18,15 @@ module.exports = {
         test: /\.scss$/,
         use: [
           {
-            loader: 'style-loader',
+            loader: "style-loader",
           },
           {
-            loader: 'css-loader',
+            loader: "css-loader",
           },
           {
             loader: sassLoader,
             options: {
-              includePaths: [path.resolve(__dirname, '../scss/includePath')],
+              includePaths: [path.resolve(__dirname, "../scss/includePath")],
             },
           },
         ],

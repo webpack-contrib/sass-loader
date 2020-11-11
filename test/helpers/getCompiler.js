@@ -1,8 +1,8 @@
-import path from 'path';
+import path from "path";
 
-import webpack from 'webpack';
-import { createFsFromVolume, Volume } from 'memfs';
-import del from 'del';
+import webpack from "webpack";
+import { createFsFromVolume, Volume } from "memfs";
+import del from "del";
 
 const module = (config) => {
   return {
@@ -14,10 +14,10 @@ const module = (config) => {
             resolve: config.loader.resolve,
             use: [
               {
-                loader: require.resolve('./testLoader'),
+                loader: require.resolve("./testLoader"),
               },
               {
-                loader: path.join(__dirname, '../../src/cjs.js'),
+                loader: path.join(__dirname, "../../src/cjs.js"),
                 options: (config.loader && config.loader.options) || {},
               },
             ],
@@ -32,10 +32,10 @@ const output = (config) => {
   return {
     path: path.resolve(
       __dirname,
-      `../outputs/${config.output ? config.output : ''}`
+      `../outputs/${config.output ? config.output : ""}`
     ),
-    filename: '[name].bundle.js',
-    library: 'sassLoaderExport',
+    filename: "[name].bundle.js",
+    library: "sassLoaderExport",
   };
 };
 
@@ -44,10 +44,10 @@ export default function getCompiler(fixture, config = {}, options = {}) {
   // eslint-disable-next-line no-param-reassign
   config = {
     cache: config.cache ? config.cache : false,
-    mode: config.mode || 'development',
+    mode: config.mode || "development",
     devtool: config.devtool || false,
     // context: path.resolve(__dirname, '..', 'fixtures'),
-    context: path.resolve(__dirname, '..'),
+    context: path.resolve(__dirname, ".."),
     entry: config.entry || `./${fixture}`,
     output: output(config),
     module: module(config),

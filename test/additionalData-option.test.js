@@ -1,6 +1,6 @@
-import nodeSass from 'node-sass';
-import dartSass from 'sass';
-import Fiber from 'fibers';
+import nodeSass from "node-sass";
+import dartSass from "sass";
+import Fiber from "fibers";
 
 import {
   compile,
@@ -11,27 +11,27 @@ import {
   getImplementationByName,
   getTestId,
   getWarnings,
-} from './helpers';
+} from "./helpers";
 
 const implementations = [nodeSass, dartSass];
-const syntaxStyles = ['scss', 'sass'];
+const syntaxStyles = ["scss", "sass"];
 
-describe('additionalData option', () => {
+describe("additionalData option", () => {
   beforeEach(() => {
     // The `sass` (`Dart Sass`) package modify the `Function` prototype, but the `jest` lose a prototype
     Object.setPrototypeOf(Fiber, Function.prototype);
   });
 
   implementations.forEach((implementation) => {
-    const [implementationName] = implementation.info.split('\t');
+    const [implementationName] = implementation.info.split("\t");
 
     syntaxStyles.forEach((syntax) => {
       it(`should work with the "data" option as a string (${implementationName}) (${syntax})`, async () => {
-        const testId = getTestId('prepending-data', syntax);
+        const testId = getTestId("prepending-data", syntax);
         const options = {
           implementation: getImplementationByName(implementationName),
           additionalData: `$prepended-data: hotpink${
-            syntax === 'sass' ? '\n' : ';'
+            syntax === "sass" ? "\n" : ";"
           }`,
         };
         const compiler = getCompiler(testId, { loader: { options } });
@@ -40,13 +40,13 @@ describe('additionalData option', () => {
         const codeFromSass = getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
-        expect(codeFromBundle.css).toMatchSnapshot('css');
-        expect(getWarnings(stats)).toMatchSnapshot('warnings');
-        expect(getErrors(stats)).toMatchSnapshot('errors');
+        expect(codeFromBundle.css).toMatchSnapshot("css");
+        expect(getWarnings(stats)).toMatchSnapshot("warnings");
+        expect(getErrors(stats)).toMatchSnapshot("errors");
       });
 
       it(`should work with the "data" option as a function (${implementationName}) (${syntax})`, async () => {
-        const testId = getTestId('prepending-data', syntax);
+        const testId = getTestId("prepending-data", syntax);
         const options = {
           implementation: getImplementationByName(implementationName),
           additionalData: (content, loaderContext) => {
@@ -54,7 +54,7 @@ describe('additionalData option', () => {
             expect(content).toBeDefined();
 
             return `$prepended-data: hotpink${
-              syntax === 'sass' ? '\n' : ';\n'
+              syntax === "sass" ? "\n" : ";\n"
             }${content}`;
           },
         };
@@ -64,15 +64,15 @@ describe('additionalData option', () => {
         const codeFromSass = getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
-        expect(codeFromBundle.css).toMatchSnapshot('css');
-        expect(getWarnings(stats)).toMatchSnapshot('warnings');
-        expect(getErrors(stats)).toMatchSnapshot('errors');
+        expect(codeFromBundle.css).toMatchSnapshot("css");
+        expect(getWarnings(stats)).toMatchSnapshot("warnings");
+        expect(getErrors(stats)).toMatchSnapshot("errors");
       });
 
       it(`should use same EOL on all os (${implementationName}) (${syntax})`, async () => {
-        const testId = getTestId('prepending-data', syntax);
+        const testId = getTestId("prepending-data", syntax);
         const additionalData =
-          syntax === 'sass'
+          syntax === "sass"
             ? `$prepended-data: hotpink
 a
   color: $prepended-data`
@@ -88,9 +88,9 @@ a {
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
 
-        expect(codeFromBundle.css).toMatchSnapshot('css');
-        expect(getWarnings(stats)).toMatchSnapshot('warnings');
-        expect(getErrors(stats)).toMatchSnapshot('errors');
+        expect(codeFromBundle.css).toMatchSnapshot("css");
+        expect(getWarnings(stats)).toMatchSnapshot("warnings");
+        expect(getErrors(stats)).toMatchSnapshot("errors");
       });
     });
   });

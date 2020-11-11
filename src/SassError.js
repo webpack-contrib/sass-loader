@@ -2,7 +2,7 @@ class SassError extends Error {
   constructor(sassError) {
     super();
 
-    this.name = 'SassError';
+    this.name = "SassError";
     this.originalSassError = sassError;
     this.loc = {
       line: sassError.line,
@@ -15,7 +15,7 @@ class SassError extends Error {
     if (this.originalSassError.formatted) {
       this.message = `${this.name}: ${this.originalSassError.formatted.replace(
         /^Error: /,
-        ''
+        ""
       )}`;
 
       // Instruct webpack to hide the JS stack from the console.
