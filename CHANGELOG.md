@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [10.1.0](https://github.com/webpack-contrib/sass-loader/compare/v10.0.5...v10.1.0) (2020-11-11)
+
+
+### Features
+
+* allow the `additionalData` to be async ([#902](https://github.com/webpack-contrib/sass-loader/issues/902)) ([9d925ff](https://github.com/webpack-contrib/sass-loader/commit/9d925ff794e1e4cb9db253a6867bfa2405ec3428))
+
 ### [10.0.5](https://github.com/webpack-contrib/sass-loader/compare/v10.0.4...v10.0.5) (2020-11-02)
 
 
