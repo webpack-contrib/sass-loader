@@ -164003,10 +164003,14 @@ exports[`loader should work with the "material-components-web" package (dart-sas
 .test .mdc-elevation-overlay {
   position: absolute;
   border-radius: inherit;
-  opacity: 0;
   pointer-events: none;
+  opacity: 0;
+  /* @alternate */
+  opacity: var(--mdc-elevation-overlay-opacity, 0);
   transition: opacity 280ms cubic-bezier(0.4, 0, 0.2, 1);
   background-color: #fff;
+  /* @alternate */
+  background-color: var(--mdc-elevation-overlay-color, #fff);
 }
 .test .mdc-button {
   -moz-osx-font-smoothing: grayscale;
@@ -164269,6 +164273,7 @@ exports[`loader should work with the "material-components-web" package (dart-sas
   --mdc-ripple-fg-translate-end: 0;
   --mdc-ripple-fg-translate-start: 0;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  will-change: transform, opacity;
 }
 .test .mdc-button .mdc-button__ripple::before,
 .test .mdc-button .mdc-button__ripple::after {
@@ -164388,10 +164393,14 @@ exports[`loader should work with the "material-components-web" package (dart-sas
 .test .mdc-elevation-overlay {
   position: absolute;
   border-radius: inherit;
-  opacity: 0;
   pointer-events: none;
+  opacity: 0;
+  /* @alternate */
+  opacity: var(--mdc-elevation-overlay-opacity, 0);
   transition: opacity 280ms cubic-bezier(0.4, 0, 0.2, 1);
   background-color: #fff;
+  /* @alternate */
+  background-color: var(--mdc-elevation-overlay-color, #fff);
 }
 .test .mdc-button {
   -moz-osx-font-smoothing: grayscale;
@@ -164654,6 +164663,7 @@ exports[`loader should work with the "material-components-web" package (dart-sas
   --mdc-ripple-fg-translate-end: 0;
   --mdc-ripple-fg-translate-start: 0;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  will-change: transform, opacity;
 }
 .test .mdc-button .mdc-button__ripple::before,
 .test .mdc-button .mdc-button__ripple::after {
@@ -164781,10 +164791,14 @@ exports[`loader should work with the "material-components-web" package (dart-sas
 .test .mdc-elevation-overlay {
   position: absolute;
   border-radius: inherit;
-  opacity: 0;
   pointer-events: none;
+  opacity: 0;
+  /* @alternate */
+  opacity: var(--mdc-elevation-overlay-opacity, 0);
   transition: opacity 280ms cubic-bezier(0.4, 0, 0.2, 1);
   background-color: #fff;
+  /* @alternate */
+  background-color: var(--mdc-elevation-overlay-color, #fff);
 }
 .test .mdc-button {
   -moz-osx-font-smoothing: grayscale;
@@ -165047,6 +165061,7 @@ exports[`loader should work with the "material-components-web" package (dart-sas
   --mdc-ripple-fg-translate-end: 0;
   --mdc-ripple-fg-translate-start: 0;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  will-change: transform, opacity;
 }
 .test .mdc-button .mdc-button__ripple::before,
 .test .mdc-button .mdc-button__ripple::after {
@@ -165166,10 +165181,14 @@ exports[`loader should work with the "material-components-web" package (dart-sas
 .test .mdc-elevation-overlay {
   position: absolute;
   border-radius: inherit;
-  opacity: 0;
   pointer-events: none;
+  opacity: 0;
+  /* @alternate */
+  opacity: var(--mdc-elevation-overlay-opacity, 0);
   transition: opacity 280ms cubic-bezier(0.4, 0, 0.2, 1);
   background-color: #fff;
+  /* @alternate */
+  background-color: var(--mdc-elevation-overlay-color, #fff);
 }
 .test .mdc-button {
   -moz-osx-font-smoothing: grayscale;
@@ -165432,6 +165451,7 @@ exports[`loader should work with the "material-components-web" package (dart-sas
   --mdc-ripple-fg-translate-end: 0;
   --mdc-ripple-fg-translate-start: 0;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  will-change: transform, opacity;
 }
 .test .mdc-button .mdc-button__ripple::before,
 .test .mdc-button .mdc-button__ripple::after {
@@ -165559,10 +165579,14 @@ exports[`loader should work with the "material-components-web" package without t
 .test .mdc-elevation-overlay {
   position: absolute;
   border-radius: inherit;
-  opacity: 0;
   pointer-events: none;
+  opacity: 0;
+  /* @alternate */
+  opacity: var(--mdc-elevation-overlay-opacity, 0);
   transition: opacity 280ms cubic-bezier(0.4, 0, 0.2, 1);
   background-color: #fff;
+  /* @alternate */
+  background-color: var(--mdc-elevation-overlay-color, #fff);
 }
 .test .mdc-button {
   -moz-osx-font-smoothing: grayscale;
@@ -165825,6 +165849,7 @@ exports[`loader should work with the "material-components-web" package without t
   --mdc-ripple-fg-translate-end: 0;
   --mdc-ripple-fg-translate-start: 0;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  will-change: transform, opacity;
 }
 .test .mdc-button .mdc-button__ripple::before,
 .test .mdc-button .mdc-button__ripple::after {
@@ -165944,10 +165969,14 @@ exports[`loader should work with the "material-components-web" package without t
 .test .mdc-elevation-overlay {
   position: absolute;
   border-radius: inherit;
-  opacity: 0;
   pointer-events: none;
+  opacity: 0;
+  /* @alternate */
+  opacity: var(--mdc-elevation-overlay-opacity, 0);
   transition: opacity 280ms cubic-bezier(0.4, 0, 0.2, 1);
   background-color: #fff;
+  /* @alternate */
+  background-color: var(--mdc-elevation-overlay-color, #fff);
 }
 .test .mdc-button {
   -moz-osx-font-smoothing: grayscale;
@@ -166210,6 +166239,7 @@ exports[`loader should work with the "material-components-web" package without t
   --mdc-ripple-fg-translate-end: 0;
   --mdc-ripple-fg-translate-start: 0;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  will-change: transform, opacity;
 }
 .test .mdc-button .mdc-button__ripple::before,
 .test .mdc-button .mdc-button__ripple::after {
@@ -166337,10 +166367,14 @@ exports[`loader should work with the "material-components-web" package without t
 .test .mdc-elevation-overlay {
   position: absolute;
   border-radius: inherit;
-  opacity: 0;
   pointer-events: none;
+  opacity: 0;
+  /* @alternate */
+  opacity: var(--mdc-elevation-overlay-opacity, 0);
   transition: opacity 280ms cubic-bezier(0.4, 0, 0.2, 1);
   background-color: #fff;
+  /* @alternate */
+  background-color: var(--mdc-elevation-overlay-color, #fff);
 }
 .test .mdc-button {
   -moz-osx-font-smoothing: grayscale;
@@ -166603,6 +166637,7 @@ exports[`loader should work with the "material-components-web" package without t
   --mdc-ripple-fg-translate-end: 0;
   --mdc-ripple-fg-translate-start: 0;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  will-change: transform, opacity;
 }
 .test .mdc-button .mdc-button__ripple::before,
 .test .mdc-button .mdc-button__ripple::after {
@@ -166722,10 +166757,14 @@ exports[`loader should work with the "material-components-web" package without t
 .test .mdc-elevation-overlay {
   position: absolute;
   border-radius: inherit;
-  opacity: 0;
   pointer-events: none;
+  opacity: 0;
+  /* @alternate */
+  opacity: var(--mdc-elevation-overlay-opacity, 0);
   transition: opacity 280ms cubic-bezier(0.4, 0, 0.2, 1);
   background-color: #fff;
+  /* @alternate */
+  background-color: var(--mdc-elevation-overlay-color, #fff);
 }
 .test .mdc-button {
   -moz-osx-font-smoothing: grayscale;
@@ -166988,6 +167027,7 @@ exports[`loader should work with the "material-components-web" package without t
   --mdc-ripple-fg-translate-end: 0;
   --mdc-ripple-fg-translate-start: 0;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  will-change: transform, opacity;
 }
 .test .mdc-button .mdc-button__ripple::before,
 .test .mdc-button .mdc-button__ripple::after {

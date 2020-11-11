@@ -1,8 +1,8 @@
 module.exports = {
-  devtool: 'source-map',
-  mode: 'development',
+  devtool: "source-map",
+  mode: "development",
   output: {
-    publicPath: '/dist/',
+    publicPath: "/dist/",
   },
   module: {
     rules: [
@@ -10,22 +10,22 @@ module.exports = {
         test: /\.scss$/i,
         use: [
           {
-            loader: 'style-loader',
+            loader: "style-loader",
           },
           {
-            loader: 'css-loader',
+            loader: "css-loader",
             options: {
               sourceMap: true,
             },
           },
           {
-            loader: require.resolve('../../dist/cjs.js'),
+            loader: require.resolve("../../dist/cjs.js"),
             options: {
               implementation: process.env.SASS_IMPLEMENTATION
                 ? // eslint-disable-next-line global-require, import/no-dynamic-require
                   require(process.env.SASS_IMPLEMENTATION)
                 : // eslint-disable-next-line global-require
-                  require('sass'),
+                  require("sass"),
               sourceMap: true,
             },
           },

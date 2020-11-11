@@ -1,17 +1,17 @@
-import path from 'path';
+import path from "path";
 
-import { validate } from 'schema-utils';
-import { getOptions } from 'loader-utils';
+import { validate } from "schema-utils";
+import { getOptions } from "loader-utils";
 
-import schema from './options.json';
+import schema from "./options.json";
 import {
   getSassImplementation,
   getSassOptions,
   getWebpackImporter,
   getRenderFunctionFromSassImplementation,
   normalizeSourceMap,
-} from './utils';
-import SassError from './SassError';
+} from "./utils";
+import SassError from "./SassError";
 
 /**
  * The sass-loader makes node-sass and dart-sass available to webpack modules.
@@ -19,18 +19,26 @@ import SassError from './SassError';
  * @this {object}
  * @param {string} content
  */
-function loader(content) {
+async function loader(content) {
   const options = getOptions(this);
 
   validate(schema, options, {
-    name: 'Sass Loader',
-    baseDataPath: 'options',
+    name: "Sass Loader",
+    baseDataPath: "options",
   });
 
-  const implementation = getSassImplementation(options.implementation);
+  const callback = this.async();
+  const implementation = getSassImplementation(this, options.implementation);
+
+  if (!implementation) {
+    callback();
+
+    return;
+  }
+
   const useSourceMap =
-    typeof options.sourceMap === 'boolean' ? options.sourceMap : this.sourceMap;
-  const sassOptions = getSassOptions(
+    typeof options.sourceMap === "boolean" ? options.sourceMap : this.sourceMap;
+  const sassOptions = await getSassOptions(
     this,
     options,
     content,
@@ -38,7 +46,7 @@ function loader(content) {
     useSourceMap
   );
   const shouldUseWebpackImporter =
-    typeof options.webpackImporter === 'boolean'
+    typeof options.webpackImporter === "boolean"
       ? options.webpackImporter
       : true;
 
@@ -50,7 +58,6 @@ function loader(content) {
     );
   }
 
-  const callback = this.async();
   const render = getRenderFunctionFromSassImplementation(implementation);
 
   render(sassOptions, (error, result) => {
