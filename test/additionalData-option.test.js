@@ -26,7 +26,7 @@ describe("additionalData option", () => {
     const [implementationName] = implementation.info.split("\t");
 
     syntaxStyles.forEach((syntax) => {
-      it(`should work with the "data" option as a string (${implementationName}) (${syntax})`, async () => {
+      it(`should work as a string (${implementationName}) (${syntax})`, async () => {
         const testId = getTestId("prepending-data", syntax);
         const options = {
           implementation: getImplementationByName(implementationName),
@@ -45,11 +45,35 @@ describe("additionalData option", () => {
         expect(getErrors(stats)).toMatchSnapshot("errors");
       });
 
-      it(`should work with the "data" option as a function (${implementationName}) (${syntax})`, async () => {
+      it(`should work as a function (${implementationName}) (${syntax})`, async () => {
         const testId = getTestId("prepending-data", syntax);
         const options = {
           implementation: getImplementationByName(implementationName),
           additionalData: (content, loaderContext) => {
+            expect(loaderContext).toBeDefined();
+            expect(content).toBeDefined();
+
+            return `$prepended-data: hotpink${
+              syntax === "sass" ? "\n" : ";\n"
+            }${content}`;
+          },
+        };
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
+        const codeFromSass = getCodeFromSass(testId, options);
+
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot("css");
+        expect(getWarnings(stats)).toMatchSnapshot("warnings");
+        expect(getErrors(stats)).toMatchSnapshot("errors");
+      });
+
+      it(`should work as an async function (${implementationName}) (${syntax})`, async () => {
+        const testId = getTestId("prepending-data", syntax);
+        const options = {
+          implementation: getImplementationByName(implementationName),
+          additionalData: async (content, loaderContext) => {
             expect(loaderContext).toBeDefined();
             expect(content).toBeDefined();
 

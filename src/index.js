@@ -19,7 +19,7 @@ import SassError from "./SassError";
  * @this {object}
  * @param {string} content
  */
-function loader(content) {
+async function loader(content) {
   const options = getOptions(this);
 
   validate(schema, options, {
@@ -27,10 +27,18 @@ function loader(content) {
     baseDataPath: "options",
   });
 
-  const implementation = getSassImplementation(options.implementation);
+  const callback = this.async();
+  const implementation = getSassImplementation(this, options.implementation);
+
+  if (!implementation) {
+    callback();
+
+    return;
+  }
+
   const useSourceMap =
     typeof options.sourceMap === "boolean" ? options.sourceMap : this.sourceMap;
-  const sassOptions = getSassOptions(
+  const sassOptions = await getSassOptions(
     this,
     options,
     content,
@@ -50,7 +58,6 @@ function loader(content) {
     );
   }
 
-  const callback = this.async();
   const render = getRenderFunctionFromSassImplementation(implementation);
 
   render(sassOptions, (error, result) => {

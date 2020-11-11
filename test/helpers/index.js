@@ -8,7 +8,6 @@ import getErrors from "./getErrors";
 import getImplementationByName from "./getImplementationByName";
 import getTestId from "./getTestId";
 import getWarnings from "./getWarnings";
-import normalizeImplementationError from "./normalizeImplementationError";
 import readAsset from "./readAsset";
 
 export {
@@ -22,6 +21,5 @@ export {
   getImplementationByName,
   getTestId,
   getWarnings,
-  normalizeImplementationError,
   readAsset,
 };

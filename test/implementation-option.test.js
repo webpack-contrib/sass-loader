@@ -10,7 +10,6 @@ import {
   getImplementationByName,
   getTestId,
   getWarnings,
-  normalizeImplementationError,
 } from "./helpers";
 
 const implementations = [nodeSass, dartSass];
@@ -84,14 +83,10 @@ describe("implementation option", () => {
     };
 
     const compiler = getCompiler(testId, { loader: { options } });
+    const stats = await compile(compiler);
 
-    try {
-      const stats = await compile(compiler);
-
-      getCodeFromBundle(stats, compiler);
-    } catch (error) {
-      expect(normalizeImplementationError(error)).toMatchSnapshot();
-    }
+    expect(getWarnings(stats)).toMatchSnapshot("warnings");
+    expect(getErrors(stats)).toMatchSnapshot("errors");
   });
 
   it('should throw an error when the "sass" package is an incompatible version', async () => {
@@ -103,14 +98,10 @@ describe("implementation option", () => {
     };
 
     const compiler = getCompiler(testId, { loader: { options } });
+    const stats = await compile(compiler);
 
-    try {
-      const stats = await compile(compiler);
-
-      getCodeFromBundle(stats, compiler);
-    } catch (error) {
-      expect(normalizeImplementationError(error)).toMatchSnapshot();
-    }
+    expect(getWarnings(stats)).toMatchSnapshot("warnings");
+    expect(getErrors(stats)).toMatchSnapshot("errors");
   });
 
   it("should throw an error on an unknown sass implementation", async () => {
@@ -122,14 +113,10 @@ describe("implementation option", () => {
     };
 
     const compiler = getCompiler(testId, { loader: { options } });
+    const stats = await compile(compiler);
 
-    try {
-      const stats = await compile(compiler);
-
-      getCodeFromBundle(stats, compiler);
-    } catch (error) {
-      expect(normalizeImplementationError(error)).toMatchSnapshot();
-    }
+    expect(getWarnings(stats)).toMatchSnapshot("warnings");
+    expect(getErrors(stats)).toMatchSnapshot("errors");
   });
 
   it('should throw an error when the "info" is unparseable', async () => {
@@ -139,14 +126,10 @@ describe("implementation option", () => {
     };
 
     const compiler = getCompiler(testId, { loader: { options } });
+    const stats = await compile(compiler);
 
-    try {
-      const stats = await compile(compiler);
-
-      getCodeFromBundle(stats, compiler);
-    } catch (error) {
-      expect(normalizeImplementationError(error)).toMatchSnapshot();
-    }
+    expect(getWarnings(stats)).toMatchSnapshot("warnings");
+    expect(getErrors(stats)).toMatchSnapshot("errors");
   });
 
   it('should throw an error when the "info" is unparseable #2', async () => {
@@ -156,14 +139,10 @@ describe("implementation option", () => {
     };
 
     const compiler = getCompiler(testId, { loader: { options } });
+    const stats = await compile(compiler);
 
-    try {
-      const stats = await compile(compiler);
-
-      getCodeFromBundle(stats, compiler);
-    } catch (error) {
-      expect(normalizeImplementationError(error)).toMatchSnapshot();
-    }
+    expect(getWarnings(stats)).toMatchSnapshot("warnings");
+    expect(getErrors(stats)).toMatchSnapshot("errors");
   });
 
   it('should throw error when the "info" does not exist', async () => {
@@ -174,14 +153,10 @@ describe("implementation option", () => {
     };
 
     const compiler = getCompiler(testId, { loader: { options } });
+    const stats = await compile(compiler);
 
-    try {
-      const stats = await compile(compiler);
-
-      getCodeFromBundle(stats, compiler);
-    } catch (error) {
-      expect(normalizeImplementationError(error)).toMatchSnapshot();
-    }
+    expect(getWarnings(stats)).toMatchSnapshot("warnings");
+    expect(getErrors(stats)).toMatchSnapshot("errors");
   });
 
   it("should not swallow an error when trying to load a sass implementation", async () => {
@@ -207,13 +182,9 @@ describe("implementation option", () => {
     const options = {};
 
     const compiler = getCompiler(testId, { loader: { options } });
+    const stats = await compile(compiler);
 
-    try {
-      const stats = await compile(compiler);
-
-      getCodeFromBundle(stats, compiler);
-    } catch (error) {
-      expect(error).toMatchSnapshot();
-    }
+    expect(getWarnings(stats)).toMatchSnapshot("warnings");
+    expect(getErrors(stats)).toMatchSnapshot("errors");
   });
 });

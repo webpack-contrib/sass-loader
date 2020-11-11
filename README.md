@@ -459,6 +459,8 @@ module.exports = {
 
 #### `Function`
 
+##### Sync
+
 ```js
 module.exports = {
   module: {
@@ -472,6 +474,40 @@ module.exports = {
             loader: "sass-loader",
             options: {
               additionalData: (content, loaderContext) => {
+                // More information about available properties https://webpack.js.org/api/loaders/
+                const { resourcePath, rootContext } = loaderContext;
+                const relativePath = path.relative(rootContext, resourcePath);
+
+                if (relativePath === "styles/foo.scss") {
+                  return "$value: 100px;" + content;
+                }
+
+                return "$value: 200px;" + content;
+              },
+            },
+          },
+        ],
+      },
+    ],
+  },
+};
+```
+
+##### Async
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          "style-loader",
+          "css-loader",
+          {
+            loader: "sass-loader",
+            options: {
+              additionalData: async (content, loaderContext) => {
                 // More information about available properties https://webpack.js.org/api/loaders/
                 const { resourcePath, rootContext } = loaderContext;
                 const relativePath = path.relative(rootContext, resourcePath);

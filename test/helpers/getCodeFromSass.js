@@ -1,8 +1,10 @@
 import path from "path";
 import fs from "fs";
 
+import { klona } from "klona/full";
+
 function getCodeFromSass(testId, options) {
-  const loaderOptions = Object.assign({}, options);
+  const loaderOptions = klona(options);
   let sassOptions = options.sassOptions || {};
 
   if (typeof sassOptions === "function") {

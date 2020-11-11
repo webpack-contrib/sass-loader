@@ -29,47 +29,64 @@ function getDefaultSassImplementation() {
  * This function is not Webpack-specific and can be used by tools wishing to
  * mimic `sass-loader`'s behaviour, so its signature should not be changed.
  */
-function getSassImplementation(implementation) {
+function getSassImplementation(loaderContext, implementation) {
   let resolvedImplementation = implementation;
 
   if (!resolvedImplementation) {
-    // eslint-disable-next-line no-param-reassign
-    resolvedImplementation = getDefaultSassImplementation();
+    try {
+      resolvedImplementation = getDefaultSassImplementation();
+    } catch (error) {
+      loaderContext.emitError(error);
+
+      return;
+    }
   }
 
   const { info } = resolvedImplementation;
 
   if (!info) {
-    throw new Error("Unknown Sass implementation.");
+    loaderContext.emitError(new Error("Unknown Sass implementation."));
+
+    return;
   }
 
   const infoParts = info.split("\t");
 
   if (infoParts.length < 2) {
-    throw new Error(`Unknown Sass implementation "${info}".`);
+    loaderContext.emitError(
+      new Error(`Unknown Sass implementation "${info}".`)
+    );
+
+    return;
   }
 
   const [implementationName, version] = infoParts;
 
   if (implementationName === "dart-sass") {
     if (!semver.satisfies(version, "^1.3.0")) {
-      throw new Error(
-        `Dart Sass version ${version} is incompatible with ^1.3.0.`
+      loaderContext.emitError(
+        new Error(`Dart Sass version ${version} is incompatible with ^1.3.0.`)
       );
     }
 
+    // eslint-disable-next-line consistent-return
     return resolvedImplementation;
   } else if (implementationName === "node-sass") {
     if (!semver.satisfies(version, "^4.0.0 || ^5.0.0")) {
-      throw new Error(
-        `Node Sass version ${version} is incompatible with ^4.0.0 || ^5.0.0.`
+      loaderContext.emitError(
+        new Error(
+          `Node Sass version ${version} is incompatible with ^4.0.0 || ^5.0.0.`
+        )
       );
     }
 
+    // eslint-disable-next-line consistent-return
     return resolvedImplementation;
   }
 
-  throw new Error(`Unknown Sass implementation "${implementationName}".`);
+  loaderContext.emitError(
+    new Error(`Unknown Sass implementation "${implementationName}".`)
+  );
 }
 
 function isProductionLikeMode(loaderContext) {
@@ -96,7 +113,7 @@ function proxyCustomImporters(importers, loaderContext) {
  * @param {boolean} useSourceMap
  * @returns {Object}
  */
-function getSassOptions(
+async function getSassOptions(
   loaderContext,
   loaderOptions,
   content,
@@ -141,7 +158,7 @@ function getSassOptions(
   options.file = loaderContext.resourcePath;
   options.data = loaderOptions.additionalData
     ? typeof loaderOptions.additionalData === "function"
-      ? loaderOptions.additionalData(content, loaderContext)
+      ? await loaderOptions.additionalData(content, loaderContext)
       : `${loaderOptions.additionalData}\n${content}`
     : content;
 
