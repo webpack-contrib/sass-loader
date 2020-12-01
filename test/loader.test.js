@@ -1454,6 +1454,22 @@ describe("loader", () => {
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
         });
+
+        it(`should import .import.${syntax} files without .${syntax} file next to it (${implementationName}) (${syntax})`, async () => {
+          const testId = getTestId("only-import", syntax);
+          const options = {
+            implementation: getImplementationByName(implementationName),
+          };
+          const compiler = getCompiler(testId, { loader: { options } });
+          const stats = await compile(compiler);
+          const codeFromBundle = getCodeFromBundle(stats, compiler);
+          const codeFromSass = getCodeFromSass(testId, options);
+
+          expect(codeFromBundle.css).toBe(codeFromSass.css);
+          expect(codeFromBundle.css).toMatchSnapshot("css");
+          expect(getWarnings(stats)).toMatchSnapshot("warnings");
+          expect(getErrors(stats)).toMatchSnapshot("errors");
+        });
       }
     });
   });
