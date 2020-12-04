@@ -1599,6 +1599,38 @@ describe("loader", () => {
           expect(getErrors(stats)).toMatchSnapshot("errors");
         });
 
+        it(`should import .import.${syntax} files (${implementationName}) (${syntax})`, async () => {
+          const testId = getTestId("import-index-import", syntax);
+          const options = {
+            implementation: getImplementationByName(implementationName),
+          };
+          const compiler = getCompiler(testId, { loader: { options } });
+          const stats = await compile(compiler);
+          const codeFromBundle = getCodeFromBundle(stats, compiler);
+          const codeFromSass = getCodeFromSass(testId, options);
+
+          expect(codeFromBundle.css).toBe(codeFromSass.css);
+          expect(codeFromBundle.css).toMatchSnapshot("css");
+          expect(getWarnings(stats)).toMatchSnapshot("warnings");
+          expect(getErrors(stats)).toMatchSnapshot("errors");
+        });
+
+        it(`should import .import.${syntax} files from a package (${implementationName}) (${syntax})`, async () => {
+          const testId = getTestId("import-index-import-from-package", syntax);
+          const options = {
+            implementation: getImplementationByName(implementationName),
+          };
+          const compiler = getCompiler(testId, { loader: { options } });
+          const stats = await compile(compiler);
+          const codeFromBundle = getCodeFromBundle(stats, compiler);
+          const codeFromSass = getCodeFromSass(testId, options);
+
+          expect(codeFromBundle.css).toBe(codeFromSass.css);
+          expect(codeFromBundle.css).toMatchSnapshot("css");
+          expect(getWarnings(stats)).toMatchSnapshot("warnings");
+          expect(getErrors(stats)).toMatchSnapshot("errors");
+        });
+
         it(`should work and output deprecation message (${implementationName})`, async () => {
           const testId = getTestId("deprecation", syntax);
           const options = {
