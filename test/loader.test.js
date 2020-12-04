@@ -1631,6 +1631,18 @@ describe("loader", () => {
           expect(getErrors(stats)).toMatchSnapshot("errors");
         });
 
+        it(`should not use .import.${syntax} files (${implementationName}) (${syntax})`, async () => {
+          const testId = getTestId("use-index-import", syntax);
+          const options = {
+            implementation: getImplementationByName(implementationName),
+          };
+          const compiler = getCompiler(testId, { loader: { options } });
+          const stats = await compile(compiler);
+
+          expect(getWarnings(stats)).toMatchSnapshot("warnings");
+          expect(getErrors(stats)).toMatchSnapshot("errors");
+        });
+
         it(`should work and output deprecation message (${implementationName})`, async () => {
           const testId = getTestId("deprecation", syntax);
           const options = {
