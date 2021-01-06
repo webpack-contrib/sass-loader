@@ -59,7 +59,6 @@
     "klona": "^2.0.4",
     "loader-utils": "^2.0.0",
     "neo-async": "^2.6.2",
-    "schema-utils": "^3.0.0",
     "semver": "^7.3.4"
   },
   "devDependencies": {
