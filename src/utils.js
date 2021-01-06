@@ -3,7 +3,6 @@ import path from "path";
 
 import semver from "semver";
 import { klona } from "klona/full";
-import { urlToRequest } from "loader-utils";
 import async from "neo-async";
 
 function getDefaultSassImplementation() {
@@ -231,6 +230,7 @@ async function getSassOptions(
 // - ~@org/package
 // - ~@org/package/
 const isModuleImport = /^~([^/]+|[^/]+\/|@[^/]+[/][^/]+|@[^/]+\/?|@[^/]+[/][^/]+\/)$/;
+const moduleRequestRegex = /^[^?]*~/;
 
 /**
  * When `sass`/`node-sass` tries to resolve an import, it uses a special algorithm.
@@ -252,11 +252,20 @@ function getPossibleRequests(
   forWebpackResolver = false,
   rootContext = false
 ) {
-  const request = urlToRequest(
-    url,
-    // Maybe it is server-relative URLs
-    forWebpackResolver && rootContext
-  );
+  // Maybe it is server-relative URLs
+  const root = forWebpackResolver && rootContext;
+  let request;
+
+  if (typeof root === "string" && /^\//.test(url)) {
+    request = root + url;
+  } else {
+    request = url;
+  }
+
+  // A `~` makes the url an module
+  if (moduleRequestRegex.test(request)) {
+    request = request.replace(moduleRequestRegex, "");
+  }
 
   // In case there is module request, send this to webpack resolver
   if (forWebpackResolver && isModuleImport.test(url)) {
@@ -376,6 +385,7 @@ function getWebpackResolver(
       mainFiles: ["_index", "index"],
       modules: [],
       restrictions: [/\.((sa|sc|c)ss)$/i],
+      preferRelative: true,
     })
   );
   const webpackResolve = promiseResolve(
@@ -385,6 +395,7 @@ function getWebpackResolver(
       mainFiles: ["_index", "index", "..."],
       extensions: [".sass", ".scss", ".css"],
       restrictions: [/\.((sa|sc|c)ss)$/i],
+      preferRelative: true,
     })
   );
 

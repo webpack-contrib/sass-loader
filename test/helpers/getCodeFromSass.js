@@ -729,6 +729,7 @@ function getCodeFromSass(testId, options) {
         .replace(/^~bootstrap-sass$/, pathToBootstrap3Entry)
         .replace(/^~bootstrap-sass/, pathToBootstrap3Package)
         .replace(/^~bootstrap$/, pathToBootstrap4Entry)
+        .replace(/^bootstrap$/, pathToBootstrap4Entry)
         .replace(/^~module/, pathToModule)
         .replace(/^~another/, pathToAnother)
         .replace(
