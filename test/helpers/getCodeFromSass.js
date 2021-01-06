@@ -217,6 +217,10 @@ function getCodeFromSass(testId, options) {
     testFolder,
     "node_modules/@org/pkg/index.scss"
   );
+  const pathToScopedNpmFile = path.resolve(
+    testFolder,
+    "node_modules/@org/style.scss"
+  );
   const pathToSCSSCustomSassField = path.resolve(
     testFolder,
     "node_modules/scss-custom-sass-field/nested/style.scss"
@@ -726,6 +730,7 @@ function getCodeFromSass(testId, options) {
           pathToSassIndexAlias
         )
         .replace(/^~@org\/pkg/, pathToScopedNpmPkg)
+        .replace(/^@org\/style/, pathToScopedNpmFile)
         .replace(/^~bootstrap-sass$/, pathToBootstrap3Entry)
         .replace(/^~bootstrap-sass/, pathToBootstrap3Package)
         .replace(/^~bootstrap$/, pathToBootstrap4Entry)

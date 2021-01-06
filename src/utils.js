@@ -252,24 +252,25 @@ function getPossibleRequests(
   forWebpackResolver = false,
   rootContext = false
 ) {
-  // Maybe it is server-relative URLs
-  const root = forWebpackResolver && rootContext;
   let request;
 
-  if (typeof root === "string" && /^\//.test(url)) {
-    request = root + url;
+  // In case there is module request, send this to webpack resolver
+  if (forWebpackResolver) {
+    // Maybe it is server-relative URLs
+    request =
+      typeof rootContext === "string" && /^\//.test(url)
+        ? rootContext + url
+        : url;
+
+    request = request.replace(moduleRequestRegex, "");
+
+    if (isModuleImport.test(url)) {
+      request = request[request.length - 1] === "/" ? request : `${request}/`;
+
+      return [...new Set([request, url])];
+    }
   } else {
     request = url;
-  }
-
-  // A `~` makes the url an module
-  if (moduleRequestRegex.test(request)) {
-    request = request.replace(moduleRequestRegex, "");
-  }
-
-  // In case there is module request, send this to webpack resolver
-  if (forWebpackResolver && isModuleImport.test(url)) {
-    return [...new Set([request, url])];
   }
 
   // Keep in mind: ext can also be something like '.datepicker' when the true extension is omitted and the filename contains a dot.

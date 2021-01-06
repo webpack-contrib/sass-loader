@@ -638,7 +638,7 @@ describe("loader", () => {
       });
 
       it(`should work with the "bootstrap" package, import as a package (${implementationName}) (${syntax})`, async () => {
-        const testId = getTestId("bootstrap-package", syntax);
+        const testId = getTestId("bootstrap", syntax);
         const options = {
           implementation: getImplementationByName(implementationName),
         };
