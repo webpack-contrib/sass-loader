@@ -569,7 +569,7 @@ For production builds it's recommended to extract the CSS from your bundle being
 
 There are two possibilities to extract a style sheet from the bundle:
 
-- [mini-css-extract-plugin](https://github.com/webpack-contrib/mini-css-extract-plugin) (use this, when using webpack 4 configuration. Works in all use-cases)
+- [mini-css-extract-plugin](https://github.com/webpack-contrib/mini-css-extract-plugin)
 - [extract-loader](https://github.com/peerigon/extract-loader) (simpler, but specialized on the css-loader's output)
 
 **webpack.config.js**
