@@ -20,7 +20,13 @@ describe("validate options", () => {
       failure: [true, "string"],
     },
     sassOptions: {
-      success: [{}, { indentWidth: 6 }, () => ({ indentWidth: 6 })],
+      success: [
+        {},
+        { indentWidth: 6 },
+        () => {
+          return { indentWidth: 6 };
+        },
+      ],
       failure: [true, "string"],
     },
     additionalData: {

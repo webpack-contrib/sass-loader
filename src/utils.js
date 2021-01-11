@@ -94,13 +94,14 @@ function isProductionLikeMode(loaderContext) {
 }
 
 function proxyCustomImporters(importers, loaderContext) {
-  return [].concat(importers).map((importer) => {
-    return function proxyImporter(...args) {
-      this.webpackLoaderContext = loaderContext;
+  return [].concat(importers).map(
+    (importer) =>
+      function proxyImporter(...args) {
+        this.webpackLoaderContext = loaderContext;
 
-      return importer.apply(this, args);
-    };
-  });
+        return importer.apply(this, args);
+      }
+  );
 }
 
 /**
@@ -205,7 +206,14 @@ async function getSassOptions(
 
   options.includePaths = []
     .concat(process.cwd())
-    .concat(options.includePaths || [])
+    .concat(
+      // We use `includePaths` in context for resolver, so it should be always absolute
+      (options.includePaths || []).map((includePath) =>
+        path.isAbsolute(includePath)
+          ? includePath
+          : path.join(process.cwd(), includePath)
+      )
+    )
     .concat(
       process.env.SASS_PATH
         ? process.env.SASS_PATH.split(process.platform === "win32" ? ";" : ":")
@@ -430,11 +438,13 @@ function getWebpackResolver(
 
       resolutionMap = resolutionMap.concat(
         // eslint-disable-next-line no-shadow
-        includePaths.map((context) => ({
-          resolve: sassResolve,
-          context,
-          possibleRequests: sassPossibleRequests,
-        }))
+        includePaths.map((context) => {
+          return {
+            resolve: sassResolve,
+            context,
+            possibleRequests: sassPossibleRequests,
+          };
+        })
       );
     }
 
