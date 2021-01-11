@@ -2012,25 +2012,45 @@ exports[`sassOptions option should work with the "importer" as a array of functi
 
 exports[`sassOptions option should work with the "importer" as a array of functions option (dart-sass) (sass): errors 1`] = `Array []`;
 
-exports[`sassOptions option should work with the "importer" as a array of functions option (dart-sass) (sass): warnings 1`] = `Array []`;
+exports[`sassOptions option should work with the "importer" as a array of functions option (dart-sass) (sass): warnings 1`] = `
+Array [
+  "InvalidDependenciesModuleWarning: Invalid dependencies have been reported by plugins or loaders for this module. All reported dependencies need to be absolute paths.
+Invalid dependencies may lead to broken watching and caching.",
+]
+`;
 
 exports[`sassOptions option should work with the "importer" as a array of functions option (dart-sass) (scss): css 1`] = `""`;
 
 exports[`sassOptions option should work with the "importer" as a array of functions option (dart-sass) (scss): errors 1`] = `Array []`;
 
-exports[`sassOptions option should work with the "importer" as a array of functions option (dart-sass) (scss): warnings 1`] = `Array []`;
+exports[`sassOptions option should work with the "importer" as a array of functions option (dart-sass) (scss): warnings 1`] = `
+Array [
+  "InvalidDependenciesModuleWarning: Invalid dependencies have been reported by plugins or loaders for this module. All reported dependencies need to be absolute paths.
+Invalid dependencies may lead to broken watching and caching.",
+]
+`;
 
 exports[`sassOptions option should work with the "importer" as a array of functions option (node-sass) (sass): css 1`] = `""`;
 
 exports[`sassOptions option should work with the "importer" as a array of functions option (node-sass) (sass): errors 1`] = `Array []`;
 
-exports[`sassOptions option should work with the "importer" as a array of functions option (node-sass) (sass): warnings 1`] = `Array []`;
+exports[`sassOptions option should work with the "importer" as a array of functions option (node-sass) (sass): warnings 1`] = `
+Array [
+  "InvalidDependenciesModuleWarning: Invalid dependencies have been reported by plugins or loaders for this module. All reported dependencies need to be absolute paths.
+Invalid dependencies may lead to broken watching and caching.",
+]
+`;
 
 exports[`sassOptions option should work with the "importer" as a array of functions option (node-sass) (scss): css 1`] = `""`;
 
 exports[`sassOptions option should work with the "importer" as a array of functions option (node-sass) (scss): errors 1`] = `Array []`;
 
-exports[`sassOptions option should work with the "importer" as a array of functions option (node-sass) (scss): warnings 1`] = `Array []`;
+exports[`sassOptions option should work with the "importer" as a array of functions option (node-sass) (scss): warnings 1`] = `
+Array [
+  "InvalidDependenciesModuleWarning: Invalid dependencies have been reported by plugins or loaders for this module. All reported dependencies need to be absolute paths.
+Invalid dependencies may lead to broken watching and caching.",
+]
+`;
 
 exports[`sassOptions option should work with the "importer" as a single function option (dart-sass) (sass): css 1`] = `""`;
 
@@ -2044,9 +2064,19 @@ exports[`sassOptions option should work with the "importer" as a single function
 
 exports[`sassOptions option should work with the "importer" as a single function option (dart-sass) (sass): errors 2`] = `Array []`;
 
-exports[`sassOptions option should work with the "importer" as a single function option (dart-sass) (sass): warnings 1`] = `Array []`;
+exports[`sassOptions option should work with the "importer" as a single function option (dart-sass) (sass): warnings 1`] = `
+Array [
+  "InvalidDependenciesModuleWarning: Invalid dependencies have been reported by plugins or loaders for this module. All reported dependencies need to be absolute paths.
+Invalid dependencies may lead to broken watching and caching.",
+]
+`;
 
-exports[`sassOptions option should work with the "importer" as a single function option (dart-sass) (sass): warnings 2`] = `Array []`;
+exports[`sassOptions option should work with the "importer" as a single function option (dart-sass) (sass): warnings 2`] = `
+Array [
+  "InvalidDependenciesModuleWarning: Invalid dependencies have been reported by plugins or loaders for this module. All reported dependencies need to be absolute paths.
+Invalid dependencies may lead to broken watching and caching.",
+]
+`;
 
 exports[`sassOptions option should work with the "importer" as a single function option (dart-sass) (scss): css 1`] = `""`;
 
@@ -2060,9 +2090,19 @@ exports[`sassOptions option should work with the "importer" as a single function
 
 exports[`sassOptions option should work with the "importer" as a single function option (dart-sass) (scss): errors 2`] = `Array []`;
 
-exports[`sassOptions option should work with the "importer" as a single function option (dart-sass) (scss): warnings 1`] = `Array []`;
+exports[`sassOptions option should work with the "importer" as a single function option (dart-sass) (scss): warnings 1`] = `
+Array [
+  "InvalidDependenciesModuleWarning: Invalid dependencies have been reported by plugins or loaders for this module. All reported dependencies need to be absolute paths.
+Invalid dependencies may lead to broken watching and caching.",
+]
+`;
 
-exports[`sassOptions option should work with the "importer" as a single function option (dart-sass) (scss): warnings 2`] = `Array []`;
+exports[`sassOptions option should work with the "importer" as a single function option (dart-sass) (scss): warnings 2`] = `
+Array [
+  "InvalidDependenciesModuleWarning: Invalid dependencies have been reported by plugins or loaders for this module. All reported dependencies need to be absolute paths.
+Invalid dependencies may lead to broken watching and caching.",
+]
+`;
 
 exports[`sassOptions option should work with the "importer" as a single function option (node-sass) (sass): css 1`] = `""`;
 
@@ -2076,9 +2116,19 @@ exports[`sassOptions option should work with the "importer" as a single function
 
 exports[`sassOptions option should work with the "importer" as a single function option (node-sass) (sass): errors 2`] = `Array []`;
 
-exports[`sassOptions option should work with the "importer" as a single function option (node-sass) (sass): warnings 1`] = `Array []`;
+exports[`sassOptions option should work with the "importer" as a single function option (node-sass) (sass): warnings 1`] = `
+Array [
+  "InvalidDependenciesModuleWarning: Invalid dependencies have been reported by plugins or loaders for this module. All reported dependencies need to be absolute paths.
+Invalid dependencies may lead to broken watching and caching.",
+]
+`;
 
-exports[`sassOptions option should work with the "importer" as a single function option (node-sass) (sass): warnings 2`] = `Array []`;
+exports[`sassOptions option should work with the "importer" as a single function option (node-sass) (sass): warnings 2`] = `
+Array [
+  "InvalidDependenciesModuleWarning: Invalid dependencies have been reported by plugins or loaders for this module. All reported dependencies need to be absolute paths.
+Invalid dependencies may lead to broken watching and caching.",
+]
+`;
 
 exports[`sassOptions option should work with the "importer" as a single function option (node-sass) (scss): css 1`] = `""`;
 
@@ -2092,9 +2142,19 @@ exports[`sassOptions option should work with the "importer" as a single function
 
 exports[`sassOptions option should work with the "importer" as a single function option (node-sass) (scss): errors 2`] = `Array []`;
 
-exports[`sassOptions option should work with the "importer" as a single function option (node-sass) (scss): warnings 1`] = `Array []`;
+exports[`sassOptions option should work with the "importer" as a single function option (node-sass) (scss): warnings 1`] = `
+Array [
+  "InvalidDependenciesModuleWarning: Invalid dependencies have been reported by plugins or loaders for this module. All reported dependencies need to be absolute paths.
+Invalid dependencies may lead to broken watching and caching.",
+]
+`;
 
-exports[`sassOptions option should work with the "importer" as a single function option (node-sass) (scss): warnings 2`] = `Array []`;
+exports[`sassOptions option should work with the "importer" as a single function option (node-sass) (scss): warnings 2`] = `
+Array [
+  "InvalidDependenciesModuleWarning: Invalid dependencies have been reported by plugins or loaders for this module. All reported dependencies need to be absolute paths.
+Invalid dependencies may lead to broken watching and caching.",
+]
+`;
 
 exports[`sassOptions option should work with the "includePaths" option (dart-sass) (sass): css 1`] = `
 ".include-path-module {
