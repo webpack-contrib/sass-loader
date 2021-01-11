@@ -81,7 +81,12 @@ async function loader(content) {
     }
 
     result.stats.includedFiles.forEach((includedFile) => {
-      this.addDependency(path.normalize(includedFile));
+      const normalizedIncludedFile = path.normalize(includedFile);
+
+      // Custom `importer` can return only `contents` so includedFile will be relative
+      if (path.isAbsolute(normalizedIncludedFile)) {
+        this.addDependency(normalizedIncludedFile);
+      }
     });
 
     callback(null, result.css.toString(), map);
