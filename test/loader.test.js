@@ -903,8 +903,8 @@ describe("loader", () => {
         const testId = getTestId("import-absolute-path", syntax);
         const options = {
           implementation: getImplementationByName(implementationName),
-          additionalData: (content) => {
-            return content
+          additionalData: (content) =>
+            content
               .replace(
                 /\/scss\/language.scss/g,
                 `file:///${path
@@ -916,8 +916,7 @@ describe("loader", () => {
                 `file:///${path
                   .resolve(__dirname, "sass/language.sass")
                   .replace(/\\/g, "/")}`
-              );
-          },
+              ),
         };
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
