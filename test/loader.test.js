@@ -1454,7 +1454,7 @@ describe("loader", () => {
           expect(getErrors(stats)).toMatchSnapshot("errors");
         });
 
-        it.only(`should work and output deprecation message (${implementationName})`, async () => {
+        it(`should work and output deprecation message (${implementationName})`, async () => {
           const testId = getTestId("deprecation", syntax);
           const options = {
             implementation: getImplementationByName(implementationName),
