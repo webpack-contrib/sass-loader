@@ -1874,6 +1874,26 @@ exports[`loader should work and ignore all css "@import" at-rules (node-sass) (s
 
 exports[`loader should work and ignore all css "@import" at-rules (node-sass) (scss): warnings 1`] = `Array []`;
 
+exports[`loader should work and output deprecation message (dart-sass): css 1`] = `
+"a:hover {
+  color: rgba(0, 0, 0, 0.025);
+}"
+`;
+
+exports[`loader should work and output deprecation message (dart-sass): css 2`] = `
+"a:hover {
+  color: rgba(0, 0, 0, 0.025);
+}"
+`;
+
+exports[`loader should work and output deprecation message (dart-sass): errors 1`] = `Array []`;
+
+exports[`loader should work and output deprecation message (dart-sass): errors 2`] = `Array []`;
+
+exports[`loader should work and output deprecation message (dart-sass): warnings 1`] = `Array []`;
+
+exports[`loader should work and output deprecation message (dart-sass): warnings 2`] = `Array []`;
+
 exports[`loader should work and output the "compressed" outputStyle when "mode" is production (dart-sass) (sass): css 1`] = `"﻿@import\\"./file.css\\";body{font:100% Helvetica,sans-serif;color:#333}nav ul{margin:0;padding:0;list-style:none}nav li{display:inline-block}nav a{display:block;padding:6px 12px;text-decoration:none}.box{-webkit-border-radius:10px;-moz-border-radius:10px;-ms-border-radius:10px;border-radius:10px}.message,.warning,.error,.success{border:1px solid #ccc;padding:10px;color:#333}.success{border-color:green}.error{border-color:red}.warning{border-color:#ff0}.foo:before{content:\\"\\"}.bar:before{content:\\"∑\\"}"`;
 
 exports[`loader should work and output the "compressed" outputStyle when "mode" is production (dart-sass) (sass): errors 1`] = `Array []`;
