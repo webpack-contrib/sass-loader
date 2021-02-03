@@ -249,19 +249,12 @@ const moduleRequestRegex = /^[^?]*~/;
 function getPossibleRequests(
   // eslint-disable-next-line no-shadow
   url,
-  forWebpackResolver = false,
-  rootContext = false
+  forWebpackResolver = false
 ) {
-  let request;
+  let request = url;
 
   // In case there is module request, send this to webpack resolver
   if (forWebpackResolver) {
-    // Maybe it is server-relative URLs
-    request =
-      typeof rootContext === "string" && /^\//.test(url)
-        ? rootContext + url
-        : url;
-
     request = request.replace(moduleRequestRegex, "");
 
     if (isModuleImport.test(url)) {
@@ -269,8 +262,6 @@ function getPossibleRequests(
 
       return [...new Set([request, url])];
     }
-  } else {
-    request = url;
   }
 
   // Keep in mind: ext can also be something like '.datepicker' when the true extension is omitted and the filename contains a dot.
