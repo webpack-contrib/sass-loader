@@ -93,7 +93,7 @@
     "sass": "^1.32.0",
     "standard-version": "^9.1.0",
     "style-loader": "^2.0.0",
-    "webpack": "^5.12.2"
+    "webpack": "^5.20.0"
   },
   "keywords": [
     "sass",
