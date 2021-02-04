@@ -30,15 +30,6 @@ Unknown Sass implementation \\"strange-sass\\".",
 
 exports[`implementation option should throw an error on an unknown sass implementation: warnings 1`] = `Array []`;
 
-exports[`implementation option should throw an error when the "info" is unparseable #2: errors 1`] = `
-Array [
-  "ModuleError: Module Error (from ../src/cjs.js):
-Node Sass version 1 is incompatible with ^4.0.0 || ^5.0.0.",
-]
-`;
-
-exports[`implementation option should throw an error when the "info" is unparseable #2: warnings 1`] = `Array []`;
-
 exports[`implementation option should throw an error when the "info" is unparseable: errors 1`] = `
 Array [
   "ModuleError: Module Error (from ../src/cjs.js):
@@ -47,24 +38,6 @@ Unknown Sass implementation \\"asdfj\\".",
 `;
 
 exports[`implementation option should throw an error when the "info" is unparseable: warnings 1`] = `Array []`;
-
-exports[`implementation option should throw an error when the "node-sass" package is an incompatible version: errors 1`] = `
-Array [
-  "ModuleError: Module Error (from ../src/cjs.js):
-Node Sass version 3.0.0 is incompatible with ^4.0.0 || ^5.0.0.",
-]
-`;
-
-exports[`implementation option should throw an error when the "node-sass" package is an incompatible version: warnings 1`] = `Array []`;
-
-exports[`implementation option should throw an error when the "sass" package is an incompatible version: errors 1`] = `
-Array [
-  "ModuleError: Module Error (from ../src/cjs.js):
-Dart Sass version 1.2.0 is incompatible with ^1.3.0.",
-]
-`;
-
-exports[`implementation option should throw an error when the "sass" package is an incompatible version: warnings 1`] = `Array []`;
 
 exports[`implementation option should throw error when the "info" does not exist: errors 1`] = `
 Array [
