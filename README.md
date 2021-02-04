@@ -83,7 +83,16 @@ Finally run `webpack` via your preferred method.
 
 Webpack provides an [advanced mechanism to resolve files](https://webpack.js.org/concepts/module-resolution/).
 
-The `sass-loader` uses Sass's custom importer feature to pass all queries to the Webpack resolving engine. Thus you can import your Sass modules from `node_modules`. Just prepend them with a `~` to tell Webpack that this is not a relative import:
+The `sass-loader` uses Sass's custom importer feature to pass all queries to the Webpack resolving engine.
+Thus you can import your Sass modules from `node_modules`.
+
+```scss
+@import "bootstrap";
+```
+
+Using `~` is deprecated and can be removed from your code (**we recommend it**), but we still support it for historical reasons.
+Why you can removed it? The loader will first try to resolve `@import` as relative, if it cannot be resolved, the loader will try to resolve `@import` inside [`node_modules`](https://webpack.js.org/configuration/resolve/#resolve-modules).
+Just prepend them with a `~` which tells webpack to look up the [`modules`](https://webpack.js.org/configuration/resolve/#resolve-modules).
 
 ```scss
 @import "~bootstrap";
@@ -569,7 +578,7 @@ For production builds it's recommended to extract the CSS from your bundle being
 
 There are two possibilities to extract a style sheet from the bundle:
 
-- [mini-css-extract-plugin](https://github.com/webpack-contrib/mini-css-extract-plugin) (use this, when using webpack 4 configuration. Works in all use-cases)
+- [mini-css-extract-plugin](https://github.com/webpack-contrib/mini-css-extract-plugin)
 - [extract-loader](https://github.com/peerigon/extract-loader) (simpler, but specialized on the css-loader's output)
 
 **webpack.config.js**

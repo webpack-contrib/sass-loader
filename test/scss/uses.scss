@@ -20,4 +20,4 @@
 @use "~another" as another;
 /* @use "~@org/style"; */
 // Should prefer `scss`
-@use "~@org/style";
+@use "@org/style";

@@ -1,4 +1,5 @@
 {
+  "title": "Sass Loader options",
   "type": "object",
   "properties": {
     "implementation": {

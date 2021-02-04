@@ -3,7 +3,6 @@ import path from "path";
 
 import semver from "semver";
 import { klona } from "klona/full";
-import { urlToRequest } from "loader-utils";
 import async from "neo-async";
 
 function getDefaultSassImplementation() {
@@ -231,6 +230,7 @@ async function getSassOptions(
 // - ~@org/package
 // - ~@org/package/
 const isModuleImport = /^~([^/]+|[^/]+\/|@[^/]+[/][^/]+|@[^/]+\/?|@[^/]+[/][^/]+\/)$/;
+const moduleRequestRegex = /^[^?]*~/;
 
 /**
  * When `sass`/`node-sass` tries to resolve an import, it uses a special algorithm.
@@ -249,18 +249,19 @@ const isModuleImport = /^~([^/]+|[^/]+\/|@[^/]+[/][^/]+|@[^/]+\/?|@[^/]+[/][^/]+
 function getPossibleRequests(
   // eslint-disable-next-line no-shadow
   url,
-  forWebpackResolver = false,
-  rootContext = false
+  forWebpackResolver = false
 ) {
-  const request = urlToRequest(
-    url,
-    // Maybe it is server-relative URLs
-    forWebpackResolver && rootContext
-  );
+  let request = url;
 
   // In case there is module request, send this to webpack resolver
-  if (forWebpackResolver && isModuleImport.test(url)) {
-    return [...new Set([request, url])];
+  if (forWebpackResolver) {
+    request = request.replace(moduleRequestRegex, "");
+
+    if (isModuleImport.test(url)) {
+      request = request[request.length - 1] === "/" ? request : `${request}/`;
+
+      return [...new Set([request, url])];
+    }
   }
 
   // Keep in mind: ext can also be something like '.datepicker' when the true extension is omitted and the filename contains a dot.
@@ -376,6 +377,7 @@ function getWebpackResolver(
       mainFiles: ["_index", "index"],
       modules: [],
       restrictions: [/\.((sa|sc|c)ss)$/i],
+      preferRelative: true,
     })
   );
   const webpackResolve = promiseResolve(
@@ -385,6 +387,7 @@ function getWebpackResolver(
       mainFiles: ["_index", "index", "..."],
       extensions: [".sass", ".scss", ".css"],
       restrictions: [/\.((sa|sc|c)ss)$/i],
+      preferRelative: true,
     })
   );
 

@@ -1,8 +1,5 @@
 import path from "path";
 
-import { validate } from "schema-utils";
-import { getOptions } from "loader-utils";
-
 import schema from "./options.json";
 import {
   getSassImplementation,
@@ -20,13 +17,7 @@ import SassError from "./SassError";
  * @param {string} content
  */
 async function loader(content) {
-  const options = getOptions(this);
-
-  validate(schema, options, {
-    name: "Sass Loader",
-    baseDataPath: "options",
-  });
-
+  const options = this.getOptions(schema);
   const callback = this.async();
   const implementation = getSassImplementation(this, options.implementation);
 
