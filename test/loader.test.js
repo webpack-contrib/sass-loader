@@ -997,6 +997,18 @@ describe("loader", () => {
         expect(getErrors(stats)).toMatchSnapshot("errors");
       });
 
+      it(`should throw an error on circular import (${implementationName}) (${syntax})`, async () => {
+        const testId = getTestId("import-circular", syntax);
+        const options = {
+          implementation: getImplementationByName(implementationName),
+        };
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+
+        expect(getWarnings(stats)).toMatchSnapshot("warnings");
+        expect(getErrors(stats)).toMatchSnapshot("errors");
+      });
+
       if (implementation === dartSass) {
         it(`should output an understandable error with a problem in "@use" (${implementationName}) (${syntax})`, async () => {
           const testId = getTestId("error-use", syntax);
@@ -1506,6 +1518,18 @@ describe("loader", () => {
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
           expect(codeFromBundle.css).toMatchSnapshot("css");
+          expect(getWarnings(stats)).toMatchSnapshot("warnings");
+          expect(getErrors(stats)).toMatchSnapshot("errors");
+        });
+
+        it(`should throw an error on circular use (${implementationName}) (${syntax})`, async () => {
+          const testId = getTestId("use-circular", syntax);
+          const options = {
+            implementation: getImplementationByName(implementationName),
+          };
+          const compiler = getCompiler(testId, { loader: { options } });
+          const stats = await compile(compiler);
+
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
         });

@@ -1140,6 +1140,60 @@ exports[`loader should throw an error on ambiguous import (only on "dart-sass") 
 
 exports[`loader should throw an error on ambiguous import (only on "dart-sass") (node-sass) (scss): warnings 1`] = `Array []`;
 
+exports[`loader should throw an error on circular import (dart-sass) (sass): errors 1`] = `
+Array [
+  "ModuleBuildError: Module build failed (from ../src/cjs.js):
+SassError: This file is already being loaded.",
+]
+`;
+
+exports[`loader should throw an error on circular import (dart-sass) (sass): warnings 1`] = `Array []`;
+
+exports[`loader should throw an error on circular import (dart-sass) (scss): errors 1`] = `
+Array [
+  "ModuleBuildError: Module build failed (from ../src/cjs.js):
+SassError: This file is already being loaded.",
+]
+`;
+
+exports[`loader should throw an error on circular import (dart-sass) (scss): warnings 1`] = `Array []`;
+
+exports[`loader should throw an error on circular import (node-sass) (sass): errors 1`] = `
+Array [
+  "ModuleBuildError: Module build failed (from ../src/cjs.js):
+SassError: An @import loop has been found:",
+]
+`;
+
+exports[`loader should throw an error on circular import (node-sass) (sass): warnings 1`] = `Array []`;
+
+exports[`loader should throw an error on circular import (node-sass) (scss): errors 1`] = `
+Array [
+  "ModuleBuildError: Module build failed (from ../src/cjs.js):
+SassError: An @import loop has been found:",
+]
+`;
+
+exports[`loader should throw an error on circular import (node-sass) (scss): warnings 1`] = `Array []`;
+
+exports[`loader should throw an error on circular use (dart-sass) (sass): errors 1`] = `
+Array [
+  "ModuleBuildError: Module build failed (from ../src/cjs.js):
+SassError: Module loop: this module is already being loaded.",
+]
+`;
+
+exports[`loader should throw an error on circular use (dart-sass) (sass): warnings 1`] = `Array []`;
+
+exports[`loader should throw an error on circular use (dart-sass) (scss): errors 1`] = `
+Array [
+  "ModuleBuildError: Module build failed (from ../src/cjs.js):
+SassError: This file is already being loaded.",
+]
+`;
+
+exports[`loader should throw an error on circular use (dart-sass) (scss): warnings 1`] = `Array []`;
+
 exports[`loader should throw an error with a explicit file and a file does not exist (dart-sass) (sass): errors 1`] = `
 Array [
   "ModuleBuildError: Module build failed (from ../src/cjs.js):
