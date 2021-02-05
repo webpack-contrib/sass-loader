@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [11.0.0](https://github.com/webpack-contrib/sass-loader/compare/v10.1.1...v11.0.0) (2021-02-05)
+
+
+### Notes
+
+* using `~` is deprecated and can be removed from your code (**we recommend it**), but we still support it for historical reasons. 
+
+Why you can removed it?
+The loader will first try to resolve `@import`/`@use` as relative, if it cannot be resolved, the loader will try to resolve `@import`/`@use` inside [`node_modules`](https://webpack.js.org/configuration/resolve/#resolve-modules).
+
+### ⚠ BREAKING CHANGES
+
+* minimum supported `webpack` version is `5`
+
+### Features
+
+* supported the [`resolve.byDependency`](https://webpack.js.org/configuration/resolve/#resolvebydependency) option, you can setup `{ resolve: { byDependency: { sass: { mainFiles: ['custom', '...'] } } } }`
+
 ### [10.1.1](https://github.com/webpack-contrib/sass-loader/compare/v10.1.0...v10.1.1) (2021-01-11)
 
 
