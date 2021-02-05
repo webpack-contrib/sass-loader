@@ -74,36 +74,6 @@ describe("implementation option", () => {
     expect(dartSassSpy).toHaveBeenCalledTimes(1);
   });
 
-  it('should throw an error when the "node-sass" package is an incompatible version', async () => {
-    const testId = getTestId("language", "scss");
-    const options = {
-      implementation: Object.assign({}, nodeSass, {
-        info: "node-sass\t3.0.0",
-      }),
-    };
-
-    const compiler = getCompiler(testId, { loader: { options } });
-    const stats = await compile(compiler);
-
-    expect(getWarnings(stats)).toMatchSnapshot("warnings");
-    expect(getErrors(stats)).toMatchSnapshot("errors");
-  });
-
-  it('should throw an error when the "sass" package is an incompatible version', async () => {
-    const testId = getTestId("language", "scss");
-    const options = {
-      implementation: Object.assign({}, dartSass, {
-        info: "dart-sass\t1.2.0",
-      }),
-    };
-
-    const compiler = getCompiler(testId, { loader: { options } });
-    const stats = await compile(compiler);
-
-    expect(getWarnings(stats)).toMatchSnapshot("warnings");
-    expect(getErrors(stats)).toMatchSnapshot("errors");
-  });
-
   it("should throw an error on an unknown sass implementation", async () => {
     const testId = getTestId("language", "scss");
     const options = {
@@ -123,19 +93,6 @@ describe("implementation option", () => {
     const testId = getTestId("language", "scss");
     const options = {
       implementation: Object.assign({}, dartSass, { info: "asdfj" }),
-    };
-
-    const compiler = getCompiler(testId, { loader: { options } });
-    const stats = await compile(compiler);
-
-    expect(getWarnings(stats)).toMatchSnapshot("warnings");
-    expect(getErrors(stats)).toMatchSnapshot("errors");
-  });
-
-  it('should throw an error when the "info" is unparseable #2', async () => {
-    const testId = getTestId("language", "scss");
-    const options = {
-      implementation: Object.assign({}, nodeSass, { info: "node-sass\t1" }),
     };
 
     const compiler = getCompiler(testId, { loader: { options } });

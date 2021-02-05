@@ -1,7 +1,6 @@
 import url from "url";
 import path from "path";
 
-import semver from "semver";
 import { klona } from "klona/full";
 import async from "neo-async";
 
@@ -59,26 +58,12 @@ function getSassImplementation(loaderContext, implementation) {
     return;
   }
 
-  const [implementationName, version] = infoParts;
+  const [implementationName] = infoParts;
 
   if (implementationName === "dart-sass") {
-    if (!semver.satisfies(version, "^1.3.0")) {
-      loaderContext.emitError(
-        new Error(`Dart Sass version ${version} is incompatible with ^1.3.0.`)
-      );
-    }
-
     // eslint-disable-next-line consistent-return
     return resolvedImplementation;
   } else if (implementationName === "node-sass") {
-    if (!semver.satisfies(version, "^4.0.0 || ^5.0.0")) {
-      loaderContext.emitError(
-        new Error(
-          `Node Sass version ${version} is incompatible with ^4.0.0 || ^5.0.0.`
-        )
-      );
-    }
-
     // eslint-disable-next-line consistent-return
     return resolvedImplementation;
   }
@@ -230,7 +215,7 @@ async function getSassOptions(
 // - ~@org/package
 // - ~@org/package/
 const isModuleImport = /^~([^/]+|[^/]+\/|@[^/]+[/][^/]+|@[^/]+\/?|@[^/]+[/][^/]+\/)$/;
-const moduleRequestRegex = /^[^?]*~/;
+const MODULE_REQUEST_REGEX = /^[^?]*~/;
 
 /**
  * When `sass`/`node-sass` tries to resolve an import, it uses a special algorithm.
@@ -255,7 +240,9 @@ function getPossibleRequests(
 
   // In case there is module request, send this to webpack resolver
   if (forWebpackResolver) {
-    request = request.replace(moduleRequestRegex, "");
+    if (MODULE_REQUEST_REGEX.test(url)) {
+      request = request.replace(MODULE_REQUEST_REGEX, "");
+    }
 
     if (isModuleImport.test(url)) {
       request = request[request.length - 1] === "/" ? request : `${request}/`;
