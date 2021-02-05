@@ -369,6 +369,7 @@ function getWebpackResolver(
   );
   const webpackResolve = promiseResolve(
     resolverFactory({
+      dependencyType: "sass",
       conditionNames: ["sass", "style"],
       mainFields: ["sass", "style", "main", "..."],
       mainFiles: ["_index", "index", "..."],

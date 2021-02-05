@@ -281,6 +281,9 @@ function getCodeFromSass(testId, options) {
     __dirname,
     "../../node_modules/@material"
   );
+  const pathToCustomMainFiles = isSass
+    ? path.resolve(testFolder, "sass/custom-main-files/custom.sass")
+    : path.resolve(testFolder, "scss/custom-main-files/custom.scss");
 
   // Pseudo importer for tests
   function testImporter(url) {
@@ -754,6 +757,7 @@ function getCodeFromSass(testId, options) {
           pathToPackageWithSameImport
         )
         .replace(/@material/, pathToMaterial)
+        .replace(/custom-main-files/, pathToCustomMainFiles)
         .replace(/^~/, testNodeModules);
     }
 
