@@ -1,5 +1,6 @@
 import path from "path";
 
+import globImporter from "node-sass-glob-importer";
 import semver from "semver";
 import nodeSass from "node-sass";
 import dartSass from "sass";
@@ -228,6 +229,25 @@ describe("sassOptions option", () => {
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
 
+        expect(codeFromBundle.css).toMatchSnapshot("css");
+        expect(getWarnings(stats)).toMatchSnapshot("warnings");
+        expect(getErrors(stats)).toMatchSnapshot("errors");
+      });
+
+      it(`should work with the "importer" as a array of functions option (${implementationName}) (${syntax})`, async () => {
+        const testId = getTestId("glob-importer", syntax);
+        const options = {
+          implementation: getImplementationByName(implementationName),
+          sassOptions: {
+            importer: [globImporter()],
+          },
+        };
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
+        const codeFromSass = getCodeFromSass(testId, options);
+
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot("css");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
