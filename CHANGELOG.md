@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [11.0.1](https://github.com/webpack-contrib/sass-loader/compare/v11.0.0...v11.0.1) (2021-02-08)
+
+
+### Bug Fixes
+
+* compatibility with custom importers for `node-sass` ([#927](https://github.com/webpack-contrib/sass-loader/issues/927)) ([af5a072](https://github.com/webpack-contrib/sass-loader/commit/af5a072c5170f96f3d0643dec658248d98f65ff7))
+
 ## [11.0.0](https://github.com/webpack-contrib/sass-loader/compare/v10.1.1...v11.0.0) (2021-02-05)
 
 
