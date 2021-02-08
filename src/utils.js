@@ -207,6 +207,8 @@ async function getSassOptions(
   return options;
 }
 
+const MODULE_REQUEST_REGEX = /^[^?]*~/;
+
 // Examples:
 // - ~package
 // - ~package/
@@ -214,8 +216,7 @@ async function getSassOptions(
 // - ~@org/
 // - ~@org/package
 // - ~@org/package/
-const isModuleImport = /^~([^/]+|[^/]+\/|@[^/]+[/][^/]+|@[^/]+\/?|@[^/]+[/][^/]+\/)$/;
-const MODULE_REQUEST_REGEX = /^[^?]*~/;
+const IS_MODULE_IMPORT = /^~([^/]+|[^/]+\/|@[^/]+[/][^/]+|@[^/]+\/?|@[^/]+[/][^/]+\/)$/;
 
 /**
  * When `sass`/`node-sass` tries to resolve an import, it uses a special algorithm.
@@ -244,7 +245,7 @@ function getPossibleRequests(
       request = request.replace(MODULE_REQUEST_REGEX, "");
     }
 
-    if (isModuleImport.test(url)) {
+    if (IS_MODULE_IMPORT.test(url)) {
       request = request[request.length - 1] === "/" ? request : `${request}/`;
 
       return [...new Set([request, url])];
@@ -310,15 +311,13 @@ const IS_NATIVE_WIN32_PATH = /^[a-z]:[/\\]|^\\\\/i;
  * @param {Object} implementation - The imported Sass implementation, both
  *   `sass` (Dart Sass) and `node-sass` are supported.
  * @param {string[]} [includePaths] - The list of include paths passed to Sass.
- * @param {boolean} [rootContext] - The configured Webpack root context.
  *
  * @throws If a compatible Sass implementation cannot be found.
  */
 function getWebpackResolver(
   resolverFactory,
   implementation,
-  includePaths = [],
-  rootContext = false
+  includePaths = []
 ) {
   async function startResolving(resolutionMap) {
     if (resolutionMap.length === 0) {
@@ -380,6 +379,13 @@ function getWebpackResolver(
   );
 
   return (context, request) => {
+    // See https://github.com/webpack/webpack/issues/12340
+    // Because `node-sass` calls our importer before `1. Filesystem imports relative to the base file.`
+    // custom importer may not return `{ file: '/path/to/name.ext' }` and therefore our `context` will be relative
+    if (!isDartSass && !path.isAbsolute(context)) {
+      return Promise.reject();
+    }
+
     const originalRequest = request;
     const isFileScheme = originalRequest.slice(0, 5).toLowerCase() === "file:";
 
@@ -415,7 +421,7 @@ function getWebpackResolver(
       // 4. Filesystem imports relative to an `includePaths` path.
       // 5. Filesystem imports relative to a `SASS_PATH` path.
       //
-      // Because `sass`/`node-sass` run custom importers before `3`, `4` and `5` points, we need to emulate this behavior to avoid wrong resolution.
+      // `sass` run custom importers before `3`, `4` and `5` points, we need to emulate this behavior to avoid wrong resolution.
       const sassPossibleRequests = getPossibleRequests(request);
 
       // `node-sass` calls our importer before `1. Filesystem imports relative to the base file.`, so we need emulate this too
@@ -439,11 +445,7 @@ function getWebpackResolver(
       );
     }
 
-    const webpackPossibleRequests = getPossibleRequests(
-      request,
-      true,
-      rootContext
-    );
+    const webpackPossibleRequests = getPossibleRequests(request, true);
 
     resolutionMap = resolutionMap.concat({
       resolve: webpackResolve,
@@ -461,8 +463,7 @@ function getWebpackImporter(loaderContext, implementation, includePaths) {
   const resolve = getWebpackResolver(
     loaderContext.getResolve,
     implementation,
-    includePaths,
-    loaderContext.rootContext
+    includePaths
   );
 
   return (originalUrl, prev, done) => {
@@ -472,6 +473,7 @@ function getWebpackImporter(loaderContext, implementation, includePaths) {
         // Although we're also using stats.includedFiles, this might come in handy when an error occurs.
         // In this case, we don't get stats.includedFiles from node-sass/sass.
         loaderContext.addDependency(path.normalize(result));
+
         // By removing the CSS file extension, we trigger node-sass to include the CSS file instead of just linking it.
         done({ file: result.replace(matchCss, "") });
       })
