@@ -18,6 +18,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 Why you can removed it?
 The loader will first try to resolve `@import`/`@use` as relative, if it cannot be resolved, the loader will try to resolve `@import`/`@use` inside [`node_modules`](https://webpack.js.org/configuration/resolve/#resolve-modules).
+Using `~` means looking for files in [`node_modules`](https://webpack.js.org/configuration/resolve/#resolve-modules) or `resolve.alias` or `resolve.fallback`.
 
 ### ⚠ BREAKING CHANGES
 
