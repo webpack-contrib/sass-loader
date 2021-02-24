@@ -1,5 +1,5 @@
 <div align="center">
-  <img height="100"
+  <img height="170"
     src="https://worldvectorlogo.com/logos/sass-1.svg">
   <a href="https://github.com/webpack/webpack">
     <img width="200" height="200"
