@@ -31,9 +31,9 @@ npm install sass-loader sass webpack --save-dev
 
 This allows you to control the versions of all your dependencies, and to choose which Sass implementation to use.
 
-> ℹ️ We recommend using [Dart Sass](https://github.com/sass/dart-sass).
+> ℹ️ We highly recommend using [Dart Sass](https://github.com/sass/dart-sass).
 
-> ⚠ [Node Sass](https://github.com/sass/node-sass) does not work with [Yarn PnP](https://classic.yarnpkg.com/en/docs/pnp/) feature.
+> ⚠ [Node Sass](https://github.com/sass/node-sass) does not work with [Yarn PnP](https://classic.yarnpkg.com/en/docs/pnp/) feature and doesn't support [@use rule](https://sass-lang.com/documentation/at-rules/use).
 
 Chain the `sass-loader` with the [css-loader](https://github.com/webpack-contrib/css-loader) and the [style-loader](https://github.com/webpack-contrib/style-loader) to immediately apply all styles to the DOM or the [mini-css-extract-plugin](https://github.com/webpack-contrib/mini-css-extract-plugin) to extract it into a separate file.
 
