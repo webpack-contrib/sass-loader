@@ -91,14 +91,15 @@ Thus you can import your Sass modules from `node_modules`.
 ```
 
 Using `~` is deprecated and can be removed from your code (**we recommend it**), but we still support it for historical reasons.
-Why you can remove it? The loader will first try to resolve `@import` as relative, if it cannot be resolved, the loader will try to resolve `@import` inside [`node_modules`](https://webpack.js.org/configuration/resolve/#resolve-modules).
-Just prepend them with a `~` which tells webpack to look up the [`modules`](https://webpack.js.org/configuration/resolve/#resolve-modules).
+Why can you remove it? The loader will first try to resolve `@import` as a relative path. If it cannot be resolved, then the loader will try to resolve `@import` inside [`node_modules`](https://webpack.js.org/configuration/resolve/#resolvemodules).
+
+Prepending module paths with a `~` tells webpack to search through [`node_modules`](https://webpack.js.org/configuration/resolve/#resolvemodules).
 
 ```scss
 @import "~bootstrap";
 ```
 
-It's important to only prepend it with `~`, because `~/` resolves to the home directory.
+It's important to prepend it with only `~`, because `~/` resolves to the home directory.
 Webpack needs to distinguish between `bootstrap` and `~bootstrap` because CSS and Sass files have no special syntax for importing relative files.
 Writing `@import "style.scss"` is the same as `@import "./style.scss";`
 
