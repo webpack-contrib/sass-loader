@@ -216,7 +216,8 @@ const MODULE_REQUEST_REGEX = /^[^?]*~/;
 // - ~@org/
 // - ~@org/package
 // - ~@org/package/
-const IS_MODULE_IMPORT = /^~([^/]+|[^/]+\/|@[^/]+[/][^/]+|@[^/]+\/?|@[^/]+[/][^/]+\/)$/;
+const IS_MODULE_IMPORT =
+  /^~([^/]+|[^/]+\/|@[^/]+[/][^/]+|@[^/]+\/?|@[^/]+[/][^/]+\/)$/;
 
 /**
  * When `sass`/`node-sass` tries to resolve an import, it uses a special algorithm.

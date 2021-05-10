@@ -16,9 +16,8 @@ function getCodeFromSass(testId, options) {
   }
 
   const { implementation } = loaderOptions;
-  const isNodeSassImplementation = loaderOptions.implementation.info.includes(
-    "node-sass"
-  );
+  const isNodeSassImplementation =
+    loaderOptions.implementation.info.includes("node-sass");
 
   delete loaderOptions.implementation;
 
