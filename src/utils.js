@@ -72,10 +72,10 @@ function getSassImplementation(loaderContext, implementation) {
     // eslint-disable-next-line consistent-return
     return resolvedImplementation;
   } else if (implementationName === "node-sass") {
-    if (!semver.satisfies(version, "^4.0.0 || ^5.0.0")) {
+    if (!semver.satisfies(version, "^4.0.0 || ^5.0.0 || ^6.0.0")) {
       loaderContext.emitError(
         new Error(
-          `Node Sass version ${version} is incompatible with ^4.0.0 || ^5.0.0.`
+          `Node Sass version ${version} is incompatible with ^4.0.0 || ^5.0.0 || ^6.0.0.`
         )
       );
     }
