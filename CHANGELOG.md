@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [10.2.0](https://github.com/webpack-contrib/sass-loader/compare/v10.1.1...v10.2.0) (2021-05-10)
+
+
+### Features
+
+* support `node-sass` v6 ([dbbbdde](https://github.com/webpack-contrib/sass-loader/commit/dbbbdde8d73b5ebac89fdc3ca7009a644a471c5f))
+
 ### [10.1.1](https://github.com/webpack-contrib/sass-loader/compare/v10.1.0...v10.1.1) (2021-01-11)
 
 
