@@ -1,6 +1,7 @@
 import nodeSass from "node-sass";
 import dartSass from "sass";
-import Fiber from "fibers";
+
+import { isSupportedFibers } from "../src/utils";
 
 import {
   compile,
@@ -12,15 +13,24 @@ import {
   getWarnings,
 } from "./helpers";
 
-const implementations = [nodeSass, dartSass];
-
 jest.setTimeout(30000);
 
+let Fiber;
+const implementations = [nodeSass, dartSass];
+
 describe("implementation option", () => {
+  beforeAll(async () => {
+    if (isSupportedFibers()) {
+      const { default: fibers } = await import("fibers");
+      Fiber = fibers;
+    }
+  });
+
   beforeEach(() => {
-    // The `sass` (`Dart Sass`) package modify the `Function` prototype, but the `jest` lose a prototype
-    Object.setPrototypeOf(Fiber, Function.prototype);
-    jest.clearAllMocks();
+    if (isSupportedFibers()) {
+      // The `sass` (`Dart Sass`) package modify the `Function` prototype, but the `jest` lose a prototype
+      Object.setPrototypeOf(Fiber, Function.prototype);
+    }
   });
 
   implementations.forEach((implementation) => {
@@ -51,6 +61,9 @@ describe("implementation option", () => {
         expect(nodeSassSpy).toHaveBeenCalledTimes(0);
         expect(dartSassSpy).toHaveBeenCalledTimes(1);
       }
+
+      nodeSassSpy.mockRestore();
+      dartSassSpy.mockRestore();
     });
   });
 
@@ -72,6 +85,9 @@ describe("implementation option", () => {
 
     expect(nodeSassSpy).toHaveBeenCalledTimes(0);
     expect(dartSassSpy).toHaveBeenCalledTimes(1);
+
+    nodeSassSpy.mockRestore();
+    dartSassSpy.mockRestore();
   });
 
   it("should throw an error on an unknown sass implementation", async () => {

@@ -88,6 +88,12 @@ function proxyCustomImporters(importers, loaderContext) {
   );
 }
 
+function isSupportedFibers() {
+  const [nodeVersion] = process.versions.node.split(".");
+
+  return Number(nodeVersion) < 16;
+}
+
 /**
  * Derives the sass options from the loader context and normalizes its values with sane defaults.
  *
@@ -115,7 +121,7 @@ async function getSassOptions(
 
   const isDartSass = implementation.info.includes("dart-sass");
 
-  if (isDartSass) {
+  if (isDartSass && isSupportedFibers()) {
     const shouldTryToResolveFibers = !options.fiber && options.fiber !== false;
 
     if (shouldTryToResolveFibers) {
@@ -569,4 +575,5 @@ export {
   getWebpackImporter,
   getRenderFunctionFromSassImplementation,
   normalizeSourceMap,
+  isSupportedFibers,
 };
