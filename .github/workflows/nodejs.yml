@@ -1,4 +1,4 @@
-name: sass-loader
+name: saztss-loaders
 
 on:
   push:
@@ -13,6 +13,7 @@ on:
 jobs:
   lint:
     name: Lint - ${{ matrix.os }} - Node v${{ matrix.node-version }}
+         /usr/bin/docker pull wagoid/commitlint-github-action:1.8.0
 
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -23,6 +24,7 @@ jobs:
         node-version: [12.x]
 
     runs-on: ${{ matrix.os }}
+    /usr/bin/docker pull wagoid/commitlint-github-action:1.8.0
 
     steps:
       - uses: actions/checkout@v2
