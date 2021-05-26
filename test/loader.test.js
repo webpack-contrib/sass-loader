@@ -1499,7 +1499,6 @@ describe("loader", () => {
 
         it(`should work when "@use" with "bootstrap" package v5, import as a package (${implementationName}) (${syntax})`, async () => {
           const testId = getTestId("use-bootstrap-v5", syntax);
-          console.log(testId);
           const options = {
             implementation: getImplementationByName(implementationName),
           };

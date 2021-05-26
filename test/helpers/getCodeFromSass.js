@@ -693,7 +693,6 @@ function getCodeFromSass(testId, options) {
           }
         }
       }
-      console.log(url);
 
       // eslint-disable-next-line no-param-reassign
       url = url
@@ -765,8 +764,6 @@ function getCodeFromSass(testId, options) {
         .replace(/@material/, pathToMaterial)
         .replace(/custom-main-files/, pathToCustomMainFiles)
         .replace(/^~/, testNodeModules);
-
-      console.log(url);
     }
 
     return {
