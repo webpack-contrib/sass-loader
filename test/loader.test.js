@@ -682,6 +682,37 @@ describe("loader", () => {
         expect(getErrors(stats)).toMatchSnapshot("errors");
       });
 
+      it(`should work with "bootstrap" package v5, import as a package (${implementationName}) (${syntax})`, async () => {
+        const testId = getTestId("bootstrap-v5", syntax);
+        const options = {
+          implementation: getImplementationByName(implementationName),
+        };
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
+        const codeFromSass = getCodeFromSass(testId, options);
+
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot("css");
+        expect(getWarnings(stats)).toMatchSnapshot("warnings");
+        expect(getErrors(stats)).toMatchSnapshot("errors");
+      });
+
+      it(`should work with "bootstrap" package v5 without tilde, import as a package (${implementationName}) (${syntax})`, async () => {
+        const testId = getTestId("bootstrap-package-v5", syntax);
+        const options = {
+          implementation: getImplementationByName(implementationName),
+        };
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
+        const codeFromSass = getCodeFromSass(testId, options);
+
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(getWarnings(stats)).toMatchSnapshot("warnings");
+        expect(getErrors(stats)).toMatchSnapshot("errors");
+      });
+
       it(`should work with the "foundation-sites" package, import as a package (${implementationName}) (${syntax})`, async () => {
         const testId = getTestId("foundation-sites", syntax);
         const options = {
@@ -1452,6 +1483,39 @@ describe("loader", () => {
 
         it(`should work when "@use" with "bootstrap" package v4 without tilde, import as a package (${implementationName}) (${syntax})`, async () => {
           const testId = getTestId("use-bootstrap-package-v4", syntax);
+          const options = {
+            implementation: getImplementationByName(implementationName),
+          };
+          const compiler = getCompiler(testId, { loader: { options } });
+          const stats = await compile(compiler);
+          const codeFromBundle = getCodeFromBundle(stats, compiler);
+          const codeFromSass = getCodeFromSass(testId, options);
+
+          expect(codeFromBundle.css).toBe(codeFromSass.css);
+          expect(codeFromBundle.css).toMatchSnapshot("css");
+          expect(getWarnings(stats)).toMatchSnapshot("warnings");
+          expect(getErrors(stats)).toMatchSnapshot("errors");
+        });
+
+        it(`should work when "@use" with "bootstrap" package v5, import as a package (${implementationName}) (${syntax})`, async () => {
+          const testId = getTestId("use-bootstrap-v5", syntax);
+          console.log(testId);
+          const options = {
+            implementation: getImplementationByName(implementationName),
+          };
+          const compiler = getCompiler(testId, { loader: { options } });
+          const stats = await compile(compiler);
+          const codeFromBundle = getCodeFromBundle(stats, compiler);
+          const codeFromSass = getCodeFromSass(testId, options);
+
+          expect(codeFromBundle.css).toBe(codeFromSass.css);
+          expect(codeFromBundle.css).toMatchSnapshot("css");
+          expect(getWarnings(stats)).toMatchSnapshot("warnings");
+          expect(getErrors(stats)).toMatchSnapshot("errors");
+        });
+
+        it(`should work when "@use" with "bootstrap" package v5 without tilde, import as a package (${implementationName}) (${syntax})`, async () => {
+          const testId = getTestId("use-bootstrap-package-v5", syntax);
           const options = {
             implementation: getImplementationByName(implementationName),
           };

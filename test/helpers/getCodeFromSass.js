@@ -240,6 +240,10 @@ function getCodeFromSass(testId, options) {
     testFolder,
     "../node_modules/bootstrap-v4/scss/bootstrap.scss"
   );
+  const pathToBootstrap5Entry = path.resolve(
+    testFolder,
+    "../node_modules/bootstrap-v5/scss/bootstrap.scss"
+  );
   const pathToModule = path.resolve(
     testFolder,
     "node_modules/module/module.scss"
@@ -689,6 +693,7 @@ function getCodeFromSass(testId, options) {
           }
         }
       }
+      console.log(url);
 
       // eslint-disable-next-line no-param-reassign
       url = url
@@ -737,6 +742,8 @@ function getCodeFromSass(testId, options) {
         .replace(/^~bootstrap-sass/, pathToBootstrap3Package)
         .replace(/^~bootstrap-v4$/, pathToBootstrap4Entry)
         .replace(/^bootstrap-v4$/, pathToBootstrap4Entry)
+        .replace(/^~bootstrap-v5$/, pathToBootstrap5Entry)
+        .replace(/^bootstrap-v5$/, pathToBootstrap5Entry)
         .replace(/^~module/, pathToModule)
         .replace(/^~another/, pathToAnother)
         .replace(
@@ -758,6 +765,8 @@ function getCodeFromSass(testId, options) {
         .replace(/@material/, pathToMaterial)
         .replace(/custom-main-files/, pathToCustomMainFiles)
         .replace(/^~/, testNodeModules);
+
+      console.log(url);
     }
 
     return {
