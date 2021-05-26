@@ -81,9 +81,9 @@ function proxyCustomImporters(importers, loaderContext) {
   return [].concat(importers).map(
     (importer) =>
       function proxyImporter(...args) {
-        this.webpackLoaderContext = loaderContext;
+        const self = { ...this, webpackLoaderContext: loaderContext };
 
-        return importer.apply(this, args);
+        return importer.apply(self, args);
       }
   );
 }
