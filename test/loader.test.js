@@ -651,8 +651,8 @@ describe("loader", () => {
         expect(getErrors(stats)).toMatchSnapshot("errors");
       });
 
-      it(`should work with the "bootstrap" package, import as a package (${implementationName}) (${syntax})`, async () => {
-        const testId = getTestId("bootstrap", syntax);
+      it(`should work with "bootstrap" package v4, import as a package (${implementationName}) (${syntax})`, async () => {
+        const testId = getTestId("bootstrap-v4", syntax);
         const options = {
           implementation: getImplementationByName(implementationName),
         };
@@ -667,8 +667,8 @@ describe("loader", () => {
         expect(getErrors(stats)).toMatchSnapshot("errors");
       });
 
-      it(`should work with the "bootstrap" package without tilde, import as a package (${implementationName}) (${syntax})`, async () => {
-        const testId = getTestId("bootstrap-package-2", syntax);
+      it(`should work with "bootstrap" package v4 without tilde, import as a package (${implementationName}) (${syntax})`, async () => {
+        const testId = getTestId("bootstrap-package-v4", syntax);
         const options = {
           implementation: getImplementationByName(implementationName),
         };
@@ -1434,8 +1434,24 @@ describe("loader", () => {
           expect(getErrors(stats)).toMatchSnapshot("errors");
         });
 
-        it(`should work when "@use" with the "bootstrap" package, import as a package (${implementationName}) (${syntax})`, async () => {
-          const testId = getTestId("use-bootstrap", syntax);
+        it(`should work when "@use" with "bootstrap" package v4, import as a package (${implementationName}) (${syntax})`, async () => {
+          const testId = getTestId("use-bootstrap-v4", syntax);
+          const options = {
+            implementation: getImplementationByName(implementationName),
+          };
+          const compiler = getCompiler(testId, { loader: { options } });
+          const stats = await compile(compiler);
+          const codeFromBundle = getCodeFromBundle(stats, compiler);
+          const codeFromSass = getCodeFromSass(testId, options);
+
+          expect(codeFromBundle.css).toBe(codeFromSass.css);
+          expect(codeFromBundle.css).toMatchSnapshot("css");
+          expect(getWarnings(stats)).toMatchSnapshot("warnings");
+          expect(getErrors(stats)).toMatchSnapshot("errors");
+        });
+
+        it(`should work when "@use" with "bootstrap" package v4 without tilde, import as a package (${implementationName}) (${syntax})`, async () => {
+          const testId = getTestId("use-bootstrap-package-v4", syntax);
           const options = {
             implementation: getImplementationByName(implementationName),
           };

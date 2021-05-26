@@ -238,7 +238,7 @@ function getCodeFromSass(testId, options) {
   );
   const pathToBootstrap4Entry = path.resolve(
     testFolder,
-    "../node_modules/bootstrap/scss/bootstrap.scss"
+    "../node_modules/bootstrap-v4/scss/bootstrap.scss"
   );
   const pathToModule = path.resolve(
     testFolder,
@@ -735,8 +735,8 @@ function getCodeFromSass(testId, options) {
         .replace(/^@org\/style/, pathToScopedNpmFile)
         .replace(/^~bootstrap-sass$/, pathToBootstrap3Entry)
         .replace(/^~bootstrap-sass/, pathToBootstrap3Package)
-        .replace(/^~bootstrap$/, pathToBootstrap4Entry)
-        .replace(/^bootstrap$/, pathToBootstrap4Entry)
+        .replace(/^~bootstrap-v4$/, pathToBootstrap4Entry)
+        .replace(/^bootstrap-v4$/, pathToBootstrap4Entry)
         .replace(/^~module/, pathToModule)
         .replace(/^~another/, pathToAnother)
         .replace(
