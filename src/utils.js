@@ -358,7 +358,22 @@ function getWebpackResolver(
   }
 
   const isDartSass = implementation.info.includes("dart-sass");
-  const sassResolve = promiseResolve(
+  const sassModuleResolve = promiseResolve(
+    resolverFactory({
+      alias: [],
+      aliasFields: [],
+      conditionNames: [],
+      descriptionFiles: [],
+      extensions: [".sass", ".scss", ".css"],
+      exportsFields: [],
+      mainFields: [],
+      mainFiles: ["_index", "index"],
+      modules: [],
+      restrictions: [/\.((sa|sc|c)ss)$/i],
+      preferRelative: true,
+    })
+  );
+  const sassImportResolve = promiseResolve(
     resolverFactory({
       alias: [],
       aliasFields: [],
@@ -373,7 +388,18 @@ function getWebpackResolver(
       preferRelative: true,
     })
   );
-  const webpackResolve = promiseResolve(
+  const webpackModuleResolve = promiseResolve(
+    resolverFactory({
+      dependencyType: "sass",
+      conditionNames: ["sass", "style"],
+      mainFields: ["sass", "style", "main", "..."],
+      mainFiles: ["_index", "index", "..."],
+      extensions: [".sass", ".scss", ".css"],
+      restrictions: [/\.((sa|sc|c)ss)$/i],
+      preferRelative: true,
+    })
+  );
+  const webpackImportResolve = promiseResolve(
     resolverFactory({
       dependencyType: "sass",
       conditionNames: ["sass", "style"],
@@ -385,7 +411,7 @@ function getWebpackResolver(
     })
   );
 
-  return (context, request) => {
+  return (context, request, fromImport) => {
     // See https://github.com/webpack/webpack/issues/12340
     // Because `node-sass` calls our importer before `1. Filesystem imports relative to the base file.`
     // custom importer may not return `{ file: '/path/to/name.ext' }` and therefore our `context` will be relative
@@ -434,7 +460,7 @@ function getWebpackResolver(
       // `node-sass` calls our importer before `1. Filesystem imports relative to the base file.`, so we need emulate this too
       if (!isDartSass) {
         resolutionMap = resolutionMap.concat({
-          resolve: sassResolve,
+          resolve: fromImport ? sassImportResolve : sassModuleResolve,
           context: path.dirname(context),
           possibleRequests: sassPossibleRequests,
         });
@@ -444,7 +470,7 @@ function getWebpackResolver(
         // eslint-disable-next-line no-shadow
         includePaths.map((context) => {
           return {
-            resolve: sassResolve,
+            resolve: fromImport ? sassImportResolve : sassModuleResolve,
             context,
             possibleRequests: sassPossibleRequests,
           };
@@ -455,7 +481,7 @@ function getWebpackResolver(
     const webpackPossibleRequests = getPossibleRequests(request, true);
 
     resolutionMap = resolutionMap.concat({
-      resolve: webpackResolve,
+      resolve: fromImport ? webpackImportResolve : webpackModuleResolve,
       context: path.dirname(context),
       possibleRequests: webpackPossibleRequests,
     });
@@ -464,7 +490,7 @@ function getWebpackResolver(
   };
 }
 
-const matchCss = /\.css$/i;
+const MATCH_CSS = /\.css$/i;
 
 function getWebpackImporter(loaderContext, implementation, includePaths) {
   const resolve = getWebpackResolver(
@@ -473,8 +499,10 @@ function getWebpackImporter(loaderContext, implementation, includePaths) {
     includePaths
   );
 
-  return (originalUrl, prev, done) => {
-    resolve(prev, originalUrl)
+  return function importer(originalUrl, prev, done) {
+    const { fromImport } = this;
+
+    resolve(prev, originalUrl, fromImport)
       .then((result) => {
         // Add the result as dependency.
         // Although we're also using stats.includedFiles, this might come in handy when an error occurs.
@@ -482,7 +510,7 @@ function getWebpackImporter(loaderContext, implementation, includePaths) {
         loaderContext.addDependency(path.normalize(result));
 
         // By removing the CSS file extension, we trigger node-sass to include the CSS file instead of just linking it.
-        done({ file: result.replace(matchCss, "") });
+        done({ file: result.replace(MATCH_CSS, "") });
       })
       // Catch all resolving errors, return the original file and pass responsibility back to other custom importers
       .catch(() => {
