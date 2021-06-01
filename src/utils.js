@@ -281,6 +281,7 @@ function getPossibleRequests(
   const dirname = path.dirname(request);
   // TODO test on windows
   const normalizedDirname = dirname === "." ? "" : `${dirname}/`;
+  console.log(normalizedDirname);
   const basename = path.basename(request);
   const basenameWithoutExtension = path.basename(request, extension);
 
