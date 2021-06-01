@@ -376,9 +376,13 @@ function getWebpackResolver(
 
   const isDartSass = implementation.info.includes("dart-sass");
   // We only have one difference with the built-in sass resolution logic and out resolution logic:
-  // First, we look at the files starting with `_` (i.e. `_name.sass`, `_name.scss`, `_name.css`), then without `_` (i.e. `name.sass`, `name.scss`, `name.css`),
+  // First, we look at the files starting with `_`, then without `_` (i.e. `_name.sass`, `_name.scss`, `_name.css`, `name.sass`, `name.scss`, `name.css`),
   // although `sass` look together by extensions (i.e. `_name.sass`/`name.sass`/`_name.scss`/`name.scss`/`_name.css`/`name.css`).
-  // It shouldn't be a problem because `sass` forbids having `_name.ext` and `name.ext` in the same directory.
+  // It shouldn't be a problem because `sass` throw errors:
+  // - on having `_name.sass` and `name.sass` (extension can be `sass`, `scss` or `css`) in the same directory
+  // - on having `_name.sass` and `_name.scss` in the same directory
+  //
+  // Also `sass` prefer `sass`/`scss` over `css`.
   const sassModuleResolve = promiseResolve(
     resolverFactory({
       alias: [],
