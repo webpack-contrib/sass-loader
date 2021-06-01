@@ -1643,6 +1643,22 @@ describe("loader", () => {
           expect(getErrors(stats)).toMatchSnapshot("errors");
         });
 
+        it(`should prefer "${syntax})" over CSS (${implementationName}) (${syntax})`, async () => {
+          const testId = getTestId("use-dir-with-css", syntax);
+          const options = {
+            implementation: getImplementationByName(implementationName),
+          };
+          const compiler = getCompiler(testId, { loader: { options } });
+          const stats = await compile(compiler);
+          const codeFromBundle = getCodeFromBundle(stats, compiler);
+          const codeFromSass = getCodeFromSass(testId, options);
+
+          expect(codeFromBundle.css).toBe(codeFromSass.css);
+          expect(codeFromBundle.css).toMatchSnapshot("css");
+          expect(getWarnings(stats)).toMatchSnapshot("warnings");
+          expect(getErrors(stats)).toMatchSnapshot("errors");
+        });
+
         it(`should work and output deprecation message (${implementationName})`, async () => {
           const testId = getTestId("deprecation", syntax);
           const options = {
