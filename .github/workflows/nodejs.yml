@@ -44,7 +44,7 @@ jobs:
         run: npm run lint
 
       - name: Security audit
-        run: npm run security
+        run: npm run security -- --only=prod
 
       - name: Check commit message
         uses: wagoid/commitlint-github-action@v1
