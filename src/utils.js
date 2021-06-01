@@ -23,9 +23,7 @@ function getDefaultSassImplementation() {
 }
 
 /**
- * @public
- * This function is not Webpack-specific and can be used by tools wishing to
- * mimic `sass-loader`'s behaviour, so its signature should not be changed.
+ * This function is not Webpack-specific and can be used by tools wishing to mimic `sass-loader`'s behaviour, so its signature should not be changed.
  */
 function getSassImplementation(loaderContext, implementation) {
   let resolvedImplementation = implementation;
@@ -73,6 +71,10 @@ function getSassImplementation(loaderContext, implementation) {
   );
 }
 
+/**
+ * @param {any} loaderContext
+ * @returns {boolean}
+ */
 function isProductionLikeMode(loaderContext) {
   return loaderContext.mode === "production" || !loaderContext.mode;
 }
@@ -236,13 +238,14 @@ const IS_MODULE_IMPORT =
  *
  * @param {string} url
  * @param {boolean} forWebpackResolver
- * @param {string} rootContext
+ * @param {boolean} fromImport
  * @returns {Array<string>}
  */
 function getPossibleRequests(
   // eslint-disable-next-line no-shadow
   url,
-  forWebpackResolver = false
+  forWebpackResolver = false,
+  fromImport = false
 ) {
   let request = url;
 
@@ -261,7 +264,7 @@ function getPossibleRequests(
 
   // Keep in mind: ext can also be something like '.datepicker' when the true extension is omitted and the filename contains a dot.
   // @see https://github.com/webpack-contrib/sass-loader/issues/167
-  const ext = path.extname(request).toLowerCase();
+  const extension = path.extname(request).toLowerCase();
 
   // Because @import is also defined in CSS, Sass needs a way of compiling plain CSS @imports without trying to import the files at compile time.
   // To accomplish this, and to ensure SCSS is as much of a superset of CSS as possible, Sass will compile any @imports with the following characteristics to plain CSS imports:
@@ -271,18 +274,32 @@ function getPossibleRequests(
   //  - imports that have media queries.
   //
   // The `node-sass` package sends `@import` ending on `.css` to importer, it is bug, so we skip resolve
-  if (ext === ".css") {
+  if (extension === ".css") {
     return [];
   }
 
   const dirname = path.dirname(request);
+  // TODO test on windows
+  const normalizedDirname = dirname === "." ? "" : `${dirname}/`;
   const basename = path.basename(request);
+  const basenameWithoutExtension = path.basename(request, extension);
 
   return [
     ...new Set(
-      [`${dirname}/_${basename}`, request].concat(
-        forWebpackResolver ? [`${path.dirname(url)}/_${basename}`, url] : []
-      )
+      []
+        .concat(
+          fromImport
+            ? [
+                `${normalizedDirname}_${basenameWithoutExtension}.import${extension}`,
+                `${normalizedDirname}${basenameWithoutExtension}.import${extension}`,
+              ]
+            : []
+        )
+        .concat([
+          `${normalizedDirname}_${basename}`,
+          `${normalizedDirname}${basename}`,
+        ])
+        .concat(forWebpackResolver ? [url] : [])
     ),
   ];
 }
@@ -358,6 +375,10 @@ function getWebpackResolver(
   }
 
   const isDartSass = implementation.info.includes("dart-sass");
+  // We only have one difference with the built-in sass resolution logic and out resolution logic:
+  // First, we look at the files starting with `_` (i.e. `_name.sass`, `_name.scss`, `_name.css`), then without `_` (i.e. `name.sass`, `name.scss`, `name.css`),
+  // although `sass` look together by extensions (i.e. `_name.sass`/`name.sass`/`_name.scss`/`name.scss`/`_name.css`/`name.css`).
+  // It shouldn't be a problem because `sass` forbids having `_name.ext` and `name.ext` in the same directory.
   const sassModuleResolve = promiseResolve(
     resolverFactory({
       alias: [],
@@ -455,7 +476,11 @@ function getWebpackResolver(
       // 5. Filesystem imports relative to a `SASS_PATH` path.
       //
       // `sass` run custom importers before `3`, `4` and `5` points, we need to emulate this behavior to avoid wrong resolution.
-      const sassPossibleRequests = getPossibleRequests(request);
+      const sassPossibleRequests = getPossibleRequests(
+        request,
+        false,
+        fromImport
+      );
 
       // `node-sass` calls our importer before `1. Filesystem imports relative to the base file.`, so we need emulate this too
       if (!isDartSass) {
@@ -478,7 +503,11 @@ function getWebpackResolver(
       );
     }
 
-    const webpackPossibleRequests = getPossibleRequests(request, true);
+    const webpackPossibleRequests = getPossibleRequests(
+      request,
+      true,
+      fromImport
+    );
 
     resolutionMap = resolutionMap.concat({
       resolve: fromImport ? webpackImportResolve : webpackModuleResolve,
@@ -551,6 +580,10 @@ function getRenderFunctionFromSassImplementation(implementation) {
 
 const ABSOLUTE_SCHEME = /^[A-Za-z0-9+\-.]+:/;
 
+/**
+ * @param {string} source
+ * @returns {"absolute" | "scheme-relative" | "path-absolute" | "path-absolute"}
+ */
 function getURLType(source) {
   if (source[0] === "/") {
     if (source[1] === "/") {
