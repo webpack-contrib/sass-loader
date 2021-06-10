@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [12.1.0](https://github.com/webpack-contrib/sass-loader/compare/v12.0.0...v12.1.0) (2021-06-10)
+
+
+### Features
+
+* allow `String` value for the `implementation` option ([382a3ca](https://github.com/webpack-contrib/sass-loader/commit/382a3ca7ca8b7041712de30ce5ad8e6532944c1b))
+
 ## [12.0.0](https://github.com/webpack-contrib/sass-loader/compare/v11.1.1...v12.0.0) (2021-06-01)
 
 
