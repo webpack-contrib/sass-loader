@@ -38,6 +38,18 @@ function getSassImplementation(loaderContext, implementation) {
     }
   }
 
+  if (typeof resolvedImplementation === "string") {
+    try {
+      // eslint-disable-next-line import/no-dynamic-require, global-require
+      resolvedImplementation = require(resolvedImplementation);
+    } catch (error) {
+      loaderContext.emitError(error);
+
+      // eslint-disable-next-line consistent-return
+      return;
+    }
+  }
+
   const { info } = resolvedImplementation;
 
   if (!info) {
