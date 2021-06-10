@@ -4,7 +4,14 @@
   "properties": {
     "implementation": {
       "description": "The implementation of the sass to be used (https://github.com/webpack-contrib/sass-loader#implementation).",
-      "type": "object"
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "object"
+        }
+      ]
     },
     "sassOptions": {
       "description": "Options for `node-sass` or `sass` (`Dart Sass`) implementation. (https://github.com/webpack-contrib/sass-loader#implementation).",

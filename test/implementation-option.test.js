@@ -16,7 +16,7 @@ import {
 jest.setTimeout(30000);
 
 let Fiber;
-const implementations = [nodeSass, dartSass];
+const implementations = [nodeSass, dartSass, "sass_string"];
 
 describe("implementation option", () => {
   beforeAll(async () => {
@@ -34,7 +34,11 @@ describe("implementation option", () => {
   });
 
   implementations.forEach((implementation) => {
-    const [implementationName] = implementation.info.split("\t");
+    let implementationName = implementation;
+
+    if (implementation.info) {
+      [implementationName] = implementation.info.split("\t");
+    }
 
     it(`${implementationName}`, async () => {
       const nodeSassSpy = jest.spyOn(nodeSass, "render");
@@ -57,7 +61,10 @@ describe("implementation option", () => {
       if (implementationName === "node-sass") {
         expect(nodeSassSpy).toHaveBeenCalledTimes(1);
         expect(dartSassSpy).toHaveBeenCalledTimes(0);
-      } else if (implementationName === "dart-sass") {
+      } else if (
+        implementationName === "dart-sass" ||
+        implementationName === "dart-sass_string"
+      ) {
         expect(nodeSassSpy).toHaveBeenCalledTimes(0);
         expect(dartSassSpy).toHaveBeenCalledTimes(1);
       }
@@ -65,6 +72,18 @@ describe("implementation option", () => {
       nodeSassSpy.mockRestore();
       dartSassSpy.mockRestore();
     });
+  });
+
+  it("should throw error when unresolved package", async () => {
+    const testId = getTestId("language", "scss");
+    const options = {
+      implementation: "unresolved",
+    };
+    const compiler = getCompiler(testId, { loader: { options } });
+    const stats = await compile(compiler);
+
+    expect(getWarnings(stats)).toMatchSnapshot("warnings");
+    expect(getErrors(stats)).toMatchSnapshot("errors");
   });
 
   it("not specify", async () => {
