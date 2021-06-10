@@ -74,6 +74,18 @@ describe("implementation option", () => {
     });
   });
 
+  it("should throw error when unresolved package", async () => {
+    const testId = getTestId("language", "scss");
+    const options = {
+      implementation: "unresolved",
+    };
+    const compiler = getCompiler(testId, { loader: { options } });
+    const stats = await compile(compiler);
+
+    expect(getWarnings(stats)).toMatchSnapshot("warnings");
+    expect(getErrors(stats)).toMatchSnapshot("errors");
+  });
+
   it("not specify", async () => {
     const nodeSassSpy = jest.spyOn(nodeSass, "render");
     const dartSassSpy = jest.spyOn(dartSass, "render");

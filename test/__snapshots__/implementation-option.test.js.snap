@@ -51,3 +51,12 @@ Unknown Sass implementation.",
 `;
 
 exports[`implementation option should throw error when the "info" does not exist: warnings 1`] = `Array []`;
+
+exports[`implementation option should throw error when unresolved package: errors 1`] = `
+Array [
+  "ModuleError: Module Error (from ../src/cjs.js):
+(Emitted value instead of an instance of Error) Error: Cannot find module 'unresolved' from 'src/utils.js'",
+]
+`;
+
+exports[`implementation option should throw error when unresolved package: warnings 1`] = `Array []`;
