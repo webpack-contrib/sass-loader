@@ -51,6 +51,24 @@ async function loader(content) {
 
   const render = getRenderFunctionFromSassImplementation(implementation);
 
+  const sourceMapShouldBeEmmited =
+    !sassOptions.omitSourceMapUrl && !sassOptions.sourceMapEmbed;
+
+  if (sourceMapShouldBeEmmited && sassOptions.sourceMap) {
+    const filename = path.basename(this.resourcePath);
+    const mapNameTemplate =
+      sassOptions.sourceMap === true ? "[name].css.map" : sassOptions.sourceMap;
+    // eslint-disable-next-line no-underscore-dangle
+    const { path: mapFilename } = this._compilation.getPathWithInfo(
+      mapNameTemplate,
+      {
+        filename,
+      }
+    );
+
+    sassOptions.sourceMap = mapFilename;
+  }
+
   render(sassOptions, (error, result) => {
     if (error) {
       // There are situations when the `file` property do not exist
@@ -79,6 +97,12 @@ async function loader(content) {
         this.addDependency(normalizedIncludedFile);
       }
     });
+
+    if (sourceMapShouldBeEmmited && map) {
+      this.emitFile(sassOptions.sourceMap, JSON.stringify(map));
+
+      map = null;
+    }
 
     callback(null, result.css.toString(), map);
   });

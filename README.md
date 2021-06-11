@@ -681,6 +681,54 @@ module.exports = {
 };
 ```
 
+### Generate source maps for sass with asset/resource
+
+It is possible to extract files using [`asset modules`](https://webpack.js.org/guides/asset-modules/).
+
+This requires:
+
+- specify the `asset/resource` type for scss/sass files
+- disable webpack source maps generation
+- enable [`sourceMap`](https://sass-lang.com/documentation/js-api#sourcemap) in [`sassOptions`](#sassoptions)
+- disable [`omitSourceMapUrl`](https://sass-lang.com/documentation/js-api#omitsourcemapurl) in [`sassOptions`](#sassoptions)
+- disable [`sourceMapEmbed`](https://sass-lang.com/documentation/js-api#sourcemapembed) in [`sassOptions`](#sassoptions)
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  devtool: false,
+  module: {
+    rules: [
+      {
+        test: /\.s[ac]ss$/i,
+        type: "asset/resource",
+        generator: {
+          filename: "assets/[name].css",
+        },
+        use: [
+          {
+            loader: "sass-loader",
+            options: {
+              sourceMap: false,
+              sassOptions: {
+                // If `sourceMap` is true, source map name will be "[name].css.map"
+                sourceMap: "assets/[name].css.map",
+                // A source map url is generated relative to this file
+                // The file name does not matter, only the directory structure is important
+                outFile: path.join(__dirname, "style.css"),
+                omitSourceMapUrl: false,
+                sourceMapEmbed: false,
+              },
+            },
+          },
+        ],
+      },
+    ],
+  },
+};
+```
+
 If you want to edit the original Sass files inside Chrome, [there's a good blog post](https://medium.com/@toolmantim/getting-started-with-css-sourcemaps-and-in-browser-sass-editing-b4daab987fb0). Checkout [test/sourceMap](https://github.com/webpack-contrib/sass-loader/tree/master/test) for a running example.
 
 ## Contributing

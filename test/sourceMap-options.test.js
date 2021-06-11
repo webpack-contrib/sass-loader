@@ -235,6 +235,86 @@ describe("sourceMap option", () => {
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
       });
+
+      it(`should generate and emit source maps when value has "false" value, but the "sassOptions.sourceMap" has the "true" value (${implementationName}) (${syntax})`, async () => {
+        const testId = getTestId("language", syntax);
+        const options = {
+          implementation: getImplementationByName(implementationName),
+          sourceMap: false,
+          sassOptions: {
+            sourceMap: true,
+            outFile: path.join(__dirname, "style.css"),
+            sourceMapContents: true,
+            omitSourceMapUrl: false,
+            sourceMapEmbed: false,
+          },
+        };
+        const compiler = getCompiler(testId, {
+          devtool: false,
+          rules: [
+            {
+              test: /\.s[ac]ss$/i,
+              type: "asset/resource",
+              generator: {
+                filename: "assets/[name].css",
+              },
+              use: [
+                {
+                  loader: path.join(__dirname, "../src/cjs.js"),
+                  options,
+                },
+              ],
+            },
+          ],
+        });
+        const stats = await compile(compiler);
+        const { compilation } = stats;
+
+        expect(compilation.getAsset("assets/language.css")).toBeDefined();
+        expect(compilation.getAsset("language.css.map")).toBeDefined();
+        expect(getWarnings(stats)).toMatchSnapshot("warnings");
+        expect(getErrors(stats)).toMatchSnapshot("errors");
+      });
+
+      it(`should generate and emit source maps when value has "false" value, but the "sassOptions.sourceMap" has the "string" value (${implementationName}) (${syntax})`, async () => {
+        const testId = getTestId("language", syntax);
+        const options = {
+          implementation: getImplementationByName(implementationName),
+          sourceMap: false,
+          sassOptions: {
+            sourceMap: "assets/[name].css.map",
+            outFile: path.join(__dirname, "styles.css"),
+            sourceMapContents: true,
+            omitSourceMapUrl: false,
+            sourceMapEmbed: false,
+          },
+        };
+        const compiler = getCompiler(testId, {
+          devtool: false,
+          rules: [
+            {
+              test: /\.s[ac]ss$/i,
+              type: "asset/resource",
+              generator: {
+                filename: "assets/[name].css",
+              },
+              use: [
+                {
+                  loader: path.join(__dirname, "../src/cjs.js"),
+                  options,
+                },
+              ],
+            },
+          ],
+        });
+        const stats = await compile(compiler);
+        const { compilation } = stats;
+
+        expect(compilation.getAsset("assets/language.css")).toBeDefined();
+        // expect(compilation.getAsset("assets/language.css.map")).toBeDefined();
+        expect(getWarnings(stats)).toMatchSnapshot("warnings");
+        expect(getErrors(stats)).toMatchSnapshot("errors");
+      });
     });
   });
 });
