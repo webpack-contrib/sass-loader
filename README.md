@@ -119,13 +119,13 @@ Thankfully there are a two solutions to this problem:
 
 ## Options
 
-|                   Name                    |         Type         |                 Default                 | Description                                                       |
-| :---------------------------------------: | :------------------: | :-------------------------------------: | :---------------------------------------------------------------- |
-|  **[`implementation`](#implementation)**  |  `{Object\|String}`  |                 `sass`                  | Setup Sass implementation to use.                                 |
-|     **[`sassOptions`](#sassoptions)**     | `{Object\|Function}` | defaults values for Sass implementation | Options for Sass.                                                 |
-|       **[`sourceMap`](#sourcemap)**       |     `{Boolean}`      |           `compiler.devtool`            | Enables/Disables generation of source maps.                       |
-|  **[`additionalData`](#additionaldata)**  | `{String\|Function}` |               `undefined`               | Prepends/Appends `Sass`/`SCSS` code before the actual entry file. |
-| **[`webpackImporter`](#webpackimporter)** |     `{Boolean}`      |                 `true`                  | Enables/Disables the default Webpack importer.                    |
+|                   Name                    |          Type           |                 Default                 | Description                                                       |
+| :---------------------------------------: | :---------------------: | :-------------------------------------: | :---------------------------------------------------------------- |
+|  **[`implementation`](#implementation)**  |   `{Object\|String}`    |                 `sass`                  | Setup Sass implementation to use.                                 |
+|     **[`sassOptions`](#sassoptions)**     |  `{Object\|Function}`   | defaults values for Sass implementation | Options for Sass.                                                 |
+|       **[`sourceMap`](#sourcemap)**       | `{Boolean\|"external"}` |           `compiler.devtool`            | Enables/Disables generation of source maps.                       |
+|  **[`additionalData`](#additionaldata)**  |  `{String\|Function}`   |               `undefined`               | Prepends/Appends `Sass`/`SCSS` code before the actual entry file. |
+| **[`webpackImporter`](#webpackimporter)** |       `{Boolean}`       |                 `true`                  | Enables/Disables the default Webpack importer.                    |
 
 ### `implementation`
 
@@ -394,8 +394,10 @@ module.exports = {
 
 ### `sourceMap`
 
-Type: `Boolean`
+Type: `Boolean | "external"`
 Default: depends on the `compiler.devtool` value
+
+#### `Boolean`
 
 Enables/Disables generation of source maps.
 
@@ -463,6 +465,66 @@ module.exports = {
   },
 };
 ```
+
+#### `external`
+
+Allows to generate a source map to external separate file without webpack source map processing.
+Source map wil be emitted as external file.
+It will be convenient, when you want to use [`webpack asset modules`](https://webpack.js.org/guides/asset-modules/) with the "asset/resource" value.
+
+This requires:
+
+- specify the [`asset modules`](https://webpack.js.org/guides/asset-modules/) "asset/resource" type for scss/sass files
+- specify the [`outFile`](https://sass-lang.com/documentation/js-api#outfile) option in [`sassOptions`](#sassoptions) to the location that Sass expects the generated CSS to be saved.
+  "outFile" must be relative to the output directory. Default: "[name].css"
+- set "sourceMap" option in "external" value. It will automatically:
+  - will turn on [`sourceMap`](https://sass-lang.com/documentation/js-api#sourcemap) option in [`sassOptions`](#sassoptions)
+  - will turn off [`omitSourceMapUrl`](https://sass-lang.com/documentatioff/js-api#omitsourcemapurl) option in [`sassOptions`](#sassoptions)
+  - will turn off [`sourceMapEmbed`](https://sass-lang.com/documentation/js-api#sourcemapembed) option in [`sassOptions`](#sassoptions)
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.s[ac]ss$/i,
+        type: "asset/resource",
+        generator: {
+          filename: "assets/[name].css",
+        },
+        use: [
+          {
+            loader: "sass-loader",
+            options: {
+              sourceMap: "external",
+              // Optional options
+              sassOptions: {
+                // [`outFile`](https://sass-lang.com/documentation/js-api#outfile). A source map url is generated relative to this file. The file name does not matter, only the directory structure is important
+                outFile: "assets/[name].css",
+                // [`sourceMapContents`](https://sass-lang.com/documentation/js-api#sourcemapcontents). Default: true
+                // sourceMapContents: false,
+                // [`omitSourceMapUrl`](https://sass-lang.com/documentation/js-api#omitsourcemapurl). Default: false
+                // omitSourceMapUrl: true,
+                // [`sourceMapEmbed`](https://sass-lang.com/documentation/js-api#sourcemapembed). Default: false
+                // sourceMapEmbed: true,
+                // [`sourceMapRoot`](https://sass-lang.com/documentation/js-api#sourcemaproot). Default: ""
+                // sourceMapRoot: "",
+              },
+            },
+          },
+        ],
+      },
+    ],
+  },
+};
+```
+
+Result:
+
+The `assets/filename.css` file with `assets/filename.map.css` source map file will be generated without webpack processing.
+In this case, urls and imports will not be processed.
 
 ### `additionalData`
 
