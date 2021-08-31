@@ -61,6 +61,13 @@ Using `~` means looking for files in [`node_modules`](https://webpack.js.org/con
 
 * supported the [`resolve.byDependency`](https://webpack.js.org/configuration/resolve/#resolvebydependency) option, you can setup `{ resolve: { byDependency: { sass: { mainFiles: ['custom', '...'] } } } }`
 
+## [10.2.0](https://github.com/webpack-contrib/sass-loader/compare/v10.1.1...v10.2.0) (2021-05-10)
+
+
+### Features
+
+* support `node-sass` v6 ([dbbbdde](https://github.com/webpack-contrib/sass-loader/commit/dbbbdde8d73b5ebac89fdc3ca7009a644a471c5f))
+
 ### [10.1.1](https://github.com/webpack-contrib/sass-loader/compare/v10.1.0...v10.1.1) (2021-01-11)
 
 
