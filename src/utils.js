@@ -168,7 +168,10 @@ async function getSassOptions(
     : content;
 
   // opt.outputStyle
-  if (!options.outputStyle && isProductionLikeMode(loaderContext)) {
+  if (
+    typeof options.outputStyle === "undefined" &&
+    isProductionLikeMode(loaderContext)
+  ) {
     options.outputStyle = "compressed";
   }
 
@@ -223,6 +226,10 @@ async function getSassOptions(
         ? process.env.SASS_PATH.split(process.platform === "win32" ? ";" : ":")
         : []
     );
+
+  if (typeof options.charset === "undefined") {
+    options.charset = true;
+  }
 
   return options;
 }
