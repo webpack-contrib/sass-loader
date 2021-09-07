@@ -306,11 +306,13 @@ Default: defaults values for Sass implementation
 
 Options for [Dart Sass](http://sass-lang.com/dart-sass) or [Node Sass](https://github.com/sass/node-sass) implementation.
 
+> ℹ️ The `charset` option has `true` value by default for `dart-sass`, we strongly discourage change value to `false`, because webpack doesn't support files other than `utf-8`.
+
 > ℹ️ The `indentedSyntax` option has `true` value for the `sass` extension.
 
 > ℹ️ Options such as `data` and `file` are unavailable and will be ignored.
 
-> ℹ We recommend not to set the `outFile`, `sourceMapContents`, `sourceMapEmbed`, `sourceMapRoot` options because `sass-loader` automatically sets these options when the `sourceMap` option is `true`.
+> ℹ We strongly discourage change `outFile`, `sourceMapContents`, `sourceMapEmbed`, `sourceMapRoot` options because `sass-loader` automatically sets these options when the `sourceMap` option is `true`.
 
 > ℹ️ Access to the [loader context](https://webpack.js.org/api/loaders/#the-loader-context) inside the custom importer can be done using the `this.webpackLoaderContext` property.
 
