@@ -306,7 +306,7 @@ Default: defaults values for Sass implementation
 
 Options for [Dart Sass](http://sass-lang.com/dart-sass) or [Node Sass](https://github.com/sass/node-sass) implementation.
 
-> ℹ️ The `charset` option has `true` value by default for `dart-sass`, we strongly discourage change value to` false`, because webpack doesn't support files other than `utf-8`.
+> ℹ️ The `charset` option has `true` value by default for `dart-sass`, we strongly discourage change value to `false`, because webpack doesn't support files other than `utf-8`.
 
 > ℹ️ The `indentedSyntax` option has `true` value for the `sass` extension.
 
