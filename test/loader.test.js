@@ -1072,7 +1072,7 @@ describe("loader", () => {
         });
 
         it(`should work (${implementationName}) (${syntax}) add "@charset "UTF-8";" for non ascii characters`, async () => {
-          const testId = getTestId("utf-8-bom", syntax);
+          const testId = getTestId("non-ascii-characters", syntax);
           const options = {
             implementation: getImplementationByName(implementationName),
           };
