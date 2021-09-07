@@ -48,7 +48,7 @@ nav a {
 }
 
 .foo:before {
-  content: \\"\\";
+  content: \\"\\\\e0c6\\";
 }
 
 .bar:before {
@@ -168,7 +168,7 @@ nav a {
 }
 
 .foo:before {
-  content: \\"\\";
+  content: \\"\\\\e0c6\\";
 }
 
 .bar:before {
@@ -530,7 +530,7 @@ nav a {
 }
 
 .foo:before {
-  content: \\"\\";
+  content: \\"\\\\e0c6\\";
 }
 
 .bar:before {
@@ -649,7 +649,7 @@ nav a {
 }
 
 .foo:before {
-  content: \\"\\";
+  content: \\"\\\\e0c6\\";
 }
 
 .bar:before {
@@ -1008,7 +1008,7 @@ nav a {
 }
 
 .foo:before {
-  content: \\"\\";
+  content: \\"\\\\e0c6\\";
 }
 
 .bar:before {
@@ -1127,7 +1127,7 @@ nav a {
 }
 
 .foo:before {
-  content: \\"\\";
+  content: \\"\\\\e0c6\\";
 }
 
 .bar:before {
@@ -1486,7 +1486,7 @@ nav a {
 }
 
 .foo:before {
-  content: \\"\\";
+  content: \\"\\\\e0c6\\";
 }
 
 .bar:before {
@@ -1605,7 +1605,7 @@ nav a {
 }
 
 .foo:before {
-  content: \\"\\";
+  content: \\"\\\\e0c6\\";
 }
 
 .bar:before {
@@ -1964,7 +1964,7 @@ nav a {
 }
 
 .foo:before {
-  content: \\"\\";
+  content: \\"\\\\e0c6\\";
 }
 
 .bar:before {
@@ -2008,7 +2008,7 @@ nav a {
 }
 
 .foo:before {
-  content: \\"\\";
+  content: \\"\\\\e0c6\\";
 }
 
 .bar:before {
@@ -2164,7 +2164,7 @@ nav a {
 }
 
 .foo:before {
-  content: \\"\\";
+  content: \\"\\\\e0c6\\";
 }
 
 .bar:before {
@@ -2208,7 +2208,7 @@ nav a {
 }
 
 .foo:before {
-  content: \\"\\";
+  content: \\"\\\\e0c6\\";
 }
 
 .bar:before {
@@ -2364,7 +2364,7 @@ nav a {
 }
 
 .foo:before {
-  content: \\"\\";
+  content: \\"\\\\e0c6\\";
 }
 
 .bar:before {
@@ -2408,7 +2408,7 @@ nav a {
 }
 
 .foo:before {
-  content: \\"\\";
+  content: \\"\\\\e0c6\\";
 }
 
 .bar:before {
