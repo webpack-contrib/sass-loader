@@ -1055,6 +1055,57 @@ describe("loader", () => {
       });
 
       if (implementation === dartSass) {
+        it(`should work (${implementationName}) (${syntax}) with "@charset "UTF-8";"`, async () => {
+          const testId = getTestId("charset-utf-8", syntax);
+          const options = {
+            implementation: getImplementationByName(implementationName),
+          };
+          const compiler = getCompiler(testId, { loader: { options } });
+          const stats = await compile(compiler);
+          const codeFromBundle = getCodeFromBundle(stats, compiler);
+          const codeFromSass = getCodeFromSass(testId, options);
+
+          expect(codeFromBundle.css).toBe(codeFromSass.css);
+          expect(codeFromBundle.css).toMatchSnapshot("css");
+          expect(getWarnings(stats)).toMatchSnapshot("warnings");
+          expect(getErrors(stats)).toMatchSnapshot("errors");
+        });
+
+        it(`should work (${implementationName}) (${syntax}) add "@charset "UTF-8";" for non ascii characters`, async () => {
+          const testId = getTestId("utf-8-bom", syntax);
+          const options = {
+            implementation: getImplementationByName(implementationName),
+          };
+          const compiler = getCompiler(testId, { loader: { options } });
+          const stats = await compile(compiler);
+          const codeFromBundle = getCodeFromBundle(stats, compiler);
+          const codeFromSass = getCodeFromSass(testId, options);
+
+          expect(codeFromBundle.css).toBe(codeFromSass.css);
+          expect(codeFromBundle.css).toMatchSnapshot("css");
+          expect(getWarnings(stats)).toMatchSnapshot("warnings");
+          expect(getErrors(stats)).toMatchSnapshot("errors");
+        });
+
+        it(`should work (${implementationName}) (${syntax}) to disable "@charset "UTF-8";" generation`, async () => {
+          const testId = getTestId("charset-utf-8", syntax);
+          const options = {
+            implementation: getImplementationByName(implementationName),
+            sassOptions: {
+              charset: false,
+            },
+          };
+          const compiler = getCompiler(testId, { loader: { options } });
+          const stats = await compile(compiler);
+          const codeFromBundle = getCodeFromBundle(stats, compiler);
+          const codeFromSass = getCodeFromSass(testId, options);
+
+          expect(codeFromBundle.css).toBe(codeFromSass.css);
+          expect(codeFromBundle.css).toMatchSnapshot("css");
+          expect(getWarnings(stats)).toMatchSnapshot("warnings");
+          expect(getErrors(stats)).toMatchSnapshot("errors");
+        });
+
         it(`should output an understandable error with a problem in "@use" (${implementationName}) (${syntax})`, async () => {
           const testId = getTestId("error-use", syntax);
           const options = {
