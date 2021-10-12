@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [12.2.0](https://github.com/webpack-contrib/sass-loader/compare/v12.1.0...v12.2.0) (2021-10-12)
+
+
+### Features
+
+* add link field in schema ([#976](https://github.com/webpack-contrib/sass-loader/issues/976)) ([1b453fb](https://github.com/webpack-contrib/sass-loader/commit/1b453fb4926ab27616f3c38104033fafe37633ab))
+
 ## [12.1.0](https://github.com/webpack-contrib/sass-loader/compare/v12.0.0...v12.1.0) (2021-06-10)
 
 
