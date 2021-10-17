@@ -1737,6 +1737,65 @@ describe("loader", () => {
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
         });
+
+        it(`should use webpack logger (${implementationName}) (${syntax})`, async () => {
+          const testId = getTestId("logging", syntax);
+          const options = {
+            implementation: getImplementationByName(implementationName),
+          };
+          const compiler = getCompiler(testId, { loader: { options } });
+          const stats = await compile(compiler);
+          const codeFromBundle = getCodeFromBundle(stats, compiler);
+          const codeFromSass = getCodeFromSass(testId, options);
+          const logs = [];
+
+          for (const [name, value] of stats.compilation.logging) {
+            if (/sass-loader/.test(name)) {
+              logs.push(
+                value.map((item) => {
+                  return {
+                    type: item.type,
+                    args: item.args,
+                  };
+                })
+              );
+            }
+          }
+
+          expect(codeFromBundle.css).toBe(codeFromSass.css);
+          expect(codeFromBundle.css).toMatchSnapshot("css");
+          expect(getWarnings(stats)).toMatchSnapshot("warnings");
+          expect(getErrors(stats)).toMatchSnapshot("errors");
+          expect(logs).toMatchSnapshot("logs");
+        });
+
+        it(`should allow to use own logger (${implementationName}) (${syntax})`, async () => {
+          const testId = getTestId("logging", syntax);
+          const logs = [];
+          const options = {
+            implementation: getImplementationByName(implementationName),
+            sassOptions: {
+              logger: {
+                warn: (message) => {
+                  logs.push({ type: "warn", message });
+                },
+                debug: (message) => {
+                  logs.push({ type: "debug", message });
+                },
+              },
+            },
+          };
+          const compiler = getCompiler(testId, { loader: { options } });
+          const stats = await compile(compiler);
+          const codeFromBundle = getCodeFromBundle(stats, compiler);
+          const codeFromSass = getCodeFromSass(testId, options);
+
+          expect(codeFromBundle.css).toBe(codeFromSass.css);
+          expect(codeFromBundle.css).toMatchSnapshot("css");
+          expect(getWarnings(stats)).toMatchSnapshot("warnings");
+          expect(getErrors(stats)).toMatchSnapshot("errors");
+          expect(logs).toMatchSnapshot("logs");
+        });
       }
     });
   });

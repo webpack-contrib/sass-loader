@@ -168,10 +168,7 @@ async function getSassOptions(
     : content;
 
   // opt.outputStyle
-  if (
-    typeof options.outputStyle === "undefined" &&
-    isProductionLikeMode(loaderContext)
-  ) {
+  if (!options.outputStyle && isProductionLikeMode(loaderContext)) {
     options.outputStyle = "compressed";
   }
 
@@ -229,6 +226,45 @@ async function getSassOptions(
 
   if (typeof options.charset === "undefined") {
     options.charset = true;
+  }
+
+  if (!options.logger) {
+    const logger = loaderContext.getLogger("sass-loader");
+    const formatSpan = (span) =>
+      `${span.url || "-"}:${span.start.line}:${span.start.column}: `;
+
+    options.logger = {
+      debug(message, loggerOptions) {
+        let builtMessage = "";
+
+        if (loggerOptions.span) {
+          builtMessage = formatSpan(loggerOptions.span);
+        }
+
+        builtMessage += message;
+
+        logger.debug(builtMessage);
+      },
+      warn(message, loggerOptions) {
+        let builtMessage = "";
+
+        if (loggerOptions.deprecation) {
+          builtMessage += "Deprecation ";
+        }
+
+        if (loggerOptions.span && !loggerOptions.stack) {
+          builtMessage = formatSpan(loggerOptions.span);
+        }
+
+        builtMessage += message;
+
+        if (loggerOptions.stack) {
+          builtMessage += `\n\n${loggerOptions.stack}`;
+        }
+
+        logger.warn(builtMessage);
+      },
+    };
   }
 
   return options;
