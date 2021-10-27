@@ -781,6 +781,8 @@ function getCodeFromSass(testId, options) {
         .concat([testImporter])
     : [testImporter];
 
+  sassOptions.logger = { debug: () => {}, warn: () => {} };
+
   const { css, map } = implementation.renderSync(sassOptions);
 
   return { css: css.toString(), sourceMap: map };

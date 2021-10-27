@@ -59,6 +59,7 @@ export default function getCompiler(fixture, config = {}, options = {}) {
     // eslint-disable-next-line no-undefined
     resolve: config.resolve || undefined,
   };
+
   // Compiler Options
   // eslint-disable-next-line no-param-reassign
   options = Object.assign({ output: false }, options);
@@ -71,7 +72,6 @@ export default function getCompiler(fixture, config = {}, options = {}) {
 
   if (!options.output) {
     compiler.outputFileSystem = createFsFromVolume(new Volume());
-    compiler.outputFileSystem.join = path.join.bind(path);
   }
 
   return compiler;
