@@ -3,6 +3,7 @@ class SassError extends Error {
     super();
 
     this.name = "SassError";
+    // TODO remove me in the next major release
     this.originalSassError = sassError;
     this.loc = {
       line: sassError.line,

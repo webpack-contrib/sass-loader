@@ -4,6 +4,8 @@ import path from "path";
 import { klona } from "klona/full";
 import async from "neo-async";
 
+import SassWarning from "./SassWarning";
+
 function getDefaultSassImplementation() {
   let sassImplPkg = "sass";
 
@@ -229,6 +231,9 @@ async function getSassOptions(
   }
 
   if (!options.logger) {
+    // TODO set me to `true` by default in the next major release
+    const needEmitWarning = loaderOptions.warnRuleAsWarning === true;
+
     const logger = loaderContext.getLogger("sass-loader");
     const formatSpan = (span) =>
       `${span.url || "-"}:${span.start.line}:${span.start.column}: `;
@@ -262,7 +267,13 @@ async function getSassOptions(
           builtMessage += `\n\n${loggerOptions.stack}`;
         }
 
-        logger.warn(builtMessage);
+        if (needEmitWarning) {
+          loaderContext.emitWarning(
+            new SassWarning(builtMessage, loggerOptions)
+          );
+        } else {
+          logger.warn(builtMessage);
+        }
       },
     };
   }
