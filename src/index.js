@@ -28,7 +28,10 @@ async function loader(content) {
   }
 
   const useSourceMap =
-    typeof options.sourceMap === "boolean" ? options.sourceMap : this.sourceMap;
+    typeof options.sourceMap === "undefined"
+      ? this.sourceMap
+      : options.sourceMap;
+
   const sassOptions = await getSassOptions(
     this,
     options,
@@ -64,13 +67,6 @@ async function loader(content) {
       return;
     }
 
-    let map = result.map ? JSON.parse(result.map) : null;
-
-    // Modify source paths only for webpack, otherwise we do nothing
-    if (map && useSourceMap) {
-      map = normalizeSourceMap(map, this.rootContext);
-    }
-
     result.stats.includedFiles.forEach((includedFile) => {
       const normalizedIncludedFile = path.normalize(includedFile);
 
@@ -79,6 +75,23 @@ async function loader(content) {
         this.addDependency(normalizedIncludedFile);
       }
     });
+
+    let map = result.map ? JSON.parse(result.map) : null;
+
+    if (map) {
+      if (useSourceMap === "external" && !sassOptions.sourceMapEmbed) {
+        const outFile =
+          process.platform !== "win32"
+            ? sassOptions.resolvedOutFile
+            : sassOptions.resolvedOutFile.split(path.sep).join("/");
+
+        this.emitFile(`${outFile}.map`, JSON.stringify(map));
+
+        map = null;
+      } else if (useSourceMap) {
+        map = normalizeSourceMap(map, this.rootContext);
+      }
+    }
 
     callback(null, result.css.toString(), map);
   });

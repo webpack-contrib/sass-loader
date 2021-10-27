@@ -115,7 +115,7 @@ function isSupportedFibers() {
  * @param {object} loaderOptions
  * @param {string} content
  * @param {object} implementation
- * @param {boolean} useSourceMap
+ * @param {boolean|string} useSourceMap
  * @returns {Object}
  */
 async function getSassOptions(
@@ -172,7 +172,7 @@ async function getSassOptions(
     options.outputStyle = "compressed";
   }
 
-  if (useSourceMap) {
+  if (useSourceMap === true) {
     // Deliberately overriding the sourceMap option here.
     // node-sass won't produce source maps if the data option is used and options.sourceMap is not a string.
     // In case it is a string, options.sourceMap should be a path where the source map is written.
@@ -184,6 +184,36 @@ async function getSassOptions(
     options.sourceMapContents = true;
     options.omitSourceMapUrl = true;
     options.sourceMapEmbed = false;
+  } else if (useSourceMap === "external") {
+    options.sourceMap = true;
+    options.outFile =
+      typeof options.outFile !== "undefined" ? options.outFile : "[name].css";
+    options.omitSourceMapUrl =
+      typeof options.omitSourceMapUrl !== "undefined"
+        ? options.omitSourceMapUrl
+        : false;
+    options.sourceMapEmbed =
+      typeof options.sourceMapEmbed !== "undefined"
+        ? options.sourceMapEmbed
+        : false;
+    options.sourceMapContents =
+      typeof options.sourceMapContents !== "undefined"
+        ? options.sourceMapContents
+        : true;
+
+    const outFileParsed = path.parse(options.outFile);
+
+    if (outFileParsed.name === "[name]") {
+      outFileParsed.name = path.parse(options.file).name;
+      outFileParsed.base = `${outFileParsed.name}${outFileParsed.ext}`;
+    }
+
+    options.resolvedOutFile = path.format(outFileParsed);
+
+    // eslint-disable-next-line no-underscore-dangle
+    const { outputPath } = loaderContext._compiler;
+
+    options.outFile = path.resolve(outputPath, options.resolvedOutFile);
   }
 
   const { resourcePath } = loaderContext;

@@ -1,5 +1,1421 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`sourceMap option should generate and emit source maps when value has "external" value (dart-sass) (sass): css 1`] = `
+"@charset \\"UTF-8\\";
+@import \\"./file.css\\";
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+nav li {
+  display: inline-block;
+}
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none;
+}
+
+.box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.message, .warning, .error, .success {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333;
+}
+
+.success {
+  border-color: green;
+}
+
+.error {
+  border-color: red;
+}
+
+.warning {
+  border-color: yellow;
+}
+
+.foo:before {
+  content: \\"\\";
+}
+
+.bar:before {
+  content: \\"∑\\";
+}
+
+/*# sourceMappingURL=style.css.map */"
+`;
+
+exports[`sourceMap option should generate and emit source maps when value has "external" value (dart-sass) (sass): errors 1`] = `Array []`;
+
+exports[`sourceMap option should generate and emit source maps when value has "external" value (dart-sass) (sass): source map 1`] = `
+Object {
+  "file": "style.css",
+  "mappings": ";AACQ;AAMR;EACE;EACA,OALc;;;AAQd;EACE;EACA;EACA;;AAEF;EACE;;AAEF;EACE;EACA;EACA;;;AAQJ;EALE,uBAMe;EALf,oBAKe;EAJf,mBAIe;EAHf,eAGe;;;AAEjB;EACE;EACA;EACA;;;AAEF;EAEE;;;AAEF;EAEE;;;AAEF;EAEE;;;AAGA;EACE,SAhDY;;;AAmDd;EACE,SCzDc",
+  "names": Array [],
+  "sourceRoot": "",
+  "sources": Array [
+    "../sass/language.sass",
+    "../sass/another/variables.sass",
+  ],
+  "sourcesContent": Array [
+    "@import \\"another/variables\\"
+@import \\"./file.css\\"
+
+$font-stack:    Helvetica, sans-serif
+$primary-color: #333
+$pi:            '\\\\e0C6'
+
+body
+  font: 100% $font-stack
+  color: $primary-color
+
+nav
+  ul
+    margin: 0
+    padding: 0
+    list-style: none
+
+  li
+    display: inline-block
+
+  a
+    display: block
+    padding: 6px 12px
+    text-decoration: none
+
+=border-radius($radius)
+  -webkit-border-radius: $radius
+  -moz-border-radius:    $radius
+  -ms-border-radius:     $radius
+  border-radius:         $radius
+
+.box
+  +border-radius(10px)
+
+.message
+  border: 1px solid #ccc
+  padding: 10px
+  color: #333
+
+.success
+  @extend .message
+  border-color: green
+
+.error
+  @extend .message
+  border-color: red
+
+.warning
+  @extend .message
+  border-color: yellow
+
+.foo
+  &:before
+    content: $pi
+
+.bar
+  &:before
+    content: $n-ary-summation
+
+",
+    "$n-ary-summation: '\\\\2211'
+",
+  ],
+  "version": 3,
+}
+`;
+
+exports[`sourceMap option should generate and emit source maps when value has "external" value (dart-sass) (sass): warnings 1`] = `Array []`;
+
+exports[`sourceMap option should generate and emit source maps when value has "external" value (dart-sass) (scss): css 1`] = `
+"@charset \\"UTF-8\\";
+@import \\"./file.css\\";
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+nav li {
+  display: inline-block;
+}
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none;
+}
+
+.box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.foo:before {
+  content: \\"\\";
+}
+
+.bar:before {
+  content: \\"∑\\";
+}
+
+/*# sourceMappingURL=style.css.map */"
+`;
+
+exports[`sourceMap option should generate and emit source maps when value has "external" value (dart-sass) (scss): errors 1`] = `Array []`;
+
+exports[`sourceMap option should generate and emit source maps when value has "external" value (dart-sass) (scss): source map 1`] = `
+Object {
+  "file": "style.css",
+  "mappings": ";AACQ;AAMR;EACE;EACA,OALc;;;AASd;EACE;EACA;EACA;;AAGF;EAAK;;AAEL;EACE;EACA;EACA;;;AAWJ;EANE,uBAM4B;EALzB,oBAKyB;EAJxB,mBAIwB;EAHpB,eAGoB;;;AAG5B;EACE,SAlCY;;;AAuCd;EACE,SC7Cc",
+  "names": Array [],
+  "sourceRoot": "",
+  "sources": Array [
+    "../scss/language.scss",
+    "../scss/another/_variables.scss",
+  ],
+  "sourcesContent": Array [
+    "@import \\"another/variables\\";
+@import \\"./file.css\\";
+
+$font-stack:    Helvetica, sans-serif;
+$primary-color: #333;
+$pi:            '\\\\e0C6';
+
+body {
+  font: 100% $font-stack;
+  color: $primary-color;
+}
+
+nav {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li { display: inline-block; }
+
+  a {
+    display: block;
+    padding: 6px 12px;
+    text-decoration: none;
+  }
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+.box { @include border-radius(10px); }
+
+.foo {
+  &:before {
+    content: $pi;
+  }
+}
+
+.bar {
+  &:before {
+    content: $n-ary-summation;
+  }
+}
+",
+    "$n-ary-summation: '\\\\2211'
+",
+  ],
+  "version": 3,
+}
+`;
+
+exports[`sourceMap option should generate and emit source maps when value has "external" value (dart-sass) (scss): warnings 1`] = `Array []`;
+
+exports[`sourceMap option should generate and emit source maps when value has "external" value (node-sass) (sass): css 1`] = `
+"@charset \\"UTF-8\\";
+@import url(./file.css);
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333; }
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+
+nav li {
+  display: inline-block; }
+
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none; }
+
+.box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px; }
+
+.message, .success, .error, .warning {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333; }
+
+.success {
+  border-color: green; }
+
+.error {
+  border-color: red; }
+
+.warning {
+  border-color: yellow; }
+
+.foo:before {
+  content: \\"\\"; }
+
+.bar:before {
+  content: \\"∑\\"; }
+
+/*# sourceMappingURL=style.css.map */"
+`;
+
+exports[`sourceMap option should generate and emit source maps when value has "external" value (node-sass) (sass): errors 1`] = `Array []`;
+
+exports[`sourceMap option should generate and emit source maps when value has "external" value (node-sass) (sass): source map 1`] = `
+Object {
+  "file": "style.css",
+  "mappings": ";AACA,OAAO,CAAP,eAAO;AAMP,AAAA,IAAI,CAAC;EACH,IAAI,EAAE,IAAI,CALI,SAAS,EAAE,UAAU;EAMnC,KAAK,EALS,IAAI,GAKM;;AAE1B,AACE,GADC,CACD,EAAE,CAAC;EACD,MAAM,EAAE,CAAC;EACT,OAAO,EAAE,CAAC;EACV,UAAU,EAAE,IAAI,GAAG;;AAJvB,AAME,GANC,CAMD,EAAE,CAAC;EACD,OAAO,EAAE,YAAY,GAAG;;AAP5B,AASE,GATC,CASD,CAAC,CAAC;EACA,OAAO,EAAE,KAAK;EACd,OAAO,EAAE,QAAQ;EACjB,eAAe,EAAE,IAAI,GAAG;;AAQ5B,AAAA,IAAI,CAAC;EALH,qBAAqB,EAME,IAAI;EAL3B,kBAAkB,EAKK,IAAI;EAJ3B,iBAAiB,EAIM,IAAI;EAH3B,aAAa,EAGU,IAAI,GAAI;;AAEjC,AAAA,QAAQ,EAKR,QAAQ,EAIR,MAAM,EAIN,QAAQ,CAbC;EACP,MAAM,EAAE,cAAc;EACtB,OAAO,EAAE,IAAI;EACb,KAAK,EAAE,IAAI,GAAG;;AAEhB,AAAA,QAAQ,CAAC;EAEP,YAAY,EAAE,KAAK,GAAG;;AAExB,AAAA,MAAM,CAAC;EAEL,YAAY,EAAE,GAAG,GAAG;;AAEtB,AAAA,QAAQ,CAAC;EAEP,YAAY,EAAE,MAAM,GAAG;;AAEzB,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,EAhDK,IAAO,GAgDJ;;AAEnB,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,ECzDO,IAAO,GDyDO",
+  "names": Array [],
+  "sources": Array [
+    "../sass/language.sass",
+    "../sass/another/variables.sass",
+  ],
+  "sourcesContent": Array [
+    "@import \\"another/variables\\";
+@import \\"./file.css\\";
+
+$font-stack:    Helvetica, sans-serif;
+$primary-color: #333;
+$pi:            '\\\\e0C6';
+
+body {
+  font: 100% $font-stack;
+  color: $primary-color; }
+
+nav {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none; }
+
+  li {
+    display: inline-block; }
+
+  a {
+    display: block;
+    padding: 6px 12px;
+    text-decoration: none; } }
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius:    $radius;
+  -ms-border-radius:     $radius;
+  border-radius:         $radius; }
+
+.box {
+  @include border-radius(10px); }
+
+.message {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333; }
+
+.success {
+  @extend .message;
+  border-color: green; }
+
+.error {
+  @extend .message;
+  border-color: red; }
+
+.warning {
+  @extend .message;
+  border-color: yellow; }
+
+.foo {
+  &:before {
+    content: $pi; } }
+
+.bar {
+  &:before {
+    content: $n-ary-summation; } }
+
+",
+    "$n-ary-summation: '\\\\2211';
+",
+  ],
+  "version": 3,
+}
+`;
+
+exports[`sourceMap option should generate and emit source maps when value has "external" value (node-sass) (sass): warnings 1`] = `Array []`;
+
+exports[`sourceMap option should generate and emit source maps when value has "external" value (node-sass) (scss): css 1`] = `
+"@charset \\"UTF-8\\";
+@import url(./file.css);
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333; }
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+
+nav li {
+  display: inline-block; }
+
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none; }
+
+.box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px; }
+
+.foo:before {
+  content: \\"\\"; }
+
+.bar:before {
+  content: \\"∑\\"; }
+
+/*# sourceMappingURL=style.css.map */"
+`;
+
+exports[`sourceMap option should generate and emit source maps when value has "external" value (node-sass) (scss): errors 1`] = `Array []`;
+
+exports[`sourceMap option should generate and emit source maps when value has "external" value (node-sass) (scss): source map 1`] = `
+Object {
+  "file": "style.css",
+  "mappings": ";AACA,OAAO,CAAP,eAAO;AAMP,AAAA,IAAI,CAAC;EACH,IAAI,EAAE,IAAI,CALI,SAAS,EAAE,UAAU;EAMnC,KAAK,EALS,IAAI,GAMnB;;AAED,AACE,GADC,CACD,EAAE,CAAC;EACD,MAAM,EAAE,CAAC;EACT,OAAO,EAAE,CAAC;EACV,UAAU,EAAE,IAAI,GACjB;;AALH,AAOE,GAPC,CAOD,EAAE,CAAC;EAAE,OAAO,EAAE,YAAY,GAAI;;AAPhC,AASE,GATC,CASD,CAAC,CAAC;EACA,OAAO,EAAE,KAAK;EACd,OAAO,EAAE,QAAQ;EACjB,eAAe,EAAE,IAAI,GACtB;;AAUH,AAAA,IAAI,CAAC;EANH,qBAAqB,EAMO,IAAI;EAL7B,kBAAkB,EAKO,IAAI;EAJ5B,iBAAiB,EAIO,IAAI;EAHxB,aAAa,EAGO,IAAI,GAAK;;AAEvC,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,EAlCK,IAAO,GAmCpB;;AAGH,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,EC7CO,IAAO,GD8CtB",
+  "names": Array [],
+  "sources": Array [
+    "../scss/language.scss",
+    "../scss/another/_variables.scss",
+  ],
+  "sourcesContent": Array [
+    "@import \\"another/variables\\";
+@import \\"./file.css\\";
+
+$font-stack:    Helvetica, sans-serif;
+$primary-color: #333;
+$pi:            '\\\\e0C6';
+
+body {
+  font: 100% $font-stack;
+  color: $primary-color;
+}
+
+nav {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li { display: inline-block; }
+
+  a {
+    display: block;
+    padding: 6px 12px;
+    text-decoration: none;
+  }
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+.box { @include border-radius(10px); }
+
+.foo {
+  &:before {
+    content: $pi;
+  }
+}
+
+.bar {
+  &:before {
+    content: $n-ary-summation;
+  }
+}
+",
+    "$n-ary-summation: '\\\\2211'
+",
+  ],
+  "version": 3,
+}
+`;
+
+exports[`sourceMap option should generate and emit source maps when value has "external" value (node-sass) (scss): warnings 1`] = `Array []`;
+
+exports[`sourceMap option should generate and emit source maps when value has "external" value and "sassOptions.omitSourceMapUrl" has "true" value (dart-sass) (sass): css 1`] = `
+"@charset \\"UTF-8\\";
+@import \\"./file.css\\";
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+nav li {
+  display: inline-block;
+}
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none;
+}
+
+.box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.message, .warning, .error, .success {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333;
+}
+
+.success {
+  border-color: green;
+}
+
+.error {
+  border-color: red;
+}
+
+.warning {
+  border-color: yellow;
+}
+
+.foo:before {
+  content: \\"\\";
+}
+
+.bar:before {
+  content: \\"∑\\";
+}"
+`;
+
+exports[`sourceMap option should generate and emit source maps when value has "external" value and "sassOptions.omitSourceMapUrl" has "true" value (dart-sass) (sass): errors 1`] = `Array []`;
+
+exports[`sourceMap option should generate and emit source maps when value has "external" value and "sassOptions.omitSourceMapUrl" has "true" value (dart-sass) (sass): source map 1`] = `
+Object {
+  "file": "language.css",
+  "mappings": ";AACQ;AAMR;EACE;EACA,OALc;;;AAQd;EACE;EACA;EACA;;AAEF;EACE;;AAEF;EACE;EACA;EACA;;;AAQJ;EALE,uBAMe;EALf,oBAKe;EAJf,mBAIe;EAHf,eAGe;;;AAEjB;EACE;EACA;EACA;;;AAEF;EAEE;;;AAEF;EAEE;;;AAEF;EAEE;;;AAGA;EACE,SAhDY;;;AAmDd;EACE,SCzDc",
+  "names": Array [],
+  "sourceRoot": "",
+  "sources": Array [
+    "../sass/language.sass",
+    "../sass/another/variables.sass",
+  ],
+  "sourcesContent": Array [
+    "@import \\"another/variables\\"
+@import \\"./file.css\\"
+
+$font-stack:    Helvetica, sans-serif
+$primary-color: #333
+$pi:            '\\\\e0C6'
+
+body
+  font: 100% $font-stack
+  color: $primary-color
+
+nav
+  ul
+    margin: 0
+    padding: 0
+    list-style: none
+
+  li
+    display: inline-block
+
+  a
+    display: block
+    padding: 6px 12px
+    text-decoration: none
+
+=border-radius($radius)
+  -webkit-border-radius: $radius
+  -moz-border-radius:    $radius
+  -ms-border-radius:     $radius
+  border-radius:         $radius
+
+.box
+  +border-radius(10px)
+
+.message
+  border: 1px solid #ccc
+  padding: 10px
+  color: #333
+
+.success
+  @extend .message
+  border-color: green
+
+.error
+  @extend .message
+  border-color: red
+
+.warning
+  @extend .message
+  border-color: yellow
+
+.foo
+  &:before
+    content: $pi
+
+.bar
+  &:before
+    content: $n-ary-summation
+
+",
+    "$n-ary-summation: '\\\\2211'
+",
+  ],
+  "version": 3,
+}
+`;
+
+exports[`sourceMap option should generate and emit source maps when value has "external" value and "sassOptions.omitSourceMapUrl" has "true" value (dart-sass) (sass): warnings 1`] = `Array []`;
+
+exports[`sourceMap option should generate and emit source maps when value has "external" value and "sassOptions.omitSourceMapUrl" has "true" value (dart-sass) (scss): css 1`] = `
+"@charset \\"UTF-8\\";
+@import \\"./file.css\\";
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+nav li {
+  display: inline-block;
+}
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none;
+}
+
+.box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.foo:before {
+  content: \\"\\";
+}
+
+.bar:before {
+  content: \\"∑\\";
+}"
+`;
+
+exports[`sourceMap option should generate and emit source maps when value has "external" value and "sassOptions.omitSourceMapUrl" has "true" value (dart-sass) (scss): errors 1`] = `Array []`;
+
+exports[`sourceMap option should generate and emit source maps when value has "external" value and "sassOptions.omitSourceMapUrl" has "true" value (dart-sass) (scss): source map 1`] = `
+Object {
+  "file": "language.css",
+  "mappings": ";AACQ;AAMR;EACE;EACA,OALc;;;AASd;EACE;EACA;EACA;;AAGF;EAAK;;AAEL;EACE;EACA;EACA;;;AAWJ;EANE,uBAM4B;EALzB,oBAKyB;EAJxB,mBAIwB;EAHpB,eAGoB;;;AAG5B;EACE,SAlCY;;;AAuCd;EACE,SC7Cc",
+  "names": Array [],
+  "sourceRoot": "",
+  "sources": Array [
+    "../scss/language.scss",
+    "../scss/another/_variables.scss",
+  ],
+  "sourcesContent": Array [
+    "@import \\"another/variables\\";
+@import \\"./file.css\\";
+
+$font-stack:    Helvetica, sans-serif;
+$primary-color: #333;
+$pi:            '\\\\e0C6';
+
+body {
+  font: 100% $font-stack;
+  color: $primary-color;
+}
+
+nav {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li { display: inline-block; }
+
+  a {
+    display: block;
+    padding: 6px 12px;
+    text-decoration: none;
+  }
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+.box { @include border-radius(10px); }
+
+.foo {
+  &:before {
+    content: $pi;
+  }
+}
+
+.bar {
+  &:before {
+    content: $n-ary-summation;
+  }
+}
+",
+    "$n-ary-summation: '\\\\2211'
+",
+  ],
+  "version": 3,
+}
+`;
+
+exports[`sourceMap option should generate and emit source maps when value has "external" value and "sassOptions.omitSourceMapUrl" has "true" value (dart-sass) (scss): warnings 1`] = `Array []`;
+
+exports[`sourceMap option should generate and emit source maps when value has "external" value and "sassOptions.omitSourceMapUrl" has "true" value (node-sass) (sass): css 1`] = `
+"@charset \\"UTF-8\\";
+@import url(./file.css);
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333; }
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+
+nav li {
+  display: inline-block; }
+
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none; }
+
+.box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px; }
+
+.message, .success, .error, .warning {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333; }
+
+.success {
+  border-color: green; }
+
+.error {
+  border-color: red; }
+
+.warning {
+  border-color: yellow; }
+
+.foo:before {
+  content: \\"\\"; }
+
+.bar:before {
+  content: \\"∑\\"; }
+"
+`;
+
+exports[`sourceMap option should generate and emit source maps when value has "external" value and "sassOptions.omitSourceMapUrl" has "true" value (node-sass) (sass): errors 1`] = `Array []`;
+
+exports[`sourceMap option should generate and emit source maps when value has "external" value and "sassOptions.omitSourceMapUrl" has "true" value (node-sass) (sass): source map 1`] = `
+Object {
+  "file": "language.css",
+  "mappings": ";AACA,OAAO,CAAP,eAAO;AAMP,AAAA,IAAI,CAAC;EACH,IAAI,EAAE,IAAI,CALI,SAAS,EAAE,UAAU;EAMnC,KAAK,EALS,IAAI,GAKM;;AAE1B,AACE,GADC,CACD,EAAE,CAAC;EACD,MAAM,EAAE,CAAC;EACT,OAAO,EAAE,CAAC;EACV,UAAU,EAAE,IAAI,GAAG;;AAJvB,AAME,GANC,CAMD,EAAE,CAAC;EACD,OAAO,EAAE,YAAY,GAAG;;AAP5B,AASE,GATC,CASD,CAAC,CAAC;EACA,OAAO,EAAE,KAAK;EACd,OAAO,EAAE,QAAQ;EACjB,eAAe,EAAE,IAAI,GAAG;;AAQ5B,AAAA,IAAI,CAAC;EALH,qBAAqB,EAME,IAAI;EAL3B,kBAAkB,EAKK,IAAI;EAJ3B,iBAAiB,EAIM,IAAI;EAH3B,aAAa,EAGU,IAAI,GAAI;;AAEjC,AAAA,QAAQ,EAKR,QAAQ,EAIR,MAAM,EAIN,QAAQ,CAbC;EACP,MAAM,EAAE,cAAc;EACtB,OAAO,EAAE,IAAI;EACb,KAAK,EAAE,IAAI,GAAG;;AAEhB,AAAA,QAAQ,CAAC;EAEP,YAAY,EAAE,KAAK,GAAG;;AAExB,AAAA,MAAM,CAAC;EAEL,YAAY,EAAE,GAAG,GAAG;;AAEtB,AAAA,QAAQ,CAAC;EAEP,YAAY,EAAE,MAAM,GAAG;;AAEzB,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,EAhDK,IAAO,GAgDJ;;AAEnB,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,ECzDO,IAAO,GDyDO",
+  "names": Array [],
+  "sources": Array [
+    "../sass/language.sass",
+    "../sass/another/variables.sass",
+  ],
+  "sourcesContent": Array [
+    "@import \\"another/variables\\";
+@import \\"./file.css\\";
+
+$font-stack:    Helvetica, sans-serif;
+$primary-color: #333;
+$pi:            '\\\\e0C6';
+
+body {
+  font: 100% $font-stack;
+  color: $primary-color; }
+
+nav {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none; }
+
+  li {
+    display: inline-block; }
+
+  a {
+    display: block;
+    padding: 6px 12px;
+    text-decoration: none; } }
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius:    $radius;
+  -ms-border-radius:     $radius;
+  border-radius:         $radius; }
+
+.box {
+  @include border-radius(10px); }
+
+.message {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333; }
+
+.success {
+  @extend .message;
+  border-color: green; }
+
+.error {
+  @extend .message;
+  border-color: red; }
+
+.warning {
+  @extend .message;
+  border-color: yellow; }
+
+.foo {
+  &:before {
+    content: $pi; } }
+
+.bar {
+  &:before {
+    content: $n-ary-summation; } }
+
+",
+    "$n-ary-summation: '\\\\2211';
+",
+  ],
+  "version": 3,
+}
+`;
+
+exports[`sourceMap option should generate and emit source maps when value has "external" value and "sassOptions.omitSourceMapUrl" has "true" value (node-sass) (sass): warnings 1`] = `Array []`;
+
+exports[`sourceMap option should generate and emit source maps when value has "external" value and "sassOptions.omitSourceMapUrl" has "true" value (node-sass) (scss): css 1`] = `
+"@charset \\"UTF-8\\";
+@import url(./file.css);
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333; }
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+
+nav li {
+  display: inline-block; }
+
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none; }
+
+.box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px; }
+
+.foo:before {
+  content: \\"\\"; }
+
+.bar:before {
+  content: \\"∑\\"; }
+"
+`;
+
+exports[`sourceMap option should generate and emit source maps when value has "external" value and "sassOptions.omitSourceMapUrl" has "true" value (node-sass) (scss): errors 1`] = `Array []`;
+
+exports[`sourceMap option should generate and emit source maps when value has "external" value and "sassOptions.omitSourceMapUrl" has "true" value (node-sass) (scss): source map 1`] = `
+Object {
+  "file": "language.css",
+  "mappings": ";AACA,OAAO,CAAP,eAAO;AAMP,AAAA,IAAI,CAAC;EACH,IAAI,EAAE,IAAI,CALI,SAAS,EAAE,UAAU;EAMnC,KAAK,EALS,IAAI,GAMnB;;AAED,AACE,GADC,CACD,EAAE,CAAC;EACD,MAAM,EAAE,CAAC;EACT,OAAO,EAAE,CAAC;EACV,UAAU,EAAE,IAAI,GACjB;;AALH,AAOE,GAPC,CAOD,EAAE,CAAC;EAAE,OAAO,EAAE,YAAY,GAAI;;AAPhC,AASE,GATC,CASD,CAAC,CAAC;EACA,OAAO,EAAE,KAAK;EACd,OAAO,EAAE,QAAQ;EACjB,eAAe,EAAE,IAAI,GACtB;;AAUH,AAAA,IAAI,CAAC;EANH,qBAAqB,EAMO,IAAI;EAL7B,kBAAkB,EAKO,IAAI;EAJ5B,iBAAiB,EAIO,IAAI;EAHxB,aAAa,EAGO,IAAI,GAAK;;AAEvC,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,EAlCK,IAAO,GAmCpB;;AAGH,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,EC7CO,IAAO,GD8CtB",
+  "names": Array [],
+  "sources": Array [
+    "../scss/language.scss",
+    "../scss/another/_variables.scss",
+  ],
+  "sourcesContent": Array [
+    "@import \\"another/variables\\";
+@import \\"./file.css\\";
+
+$font-stack:    Helvetica, sans-serif;
+$primary-color: #333;
+$pi:            '\\\\e0C6';
+
+body {
+  font: 100% $font-stack;
+  color: $primary-color;
+}
+
+nav {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li { display: inline-block; }
+
+  a {
+    display: block;
+    padding: 6px 12px;
+    text-decoration: none;
+  }
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+.box { @include border-radius(10px); }
+
+.foo {
+  &:before {
+    content: $pi;
+  }
+}
+
+.bar {
+  &:before {
+    content: $n-ary-summation;
+  }
+}
+",
+    "$n-ary-summation: '\\\\2211'
+",
+  ],
+  "version": 3,
+}
+`;
+
+exports[`sourceMap option should generate and emit source maps when value has "external" value and "sassOptions.omitSourceMapUrl" has "true" value (node-sass) (scss): warnings 1`] = `Array []`;
+
+exports[`sourceMap option should generate and emit source maps when value has "external" value and nested outFile (dart-sass) (sass): css 1`] = `
+"@charset \\"UTF-8\\";
+@import \\"./file.css\\";
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+nav li {
+  display: inline-block;
+}
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none;
+}
+
+.box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.message, .warning, .error, .success {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333;
+}
+
+.success {
+  border-color: green;
+}
+
+.error {
+  border-color: red;
+}
+
+.warning {
+  border-color: yellow;
+}
+
+.foo:before {
+  content: \\"\\";
+}
+
+.bar:before {
+  content: \\"∑\\";
+}
+
+/*# sourceMappingURL=language.css.map */"
+`;
+
+exports[`sourceMap option should generate and emit source maps when value has "external" value and nested outFile (dart-sass) (sass): errors 1`] = `Array []`;
+
+exports[`sourceMap option should generate and emit source maps when value has "external" value and nested outFile (dart-sass) (sass): source map 1`] = `
+Object {
+  "file": "language.css",
+  "mappings": ";AACQ;AAMR;EACE;EACA,OALc;;;AAQd;EACE;EACA;EACA;;AAEF;EACE;;AAEF;EACE;EACA;EACA;;;AAQJ;EALE,uBAMe;EALf,oBAKe;EAJf,mBAIe;EAHf,eAGe;;;AAEjB;EACE;EACA;EACA;;;AAEF;EAEE;;;AAEF;EAEE;;;AAEF;EAEE;;;AAGA;EACE,SAhDY;;;AAmDd;EACE,SCzDc",
+  "names": Array [],
+  "sourceRoot": "",
+  "sources": Array [
+    "../../sass/language.sass",
+    "../../sass/another/variables.sass",
+  ],
+  "version": 3,
+}
+`;
+
+exports[`sourceMap option should generate and emit source maps when value has "external" value and nested outFile (dart-sass) (sass): warnings 1`] = `Array []`;
+
+exports[`sourceMap option should generate and emit source maps when value has "external" value and nested outFile (dart-sass) (scss): css 1`] = `
+"@charset \\"UTF-8\\";
+@import \\"./file.css\\";
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+nav li {
+  display: inline-block;
+}
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none;
+}
+
+.box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.foo:before {
+  content: \\"\\";
+}
+
+.bar:before {
+  content: \\"∑\\";
+}
+
+/*# sourceMappingURL=language.css.map */"
+`;
+
+exports[`sourceMap option should generate and emit source maps when value has "external" value and nested outFile (dart-sass) (scss): errors 1`] = `Array []`;
+
+exports[`sourceMap option should generate and emit source maps when value has "external" value and nested outFile (dart-sass) (scss): source map 1`] = `
+Object {
+  "file": "language.css",
+  "mappings": ";AACQ;AAMR;EACE;EACA,OALc;;;AASd;EACE;EACA;EACA;;AAGF;EAAK;;AAEL;EACE;EACA;EACA;;;AAWJ;EANE,uBAM4B;EALzB,oBAKyB;EAJxB,mBAIwB;EAHpB,eAGoB;;;AAG5B;EACE,SAlCY;;;AAuCd;EACE,SC7Cc",
+  "names": Array [],
+  "sourceRoot": "",
+  "sources": Array [
+    "../../scss/language.scss",
+    "../../scss/another/_variables.scss",
+  ],
+  "version": 3,
+}
+`;
+
+exports[`sourceMap option should generate and emit source maps when value has "external" value and nested outFile (dart-sass) (scss): warnings 1`] = `Array []`;
+
+exports[`sourceMap option should generate and emit source maps when value has "external" value and nested outFile (node-sass) (sass): css 1`] = `
+"@charset \\"UTF-8\\";
+@import url(./file.css);
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333; }
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+
+nav li {
+  display: inline-block; }
+
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none; }
+
+.box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px; }
+
+.message, .success, .error, .warning {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333; }
+
+.success {
+  border-color: green; }
+
+.error {
+  border-color: red; }
+
+.warning {
+  border-color: yellow; }
+
+.foo:before {
+  content: \\"\\"; }
+
+.bar:before {
+  content: \\"∑\\"; }
+
+/*# sourceMappingURL=language.css.map */"
+`;
+
+exports[`sourceMap option should generate and emit source maps when value has "external" value and nested outFile (node-sass) (sass): errors 1`] = `Array []`;
+
+exports[`sourceMap option should generate and emit source maps when value has "external" value and nested outFile (node-sass) (sass): source map 1`] = `
+Object {
+  "file": "language.css",
+  "mappings": ";AACA,OAAO,CAAP,eAAO;AAMP,AAAA,IAAI,CAAC;EACH,IAAI,EAAE,IAAI,CALI,SAAS,EAAE,UAAU;EAMnC,KAAK,EALS,IAAI,GAKM;;AAE1B,AACE,GADC,CACD,EAAE,CAAC;EACD,MAAM,EAAE,CAAC;EACT,OAAO,EAAE,CAAC;EACV,UAAU,EAAE,IAAI,GAAG;;AAJvB,AAME,GANC,CAMD,EAAE,CAAC;EACD,OAAO,EAAE,YAAY,GAAG;;AAP5B,AASE,GATC,CASD,CAAC,CAAC;EACA,OAAO,EAAE,KAAK;EACd,OAAO,EAAE,QAAQ;EACjB,eAAe,EAAE,IAAI,GAAG;;AAQ5B,AAAA,IAAI,CAAC;EALH,qBAAqB,EAME,IAAI;EAL3B,kBAAkB,EAKK,IAAI;EAJ3B,iBAAiB,EAIM,IAAI;EAH3B,aAAa,EAGU,IAAI,GAAI;;AAEjC,AAAA,QAAQ,EAKR,QAAQ,EAIR,MAAM,EAIN,QAAQ,CAbC;EACP,MAAM,EAAE,cAAc;EACtB,OAAO,EAAE,IAAI;EACb,KAAK,EAAE,IAAI,GAAG;;AAEhB,AAAA,QAAQ,CAAC;EAEP,YAAY,EAAE,KAAK,GAAG;;AAExB,AAAA,MAAM,CAAC;EAEL,YAAY,EAAE,GAAG,GAAG;;AAEtB,AAAA,QAAQ,CAAC;EAEP,YAAY,EAAE,MAAM,GAAG;;AAEzB,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,EAhDK,IAAO,GAgDJ;;AAEnB,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,ECzDO,IAAO,GDyDO",
+  "names": Array [],
+  "sources": Array [
+    "../../sass/language.sass",
+    "../../sass/another/variables.sass",
+  ],
+  "version": 3,
+}
+`;
+
+exports[`sourceMap option should generate and emit source maps when value has "external" value and nested outFile (node-sass) (sass): warnings 1`] = `Array []`;
+
+exports[`sourceMap option should generate and emit source maps when value has "external" value and nested outFile (node-sass) (scss): css 1`] = `
+"@charset \\"UTF-8\\";
+@import url(./file.css);
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333; }
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+
+nav li {
+  display: inline-block; }
+
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none; }
+
+.box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px; }
+
+.foo:before {
+  content: \\"\\"; }
+
+.bar:before {
+  content: \\"∑\\"; }
+
+/*# sourceMappingURL=language.css.map */"
+`;
+
+exports[`sourceMap option should generate and emit source maps when value has "external" value and nested outFile (node-sass) (scss): errors 1`] = `Array []`;
+
+exports[`sourceMap option should generate and emit source maps when value has "external" value and nested outFile (node-sass) (scss): source map 1`] = `
+Object {
+  "file": "language.css",
+  "mappings": ";AACA,OAAO,CAAP,eAAO;AAMP,AAAA,IAAI,CAAC;EACH,IAAI,EAAE,IAAI,CALI,SAAS,EAAE,UAAU;EAMnC,KAAK,EALS,IAAI,GAMnB;;AAED,AACE,GADC,CACD,EAAE,CAAC;EACD,MAAM,EAAE,CAAC;EACT,OAAO,EAAE,CAAC;EACV,UAAU,EAAE,IAAI,GACjB;;AALH,AAOE,GAPC,CAOD,EAAE,CAAC;EAAE,OAAO,EAAE,YAAY,GAAI;;AAPhC,AASE,GATC,CASD,CAAC,CAAC;EACA,OAAO,EAAE,KAAK;EACd,OAAO,EAAE,QAAQ;EACjB,eAAe,EAAE,IAAI,GACtB;;AAUH,AAAA,IAAI,CAAC;EANH,qBAAqB,EAMO,IAAI;EAL7B,kBAAkB,EAKO,IAAI;EAJ5B,iBAAiB,EAIO,IAAI;EAHxB,aAAa,EAGO,IAAI,GAAK;;AAEvC,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,EAlCK,IAAO,GAmCpB;;AAGH,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,EC7CO,IAAO,GD8CtB",
+  "names": Array [],
+  "sources": Array [
+    "../../scss/language.scss",
+    "../../scss/another/_variables.scss",
+  ],
+  "version": 3,
+}
+`;
+
+exports[`sourceMap option should generate and emit source maps when value has "external" value and nested outFile (node-sass) (scss): warnings 1`] = `Array []`;
+
+exports[`sourceMap option should generate embeded source maps when value has "external" value, but the "sassOptions.sourceMapEmbed" has the "true" value (dart-sass) (sass): css 1`] = `
+"@charset \\"UTF-8\\";
+@import \\"./file.css\\";
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+nav li {
+  display: inline-block;
+}
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none;
+}
+
+.box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.message, .warning, .error, .success {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333;
+}
+
+.success {
+  border-color: green;
+}
+
+.error {
+  border-color: red;
+}
+
+.warning {
+  border-color: yellow;
+}
+
+.foo:before {
+  content: \\"\\";
+}
+
+.bar:before {
+  content: \\"∑\\";
+}
+
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi9zYXNzL2xhbmd1YWdlLnNhc3MiLCIuLi9zYXNzL2Fub3RoZXIvdmFyaWFibGVzLnNhc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUNRO0FBTVI7RUFDRTtFQUNBLE9BTGM7OztBQVFkO0VBQ0U7RUFDQTtFQUNBOztBQUVGO0VBQ0U7O0FBRUY7RUFDRTtFQUNBO0VBQ0E7OztBQVFKO0VBTEUsdUJBTWU7RUFMZixvQkFLZTtFQUpmLG1CQUllO0VBSGYsZUFHZTs7O0FBRWpCO0VBQ0U7RUFDQTtFQUNBOzs7QUFFRjtFQUVFOzs7QUFFRjtFQUVFOzs7QUFFRjtFQUVFOzs7QUFHQTtFQUNFLFNBaERZOzs7QUFtRGQ7RUFDRSxTQ3pEYyIsImZpbGUiOiJsYW5ndWFnZS5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJAaW1wb3J0IFwiYW5vdGhlci92YXJpYWJsZXNcIlxuQGltcG9ydCBcIi4vZmlsZS5jc3NcIlxuXG4kZm9udC1zdGFjazogICAgSGVsdmV0aWNhLCBzYW5zLXNlcmlmXG4kcHJpbWFyeS1jb2xvcjogIzMzM1xuJHBpOiAgICAgICAgICAgICdcXGUwQzYnXG5cbmJvZHlcbiAgZm9udDogMTAwJSAkZm9udC1zdGFja1xuICBjb2xvcjogJHByaW1hcnktY29sb3JcblxubmF2XG4gIHVsXG4gICAgbWFyZ2luOiAwXG4gICAgcGFkZGluZzogMFxuICAgIGxpc3Qtc3R5bGU6IG5vbmVcblxuICBsaVxuICAgIGRpc3BsYXk6IGlubGluZS1ibG9ja1xuXG4gIGFcbiAgICBkaXNwbGF5OiBibG9ja1xuICAgIHBhZGRpbmc6IDZweCAxMnB4XG4gICAgdGV4dC1kZWNvcmF0aW9uOiBub25lXG5cbj1ib3JkZXItcmFkaXVzKCRyYWRpdXMpXG4gIC13ZWJraXQtYm9yZGVyLXJhZGl1czogJHJhZGl1c1xuICAtbW96LWJvcmRlci1yYWRpdXM6ICAgICRyYWRpdXNcbiAgLW1zLWJvcmRlci1yYWRpdXM6ICAgICAkcmFkaXVzXG4gIGJvcmRlci1yYWRpdXM6ICAgICAgICAgJHJhZGl1c1xuXG4uYm94XG4gICtib3JkZXItcmFkaXVzKDEwcHgpXG5cbi5tZXNzYWdlXG4gIGJvcmRlcjogMXB4IHNvbGlkICNjY2NcbiAgcGFkZGluZzogMTBweFxuICBjb2xvcjogIzMzM1xuXG4uc3VjY2Vzc1xuICBAZXh0ZW5kIC5tZXNzYWdlXG4gIGJvcmRlci1jb2xvcjogZ3JlZW5cblxuLmVycm9yXG4gIEBleHRlbmQgLm1lc3NhZ2VcbiAgYm9yZGVyLWNvbG9yOiByZWRcblxuLndhcm5pbmdcbiAgQGV4dGVuZCAubWVzc2FnZVxuICBib3JkZXItY29sb3I6IHllbGxvd1xuXG4uZm9vXG4gICY6YmVmb3JlXG4gICAgY29udGVudDogJHBpXG5cbi5iYXJcbiAgJjpiZWZvcmVcbiAgICBjb250ZW50OiAkbi1hcnktc3VtbWF0aW9uXG5cbiIsIiRuLWFyeS1zdW1tYXRpb246ICdcXDIyMTEnXG4iXX0= */"
+`;
+
+exports[`sourceMap option should generate embeded source maps when value has "external" value, but the "sassOptions.sourceMapEmbed" has the "true" value (dart-sass) (sass): errors 1`] = `Array []`;
+
+exports[`sourceMap option should generate embeded source maps when value has "external" value, but the "sassOptions.sourceMapEmbed" has the "true" value (dart-sass) (sass): warnings 1`] = `Array []`;
+
+exports[`sourceMap option should generate embeded source maps when value has "external" value, but the "sassOptions.sourceMapEmbed" has the "true" value (dart-sass) (scss): css 1`] = `
+"@charset \\"UTF-8\\";
+@import \\"./file.css\\";
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+nav li {
+  display: inline-block;
+}
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none;
+}
+
+.box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.foo:before {
+  content: \\"\\";
+}
+
+.bar:before {
+  content: \\"∑\\";
+}
+
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi9zY3NzL2xhbmd1YWdlLnNjc3MiLCIuLi9zY3NzL2Fub3RoZXIvX3ZhcmlhYmxlcy5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFDUTtBQU1SO0VBQ0U7RUFDQSxPQUxjOzs7QUFTZDtFQUNFO0VBQ0E7RUFDQTs7QUFHRjtFQUFLOztBQUVMO0VBQ0U7RUFDQTtFQUNBOzs7QUFXSjtFQU5FLHVCQU00QjtFQUx6QixvQkFLeUI7RUFKeEIsbUJBSXdCO0VBSHBCLGVBR29COzs7QUFHNUI7RUFDRSxTQWxDWTs7O0FBdUNkO0VBQ0UsU0M3Q2MiLCJmaWxlIjoibGFuZ3VhZ2UuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiQGltcG9ydCBcImFub3RoZXIvdmFyaWFibGVzXCI7XG5AaW1wb3J0IFwiLi9maWxlLmNzc1wiO1xuXG4kZm9udC1zdGFjazogICAgSGVsdmV0aWNhLCBzYW5zLXNlcmlmO1xuJHByaW1hcnktY29sb3I6ICMzMzM7XG4kcGk6ICAgICAgICAgICAgJ1xcZTBDNic7XG5cbmJvZHkge1xuICBmb250OiAxMDAlICRmb250LXN0YWNrO1xuICBjb2xvcjogJHByaW1hcnktY29sb3I7XG59XG5cbm5hdiB7XG4gIHVsIHtcbiAgICBtYXJnaW46IDA7XG4gICAgcGFkZGluZzogMDtcbiAgICBsaXN0LXN0eWxlOiBub25lO1xuICB9XG5cbiAgbGkgeyBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IH1cblxuICBhIHtcbiAgICBkaXNwbGF5OiBibG9jaztcbiAgICBwYWRkaW5nOiA2cHggMTJweDtcbiAgICB0ZXh0LWRlY29yYXRpb246IG5vbmU7XG4gIH1cbn1cblxuQG1peGluIGJvcmRlci1yYWRpdXMoJHJhZGl1cykge1xuICAtd2Via2l0LWJvcmRlci1yYWRpdXM6ICRyYWRpdXM7XG4gICAgIC1tb3otYm9yZGVyLXJhZGl1czogJHJhZGl1cztcbiAgICAgIC1tcy1ib3JkZXItcmFkaXVzOiAkcmFkaXVzO1xuICAgICAgICAgIGJvcmRlci1yYWRpdXM6ICRyYWRpdXM7XG59XG5cbi5ib3ggeyBAaW5jbHVkZSBib3JkZXItcmFkaXVzKDEwcHgpOyB9XG5cbi5mb28ge1xuICAmOmJlZm9yZSB7XG4gICAgY29udGVudDogJHBpO1xuICB9XG59XG5cbi5iYXIge1xuICAmOmJlZm9yZSB7XG4gICAgY29udGVudDogJG4tYXJ5LXN1bW1hdGlvbjtcbiAgfVxufVxuIiwiJG4tYXJ5LXN1bW1hdGlvbjogJ1xcMjIxMSdcbiJdfQ== */"
+`;
+
+exports[`sourceMap option should generate embeded source maps when value has "external" value, but the "sassOptions.sourceMapEmbed" has the "true" value (dart-sass) (scss): errors 1`] = `Array []`;
+
+exports[`sourceMap option should generate embeded source maps when value has "external" value, but the "sassOptions.sourceMapEmbed" has the "true" value (dart-sass) (scss): warnings 1`] = `Array []`;
+
+exports[`sourceMap option should generate embeded source maps when value has "external" value, but the "sassOptions.sourceMapEmbed" has the "true" value (node-sass) (sass): css 1`] = `
+"@charset \\"UTF-8\\";
+@import url(./file.css);
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333; }
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+
+nav li {
+  display: inline-block; }
+
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none; }
+
+.box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px; }
+
+.message, .success, .error, .warning {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333; }
+
+.success {
+  border-color: green; }
+
+.error {
+  border-color: red; }
+
+.warning {
+  border-color: yellow; }
+
+.foo:before {
+  content: \\"\\"; }
+
+.bar:before {
+  content: \\"∑\\"; }
+
+/*# sourceMappingURL=data:application/json;base64,ewoJInZlcnNpb24iOiAzLAoJImZpbGUiOiAibGFuZ3VhZ2UuY3NzIiwKCSJzb3VyY2VzIjogWwoJCSIuLi9zYXNzL2xhbmd1YWdlLnNhc3MiLAoJCSIuLi9zYXNzL2Fub3RoZXIvdmFyaWFibGVzLnNhc3MiCgldLAoJInNvdXJjZXNDb250ZW50IjogWwoJCSJAaW1wb3J0IFwiYW5vdGhlci92YXJpYWJsZXNcIjtcbkBpbXBvcnQgXCIuL2ZpbGUuY3NzXCI7XG5cbiRmb250LXN0YWNrOiAgICBIZWx2ZXRpY2EsIHNhbnMtc2VyaWY7XG4kcHJpbWFyeS1jb2xvcjogIzMzMztcbiRwaTogICAgICAgICAgICAnXFxlMEM2JztcblxuYm9keSB7XG4gIGZvbnQ6IDEwMCUgJGZvbnQtc3RhY2s7XG4gIGNvbG9yOiAkcHJpbWFyeS1jb2xvcjsgfVxuXG5uYXYge1xuICB1bCB7XG4gICAgbWFyZ2luOiAwO1xuICAgIHBhZGRpbmc6IDA7XG4gICAgbGlzdC1zdHlsZTogbm9uZTsgfVxuXG4gIGxpIHtcbiAgICBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IH1cblxuICBhIHtcbiAgICBkaXNwbGF5OiBibG9jaztcbiAgICBwYWRkaW5nOiA2cHggMTJweDtcbiAgICB0ZXh0LWRlY29yYXRpb246IG5vbmU7IH0gfVxuXG5AbWl4aW4gYm9yZGVyLXJhZGl1cygkcmFkaXVzKSB7XG4gIC13ZWJraXQtYm9yZGVyLXJhZGl1czogJHJhZGl1cztcbiAgLW1vei1ib3JkZXItcmFkaXVzOiAgICAkcmFkaXVzO1xuICAtbXMtYm9yZGVyLXJhZGl1czogICAgICRyYWRpdXM7XG4gIGJvcmRlci1yYWRpdXM6ICAgICAgICAgJHJhZGl1czsgfVxuXG4uYm94IHtcbiAgQGluY2x1ZGUgYm9yZGVyLXJhZGl1cygxMHB4KTsgfVxuXG4ubWVzc2FnZSB7XG4gIGJvcmRlcjogMXB4IHNvbGlkICNjY2M7XG4gIHBhZGRpbmc6IDEwcHg7XG4gIGNvbG9yOiAjMzMzOyB9XG5cbi5zdWNjZXNzIHtcbiAgQGV4dGVuZCAubWVzc2FnZTtcbiAgYm9yZGVyLWNvbG9yOiBncmVlbjsgfVxuXG4uZXJyb3Ige1xuICBAZXh0ZW5kIC5tZXNzYWdlO1xuICBib3JkZXItY29sb3I6IHJlZDsgfVxuXG4ud2FybmluZyB7XG4gIEBleHRlbmQgLm1lc3NhZ2U7XG4gIGJvcmRlci1jb2xvcjogeWVsbG93OyB9XG5cbi5mb28ge1xuICAmOmJlZm9yZSB7XG4gICAgY29udGVudDogJHBpOyB9IH1cblxuLmJhciB7XG4gICY6YmVmb3JlIHtcbiAgICBjb250ZW50OiAkbi1hcnktc3VtbWF0aW9uOyB9IH1cblxuIiwKCQkiJG4tYXJ5LXN1bW1hdGlvbjogJ1xcMjIxMSc7XG4iCgldLAoJIm5hbWVzIjogW10sCgkibWFwcGluZ3MiOiAiO0FBQ0EsT0FBTyxDQUFQLGVBQU87QUFNUCxBQUFBLElBQUksQ0FBQztFQUNILElBQUksRUFBRSxJQUFJLENBTEksU0FBUyxFQUFFLFVBQVU7RUFNbkMsS0FBSyxFQUxTLElBQUksR0FLTTs7QUFFMUIsQUFDRSxHQURDLENBQ0QsRUFBRSxDQUFDO0VBQ0QsTUFBTSxFQUFFLENBQUM7RUFDVCxPQUFPLEVBQUUsQ0FBQztFQUNWLFVBQVUsRUFBRSxJQUFJLEdBQUc7O0FBSnZCLEFBTUUsR0FOQyxDQU1ELEVBQUUsQ0FBQztFQUNELE9BQU8sRUFBRSxZQUFZLEdBQUc7O0FBUDVCLEFBU0UsR0FUQyxDQVNELENBQUMsQ0FBQztFQUNBLE9BQU8sRUFBRSxLQUFLO0VBQ2QsT0FBTyxFQUFFLFFBQVE7RUFDakIsZUFBZSxFQUFFLElBQUksR0FBRzs7QUFRNUIsQUFBQSxJQUFJLENBQUM7RUFMSCxxQkFBcUIsRUFNRSxJQUFJO0VBTDNCLGtCQUFrQixFQUtLLElBQUk7RUFKM0IsaUJBQWlCLEVBSU0sSUFBSTtFQUgzQixhQUFhLEVBR1UsSUFBSSxHQUFJOztBQUVqQyxBQUFBLFFBQVEsRUFLUixRQUFRLEVBSVIsTUFBTSxFQUlOLFFBQVEsQ0FiQztFQUNQLE1BQU0sRUFBRSxjQUFjO0VBQ3RCLE9BQU8sRUFBRSxJQUFJO0VBQ2IsS0FBSyxFQUFFLElBQUksR0FBRzs7QUFFaEIsQUFBQSxRQUFRLENBQUM7RUFFUCxZQUFZLEVBQUUsS0FBSyxHQUFHOztBQUV4QixBQUFBLE1BQU0sQ0FBQztFQUVMLFlBQVksRUFBRSxHQUFHLEdBQUc7O0FBRXRCLEFBQUEsUUFBUSxDQUFDO0VBRVAsWUFBWSxFQUFFLE1BQU0sR0FBRzs7QUFFekIsQUFDRSxJQURFLEFBQ0QsT0FBTyxDQUFDO0VBQ1AsT0FBTyxFQWhESyxJQUFPLEdBZ0RKOztBQUVuQixBQUNFLElBREUsQUFDRCxPQUFPLENBQUM7RUFDUCxPQUFPLEVDekRPLElBQU8sR0R5RE8iCn0= */"
+`;
+
+exports[`sourceMap option should generate embeded source maps when value has "external" value, but the "sassOptions.sourceMapEmbed" has the "true" value (node-sass) (sass): errors 1`] = `Array []`;
+
+exports[`sourceMap option should generate embeded source maps when value has "external" value, but the "sassOptions.sourceMapEmbed" has the "true" value (node-sass) (sass): warnings 1`] = `Array []`;
+
+exports[`sourceMap option should generate embeded source maps when value has "external" value, but the "sassOptions.sourceMapEmbed" has the "true" value (node-sass) (scss): css 1`] = `
+"@charset \\"UTF-8\\";
+@import url(./file.css);
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333; }
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+
+nav li {
+  display: inline-block; }
+
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none; }
+
+.box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px; }
+
+.foo:before {
+  content: \\"\\"; }
+
+.bar:before {
+  content: \\"∑\\"; }
+
+/*# sourceMappingURL=data:application/json;base64,ewoJInZlcnNpb24iOiAzLAoJImZpbGUiOiAibGFuZ3VhZ2UuY3NzIiwKCSJzb3VyY2VzIjogWwoJCSIuLi9zY3NzL2xhbmd1YWdlLnNjc3MiLAoJCSIuLi9zY3NzL2Fub3RoZXIvX3ZhcmlhYmxlcy5zY3NzIgoJXSwKCSJzb3VyY2VzQ29udGVudCI6IFsKCQkiQGltcG9ydCBcImFub3RoZXIvdmFyaWFibGVzXCI7XG5AaW1wb3J0IFwiLi9maWxlLmNzc1wiO1xuXG4kZm9udC1zdGFjazogICAgSGVsdmV0aWNhLCBzYW5zLXNlcmlmO1xuJHByaW1hcnktY29sb3I6ICMzMzM7XG4kcGk6ICAgICAgICAgICAgJ1xcZTBDNic7XG5cbmJvZHkge1xuICBmb250OiAxMDAlICRmb250LXN0YWNrO1xuICBjb2xvcjogJHByaW1hcnktY29sb3I7XG59XG5cbm5hdiB7XG4gIHVsIHtcbiAgICBtYXJnaW46IDA7XG4gICAgcGFkZGluZzogMDtcbiAgICBsaXN0LXN0eWxlOiBub25lO1xuICB9XG5cbiAgbGkgeyBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IH1cblxuICBhIHtcbiAgICBkaXNwbGF5OiBibG9jaztcbiAgICBwYWRkaW5nOiA2cHggMTJweDtcbiAgICB0ZXh0LWRlY29yYXRpb246IG5vbmU7XG4gIH1cbn1cblxuQG1peGluIGJvcmRlci1yYWRpdXMoJHJhZGl1cykge1xuICAtd2Via2l0LWJvcmRlci1yYWRpdXM6ICRyYWRpdXM7XG4gICAgIC1tb3otYm9yZGVyLXJhZGl1czogJHJhZGl1cztcbiAgICAgIC1tcy1ib3JkZXItcmFkaXVzOiAkcmFkaXVzO1xuICAgICAgICAgIGJvcmRlci1yYWRpdXM6ICRyYWRpdXM7XG59XG5cbi5ib3ggeyBAaW5jbHVkZSBib3JkZXItcmFkaXVzKDEwcHgpOyB9XG5cbi5mb28ge1xuICAmOmJlZm9yZSB7XG4gICAgY29udGVudDogJHBpO1xuICB9XG59XG5cbi5iYXIge1xuICAmOmJlZm9yZSB7XG4gICAgY29udGVudDogJG4tYXJ5LXN1bW1hdGlvbjtcbiAgfVxufVxuIiwKCQkiJG4tYXJ5LXN1bW1hdGlvbjogJ1xcMjIxMSdcbiIKCV0sCgkibmFtZXMiOiBbXSwKCSJtYXBwaW5ncyI6ICI7QUFDQSxPQUFPLENBQVAsZUFBTztBQU1QLEFBQUEsSUFBSSxDQUFDO0VBQ0gsSUFBSSxFQUFFLElBQUksQ0FMSSxTQUFTLEVBQUUsVUFBVTtFQU1uQyxLQUFLLEVBTFMsSUFBSSxHQU1uQjs7QUFFRCxBQUNFLEdBREMsQ0FDRCxFQUFFLENBQUM7RUFDRCxNQUFNLEVBQUUsQ0FBQztFQUNULE9BQU8sRUFBRSxDQUFDO0VBQ1YsVUFBVSxFQUFFLElBQUksR0FDakI7O0FBTEgsQUFPRSxHQVBDLENBT0QsRUFBRSxDQUFDO0VBQUUsT0FBTyxFQUFFLFlBQVksR0FBSTs7QUFQaEMsQUFTRSxHQVRDLENBU0QsQ0FBQyxDQUFDO0VBQ0EsT0FBTyxFQUFFLEtBQUs7RUFDZCxPQUFPLEVBQUUsUUFBUTtFQUNqQixlQUFlLEVBQUUsSUFBSSxHQUN0Qjs7QUFVSCxBQUFBLElBQUksQ0FBQztFQU5ILHFCQUFxQixFQU1PLElBQUk7RUFMN0Isa0JBQWtCLEVBS08sSUFBSTtFQUo1QixpQkFBaUIsRUFJTyxJQUFJO0VBSHhCLGFBQWEsRUFHTyxJQUFJLEdBQUs7O0FBRXZDLEFBQ0UsSUFERSxBQUNELE9BQU8sQ0FBQztFQUNQLE9BQU8sRUFsQ0ssSUFBTyxHQW1DcEI7O0FBR0gsQUFDRSxJQURFLEFBQ0QsT0FBTyxDQUFDO0VBQ1AsT0FBTyxFQzdDTyxJQUFPLEdEOEN0QiIKfQ== */"
+`;
+
+exports[`sourceMap option should generate embeded source maps when value has "external" value, but the "sassOptions.sourceMapEmbed" has the "true" value (node-sass) (scss): errors 1`] = `Array []`;
+
+exports[`sourceMap option should generate embeded source maps when value has "external" value, but the "sassOptions.sourceMapEmbed" has the "true" value (node-sass) (scss): warnings 1`] = `Array []`;
+
 exports[`sourceMap option should generate source maps when value has "false" value, but the "sassOptions.sourceMap" has the "true" value (dart-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
 @import \\"./file.css\\";

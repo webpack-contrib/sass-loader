@@ -61,9 +61,13 @@ exports[`validate options should throw an error on the "sassOptions" option with
 
 exports[`validate options should throw an error on the "sourceMap" option with "string" value 1`] = `
 "Invalid options object. Sass Loader has been initialized using an options object that does not match the API schema.
- - options.sourceMap should be a boolean.
+ - options.sourceMap should be one of these:
+   \\"external\\" | boolean
    -> Enables/Disables generation of source maps.
-   -> Read more at https://github.com/webpack-contrib/sass-loader#sourcemap"
+   -> Read more at https://github.com/webpack-contrib/sass-loader#sourcemap
+   Details:
+    * options.sourceMap should be \\"external\\".
+    * options.sourceMap should be a boolean."
 `;
 
 exports[`validate options should throw an error on the "unknown" option with "/test/" value 1`] = `
