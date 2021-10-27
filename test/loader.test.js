@@ -1757,7 +1757,9 @@ describe("loader", () => {
                   return {
                     type: item.type,
                     args: item.args.map((arg) =>
-                      arg.replace(url.pathToFileURL(__dirname), "file:///<cwd>")
+                      arg
+                        .replace(url.pathToFileURL(__dirname), "file:///<cwd>")
+                        .replace(/\\/g, "/")
                     ),
                   };
                 })
