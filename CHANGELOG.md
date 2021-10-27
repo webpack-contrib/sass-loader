@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [12.3.0](https://github.com/webpack-contrib/sass-loader/compare/v12.2.0...v12.3.0) (2021-10-27)
+
+
+### Features
+
+* added the `warnRuleAsWarning` option, allows to emit a warning on the `@warn` rule ([#992](https://github.com/webpack-contrib/sass-loader/issues/992)) ([c652c79](https://github.com/webpack-contrib/sass-loader/commit/c652c79b67999546d0e65f237a947b3e1b454691))
+* use webpack logger to log sass messages (only for `dart-sass`), configure it using [infrastructureLogging](https://webpack.js.org/configuration/other-options/#infrastructurelogging) ([#991](https://github.com/webpack-contrib/sass-loader/issues/991)) ([bb7cef9](https://github.com/webpack-contrib/sass-loader/commit/bb7cef97d5d9ba26dc2db2e1948a2a04b26f4031))
+
 ## [12.2.0](https://github.com/webpack-contrib/sass-loader/compare/v12.1.0...v12.2.0) (2021-10-12)
 
 
