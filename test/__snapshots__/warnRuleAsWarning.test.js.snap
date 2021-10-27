@@ -1,0 +1,185 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`loader should not emit warning by default (dart-sass) (sass): css 1`] = `
+"a {
+  color: red;
+}"
+`;
+
+exports[`loader should not emit warning by default (dart-sass) (sass): errors 1`] = `Array []`;
+
+exports[`loader should not emit warning by default (dart-sass) (sass): logs 1`] = `
+Array [
+  Array [
+    Object {
+      "args": Array [
+        "file:///<cwd>/sass/logging.sass:0:0: My debug message",
+      ],
+      "type": "debug",
+    },
+    Object {
+      "args": Array [
+        "My warning message
+
+test/sass/logging.sass 2:1  root stylesheet
+",
+      ],
+      "type": "warn",
+    },
+  ],
+]
+`;
+
+exports[`loader should not emit warning by default (dart-sass) (sass): warnings 1`] = `Array []`;
+
+exports[`loader should not emit warning by default (dart-sass) (scss): css 1`] = `
+"a {
+  color: red;
+}"
+`;
+
+exports[`loader should not emit warning by default (dart-sass) (scss): errors 1`] = `Array []`;
+
+exports[`loader should not emit warning by default (dart-sass) (scss): logs 1`] = `
+Array [
+  Array [
+    Object {
+      "args": Array [
+        "file:///<cwd>/scss/logging.scss:0:0: My debug message",
+      ],
+      "type": "debug",
+    },
+    Object {
+      "args": Array [
+        "My warning message
+
+test/scss/logging.scss 2:1  root stylesheet
+",
+      ],
+      "type": "warn",
+    },
+  ],
+]
+`;
+
+exports[`loader should not emit warning by default (dart-sass) (scss): warnings 1`] = `Array []`;
+
+exports[`loader should not emit warning when 'false' used (dart-sass) (sass): css 1`] = `
+"a {
+  color: red;
+}"
+`;
+
+exports[`loader should not emit warning when 'false' used (dart-sass) (sass): errors 1`] = `Array []`;
+
+exports[`loader should not emit warning when 'false' used (dart-sass) (sass): logs 1`] = `
+Array [
+  Array [
+    Object {
+      "args": Array [
+        "file:///<cwd>/sass/logging.sass:0:0: My debug message",
+      ],
+      "type": "debug",
+    },
+    Object {
+      "args": Array [
+        "My warning message
+
+test/sass/logging.sass 2:1  root stylesheet
+",
+      ],
+      "type": "warn",
+    },
+  ],
+]
+`;
+
+exports[`loader should not emit warning when 'false' used (dart-sass) (sass): warnings 1`] = `Array []`;
+
+exports[`loader should not emit warning when 'false' used (dart-sass) (scss): css 1`] = `
+"a {
+  color: red;
+}"
+`;
+
+exports[`loader should not emit warning when 'false' used (dart-sass) (scss): errors 1`] = `Array []`;
+
+exports[`loader should not emit warning when 'false' used (dart-sass) (scss): logs 1`] = `
+Array [
+  Array [
+    Object {
+      "args": Array [
+        "file:///<cwd>/scss/logging.scss:0:0: My debug message",
+      ],
+      "type": "debug",
+    },
+    Object {
+      "args": Array [
+        "My warning message
+
+test/scss/logging.scss 2:1  root stylesheet
+",
+      ],
+      "type": "warn",
+    },
+  ],
+]
+`;
+
+exports[`loader should not emit warning when 'false' used (dart-sass) (scss): warnings 1`] = `Array []`;
+
+exports[`loader should not emit warning when 'true' used (dart-sass) (sass): css 1`] = `
+"a {
+  color: red;
+}"
+`;
+
+exports[`loader should not emit warning when 'true' used (dart-sass) (sass): errors 1`] = `Array []`;
+
+exports[`loader should not emit warning when 'true' used (dart-sass) (sass): logs 1`] = `
+Array [
+  Array [
+    Object {
+      "args": Array [
+        "file:///<cwd>/sass/logging.sass:0:0: My debug message",
+      ],
+      "type": "debug",
+    },
+  ],
+]
+`;
+
+exports[`loader should not emit warning when 'true' used (dart-sass) (sass): warnings 1`] = `
+Array [
+  "ModuleWarning: Module Warning (from ../src/cjs.js):
+My warning message",
+]
+`;
+
+exports[`loader should not emit warning when 'true' used (dart-sass) (scss): css 1`] = `
+"a {
+  color: red;
+}"
+`;
+
+exports[`loader should not emit warning when 'true' used (dart-sass) (scss): errors 1`] = `Array []`;
+
+exports[`loader should not emit warning when 'true' used (dart-sass) (scss): logs 1`] = `
+Array [
+  Array [
+    Object {
+      "args": Array [
+        "file:///<cwd>/scss/logging.scss:0:0: My debug message",
+      ],
+      "type": "debug",
+    },
+  ],
+]
+`;
+
+exports[`loader should not emit warning when 'true' used (dart-sass) (scss): warnings 1`] = `
+Array [
+  "ModuleWarning: Module Warning (from ../src/cjs.js):
+My warning message",
+]
+`;

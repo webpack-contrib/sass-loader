@@ -119,13 +119,14 @@ Thankfully there are a two solutions to this problem:
 
 ## Options
 
-|                   Name                    |         Type         |                 Default                 | Description                                                       |
-| :---------------------------------------: | :------------------: | :-------------------------------------: | :---------------------------------------------------------------- |
-|  **[`implementation`](#implementation)**  |  `{Object\|String}`  |                 `sass`                  | Setup Sass implementation to use.                                 |
-|     **[`sassOptions`](#sassoptions)**     | `{Object\|Function}` | defaults values for Sass implementation | Options for Sass.                                                 |
-|       **[`sourceMap`](#sourcemap)**       |     `{Boolean}`      |           `compiler.devtool`            | Enables/Disables generation of source maps.                       |
-|  **[`additionalData`](#additionaldata)**  | `{String\|Function}` |               `undefined`               | Prepends/Appends `Sass`/`SCSS` code before the actual entry file. |
-| **[`webpackImporter`](#webpackimporter)** |     `{Boolean}`      |                 `true`                  | Enables/Disables the default Webpack importer.                    |
+|                     Name                      |         Type         |                 Default                 | Description                                                       |
+| :-------------------------------------------: | :------------------: | :-------------------------------------: | :---------------------------------------------------------------- |
+|    **[`implementation`](#implementation)**    |  `{Object\|String}`  |                 `sass`                  | Setup Sass implementation to use.                                 |
+|       **[`sassOptions`](#sassoptions)**       | `{Object\|Function}` | defaults values for Sass implementation | Options for Sass.                                                 |
+|         **[`sourceMap`](#sourcemap)**         |     `{Boolean}`      |           `compiler.devtool`            | Enables/Disables generation of source maps.                       |
+|    **[`additionalData`](#additionaldata)**    | `{String\|Function}` |               `undefined`               | Prepends/Appends `Sass`/`SCSS` code before the actual entry file. |
+|   **[`webpackImporter`](#webpackimporter)**   |     `{Boolean}`      |                 `true`                  | Enables/Disables the default Webpack importer.                    |
+| **[`warnRuleAsWarning`](#warnruleaswarning)** |     `{Boolean}`      |                 `false`                 | Treats the `@warn` rule as a webpack warning.                     |
 
 ### `implementation`
 
@@ -595,6 +596,65 @@ module.exports = {
             loader: "sass-loader",
             options: {
               webpackImporter: false,
+            },
+          },
+        ],
+      },
+    ],
+  },
+};
+```
+
+### `warnRuleAsWarning`
+
+Type: `Boolean`
+Default: `false`
+
+Treats the `@warn` rule as a webpack warning.
+
+> ℹ️ It will be `true` by default in the next major release.
+
+**style.scss**
+
+```scss
+$known-prefixes: webkit, moz, ms, o;
+
+@mixin prefix($property, $value, $prefixes) {
+  @each $prefix in $prefixes {
+    @if not index($known-prefixes, $prefix) {
+      @warn "Unknown prefix #{$prefix}.";
+    }
+
+    -#{$prefix}-#{$property}: $value;
+  }
+  #{$property}: $value;
+}
+
+.tilt {
+  // Oops, we typo'd "webkit" as "wekbit"!
+  @include prefix(transform, rotate(15deg), wekbit ms);
+}
+```
+
+The presented code will throw webpack warning instead logging.
+
+To ignore unnecessary warnings you can use the [ignoreWarnings](https://webpack.js.org/configuration/other-options/#ignorewarnings) option.
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          "style-loader",
+          "css-loader",
+          {
+            loader: "sass-loader",
+            options: {
+              warnRuleAsWarning: true,
             },
           },
         ],

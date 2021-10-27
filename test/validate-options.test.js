@@ -52,6 +52,10 @@ describe("validate options", () => {
       success: [true, false],
       failure: ["string"],
     },
+    warnRuleAsWarning: {
+      success: [true, false],
+      failure: ["string"],
+    },
     unknown: {
       success: [],
       failure: [1, true, false, "test", /test/, [], {}, { foo: "bar" }],

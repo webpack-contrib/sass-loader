@@ -48,6 +48,11 @@
       "description": "Enables/Disables default `webpack` importer.",
       "link": "https://github.com/webpack-contrib/sass-loader#webpackimporter",
       "type": "boolean"
+    },
+    "warnRuleAsWarning": {
+      "description": "Treats the '@warn' rule as a webpack warning.",
+      "link": "https://github.com/webpack-contrib/sass-loader#warnruleaswarning",
+      "type": "boolean"
     }
   },
   "additionalProperties": false
