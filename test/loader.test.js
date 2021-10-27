@@ -1,4 +1,5 @@
 import path from "path";
+import url from "url";
 
 import nodeSass from "node-sass";
 import dartSass from "sass";
@@ -1755,7 +1756,9 @@ describe("loader", () => {
                 value.map((item) => {
                   return {
                     type: item.type,
-                    args: item.args,
+                    args: item.args.map((arg) =>
+                      arg.replace(url.pathToFileURL(__dirname), "file:///<cwd>")
+                    ),
                   };
                 })
               );
