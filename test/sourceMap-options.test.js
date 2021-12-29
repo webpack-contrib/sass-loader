@@ -3,7 +3,8 @@ import path from "path";
 
 import nodeSass from "node-sass";
 import dartSass from "sass";
-import Fiber from "fibers";
+
+import { isSupportedFibers } from "../src/utils";
 
 import {
   compile,
@@ -15,13 +16,23 @@ import {
   getWarnings,
 } from "./helpers";
 
+let Fiber;
 const implementations = [nodeSass, dartSass];
 const syntaxStyles = ["scss", "sass"];
 
 describe("sourceMap option", () => {
+  beforeAll(async () => {
+    if (isSupportedFibers()) {
+      const { default: fibers } = await import("fibers");
+      Fiber = fibers;
+    }
+  });
+
   beforeEach(() => {
-    // The `sass` (`Dart Sass`) package modify the `Function` prototype, but the `jest` lose a prototype
-    Object.setPrototypeOf(Fiber, Function.prototype);
+    if (isSupportedFibers()) {
+      // The `sass` (`Dart Sass`) package modify the `Function` prototype, but the `jest` lose a prototype
+      Object.setPrototypeOf(Fiber, Function.prototype);
+    }
   });
 
   implementations.forEach((implementation) => {
