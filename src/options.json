@@ -42,7 +42,14 @@
     "sourceMap": {
       "description": "Enables/Disables generation of source maps.",
       "link": "https://github.com/webpack-contrib/sass-loader#sourcemap",
-      "type": "boolean"
+      "anyOf": [
+        {
+          "enum": ["external"]
+        },
+        {
+          "type": "boolean"
+        }
+      ]
     },
     "webpackImporter": {
       "description": "Enables/Disables default `webpack` importer.",
