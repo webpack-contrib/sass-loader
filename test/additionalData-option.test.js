@@ -1,6 +1,3 @@
-import nodeSass from "node-sass";
-import dartSass from "sass";
-
 import { isSupportedFibers } from "../src/utils";
 
 import {
@@ -9,13 +6,14 @@ import {
   getCodeFromSass,
   getCompiler,
   getErrors,
+  getImplementations,
   getImplementationByName,
   getTestId,
   getWarnings,
 } from "./helpers";
 
 let Fiber;
-const implementations = [nodeSass, dartSass];
+const implementations = getImplementations();
 const syntaxStyles = ["scss", "sass"];
 
 describe("additionalData option", () => {
@@ -48,7 +46,7 @@ describe("additionalData option", () => {
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = getCodeFromSass(testId, options);
+        const codeFromSass = await getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -72,7 +70,7 @@ describe("additionalData option", () => {
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = getCodeFromSass(testId, options);
+        const codeFromSass = await getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -96,7 +94,7 @@ describe("additionalData option", () => {
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = getCodeFromSass(testId, options);
+        const codeFromSass = await getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot("css");

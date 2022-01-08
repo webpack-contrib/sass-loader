@@ -1,8 +1,8 @@
 import path from "path";
 import url from "url";
 
-import nodeSass from "node-sass";
 import dartSass from "sass";
+import sassEmbedded from "sass-embedded";
 import del from "del";
 
 import { isSupportedFibers } from "../src/utils";
@@ -13,6 +13,7 @@ import {
   getCodeFromSass,
   getCompiler,
   getErrors,
+  getImplementations,
   getImplementationByName,
   getTestId,
   getWarnings,
@@ -21,7 +22,7 @@ import {
 jest.setTimeout(60000);
 
 let Fiber;
-const implementations = [nodeSass, dartSass];
+const implementations = getImplementations();
 const syntaxStyles = ["scss", "sass"];
 
 describe("loader", () => {
@@ -51,7 +52,7 @@ describe("loader", () => {
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = getCodeFromSass(testId, options);
+        const codeFromSass = await getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -79,7 +80,7 @@ describe("loader", () => {
         });
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = getCodeFromSass(testId, options);
+        const codeFromSass = await getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -108,7 +109,7 @@ describe("loader", () => {
         });
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = getCodeFromSass(testId, options);
+        const codeFromSass = await getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -124,7 +125,7 @@ describe("loader", () => {
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = getCodeFromSass(testId, options);
+        const codeFromSass = await getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -213,7 +214,7 @@ describe("loader", () => {
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = getCodeFromSass(testId, options);
+        const codeFromSass = await getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -230,7 +231,7 @@ describe("loader", () => {
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = getCodeFromSass(testId, options);
+        const codeFromSass = await getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -247,7 +248,7 @@ describe("loader", () => {
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = getCodeFromSass(testId, options);
+        const codeFromSass = await getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -263,7 +264,7 @@ describe("loader", () => {
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = getCodeFromSass(testId, options);
+        const codeFromSass = await getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -279,7 +280,7 @@ describe("loader", () => {
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = getCodeFromSass(testId, options);
+        const codeFromSass = await getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -295,7 +296,7 @@ describe("loader", () => {
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = getCodeFromSass(testId, options);
+        const codeFromSass = await getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -314,7 +315,7 @@ describe("loader", () => {
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = getCodeFromSass(testId, options);
+        const codeFromSass = await getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -334,7 +335,7 @@ describe("loader", () => {
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = getCodeFromSass(testId, options);
+        const codeFromSass = await getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -350,7 +351,7 @@ describe("loader", () => {
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = getCodeFromSass(testId, options);
+        const codeFromSass = await getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -366,7 +367,7 @@ describe("loader", () => {
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = getCodeFromSass(testId, options);
+        const codeFromSass = await getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -382,7 +383,7 @@ describe("loader", () => {
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = getCodeFromSass(testId, options);
+        const codeFromSass = await getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -400,7 +401,7 @@ describe("loader", () => {
         });
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = getCodeFromSass(testId, options);
+        const codeFromSass = await getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -418,7 +419,7 @@ describe("loader", () => {
         });
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = getCodeFromSass(testId, options);
+        const codeFromSass = await getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -439,7 +440,7 @@ describe("loader", () => {
         });
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = getCodeFromSass(testId, options);
+        const codeFromSass = await getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -455,7 +456,7 @@ describe("loader", () => {
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = getCodeFromSass(testId, options);
+        const codeFromSass = await getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -473,7 +474,7 @@ describe("loader", () => {
         });
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = getCodeFromSass(testId, options);
+        const codeFromSass = await getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -491,7 +492,7 @@ describe("loader", () => {
         });
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = getCodeFromSass(testId, options);
+        const codeFromSass = await getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -510,7 +511,7 @@ describe("loader", () => {
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = getCodeFromSass(testId, options);
+        const codeFromSass = await getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -532,7 +533,7 @@ describe("loader", () => {
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = getCodeFromSass(testId, options);
+        const codeFromSass = await getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -548,7 +549,7 @@ describe("loader", () => {
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = getCodeFromSass(testId, options);
+        const codeFromSass = await getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -594,7 +595,7 @@ describe("loader", () => {
         });
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = getCodeFromSass(testId, options);
+        const codeFromSass = await getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -612,7 +613,7 @@ describe("loader", () => {
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = getCodeFromSass(testId, options);
+        const codeFromSass = await getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -628,7 +629,7 @@ describe("loader", () => {
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = getCodeFromSass(testId, options);
+        const codeFromSass = await getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -644,7 +645,7 @@ describe("loader", () => {
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = getCodeFromSass(testId, options);
+        const codeFromSass = await getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -660,7 +661,7 @@ describe("loader", () => {
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = getCodeFromSass(testId, options);
+        const codeFromSass = await getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -676,7 +677,7 @@ describe("loader", () => {
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = getCodeFromSass(testId, options);
+        const codeFromSass = await getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
@@ -691,7 +692,7 @@ describe("loader", () => {
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = getCodeFromSass(testId, options);
+        const codeFromSass = await getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -707,7 +708,7 @@ describe("loader", () => {
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = getCodeFromSass(testId, options);
+        const codeFromSass = await getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
@@ -725,7 +726,7 @@ describe("loader", () => {
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = getCodeFromSass(testId, options);
+        const codeFromSass = await getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -747,7 +748,7 @@ describe("loader", () => {
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = getCodeFromSass(testId, options);
+        const codeFromSass = await getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -766,7 +767,7 @@ describe("loader", () => {
         });
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = getCodeFromSass(
+        const codeFromSass = await getCodeFromSass(
           testId,
           Object.assign({}, options, {
             sassOptions: {
@@ -796,7 +797,7 @@ describe("loader", () => {
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = getCodeFromSass(testId, options);
+        const codeFromSass = await getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -815,7 +816,7 @@ describe("loader", () => {
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = getCodeFromSass(testId, options);
+        const codeFromSass = await getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -831,7 +832,7 @@ describe("loader", () => {
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = getCodeFromSass(testId, options);
+        const codeFromSass = await getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -860,7 +861,7 @@ describe("loader", () => {
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = getCodeFromSass(testId, options);
+        const codeFromSass = await getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -878,7 +879,7 @@ describe("loader", () => {
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = getCodeFromSass(testId, options);
+        const codeFromSass = await getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -897,7 +898,7 @@ describe("loader", () => {
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = getCodeFromSass(testId, options);
+        const codeFromSass = await getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -913,7 +914,7 @@ describe("loader", () => {
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = getCodeFromSass(testId, options);
+        const codeFromSass = await getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -936,7 +937,7 @@ describe("loader", () => {
         });
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = getCodeFromSass(testId, options);
+        const codeFromSass = await getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -952,7 +953,7 @@ describe("loader", () => {
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = getCodeFromSass(testId, options);
+        const codeFromSass = await getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -982,7 +983,7 @@ describe("loader", () => {
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = getCodeFromSass(testId, options);
+        const codeFromSass = await getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -1010,7 +1011,7 @@ describe("loader", () => {
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = getCodeFromSass(testId, options);
+        const codeFromSass = await getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -1035,7 +1036,7 @@ describe("loader", () => {
         });
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = getCodeFromSass(testId, options);
+        const codeFromSass = await getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -1055,7 +1056,7 @@ describe("loader", () => {
         expect(getErrors(stats)).toMatchSnapshot("errors");
       });
 
-      if (implementation === dartSass) {
+      if (implementation === dartSass || implementation === sassEmbedded) {
         it(`should work (${implementationName}) (${syntax}) with "@charset "UTF-8";"`, async () => {
           const testId = getTestId("charset-utf-8", syntax);
           const options = {
@@ -1064,7 +1065,7 @@ describe("loader", () => {
           const compiler = getCompiler(testId, { loader: { options } });
           const stats = await compile(compiler);
           const codeFromBundle = getCodeFromBundle(stats, compiler);
-          const codeFromSass = getCodeFromSass(testId, options);
+          const codeFromSass = await getCodeFromSass(testId, options);
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
           expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -1080,7 +1081,7 @@ describe("loader", () => {
           const compiler = getCompiler(testId, { loader: { options } });
           const stats = await compile(compiler);
           const codeFromBundle = getCodeFromBundle(stats, compiler);
-          const codeFromSass = getCodeFromSass(testId, options);
+          const codeFromSass = await getCodeFromSass(testId, options);
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
           expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -1099,7 +1100,7 @@ describe("loader", () => {
           const compiler = getCompiler(testId, { loader: { options } });
           const stats = await compile(compiler);
           const codeFromBundle = getCodeFromBundle(stats, compiler);
-          const codeFromSass = getCodeFromSass(testId, options);
+          const codeFromSass = await getCodeFromSass(testId, options);
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
           expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -1175,7 +1176,7 @@ describe("loader", () => {
           const compiler = getCompiler(testId, { loader: { options } });
           const stats = await compile(compiler);
           const codeFromBundle = getCodeFromBundle(stats, compiler);
-          const codeFromSass = getCodeFromSass(testId, options);
+          const codeFromSass = await getCodeFromSass(testId, options);
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
           expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -1191,7 +1192,7 @@ describe("loader", () => {
           const compiler = getCompiler(testId, { loader: { options } });
           const stats = await compile(compiler);
           const codeFromBundle = getCodeFromBundle(stats, compiler);
-          const codeFromSass = getCodeFromSass(testId, options);
+          const codeFromSass = await getCodeFromSass(testId, options);
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
           expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -1207,7 +1208,7 @@ describe("loader", () => {
           const compiler = getCompiler(testId, { loader: { options } });
           const stats = await compile(compiler);
           const codeFromBundle = getCodeFromBundle(stats, compiler);
-          const codeFromSass = getCodeFromSass(testId, options);
+          const codeFromSass = await getCodeFromSass(testId, options);
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
           expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -1223,7 +1224,7 @@ describe("loader", () => {
           const compiler = getCompiler(testId, { loader: { options } });
           const stats = await compile(compiler);
           const codeFromBundle = getCodeFromBundle(stats, compiler);
-          const codeFromSass = getCodeFromSass(testId, options);
+          const codeFromSass = await getCodeFromSass(testId, options);
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
           expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -1239,7 +1240,7 @@ describe("loader", () => {
           const compiler = getCompiler(testId, { loader: { options } });
           const stats = await compile(compiler);
           const codeFromBundle = getCodeFromBundle(stats, compiler);
-          const codeFromSass = getCodeFromSass(testId, options);
+          const codeFromSass = await getCodeFromSass(testId, options);
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
           expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -1258,7 +1259,7 @@ describe("loader", () => {
           const compiler = getCompiler(testId, { loader: { options } });
           const stats = await compile(compiler);
           const codeFromBundle = getCodeFromBundle(stats, compiler);
-          const codeFromSass = getCodeFromSass(testId, options);
+          const codeFromSass = await getCodeFromSass(testId, options);
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
           expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -1274,7 +1275,7 @@ describe("loader", () => {
           const compiler = getCompiler(testId, { loader: { options } });
           const stats = await compile(compiler);
           const codeFromBundle = getCodeFromBundle(stats, compiler);
-          const codeFromSass = getCodeFromSass(testId, options);
+          const codeFromSass = await getCodeFromSass(testId, options);
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
           expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -1290,7 +1291,7 @@ describe("loader", () => {
           const compiler = getCompiler(testId, { loader: { options } });
           const stats = await compile(compiler);
           const codeFromBundle = getCodeFromBundle(stats, compiler);
-          const codeFromSass = getCodeFromSass(testId, options);
+          const codeFromSass = await getCodeFromSass(testId, options);
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
           expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -1306,7 +1307,7 @@ describe("loader", () => {
           const compiler = getCompiler(testId, { loader: { options } });
           const stats = await compile(compiler);
           const codeFromBundle = getCodeFromBundle(stats, compiler);
-          const codeFromSass = getCodeFromSass(testId, options);
+          const codeFromSass = await getCodeFromSass(testId, options);
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
           expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -1324,7 +1325,7 @@ describe("loader", () => {
           });
           const stats = await compile(compiler);
           const codeFromBundle = getCodeFromBundle(stats, compiler);
-          const codeFromSass = getCodeFromSass(testId, options);
+          const codeFromSass = await getCodeFromSass(testId, options);
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
           expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -1342,7 +1343,7 @@ describe("loader", () => {
           });
           const stats = await compile(compiler);
           const codeFromBundle = getCodeFromBundle(stats, compiler);
-          const codeFromSass = getCodeFromSass(testId, options);
+          const codeFromSass = await getCodeFromSass(testId, options);
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
           expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -1363,7 +1364,7 @@ describe("loader", () => {
           });
           const stats = await compile(compiler);
           const codeFromBundle = getCodeFromBundle(stats, compiler);
-          const codeFromSass = getCodeFromSass(testId, options);
+          const codeFromSass = await getCodeFromSass(testId, options);
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
           expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -1379,7 +1380,7 @@ describe("loader", () => {
           const compiler = getCompiler(testId, { loader: { options } });
           const stats = await compile(compiler);
           const codeFromBundle = getCodeFromBundle(stats, compiler);
-          const codeFromSass = getCodeFromSass(testId, options);
+          const codeFromSass = await getCodeFromSass(testId, options);
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
           expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -1397,7 +1398,7 @@ describe("loader", () => {
           });
           const stats = await compile(compiler);
           const codeFromBundle = getCodeFromBundle(stats, compiler);
-          const codeFromSass = getCodeFromSass(testId, options);
+          const codeFromSass = await getCodeFromSass(testId, options);
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
           expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -1415,7 +1416,7 @@ describe("loader", () => {
           });
           const stats = await compile(compiler);
           const codeFromBundle = getCodeFromBundle(stats, compiler);
-          const codeFromSass = getCodeFromSass(testId, options);
+          const codeFromSass = await getCodeFromSass(testId, options);
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
           expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -1431,7 +1432,7 @@ describe("loader", () => {
           const compiler = getCompiler(testId, { loader: { options } });
           const stats = await compile(compiler);
           const codeFromBundle = getCodeFromBundle(stats, compiler);
-          const codeFromSass = getCodeFromSass(testId, options);
+          const codeFromSass = await getCodeFromSass(testId, options);
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
           expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -1477,7 +1478,7 @@ describe("loader", () => {
           });
           const stats = await compile(compiler);
           const codeFromBundle = getCodeFromBundle(stats, compiler);
-          const codeFromSass = getCodeFromSass(testId, options);
+          const codeFromSass = await getCodeFromSass(testId, options);
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
           expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -1493,7 +1494,7 @@ describe("loader", () => {
           const compiler = getCompiler(testId, { loader: { options } });
           const stats = await compile(compiler);
           const codeFromBundle = getCodeFromBundle(stats, compiler);
-          const codeFromSass = getCodeFromSass(testId, options);
+          const codeFromSass = await getCodeFromSass(testId, options);
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
           expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -1509,7 +1510,7 @@ describe("loader", () => {
           const compiler = getCompiler(testId, { loader: { options } });
           const stats = await compile(compiler);
           const codeFromBundle = getCodeFromBundle(stats, compiler);
-          const codeFromSass = getCodeFromSass(testId, options);
+          const codeFromSass = await getCodeFromSass(testId, options);
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
           expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -1525,7 +1526,7 @@ describe("loader", () => {
           const compiler = getCompiler(testId, { loader: { options } });
           const stats = await compile(compiler);
           const codeFromBundle = getCodeFromBundle(stats, compiler);
-          const codeFromSass = getCodeFromSass(testId, options);
+          const codeFromSass = await getCodeFromSass(testId, options);
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
           expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -1541,7 +1542,7 @@ describe("loader", () => {
           const compiler = getCompiler(testId, { loader: { options } });
           const stats = await compile(compiler);
           const codeFromBundle = getCodeFromBundle(stats, compiler);
-          const codeFromSass = getCodeFromSass(testId, options);
+          const codeFromSass = await getCodeFromSass(testId, options);
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
           expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -1557,7 +1558,7 @@ describe("loader", () => {
           const compiler = getCompiler(testId, { loader: { options } });
           const stats = await compile(compiler);
           const codeFromBundle = getCodeFromBundle(stats, compiler);
-          const codeFromSass = getCodeFromSass(testId, options);
+          const codeFromSass = await getCodeFromSass(testId, options);
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
           expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -1573,7 +1574,7 @@ describe("loader", () => {
           const compiler = getCompiler(testId, { loader: { options } });
           const stats = await compile(compiler);
           const codeFromBundle = getCodeFromBundle(stats, compiler);
-          const codeFromSass = getCodeFromSass(testId, options);
+          const codeFromSass = await getCodeFromSass(testId, options);
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
           expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -1592,7 +1593,7 @@ describe("loader", () => {
           const compiler = getCompiler(testId, { loader: { options } });
           const stats = await compile(compiler);
           const codeFromBundle = getCodeFromBundle(stats, compiler);
-          const codeFromSass = getCodeFromSass(testId, options);
+          const codeFromSass = await getCodeFromSass(testId, options);
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
           expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -1608,7 +1609,7 @@ describe("loader", () => {
           const compiler = getCompiler(testId, { loader: { options } });
           const stats = await compile(compiler);
           const codeFromBundle = getCodeFromBundle(stats, compiler);
-          const codeFromSass = getCodeFromSass(testId, options);
+          const codeFromSass = await getCodeFromSass(testId, options);
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
           expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -1627,7 +1628,7 @@ describe("loader", () => {
           const compiler = getCompiler(testId, { loader: { options } });
           const stats = await compile(compiler);
           const codeFromBundle = getCodeFromBundle(stats, compiler);
-          const codeFromSass = getCodeFromSass(testId, options);
+          const codeFromSass = await getCodeFromSass(testId, options);
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
           expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -1643,7 +1644,7 @@ describe("loader", () => {
           const compiler = getCompiler(testId, { loader: { options } });
           const stats = await compile(compiler);
           const codeFromBundle = getCodeFromBundle(stats, compiler);
-          const codeFromSass = getCodeFromSass(testId, options);
+          const codeFromSass = await getCodeFromSass(testId, options);
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
           expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -1659,7 +1660,7 @@ describe("loader", () => {
           const compiler = getCompiler(testId, { loader: { options } });
           const stats = await compile(compiler);
           const codeFromBundle = getCodeFromBundle(stats, compiler);
-          const codeFromSass = getCodeFromSass(testId, options);
+          const codeFromSass = await getCodeFromSass(testId, options);
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
           expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -1675,7 +1676,7 @@ describe("loader", () => {
           const compiler = getCompiler(testId, { loader: { options } });
           const stats = await compile(compiler);
           const codeFromBundle = getCodeFromBundle(stats, compiler);
-          const codeFromSass = getCodeFromSass(testId, options);
+          const codeFromSass = await getCodeFromSass(testId, options);
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
           expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -1703,7 +1704,7 @@ describe("loader", () => {
           const compiler = getCompiler(testId, { loader: { options } });
           const stats = await compile(compiler);
           const codeFromBundle = getCodeFromBundle(stats, compiler);
-          const codeFromSass = getCodeFromSass(testId, options);
+          const codeFromSass = await getCodeFromSass(testId, options);
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
           expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -1719,7 +1720,7 @@ describe("loader", () => {
           const compiler = getCompiler(testId, { loader: { options } });
           const stats = await compile(compiler);
           const codeFromBundle = getCodeFromBundle(stats, compiler);
-          const codeFromSass = getCodeFromSass(testId, options);
+          const codeFromSass = await getCodeFromSass(testId, options);
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
           expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -1747,7 +1748,7 @@ describe("loader", () => {
           const compiler = getCompiler(testId, { loader: { options } });
           const stats = await compile(compiler);
           const codeFromBundle = getCodeFromBundle(stats, compiler);
-          const codeFromSass = getCodeFromSass(testId, options);
+          const codeFromSass = await getCodeFromSass(testId, options);
           const logs = [];
 
           for (const [name, value] of stats.compilation.logging) {
@@ -1793,7 +1794,7 @@ describe("loader", () => {
           const compiler = getCompiler(testId, { loader: { options } });
           const stats = await compile(compiler);
           const codeFromBundle = getCodeFromBundle(stats, compiler);
-          const codeFromSass = getCodeFromSass(testId, options);
+          const codeFromSass = await getCodeFromSass(testId, options);
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
           expect(codeFromBundle.css).toMatchSnapshot("css");

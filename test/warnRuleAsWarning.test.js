@@ -1,7 +1,5 @@
 import url from "url";
 
-import dartSass from "sass";
-
 import { isSupportedFibers } from "../src/utils";
 
 import {
@@ -10,6 +8,7 @@ import {
   getCodeFromSass,
   getCompiler,
   getErrors,
+  getImplementations,
   getImplementationByName,
   getTestId,
   getWarnings,
@@ -18,7 +17,7 @@ import {
 jest.setTimeout(60000);
 
 let Fiber;
-const implementations = [dartSass];
+const implementations = getImplementations({ nodeSass: false });
 const syntaxStyles = ["scss", "sass"];
 
 describe("loader", () => {

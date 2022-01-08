@@ -1,9 +1,6 @@
 import fs from "fs";
 import path from "path";
 
-import nodeSass from "node-sass";
-import dartSass from "sass";
-
 import { isSupportedFibers } from "../src/utils";
 
 import {
@@ -11,13 +8,14 @@ import {
   getCodeFromBundle,
   getCompiler,
   getErrors,
+  getImplementations,
   getImplementationByName,
   getTestId,
   getWarnings,
 } from "./helpers";
 
 let Fiber;
-const implementations = [nodeSass, dartSass];
+const implementations = getImplementations();
 const syntaxStyles = ["scss", "sass"];
 
 describe("sourceMap option", () => {

@@ -3,7 +3,7 @@ import fs from "fs";
 
 import { klona } from "klona/full";
 
-function getCodeFromSass(testId, options) {
+async function getCodeFromSass(testId, options) {
   const loaderOptions = klona(options);
   let sassOptions = options.sassOptions || {};
 
@@ -783,7 +783,20 @@ function getCodeFromSass(testId, options) {
 
   sassOptions.logger = { debug: () => {}, warn: () => {} };
 
-  const { css, map } = implementation.renderSync(sassOptions);
+  const { css, map } =
+    typeof implementation.compile !== "undefined"
+      ? await new Promise((resolve, reject) => {
+          implementation.render(sassOptions, (error, result) => {
+            if (error) {
+              reject(error);
+
+              return;
+            }
+
+            resolve(result);
+          });
+        })
+      : implementation.renderSync(sassOptions);
 
   return { css: css.toString(), sourceMap: map };
 }
