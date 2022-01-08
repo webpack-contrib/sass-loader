@@ -47,7 +47,7 @@ describe("loader", () => {
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = getCodeFromSass(testId, options);
+        const codeFromSass = await getCodeFromSass(testId, options);
         const logs = [];
 
         for (const [name, value] of stats.compilation.logging) {
@@ -83,7 +83,7 @@ describe("loader", () => {
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = getCodeFromSass(testId, options);
+        const codeFromSass = await getCodeFromSass(testId, options);
         const logs = [];
 
         for (const [name, value] of stats.compilation.logging) {
@@ -119,7 +119,7 @@ describe("loader", () => {
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = getCodeFromSass(testId, options);
+        const codeFromSass = await getCodeFromSass(testId, options);
         const logs = [];
 
         for (const [name, value] of stats.compilation.logging) {
