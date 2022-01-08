@@ -102,95 +102,107 @@ exports[`webpackImporter option false (dart-sass) (scss): errors 1`] = `Array []
 
 exports[`webpackImporter option false (dart-sass) (scss): warnings 1`] = `Array []`;
 
-exports[`webpackImporter option false (node-sass) (sass): css 1`] = `
+exports[`webpackImporter option false (sass-embedded) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
-@import url(./file.css);
+@import \\"./file.css\\";
 body {
   font: 100% Helvetica, sans-serif;
-  color: #333; }
+  color: #333;
+}
 
 nav ul {
   margin: 0;
   padding: 0;
-  list-style: none; }
-
+  list-style: none;
+}
 nav li {
-  display: inline-block; }
-
+  display: inline-block;
+}
 nav a {
   display: block;
   padding: 6px 12px;
-  text-decoration: none; }
+  text-decoration: none;
+}
 
 .box {
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   -ms-border-radius: 10px;
-  border-radius: 10px; }
+  border-radius: 10px;
+}
 
-.message, .success, .error, .warning {
+.message, .warning, .error, .success {
   border: 1px solid #ccc;
   padding: 10px;
-  color: #333; }
+  color: #333;
+}
 
 .success {
-  border-color: green; }
+  border-color: green;
+}
 
 .error {
-  border-color: red; }
+  border-color: red;
+}
 
 .warning {
-  border-color: yellow; }
+  border-color: yellow;
+}
 
 .foo:before {
-  content: \\"\\"; }
+  content: \\"\\\\e0c6\\";
+}
 
 .bar:before {
-  content: \\"∑\\"; }
-"
+  content: \\"∑\\";
+}"
 `;
 
-exports[`webpackImporter option false (node-sass) (sass): errors 1`] = `Array []`;
+exports[`webpackImporter option false (sass-embedded) (sass): errors 1`] = `Array []`;
 
-exports[`webpackImporter option false (node-sass) (sass): warnings 1`] = `Array []`;
+exports[`webpackImporter option false (sass-embedded) (sass): warnings 1`] = `Array []`;
 
-exports[`webpackImporter option false (node-sass) (scss): css 1`] = `
+exports[`webpackImporter option false (sass-embedded) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
-@import url(./file.css);
+@import \\"./file.css\\";
 body {
   font: 100% Helvetica, sans-serif;
-  color: #333; }
+  color: #333;
+}
 
 nav ul {
   margin: 0;
   padding: 0;
-  list-style: none; }
-
+  list-style: none;
+}
 nav li {
-  display: inline-block; }
-
+  display: inline-block;
+}
 nav a {
   display: block;
   padding: 6px 12px;
-  text-decoration: none; }
+  text-decoration: none;
+}
 
 .box {
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   -ms-border-radius: 10px;
-  border-radius: 10px; }
+  border-radius: 10px;
+}
 
 .foo:before {
-  content: \\"\\"; }
+  content: \\"\\\\e0c6\\";
+}
 
 .bar:before {
-  content: \\"∑\\"; }
-"
+  content: \\"∑\\";
+}"
 `;
 
-exports[`webpackImporter option false (node-sass) (scss): errors 1`] = `Array []`;
+exports[`webpackImporter option false (sass-embedded) (scss): errors 1`] = `Array []`;
 
-exports[`webpackImporter option false (node-sass) (scss): warnings 1`] = `Array []`;
+exports[`webpackImporter option false (sass-embedded) (scss): warnings 1`] = `Array []`;
 
 exports[`webpackImporter option not specify (dart-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
@@ -294,95 +306,107 @@ exports[`webpackImporter option not specify (dart-sass) (scss): errors 1`] = `Ar
 
 exports[`webpackImporter option not specify (dart-sass) (scss): warnings 1`] = `Array []`;
 
-exports[`webpackImporter option not specify (node-sass) (sass): css 1`] = `
+exports[`webpackImporter option not specify (sass-embedded) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
-@import url(./file.css);
+@import \\"./file.css\\";
 body {
   font: 100% Helvetica, sans-serif;
-  color: #333; }
+  color: #333;
+}
 
 nav ul {
   margin: 0;
   padding: 0;
-  list-style: none; }
-
+  list-style: none;
+}
 nav li {
-  display: inline-block; }
-
+  display: inline-block;
+}
 nav a {
   display: block;
   padding: 6px 12px;
-  text-decoration: none; }
+  text-decoration: none;
+}
 
 .box {
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   -ms-border-radius: 10px;
-  border-radius: 10px; }
+  border-radius: 10px;
+}
 
-.message, .success, .error, .warning {
+.message, .warning, .error, .success {
   border: 1px solid #ccc;
   padding: 10px;
-  color: #333; }
+  color: #333;
+}
 
 .success {
-  border-color: green; }
+  border-color: green;
+}
 
 .error {
-  border-color: red; }
+  border-color: red;
+}
 
 .warning {
-  border-color: yellow; }
+  border-color: yellow;
+}
 
 .foo:before {
-  content: \\"\\"; }
+  content: \\"\\\\e0c6\\";
+}
 
 .bar:before {
-  content: \\"∑\\"; }
-"
+  content: \\"∑\\";
+}"
 `;
 
-exports[`webpackImporter option not specify (node-sass) (sass): errors 1`] = `Array []`;
+exports[`webpackImporter option not specify (sass-embedded) (sass): errors 1`] = `Array []`;
 
-exports[`webpackImporter option not specify (node-sass) (sass): warnings 1`] = `Array []`;
+exports[`webpackImporter option not specify (sass-embedded) (sass): warnings 1`] = `Array []`;
 
-exports[`webpackImporter option not specify (node-sass) (scss): css 1`] = `
+exports[`webpackImporter option not specify (sass-embedded) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
-@import url(./file.css);
+@import \\"./file.css\\";
 body {
   font: 100% Helvetica, sans-serif;
-  color: #333; }
+  color: #333;
+}
 
 nav ul {
   margin: 0;
   padding: 0;
-  list-style: none; }
-
+  list-style: none;
+}
 nav li {
-  display: inline-block; }
-
+  display: inline-block;
+}
 nav a {
   display: block;
   padding: 6px 12px;
-  text-decoration: none; }
+  text-decoration: none;
+}
 
 .box {
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   -ms-border-radius: 10px;
-  border-radius: 10px; }
+  border-radius: 10px;
+}
 
 .foo:before {
-  content: \\"\\"; }
+  content: \\"\\\\e0c6\\";
+}
 
 .bar:before {
-  content: \\"∑\\"; }
-"
+  content: \\"∑\\";
+}"
 `;
 
-exports[`webpackImporter option not specify (node-sass) (scss): errors 1`] = `Array []`;
+exports[`webpackImporter option not specify (sass-embedded) (scss): errors 1`] = `Array []`;
 
-exports[`webpackImporter option not specify (node-sass) (scss): warnings 1`] = `Array []`;
+exports[`webpackImporter option not specify (sass-embedded) (scss): warnings 1`] = `Array []`;
 
 exports[`webpackImporter option true (dart-sass) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
@@ -486,92 +510,104 @@ exports[`webpackImporter option true (dart-sass) (scss): errors 1`] = `Array []`
 
 exports[`webpackImporter option true (dart-sass) (scss): warnings 1`] = `Array []`;
 
-exports[`webpackImporter option true (node-sass) (sass): css 1`] = `
+exports[`webpackImporter option true (sass-embedded) (sass): css 1`] = `
 "@charset \\"UTF-8\\";
-@import url(./file.css);
+@import \\"./file.css\\";
 body {
   font: 100% Helvetica, sans-serif;
-  color: #333; }
+  color: #333;
+}
 
 nav ul {
   margin: 0;
   padding: 0;
-  list-style: none; }
-
+  list-style: none;
+}
 nav li {
-  display: inline-block; }
-
+  display: inline-block;
+}
 nav a {
   display: block;
   padding: 6px 12px;
-  text-decoration: none; }
+  text-decoration: none;
+}
 
 .box {
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   -ms-border-radius: 10px;
-  border-radius: 10px; }
+  border-radius: 10px;
+}
 
-.message, .success, .error, .warning {
+.message, .warning, .error, .success {
   border: 1px solid #ccc;
   padding: 10px;
-  color: #333; }
+  color: #333;
+}
 
 .success {
-  border-color: green; }
+  border-color: green;
+}
 
 .error {
-  border-color: red; }
+  border-color: red;
+}
 
 .warning {
-  border-color: yellow; }
+  border-color: yellow;
+}
 
 .foo:before {
-  content: \\"\\"; }
+  content: \\"\\\\e0c6\\";
+}
 
 .bar:before {
-  content: \\"∑\\"; }
-"
+  content: \\"∑\\";
+}"
 `;
 
-exports[`webpackImporter option true (node-sass) (sass): errors 1`] = `Array []`;
+exports[`webpackImporter option true (sass-embedded) (sass): errors 1`] = `Array []`;
 
-exports[`webpackImporter option true (node-sass) (sass): warnings 1`] = `Array []`;
+exports[`webpackImporter option true (sass-embedded) (sass): warnings 1`] = `Array []`;
 
-exports[`webpackImporter option true (node-sass) (scss): css 1`] = `
+exports[`webpackImporter option true (sass-embedded) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
-@import url(./file.css);
+@import \\"./file.css\\";
 body {
   font: 100% Helvetica, sans-serif;
-  color: #333; }
+  color: #333;
+}
 
 nav ul {
   margin: 0;
   padding: 0;
-  list-style: none; }
-
+  list-style: none;
+}
 nav li {
-  display: inline-block; }
-
+  display: inline-block;
+}
 nav a {
   display: block;
   padding: 6px 12px;
-  text-decoration: none; }
+  text-decoration: none;
+}
 
 .box {
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   -ms-border-radius: 10px;
-  border-radius: 10px; }
+  border-radius: 10px;
+}
 
 .foo:before {
-  content: \\"\\"; }
+  content: \\"\\\\e0c6\\";
+}
 
 .bar:before {
-  content: \\"∑\\"; }
-"
+  content: \\"∑\\";
+}"
 `;
 
-exports[`webpackImporter option true (node-sass) (scss): errors 1`] = `Array []`;
+exports[`webpackImporter option true (sass-embedded) (scss): errors 1`] = `Array []`;
 
-exports[`webpackImporter option true (node-sass) (scss): warnings 1`] = `Array []`;
+exports[`webpackImporter option true (sass-embedded) (scss): warnings 1`] = `Array []`;

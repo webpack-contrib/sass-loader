@@ -64,29 +64,29 @@ test/scss/logging.scss 2:1  root stylesheet
 
 exports[`loader should not emit warning by default (dart-sass) (scss): warnings 1`] = `Array []`;
 
-exports[`loader should not emit warning by default (node-sass) (sass): css 1`] = `
+exports[`loader should not emit warning by default (sass-embedded) (sass): css 1`] = `
 "a {
-  color: red; }
-"
+  color: red;
+}"
 `;
 
-exports[`loader should not emit warning by default (node-sass) (sass): errors 1`] = `Array []`;
+exports[`loader should not emit warning by default (sass-embedded) (sass): errors 1`] = `Array []`;
 
-exports[`loader should not emit warning by default (node-sass) (sass): logs 1`] = `Array []`;
+exports[`loader should not emit warning by default (sass-embedded) (sass): logs 1`] = `Array []`;
 
-exports[`loader should not emit warning by default (node-sass) (sass): warnings 1`] = `Array []`;
+exports[`loader should not emit warning by default (sass-embedded) (sass): warnings 1`] = `Array []`;
 
-exports[`loader should not emit warning by default (node-sass) (scss): css 1`] = `
+exports[`loader should not emit warning by default (sass-embedded) (scss): css 1`] = `
 "a {
-  color: red; }
-"
+  color: red;
+}"
 `;
 
-exports[`loader should not emit warning by default (node-sass) (scss): errors 1`] = `Array []`;
+exports[`loader should not emit warning by default (sass-embedded) (scss): errors 1`] = `Array []`;
 
-exports[`loader should not emit warning by default (node-sass) (scss): logs 1`] = `Array []`;
+exports[`loader should not emit warning by default (sass-embedded) (scss): logs 1`] = `Array []`;
 
-exports[`loader should not emit warning by default (node-sass) (scss): warnings 1`] = `Array []`;
+exports[`loader should not emit warning by default (sass-embedded) (scss): warnings 1`] = `Array []`;
 
 exports[`loader should not emit warning when 'false' used (dart-sass) (sass): css 1`] = `
 "a {
@@ -152,29 +152,29 @@ test/scss/logging.scss 2:1  root stylesheet
 
 exports[`loader should not emit warning when 'false' used (dart-sass) (scss): warnings 1`] = `Array []`;
 
-exports[`loader should not emit warning when 'false' used (node-sass) (sass): css 1`] = `
+exports[`loader should not emit warning when 'false' used (sass-embedded) (sass): css 1`] = `
 "a {
-  color: red; }
-"
+  color: red;
+}"
 `;
 
-exports[`loader should not emit warning when 'false' used (node-sass) (sass): errors 1`] = `Array []`;
+exports[`loader should not emit warning when 'false' used (sass-embedded) (sass): errors 1`] = `Array []`;
 
-exports[`loader should not emit warning when 'false' used (node-sass) (sass): logs 1`] = `Array []`;
+exports[`loader should not emit warning when 'false' used (sass-embedded) (sass): logs 1`] = `Array []`;
 
-exports[`loader should not emit warning when 'false' used (node-sass) (sass): warnings 1`] = `Array []`;
+exports[`loader should not emit warning when 'false' used (sass-embedded) (sass): warnings 1`] = `Array []`;
 
-exports[`loader should not emit warning when 'false' used (node-sass) (scss): css 1`] = `
+exports[`loader should not emit warning when 'false' used (sass-embedded) (scss): css 1`] = `
 "a {
-  color: red; }
-"
+  color: red;
+}"
 `;
 
-exports[`loader should not emit warning when 'false' used (node-sass) (scss): errors 1`] = `Array []`;
+exports[`loader should not emit warning when 'false' used (sass-embedded) (scss): errors 1`] = `Array []`;
 
-exports[`loader should not emit warning when 'false' used (node-sass) (scss): logs 1`] = `Array []`;
+exports[`loader should not emit warning when 'false' used (sass-embedded) (scss): logs 1`] = `Array []`;
 
-exports[`loader should not emit warning when 'false' used (node-sass) (scss): warnings 1`] = `Array []`;
+exports[`loader should not emit warning when 'false' used (sass-embedded) (scss): warnings 1`] = `Array []`;
 
 exports[`loader should not emit warning when 'true' used (dart-sass) (sass): css 1`] = `
 "a {
@@ -232,26 +232,26 @@ My warning message",
 ]
 `;
 
-exports[`loader should not emit warning when 'true' used (node-sass) (sass): css 1`] = `
+exports[`loader should not emit warning when 'true' used (sass-embedded) (sass): css 1`] = `
 "a {
-  color: red; }
-"
+  color: red;
+}"
 `;
 
-exports[`loader should not emit warning when 'true' used (node-sass) (sass): errors 1`] = `Array []`;
+exports[`loader should not emit warning when 'true' used (sass-embedded) (sass): errors 1`] = `Array []`;
 
-exports[`loader should not emit warning when 'true' used (node-sass) (sass): logs 1`] = `Array []`;
+exports[`loader should not emit warning when 'true' used (sass-embedded) (sass): logs 1`] = `Array []`;
 
-exports[`loader should not emit warning when 'true' used (node-sass) (sass): warnings 1`] = `Array []`;
+exports[`loader should not emit warning when 'true' used (sass-embedded) (sass): warnings 1`] = `Array []`;
 
-exports[`loader should not emit warning when 'true' used (node-sass) (scss): css 1`] = `
+exports[`loader should not emit warning when 'true' used (sass-embedded) (scss): css 1`] = `
 "a {
-  color: red; }
-"
+  color: red;
+}"
 `;
 
-exports[`loader should not emit warning when 'true' used (node-sass) (scss): errors 1`] = `Array []`;
+exports[`loader should not emit warning when 'true' used (sass-embedded) (scss): errors 1`] = `Array []`;
 
-exports[`loader should not emit warning when 'true' used (node-sass) (scss): logs 1`] = `Array []`;
+exports[`loader should not emit warning when 'true' used (sass-embedded) (scss): logs 1`] = `Array []`;
 
-exports[`loader should not emit warning when 'true' used (node-sass) (scss): warnings 1`] = `Array []`;
+exports[`loader should not emit warning when 'true' used (sass-embedded) (scss): warnings 1`] = `Array []`;

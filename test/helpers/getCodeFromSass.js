@@ -783,20 +783,17 @@ async function getCodeFromSass(testId, options) {
 
   sassOptions.logger = { debug: () => {}, warn: () => {} };
 
-  const { css, map } =
-    typeof implementation.compile !== "undefined"
-      ? await new Promise((resolve, reject) => {
-          implementation.render(sassOptions, (error, result) => {
-            if (error) {
-              reject(error);
+  const { css, map } = await new Promise((resolve, reject) => {
+    implementation.render(sassOptions, (error, result) => {
+      if (error) {
+        reject(error);
 
-              return;
-            }
+        return;
+      }
 
-            resolve(result);
-          });
-        })
-      : implementation.renderSync(sassOptions);
+      resolve(result);
+    });
+  });
 
   return { css: css.toString(), sourceMap: map };
 }

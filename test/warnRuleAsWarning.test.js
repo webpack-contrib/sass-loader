@@ -17,7 +17,7 @@ import {
 jest.setTimeout(60000);
 
 let Fiber;
-const implementations = getImplementations({ nodeSass: false });
+const implementations = getImplementations();
 const syntaxStyles = ["scss", "sass"];
 
 describe("loader", () => {
