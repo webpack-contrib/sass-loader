@@ -1,20 +1,28 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`implementation option dart-sass: errors 1`] = `Array []`;
+exports[`implementation option 'dart-sass', 'old' API: errors 1`] = `Array []`;
 
-exports[`implementation option dart-sass: warnings 1`] = `Array []`;
+exports[`implementation option 'dart-sass', 'old' API: warnings 1`] = `Array []`;
 
-exports[`implementation option node-sass: errors 1`] = `Array []`;
+exports[`implementation option 'node-sass', 'old' API: errors 1`] = `Array []`;
 
-exports[`implementation option node-sass: warnings 1`] = `Array []`;
+exports[`implementation option 'node-sass', 'old' API: warnings 1`] = `Array []`;
+
+exports[`implementation option 'sass_string', 'old' API: errors 1`] = `Array []`;
+
+exports[`implementation option 'sass_string', 'old' API: warnings 1`] = `Array []`;
+
+exports[`implementation option not specify with modern API: errors 1`] = `Array []`;
+
+exports[`implementation option not specify with modern API: warnings 1`] = `Array []`;
+
+exports[`implementation option not specify with old API: errors 1`] = `Array []`;
+
+exports[`implementation option not specify with old API: warnings 1`] = `Array []`;
 
 exports[`implementation option not specify: errors 1`] = `Array []`;
 
 exports[`implementation option not specify: warnings 1`] = `Array []`;
-
-exports[`implementation option sass_string: errors 1`] = `Array []`;
-
-exports[`implementation option sass_string: warnings 1`] = `Array []`;
 
 exports[`implementation option should not swallow an error when trying to load a sass implementation: errors 1`] = `
 Array [

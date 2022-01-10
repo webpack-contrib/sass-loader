@@ -2,7 +2,6 @@ import path from "path";
 
 import globImporter from "node-sass-glob-importer";
 import semver from "semver";
-import nodeSass from "node-sass";
 import dartSass from "sass";
 
 import { isSupportedFibers } from "../src/utils";
@@ -14,16 +13,16 @@ import {
   getCodeFromBundle,
   getCodeFromSass,
   getErrors,
-  getImplementationByName,
   getTestId,
   getWarnings,
   getCompiler,
+  getImplementationsAndAPI,
 } from "./helpers";
 
 jest.setTimeout(30000);
 
 let Fiber;
-const implementations = [nodeSass, dartSass];
+const implementations = getImplementationsAndAPI();
 const syntaxStyles = ["scss", "sass"];
 
 describe("sassOptions option", () => {
@@ -41,14 +40,15 @@ describe("sassOptions option", () => {
     }
   });
 
-  implementations.forEach((implementation) => {
-    const [implementationName] = implementation.info.split("\t");
+  implementations.forEach((item) => {
+    const { name: implementationName, api, implementation } = item;
 
     syntaxStyles.forEach((syntax) => {
-      it(`should work when the option like "Object" (${implementationName}) (${syntax})`, async () => {
+      it(`should work when the option like "Object" ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
         const testId = getTestId("language", syntax);
         const options = {
-          implementation: getImplementationByName(implementationName),
+          implementation,
+          api,
           sassOptions: {
             indentWidth: 10,
           },
@@ -64,10 +64,11 @@ describe("sassOptions option", () => {
         expect(getErrors(stats)).toMatchSnapshot("errors");
       });
 
-      it(`should work when the option is empty "Object" (${implementationName}) (${syntax})`, async () => {
+      it(`should work when the option is empty "Object" ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
         const testId = getTestId("language", syntax);
         const options = {
-          implementation: getImplementationByName(implementationName),
+          implementation,
+          api,
           sassOptions: {},
         };
         const compiler = getCompiler(testId, { loader: { options } });
@@ -81,12 +82,13 @@ describe("sassOptions option", () => {
         expect(getErrors(stats)).toMatchSnapshot("errors");
       });
 
-      it(`should work when the option like "Function" (${implementationName}) (${syntax})`, async () => {
+      it(`should work when the option like "Function" ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
         expect.assertions(6);
 
         const testId = getTestId("language", syntax);
         const options = {
-          implementation: getImplementationByName(implementationName),
+          implementation,
+          api,
           sassOptions: (loaderContext) => {
             expect(loaderContext).toBeDefined();
 
@@ -106,12 +108,13 @@ describe("sassOptions option", () => {
         expect(getErrors(stats)).toMatchSnapshot("errors");
       });
 
-      it(`should work when the option like "Function" and never return (${implementationName}) (${syntax})`, async () => {
+      it(`should work when the option like "Function" and never return ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
         expect.assertions(6);
 
         const testId = getTestId("language", syntax);
         const options = {
-          implementation: getImplementationByName(implementationName),
+          implementation,
+          api,
           sassOptions: (loaderContext) => {
             expect(loaderContext).toBeDefined();
           },
@@ -127,10 +130,11 @@ describe("sassOptions option", () => {
         expect(getErrors(stats)).toMatchSnapshot("errors");
       });
 
-      it(`should ignore the "file" option (${implementationName}) (${syntax})`, async () => {
+      it(`should ignore the "file" option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
         const testId = getTestId("language", syntax);
         const options = {
-          implementation: getImplementationByName(implementationName),
+          implementation,
+          api,
           sassOptions: {
             file: "test",
           },
@@ -146,10 +150,11 @@ describe("sassOptions option", () => {
         expect(getErrors(stats)).toMatchSnapshot("errors");
       });
 
-      it(`should ignore the "data" option (${implementationName}) (${syntax})`, async () => {
+      it(`should ignore the "data" option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
         const testId = getTestId("language", syntax);
         const options = {
-          implementation: getImplementationByName(implementationName),
+          implementation,
+          api,
           sassOptions: {
             data: "test",
           },
@@ -165,10 +170,11 @@ describe("sassOptions option", () => {
         expect(getErrors(stats)).toMatchSnapshot("errors");
       });
 
-      it(`should work with the "functions" option (${implementationName}) (${syntax})`, async () => {
+      it(`should work with the "functions" option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
         const testId = getTestId("custom-functions", syntax);
         const options = {
-          implementation: getImplementationByName(implementationName),
+          implementation,
+          api,
           sassOptions: {
             functions: customFunctions(implementation),
           },
@@ -184,10 +190,11 @@ describe("sassOptions option", () => {
         expect(getErrors(stats)).toMatchSnapshot("errors");
       });
 
-      it(`should work with the "importer" as a single function option (${implementationName}) (${syntax})`, async () => {
+      it(`should work with the "importer" as a single function option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
         const testId = getTestId("custom-importer", syntax);
         const options = {
-          implementation: getImplementationByName(implementationName),
+          implementation,
+          api,
           sassOptions: {
             importer: customImporter,
           },
@@ -203,10 +210,11 @@ describe("sassOptions option", () => {
         expect(getErrors(stats)).toMatchSnapshot("errors");
       });
 
-      it(`should work with the "importer" as a array of functions option (${implementationName}) (${syntax})`, async () => {
+      it(`should work with the "importer" as a array of functions option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
         const testId = getTestId("custom-importer", syntax);
         const options = {
-          implementation: getImplementationByName(implementationName),
+          implementation,
+          api,
           sassOptions: {
             importer: [customImporter],
           },
@@ -222,12 +230,13 @@ describe("sassOptions option", () => {
         expect(getErrors(stats)).toMatchSnapshot("errors");
       });
 
-      it(`should work with the "importer" as a single function option (${implementationName}) (${syntax})`, async () => {
+      it(`should work with the "importer" as a single function option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
         expect.assertions(4);
 
         const testId = getTestId("custom-importer", syntax);
         const options = {
-          implementation: getImplementationByName(implementationName),
+          implementation,
+          api,
           sassOptions: {
             importer(url, prev, done) {
               expect(this.webpackLoaderContext).toBeDefined();
@@ -245,10 +254,11 @@ describe("sassOptions option", () => {
         expect(getErrors(stats)).toMatchSnapshot("errors");
       });
 
-      it(`should work with the "importer" as a array of functions option (${implementationName}) (${syntax})`, async () => {
+      it(`should work with the "importer" as a array of functions option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
         const testId = getTestId("glob-importer", syntax);
         const options = {
-          implementation: getImplementationByName(implementationName),
+          implementation,
+          api,
           sassOptions: {
             importer: [globImporter()],
           },
@@ -264,10 +274,11 @@ describe("sassOptions option", () => {
         expect(getErrors(stats)).toMatchSnapshot("errors");
       });
 
-      it(`should work with the "includePaths" option (${implementationName}) (${syntax})`, async () => {
+      it(`should work with the "includePaths" option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
         const testId = getTestId("import-include-paths", syntax);
         const options = {
-          implementation: getImplementationByName(implementationName),
+          implementation,
+          api,
           sassOptions: {
             includePaths: [path.resolve(__dirname, syntax, "includePath")],
           },
@@ -283,10 +294,11 @@ describe("sassOptions option", () => {
         expect(getErrors(stats)).toMatchSnapshot("errors");
       });
 
-      it(`should work with the "indentType" option (${implementationName}) (${syntax})`, async () => {
+      it(`should work with the "indentType" option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
         const testId = getTestId("language", syntax);
         const options = {
-          implementation: getImplementationByName(implementationName),
+          implementation,
+          api,
           sassOptions: {
             indentType: "tab",
           },
@@ -302,10 +314,11 @@ describe("sassOptions option", () => {
         expect(getErrors(stats)).toMatchSnapshot("errors");
       });
 
-      it(`should work with the "indentWidth" option (${implementationName}) (${syntax})`, async () => {
+      it(`should work with the "indentWidth" option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
         const testId = getTestId("language", syntax);
         const options = {
-          implementation: getImplementationByName(implementationName),
+          implementation,
+          api,
           sassOptions: {
             indentWidth: 4,
           },
@@ -321,10 +334,11 @@ describe("sassOptions option", () => {
         expect(getErrors(stats)).toMatchSnapshot("errors");
       });
 
-      it(`should work with the "indentedSyntax" option (${implementationName}) (${syntax})`, async () => {
+      it(`should work with the "indentedSyntax" option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
         const testId = getTestId("language", syntax);
         const options = {
-          implementation: getImplementationByName(implementationName),
+          implementation,
+          api,
           sassOptions: {
             indentedSyntax: syntax === "sass",
           },
@@ -340,10 +354,11 @@ describe("sassOptions option", () => {
         expect(getErrors(stats)).toMatchSnapshot("errors");
       });
 
-      it(`should work with the "linefeed" option (${implementationName}) (${syntax})`, async () => {
+      it(`should work with the "linefeed" option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
         const testId = getTestId("language", syntax);
         const options = {
-          implementation: getImplementationByName(implementationName),
+          implementation,
+          api,
           sassOptions: {
             linefeed: "lf",
           },
@@ -359,11 +374,12 @@ describe("sassOptions option", () => {
         expect(getErrors(stats)).toMatchSnapshot("errors");
       });
 
-      it(`should work with the "fiber" option (${implementationName}) (${syntax})`, async () => {
+      it(`should work with the "fiber" option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
         const dartSassSpy = jest.spyOn(dartSass, "render");
         const testId = getTestId("language", syntax);
         const options = {
-          implementation: getImplementationByName(implementationName),
+          implementation,
+          api,
           sassOptions: {},
         };
 
@@ -396,11 +412,12 @@ describe("sassOptions option", () => {
         dartSassSpy.mockRestore();
       });
 
-      it(`should use the "fibers" package if it is possible (${implementationName}) (${syntax})`, async () => {
+      it(`should use the "fibers" package if it is possible ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
         const dartSassSpy = jest.spyOn(dartSass, "render");
         const testId = getTestId("language", syntax);
         const options = {
-          implementation: getImplementationByName(implementationName),
+          implementation,
+          api,
           sassOptions: {},
         };
         const compiler = getCompiler(testId, { loader: { options } });
@@ -424,11 +441,12 @@ describe("sassOptions option", () => {
         dartSassSpy.mockRestore();
       });
 
-      it(`should don't use the "fibers" package when the "fiber" option is "false" (${implementationName}) (${syntax})`, async () => {
+      it(`should don't use the "fibers" package when the "fiber" option is "false" ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
         const dartSassSpy = jest.spyOn(dartSass, "render");
         const testId = getTestId("language", syntax);
         const options = {
-          implementation: getImplementationByName(implementationName),
+          implementation,
+          api,
           sassOptions: { fiber: false },
         };
         const compiler = getCompiler(testId, { loader: { options } });
@@ -451,10 +469,11 @@ describe("sassOptions option", () => {
         dartSassSpy.mockRestore();
       });
 
-      it(`should respect the "outputStyle" option (${implementationName}) (${syntax})`, async () => {
+      it(`should respect the "outputStyle" option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
         const testId = getTestId("language", syntax);
         const options = {
-          implementation: getImplementationByName(implementationName),
+          implementation,
+          api,
           sassOptions: {
             outputStyle: "expanded",
           },
@@ -473,11 +492,9 @@ describe("sassOptions option", () => {
         expect(getErrors(stats)).toMatchSnapshot("errors");
       });
 
-      it(`should use "compressed" output style in the "production" mode (${implementationName}) (${syntax})`, async () => {
+      it(`should use "compressed" output style in the "production" mode ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
         const testId = getTestId("language", syntax);
-        const options = {
-          implementation: getImplementationByName(implementationName),
-        };
+        const options = { implementation, api };
         const compiler = getCompiler(testId, {
           mode: "production",
           loader: { options },

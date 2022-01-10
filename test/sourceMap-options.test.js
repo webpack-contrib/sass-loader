@@ -1,9 +1,6 @@
 import fs from "fs";
 import path from "path";
 
-import nodeSass from "node-sass";
-import dartSass from "sass";
-
 import { isSupportedFibers } from "../src/utils";
 
 import {
@@ -11,13 +8,13 @@ import {
   getCodeFromBundle,
   getCompiler,
   getErrors,
-  getImplementationByName,
+  getImplementationsAndAPI,
   getTestId,
   getWarnings,
 } from "./helpers";
 
 let Fiber;
-const implementations = [nodeSass, dartSass];
+const implementations = getImplementationsAndAPI();
 const syntaxStyles = ["scss", "sass"];
 
 describe("sourceMap option", () => {
@@ -35,17 +32,15 @@ describe("sourceMap option", () => {
     }
   });
 
-  implementations.forEach((implementation) => {
+  implementations.forEach((item) => {
     syntaxStyles.forEach((syntax) => {
-      const [implementationName] = implementation.info.split("\t");
+      const { name: implementationName, api, implementation } = item;
 
-      it(`should generate source maps when value is not specified and the "devtool" option has "source-map" value (${implementationName}) (${syntax})`, async () => {
+      it(`should generate source maps when value is not specified and the "devtool" option has "source-map" value ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
         expect.assertions(10);
 
         const testId = getTestId("language", syntax);
-        const options = {
-          implementation: getImplementationByName(implementationName),
-        };
+        const options = { implementation, api };
         const compiler = getCompiler(testId, {
           devtool: "source-map",
           loader: { options },
@@ -72,14 +67,11 @@ describe("sourceMap option", () => {
         expect(getErrors(stats)).toMatchSnapshot("errors");
       });
 
-      it(`should generate source maps when value has "true" value and the "devtool" option has "source-map" value (${implementationName}) (${syntax})`, async () => {
+      it(`should generate source maps when value has "true" value and the "devtool" option has "source-map" value ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
         expect.assertions(10);
 
         const testId = getTestId("language", syntax);
-        const options = {
-          implementation: getImplementationByName(implementationName),
-          sourceMap: true,
-        };
+        const options = { implementation, api, sourceMap: true };
         const compiler = getCompiler(testId, {
           devtool: "source-map",
           loader: { options },
@@ -106,14 +98,11 @@ describe("sourceMap option", () => {
         expect(getErrors(stats)).toMatchSnapshot("errors");
       });
 
-      it(`should generate source maps when value has "true" value and the "devtool" option has "false" value (${implementationName}) (${syntax})`, async () => {
+      it(`should generate source maps when value has "true" value and the "devtool" option has "false" value ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
         expect.assertions(10);
 
         const testId = getTestId("language", syntax);
-        const options = {
-          implementation: getImplementationByName(implementationName),
-          sourceMap: true,
-        };
+        const options = { implementation, api, sourceMap: true };
         const compiler = getCompiler(testId, {
           devtool: false,
           loader: { options },
@@ -140,12 +129,13 @@ describe("sourceMap option", () => {
         expect(getErrors(stats)).toMatchSnapshot("errors");
       });
 
-      it(`should generate source maps when value has "false" value, but the "sassOptions.sourceMap" has the "true" value (${implementationName}) (${syntax})`, async () => {
+      it(`should generate source maps when value has "false" value, but the "sassOptions.sourceMap" has the "true" value ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
         expect.assertions(8);
 
         const testId = getTestId("language", syntax);
         const options = {
-          implementation: getImplementationByName(implementationName),
+          implementation,
+          api,
           sourceMap: false,
           sassOptions: {
             sourceMap: true,
@@ -180,11 +170,9 @@ describe("sourceMap option", () => {
         expect(getErrors(stats)).toMatchSnapshot("errors");
       });
 
-      it(`should not generate source maps when value is not specified and the "devtool" option has "false" value (${implementationName}) (${syntax})`, async () => {
+      it(`should not generate source maps when value is not specified and the "devtool" option has "false" value ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
         const testId = getTestId("language", syntax);
-        const options = {
-          implementation: getImplementationByName(implementationName),
-        };
+        const options = { implementation, api };
         const compiler = getCompiler(testId, {
           devtool: false,
           loader: { options },
@@ -198,12 +186,9 @@ describe("sourceMap option", () => {
         expect(getErrors(stats)).toMatchSnapshot("errors");
       });
 
-      it(`should not generate source maps when value has "false" value and the "devtool" option has "source-map" value (${implementationName}) (${syntax})`, async () => {
+      it(`should not generate source maps when value has "false" value and the "devtool" option has "source-map" value ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
         const testId = getTestId("language", syntax);
-        const options = {
-          implementation: getImplementationByName(implementationName),
-          sourceMap: false,
-        };
+        const options = { implementation, api, sourceMap: false };
         const compiler = getCompiler(testId, {
           devtool: "source-map",
           loader: { options },
@@ -217,12 +202,9 @@ describe("sourceMap option", () => {
         expect(getErrors(stats)).toMatchSnapshot("errors");
       });
 
-      it(`should not generate source maps when value has "false" value and the "devtool" option has "false" value (${implementationName}) (${syntax})`, async () => {
+      it(`should not generate source maps when value has "false" value and the "devtool" option has "false" value ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
         const testId = getTestId("language", syntax);
-        const options = {
-          implementation: getImplementationByName(implementationName),
-          sourceMap: false,
-        };
+        const options = { implementation, api, sourceMap: false };
         const compiler = getCompiler(testId, {
           devtool: false,
           loader: { options },

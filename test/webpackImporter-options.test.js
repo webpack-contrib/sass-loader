@@ -1,6 +1,3 @@
-import nodeSass from "node-sass";
-import dartSass from "sass";
-
 import { isSupportedFibers } from "../src/utils";
 
 import {
@@ -9,13 +6,13 @@ import {
   getCodeFromSass,
   getCompiler,
   getErrors,
-  getImplementationByName,
+  getImplementationsAndAPI,
   getTestId,
   getWarnings,
 } from "./helpers";
 
 let Fiber;
-const implementations = [nodeSass, dartSass];
+const implementations = getImplementationsAndAPI();
 const syntaxStyles = ["scss", "sass"];
 
 describe("webpackImporter option", () => {
@@ -33,14 +30,15 @@ describe("webpackImporter option", () => {
     }
   });
 
-  implementations.forEach((implementation) => {
+  implementations.forEach((item) => {
     syntaxStyles.forEach((syntax) => {
-      const [implementationName] = implementation.info.split("\t");
+      const { name: implementationName, api, implementation } = item;
 
-      it(`not specify (${implementationName}) (${syntax})`, async () => {
+      it(`not specify ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
         const testId = getTestId("language", syntax);
         const options = {
-          implementation: getImplementationByName(implementationName),
+          implementation,
+          api,
         };
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
@@ -53,11 +51,12 @@ describe("webpackImporter option", () => {
         expect(getErrors(stats)).toMatchSnapshot("errors");
       });
 
-      it(`false (${implementationName}) (${syntax})`, async () => {
+      it(`false ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
         const testId = getTestId("language", syntax);
         const options = {
+          implementation,
+          api,
           webpackImporter: false,
-          implementation: getImplementationByName(implementationName),
         };
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
@@ -70,11 +69,12 @@ describe("webpackImporter option", () => {
         expect(getErrors(stats)).toMatchSnapshot("errors");
       });
 
-      it(`true (${implementationName}) (${syntax})`, async () => {
+      it(`true ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
         const testId = getTestId("language", syntax);
         const options = {
+          implementation,
+          api,
           webpackImporter: true,
-          implementation: getImplementationByName(implementationName),
         };
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);

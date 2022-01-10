@@ -1,7 +1,5 @@
 import url from "url";
 
-import dartSass from "sass";
-
 import { isSupportedFibers } from "../src/utils";
 
 import {
@@ -10,7 +8,7 @@ import {
   getCodeFromSass,
   getCompiler,
   getErrors,
-  getImplementationByName,
+  getImplementationsAndAPI,
   getTestId,
   getWarnings,
 } from "./helpers";
@@ -18,13 +16,14 @@ import {
 jest.setTimeout(60000);
 
 let Fiber;
-const implementations = [dartSass];
+const implementations = getImplementationsAndAPI();
 const syntaxStyles = ["scss", "sass"];
 
 describe("loader", () => {
   beforeAll(async () => {
     if (isSupportedFibers()) {
       const { default: fibers } = await import("fibers");
+
       Fiber = fibers;
     }
   });
@@ -36,14 +35,15 @@ describe("loader", () => {
     }
   });
 
-  implementations.forEach((implementation) => {
-    const [implementationName] = implementation.info.split("\t");
+  implementations.forEach((item) => {
+    const { name: implementationName, api, implementation } = item;
 
     syntaxStyles.forEach((syntax) => {
-      it(`should not emit warning by default (${implementationName}) (${syntax})`, async () => {
+      it(`should not emit warning by default ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
         const testId = getTestId("logging", syntax);
         const options = {
-          implementation: getImplementationByName(implementationName),
+          implementation,
+          api,
         };
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
@@ -54,10 +54,10 @@ describe("loader", () => {
         for (const [name, value] of stats.compilation.logging) {
           if (/sass-loader/.test(name)) {
             logs.push(
-              value.map((item) => {
+              value.map((i) => {
                 return {
-                  type: item.type,
-                  args: item.args.map((arg) =>
+                  type: i.type,
+                  args: i.args.map((arg) =>
                     arg
                       .replace(url.pathToFileURL(__dirname), "file:///<cwd>")
                       .replace(/\\/g, "/")
@@ -75,10 +75,11 @@ describe("loader", () => {
         expect(logs).toMatchSnapshot("logs");
       });
 
-      it(`should not emit warning when 'false' used (${implementationName}) (${syntax})`, async () => {
+      it(`should not emit warning when 'false' used ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
         const testId = getTestId("logging", syntax);
         const options = {
-          implementation: getImplementationByName(implementationName),
+          implementation,
+          api,
           warnRuleAsWarning: false,
         };
         const compiler = getCompiler(testId, { loader: { options } });
@@ -90,10 +91,10 @@ describe("loader", () => {
         for (const [name, value] of stats.compilation.logging) {
           if (/sass-loader/.test(name)) {
             logs.push(
-              value.map((item) => {
+              value.map((i) => {
                 return {
-                  type: item.type,
-                  args: item.args.map((arg) =>
+                  type: i.type,
+                  args: i.args.map((arg) =>
                     arg
                       .replace(url.pathToFileURL(__dirname), "file:///<cwd>")
                       .replace(/\\/g, "/")
@@ -111,10 +112,11 @@ describe("loader", () => {
         expect(logs).toMatchSnapshot("logs");
       });
 
-      it(`should not emit warning when 'true' used (${implementationName}) (${syntax})`, async () => {
+      it(`should not emit warning when 'true' used ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
         const testId = getTestId("logging", syntax);
         const options = {
-          implementation: getImplementationByName(implementationName),
+          implementation,
+          api,
           warnRuleAsWarning: true,
         };
         const compiler = getCompiler(testId, { loader: { options } });
@@ -126,10 +128,10 @@ describe("loader", () => {
         for (const [name, value] of stats.compilation.logging) {
           if (/sass-loader/.test(name)) {
             logs.push(
-              value.map((item) => {
+              value.map((i) => {
                 return {
-                  type: item.type,
-                  args: item.args.map((arg) =>
+                  type: i.type,
+                  args: i.args.map((arg) =>
                     arg
                       .replace(url.pathToFileURL(__dirname), "file:///<cwd>")
                       .replace(/\\/g, "/")

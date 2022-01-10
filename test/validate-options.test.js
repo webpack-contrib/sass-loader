@@ -13,6 +13,7 @@ describe("validate options", () => {
   beforeAll(async () => {
     if (isSupportedFibers()) {
       const { default: fibers } = await import("fibers");
+
       Fiber = fibers;
     }
   });

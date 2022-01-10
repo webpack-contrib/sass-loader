@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`sourceMap option should generate source maps when value has "false" value, but the "sassOptions.sourceMap" has the "true" value (dart-sass) (sass): css 1`] = `
+exports[`sourceMap option should generate source maps when value has "false" value, but the "sassOptions.sourceMap" has the "true" value ('dart-sass', 'old' API, 'sass' syntax): css 1`] = `
 "@charset \\"UTF-8\\";
 @import \\"./file.css\\";
 body {
@@ -56,9 +56,9 @@ nav a {
 }"
 `;
 
-exports[`sourceMap option should generate source maps when value has "false" value, but the "sassOptions.sourceMap" has the "true" value (dart-sass) (sass): errors 1`] = `Array []`;
+exports[`sourceMap option should generate source maps when value has "false" value, but the "sassOptions.sourceMap" has the "true" value ('dart-sass', 'old' API, 'sass' syntax): errors 1`] = `Array []`;
 
-exports[`sourceMap option should generate source maps when value has "false" value, but the "sassOptions.sourceMap" has the "true" value (dart-sass) (sass): source map 1`] = `
+exports[`sourceMap option should generate source maps when value has "false" value, but the "sassOptions.sourceMap" has the "true" value ('dart-sass', 'old' API, 'sass' syntax): source map 1`] = `
 Object {
   "file": "style.css.map",
   "mappings": ";AACQ;AAMR;EACE;EACA,OALc;;;AAQd;EACE;EACA;EACA;;AAEF;EACE;;AAEF;EACE;EACA;EACA;;;AAQJ;EALE,uBAMe;EALf,oBAKe;EAJf,mBAIe;EAHf,eAGe;;;AAEjB;EACE;EACA;EACA;;;AAEF;EAEE;;;AAEF;EAEE;;;AAEF;EAEE;;;AAGA;EACE,SAhDY;;;AAmDd;EACE,SCzDc",
@@ -136,9 +136,9 @@ nav
 }
 `;
 
-exports[`sourceMap option should generate source maps when value has "false" value, but the "sassOptions.sourceMap" has the "true" value (dart-sass) (sass): warnings 1`] = `Array []`;
+exports[`sourceMap option should generate source maps when value has "false" value, but the "sassOptions.sourceMap" has the "true" value ('dart-sass', 'old' API, 'sass' syntax): warnings 1`] = `Array []`;
 
-exports[`sourceMap option should generate source maps when value has "false" value, but the "sassOptions.sourceMap" has the "true" value (dart-sass) (scss): css 1`] = `
+exports[`sourceMap option should generate source maps when value has "false" value, but the "sassOptions.sourceMap" has the "true" value ('dart-sass', 'old' API, 'scss' syntax): css 1`] = `
 "@charset \\"UTF-8\\";
 @import \\"./file.css\\";
 body {
@@ -176,9 +176,9 @@ nav a {
 }"
 `;
 
-exports[`sourceMap option should generate source maps when value has "false" value, but the "sassOptions.sourceMap" has the "true" value (dart-sass) (scss): errors 1`] = `Array []`;
+exports[`sourceMap option should generate source maps when value has "false" value, but the "sassOptions.sourceMap" has the "true" value ('dart-sass', 'old' API, 'scss' syntax): errors 1`] = `Array []`;
 
-exports[`sourceMap option should generate source maps when value has "false" value, but the "sassOptions.sourceMap" has the "true" value (dart-sass) (scss): source map 1`] = `
+exports[`sourceMap option should generate source maps when value has "false" value, but the "sassOptions.sourceMap" has the "true" value ('dart-sass', 'old' API, 'scss' syntax): source map 1`] = `
 Object {
   "file": "style.css.map",
   "mappings": ";AACQ;AAMR;EACE;EACA,OALc;;;AASd;EACE;EACA;EACA;;AAGF;EAAK;;AAEL;EACE;EACA;EACA;;;AAWJ;EANE,uBAM4B;EALzB,oBAKyB;EAJxB,mBAIwB;EAHpB,eAGoB;;;AAG5B;EACE,SAlCY;;;AAuCd;EACE,SC7Cc",
@@ -245,9 +245,9 @@ nav {
 }
 `;
 
-exports[`sourceMap option should generate source maps when value has "false" value, but the "sassOptions.sourceMap" has the "true" value (dart-sass) (scss): warnings 1`] = `Array []`;
+exports[`sourceMap option should generate source maps when value has "false" value, but the "sassOptions.sourceMap" has the "true" value ('dart-sass', 'old' API, 'scss' syntax): warnings 1`] = `Array []`;
 
-exports[`sourceMap option should generate source maps when value has "false" value, but the "sassOptions.sourceMap" has the "true" value (node-sass) (sass): css 1`] = `
+exports[`sourceMap option should generate source maps when value has "false" value, but the "sassOptions.sourceMap" has the "true" value ('node-sass', 'old' API, 'sass' syntax): css 1`] = `
 "@charset \\"UTF-8\\";
 @import url(./file.css);
 body {
@@ -295,9 +295,9 @@ nav a {
 "
 `;
 
-exports[`sourceMap option should generate source maps when value has "false" value, but the "sassOptions.sourceMap" has the "true" value (node-sass) (sass): errors 1`] = `Array []`;
+exports[`sourceMap option should generate source maps when value has "false" value, but the "sassOptions.sourceMap" has the "true" value ('node-sass', 'old' API, 'sass' syntax): errors 1`] = `Array []`;
 
-exports[`sourceMap option should generate source maps when value has "false" value, but the "sassOptions.sourceMap" has the "true" value (node-sass) (sass): source map 1`] = `
+exports[`sourceMap option should generate source maps when value has "false" value, but the "sassOptions.sourceMap" has the "true" value ('node-sass', 'old' API, 'sass' syntax): source map 1`] = `
 Object {
   "file": "style.css.map",
   "mappings": ";AACA,OAAO,CAAP,eAAO;AAMP,AAAA,IAAI,CAAC;EACH,IAAI,EAAE,IAAI,CALI,SAAS,EAAE,UAAU;EAMnC,KAAK,EALS,IAAI,GAKM;;AAE1B,AACE,GADC,CACD,EAAE,CAAC;EACD,MAAM,EAAE,CAAC;EACT,OAAO,EAAE,CAAC;EACV,UAAU,EAAE,IAAI,GAAG;;AAJvB,AAME,GANC,CAMD,EAAE,CAAC;EACD,OAAO,EAAE,YAAY,GAAG;;AAP5B,AASE,GATC,CASD,CAAC,CAAC;EACA,OAAO,EAAE,KAAK;EACd,OAAO,EAAE,QAAQ;EACjB,eAAe,EAAE,IAAI,GAAG;;AAQ5B,AAAA,IAAI,CAAC;EALH,qBAAqB,EAME,IAAI;EAL3B,kBAAkB,EAKK,IAAI;EAJ3B,iBAAiB,EAIM,IAAI;EAH3B,aAAa,EAGU,IAAI,GAAI;;AAEjC,AAAA,QAAQ,EAKR,QAAQ,EAIR,MAAM,EAIN,QAAQ,CAbC;EACP,MAAM,EAAE,cAAc;EACtB,OAAO,EAAE,IAAI;EACb,KAAK,EAAE,IAAI,GAAG;;AAEhB,AAAA,QAAQ,CAAC;EAEP,YAAY,EAAE,KAAK,GAAG;;AAExB,AAAA,MAAM,CAAC;EAEL,YAAY,EAAE,GAAG,GAAG;;AAEtB,AAAA,QAAQ,CAAC;EAEP,YAAY,EAAE,MAAM,GAAG;;AAEzB,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,EAhDK,IAAO,GAgDJ;;AAEnB,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,ECzDO,IAAO,GDyDO",
@@ -375,9 +375,9 @@ nav {
 }
 `;
 
-exports[`sourceMap option should generate source maps when value has "false" value, but the "sassOptions.sourceMap" has the "true" value (node-sass) (sass): warnings 1`] = `Array []`;
+exports[`sourceMap option should generate source maps when value has "false" value, but the "sassOptions.sourceMap" has the "true" value ('node-sass', 'old' API, 'sass' syntax): warnings 1`] = `Array []`;
 
-exports[`sourceMap option should generate source maps when value has "false" value, but the "sassOptions.sourceMap" has the "true" value (node-sass) (scss): css 1`] = `
+exports[`sourceMap option should generate source maps when value has "false" value, but the "sassOptions.sourceMap" has the "true" value ('node-sass', 'old' API, 'scss' syntax): css 1`] = `
 "@charset \\"UTF-8\\";
 @import url(./file.css);
 body {
@@ -411,9 +411,9 @@ nav a {
 "
 `;
 
-exports[`sourceMap option should generate source maps when value has "false" value, but the "sassOptions.sourceMap" has the "true" value (node-sass) (scss): errors 1`] = `Array []`;
+exports[`sourceMap option should generate source maps when value has "false" value, but the "sassOptions.sourceMap" has the "true" value ('node-sass', 'old' API, 'scss' syntax): errors 1`] = `Array []`;
 
-exports[`sourceMap option should generate source maps when value has "false" value, but the "sassOptions.sourceMap" has the "true" value (node-sass) (scss): source map 1`] = `
+exports[`sourceMap option should generate source maps when value has "false" value, but the "sassOptions.sourceMap" has the "true" value ('node-sass', 'old' API, 'scss' syntax): source map 1`] = `
 Object {
   "file": "style.css.map",
   "mappings": ";AACA,OAAO,CAAP,eAAO;AAMP,AAAA,IAAI,CAAC;EACH,IAAI,EAAE,IAAI,CALI,SAAS,EAAE,UAAU;EAMnC,KAAK,EALS,IAAI,GAMnB;;AAED,AACE,GADC,CACD,EAAE,CAAC;EACD,MAAM,EAAE,CAAC;EACT,OAAO,EAAE,CAAC;EACV,UAAU,EAAE,IAAI,GACjB;;AALH,AAOE,GAPC,CAOD,EAAE,CAAC;EAAE,OAAO,EAAE,YAAY,GAAI;;AAPhC,AASE,GATC,CASD,CAAC,CAAC;EACA,OAAO,EAAE,KAAK;EACd,OAAO,EAAE,QAAQ;EACjB,eAAe,EAAE,IAAI,GACtB;;AAUH,AAAA,IAAI,CAAC;EANH,qBAAqB,EAMO,IAAI;EAL7B,kBAAkB,EAKO,IAAI;EAJ5B,iBAAiB,EAIO,IAAI;EAHxB,aAAa,EAGO,IAAI,GAAK;;AAEvC,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,EAlCK,IAAO,GAmCpB;;AAGH,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,EC7CO,IAAO,GD8CtB",
@@ -480,9 +480,9 @@ nav {
 }
 `;
 
-exports[`sourceMap option should generate source maps when value has "false" value, but the "sassOptions.sourceMap" has the "true" value (node-sass) (scss): warnings 1`] = `Array []`;
+exports[`sourceMap option should generate source maps when value has "false" value, but the "sassOptions.sourceMap" has the "true" value ('node-sass', 'old' API, 'scss' syntax): warnings 1`] = `Array []`;
 
-exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "false" value (dart-sass) (sass): css 1`] = `
+exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "false" value ('dart-sass', 'old' API, 'sass' syntax): css 1`] = `
 "@charset \\"UTF-8\\";
 @import \\"./file.css\\";
 body {
@@ -538,9 +538,9 @@ nav a {
 }"
 `;
 
-exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "false" value (dart-sass) (sass): errors 1`] = `Array []`;
+exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "false" value ('dart-sass', 'old' API, 'sass' syntax): errors 1`] = `Array []`;
 
-exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "false" value (dart-sass) (sass): source map 1`] = `
+exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "false" value ('dart-sass', 'old' API, 'sass' syntax): source map 1`] = `
 Object {
   "mappings": ";AACQ;AAMR;EACE;EACA,OALc;;;AAQd;EACE;EACA;EACA;;AAEF;EACE;;AAEF;EACE;EACA;EACA;;;AAQJ;EALE,uBAMe;EALf,oBAKe;EAJf,mBAIe;EAHf,eAGe;;;AAEjB;EACE;EACA;EACA;;;AAEF;EAEE;;;AAEF;EAEE;;;AAEF;EAEE;;;AAGA;EACE,SAhDY;;;AAmDd;EACE,SCzDc",
   "names": Array [],
@@ -617,9 +617,9 @@ nav
 }
 `;
 
-exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "false" value (dart-sass) (sass): warnings 1`] = `Array []`;
+exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "false" value ('dart-sass', 'old' API, 'sass' syntax): warnings 1`] = `Array []`;
 
-exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "false" value (dart-sass) (scss): css 1`] = `
+exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "false" value ('dart-sass', 'old' API, 'scss' syntax): css 1`] = `
 "@charset \\"UTF-8\\";
 @import \\"./file.css\\";
 body {
@@ -657,9 +657,9 @@ nav a {
 }"
 `;
 
-exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "false" value (dart-sass) (scss): errors 1`] = `Array []`;
+exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "false" value ('dart-sass', 'old' API, 'scss' syntax): errors 1`] = `Array []`;
 
-exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "false" value (dart-sass) (scss): source map 1`] = `
+exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "false" value ('dart-sass', 'old' API, 'scss' syntax): source map 1`] = `
 Object {
   "mappings": ";AACQ;AAMR;EACE;EACA,OALc;;;AASd;EACE;EACA;EACA;;AAGF;EAAK;;AAEL;EACE;EACA;EACA;;;AAWJ;EANE,uBAM4B;EALzB,oBAKyB;EAJxB,mBAIwB;EAHpB,eAGoB;;;AAG5B;EACE,SAlCY;;;AAuCd;EACE,SC7Cc",
   "names": Array [],
@@ -725,9 +725,9 @@ nav {
 }
 `;
 
-exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "false" value (dart-sass) (scss): warnings 1`] = `Array []`;
+exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "false" value ('dart-sass', 'old' API, 'scss' syntax): warnings 1`] = `Array []`;
 
-exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "false" value (node-sass) (sass): css 1`] = `
+exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "false" value ('node-sass', 'old' API, 'sass' syntax): css 1`] = `
 "@charset \\"UTF-8\\";
 @import url(./file.css);
 body {
@@ -775,9 +775,9 @@ nav a {
 "
 `;
 
-exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "false" value (node-sass) (sass): errors 1`] = `Array []`;
+exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "false" value ('node-sass', 'old' API, 'sass' syntax): errors 1`] = `Array []`;
 
-exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "false" value (node-sass) (sass): source map 1`] = `
+exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "false" value ('node-sass', 'old' API, 'sass' syntax): source map 1`] = `
 Object {
   "mappings": ";AACA,OAAO,CAAP,eAAO;AAMP,AAAA,IAAI,CAAC;EACH,IAAI,EAAE,IAAI,CALI,SAAS,EAAE,UAAU;EAMnC,KAAK,EALS,IAAI,GAKM;;AAE1B,AACE,GADC,CACD,EAAE,CAAC;EACD,MAAM,EAAE,CAAC;EACT,OAAO,EAAE,CAAC;EACV,UAAU,EAAE,IAAI,GAAG;;AAJvB,AAME,GANC,CAMD,EAAE,CAAC;EACD,OAAO,EAAE,YAAY,GAAG;;AAP5B,AASE,GATC,CASD,CAAC,CAAC;EACA,OAAO,EAAE,KAAK;EACd,OAAO,EAAE,QAAQ;EACjB,eAAe,EAAE,IAAI,GAAG;;AAQ5B,AAAA,IAAI,CAAC;EALH,qBAAqB,EAME,IAAI;EAL3B,kBAAkB,EAKK,IAAI;EAJ3B,iBAAiB,EAIM,IAAI;EAH3B,aAAa,EAGU,IAAI,GAAI;;AAEjC,AAAA,QAAQ,EAKR,QAAQ,EAIR,MAAM,EAIN,QAAQ,CAbC;EACP,MAAM,EAAE,cAAc;EACtB,OAAO,EAAE,IAAI;EACb,KAAK,EAAE,IAAI,GAAG;;AAEhB,AAAA,QAAQ,CAAC;EAEP,YAAY,EAAE,KAAK,GAAG;;AAExB,AAAA,MAAM,CAAC;EAEL,YAAY,EAAE,GAAG,GAAG;;AAEtB,AAAA,QAAQ,CAAC;EAEP,YAAY,EAAE,MAAM,GAAG;;AAEzB,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,EAhDK,IAAO,GAgDJ;;AAEnB,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,ECzDO,IAAO,GDyDO",
   "names": Array [],
@@ -854,9 +854,9 @@ nav {
 }
 `;
 
-exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "false" value (node-sass) (sass): warnings 1`] = `Array []`;
+exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "false" value ('node-sass', 'old' API, 'sass' syntax): warnings 1`] = `Array []`;
 
-exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "false" value (node-sass) (scss): css 1`] = `
+exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "false" value ('node-sass', 'old' API, 'scss' syntax): css 1`] = `
 "@charset \\"UTF-8\\";
 @import url(./file.css);
 body {
@@ -890,9 +890,9 @@ nav a {
 "
 `;
 
-exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "false" value (node-sass) (scss): errors 1`] = `Array []`;
+exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "false" value ('node-sass', 'old' API, 'scss' syntax): errors 1`] = `Array []`;
 
-exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "false" value (node-sass) (scss): source map 1`] = `
+exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "false" value ('node-sass', 'old' API, 'scss' syntax): source map 1`] = `
 Object {
   "mappings": ";AACA,OAAO,CAAP,eAAO;AAMP,AAAA,IAAI,CAAC;EACH,IAAI,EAAE,IAAI,CALI,SAAS,EAAE,UAAU;EAMnC,KAAK,EALS,IAAI,GAMnB;;AAED,AACE,GADC,CACD,EAAE,CAAC;EACD,MAAM,EAAE,CAAC;EACT,OAAO,EAAE,CAAC;EACV,UAAU,EAAE,IAAI,GACjB;;AALH,AAOE,GAPC,CAOD,EAAE,CAAC;EAAE,OAAO,EAAE,YAAY,GAAI;;AAPhC,AASE,GATC,CASD,CAAC,CAAC;EACA,OAAO,EAAE,KAAK;EACd,OAAO,EAAE,QAAQ;EACjB,eAAe,EAAE,IAAI,GACtB;;AAUH,AAAA,IAAI,CAAC;EANH,qBAAqB,EAMO,IAAI;EAL7B,kBAAkB,EAKO,IAAI;EAJ5B,iBAAiB,EAIO,IAAI;EAHxB,aAAa,EAGO,IAAI,GAAK;;AAEvC,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,EAlCK,IAAO,GAmCpB;;AAGH,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,EC7CO,IAAO,GD8CtB",
   "names": Array [],
@@ -958,9 +958,9 @@ nav {
 }
 `;
 
-exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "false" value (node-sass) (scss): warnings 1`] = `Array []`;
+exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "false" value ('node-sass', 'old' API, 'scss' syntax): warnings 1`] = `Array []`;
 
-exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "source-map" value (dart-sass) (sass): css 1`] = `
+exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "source-map" value ('dart-sass', 'old' API, 'sass' syntax): css 1`] = `
 "@charset \\"UTF-8\\";
 @import \\"./file.css\\";
 body {
@@ -1016,9 +1016,9 @@ nav a {
 }"
 `;
 
-exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "source-map" value (dart-sass) (sass): errors 1`] = `Array []`;
+exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "source-map" value ('dart-sass', 'old' API, 'sass' syntax): errors 1`] = `Array []`;
 
-exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "source-map" value (dart-sass) (sass): source map 1`] = `
+exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "source-map" value ('dart-sass', 'old' API, 'sass' syntax): source map 1`] = `
 Object {
   "mappings": ";AACQ;AAMR;EACE;EACA,OALc;;;AAQd;EACE;EACA;EACA;;AAEF;EACE;;AAEF;EACE;EACA;EACA;;;AAQJ;EALE,uBAMe;EALf,oBAKe;EAJf,mBAIe;EAHf,eAGe;;;AAEjB;EACE;EACA;EACA;;;AAEF;EAEE;;;AAEF;EAEE;;;AAEF;EAEE;;;AAGA;EACE,SAhDY;;;AAmDd;EACE,SCzDc",
   "names": Array [],
@@ -1095,9 +1095,9 @@ nav
 }
 `;
 
-exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "source-map" value (dart-sass) (sass): warnings 1`] = `Array []`;
+exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "source-map" value ('dart-sass', 'old' API, 'sass' syntax): warnings 1`] = `Array []`;
 
-exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "source-map" value (dart-sass) (scss): css 1`] = `
+exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "source-map" value ('dart-sass', 'old' API, 'scss' syntax): css 1`] = `
 "@charset \\"UTF-8\\";
 @import \\"./file.css\\";
 body {
@@ -1135,9 +1135,9 @@ nav a {
 }"
 `;
 
-exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "source-map" value (dart-sass) (scss): errors 1`] = `Array []`;
+exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "source-map" value ('dart-sass', 'old' API, 'scss' syntax): errors 1`] = `Array []`;
 
-exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "source-map" value (dart-sass) (scss): source map 1`] = `
+exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "source-map" value ('dart-sass', 'old' API, 'scss' syntax): source map 1`] = `
 Object {
   "mappings": ";AACQ;AAMR;EACE;EACA,OALc;;;AASd;EACE;EACA;EACA;;AAGF;EAAK;;AAEL;EACE;EACA;EACA;;;AAWJ;EANE,uBAM4B;EALzB,oBAKyB;EAJxB,mBAIwB;EAHpB,eAGoB;;;AAG5B;EACE,SAlCY;;;AAuCd;EACE,SC7Cc",
   "names": Array [],
@@ -1203,9 +1203,9 @@ nav {
 }
 `;
 
-exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "source-map" value (dart-sass) (scss): warnings 1`] = `Array []`;
+exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "source-map" value ('dart-sass', 'old' API, 'scss' syntax): warnings 1`] = `Array []`;
 
-exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "source-map" value (node-sass) (sass): css 1`] = `
+exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "source-map" value ('node-sass', 'old' API, 'sass' syntax): css 1`] = `
 "@charset \\"UTF-8\\";
 @import url(./file.css);
 body {
@@ -1253,9 +1253,9 @@ nav a {
 "
 `;
 
-exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "source-map" value (node-sass) (sass): errors 1`] = `Array []`;
+exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "source-map" value ('node-sass', 'old' API, 'sass' syntax): errors 1`] = `Array []`;
 
-exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "source-map" value (node-sass) (sass): source map 1`] = `
+exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "source-map" value ('node-sass', 'old' API, 'sass' syntax): source map 1`] = `
 Object {
   "mappings": ";AACA,OAAO,CAAP,eAAO;AAMP,AAAA,IAAI,CAAC;EACH,IAAI,EAAE,IAAI,CALI,SAAS,EAAE,UAAU;EAMnC,KAAK,EALS,IAAI,GAKM;;AAE1B,AACE,GADC,CACD,EAAE,CAAC;EACD,MAAM,EAAE,CAAC;EACT,OAAO,EAAE,CAAC;EACV,UAAU,EAAE,IAAI,GAAG;;AAJvB,AAME,GANC,CAMD,EAAE,CAAC;EACD,OAAO,EAAE,YAAY,GAAG;;AAP5B,AASE,GATC,CASD,CAAC,CAAC;EACA,OAAO,EAAE,KAAK;EACd,OAAO,EAAE,QAAQ;EACjB,eAAe,EAAE,IAAI,GAAG;;AAQ5B,AAAA,IAAI,CAAC;EALH,qBAAqB,EAME,IAAI;EAL3B,kBAAkB,EAKK,IAAI;EAJ3B,iBAAiB,EAIM,IAAI;EAH3B,aAAa,EAGU,IAAI,GAAI;;AAEjC,AAAA,QAAQ,EAKR,QAAQ,EAIR,MAAM,EAIN,QAAQ,CAbC;EACP,MAAM,EAAE,cAAc;EACtB,OAAO,EAAE,IAAI;EACb,KAAK,EAAE,IAAI,GAAG;;AAEhB,AAAA,QAAQ,CAAC;EAEP,YAAY,EAAE,KAAK,GAAG;;AAExB,AAAA,MAAM,CAAC;EAEL,YAAY,EAAE,GAAG,GAAG;;AAEtB,AAAA,QAAQ,CAAC;EAEP,YAAY,EAAE,MAAM,GAAG;;AAEzB,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,EAhDK,IAAO,GAgDJ;;AAEnB,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,ECzDO,IAAO,GDyDO",
   "names": Array [],
@@ -1332,9 +1332,9 @@ nav {
 }
 `;
 
-exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "source-map" value (node-sass) (sass): warnings 1`] = `Array []`;
+exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "source-map" value ('node-sass', 'old' API, 'sass' syntax): warnings 1`] = `Array []`;
 
-exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "source-map" value (node-sass) (scss): css 1`] = `
+exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "source-map" value ('node-sass', 'old' API, 'scss' syntax): css 1`] = `
 "@charset \\"UTF-8\\";
 @import url(./file.css);
 body {
@@ -1368,9 +1368,9 @@ nav a {
 "
 `;
 
-exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "source-map" value (node-sass) (scss): errors 1`] = `Array []`;
+exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "source-map" value ('node-sass', 'old' API, 'scss' syntax): errors 1`] = `Array []`;
 
-exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "source-map" value (node-sass) (scss): source map 1`] = `
+exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "source-map" value ('node-sass', 'old' API, 'scss' syntax): source map 1`] = `
 Object {
   "mappings": ";AACA,OAAO,CAAP,eAAO;AAMP,AAAA,IAAI,CAAC;EACH,IAAI,EAAE,IAAI,CALI,SAAS,EAAE,UAAU;EAMnC,KAAK,EALS,IAAI,GAMnB;;AAED,AACE,GADC,CACD,EAAE,CAAC;EACD,MAAM,EAAE,CAAC;EACT,OAAO,EAAE,CAAC;EACV,UAAU,EAAE,IAAI,GACjB;;AALH,AAOE,GAPC,CAOD,EAAE,CAAC;EAAE,OAAO,EAAE,YAAY,GAAI;;AAPhC,AASE,GATC,CASD,CAAC,CAAC;EACA,OAAO,EAAE,KAAK;EACd,OAAO,EAAE,QAAQ;EACjB,eAAe,EAAE,IAAI,GACtB;;AAUH,AAAA,IAAI,CAAC;EANH,qBAAqB,EAMO,IAAI;EAL7B,kBAAkB,EAKO,IAAI;EAJ5B,iBAAiB,EAIO,IAAI;EAHxB,aAAa,EAGO,IAAI,GAAK;;AAEvC,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,EAlCK,IAAO,GAmCpB;;AAGH,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,EC7CO,IAAO,GD8CtB",
   "names": Array [],
@@ -1436,9 +1436,9 @@ nav {
 }
 `;
 
-exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "source-map" value (node-sass) (scss): warnings 1`] = `Array []`;
+exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "source-map" value ('node-sass', 'old' API, 'scss' syntax): warnings 1`] = `Array []`;
 
-exports[`sourceMap option should generate source maps when value is not specified and the "devtool" option has "source-map" value (dart-sass) (sass): css 1`] = `
+exports[`sourceMap option should generate source maps when value is not specified and the "devtool" option has "source-map" value ('dart-sass', 'old' API, 'sass' syntax): css 1`] = `
 "@charset \\"UTF-8\\";
 @import \\"./file.css\\";
 body {
@@ -1494,9 +1494,9 @@ nav a {
 }"
 `;
 
-exports[`sourceMap option should generate source maps when value is not specified and the "devtool" option has "source-map" value (dart-sass) (sass): errors 1`] = `Array []`;
+exports[`sourceMap option should generate source maps when value is not specified and the "devtool" option has "source-map" value ('dart-sass', 'old' API, 'sass' syntax): errors 1`] = `Array []`;
 
-exports[`sourceMap option should generate source maps when value is not specified and the "devtool" option has "source-map" value (dart-sass) (sass): source map 1`] = `
+exports[`sourceMap option should generate source maps when value is not specified and the "devtool" option has "source-map" value ('dart-sass', 'old' API, 'sass' syntax): source map 1`] = `
 Object {
   "mappings": ";AACQ;AAMR;EACE;EACA,OALc;;;AAQd;EACE;EACA;EACA;;AAEF;EACE;;AAEF;EACE;EACA;EACA;;;AAQJ;EALE,uBAMe;EALf,oBAKe;EAJf,mBAIe;EAHf,eAGe;;;AAEjB;EACE;EACA;EACA;;;AAEF;EAEE;;;AAEF;EAEE;;;AAEF;EAEE;;;AAGA;EACE,SAhDY;;;AAmDd;EACE,SCzDc",
   "names": Array [],
@@ -1573,9 +1573,9 @@ nav
 }
 `;
 
-exports[`sourceMap option should generate source maps when value is not specified and the "devtool" option has "source-map" value (dart-sass) (sass): warnings 1`] = `Array []`;
+exports[`sourceMap option should generate source maps when value is not specified and the "devtool" option has "source-map" value ('dart-sass', 'old' API, 'sass' syntax): warnings 1`] = `Array []`;
 
-exports[`sourceMap option should generate source maps when value is not specified and the "devtool" option has "source-map" value (dart-sass) (scss): css 1`] = `
+exports[`sourceMap option should generate source maps when value is not specified and the "devtool" option has "source-map" value ('dart-sass', 'old' API, 'scss' syntax): css 1`] = `
 "@charset \\"UTF-8\\";
 @import \\"./file.css\\";
 body {
@@ -1613,9 +1613,9 @@ nav a {
 }"
 `;
 
-exports[`sourceMap option should generate source maps when value is not specified and the "devtool" option has "source-map" value (dart-sass) (scss): errors 1`] = `Array []`;
+exports[`sourceMap option should generate source maps when value is not specified and the "devtool" option has "source-map" value ('dart-sass', 'old' API, 'scss' syntax): errors 1`] = `Array []`;
 
-exports[`sourceMap option should generate source maps when value is not specified and the "devtool" option has "source-map" value (dart-sass) (scss): source map 1`] = `
+exports[`sourceMap option should generate source maps when value is not specified and the "devtool" option has "source-map" value ('dart-sass', 'old' API, 'scss' syntax): source map 1`] = `
 Object {
   "mappings": ";AACQ;AAMR;EACE;EACA,OALc;;;AASd;EACE;EACA;EACA;;AAGF;EAAK;;AAEL;EACE;EACA;EACA;;;AAWJ;EANE,uBAM4B;EALzB,oBAKyB;EAJxB,mBAIwB;EAHpB,eAGoB;;;AAG5B;EACE,SAlCY;;;AAuCd;EACE,SC7Cc",
   "names": Array [],
@@ -1681,9 +1681,9 @@ nav {
 }
 `;
 
-exports[`sourceMap option should generate source maps when value is not specified and the "devtool" option has "source-map" value (dart-sass) (scss): warnings 1`] = `Array []`;
+exports[`sourceMap option should generate source maps when value is not specified and the "devtool" option has "source-map" value ('dart-sass', 'old' API, 'scss' syntax): warnings 1`] = `Array []`;
 
-exports[`sourceMap option should generate source maps when value is not specified and the "devtool" option has "source-map" value (node-sass) (sass): css 1`] = `
+exports[`sourceMap option should generate source maps when value is not specified and the "devtool" option has "source-map" value ('node-sass', 'old' API, 'sass' syntax): css 1`] = `
 "@charset \\"UTF-8\\";
 @import url(./file.css);
 body {
@@ -1731,9 +1731,9 @@ nav a {
 "
 `;
 
-exports[`sourceMap option should generate source maps when value is not specified and the "devtool" option has "source-map" value (node-sass) (sass): errors 1`] = `Array []`;
+exports[`sourceMap option should generate source maps when value is not specified and the "devtool" option has "source-map" value ('node-sass', 'old' API, 'sass' syntax): errors 1`] = `Array []`;
 
-exports[`sourceMap option should generate source maps when value is not specified and the "devtool" option has "source-map" value (node-sass) (sass): source map 1`] = `
+exports[`sourceMap option should generate source maps when value is not specified and the "devtool" option has "source-map" value ('node-sass', 'old' API, 'sass' syntax): source map 1`] = `
 Object {
   "mappings": ";AACA,OAAO,CAAP,eAAO;AAMP,AAAA,IAAI,CAAC;EACH,IAAI,EAAE,IAAI,CALI,SAAS,EAAE,UAAU;EAMnC,KAAK,EALS,IAAI,GAKM;;AAE1B,AACE,GADC,CACD,EAAE,CAAC;EACD,MAAM,EAAE,CAAC;EACT,OAAO,EAAE,CAAC;EACV,UAAU,EAAE,IAAI,GAAG;;AAJvB,AAME,GANC,CAMD,EAAE,CAAC;EACD,OAAO,EAAE,YAAY,GAAG;;AAP5B,AASE,GATC,CASD,CAAC,CAAC;EACA,OAAO,EAAE,KAAK;EACd,OAAO,EAAE,QAAQ;EACjB,eAAe,EAAE,IAAI,GAAG;;AAQ5B,AAAA,IAAI,CAAC;EALH,qBAAqB,EAME,IAAI;EAL3B,kBAAkB,EAKK,IAAI;EAJ3B,iBAAiB,EAIM,IAAI;EAH3B,aAAa,EAGU,IAAI,GAAI;;AAEjC,AAAA,QAAQ,EAKR,QAAQ,EAIR,MAAM,EAIN,QAAQ,CAbC;EACP,MAAM,EAAE,cAAc;EACtB,OAAO,EAAE,IAAI;EACb,KAAK,EAAE,IAAI,GAAG;;AAEhB,AAAA,QAAQ,CAAC;EAEP,YAAY,EAAE,KAAK,GAAG;;AAExB,AAAA,MAAM,CAAC;EAEL,YAAY,EAAE,GAAG,GAAG;;AAEtB,AAAA,QAAQ,CAAC;EAEP,YAAY,EAAE,MAAM,GAAG;;AAEzB,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,EAhDK,IAAO,GAgDJ;;AAEnB,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,ECzDO,IAAO,GDyDO",
   "names": Array [],
@@ -1810,9 +1810,9 @@ nav {
 }
 `;
 
-exports[`sourceMap option should generate source maps when value is not specified and the "devtool" option has "source-map" value (node-sass) (sass): warnings 1`] = `Array []`;
+exports[`sourceMap option should generate source maps when value is not specified and the "devtool" option has "source-map" value ('node-sass', 'old' API, 'sass' syntax): warnings 1`] = `Array []`;
 
-exports[`sourceMap option should generate source maps when value is not specified and the "devtool" option has "source-map" value (node-sass) (scss): css 1`] = `
+exports[`sourceMap option should generate source maps when value is not specified and the "devtool" option has "source-map" value ('node-sass', 'old' API, 'scss' syntax): css 1`] = `
 "@charset \\"UTF-8\\";
 @import url(./file.css);
 body {
@@ -1846,9 +1846,9 @@ nav a {
 "
 `;
 
-exports[`sourceMap option should generate source maps when value is not specified and the "devtool" option has "source-map" value (node-sass) (scss): errors 1`] = `Array []`;
+exports[`sourceMap option should generate source maps when value is not specified and the "devtool" option has "source-map" value ('node-sass', 'old' API, 'scss' syntax): errors 1`] = `Array []`;
 
-exports[`sourceMap option should generate source maps when value is not specified and the "devtool" option has "source-map" value (node-sass) (scss): source map 1`] = `
+exports[`sourceMap option should generate source maps when value is not specified and the "devtool" option has "source-map" value ('node-sass', 'old' API, 'scss' syntax): source map 1`] = `
 Object {
   "mappings": ";AACA,OAAO,CAAP,eAAO;AAMP,AAAA,IAAI,CAAC;EACH,IAAI,EAAE,IAAI,CALI,SAAS,EAAE,UAAU;EAMnC,KAAK,EALS,IAAI,GAMnB;;AAED,AACE,GADC,CACD,EAAE,CAAC;EACD,MAAM,EAAE,CAAC;EACT,OAAO,EAAE,CAAC;EACV,UAAU,EAAE,IAAI,GACjB;;AALH,AAOE,GAPC,CAOD,EAAE,CAAC;EAAE,OAAO,EAAE,YAAY,GAAI;;AAPhC,AASE,GATC,CASD,CAAC,CAAC;EACA,OAAO,EAAE,KAAK;EACd,OAAO,EAAE,QAAQ;EACjB,eAAe,EAAE,IAAI,GACtB;;AAUH,AAAA,IAAI,CAAC;EANH,qBAAqB,EAMO,IAAI;EAL7B,kBAAkB,EAKO,IAAI;EAJ5B,iBAAiB,EAIO,IAAI;EAHxB,aAAa,EAGO,IAAI,GAAK;;AAEvC,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,EAlCK,IAAO,GAmCpB;;AAGH,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,EC7CO,IAAO,GD8CtB",
   "names": Array [],
@@ -1914,9 +1914,9 @@ nav {
 }
 `;
 
-exports[`sourceMap option should generate source maps when value is not specified and the "devtool" option has "source-map" value (node-sass) (scss): warnings 1`] = `Array []`;
+exports[`sourceMap option should generate source maps when value is not specified and the "devtool" option has "source-map" value ('node-sass', 'old' API, 'scss' syntax): warnings 1`] = `Array []`;
 
-exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "false" value (dart-sass) (sass): css 1`] = `
+exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "false" value ('dart-sass', 'old' API, 'sass' syntax): css 1`] = `
 "@charset \\"UTF-8\\";
 @import \\"./file.css\\";
 body {
@@ -1972,13 +1972,13 @@ nav a {
 }"
 `;
 
-exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "false" value (dart-sass) (sass): errors 1`] = `Array []`;
+exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "false" value ('dart-sass', 'old' API, 'sass' syntax): errors 1`] = `Array []`;
 
-exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "false" value (dart-sass) (sass): source map 1`] = `undefined`;
+exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "false" value ('dart-sass', 'old' API, 'sass' syntax): source map 1`] = `undefined`;
 
-exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "false" value (dart-sass) (sass): warnings 1`] = `Array []`;
+exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "false" value ('dart-sass', 'old' API, 'sass' syntax): warnings 1`] = `Array []`;
 
-exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "false" value (dart-sass) (scss): css 1`] = `
+exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "false" value ('dart-sass', 'old' API, 'scss' syntax): css 1`] = `
 "@charset \\"UTF-8\\";
 @import \\"./file.css\\";
 body {
@@ -2016,13 +2016,13 @@ nav a {
 }"
 `;
 
-exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "false" value (dart-sass) (scss): errors 1`] = `Array []`;
+exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "false" value ('dart-sass', 'old' API, 'scss' syntax): errors 1`] = `Array []`;
 
-exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "false" value (dart-sass) (scss): source map 1`] = `undefined`;
+exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "false" value ('dart-sass', 'old' API, 'scss' syntax): source map 1`] = `undefined`;
 
-exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "false" value (dart-sass) (scss): warnings 1`] = `Array []`;
+exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "false" value ('dart-sass', 'old' API, 'scss' syntax): warnings 1`] = `Array []`;
 
-exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "false" value (node-sass) (sass): css 1`] = `
+exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "false" value ('node-sass', 'old' API, 'sass' syntax): css 1`] = `
 "@charset \\"UTF-8\\";
 @import url(./file.css);
 body {
@@ -2070,13 +2070,13 @@ nav a {
 "
 `;
 
-exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "false" value (node-sass) (sass): errors 1`] = `Array []`;
+exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "false" value ('node-sass', 'old' API, 'sass' syntax): errors 1`] = `Array []`;
 
-exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "false" value (node-sass) (sass): source map 1`] = `undefined`;
+exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "false" value ('node-sass', 'old' API, 'sass' syntax): source map 1`] = `undefined`;
 
-exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "false" value (node-sass) (sass): warnings 1`] = `Array []`;
+exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "false" value ('node-sass', 'old' API, 'sass' syntax): warnings 1`] = `Array []`;
 
-exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "false" value (node-sass) (scss): css 1`] = `
+exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "false" value ('node-sass', 'old' API, 'scss' syntax): css 1`] = `
 "@charset \\"UTF-8\\";
 @import url(./file.css);
 body {
@@ -2110,13 +2110,13 @@ nav a {
 "
 `;
 
-exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "false" value (node-sass) (scss): errors 1`] = `Array []`;
+exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "false" value ('node-sass', 'old' API, 'scss' syntax): errors 1`] = `Array []`;
 
-exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "false" value (node-sass) (scss): source map 1`] = `undefined`;
+exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "false" value ('node-sass', 'old' API, 'scss' syntax): source map 1`] = `undefined`;
 
-exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "false" value (node-sass) (scss): warnings 1`] = `Array []`;
+exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "false" value ('node-sass', 'old' API, 'scss' syntax): warnings 1`] = `Array []`;
 
-exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "source-map" value (dart-sass) (sass): css 1`] = `
+exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "source-map" value ('dart-sass', 'old' API, 'sass' syntax): css 1`] = `
 "@charset \\"UTF-8\\";
 @import \\"./file.css\\";
 body {
@@ -2172,13 +2172,13 @@ nav a {
 }"
 `;
 
-exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "source-map" value (dart-sass) (sass): errors 1`] = `Array []`;
+exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "source-map" value ('dart-sass', 'old' API, 'sass' syntax): errors 1`] = `Array []`;
 
-exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "source-map" value (dart-sass) (sass): source map 1`] = `undefined`;
+exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "source-map" value ('dart-sass', 'old' API, 'sass' syntax): source map 1`] = `undefined`;
 
-exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "source-map" value (dart-sass) (sass): warnings 1`] = `Array []`;
+exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "source-map" value ('dart-sass', 'old' API, 'sass' syntax): warnings 1`] = `Array []`;
 
-exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "source-map" value (dart-sass) (scss): css 1`] = `
+exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "source-map" value ('dart-sass', 'old' API, 'scss' syntax): css 1`] = `
 "@charset \\"UTF-8\\";
 @import \\"./file.css\\";
 body {
@@ -2216,13 +2216,13 @@ nav a {
 }"
 `;
 
-exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "source-map" value (dart-sass) (scss): errors 1`] = `Array []`;
+exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "source-map" value ('dart-sass', 'old' API, 'scss' syntax): errors 1`] = `Array []`;
 
-exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "source-map" value (dart-sass) (scss): source map 1`] = `undefined`;
+exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "source-map" value ('dart-sass', 'old' API, 'scss' syntax): source map 1`] = `undefined`;
 
-exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "source-map" value (dart-sass) (scss): warnings 1`] = `Array []`;
+exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "source-map" value ('dart-sass', 'old' API, 'scss' syntax): warnings 1`] = `Array []`;
 
-exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "source-map" value (node-sass) (sass): css 1`] = `
+exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "source-map" value ('node-sass', 'old' API, 'sass' syntax): css 1`] = `
 "@charset \\"UTF-8\\";
 @import url(./file.css);
 body {
@@ -2270,13 +2270,13 @@ nav a {
 "
 `;
 
-exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "source-map" value (node-sass) (sass): errors 1`] = `Array []`;
+exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "source-map" value ('node-sass', 'old' API, 'sass' syntax): errors 1`] = `Array []`;
 
-exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "source-map" value (node-sass) (sass): source map 1`] = `undefined`;
+exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "source-map" value ('node-sass', 'old' API, 'sass' syntax): source map 1`] = `undefined`;
 
-exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "source-map" value (node-sass) (sass): warnings 1`] = `Array []`;
+exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "source-map" value ('node-sass', 'old' API, 'sass' syntax): warnings 1`] = `Array []`;
 
-exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "source-map" value (node-sass) (scss): css 1`] = `
+exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "source-map" value ('node-sass', 'old' API, 'scss' syntax): css 1`] = `
 "@charset \\"UTF-8\\";
 @import url(./file.css);
 body {
@@ -2310,13 +2310,13 @@ nav a {
 "
 `;
 
-exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "source-map" value (node-sass) (scss): errors 1`] = `Array []`;
+exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "source-map" value ('node-sass', 'old' API, 'scss' syntax): errors 1`] = `Array []`;
 
-exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "source-map" value (node-sass) (scss): source map 1`] = `undefined`;
+exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "source-map" value ('node-sass', 'old' API, 'scss' syntax): source map 1`] = `undefined`;
 
-exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "source-map" value (node-sass) (scss): warnings 1`] = `Array []`;
+exports[`sourceMap option should not generate source maps when value has "false" value and the "devtool" option has "source-map" value ('node-sass', 'old' API, 'scss' syntax): warnings 1`] = `Array []`;
 
-exports[`sourceMap option should not generate source maps when value is not specified and the "devtool" option has "false" value (dart-sass) (sass): css 1`] = `
+exports[`sourceMap option should not generate source maps when value is not specified and the "devtool" option has "false" value ('dart-sass', 'old' API, 'sass' syntax): css 1`] = `
 "@charset \\"UTF-8\\";
 @import \\"./file.css\\";
 body {
@@ -2372,13 +2372,13 @@ nav a {
 }"
 `;
 
-exports[`sourceMap option should not generate source maps when value is not specified and the "devtool" option has "false" value (dart-sass) (sass): errors 1`] = `Array []`;
+exports[`sourceMap option should not generate source maps when value is not specified and the "devtool" option has "false" value ('dart-sass', 'old' API, 'sass' syntax): errors 1`] = `Array []`;
 
-exports[`sourceMap option should not generate source maps when value is not specified and the "devtool" option has "false" value (dart-sass) (sass): source map 1`] = `undefined`;
+exports[`sourceMap option should not generate source maps when value is not specified and the "devtool" option has "false" value ('dart-sass', 'old' API, 'sass' syntax): source map 1`] = `undefined`;
 
-exports[`sourceMap option should not generate source maps when value is not specified and the "devtool" option has "false" value (dart-sass) (sass): warnings 1`] = `Array []`;
+exports[`sourceMap option should not generate source maps when value is not specified and the "devtool" option has "false" value ('dart-sass', 'old' API, 'sass' syntax): warnings 1`] = `Array []`;
 
-exports[`sourceMap option should not generate source maps when value is not specified and the "devtool" option has "false" value (dart-sass) (scss): css 1`] = `
+exports[`sourceMap option should not generate source maps when value is not specified and the "devtool" option has "false" value ('dart-sass', 'old' API, 'scss' syntax): css 1`] = `
 "@charset \\"UTF-8\\";
 @import \\"./file.css\\";
 body {
@@ -2416,13 +2416,13 @@ nav a {
 }"
 `;
 
-exports[`sourceMap option should not generate source maps when value is not specified and the "devtool" option has "false" value (dart-sass) (scss): errors 1`] = `Array []`;
+exports[`sourceMap option should not generate source maps when value is not specified and the "devtool" option has "false" value ('dart-sass', 'old' API, 'scss' syntax): errors 1`] = `Array []`;
 
-exports[`sourceMap option should not generate source maps when value is not specified and the "devtool" option has "false" value (dart-sass) (scss): source map 1`] = `undefined`;
+exports[`sourceMap option should not generate source maps when value is not specified and the "devtool" option has "false" value ('dart-sass', 'old' API, 'scss' syntax): source map 1`] = `undefined`;
 
-exports[`sourceMap option should not generate source maps when value is not specified and the "devtool" option has "false" value (dart-sass) (scss): warnings 1`] = `Array []`;
+exports[`sourceMap option should not generate source maps when value is not specified and the "devtool" option has "false" value ('dart-sass', 'old' API, 'scss' syntax): warnings 1`] = `Array []`;
 
-exports[`sourceMap option should not generate source maps when value is not specified and the "devtool" option has "false" value (node-sass) (sass): css 1`] = `
+exports[`sourceMap option should not generate source maps when value is not specified and the "devtool" option has "false" value ('node-sass', 'old' API, 'sass' syntax): css 1`] = `
 "@charset \\"UTF-8\\";
 @import url(./file.css);
 body {
@@ -2470,13 +2470,13 @@ nav a {
 "
 `;
 
-exports[`sourceMap option should not generate source maps when value is not specified and the "devtool" option has "false" value (node-sass) (sass): errors 1`] = `Array []`;
+exports[`sourceMap option should not generate source maps when value is not specified and the "devtool" option has "false" value ('node-sass', 'old' API, 'sass' syntax): errors 1`] = `Array []`;
 
-exports[`sourceMap option should not generate source maps when value is not specified and the "devtool" option has "false" value (node-sass) (sass): source map 1`] = `undefined`;
+exports[`sourceMap option should not generate source maps when value is not specified and the "devtool" option has "false" value ('node-sass', 'old' API, 'sass' syntax): source map 1`] = `undefined`;
 
-exports[`sourceMap option should not generate source maps when value is not specified and the "devtool" option has "false" value (node-sass) (sass): warnings 1`] = `Array []`;
+exports[`sourceMap option should not generate source maps when value is not specified and the "devtool" option has "false" value ('node-sass', 'old' API, 'sass' syntax): warnings 1`] = `Array []`;
 
-exports[`sourceMap option should not generate source maps when value is not specified and the "devtool" option has "false" value (node-sass) (scss): css 1`] = `
+exports[`sourceMap option should not generate source maps when value is not specified and the "devtool" option has "false" value ('node-sass', 'old' API, 'scss' syntax): css 1`] = `
 "@charset \\"UTF-8\\";
 @import url(./file.css);
 body {
@@ -2510,8 +2510,8 @@ nav a {
 "
 `;
 
-exports[`sourceMap option should not generate source maps when value is not specified and the "devtool" option has "false" value (node-sass) (scss): errors 1`] = `Array []`;
+exports[`sourceMap option should not generate source maps when value is not specified and the "devtool" option has "false" value ('node-sass', 'old' API, 'scss' syntax): errors 1`] = `Array []`;
 
-exports[`sourceMap option should not generate source maps when value is not specified and the "devtool" option has "false" value (node-sass) (scss): source map 1`] = `undefined`;
+exports[`sourceMap option should not generate source maps when value is not specified and the "devtool" option has "false" value ('node-sass', 'old' API, 'scss' syntax): source map 1`] = `undefined`;
 
-exports[`sourceMap option should not generate source maps when value is not specified and the "devtool" option has "false" value (node-sass) (scss): warnings 1`] = `Array []`;
+exports[`sourceMap option should not generate source maps when value is not specified and the "devtool" option has "false" value ('node-sass', 'old' API, 'scss' syntax): warnings 1`] = `Array []`;

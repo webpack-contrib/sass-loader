@@ -42,7 +42,9 @@ async function loader(content) {
       ? options.webpackImporter
       : true;
 
-  if (shouldUseWebpackImporter) {
+  const isModernAPI = options.api === "modern";
+
+  if (shouldUseWebpackImporter && !isModernAPI) {
     const { includePaths } = sassOptions;
 
     sassOptions.importer.push(

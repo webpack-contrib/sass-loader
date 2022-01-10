@@ -1,6 +1,3 @@
-import nodeSass from "node-sass";
-import dartSass from "sass";
-
 import { isSupportedFibers } from "../src/utils";
 
 import {
@@ -9,19 +6,20 @@ import {
   getCodeFromSass,
   getCompiler,
   getErrors,
-  getImplementationByName,
+  getImplementationsAndAPI,
   getTestId,
   getWarnings,
 } from "./helpers";
 
 let Fiber;
-const implementations = [nodeSass, dartSass];
+const implementations = getImplementationsAndAPI();
 const syntaxStyles = ["scss", "sass"];
 
 describe("additionalData option", () => {
   beforeAll(async () => {
     if (isSupportedFibers()) {
       const { default: fibers } = await import("fibers");
+
       Fiber = fibers;
     }
   });
@@ -33,14 +31,15 @@ describe("additionalData option", () => {
     }
   });
 
-  implementations.forEach((implementation) => {
-    const [implementationName] = implementation.info.split("\t");
+  implementations.forEach((item) => {
+    const { name: implementationName, api, implementation } = item;
 
     syntaxStyles.forEach((syntax) => {
-      it(`should work as a string (${implementationName}) (${syntax})`, async () => {
+      it(`should work as a string ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
         const testId = getTestId("prepending-data", syntax);
         const options = {
-          implementation: getImplementationByName(implementationName),
+          implementation,
+          api,
           additionalData: `$prepended-data: hotpink${
             syntax === "sass" ? "\n" : ";"
           }`,
@@ -56,10 +55,11 @@ describe("additionalData option", () => {
         expect(getErrors(stats)).toMatchSnapshot("errors");
       });
 
-      it(`should work as a function (${implementationName}) (${syntax})`, async () => {
+      it(`should work as a function ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
         const testId = getTestId("prepending-data", syntax);
         const options = {
-          implementation: getImplementationByName(implementationName),
+          implementation,
+          api,
           additionalData: (content, loaderContext) => {
             expect(loaderContext).toBeDefined();
             expect(content).toBeDefined();
@@ -80,10 +80,11 @@ describe("additionalData option", () => {
         expect(getErrors(stats)).toMatchSnapshot("errors");
       });
 
-      it(`should work as an async function (${implementationName}) (${syntax})`, async () => {
+      it(`should work as an async function ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
         const testId = getTestId("prepending-data", syntax);
         const options = {
-          implementation: getImplementationByName(implementationName),
+          implementation,
+          api,
           additionalData: async (content, loaderContext) => {
             expect(loaderContext).toBeDefined();
             expect(content).toBeDefined();
@@ -104,7 +105,7 @@ describe("additionalData option", () => {
         expect(getErrors(stats)).toMatchSnapshot("errors");
       });
 
-      it(`should use same EOL on all os (${implementationName}) (${syntax})`, async () => {
+      it(`should use same EOL on all os ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
         const testId = getTestId("prepending-data", syntax);
         const additionalData =
           syntax === "sass"
@@ -115,10 +116,7 @@ a
 a {
   color: red;
 }`;
-        const options = {
-          implementation: getImplementationByName(implementationName),
-          additionalData,
-        };
+        const options = { implementation, api, additionalData };
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);

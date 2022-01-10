@@ -192,10 +192,6 @@ async function getSassOptions(
     };
   }
 
-  if (typeof options.charset === "undefined") {
-    options.charset = true;
-  }
-
   const { resourcePath } = loaderContext;
 
   if (isModernAPI) {
@@ -310,6 +306,10 @@ async function getSassOptions(
             )
           : []
       );
+
+    if (typeof options.charset === "undefined") {
+      options.charset = true;
+    }
   }
 
   return options;
