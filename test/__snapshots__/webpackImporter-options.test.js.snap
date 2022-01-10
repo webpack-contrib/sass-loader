@@ -1,107 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`webpackImporter option false ('dart-sass', 'modern' API, 'sass' syntax): css 1`] = `
-"@charset \\"UTF-8\\";
-@import \\"./file.css\\";
-body {
-  font: 100% Helvetica, sans-serif;
-  color: #333;
-}
-
-nav ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-nav li {
-  display: inline-block;
-}
-nav a {
-  display: block;
-  padding: 6px 12px;
-  text-decoration: none;
-}
-
-.box {
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  -ms-border-radius: 10px;
-  border-radius: 10px;
-}
-
-.message, .warning, .error, .success {
-  border: 1px solid #ccc;
-  padding: 10px;
-  color: #333;
-}
-
-.success {
-  border-color: green;
-}
-
-.error {
-  border-color: red;
-}
-
-.warning {
-  border-color: yellow;
-}
-
-.foo:before {
-  content: \\"\\\\e0c6\\";
-}
-
-.bar:before {
-  content: \\"∑\\";
-}"
-`;
-
-exports[`webpackImporter option false ('dart-sass', 'modern' API, 'sass' syntax): errors 1`] = `Array []`;
-
-exports[`webpackImporter option false ('dart-sass', 'modern' API, 'sass' syntax): warnings 1`] = `Array []`;
-
-exports[`webpackImporter option false ('dart-sass', 'modern' API, 'scss' syntax): css 1`] = `
-"@charset \\"UTF-8\\";
-@import \\"./file.css\\";
-body {
-  font: 100% Helvetica, sans-serif;
-  color: #333;
-}
-
-nav ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-nav li {
-  display: inline-block;
-}
-nav a {
-  display: block;
-  padding: 6px 12px;
-  text-decoration: none;
-}
-
-.box {
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  -ms-border-radius: 10px;
-  border-radius: 10px;
-}
-
-.foo:before {
-  content: \\"\\\\e0c6\\";
-}
-
-.bar:before {
-  content: \\"∑\\";
-}"
-`;
-
-exports[`webpackImporter option false ('dart-sass', 'modern' API, 'scss' syntax): errors 1`] = `Array []`;
-
-exports[`webpackImporter option false ('dart-sass', 'modern' API, 'scss' syntax): warnings 1`] = `Array []`;
-
 exports[`webpackImporter option false ('dart-sass', 'old' API, 'sass' syntax): css 1`] = `
 "@charset \\"UTF-8\\";
 @import \\"./file.css\\";
@@ -294,7 +192,7 @@ exports[`webpackImporter option false ('node-sass', 'old' API, 'scss' syntax): e
 
 exports[`webpackImporter option false ('node-sass', 'old' API, 'scss' syntax): warnings 1`] = `Array []`;
 
-exports[`webpackImporter option not specify ('dart-sass', 'modern' API, 'sass' syntax): css 1`] = `
+exports[`webpackImporter option false ('sass-embedded', 'old' API, 'sass' syntax): css 1`] = `
 "@charset \\"UTF-8\\";
 @import \\"./file.css\\";
 body {
@@ -350,11 +248,11 @@ nav a {
 }"
 `;
 
-exports[`webpackImporter option not specify ('dart-sass', 'modern' API, 'sass' syntax): errors 1`] = `Array []`;
+exports[`webpackImporter option false ('sass-embedded', 'old' API, 'sass' syntax): errors 1`] = `Array []`;
 
-exports[`webpackImporter option not specify ('dart-sass', 'modern' API, 'sass' syntax): warnings 1`] = `Array []`;
+exports[`webpackImporter option false ('sass-embedded', 'old' API, 'sass' syntax): warnings 1`] = `Array []`;
 
-exports[`webpackImporter option not specify ('dart-sass', 'modern' API, 'scss' syntax): css 1`] = `
+exports[`webpackImporter option false ('sass-embedded', 'old' API, 'scss' syntax): css 1`] = `
 "@charset \\"UTF-8\\";
 @import \\"./file.css\\";
 body {
@@ -392,9 +290,9 @@ nav a {
 }"
 `;
 
-exports[`webpackImporter option not specify ('dart-sass', 'modern' API, 'scss' syntax): errors 1`] = `Array []`;
+exports[`webpackImporter option false ('sass-embedded', 'old' API, 'scss' syntax): errors 1`] = `Array []`;
 
-exports[`webpackImporter option not specify ('dart-sass', 'modern' API, 'scss' syntax): warnings 1`] = `Array []`;
+exports[`webpackImporter option false ('sass-embedded', 'old' API, 'scss' syntax): warnings 1`] = `Array []`;
 
 exports[`webpackImporter option not specify ('dart-sass', 'old' API, 'sass' syntax): css 1`] = `
 "@charset \\"UTF-8\\";
@@ -588,7 +486,7 @@ exports[`webpackImporter option not specify ('node-sass', 'old' API, 'scss' synt
 
 exports[`webpackImporter option not specify ('node-sass', 'old' API, 'scss' syntax): warnings 1`] = `Array []`;
 
-exports[`webpackImporter option true ('dart-sass', 'modern' API, 'sass' syntax): css 1`] = `
+exports[`webpackImporter option not specify ('sass-embedded', 'old' API, 'sass' syntax): css 1`] = `
 "@charset \\"UTF-8\\";
 @import \\"./file.css\\";
 body {
@@ -644,11 +542,11 @@ nav a {
 }"
 `;
 
-exports[`webpackImporter option true ('dart-sass', 'modern' API, 'sass' syntax): errors 1`] = `Array []`;
+exports[`webpackImporter option not specify ('sass-embedded', 'old' API, 'sass' syntax): errors 1`] = `Array []`;
 
-exports[`webpackImporter option true ('dart-sass', 'modern' API, 'sass' syntax): warnings 1`] = `Array []`;
+exports[`webpackImporter option not specify ('sass-embedded', 'old' API, 'sass' syntax): warnings 1`] = `Array []`;
 
-exports[`webpackImporter option true ('dart-sass', 'modern' API, 'scss' syntax): css 1`] = `
+exports[`webpackImporter option not specify ('sass-embedded', 'old' API, 'scss' syntax): css 1`] = `
 "@charset \\"UTF-8\\";
 @import \\"./file.css\\";
 body {
@@ -686,9 +584,9 @@ nav a {
 }"
 `;
 
-exports[`webpackImporter option true ('dart-sass', 'modern' API, 'scss' syntax): errors 1`] = `Array []`;
+exports[`webpackImporter option not specify ('sass-embedded', 'old' API, 'scss' syntax): errors 1`] = `Array []`;
 
-exports[`webpackImporter option true ('dart-sass', 'modern' API, 'scss' syntax): warnings 1`] = `Array []`;
+exports[`webpackImporter option not specify ('sass-embedded', 'old' API, 'scss' syntax): warnings 1`] = `Array []`;
 
 exports[`webpackImporter option true ('dart-sass', 'old' API, 'sass' syntax): css 1`] = `
 "@charset \\"UTF-8\\";
@@ -881,3 +779,105 @@ nav a {
 exports[`webpackImporter option true ('node-sass', 'old' API, 'scss' syntax): errors 1`] = `Array []`;
 
 exports[`webpackImporter option true ('node-sass', 'old' API, 'scss' syntax): warnings 1`] = `Array []`;
+
+exports[`webpackImporter option true ('sass-embedded', 'old' API, 'sass' syntax): css 1`] = `
+"@charset \\"UTF-8\\";
+@import \\"./file.css\\";
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+nav li {
+  display: inline-block;
+}
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none;
+}
+
+.box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.message, .warning, .error, .success {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333;
+}
+
+.success {
+  border-color: green;
+}
+
+.error {
+  border-color: red;
+}
+
+.warning {
+  border-color: yellow;
+}
+
+.foo:before {
+  content: \\"\\\\e0c6\\";
+}
+
+.bar:before {
+  content: \\"∑\\";
+}"
+`;
+
+exports[`webpackImporter option true ('sass-embedded', 'old' API, 'sass' syntax): errors 1`] = `Array []`;
+
+exports[`webpackImporter option true ('sass-embedded', 'old' API, 'sass' syntax): warnings 1`] = `Array []`;
+
+exports[`webpackImporter option true ('sass-embedded', 'old' API, 'scss' syntax): css 1`] = `
+"@charset \\"UTF-8\\";
+@import \\"./file.css\\";
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+nav li {
+  display: inline-block;
+}
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none;
+}
+
+.box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.foo:before {
+  content: \\"\\\\e0c6\\";
+}
+
+.bar:before {
+  content: \\"∑\\";
+}"
+`;
+
+exports[`webpackImporter option true ('sass-embedded', 'old' API, 'scss' syntax): errors 1`] = `Array []`;
+
+exports[`webpackImporter option true ('sass-embedded', 'old' API, 'scss' syntax): warnings 1`] = `Array []`;

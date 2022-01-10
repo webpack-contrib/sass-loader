@@ -34,6 +34,11 @@ describe("webpackImporter option", () => {
     syntaxStyles.forEach((syntax) => {
       const { name: implementationName, api, implementation } = item;
 
+      // TODO fix me https://github.com/webpack-contrib/sass-loader/issues/774
+      if (api === "modern") {
+        return;
+      }
+
       it(`not specify ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
         const testId = getTestId("language", syntax);
         const options = {
@@ -43,7 +48,7 @@ describe("webpackImporter option", () => {
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = getCodeFromSass(testId, options);
+        const codeFromSass = await getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -61,7 +66,7 @@ describe("webpackImporter option", () => {
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = getCodeFromSass(testId, options);
+        const codeFromSass = await getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -79,7 +84,7 @@ describe("webpackImporter option", () => {
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = getCodeFromSass(testId, options);
+        const codeFromSass = await getCodeFromSass(testId, options);
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot("css");

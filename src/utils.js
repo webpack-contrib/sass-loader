@@ -78,6 +78,9 @@ function getSassImplementation(loaderContext, implementation) {
   } else if (implementationName === "node-sass") {
     // eslint-disable-next-line consistent-return
     return resolvedImplementation;
+  } else if (implementationName === "sass-embedded") {
+    // eslint-disable-next-line consistent-return
+    return resolvedImplementation;
   }
 
   loaderContext.emitError(
@@ -682,9 +685,11 @@ let nodeSassJobQueue = null;
  * @returns {Function}
  */
 function getCompileFn(implementation, options) {
-  const isDartSass = implementation.info.includes("dart-sass");
+  const isNewSass =
+    implementation.info.includes("dart-sass") ||
+    implementation.info.includes("sass-embedded");
 
-  if (isDartSass) {
+  if (isNewSass) {
     if (options.api === "modern") {
       return (sassOptions) => {
         const { data, ...rest } = sassOptions;

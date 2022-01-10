@@ -1,9 +1,10 @@
+import url from "url";
 import path from "path";
 import fs from "fs";
 
 import { klona } from "klona/full";
 
-function getCodeFromSass(testId, options) {
+async function getCodeFromSass(testId, options) {
   const loaderOptions = klona(options);
   let sassOptions = options.sassOptions || {};
 
@@ -18,16 +19,28 @@ function getCodeFromSass(testId, options) {
   const { implementation } = loaderOptions;
   const isNodeSassImplementation =
     loaderOptions.implementation.info.includes("node-sass");
+  const isModernAPI = options.api === "modern";
 
   delete loaderOptions.implementation;
 
   const isSass = /\.sass$/i.test(testId);
 
-  if (loaderOptions.additionalData) {
+  const isIndentedSyntax = isSass;
+
+  if (isModernAPI) {
+    sassOptions.syntax = isIndentedSyntax ? "indented" : "scss";
+  } else {
     sassOptions.indentedSyntax = isSass;
+  }
+
+  if (loaderOptions.additionalData) {
     sassOptions.data = `$prepended-data: hotpink${
-      sassOptions.indentedSyntax ? "\n" : ";"
+      isIndentedSyntax ? "\n" : ";"
     }\n${fs.readFileSync(path.resolve(__dirname, "..", testId), "utf8")}`;
+  } else if (isModernAPI) {
+    sassOptions.data = fs
+      .readFileSync(url.pathToFileURL(path.resolve(__dirname, "..", testId)))
+      .toString();
   } else {
     sassOptions.file = path.resolve(__dirname, "..", testId);
   }
@@ -771,19 +784,43 @@ function getCodeFromSass(testId, options) {
     };
   }
 
-  sassOptions.importer = sassOptions.importer
-    ? []
-        .concat(
-          Array.isArray(sassOptions.importer)
-            ? [...sassOptions.importer]
-            : [sassOptions.importer]
-        )
-        .concat([testImporter])
-    : [testImporter];
+  if (!isModernAPI) {
+    sassOptions.importer = sassOptions.importer
+      ? []
+          .concat(
+            Array.isArray(sassOptions.importer)
+              ? [...sassOptions.importer]
+              : [sassOptions.importer]
+          )
+          .concat([testImporter])
+      : [testImporter];
+  }
 
   sassOptions.logger = { debug: () => {}, warn: () => {} };
 
-  const { css, map } = implementation.renderSync(sassOptions);
+  let css;
+  let map;
+
+  if (isModernAPI) {
+    const { data, ...rest } = sassOptions;
+
+    ({ css, sourceMap: map } = await implementation.compileStringAsync(
+      data,
+      rest
+    ));
+  } else {
+    ({ css, map } = await new Promise((resolve, reject) => {
+      implementation.render(sassOptions, (error, result) => {
+        if (error) {
+          reject(error);
+
+          return;
+        }
+
+        resolve(result);
+      });
+    }));
+  }
 
   return { css: css.toString(), sourceMap: map };
 }

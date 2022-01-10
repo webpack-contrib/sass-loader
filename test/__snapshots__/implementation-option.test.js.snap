@@ -16,6 +16,14 @@ exports[`implementation option 'sass_string', 'old' API: errors 1`] = `Array []`
 
 exports[`implementation option 'sass_string', 'old' API: warnings 1`] = `Array []`;
 
+exports[`implementation option 'sass-embedded', 'modern' API: errors 1`] = `Array []`;
+
+exports[`implementation option 'sass-embedded', 'modern' API: warnings 1`] = `Array []`;
+
+exports[`implementation option 'sass-embedded', 'old' API: errors 1`] = `Array []`;
+
+exports[`implementation option 'sass-embedded', 'old' API: warnings 1`] = `Array []`;
+
 exports[`implementation option not specify with modern API: errors 1`] = `Array []`;
 
 exports[`implementation option not specify with modern API: warnings 1`] = `Array []`;
