@@ -6,6 +6,7 @@ import {
   getSassImplementation,
   getSassOptions,
   getWebpackImporter,
+  getModernWebpackImporter,
   getCompileFn,
   normalizeSourceMap,
 } from "./utils";
@@ -44,12 +45,18 @@ async function loader(content) {
 
   const isModernAPI = options.api === "modern";
 
-  if (shouldUseWebpackImporter && !isModernAPI) {
-    const { includePaths } = sassOptions;
+  if (shouldUseWebpackImporter) {
+    if (!isModernAPI) {
+      const { includePaths } = sassOptions;
 
-    sassOptions.importer.push(
-      getWebpackImporter(this, implementation, includePaths)
-    );
+      sassOptions.importer.push(
+        getWebpackImporter(this, implementation, includePaths)
+      );
+    } else {
+      sassOptions.importers.push(
+        getModernWebpackImporter(this, implementation)
+      );
+    }
   }
 
   const compile = getCompileFn(implementation, options);

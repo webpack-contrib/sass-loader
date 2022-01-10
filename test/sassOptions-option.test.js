@@ -174,7 +174,7 @@ describe("sassOptions option", () => {
           implementation,
           api,
           sassOptions: {
-            functions: customFunctions(implementation),
+            functions: customFunctions(api, implementation),
           },
         };
         const compiler = getCompiler(testId, { loader: { options } });

@@ -218,6 +218,15 @@ async function getSassOptions(
         options.syntax = "css";
       }
     }
+
+    options.importers = options.importers
+      ? proxyCustomImporters(
+          Array.isArray(options.importers)
+            ? options.importers
+            : [options.importers],
+          loaderContext
+        )
+      : [];
   } else {
     options.file = resourcePath;
 
@@ -416,6 +425,37 @@ function promiseResolve(callbackResolve) {
     });
 }
 
+async function startResolving(resolutionMap) {
+  if (resolutionMap.length === 0) {
+    return Promise.reject();
+  }
+
+  const [{ possibleRequests }] = resolutionMap;
+
+  if (possibleRequests.length === 0) {
+    return Promise.reject();
+  }
+
+  const [{ resolve, context }] = resolutionMap;
+
+  try {
+    return await resolve(context, possibleRequests[0]);
+  } catch (_ignoreError) {
+    const [, ...tailResult] = possibleRequests;
+
+    if (tailResult.length === 0) {
+      const [, ...tailResolutionMap] = resolutionMap;
+
+      return startResolving(tailResolutionMap);
+    }
+
+    // eslint-disable-next-line no-param-reassign
+    resolutionMap[0].possibleRequests = tailResult;
+
+    return startResolving(resolutionMap);
+  }
+}
+
 const IS_SPECIAL_MODULE_IMPORT = /^~[^/]+$/;
 // `[drive_letter]:\` + `\\[server]\[sharename]\`
 const IS_NATIVE_WIN32_PATH = /^[a-z]:[/\\]|^\\\\/i;
@@ -442,38 +482,8 @@ function getWebpackResolver(
   implementation,
   includePaths = []
 ) {
-  async function startResolving(resolutionMap) {
-    if (resolutionMap.length === 0) {
-      return Promise.reject();
-    }
-
-    const [{ possibleRequests }] = resolutionMap;
-
-    if (possibleRequests.length === 0) {
-      return Promise.reject();
-    }
-
-    const [{ resolve, context }] = resolutionMap;
-
-    try {
-      return await resolve(context, possibleRequests[0]);
-    } catch (_ignoreError) {
-      const [, ...tailResult] = possibleRequests;
-
-      if (tailResult.length === 0) {
-        const [, ...tailResolutionMap] = resolutionMap;
-
-        return startResolving(tailResolutionMap);
-      }
-
-      // eslint-disable-next-line no-param-reassign
-      resolutionMap[0].possibleRequests = tailResult;
-
-      return startResolving(resolutionMap);
-    }
-  }
-
-  const isDartSass = implementation.info.includes("dart-sass");
+  const isDartSass =
+    implementation && implementation.info.includes("dart-sass");
   // We only have one difference with the built-in sass resolution logic and out resolution logic:
   // First, we look at the files starting with `_`, then without `_` (i.e. `_name.sass`, `_name.scss`, `_name.css`, `name.sass`, `name.scss`, `name.css`),
   // although `sass` look together by extensions (i.e. `_name.sass`/`name.sass`/`_name.scss`/`name.scss`/`_name.css`/`name.css`).
@@ -623,6 +633,17 @@ function getWebpackResolver(
 }
 
 const MATCH_CSS = /\.css$/i;
+
+function getModernWebpackImporter() {
+  return {
+    async canonicalize() {
+      return null;
+    },
+    load() {
+      // TODO implement
+    },
+  };
+}
 
 function getWebpackImporter(loaderContext, implementation, includePaths) {
   const resolve = getWebpackResolver(
@@ -777,6 +798,7 @@ function normalizeSourceMap(map, rootContext) {
 export {
   getSassImplementation,
   getSassOptions,
+  getModernWebpackImporter,
   getWebpackResolver,
   getWebpackImporter,
   getCompileFn,
