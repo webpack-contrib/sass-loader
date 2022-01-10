@@ -92,9 +92,7 @@ describe("sassOptions option", () => {
           sassOptions: (loaderContext) => {
             expect(loaderContext).toBeDefined();
 
-            return {
-              indentWidth: 10,
-            };
+            return api === "modern" ? {} : { indentWidth: 10 };
           },
         };
         const compiler = getCompiler(testId, { loader: { options } });
@@ -254,34 +252,41 @@ describe("sassOptions option", () => {
         expect(getErrors(stats)).toMatchSnapshot("errors");
       });
 
-      it(`should work with the "importer" as a array of functions option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
-        const testId = getTestId("glob-importer", syntax);
-        const options = {
-          implementation,
-          api,
-          sassOptions: {
-            importer: [globImporter()],
-          },
-        };
-        const compiler = getCompiler(testId, { loader: { options } });
-        const stats = await compile(compiler);
-        const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = getCodeFromSass(testId, options);
+      if (api !== "modern") {
+        it(`should work with the "importer" as a array of functions option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
+          const testId = getTestId("glob-importer", syntax);
+          const options = {
+            implementation,
+            api,
+            sassOptions: {
+              importer: [globImporter()],
+            },
+          };
+          const compiler = getCompiler(testId, { loader: { options } });
+          const stats = await compile(compiler);
+          const codeFromBundle = getCodeFromBundle(stats, compiler);
+          const codeFromSass = getCodeFromSass(testId, options);
 
-        expect(codeFromBundle.css).toBe(codeFromSass.css);
-        expect(codeFromBundle.css).toMatchSnapshot("css");
-        expect(getWarnings(stats)).toMatchSnapshot("warnings");
-        expect(getErrors(stats)).toMatchSnapshot("errors");
-      });
+          expect(codeFromBundle.css).toBe(codeFromSass.css);
+          expect(codeFromBundle.css).toMatchSnapshot("css");
+          expect(getWarnings(stats)).toMatchSnapshot("warnings");
+          expect(getErrors(stats)).toMatchSnapshot("errors");
+        });
+      }
 
-      it(`should work with the "includePaths" option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
+      it(`should work with the "includePaths"/"loadPaths" option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
         const testId = getTestId("import-include-paths", syntax);
         const options = {
           implementation,
           api,
-          sassOptions: {
-            includePaths: [path.resolve(__dirname, syntax, "includePath")],
-          },
+          sassOptions:
+            api === "modern"
+              ? { loadPaths: [path.resolve(__dirname, syntax, "includePath")] }
+              : {
+                  includePaths: [
+                    path.resolve(__dirname, syntax, "includePath"),
+                  ],
+                },
         };
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
@@ -299,9 +304,8 @@ describe("sassOptions option", () => {
         const options = {
           implementation,
           api,
-          sassOptions: {
-            indentType: "tab",
-          },
+          // Doesn't supported by modern API
+          sassOptions: api === "modern" ? {} : { indentType: "tab" },
         };
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
@@ -319,9 +323,8 @@ describe("sassOptions option", () => {
         const options = {
           implementation,
           api,
-          sassOptions: {
-            indentWidth: 4,
-          },
+          // Doesn't supported by modern API
+          sassOptions: api === "modern" ? {} : { indentWidth: 4 },
         };
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
@@ -455,6 +458,7 @@ describe("sassOptions option", () => {
         const codeFromSass = getCodeFromSass(testId, options);
 
         if (
+          api !== "modern" &&
           implementationName === "dart-sass" &&
           semver.satisfies(process.version, ">= 10")
         ) {
@@ -474,9 +478,10 @@ describe("sassOptions option", () => {
         const options = {
           implementation,
           api,
-          sassOptions: {
-            outputStyle: "expanded",
-          },
+          sassOptions:
+            api === "modern"
+              ? { style: "expanded" }
+              : { outputStyle: "expanded" },
         };
         const compiler = getCompiler(testId, {
           mode: "production",
