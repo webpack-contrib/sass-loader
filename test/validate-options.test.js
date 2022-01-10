@@ -27,10 +27,12 @@ describe("validate options", () => {
 
   const tests = {
     implementation: {
-      // eslint-disable-next-line global-require
       success: [
+        // eslint-disable-next-line global-require
         require("sass"),
+        // eslint-disable-next-line global-require
         require("node-sass"),
+        // eslint-disable-next-line global-require
         require("sass-embedded"),
         "sass",
         "node-sass",

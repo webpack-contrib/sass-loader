@@ -10,10 +10,7 @@ export default (api, implementation) => {
           .assertNumber("exponent")
           .assertNoUnits("exponent");
 
-        // eslint-disable-next-line no-restricted-properties
-        return new implementation.SassNumber(
-          Math.pow(base.value, exponent.value)
-        );
+        return new implementation.SassNumber(base.value ** exponent.value);
       },
     };
   }
