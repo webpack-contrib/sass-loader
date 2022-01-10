@@ -13,10 +13,10 @@ export default function getImplementationsAndAPI() {
       implementation: dartSass,
       api: "old",
     },
-    // {
-    //   name: dartSass.info.split("\t")[0],
-    //   implementation: dartSass,
-    //   api: "modern",
-    // },
+    {
+      name: dartSass.info.split("\t")[0],
+      implementation: dartSass,
+      api: "modern",
+    },
   ];
 }

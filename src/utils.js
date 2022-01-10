@@ -747,7 +747,9 @@ function normalizeSourceMap(map, rootContext) {
   // result.map.file is an optional property that provides the output filename.
   // Since we don't know the final filename in the webpack build chain yet, it makes no sense to have it.
   // eslint-disable-next-line no-param-reassign
-  delete newMap.file;
+  if (typeof newMap.file !== "undefined") {
+    delete newMap.file;
+  }
 
   // eslint-disable-next-line no-param-reassign
   newMap.sourceRoot = "";
@@ -759,8 +761,10 @@ function normalizeSourceMap(map, rootContext) {
   newMap.sources = newMap.sources.map((source) => {
     const sourceType = getURLType(source);
 
-    // Do no touch `scheme-relative`, `path-absolute` and `absolute` types
-    if (sourceType === "path-relative") {
+    // Do no touch `scheme-relative`, `path-absolute` and `absolute` types (except `file:`)
+    if (sourceType === "absolute" && /^file:/i.test(source)) {
+      return url.fileURLToPath(source);
+    } else if (sourceType === "path-relative") {
       return path.resolve(rootContext, path.normalize(source));
     }
 

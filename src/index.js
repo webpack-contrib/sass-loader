@@ -70,7 +70,13 @@ async function loader(content) {
     return;
   }
 
-  let map = result.map ? JSON.parse(result.map) : null;
+  let map =
+    // Modern API, then Old API
+    result.sourceMap
+      ? result.sourceMap
+      : result.map
+      ? JSON.parse(result.map)
+      : null;
 
   // Modify source paths only for webpack, otherwise we do nothing
   if (map && useSourceMap) {

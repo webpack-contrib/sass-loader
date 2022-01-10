@@ -192,6 +192,108 @@ exports[`sassOptions option should don't use the "fibers" package when the "fibe
 
 exports[`sassOptions option should don't use the "fibers" package when the "fiber" option is "false" ('node-sass', 'old' API, 'scss' syntax): warnings 1`] = `Array []`;
 
+exports[`sassOptions option should ignore the "data" option ('dart-sass', 'modern' API, 'sass' syntax): css 1`] = `
+"@charset \\"UTF-8\\";
+@import \\"./file.css\\";
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+nav li {
+  display: inline-block;
+}
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none;
+}
+
+.box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.message, .warning, .error, .success {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333;
+}
+
+.success {
+  border-color: green;
+}
+
+.error {
+  border-color: red;
+}
+
+.warning {
+  border-color: yellow;
+}
+
+.foo:before {
+  content: \\"\\\\e0c6\\";
+}
+
+.bar:before {
+  content: \\"∑\\";
+}"
+`;
+
+exports[`sassOptions option should ignore the "data" option ('dart-sass', 'modern' API, 'sass' syntax): errors 1`] = `Array []`;
+
+exports[`sassOptions option should ignore the "data" option ('dart-sass', 'modern' API, 'sass' syntax): warnings 1`] = `Array []`;
+
+exports[`sassOptions option should ignore the "data" option ('dart-sass', 'modern' API, 'scss' syntax): css 1`] = `
+"@charset \\"UTF-8\\";
+@import \\"./file.css\\";
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+nav li {
+  display: inline-block;
+}
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none;
+}
+
+.box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.foo:before {
+  content: \\"\\\\e0c6\\";
+}
+
+.bar:before {
+  content: \\"∑\\";
+}"
+`;
+
+exports[`sassOptions option should ignore the "data" option ('dart-sass', 'modern' API, 'scss' syntax): errors 1`] = `Array []`;
+
+exports[`sassOptions option should ignore the "data" option ('dart-sass', 'modern' API, 'scss' syntax): warnings 1`] = `Array []`;
+
 exports[`sassOptions option should ignore the "data" option ('dart-sass', 'old' API, 'sass' syntax): css 1`] = `
 "@charset \\"UTF-8\\";
 @import \\"./file.css\\";
@@ -383,6 +485,108 @@ nav a {
 exports[`sassOptions option should ignore the "data" option ('node-sass', 'old' API, 'scss' syntax): errors 1`] = `Array []`;
 
 exports[`sassOptions option should ignore the "data" option ('node-sass', 'old' API, 'scss' syntax): warnings 1`] = `Array []`;
+
+exports[`sassOptions option should ignore the "file" option ('dart-sass', 'modern' API, 'sass' syntax): css 1`] = `
+"@charset \\"UTF-8\\";
+@import \\"./file.css\\";
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+nav li {
+  display: inline-block;
+}
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none;
+}
+
+.box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.message, .warning, .error, .success {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333;
+}
+
+.success {
+  border-color: green;
+}
+
+.error {
+  border-color: red;
+}
+
+.warning {
+  border-color: yellow;
+}
+
+.foo:before {
+  content: \\"\\\\e0c6\\";
+}
+
+.bar:before {
+  content: \\"∑\\";
+}"
+`;
+
+exports[`sassOptions option should ignore the "file" option ('dart-sass', 'modern' API, 'sass' syntax): errors 1`] = `Array []`;
+
+exports[`sassOptions option should ignore the "file" option ('dart-sass', 'modern' API, 'sass' syntax): warnings 1`] = `Array []`;
+
+exports[`sassOptions option should ignore the "file" option ('dart-sass', 'modern' API, 'scss' syntax): css 1`] = `
+"@charset \\"UTF-8\\";
+@import \\"./file.css\\";
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+nav li {
+  display: inline-block;
+}
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none;
+}
+
+.box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.foo:before {
+  content: \\"\\\\e0c6\\";
+}
+
+.bar:before {
+  content: \\"∑\\";
+}"
+`;
+
+exports[`sassOptions option should ignore the "file" option ('dart-sass', 'modern' API, 'scss' syntax): errors 1`] = `Array []`;
+
+exports[`sassOptions option should ignore the "file" option ('dart-sass', 'modern' API, 'scss' syntax): warnings 1`] = `Array []`;
 
 exports[`sassOptions option should ignore the "file" option ('dart-sass', 'old' API, 'sass' syntax): css 1`] = `
 "@charset \\"UTF-8\\";
@@ -786,6 +990,18 @@ exports[`sassOptions option should respect the "outputStyle" option ('node-sass'
 
 exports[`sassOptions option should respect the "outputStyle" option ('node-sass', 'old' API, 'scss' syntax): warnings 1`] = `Array []`;
 
+exports[`sassOptions option should use "compressed" output style in the "production" mode ('dart-sass', 'modern' API, 'sass' syntax): css 1`] = `"﻿@import\\"./file.css\\";body{font:100% Helvetica,sans-serif;color:#333}nav ul{margin:0;padding:0;list-style:none}nav li{display:inline-block}nav a{display:block;padding:6px 12px;text-decoration:none}.box{-webkit-border-radius:10px;-moz-border-radius:10px;-ms-border-radius:10px;border-radius:10px}.message,.warning,.error,.success{border:1px solid #ccc;padding:10px;color:#333}.success{border-color:green}.error{border-color:red}.warning{border-color:#ff0}.foo:before{content:\\"\\"}.bar:before{content:\\"∑\\"}"`;
+
+exports[`sassOptions option should use "compressed" output style in the "production" mode ('dart-sass', 'modern' API, 'sass' syntax): errors 1`] = `Array []`;
+
+exports[`sassOptions option should use "compressed" output style in the "production" mode ('dart-sass', 'modern' API, 'sass' syntax): warnings 1`] = `Array []`;
+
+exports[`sassOptions option should use "compressed" output style in the "production" mode ('dart-sass', 'modern' API, 'scss' syntax): css 1`] = `"﻿@import\\"./file.css\\";body{font:100% Helvetica,sans-serif;color:#333}nav ul{margin:0;padding:0;list-style:none}nav li{display:inline-block}nav a{display:block;padding:6px 12px;text-decoration:none}.box{-webkit-border-radius:10px;-moz-border-radius:10px;-ms-border-radius:10px;border-radius:10px}.foo:before{content:\\"\\"}.bar:before{content:\\"∑\\"}"`;
+
+exports[`sassOptions option should use "compressed" output style in the "production" mode ('dart-sass', 'modern' API, 'scss' syntax): errors 1`] = `Array []`;
+
+exports[`sassOptions option should use "compressed" output style in the "production" mode ('dart-sass', 'modern' API, 'scss' syntax): warnings 1`] = `Array []`;
+
 exports[`sassOptions option should use "compressed" output style in the "production" mode ('dart-sass', 'old' API, 'sass' syntax): css 1`] = `"﻿@import\\"./file.css\\";body{font:100% Helvetica,sans-serif;color:#333}nav ul{margin:0;padding:0;list-style:none}nav li{display:inline-block}nav a{display:block;padding:6px 12px;text-decoration:none}.box{-webkit-border-radius:10px;-moz-border-radius:10px;-ms-border-radius:10px;border-radius:10px}.message,.warning,.error,.success{border:1px solid #ccc;padding:10px;color:#333}.success{border-color:green}.error{border-color:red}.warning{border-color:#ff0}.foo:before{content:\\"\\"}.bar:before{content:\\"∑\\"}"`;
 
 exports[`sassOptions option should use "compressed" output style in the "production" mode ('dart-sass', 'old' API, 'sass' syntax): errors 1`] = `Array []`;
@@ -815,6 +1031,108 @@ exports[`sassOptions option should use "compressed" output style in the "product
 exports[`sassOptions option should use "compressed" output style in the "production" mode ('node-sass', 'old' API, 'scss' syntax): errors 1`] = `Array []`;
 
 exports[`sassOptions option should use "compressed" output style in the "production" mode ('node-sass', 'old' API, 'scss' syntax): warnings 1`] = `Array []`;
+
+exports[`sassOptions option should use the "fibers" package if it is possible ('dart-sass', 'modern' API, 'sass' syntax): css 1`] = `
+"@charset \\"UTF-8\\";
+@import \\"./file.css\\";
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+nav li {
+  display: inline-block;
+}
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none;
+}
+
+.box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.message, .warning, .error, .success {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333;
+}
+
+.success {
+  border-color: green;
+}
+
+.error {
+  border-color: red;
+}
+
+.warning {
+  border-color: yellow;
+}
+
+.foo:before {
+  content: \\"\\\\e0c6\\";
+}
+
+.bar:before {
+  content: \\"∑\\";
+}"
+`;
+
+exports[`sassOptions option should use the "fibers" package if it is possible ('dart-sass', 'modern' API, 'sass' syntax): errors 1`] = `Array []`;
+
+exports[`sassOptions option should use the "fibers" package if it is possible ('dart-sass', 'modern' API, 'sass' syntax): warnings 1`] = `Array []`;
+
+exports[`sassOptions option should use the "fibers" package if it is possible ('dart-sass', 'modern' API, 'scss' syntax): css 1`] = `
+"@charset \\"UTF-8\\";
+@import \\"./file.css\\";
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+nav li {
+  display: inline-block;
+}
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none;
+}
+
+.box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.foo:before {
+  content: \\"\\\\e0c6\\";
+}
+
+.bar:before {
+  content: \\"∑\\";
+}"
+`;
+
+exports[`sassOptions option should use the "fibers" package if it is possible ('dart-sass', 'modern' API, 'scss' syntax): errors 1`] = `Array []`;
+
+exports[`sassOptions option should use the "fibers" package if it is possible ('dart-sass', 'modern' API, 'scss' syntax): warnings 1`] = `Array []`;
 
 exports[`sassOptions option should use the "fibers" package if it is possible ('dart-sass', 'old' API, 'sass' syntax): css 1`] = `
 "@charset \\"UTF-8\\";
@@ -1007,6 +1325,108 @@ nav a {
 exports[`sassOptions option should use the "fibers" package if it is possible ('node-sass', 'old' API, 'scss' syntax): errors 1`] = `Array []`;
 
 exports[`sassOptions option should use the "fibers" package if it is possible ('node-sass', 'old' API, 'scss' syntax): warnings 1`] = `Array []`;
+
+exports[`sassOptions option should work when the option is empty "Object" ('dart-sass', 'modern' API, 'sass' syntax): css 1`] = `
+"@charset \\"UTF-8\\";
+@import \\"./file.css\\";
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+nav li {
+  display: inline-block;
+}
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none;
+}
+
+.box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.message, .warning, .error, .success {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333;
+}
+
+.success {
+  border-color: green;
+}
+
+.error {
+  border-color: red;
+}
+
+.warning {
+  border-color: yellow;
+}
+
+.foo:before {
+  content: \\"\\\\e0c6\\";
+}
+
+.bar:before {
+  content: \\"∑\\";
+}"
+`;
+
+exports[`sassOptions option should work when the option is empty "Object" ('dart-sass', 'modern' API, 'sass' syntax): errors 1`] = `Array []`;
+
+exports[`sassOptions option should work when the option is empty "Object" ('dart-sass', 'modern' API, 'sass' syntax): warnings 1`] = `Array []`;
+
+exports[`sassOptions option should work when the option is empty "Object" ('dart-sass', 'modern' API, 'scss' syntax): css 1`] = `
+"@charset \\"UTF-8\\";
+@import \\"./file.css\\";
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+nav li {
+  display: inline-block;
+}
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none;
+}
+
+.box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.foo:before {
+  content: \\"\\\\e0c6\\";
+}
+
+.bar:before {
+  content: \\"∑\\";
+}"
+`;
+
+exports[`sassOptions option should work when the option is empty "Object" ('dart-sass', 'modern' API, 'scss' syntax): errors 1`] = `Array []`;
+
+exports[`sassOptions option should work when the option is empty "Object" ('dart-sass', 'modern' API, 'scss' syntax): warnings 1`] = `Array []`;
 
 exports[`sassOptions option should work when the option is empty "Object" ('dart-sass', 'old' API, 'sass' syntax): css 1`] = `
 "@charset \\"UTF-8\\";
@@ -1392,6 +1812,108 @@ exports[`sassOptions option should work when the option like "Function" ('node-s
 
 exports[`sassOptions option should work when the option like "Function" ('node-sass', 'old' API, 'scss' syntax): warnings 1`] = `Array []`;
 
+exports[`sassOptions option should work when the option like "Function" and never return ('dart-sass', 'modern' API, 'sass' syntax): css 1`] = `
+"@charset \\"UTF-8\\";
+@import \\"./file.css\\";
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+nav li {
+  display: inline-block;
+}
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none;
+}
+
+.box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.message, .warning, .error, .success {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333;
+}
+
+.success {
+  border-color: green;
+}
+
+.error {
+  border-color: red;
+}
+
+.warning {
+  border-color: yellow;
+}
+
+.foo:before {
+  content: \\"\\\\e0c6\\";
+}
+
+.bar:before {
+  content: \\"∑\\";
+}"
+`;
+
+exports[`sassOptions option should work when the option like "Function" and never return ('dart-sass', 'modern' API, 'sass' syntax): errors 1`] = `Array []`;
+
+exports[`sassOptions option should work when the option like "Function" and never return ('dart-sass', 'modern' API, 'sass' syntax): warnings 1`] = `Array []`;
+
+exports[`sassOptions option should work when the option like "Function" and never return ('dart-sass', 'modern' API, 'scss' syntax): css 1`] = `
+"@charset \\"UTF-8\\";
+@import \\"./file.css\\";
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+nav li {
+  display: inline-block;
+}
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none;
+}
+
+.box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.foo:before {
+  content: \\"\\\\e0c6\\";
+}
+
+.bar:before {
+  content: \\"∑\\";
+}"
+`;
+
+exports[`sassOptions option should work when the option like "Function" and never return ('dart-sass', 'modern' API, 'scss' syntax): errors 1`] = `Array []`;
+
+exports[`sassOptions option should work when the option like "Function" and never return ('dart-sass', 'modern' API, 'scss' syntax): warnings 1`] = `Array []`;
+
 exports[`sassOptions option should work when the option like "Function" and never return ('dart-sass', 'old' API, 'sass' syntax): css 1`] = `
 "@charset \\"UTF-8\\";
 @import \\"./file.css\\";
@@ -1775,6 +2297,108 @@ nav a {
 exports[`sassOptions option should work when the option like "Object" ('node-sass', 'old' API, 'scss' syntax): errors 1`] = `Array []`;
 
 exports[`sassOptions option should work when the option like "Object" ('node-sass', 'old' API, 'scss' syntax): warnings 1`] = `Array []`;
+
+exports[`sassOptions option should work with the "fiber" option ('dart-sass', 'modern' API, 'sass' syntax): css 1`] = `
+"@charset \\"UTF-8\\";
+@import \\"./file.css\\";
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+nav li {
+  display: inline-block;
+}
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none;
+}
+
+.box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.message, .warning, .error, .success {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333;
+}
+
+.success {
+  border-color: green;
+}
+
+.error {
+  border-color: red;
+}
+
+.warning {
+  border-color: yellow;
+}
+
+.foo:before {
+  content: \\"\\\\e0c6\\";
+}
+
+.bar:before {
+  content: \\"∑\\";
+}"
+`;
+
+exports[`sassOptions option should work with the "fiber" option ('dart-sass', 'modern' API, 'sass' syntax): errors 1`] = `Array []`;
+
+exports[`sassOptions option should work with the "fiber" option ('dart-sass', 'modern' API, 'sass' syntax): warnings 1`] = `Array []`;
+
+exports[`sassOptions option should work with the "fiber" option ('dart-sass', 'modern' API, 'scss' syntax): css 1`] = `
+"@charset \\"UTF-8\\";
+@import \\"./file.css\\";
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+nav li {
+  display: inline-block;
+}
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none;
+}
+
+.box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.foo:before {
+  content: \\"\\\\e0c6\\";
+}
+
+.bar:before {
+  content: \\"∑\\";
+}"
+`;
+
+exports[`sassOptions option should work with the "fiber" option ('dart-sass', 'modern' API, 'scss' syntax): errors 1`] = `Array []`;
+
+exports[`sassOptions option should work with the "fiber" option ('dart-sass', 'modern' API, 'scss' syntax): warnings 1`] = `Array []`;
 
 exports[`sassOptions option should work with the "fiber" option ('dart-sass', 'old' API, 'sass' syntax): css 1`] = `
 "@charset \\"UTF-8\\";
@@ -2588,6 +3212,108 @@ exports[`sassOptions option should work with the "indentWidth" option ('node-sas
 
 exports[`sassOptions option should work with the "indentWidth" option ('node-sass', 'old' API, 'scss' syntax): warnings 1`] = `Array []`;
 
+exports[`sassOptions option should work with the "indentedSyntax" option ('dart-sass', 'modern' API, 'sass' syntax): css 1`] = `
+"@charset \\"UTF-8\\";
+@import \\"./file.css\\";
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+nav li {
+  display: inline-block;
+}
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none;
+}
+
+.box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.message, .warning, .error, .success {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333;
+}
+
+.success {
+  border-color: green;
+}
+
+.error {
+  border-color: red;
+}
+
+.warning {
+  border-color: yellow;
+}
+
+.foo:before {
+  content: \\"\\\\e0c6\\";
+}
+
+.bar:before {
+  content: \\"∑\\";
+}"
+`;
+
+exports[`sassOptions option should work with the "indentedSyntax" option ('dart-sass', 'modern' API, 'sass' syntax): errors 1`] = `Array []`;
+
+exports[`sassOptions option should work with the "indentedSyntax" option ('dart-sass', 'modern' API, 'sass' syntax): warnings 1`] = `Array []`;
+
+exports[`sassOptions option should work with the "indentedSyntax" option ('dart-sass', 'modern' API, 'scss' syntax): css 1`] = `
+"@charset \\"UTF-8\\";
+@import \\"./file.css\\";
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+nav li {
+  display: inline-block;
+}
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none;
+}
+
+.box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.foo:before {
+  content: \\"\\\\e0c6\\";
+}
+
+.bar:before {
+  content: \\"∑\\";
+}"
+`;
+
+exports[`sassOptions option should work with the "indentedSyntax" option ('dart-sass', 'modern' API, 'scss' syntax): errors 1`] = `Array []`;
+
+exports[`sassOptions option should work with the "indentedSyntax" option ('dart-sass', 'modern' API, 'scss' syntax): warnings 1`] = `Array []`;
+
 exports[`sassOptions option should work with the "indentedSyntax" option ('dart-sass', 'old' API, 'sass' syntax): css 1`] = `
 "@charset \\"UTF-8\\";
 @import \\"./file.css\\";
@@ -2779,6 +3505,108 @@ nav a {
 exports[`sassOptions option should work with the "indentedSyntax" option ('node-sass', 'old' API, 'scss' syntax): errors 1`] = `Array []`;
 
 exports[`sassOptions option should work with the "indentedSyntax" option ('node-sass', 'old' API, 'scss' syntax): warnings 1`] = `Array []`;
+
+exports[`sassOptions option should work with the "linefeed" option ('dart-sass', 'modern' API, 'sass' syntax): css 1`] = `
+"@charset \\"UTF-8\\";
+@import \\"./file.css\\";
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+nav li {
+  display: inline-block;
+}
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none;
+}
+
+.box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.message, .warning, .error, .success {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333;
+}
+
+.success {
+  border-color: green;
+}
+
+.error {
+  border-color: red;
+}
+
+.warning {
+  border-color: yellow;
+}
+
+.foo:before {
+  content: \\"\\\\e0c6\\";
+}
+
+.bar:before {
+  content: \\"∑\\";
+}"
+`;
+
+exports[`sassOptions option should work with the "linefeed" option ('dart-sass', 'modern' API, 'sass' syntax): errors 1`] = `Array []`;
+
+exports[`sassOptions option should work with the "linefeed" option ('dart-sass', 'modern' API, 'sass' syntax): warnings 1`] = `Array []`;
+
+exports[`sassOptions option should work with the "linefeed" option ('dart-sass', 'modern' API, 'scss' syntax): css 1`] = `
+"@charset \\"UTF-8\\";
+@import \\"./file.css\\";
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+nav li {
+  display: inline-block;
+}
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none;
+}
+
+.box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.foo:before {
+  content: \\"\\\\e0c6\\";
+}
+
+.bar:before {
+  content: \\"∑\\";
+}"
+`;
+
+exports[`sassOptions option should work with the "linefeed" option ('dart-sass', 'modern' API, 'scss' syntax): errors 1`] = `Array []`;
+
+exports[`sassOptions option should work with the "linefeed" option ('dart-sass', 'modern' API, 'scss' syntax): warnings 1`] = `Array []`;
 
 exports[`sassOptions option should work with the "linefeed" option ('dart-sass', 'old' API, 'sass' syntax): css 1`] = `
 "@charset \\"UTF-8\\";
