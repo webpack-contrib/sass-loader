@@ -509,11 +509,12 @@ describe("sassOptions option", () => {
         });
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = getCodeFromSass(testId, {
+        const codeFromSass = await getCodeFromSass(testId, {
           ...options,
-          sassOptions: {
-            outputStyle: "compressed",
-          },
+          sassOptions:
+            api === "modern"
+              ? { style: "compressed" }
+              : { outputStyle: "compressed" },
         });
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
