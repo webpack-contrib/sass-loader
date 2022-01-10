@@ -38,9 +38,10 @@ async function getCodeFromSass(testId, options) {
       isIndentedSyntax ? "\n" : ";"
     }\n${fs.readFileSync(path.resolve(__dirname, "..", testId), "utf8")}`;
   } else if (isModernAPI) {
-    sassOptions.data = fs
-      .readFileSync(url.pathToFileURL(path.resolve(__dirname, "..", testId)))
-      .toString();
+    const URL = url.pathToFileURL(path.resolve(__dirname, "..", testId));
+
+    sassOptions.url = URL;
+    sassOptions.data = fs.readFileSync(URL).toString();
   } else {
     sassOptions.file = path.resolve(__dirname, "..", testId);
   }
