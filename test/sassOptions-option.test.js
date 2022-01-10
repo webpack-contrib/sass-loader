@@ -188,48 +188,48 @@ describe("sassOptions option", () => {
         expect(getErrors(stats)).toMatchSnapshot("errors");
       });
 
-      it(`should work with the "importer" as a single function option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
-        const testId = getTestId("custom-importer", syntax);
-        const options = {
-          implementation,
-          api,
-          sassOptions: {
-            importer: customImporter,
-          },
-        };
-        const compiler = getCompiler(testId, { loader: { options } });
-        const stats = await compile(compiler);
-        const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = await getCodeFromSass(testId, options);
-
-        expect(codeFromBundle.css).toBe(codeFromSass.css);
-        expect(codeFromBundle.css).toMatchSnapshot("css");
-        expect(getWarnings(stats)).toMatchSnapshot("warnings");
-        expect(getErrors(stats)).toMatchSnapshot("errors");
-      });
-
-      it(`should work with the "importer" as a array of functions option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
-        const testId = getTestId("custom-importer", syntax);
-        const options = {
-          implementation,
-          api,
-          sassOptions: {
-            importer: [customImporter],
-          },
-        };
-        const compiler = getCompiler(testId, { loader: { options } });
-        const stats = await compile(compiler);
-        const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = await getCodeFromSass(testId, options);
-
-        expect(codeFromBundle.css).toBe(codeFromSass.css);
-        expect(codeFromBundle.css).toMatchSnapshot("css");
-        expect(getWarnings(stats)).toMatchSnapshot("warnings");
-        expect(getErrors(stats)).toMatchSnapshot("errors");
-      });
-
       // TODO fix me https://github.com/webpack-contrib/sass-loader/issues/774
       if (api !== "modern") {
+        it(`should work with the "importer" as a single function option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
+          const testId = getTestId("custom-importer", syntax);
+          const options = {
+            implementation,
+            api,
+            sassOptions: {
+              importer: customImporter,
+            },
+          };
+          const compiler = getCompiler(testId, { loader: { options } });
+          const stats = await compile(compiler);
+          const codeFromBundle = getCodeFromBundle(stats, compiler);
+          const codeFromSass = await getCodeFromSass(testId, options);
+
+          expect(codeFromBundle.css).toBe(codeFromSass.css);
+          expect(codeFromBundle.css).toMatchSnapshot("css");
+          expect(getWarnings(stats)).toMatchSnapshot("warnings");
+          expect(getErrors(stats)).toMatchSnapshot("errors");
+        });
+
+        it(`should work with the "importer" as a array of functions option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
+          const testId = getTestId("custom-importer", syntax);
+          const options = {
+            implementation,
+            api,
+            sassOptions: {
+              importer: [customImporter],
+            },
+          };
+          const compiler = getCompiler(testId, { loader: { options } });
+          const stats = await compile(compiler);
+          const codeFromBundle = getCodeFromBundle(stats, compiler);
+          const codeFromSass = await getCodeFromSass(testId, options);
+
+          expect(codeFromBundle.css).toBe(codeFromSass.css);
+          expect(codeFromBundle.css).toMatchSnapshot("css");
+          expect(getWarnings(stats)).toMatchSnapshot("warnings");
+          expect(getErrors(stats)).toMatchSnapshot("errors");
+        });
+
         it(`should work with the "importer" as a single function option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           expect.assertions(4);
 
@@ -345,9 +345,14 @@ describe("sassOptions option", () => {
         const options = {
           implementation,
           api,
-          sassOptions: {
-            indentedSyntax: syntax === "sass",
-          },
+          sassOptions:
+            api === "modern"
+              ? {
+                  syntax: syntax === "sass" ? "indented" : "scss",
+                }
+              : {
+                  indentedSyntax: syntax === "sass",
+                },
         };
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
@@ -365,9 +370,8 @@ describe("sassOptions option", () => {
         const options = {
           implementation,
           api,
-          sassOptions: {
-            linefeed: "lf",
-          },
+          // Doesn't supported by modern API
+          sassOptions: api === "modern" ? {} : { linefeed: "lf" },
         };
         const compiler = getCompiler(testId, { loader: { options } });
         const stats = await compile(compiler);
@@ -405,6 +409,7 @@ describe("sassOptions option", () => {
         if (
           implementationName === "dart-sass" &&
           semver.satisfies(process.version, ">= 10") &&
+          api !== "modern" &&
           isSupportedFibers()
         ) {
           expect(dartSassSpy.mock.calls[0][0]).toHaveProperty("fiber");
