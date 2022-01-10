@@ -228,29 +228,32 @@ describe("sassOptions option", () => {
         expect(getErrors(stats)).toMatchSnapshot("errors");
       });
 
-      it(`should work with the "importer" as a single function option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
-        expect.assertions(4);
+      // TODO fix me https://github.com/webpack-contrib/sass-loader/issues/774
+      if (api !== "modern") {
+        it(`should work with the "importer" as a single function option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
+          expect.assertions(4);
 
-        const testId = getTestId("custom-importer", syntax);
-        const options = {
-          implementation,
-          api,
-          sassOptions: {
-            importer(url, prev, done) {
-              expect(this.webpackLoaderContext).toBeDefined();
+          const testId = getTestId("custom-importer", syntax);
+          const options = {
+            implementation,
+            api,
+            sassOptions: {
+              importer(url, prev, done) {
+                expect(this.webpackLoaderContext).toBeDefined();
 
-              return done({ contents: ".a { color: red; }" });
+                return done({ contents: ".a { color: red; }" });
+              },
             },
-          },
-        };
-        const compiler = getCompiler(testId, { loader: { options } });
-        const stats = await compile(compiler);
-        const codeFromBundle = getCodeFromBundle(stats, compiler);
+          };
+          const compiler = getCompiler(testId, { loader: { options } });
+          const stats = await compile(compiler);
+          const codeFromBundle = getCodeFromBundle(stats, compiler);
 
-        expect(codeFromBundle.css).toMatchSnapshot("css");
-        expect(getWarnings(stats)).toMatchSnapshot("warnings");
-        expect(getErrors(stats)).toMatchSnapshot("errors");
-      });
+          expect(codeFromBundle.css).toMatchSnapshot("css");
+          expect(getWarnings(stats)).toMatchSnapshot("warnings");
+          expect(getErrors(stats)).toMatchSnapshot("errors");
+        });
+      }
 
       if (api !== "modern") {
         it(`should work with the "importer" as a array of functions option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
