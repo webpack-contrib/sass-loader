@@ -1,3 +1,4 @@
+import url from "url";
 import path from "path";
 
 import schema from "./options.json";
@@ -49,12 +50,12 @@ async function loader(content) {
     );
   }
 
-  const compile = getCompileFn(implementation);
+  const compile = getCompileFn(implementation, options);
 
   let result;
 
   try {
-    result = await compile(sassOptions);
+    result = await compile(sassOptions, options);
   } catch (error) {
     // There are situations when the `file` property do not exist
     if (error.file) {
@@ -74,14 +75,31 @@ async function loader(content) {
     map = normalizeSourceMap(map, this.rootContext);
   }
 
-  result.stats.includedFiles.forEach((includedFile) => {
-    const normalizedIncludedFile = path.normalize(includedFile);
+  // Modern API
+  if (typeof result.loadedUrls !== "undefined") {
+    result.loadedUrls.forEach((includedFile) => {
+      const normalizedIncludedFile = url.fileURLToPath(includedFile);
 
-    // Custom `importer` can return only `contents` so includedFile will be relative
-    if (path.isAbsolute(normalizedIncludedFile)) {
-      this.addDependency(normalizedIncludedFile);
-    }
-  });
+      // Custom `importer` can return only `contents` so includedFile will be relative
+      if (path.isAbsolute(normalizedIncludedFile)) {
+        this.addDependency(normalizedIncludedFile);
+      }
+    });
+  }
+  // Old API
+  else if (
+    typeof result.stats !== "undefined" &&
+    typeof result.stats.includedFiles !== "undefined"
+  ) {
+    result.stats.includedFiles.forEach((includedFile) => {
+      const normalizedIncludedFile = path.normalize(includedFile);
+
+      // Custom `importer` can return only `contents` so includedFile will be relative
+      if (path.isAbsolute(normalizedIncludedFile)) {
+        this.addDependency(normalizedIncludedFile);
+      }
+    });
+  }
 
   callback(null, result.css.toString(), map);
 }

@@ -136,99 +136,13 @@ async function getSassOptions(
   );
 
   const isDartSass = implementation.info.includes("dart-sass");
+  const isModernAPI = loaderOptions.api === "modern";
 
-  if (isDartSass && isSupportedFibers()) {
-    const shouldTryToResolveFibers = !options.fiber && options.fiber !== false;
-
-    if (shouldTryToResolveFibers) {
-      let fibers;
-
-      try {
-        fibers = require.resolve("fibers");
-      } catch (_error) {
-        // Nothing
-      }
-
-      if (fibers) {
-        // eslint-disable-next-line global-require, import/no-dynamic-require
-        options.fiber = require(fibers);
-      }
-    } else if (options.fiber === false) {
-      // Don't pass the `fiber` option for `sass` (`Dart Sass`)
-      delete options.fiber;
-    }
-  } else {
-    // Don't pass the `fiber` option for `node-sass`
-    delete options.fiber;
-  }
-
-  options.file = loaderContext.resourcePath;
   options.data = loaderOptions.additionalData
     ? typeof loaderOptions.additionalData === "function"
       ? await loaderOptions.additionalData(content, loaderContext)
       : `${loaderOptions.additionalData}\n${content}`
     : content;
-
-  // opt.outputStyle
-  if (!options.outputStyle && isProductionLikeMode(loaderContext)) {
-    options.outputStyle = "compressed";
-  }
-
-  if (useSourceMap) {
-    // Deliberately overriding the sourceMap option here.
-    // node-sass won't produce source maps if the data option is used and options.sourceMap is not a string.
-    // In case it is a string, options.sourceMap should be a path where the source map is written.
-    // But since we're using the data option, the source map will not actually be written, but
-    // all paths in sourceMap.sources will be relative to that path.
-    // Pretty complicated... :(
-    options.sourceMap = true;
-    options.outFile = path.join(loaderContext.rootContext, "style.css.map");
-    options.sourceMapContents = true;
-    options.omitSourceMapUrl = true;
-    options.sourceMapEmbed = false;
-  }
-
-  const { resourcePath } = loaderContext;
-  const ext = path.extname(resourcePath);
-
-  // If we are compiling sass and indentedSyntax isn't set, automatically set it.
-  if (
-    ext &&
-    ext.toLowerCase() === ".sass" &&
-    typeof options.indentedSyntax === "undefined"
-  ) {
-    options.indentedSyntax = true;
-  } else {
-    options.indentedSyntax = Boolean(options.indentedSyntax);
-  }
-
-  // Allow passing custom importers to `sass`/`node-sass`. Accepts `Function` or an array of `Function`s.
-  options.importer = options.importer
-    ? proxyCustomImporters(
-        Array.isArray(options.importer) ? options.importer : [options.importer],
-        loaderContext
-      )
-    : [];
-
-  options.includePaths = []
-    .concat(process.cwd())
-    .concat(
-      // We use `includePaths` in context for resolver, so it should be always absolute
-      (options.includePaths || []).map((includePath) =>
-        path.isAbsolute(includePath)
-          ? includePath
-          : path.join(process.cwd(), includePath)
-      )
-    )
-    .concat(
-      process.env.SASS_PATH
-        ? process.env.SASS_PATH.split(process.platform === "win32" ? ";" : ":")
-        : []
-    );
-
-  if (typeof options.charset === "undefined") {
-    options.charset = true;
-  }
 
   if (!options.logger) {
     // TODO set me to `true` by default in the next major release
@@ -276,6 +190,126 @@ async function getSassOptions(
         }
       },
     };
+  }
+
+  if (typeof options.charset === "undefined") {
+    options.charset = true;
+  }
+
+  const { resourcePath } = loaderContext;
+
+  if (isModernAPI) {
+    options.url = url.pathToFileURL(resourcePath);
+
+    // opt.outputStyle
+    if (!options.style && isProductionLikeMode(loaderContext)) {
+      options.style = "compressed";
+    }
+
+    if (useSourceMap) {
+      options.sourceMap = true;
+    }
+
+    // If we are compiling sass and indentedSyntax isn't set, automatically set it.
+    if (typeof options.syntax === "undefined") {
+      const ext = path.extname(resourcePath);
+
+      if (ext && ext.toLowerCase() === ".scss") {
+        options.syntax = "scss";
+      } else if (ext && ext.toLowerCase() === ".sass") {
+        options.syntax = "indented";
+      } else if (ext && ext.toLowerCase() === ".css") {
+        options.syntax = "css";
+      }
+    }
+  } else {
+    options.file = resourcePath;
+
+    if (isDartSass && isSupportedFibers()) {
+      const shouldTryToResolveFibers =
+        !options.fiber && options.fiber !== false;
+
+      if (shouldTryToResolveFibers) {
+        let fibers;
+
+        try {
+          fibers = require.resolve("fibers");
+        } catch (_error) {
+          // Nothing
+        }
+
+        if (fibers) {
+          // eslint-disable-next-line global-require, import/no-dynamic-require
+          options.fiber = require(fibers);
+        }
+      } else if (options.fiber === false) {
+        // Don't pass the `fiber` option for `sass` (`Dart Sass`)
+        delete options.fiber;
+      }
+    } else {
+      // Don't pass the `fiber` option for `node-sass`
+      delete options.fiber;
+    }
+
+    // opt.outputStyle
+    if (!options.outputStyle && isProductionLikeMode(loaderContext)) {
+      options.outputStyle = "compressed";
+    }
+
+    if (useSourceMap) {
+      // Deliberately overriding the sourceMap option here.
+      // node-sass won't produce source maps if the data option is used and options.sourceMap is not a string.
+      // In case it is a string, options.sourceMap should be a path where the source map is written.
+      // But since we're using the data option, the source map will not actually be written, but
+      // all paths in sourceMap.sources will be relative to that path.
+      // Pretty complicated... :(
+      options.sourceMap = true;
+      options.outFile = path.join(loaderContext.rootContext, "style.css.map");
+      options.sourceMapContents = true;
+      options.omitSourceMapUrl = true;
+      options.sourceMapEmbed = false;
+    }
+
+    const ext = path.extname(resourcePath);
+
+    // If we are compiling sass and indentedSyntax isn't set, automatically set it.
+    if (
+      ext &&
+      ext.toLowerCase() === ".sass" &&
+      typeof options.indentedSyntax === "undefined"
+    ) {
+      options.indentedSyntax = true;
+    } else {
+      options.indentedSyntax = Boolean(options.indentedSyntax);
+    }
+
+    // Allow passing custom importers to `sass`/`node-sass`. Accepts `Function` or an array of `Function`s.
+    options.importer = options.importer
+      ? proxyCustomImporters(
+          Array.isArray(options.importer)
+            ? options.importer
+            : [options.importer],
+          loaderContext
+        )
+      : [];
+
+    options.includePaths = []
+      .concat(process.cwd())
+      .concat(
+        // We use `includePaths` in context for resolver, so it should be always absolute
+        (options.includePaths || []).map((includePath) =>
+          path.isAbsolute(includePath)
+            ? includePath
+            : path.join(process.cwd(), includePath)
+        )
+      )
+      .concat(
+        process.env.SASS_PATH
+          ? process.env.SASS_PATH.split(
+              process.platform === "win32" ? ";" : ":"
+            )
+          : []
+      );
   }
 
   return options;
@@ -623,12 +657,21 @@ let nodeSassJobQueue = null;
  * Verifies that the implementation and version of Sass is supported by this loader.
  *
  * @param {Object} implementation
+ * @param {Object} options
  * @returns {Function}
  */
-function getCompileFn(implementation) {
+function getCompileFn(implementation, options) {
   const isDartSass = implementation.info.includes("dart-sass");
 
   if (isDartSass) {
+    if (options.api === "modern") {
+      return (sassOptions) => {
+        const { data, ...rest } = sassOptions;
+
+        return implementation.compileStringAsync(data, rest);
+      };
+    }
+
     return (sassOptions) =>
       new Promise((resolve, reject) => {
         implementation.render(sassOptions, (error, result) => {
@@ -641,6 +684,10 @@ function getCompileFn(implementation) {
           resolve(result);
         });
       });
+  }
+
+  if (options.api === "modern") {
+    throw new Error("Modern API is not supported for 'node-sass'");
   }
 
   // There is an issue with node-sass when async custom importers are used
