@@ -828,6 +828,66 @@ exports[`sassOptions option should use "compressed" output style in the "product
 
 exports[`sassOptions option should use "compressed" output style in the "production" mode (sass-embedded) (scss): warnings 1`] = `Array []`;
 
+exports[`sassOptions option should use the "fibers" package if it is possible (dart-sass) (sass): css 1`] = `
+"@charset \\"UTF-8\\";
+@import \\"./file.css\\";
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+nav li {
+  display: inline-block;
+}
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none;
+}
+
+.box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.message, .warning, .error, .success {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333;
+}
+
+.success {
+  border-color: green;
+}
+
+.error {
+  border-color: red;
+}
+
+.warning {
+  border-color: yellow;
+}
+
+.foo:before {
+  content: \\"\\\\e0c6\\";
+}
+
+.bar:before {
+  content: \\"∑\\";
+}"
+`;
+
+exports[`sassOptions option should use the "fibers" package if it is possible (dart-sass) (sass): errors 1`] = `Array []`;
+
+exports[`sassOptions option should use the "fibers" package if it is possible (dart-sass) (sass): warnings 1`] = `Array []`;
+
 exports[`sassOptions option should use the "fibers" package if it is possible (dart-sass) (scss): css 1`] = `
 "@charset \\"UTF-8\\";
 @import \\"./file.css\\";
@@ -1787,6 +1847,66 @@ nav a {
 exports[`sassOptions option should work when the option like "Object" (sass-embedded) (scss): errors 1`] = `Array []`;
 
 exports[`sassOptions option should work when the option like "Object" (sass-embedded) (scss): warnings 1`] = `Array []`;
+
+exports[`sassOptions option should work with the "fiber" option (dart-sass) (sass): css 1`] = `
+"@charset \\"UTF-8\\";
+@import \\"./file.css\\";
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+nav li {
+  display: inline-block;
+}
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none;
+}
+
+.box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.message, .warning, .error, .success {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333;
+}
+
+.success {
+  border-color: green;
+}
+
+.error {
+  border-color: red;
+}
+
+.warning {
+  border-color: yellow;
+}
+
+.foo:before {
+  content: \\"\\\\e0c6\\";
+}
+
+.bar:before {
+  content: \\"∑\\";
+}"
+`;
+
+exports[`sassOptions option should work with the "fiber" option (dart-sass) (sass): errors 1`] = `Array []`;
+
+exports[`sassOptions option should work with the "fiber" option (dart-sass) (sass): warnings 1`] = `Array []`;
 
 exports[`sassOptions option should work with the "fiber" option (dart-sass) (scss): css 1`] = `
 "@charset \\"UTF-8\\";

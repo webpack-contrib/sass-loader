@@ -42,10 +42,10 @@ describe("implementation option", () => {
       [implementationName] = implementation.info.split("\t");
     }
 
-    it.skip(`${implementationName}`, async () => {
+    it(`${implementationName}`, async () => {
       const nodeSassSpy = jest.spyOn(nodeSass, "render");
       const dartSassSpy = jest.spyOn(dartSass, "render");
-      // const sassEmbeddedSpy = jest.spyOn(sassEmbedded, "render");
+      const sassEmbeddedSpy = jest.spyOn(sassEmbedded, "render");
 
       const testId = getTestId("language", "scss");
       const options = {
@@ -64,23 +64,23 @@ describe("implementation option", () => {
       if (implementationName === "node-sass") {
         expect(nodeSassSpy).toHaveBeenCalledTimes(1);
         expect(dartSassSpy).toHaveBeenCalledTimes(0);
-        // expect(sassEmbeddedSpy).toHaveBeenCalledTimes(0);
+        expect(sassEmbeddedSpy).toHaveBeenCalledTimes(0);
       } else if (
         implementationName === "dart-sass" ||
         implementationName === "dart-sass_string"
       ) {
         expect(nodeSassSpy).toHaveBeenCalledTimes(0);
         expect(dartSassSpy).toHaveBeenCalledTimes(1);
-        // expect(sassEmbeddedSpy).toHaveBeenCalledTimes(0);
+        expect(sassEmbeddedSpy).toHaveBeenCalledTimes(0);
       } else if (implementationName === "sass-embedded") {
         expect(nodeSassSpy).toHaveBeenCalledTimes(0);
         expect(dartSassSpy).toHaveBeenCalledTimes(0);
-        // expect(sassEmbeddedSpy).toHaveBeenCalledTimes(1);
+        expect(sassEmbeddedSpy).toHaveBeenCalledTimes(1);
       }
 
-      nodeSassSpy.mockRestore();
-      dartSassSpy.mockRestore();
-      // sassEmbeddedSpy.mockRestore();
+      nodeSassSpy.mockClear();
+      dartSassSpy.mockClear();
+      sassEmbeddedSpy.mockClear();
     });
   });
 

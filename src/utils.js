@@ -629,9 +629,11 @@ let nodeSassJobQueue = null;
  * @returns {Function}
  */
 function getRenderFunctionFromSassImplementation(implementation) {
-  const isDartSass = implementation.info.includes("dart-sass");
+  const isNewSass =
+    implementation.info.includes("dart-sass") ||
+    implementation.info.includes("sass-embedded");
 
-  if (isDartSass) {
+  if (isNewSass) {
     return implementation.render.bind(implementation);
   }
 
