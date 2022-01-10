@@ -625,11 +625,22 @@ let nodeSassJobQueue = null;
  * @param {Object} implementation
  * @returns {Function}
  */
-function getRenderFunctionFromSassImplementation(implementation) {
+function getCompileFn(implementation) {
   const isDartSass = implementation.info.includes("dart-sass");
 
   if (isDartSass) {
-    return implementation.render.bind(implementation);
+    return (sassOptions) =>
+      new Promise((resolve, reject) => {
+        implementation.render(sassOptions, (error, result) => {
+          if (error) {
+            reject(error);
+
+            return;
+          }
+
+          resolve(result);
+        });
+      });
   }
 
   // There is an issue with node-sass when async custom importers are used
@@ -644,7 +655,21 @@ function getRenderFunctionFromSassImplementation(implementation) {
     );
   }
 
-  return nodeSassJobQueue.push.bind(nodeSassJobQueue);
+  return (sassOptions) =>
+    new Promise((resolve, reject) => {
+      nodeSassJobQueue.push.bind(nodeSassJobQueue)(
+        sassOptions,
+        (error, result) => {
+          if (error) {
+            reject(error);
+
+            return;
+          }
+
+          resolve(result);
+        }
+      );
+    });
 }
 
 const ABSOLUTE_SCHEME = /^[A-Za-z0-9+\-.]+:/;
@@ -703,7 +728,7 @@ export {
   getSassOptions,
   getWebpackResolver,
   getWebpackImporter,
-  getRenderFunctionFromSassImplementation,
+  getCompileFn,
   normalizeSourceMap,
   isSupportedFibers,
 };

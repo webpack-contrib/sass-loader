@@ -5,7 +5,7 @@ import {
   getSassImplementation,
   getSassOptions,
   getWebpackImporter,
-  getRenderFunctionFromSassImplementation,
+  getCompileFn,
   normalizeSourceMap,
 } from "./utils";
 import SassError from "./SassError";
@@ -49,39 +49,41 @@ async function loader(content) {
     );
   }
 
-  const render = getRenderFunctionFromSassImplementation(implementation);
+  const compile = getCompileFn(implementation);
 
-  render(sassOptions, (error, result) => {
-    if (error) {
-      // There are situations when the `file` property do not exist
-      if (error.file) {
-        // `node-sass` returns POSIX paths
-        this.addDependency(path.normalize(error.file));
-      }
+  let result;
 
-      callback(new SassError(error));
-
-      return;
+  try {
+    result = await compile(sassOptions);
+  } catch (error) {
+    // There are situations when the `file` property do not exist
+    if (error.file) {
+      // `node-sass` returns POSIX paths
+      this.addDependency(path.normalize(error.file));
     }
 
-    let map = result.map ? JSON.parse(result.map) : null;
+    callback(new SassError(error));
 
-    // Modify source paths only for webpack, otherwise we do nothing
-    if (map && useSourceMap) {
-      map = normalizeSourceMap(map, this.rootContext);
+    return;
+  }
+
+  let map = result.map ? JSON.parse(result.map) : null;
+
+  // Modify source paths only for webpack, otherwise we do nothing
+  if (map && useSourceMap) {
+    map = normalizeSourceMap(map, this.rootContext);
+  }
+
+  result.stats.includedFiles.forEach((includedFile) => {
+    const normalizedIncludedFile = path.normalize(includedFile);
+
+    // Custom `importer` can return only `contents` so includedFile will be relative
+    if (path.isAbsolute(normalizedIncludedFile)) {
+      this.addDependency(normalizedIncludedFile);
     }
-
-    result.stats.includedFiles.forEach((includedFile) => {
-      const normalizedIncludedFile = path.normalize(includedFile);
-
-      // Custom `importer` can return only `contents` so includedFile will be relative
-      if (path.isAbsolute(normalizedIncludedFile)) {
-        this.addDependency(normalizedIncludedFile);
-      }
-    });
-
-    callback(null, result.css.toString(), map);
   });
+
+  callback(null, result.css.toString(), map);
 }
 
 export default loader;
