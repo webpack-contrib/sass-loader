@@ -1,29 +1,35 @@
 export default (api, implementation) => {
+  if (api === "modern") {
+    return {
+      // Note: in real code, you should use `math.pow()` from the built-in
+      // `sass:math` module.
+      // eslint-disable-next-line func-names
+      "pow($base, $exponent)": function (args) {
+        const base = args[0].assertNumber("base").assertNoUnits("base");
+        const exponent = args[1]
+          .assertNumber("exponent")
+          .assertNoUnits("exponent");
+
+        // eslint-disable-next-line no-restricted-properties
+        return new implementation.SassNumber(
+          Math.pow(base.value, exponent.value)
+        );
+      },
+    };
+  }
+
   return {
-    "headings($from: 0, $to: 6)":
-      api === "modern"
-        ? (args) => {
-            const [f, t] = args;
-            const list = new implementation.SassList(t - f + 1);
-            let i;
+    "headings($from: 0, $to: 6)": (from, to) => {
+      const f = from.getValue();
+      const t = to.getValue();
+      const list = new implementation.types.List(t - f + 1);
+      let i;
 
-            for (i = f; i <= t; i++) {
-              list.setValue(i - f, new implementation.SassString(`h${i}`));
-            }
+      for (i = f; i <= t; i++) {
+        list.setValue(i - f, new implementation.types.String(`h${i}`));
+      }
 
-            return implementation.SassString(`h1`);
-          }
-        : (from, to) => {
-            const f = from.getValue();
-            const t = to.getValue();
-            const list = new implementation.types.List(t - f + 1);
-            let i;
-
-            for (i = f; i <= t; i++) {
-              list.setValue(i - f, new implementation.types.String(`h${i}`));
-            }
-
-            return list;
-          },
+      return list;
+    },
   };
 };

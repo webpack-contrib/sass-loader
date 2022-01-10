@@ -4870,6 +4870,26 @@ exports[`sassOptions option should work with the "functions" option ('node-sass'
 
 exports[`sassOptions option should work with the "functions" option ('node-sass', 'old' API, 'scss' syntax): warnings 1`] = `Array []`;
 
+exports[`sassOptions option should work with the "functions" option ('sass-embedded', 'modern' API, 'sass' syntax): css 1`] = `
+"h1 {
+  font-size: 32px;
+}"
+`;
+
+exports[`sassOptions option should work with the "functions" option ('sass-embedded', 'modern' API, 'sass' syntax): errors 1`] = `Array []`;
+
+exports[`sassOptions option should work with the "functions" option ('sass-embedded', 'modern' API, 'sass' syntax): warnings 1`] = `Array []`;
+
+exports[`sassOptions option should work with the "functions" option ('sass-embedded', 'modern' API, 'scss' syntax): css 1`] = `
+"h1 {
+  font-size: 32px;
+}"
+`;
+
+exports[`sassOptions option should work with the "functions" option ('sass-embedded', 'modern' API, 'scss' syntax): errors 1`] = `Array []`;
+
+exports[`sassOptions option should work with the "functions" option ('sass-embedded', 'modern' API, 'scss' syntax): warnings 1`] = `Array []`;
+
 exports[`sassOptions option should work with the "importer" as a array of functions option ('dart-sass', 'old' API, 'sass' syntax): css 1`] = `""`;
 
 exports[`sassOptions option should work with the "importer" as a array of functions option ('dart-sass', 'old' API, 'sass' syntax): css 2`] = `

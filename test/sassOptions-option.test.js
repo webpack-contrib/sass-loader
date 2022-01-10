@@ -168,25 +168,35 @@ describe("sassOptions option", () => {
         expect(getErrors(stats)).toMatchSnapshot("errors");
       });
 
-      it(`should work with the "functions" option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
-        const testId = getTestId("custom-functions", syntax);
-        const options = {
-          implementation,
-          api,
-          sassOptions: {
-            functions: customFunctions(api, implementation),
-          },
-        };
-        const compiler = getCompiler(testId, { loader: { options } });
-        const stats = await compile(compiler);
-        const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = await getCodeFromSass(testId, options);
+      // TODO fix me https://github.com/webpack-contrib/sass-loader/issues/774
+      const needSkip =
+        (implementationName === "sass-embedded" && api === "old") ||
+        (implementationName === "dart-sass" && api === "modern");
 
-        expect(codeFromBundle.css).toBe(codeFromSass.css);
-        expect(codeFromBundle.css).toMatchSnapshot("css");
-        expect(getWarnings(stats)).toMatchSnapshot("warnings");
-        expect(getErrors(stats)).toMatchSnapshot("errors");
-      });
+      if (!needSkip) {
+        it(`should work with the "functions" option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
+          const testId = getTestId(
+            api === "modern" ? "custom-functions-modern" : "custom-functions",
+            syntax
+          );
+          const options = {
+            implementation,
+            api,
+            sassOptions: {
+              functions: customFunctions(api, implementation),
+            },
+          };
+          const compiler = getCompiler(testId, { loader: { options } });
+          const stats = await compile(compiler);
+          const codeFromBundle = getCodeFromBundle(stats, compiler);
+          const codeFromSass = await getCodeFromSass(testId, options);
+
+          expect(codeFromBundle.css).toBe(codeFromSass.css);
+          expect(codeFromBundle.css).toMatchSnapshot("css");
+          expect(getWarnings(stats)).toMatchSnapshot("warnings");
+          expect(getErrors(stats)).toMatchSnapshot("errors");
+        });
+      }
 
       // TODO fix me https://github.com/webpack-contrib/sass-loader/issues/774
       if (api !== "modern") {
