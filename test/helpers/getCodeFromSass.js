@@ -811,6 +811,10 @@ async function getCodeFromSass(testId, options) {
     ));
   } else {
     ({ css, map } = await new Promise((resolve, reject) => {
+      if (sassOptions.fiber === false) {
+        delete sassOptions.fiber;
+      }
+
       implementation.render(sassOptions, (error, result) => {
         if (error) {
           reject(error);
