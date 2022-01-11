@@ -309,16 +309,22 @@ describe("sassOptions option", () => {
         });
       }
 
-      // TODO fix me https://github.com/webpack-contrib/sass-loader/issues/774
-      if (api !== "modern" && implementationName !== "sass-embedded") {
-        it(`should work with the "includePaths" option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
+      if (implementationName !== "sass-embedded" && api !== "old") {
+        it(`should work with the "includePaths"/"loadPaths" option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           const testId = getTestId("import-include-paths", syntax);
           const options = {
             implementation,
             api,
-            sassOptions: {
-              includePaths: [path.resolve(__dirname, syntax, "includePath")],
-            },
+            sassOptions:
+              api === "modern"
+                ? {
+                    loadPaths: [path.resolve(__dirname, syntax, "includePath")],
+                  }
+                : {
+                    includePaths: [
+                      path.resolve(__dirname, syntax, "includePath"),
+                    ],
+                  },
           };
           const compiler = getCompiler(testId, { loader: { options } });
           const stats = await compile(compiler);
