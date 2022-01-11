@@ -65,6 +65,10 @@ describe("validate options", () => {
       success: [true, false],
       failure: ["string"],
     },
+    api: {
+      success: ["old", "modern"],
+      failure: ["string", true],
+    },
     unknown: {
       success: [],
       failure: [1, true, false, "test", /test/, [], {}, { foo: "bar" }],

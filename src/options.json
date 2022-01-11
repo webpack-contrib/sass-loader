@@ -15,7 +15,7 @@
       ]
     },
     "api": {
-      "description": "Use old or modern API or `sass` (`Dart Sass`) implementation.",
+      "description": "Switch between old and modern API for `sass` (`Dart Sass`) and `Sass Embedded` implementations.",
       "link": "https://github.com/webpack-contrib/sass-loader#sassoptions",
       "enum": ["old", "modern"]
     },

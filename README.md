@@ -39,13 +39,15 @@ or
 pnpm add -D sass-loader sass webpack
 ```
 
-`sass-loader` requires you to install either [Dart Sass](https://github.com/sass/dart-sass) or [Node Sass](https://github.com/sass/node-sass) on your own (more documentation can be found below).
+`sass-loader` requires you to install either [Dart Sass](https://github.com/sass/dart-sass), [Node Sass](https://github.com/sass/node-sass) on your own (more documentation can be found below) or [Sass Embedded](https://github.com/sass/embedded-host-node).
 
 This allows you to control the versions of all your dependencies, and to choose which Sass implementation to use.
 
 > ℹ️ We highly recommend using [Dart Sass](https://github.com/sass/dart-sass).
 
 > ⚠ [Node Sass](https://github.com/sass/node-sass) does not work with [Yarn PnP](https://classic.yarnpkg.com/en/docs/pnp/) feature and doesn't support [@use rule](https://sass-lang.com/documentation/at-rules/use).
+
+> ⚠ [Sass Embedded](https://github.com/sass/embedded-host-node) is experimental and in `beta`, therefore some features may not work
 
 Chain the `sass-loader` with the [css-loader](https://github.com/webpack-contrib/css-loader) and the [style-loader](https://github.com/webpack-contrib/style-loader) to immediately apply all styles to the DOM or the [mini-css-extract-plugin](https://github.com/webpack-contrib/mini-css-extract-plugin) to extract it into a separate file.
 
@@ -703,6 +705,49 @@ module.exports = {
             loader: "sass-loader",
             options: {
               warnRuleAsWarning: true,
+            },
+          },
+        ],
+      },
+    ],
+  },
+};
+```
+
+### `api`
+
+Type:
+
+```ts
+type api = "old" | "modern";
+```
+
+Default: `"old"`
+
+Allows you to switch between `old` and `modern` API. You can find more information [here](https://sass-lang.com/documentation/js-api).
+
+> ⚠ This is experimental, so some features may not work (known: built-in `importer` is not working and files with errors is not watching on initial run), you can follow this [here](https://github.com/webpack-contrib/sass-loader/issues/774).
+
+> ⚠ The options are different for `modern` and `old` APIs. Please look at [docs](https://sass-lang.com/documentation/js-api) how to migrate on new options.
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          "style-loader",
+          "css-loader",
+          {
+            loader: "sass-loader",
+            options: {
+              api: "modern",
+              sassOptions: {
+                // Your sass options
+              },
             },
           },
         ],
