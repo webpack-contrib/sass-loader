@@ -121,16 +121,16 @@ Thankfully there are a two solutions to this problem:
 
 |                     Name                      |         Type         |                 Default                 | Description                                                       |
 | :-------------------------------------------: | :------------------: | :-------------------------------------: | :---------------------------------------------------------------- |
-|    **[`implementation`](#implementation)**    |  `{Object\|String}`  |                 `sass`                  | Setup Sass implementation to use.                                 |
-|       **[`sassOptions`](#sassoptions)**       | `{Object\|Function}` | defaults values for Sass implementation | Options for Sass.                                                 |
-|         **[`sourceMap`](#sourcemap)**         |     `{Boolean}`      |           `compiler.devtool`            | Enables/Disables generation of source maps.                       |
-|    **[`additionalData`](#additionaldata)**    | `{String\|Function}` |               `undefined`               | Prepends/Appends `Sass`/`SCSS` code before the actual entry file. |
-|   **[`webpackImporter`](#webpackimporter)**   |     `{Boolean}`      |                 `true`                  | Enables/Disables the default Webpack importer.                    |
-| **[`warnRuleAsWarning`](#warnruleaswarning)** |     `{Boolean}`      |                 `false`                 | Treats the `@warn` rule as a webpack warning.                     |
+|    **[`implementation`](#implementation)**    |  `{object\|string}`  |                 `sass`                  | Setup Sass implementation to use.                                 |
+|       **[`sassOptions`](#sassoptions)**       | `{object\| (content: string \| Buffer, loaderContext: LoaderContext, meta: any) => object }` | defaults values for Sass implementation | Options for Sass.                                                 |
+|         **[`sourceMap`](#sourcemap)**         |     `{object}`      |           `compiler.devtool`            | Enables/Disables generation of source maps.                       |
+|    **[`additionalData`](#additionaldata)**    | `{string \| (content: string \| Buffer , loaderContext: LoaderContext, meta: any) => string}` |               `undefined`               | Prepends/Appends `Sass`/`SCSS` code before the actual entry file. |
+|   **[`webpackImporter`](#webpackimporter)**   |     `{boolean}`      |                 `true`                  | Enables/Disables the default Webpack importer.                    |
+| **[`warnRuleAsWarning`](#warnruleaswarning)** |     `{boolean}`      |                 `false`                 | Treats the `@warn` rule as a webpack warning.                     |
 
 ### `implementation`
 
-Type: `Object | String`
+Type: `object | string`
 Default: `sass`
 
 The special `implementation` option determines which implementation of Sass to use.
@@ -169,7 +169,7 @@ In order to avoid this situation you can use the `implementation` option.
 
 The `implementation` options either accepts `sass` (`Dart Sass`) or `node-sass` as a module.
 
-#### Object
+#### object
 
 For example, to use Dart Sass, you'd pass:
 
@@ -196,7 +196,7 @@ module.exports = {
 };
 ```
 
-#### String
+#### string
 
 For example, to use Dart Sass, you'd pass:
 
@@ -302,7 +302,7 @@ module.exports = {
 
 ### `sassOptions`
 
-Type: `Object|Function`
+Type: `object | (content: string|Buffer, loaderContext: LoaderContext, meta: any) => object `
 Default: defaults values for Sass implementation
 
 Options for [Dart Sass](http://sass-lang.com/dart-sass) or [Node Sass](https://github.com/sass/node-sass) implementation.
@@ -324,7 +324,7 @@ Please consult documentation before using them:
 - [Dart Sass documentation](https://github.com/sass/dart-sass#javascript-api) for all available `sass` options.
 - [Node Sass documentation](https://github.com/sass/node-sass/#options) for all available `node-sass` options.
 
-#### `Object`
+#### `object`
 
 Use and object for the Sass implementation setup.
 
@@ -355,7 +355,7 @@ module.exports = {
 };
 ```
 
-#### `Function`
+#### `function`
 
 Allows to setup the Sass implementation by setting different options based on the loader context.
 
@@ -397,7 +397,7 @@ module.exports = {
 
 ### `sourceMap`
 
-Type: `Boolean`
+Type: `boolean`
 Default: depends on the `compiler.devtool` value
 
 Enables/Disables generation of source maps.
@@ -469,7 +469,7 @@ module.exports = {
 
 ### `additionalData`
 
-Type: `String|Function`
+Type: `string | (content: string|Buffer , loaderContext: LoaderContext, meta: any) => string`
 Default: `undefined`
 
 Prepends `Sass`/`SCSS` code before the actual entry file.
@@ -477,7 +477,7 @@ In this case, the `sass-loader` will not override the `data` option but just **p
 
 This is especially useful when some of your Sass variables depend on the environment:
 
-#### `String`
+#### `string`
 
 ```js
 module.exports = {
@@ -501,7 +501,7 @@ module.exports = {
 };
 ```
 
-#### `Function`
+#### `function`
 
 ##### Sync
 
@@ -573,7 +573,7 @@ module.exports = {
 
 ### `webpackImporter`
 
-Type: `Boolean`
+Type: `boolean`
 Default: `true`
 
 Enables/Disables the default Webpack importer.
@@ -607,7 +607,7 @@ module.exports = {
 
 ### `warnRuleAsWarning`
 
-Type: `Boolean`
+Type: `boolean`
 Default: `false`
 
 Treats the `@warn` rule as a webpack warning.
