@@ -66,8 +66,13 @@ async function loader(content) {
   try {
     result = await compile(sassOptions, options);
   } catch (error) {
-    // There are situations when the `file` property do not exist
-    if (error.file) {
+    // There are situations when the `file`/`span.url` property do not exist
+    // Modern API
+    if (error.span && typeof error.span.url !== "undefined") {
+      this.addDependency(url.fileURLToPath(error.span.url));
+    }
+    // Old API
+    else if (typeof error.file !== "undefined") {
       // `node-sass` returns POSIX paths
       this.addDependency(path.normalize(error.file));
     }

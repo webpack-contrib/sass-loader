@@ -155,30 +155,28 @@ describe("loader", () => {
         expect(getErrors(stats)).toMatchSnapshot("errors");
       });
 
-      if (!isModernAPI && !isSassEmbedded) {
-        it(`should output an understandable error when the problem in "@import" ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
-          const testId = getTestId("error-import", syntax);
-          const options = {
-            implementation,
-            api,
-          };
-          const compiler = getCompiler(testId, { loader: { options } });
-          const stats = await compile(compiler);
+      it(`should output an understandable error when the problem in "@import" ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
+        const testId = getTestId("error-import", syntax);
+        const options = {
+          implementation,
+          api,
+        };
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
 
-          expect(
-            stats.compilation.fileDependencies.has(
-              path.resolve(`./test/${syntax}/error-import.${syntax}`)
-            )
-          ).toBe(true);
-          expect(
-            stats.compilation.fileDependencies.has(
-              path.resolve(`./test/${syntax}/error.${syntax}`)
-            )
-          ).toBe(true);
-          expect(getWarnings(stats)).toMatchSnapshot("warnings");
-          expect(getErrors(stats)).toMatchSnapshot("errors");
-        });
-      }
+        expect(
+          stats.compilation.fileDependencies.has(
+            path.resolve(`./test/${syntax}/error-import.${syntax}`)
+          )
+        ).toBe(true);
+        expect(
+          stats.compilation.fileDependencies.has(
+            path.resolve(`./test/${syntax}/error.${syntax}`)
+          )
+        ).toBe(true);
+        expect(getWarnings(stats)).toMatchSnapshot("warnings");
+        expect(getErrors(stats)).toMatchSnapshot("errors");
+      });
 
       it(`should output an understandable error when a file could not be found ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
         const testId = getTestId("error-file-not-found", syntax);
@@ -1255,30 +1253,28 @@ describe("loader", () => {
           expect(getErrors(stats)).toMatchSnapshot("errors");
         });
 
-        if (!isModernAPI && !isSassEmbedded) {
-          it(`should output an understandable error with a problem in "@use" ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
-            const testId = getTestId("error-use", syntax);
-            const options = {
-              implementation,
-              api,
-            };
-            const compiler = getCompiler(testId, { loader: { options } });
-            const stats = await compile(compiler);
+        it(`should output an understandable error with a problem in "@use" ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
+          const testId = getTestId("error-use", syntax);
+          const options = {
+            implementation,
+            api,
+          };
+          const compiler = getCompiler(testId, { loader: { options } });
+          const stats = await compile(compiler);
 
-            expect(
-              stats.compilation.fileDependencies.has(
-                path.resolve(`./test/${syntax}/error-use.${syntax}`)
-              )
-            ).toBe(true);
-            expect(
-              stats.compilation.fileDependencies.has(
-                path.resolve(`./test/${syntax}/error.${syntax}`)
-              )
-            ).toBe(true);
-            expect(getWarnings(stats)).toMatchSnapshot("warnings");
-            expect(getErrors(stats)).toMatchSnapshot("errors");
-          });
-        }
+          expect(
+            stats.compilation.fileDependencies.has(
+              path.resolve(`./test/${syntax}/error-use.${syntax}`)
+            )
+          ).toBe(true);
+          expect(
+            stats.compilation.fileDependencies.has(
+              path.resolve(`./test/${syntax}/error.${syntax}`)
+            )
+          ).toBe(true);
+          expect(getWarnings(stats)).toMatchSnapshot("warnings");
+          expect(getErrors(stats)).toMatchSnapshot("errors");
+        });
 
         it(`should output an understandable error when a file could not be found using "@use" rule ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           const testId = getTestId("error-file-not-found-use", syntax);
