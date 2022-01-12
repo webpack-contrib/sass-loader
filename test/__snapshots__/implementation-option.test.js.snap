@@ -75,7 +75,7 @@ exports[`implementation option should throw error when the "info" does not exist
 exports[`implementation option should throw error when unresolved package: errors 1`] = `
 Array [
   "ModuleError: Module Error (from ../src/cjs.js):
-(Emitted value instead of an instance of Error) Error: Cannot find module 'unresolved' from 'src/utils.js'",
+Cannot find module 'unresolved' from 'src/utils.js'",
 ]
 `;
 
