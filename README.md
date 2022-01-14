@@ -308,7 +308,13 @@ module.exports = {
 Type:
 
 ```ts
-type sassOptions = object | (content: string|Buffer, loaderContext: LoaderContext, meta: any) => object
+type sassOptions =
+  | object
+  | ((
+      content: string | Buffer,
+      loaderContext: LoaderContext,
+      meta: any
+    ) => object);
 ```
 
 Default: defaults values for Sass implementation
@@ -485,7 +491,13 @@ module.exports = {
 Type:
 
 ```ts
-type additionalData = string | (content: string|Buffer, loaderContext: LoaderContext, meta: any) => string
+type additionalData =
+  | string
+  | ((
+      content: string | Buffer,
+      loaderContext: LoaderContext,
+      meta: any
+    ) => string);
 ```
 
 Default: `undefined`
