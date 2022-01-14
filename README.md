@@ -118,19 +118,22 @@ Thankfully there are a two solutions to this problem:
 - Library authors usually provide a variable to modify the asset path. [bootstrap-sass](https://github.com/twbs/bootstrap-sass) for example has an `$icon-font-path`.
 
 ## Options
+
 - **[`implementation`](#implementation)**
-- **[`sassOptions`](#sassoptions)** 
-- **[`sourceMap`](#sourcemap)**  
-- **[`additionalData`](#additionaldata)**    
+- **[`sassOptions`](#sassoptions)**
+- **[`sourceMap`](#sourcemap)**
+- **[`additionalData`](#additionaldata)**
 - **[`webpackImporter`](#webpackimporter)**
-- **[`warnRuleAsWarning`](#warnruleaswarning)** 
- 
+- **[`warnRuleAsWarning`](#warnruleaswarning)**
+
 ### `implementation`
 
-Type: 
+Type:
+
 ```ts
-type implementation = object | string
+type implementation = object | string;
 ```
+
 Default: `sass`
 
 The special `implementation` option determines which implementation of Sass to use.
@@ -302,10 +305,12 @@ module.exports = {
 
 ### `sassOptions`
 
-Type: 
+Type:
+
 ```ts
-type sassOptions = object | (content: string|Buffer, loaderContext: LoaderContext, meta: any) => object 
+type sassOptions = object | (content: string|Buffer, loaderContext: LoaderContext, meta: any) => object
 ```
+
 Default: defaults values for Sass implementation
 
 Options for [Dart Sass](http://sass-lang.com/dart-sass) or [Node Sass](https://github.com/sass/node-sass) implementation.
@@ -400,10 +405,12 @@ module.exports = {
 
 ### `sourceMap`
 
-Type: 
-```ts 
-type sourceMap = boolean
+Type:
+
+```ts
+type sourceMap = boolean;
 ```
+
 Default: depends on the `compiler.devtool` value
 
 Enables/Disables generation of source maps.
@@ -475,7 +482,8 @@ module.exports = {
 
 ### `additionalData`
 
-Type: 
+Type:
+
 ```ts
 type additionalData = string | (content: string|Buffer, loaderContext: LoaderContext, meta: any) => string
 ```
@@ -583,10 +591,12 @@ module.exports = {
 
 ### `webpackImporter`
 
-Type: 
+Type:
+
 ```ts
-type webpackImporter = boolean
+type webpackImporter = boolean;
 ```
+
 Default: `true`
 
 Enables/Disables the default Webpack importer.
@@ -620,10 +630,12 @@ module.exports = {
 
 ### `warnRuleAsWarning`
 
-Type: 
+Type:
+
 ```ts
-type warnRuleAsWarning = boolean
+type warnRuleAsWarning = boolean;
 ```
+
 Default: `false`
 
 Treats the `@warn` rule as a webpack warning.
