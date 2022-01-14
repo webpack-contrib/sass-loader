@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [10.2.1](https://github.com/webpack-contrib/sass-loader/compare/v10.2.0...v10.2.1) (2022-01-14)
+
+
+### Bug Fixes
+
+* backported disabled auto importing `fiber` on node >= 16 ([#1014](https://github.com/webpack-contrib/sass-loader/issues/1014)) ([f4234e4](https://github.com/webpack-contrib/sass-loader/commit/f4234e458b33de5890e33b1be3e7725d36d3552a))
+
 ## [10.2.0](https://github.com/webpack-contrib/sass-loader/compare/v10.1.1...v10.2.0) (2021-05-10)
 
 
