@@ -129,7 +129,7 @@ Thankfully there are a two solutions to this problem:
 
 Type: 
 ```ts
-object | string
+type implementation = object | string
 ```
 Default: `sass`
 
@@ -304,7 +304,7 @@ module.exports = {
 
 Type: 
 ```ts
-object | (content: string|Buffer, loaderContext: LoaderContext, meta: any) => object 
+type sassOptions = object | (content: string|Buffer, loaderContext: LoaderContext, meta: any) => object 
 ```
 Default: defaults values for Sass implementation
 
@@ -402,7 +402,7 @@ module.exports = {
 
 Type: 
 ```ts 
-boolean
+type sourceMap = boolean
 ```
 Default: depends on the `compiler.devtool` value
 
@@ -477,7 +477,7 @@ module.exports = {
 
 Type: 
 ```ts
-string | (content: string|Buffer, loaderContext: LoaderContext, meta: any) => string
+type additionalData = string | (content: string|Buffer, loaderContext: LoaderContext, meta: any) => string
 ```
 
 Default: `undefined`
@@ -585,7 +585,7 @@ module.exports = {
 
 Type: 
 ```ts
-boolean
+type webpackImporter = boolean
 ```
 Default: `true`
 
@@ -622,7 +622,7 @@ module.exports = {
 
 Type: 
 ```ts
-boolean
+type warnRuleAsWarning = boolean
 ```
 Default: `false`
 
