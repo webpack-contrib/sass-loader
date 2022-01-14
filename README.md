@@ -118,19 +118,19 @@ Thankfully there are a two solutions to this problem:
 - Library authors usually provide a variable to modify the asset path. [bootstrap-sass](https://github.com/twbs/bootstrap-sass) for example has an `$icon-font-path`.
 
 ## Options
-
-|                     Name                      |         Type         |                 Default                 | Description                                                       |
-| :-------------------------------------------: | :------------------: | :-------------------------------------: | :---------------------------------------------------------------- |
-|    **[`implementation`](#implementation)**    |  `{object\|string}`  |                 `sass`                  | Setup Sass implementation to use.                                 |
-|       **[`sassOptions`](#sassoptions)**       | `{object\| (content: string \| Buffer, loaderContext: LoaderContext, meta: any) => object }` | defaults values for Sass implementation | Options for Sass.                                                 |
-|         **[`sourceMap`](#sourcemap)**         |     `{object}`      |           `compiler.devtool`            | Enables/Disables generation of source maps.                       |
-|    **[`additionalData`](#additionaldata)**    | `{string \| (content: string \| Buffer , loaderContext: LoaderContext, meta: any) => string}` |               `undefined`               | Prepends/Appends `Sass`/`SCSS` code before the actual entry file. |
-|   **[`webpackImporter`](#webpackimporter)**   |     `{boolean}`      |                 `true`                  | Enables/Disables the default Webpack importer.                    |
-| **[`warnRuleAsWarning`](#warnruleaswarning)** |     `{boolean}`      |                 `false`                 | Treats the `@warn` rule as a webpack warning.                     |
-
+- **[`implementation`](#implementation)**
+- **[`sassOptions`](#sassoptions)** 
+- **[`sourceMap`](#sourcemap)**  
+- **[`additionalData`](#additionaldata)**    
+- **[`webpackImporter`](#webpackimporter)**
+- **[`warnRuleAsWarning`](#warnruleaswarning)** 
+ 
 ### `implementation`
 
-Type: `object | string`
+Type: 
+```ts
+object | string
+```
 Default: `sass`
 
 The special `implementation` option determines which implementation of Sass to use.
@@ -169,7 +169,7 @@ In order to avoid this situation you can use the `implementation` option.
 
 The `implementation` options either accepts `sass` (`Dart Sass`) or `node-sass` as a module.
 
-#### object
+#### `object`
 
 For example, to use Dart Sass, you'd pass:
 
@@ -196,7 +196,7 @@ module.exports = {
 };
 ```
 
-#### string
+#### `string`
 
 For example, to use Dart Sass, you'd pass:
 
@@ -302,7 +302,10 @@ module.exports = {
 
 ### `sassOptions`
 
-Type: `object | (content: string|Buffer, loaderContext: LoaderContext, meta: any) => object `
+Type: 
+```ts
+object | (content: string|Buffer, loaderContext: LoaderContext, meta: any) => object 
+```
 Default: defaults values for Sass implementation
 
 Options for [Dart Sass](http://sass-lang.com/dart-sass) or [Node Sass](https://github.com/sass/node-sass) implementation.
@@ -397,7 +400,10 @@ module.exports = {
 
 ### `sourceMap`
 
-Type: `boolean`
+Type: 
+```ts 
+boolean
+```
 Default: depends on the `compiler.devtool` value
 
 Enables/Disables generation of source maps.
@@ -469,7 +475,11 @@ module.exports = {
 
 ### `additionalData`
 
-Type: `string | (content: string|Buffer , loaderContext: LoaderContext, meta: any) => string`
+Type: 
+```ts
+string | (content: string|Buffer, loaderContext: LoaderContext, meta: any) => string
+```
+
 Default: `undefined`
 
 Prepends `Sass`/`SCSS` code before the actual entry file.
@@ -573,7 +583,10 @@ module.exports = {
 
 ### `webpackImporter`
 
-Type: `boolean`
+Type: 
+```ts
+boolean
+```
 Default: `true`
 
 Enables/Disables the default Webpack importer.
@@ -607,7 +620,10 @@ module.exports = {
 
 ### `warnRuleAsWarning`
 
-Type: `boolean`
+Type: 
+```ts
+boolean
+```
 Default: `false`
 
 Treats the `@warn` rule as a webpack warning.
