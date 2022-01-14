@@ -186,7 +186,9 @@ module.exports = {
 Note that when using `sass` (`Dart Sass`), **synchronous compilation is twice as fast as asynchronous compilation** by default, due to the overhead of asynchronous callbacks.
 To avoid this overhead, you can use the [fibers](https://www.npmjs.com/package/fibers) package to call asynchronous importers from the synchronous code path.
 
-We automatically inject the [`fibers`](https://github.com/laverdet/node-fibers) package (setup `sassOptions.fiber`) if is possible (i.e. you need install the [`fibers`](https://github.com/laverdet/node-fibers) package).
+We automatically inject the [`fibers`](https://github.com/laverdet/node-fibers) package (setup `sassOptions.fiber`) for `Node.js` less v16.0.0 if is possible (i.e. you need install the [`fibers`](https://github.com/laverdet/node-fibers) package).
+
+> Fibers is not compatible with `Node.js` v16.0.0 or later ([see introduction to readme](https://github.com/laverdet/node-fibers)).
 
 **package.json**
 

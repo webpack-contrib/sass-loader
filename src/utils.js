@@ -89,6 +89,12 @@ function getSassImplementation(loaderContext, implementation) {
   );
 }
 
+function isSupportedFibers() {
+  const [nodeVersion] = process.versions.node.split(".");
+
+  return Number(nodeVersion) < 16;
+}
+
 function isProductionLikeMode(loaderContext) {
   return loaderContext.mode === "production" || !loaderContext.mode;
 }
@@ -131,7 +137,7 @@ async function getSassOptions(
 
   const isDartSass = implementation.info.includes("dart-sass");
 
-  if (isDartSass) {
+  if (isDartSass && isSupportedFibers()) {
     const shouldTryToResolveFibers = !options.fiber && options.fiber !== false;
 
     if (shouldTryToResolveFibers) {
@@ -575,4 +581,5 @@ export {
   getWebpackImporter,
   getRenderFunctionFromSassImplementation,
   normalizeSourceMap,
+  isSupportedFibers,
 };

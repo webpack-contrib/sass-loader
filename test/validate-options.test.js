@@ -1,4 +1,4 @@
-import Fiber from "fibers";
+import { isSupportedFibers } from "../src/utils";
 
 import {
   getCompiler,
@@ -7,10 +7,21 @@ import {
   getImplementationByName,
 } from "./helpers/index";
 
+let Fiber;
+
 describe("validate options", () => {
+  beforeAll(async () => {
+    if (isSupportedFibers()) {
+      const { default: fibers } = await import("fibers");
+      Fiber = fibers;
+    }
+  });
+
   beforeEach(() => {
-    // The `sass` (`Dart Sass`) package modify the `Function` prototype, but the `jest` lose a prototype
-    Object.setPrototypeOf(Fiber, Function.prototype);
+    if (isSupportedFibers()) {
+      // The `sass` (`Dart Sass`) package modify the `Function` prototype, but the `jest` lose a prototype
+      Object.setPrototypeOf(Fiber, Function.prototype);
+    }
   });
 
   const tests = {

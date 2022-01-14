@@ -3,7 +3,8 @@ import path from "path";
 import semver from "semver";
 import nodeSass from "node-sass";
 import dartSass from "sass";
-import Fiber from "fibers";
+
+import { isSupportedFibers } from "../src/utils";
 
 import {
   compile,
@@ -18,15 +19,25 @@ import {
   getCompiler,
 } from "./helpers";
 
+jest.setTimeout(30000);
+
+let Fiber;
 const implementations = [nodeSass, dartSass];
 const syntaxStyles = ["scss", "sass"];
 
-jest.setTimeout(30000);
-
 describe("sassOptions option", () => {
+  beforeAll(async () => {
+    if (isSupportedFibers()) {
+      const { default: fibers } = await import("fibers");
+      Fiber = fibers;
+    }
+  });
+
   beforeEach(() => {
-    // The `sass` (`Dart Sass`) package modify the `Function` prototype, but the `jest` lose a prototype
-    Object.setPrototypeOf(Fiber, Function.prototype);
+    if (isSupportedFibers()) {
+      // The `sass` (`Dart Sass`) package modify the `Function` prototype, but the `jest` lose a prototype
+      Object.setPrototypeOf(Fiber, Function.prototype);
+    }
   });
 
   implementations.forEach((implementation) => {
@@ -351,7 +362,8 @@ describe("sassOptions option", () => {
 
         if (
           implementationName === "dart-sass" &&
-          semver.satisfies(process.version, ">= 10")
+          semver.satisfies(process.version, ">= 10") &&
+          isSupportedFibers()
         ) {
           expect(dartSassSpy.mock.calls[0][0]).toHaveProperty("fiber");
         }
@@ -378,7 +390,8 @@ describe("sassOptions option", () => {
 
         if (
           implementationName === "dart-sass" &&
-          semver.satisfies(process.version, ">= 10")
+          semver.satisfies(process.version, ">= 10") &&
+          isSupportedFibers()
         ) {
           expect(dartSassSpy.mock.calls[0][0]).toHaveProperty("fiber");
         }
