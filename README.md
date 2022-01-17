@@ -493,11 +493,7 @@ Type:
 ```ts
 type additionalData =
   | string
-  | ((
-      content: string | Buffer,
-      loaderContext: LoaderContext,
-      meta: any
-    ) => string);
+  | ((content: string | Buffer, loaderContext: LoaderContext) => string);
 ```
 
 Default: `undefined`
