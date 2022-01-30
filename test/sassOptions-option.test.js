@@ -191,11 +191,9 @@ describe("sassOptions option", () => {
       });
 
       // TODO fix me https://github.com/webpack-contrib/sass-loader/issues/774
-      const needSkip =
-        (implementationName === "sass-embedded" && api === "old") ||
-        (implementationName === "dart-sass" && api === "modern");
+      const isModernAPI = api === "modern";
 
-      if (!needSkip) {
+      if (!isModernAPI) {
         it(`should work with the "functions" option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           const testId = getTestId(
             api === "modern" ? "custom-functions-modern" : "custom-functions",
@@ -220,8 +218,7 @@ describe("sassOptions option", () => {
         });
       }
 
-      // TODO fix me https://github.com/webpack-contrib/sass-loader/issues/774
-      if (api !== "modern" && implementationName !== "sass-embedded") {
+      if (!isModernAPI) {
         it(`should work with the "importer" as a single function option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           const testId = getTestId("custom-importer", syntax);
           const options = {
@@ -287,7 +284,7 @@ describe("sassOptions option", () => {
         });
       }
 
-      if (api !== "modern" && implementationName !== "sass-embedded") {
+      if (!isModernAPI) {
         it(`should work with the "importer" as a array of functions option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           const testId = getTestId("glob-importer", syntax);
           const options = {
@@ -309,34 +306,32 @@ describe("sassOptions option", () => {
         });
       }
 
-      if (implementationName !== "sass-embedded" && api !== "old") {
-        it(`should work with the "includePaths"/"loadPaths" option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
-          const testId = getTestId("import-include-paths", syntax);
-          const options = {
-            implementation,
-            api,
-            sassOptions:
-              api === "modern"
-                ? {
-                    loadPaths: [path.resolve(__dirname, syntax, "includePath")],
-                  }
-                : {
-                    includePaths: [
-                      path.resolve(__dirname, syntax, "includePath"),
-                    ],
-                  },
-          };
-          const compiler = getCompiler(testId, { loader: { options } });
-          const stats = await compile(compiler);
-          const codeFromBundle = getCodeFromBundle(stats, compiler);
-          const codeFromSass = await getCodeFromSass(testId, options);
+      it(`should work with the "includePaths"/"loadPaths" option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
+        const testId = getTestId("import-include-paths", syntax);
+        const options = {
+          implementation,
+          api,
+          sassOptions:
+            api === "modern"
+              ? {
+                  loadPaths: [path.resolve(__dirname, syntax, "includePath")],
+                }
+              : {
+                  includePaths: [
+                    path.resolve(__dirname, syntax, "includePath"),
+                  ],
+                },
+        };
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
+        const codeFromSass = await getCodeFromSass(testId, options);
 
-          expect(codeFromBundle.css).toBe(codeFromSass.css);
-          expect(codeFromBundle.css).toMatchSnapshot("css");
-          expect(getWarnings(stats)).toMatchSnapshot("warnings");
-          expect(getErrors(stats)).toMatchSnapshot("errors");
-        });
-      }
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot("css");
+        expect(getWarnings(stats)).toMatchSnapshot("warnings");
+        expect(getErrors(stats)).toMatchSnapshot("errors");
+      });
 
       if (api !== "modern") {
         it(`should work with the "indentType" option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {

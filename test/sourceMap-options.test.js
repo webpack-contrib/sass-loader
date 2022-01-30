@@ -113,6 +113,10 @@ describe("sourceMap option", () => {
 
         sourceMap.sourceRoot = "";
         sourceMap.sources = sourceMap.sources.map((source) => {
+          if (source === "stdin") {
+            return "stdin";
+          }
+
           expect(path.isAbsolute(source)).toBe(true);
           expect(source).toBe(path.normalize(source));
           expect(
@@ -131,7 +135,7 @@ describe("sourceMap option", () => {
       });
 
       it(`should generate source maps when value has "false" value, but the "sassOptions.sourceMap" has the "true" value ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
-        expect.assertions(api === "modern" ? 10 : 8);
+        expect.assertions(api === "modern" ? 8 : 6);
 
         const testId = getTestId("language", syntax);
         const options = {
@@ -160,6 +164,10 @@ describe("sourceMap option", () => {
 
         sourceMap.sourceRoot = "";
         sourceMap.sources = sourceMap.sources.map((source) => {
+          if (source === "stdin") {
+            return "stdin";
+          }
+
           let normalizedSource = source;
 
           if (api === "modern") {

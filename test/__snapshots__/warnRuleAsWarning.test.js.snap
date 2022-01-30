@@ -224,7 +224,27 @@ exports[`loader should not emit warning by default ('sass-embedded', 'old' API, 
 
 exports[`loader should not emit warning by default ('sass-embedded', 'old' API, 'sass' syntax): errors 1`] = `Array []`;
 
-exports[`loader should not emit warning by default ('sass-embedded', 'old' API, 'sass' syntax): logs 1`] = `Array []`;
+exports[`loader should not emit warning by default ('sass-embedded', 'old' API, 'sass' syntax): logs 1`] = `
+Array [
+  Array [
+    Object {
+      "args": Array [
+        "file:///<cwd>/sass/logging.sass:0:0: My debug message",
+      ],
+      "type": "debug",
+    },
+    Object {
+      "args": Array [
+        "My warning message
+
+test/sass/logging.sass 2:1  root stylesheet
+",
+      ],
+      "type": "warn",
+    },
+  ],
+]
+`;
 
 exports[`loader should not emit warning by default ('sass-embedded', 'old' API, 'sass' syntax): warnings 1`] = `Array []`;
 
@@ -236,7 +256,27 @@ exports[`loader should not emit warning by default ('sass-embedded', 'old' API, 
 
 exports[`loader should not emit warning by default ('sass-embedded', 'old' API, 'scss' syntax): errors 1`] = `Array []`;
 
-exports[`loader should not emit warning by default ('sass-embedded', 'old' API, 'scss' syntax): logs 1`] = `Array []`;
+exports[`loader should not emit warning by default ('sass-embedded', 'old' API, 'scss' syntax): logs 1`] = `
+Array [
+  Array [
+    Object {
+      "args": Array [
+        "file:///<cwd>/scss/logging.scss:0:0: My debug message",
+      ],
+      "type": "debug",
+    },
+    Object {
+      "args": Array [
+        "My warning message
+
+test/scss/logging.scss 2:1  root stylesheet
+",
+      ],
+      "type": "warn",
+    },
+  ],
+]
+`;
 
 exports[`loader should not emit warning by default ('sass-embedded', 'old' API, 'scss' syntax): warnings 1`] = `Array []`;
 
@@ -464,7 +504,27 @@ exports[`loader should not emit warning when 'false' used ('sass-embedded', 'old
 
 exports[`loader should not emit warning when 'false' used ('sass-embedded', 'old' API, 'sass' syntax): errors 1`] = `Array []`;
 
-exports[`loader should not emit warning when 'false' used ('sass-embedded', 'old' API, 'sass' syntax): logs 1`] = `Array []`;
+exports[`loader should not emit warning when 'false' used ('sass-embedded', 'old' API, 'sass' syntax): logs 1`] = `
+Array [
+  Array [
+    Object {
+      "args": Array [
+        "file:///<cwd>/sass/logging.sass:0:0: My debug message",
+      ],
+      "type": "debug",
+    },
+    Object {
+      "args": Array [
+        "My warning message
+
+test/sass/logging.sass 2:1  root stylesheet
+",
+      ],
+      "type": "warn",
+    },
+  ],
+]
+`;
 
 exports[`loader should not emit warning when 'false' used ('sass-embedded', 'old' API, 'sass' syntax): warnings 1`] = `Array []`;
 
@@ -476,7 +536,27 @@ exports[`loader should not emit warning when 'false' used ('sass-embedded', 'old
 
 exports[`loader should not emit warning when 'false' used ('sass-embedded', 'old' API, 'scss' syntax): errors 1`] = `Array []`;
 
-exports[`loader should not emit warning when 'false' used ('sass-embedded', 'old' API, 'scss' syntax): logs 1`] = `Array []`;
+exports[`loader should not emit warning when 'false' used ('sass-embedded', 'old' API, 'scss' syntax): logs 1`] = `
+Array [
+  Array [
+    Object {
+      "args": Array [
+        "file:///<cwd>/scss/logging.scss:0:0: My debug message",
+      ],
+      "type": "debug",
+    },
+    Object {
+      "args": Array [
+        "My warning message
+
+test/scss/logging.scss 2:1  root stylesheet
+",
+      ],
+      "type": "warn",
+    },
+  ],
+]
+`;
 
 exports[`loader should not emit warning when 'false' used ('sass-embedded', 'old' API, 'scss' syntax): warnings 1`] = `Array []`;
 
@@ -680,9 +760,25 @@ exports[`loader should not emit warning when 'true' used ('sass-embedded', 'old'
 
 exports[`loader should not emit warning when 'true' used ('sass-embedded', 'old' API, 'sass' syntax): errors 1`] = `Array []`;
 
-exports[`loader should not emit warning when 'true' used ('sass-embedded', 'old' API, 'sass' syntax): logs 1`] = `Array []`;
+exports[`loader should not emit warning when 'true' used ('sass-embedded', 'old' API, 'sass' syntax): logs 1`] = `
+Array [
+  Array [
+    Object {
+      "args": Array [
+        "file:///<cwd>/sass/logging.sass:0:0: My debug message",
+      ],
+      "type": "debug",
+    },
+  ],
+]
+`;
 
-exports[`loader should not emit warning when 'true' used ('sass-embedded', 'old' API, 'sass' syntax): warnings 1`] = `Array []`;
+exports[`loader should not emit warning when 'true' used ('sass-embedded', 'old' API, 'sass' syntax): warnings 1`] = `
+Array [
+  "ModuleWarning: Module Warning (from ../src/cjs.js):
+My warning message",
+]
+`;
 
 exports[`loader should not emit warning when 'true' used ('sass-embedded', 'old' API, 'scss' syntax): css 1`] = `
 "a {
@@ -692,6 +788,22 @@ exports[`loader should not emit warning when 'true' used ('sass-embedded', 'old'
 
 exports[`loader should not emit warning when 'true' used ('sass-embedded', 'old' API, 'scss' syntax): errors 1`] = `Array []`;
 
-exports[`loader should not emit warning when 'true' used ('sass-embedded', 'old' API, 'scss' syntax): logs 1`] = `Array []`;
+exports[`loader should not emit warning when 'true' used ('sass-embedded', 'old' API, 'scss' syntax): logs 1`] = `
+Array [
+  Array [
+    Object {
+      "args": Array [
+        "file:///<cwd>/scss/logging.scss:0:0: My debug message",
+      ],
+      "type": "debug",
+    },
+  ],
+]
+`;
 
-exports[`loader should not emit warning when 'true' used ('sass-embedded', 'old' API, 'scss' syntax): warnings 1`] = `Array []`;
+exports[`loader should not emit warning when 'true' used ('sass-embedded', 'old' API, 'scss' syntax): warnings 1`] = `
+Array [
+  "ModuleWarning: Module Warning (from ../src/cjs.js):
+My warning message",
+]
+`;

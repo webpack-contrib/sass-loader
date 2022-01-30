@@ -269,7 +269,7 @@ describe("loader", () => {
         expect(getErrors(stats)).toMatchSnapshot("errors");
       });
 
-      if (!isModernAPI && !isSassEmbedded) {
+      if (!isModernAPI) {
         it(`should work when "@import" at-rules from scoped npm packages ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           const testId = getTestId("import-from-npm-org-pkg", syntax);
           const options = {
@@ -365,7 +365,7 @@ describe("loader", () => {
         });
       }
 
-      if (!isModernAPI && !isSassEmbedded) {
+      if (!isModernAPI) {
         it(`should work and use the "sass" field ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           const testId = getTestId("import-sass-field", syntax);
           const options = {
@@ -384,7 +384,7 @@ describe("loader", () => {
         });
       }
 
-      if (!isModernAPI && !isSassEmbedded) {
+      if (!isModernAPI) {
         it(`should work and use the "style" field ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           const testId = getTestId("import-style-field", syntax);
           const options = {
@@ -403,7 +403,7 @@ describe("loader", () => {
         });
       }
 
-      if (!isModernAPI && !isSassEmbedded) {
+      if (!isModernAPI) {
         it(`should work and use the "main" field ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           const testId = getTestId("import-main-field", syntax);
           const options = {
@@ -422,7 +422,7 @@ describe("loader", () => {
         });
       }
 
-      if (!isModernAPI && !isSassEmbedded) {
+      if (!isModernAPI) {
         it(`should work and use the "main" field when the "main" value is not in the "mainFields" resolve option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           const testId = getTestId("import-main-field", syntax);
           const options = {
@@ -443,7 +443,7 @@ describe("loader", () => {
         });
       }
 
-      if (!isModernAPI && !isSassEmbedded) {
+      if (!isModernAPI) {
         it(`should work and use the "main" field when the "main" value already in the "mainFields" resolve option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           const testId = getTestId("import-main-field", syntax);
           const options = {
@@ -464,7 +464,7 @@ describe("loader", () => {
         });
       }
 
-      if (!isModernAPI && !isSassEmbedded) {
+      if (!isModernAPI) {
         it(`should work and use the "custom-sass" field ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           const testId = getTestId("import-custom-sass-field", syntax);
           const options = {
@@ -488,7 +488,7 @@ describe("loader", () => {
         });
       }
 
-      if (!isModernAPI && !isSassEmbedded) {
+      if (!isModernAPI) {
         it(`should work and use the "index" file in package ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           const testId = getTestId("import-index", syntax);
           const options = {
@@ -507,7 +507,7 @@ describe("loader", () => {
         });
       }
 
-      if (!isModernAPI && !isSassEmbedded) {
+      if (!isModernAPI) {
         it(`should work and use the "index" file in package when the "index" value is not in the "mainFiles" resolve option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           const testId = getTestId("import-index", syntax);
           const options = {
@@ -528,7 +528,7 @@ describe("loader", () => {
         });
       }
 
-      if (!isModernAPI && !isSassEmbedded) {
+      if (!isModernAPI) {
         it(`should work and use the "index" file in package when the "index" value already in the "mainFiles" resolve option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           const testId = getTestId("import-index", syntax);
           const options = {
@@ -549,7 +549,7 @@ describe("loader", () => {
         });
       }
 
-      if (!isModernAPI && !isSassEmbedded) {
+      if (!isModernAPI) {
         it(`should prefer "mainFiles" over "mainFields" when the field contains "js" file ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           const testId = getTestId(
             "import-prefer-main-files-over-main-fields",
@@ -571,7 +571,7 @@ describe("loader", () => {
         });
       }
 
-      if (!isModernAPI && !isSassEmbedded) {
+      if (!isModernAPI) {
         it(`should prefer "mainFiles" with extension over without ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           const testId = getTestId(
             "import-prefer-main-files-with-extension",
@@ -598,7 +598,7 @@ describe("loader", () => {
         });
       }
 
-      if (!isModernAPI && !isSassEmbedded) {
+      if (!isModernAPI) {
         it(`should work and use the "_index" file in package ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           const testId = getTestId("import-_index", syntax);
           const options = {
@@ -617,7 +617,7 @@ describe("loader", () => {
         });
       }
 
-      if (!isModernAPI && !isSassEmbedded) {
+      if (!isModernAPI) {
         it(`should work with an alias ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           const testId = getTestId("import-alias", syntax);
           const options = {
@@ -666,7 +666,7 @@ describe("loader", () => {
         });
       }
 
-      if (!isModernAPI && !isSassEmbedded) {
+      if (!isModernAPI) {
         // Legacy support for CSS imports with node-sass
         // See discussion https://github.com/webpack-contrib/sass-loader/pull/573/files?#r199109203
         it(`should work and ignore all css "@import" at-rules ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -687,7 +687,7 @@ describe("loader", () => {
         });
       }
 
-      if (!isModernAPI && !isSassEmbedded) {
+      if (!isModernAPI) {
         it(`should work with the "bootstrap-sass" package, directly import ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           const testId = getTestId("bootstrap-sass", syntax);
           const options = {
@@ -706,7 +706,7 @@ describe("loader", () => {
         });
       }
 
-      if (!isModernAPI && !isSassEmbedded) {
+      if (!isModernAPI) {
         it(`should work with the "bootstrap-sass" package, import as a package ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           const testId = getTestId("bootstrap-sass-package", syntax);
           const options = {
@@ -725,7 +725,7 @@ describe("loader", () => {
         });
       }
 
-      if (!isModernAPI && !isSassEmbedded) {
+      if (!isModernAPI) {
         it(`should work with "bootstrap" package v4, import as a package ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           const testId = getTestId("bootstrap-v4", syntax);
           const options = {
@@ -744,7 +744,7 @@ describe("loader", () => {
         });
       }
 
-      if (!isModernAPI && !isSassEmbedded) {
+      if (!isModernAPI) {
         it(`should work with "bootstrap" package v4 without tilde, import as a package ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           const testId = getTestId("bootstrap-package-v4", syntax);
           const options = {
@@ -762,7 +762,7 @@ describe("loader", () => {
         });
       }
 
-      if (!isModernAPI && !isSassEmbedded) {
+      if (!isModernAPI) {
         it(`should work with "bootstrap" package v5, import as a package ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           const testId = getTestId("bootstrap-v5", syntax);
           const options = {
@@ -781,7 +781,7 @@ describe("loader", () => {
         });
       }
 
-      if (!isModernAPI && !isSassEmbedded) {
+      if (!isModernAPI) {
         it(`should work with "bootstrap" package v5 without tilde, import as a package ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           const testId = getTestId("bootstrap-package-v5", syntax);
           const options = {
@@ -799,27 +799,25 @@ describe("loader", () => {
         });
       }
 
-      if (!isSassEmbedded) {
-        it(`should work with the "foundation-sites" package, import as a package ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
-          const testId = getTestId("foundation-sites", syntax);
-          const options = {
-            implementation,
-            api,
-            sassOptions: isModernAPI
-              ? { loadPaths: ["node_modules/foundation-sites/scss"] }
-              : { includePaths: ["node_modules/foundation-sites/scss"] },
-          };
-          const compiler = getCompiler(testId, { loader: { options } });
-          const stats = await compile(compiler);
-          const codeFromBundle = getCodeFromBundle(stats, compiler);
-          const codeFromSass = await getCodeFromSass(testId, options);
+      it(`should work with the "foundation-sites" package, import as a package ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
+        const testId = getTestId("foundation-sites", syntax);
+        const options = {
+          implementation,
+          api,
+          sassOptions: isModernAPI
+            ? { loadPaths: ["node_modules/foundation-sites/scss"] }
+            : { includePaths: ["node_modules/foundation-sites/scss"] },
+        };
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
+        const codeFromSass = await getCodeFromSass(testId, options);
 
-          expect(codeFromBundle.css).toBe(codeFromSass.css);
-          expect(codeFromBundle.css).toMatchSnapshot("css");
-          expect(getWarnings(stats)).toMatchSnapshot("warnings");
-          expect(getErrors(stats)).toMatchSnapshot("errors");
-        });
-      }
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot("css");
+        expect(getWarnings(stats)).toMatchSnapshot("warnings");
+        expect(getErrors(stats)).toMatchSnapshot("errors");
+      });
 
       if (!isSassEmbedded) {
         it(`should work with the "foundation-sites" package, adjusting CSS output ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -875,41 +873,39 @@ describe("loader", () => {
         expect(getErrors(stats)).toMatchSnapshot("errors");
       });
 
-      if (!isSassEmbedded) {
-        it(`should watch firstly in the "includePaths" values ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
-          const testId = getTestId("prefer-include-paths", syntax);
-          const options = {
-            sassOptions: isModernAPI
-              ? {
-                  loadPaths: [
-                    path.resolve(
-                      `./test/node_modules/package-with-style-field-and-css/${syntax}`
-                    ),
-                  ],
-                }
-              : {
-                  includePaths: [
-                    path.resolve(
-                      `./test/node_modules/package-with-style-field-and-css/${syntax}`
-                    ),
-                  ],
-                },
-            implementation,
-            api,
-          };
-          const compiler = getCompiler(testId, { loader: { options } });
-          const stats = await compile(compiler);
-          const codeFromBundle = getCodeFromBundle(stats, compiler);
-          const codeFromSass = await getCodeFromSass(testId, options);
+      it(`should watch firstly in the "includePaths" values ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
+        const testId = getTestId("prefer-include-paths", syntax);
+        const options = {
+          sassOptions: isModernAPI
+            ? {
+                loadPaths: [
+                  path.resolve(
+                    `./test/node_modules/package-with-style-field-and-css/${syntax}`
+                  ),
+                ],
+              }
+            : {
+                includePaths: [
+                  path.resolve(
+                    `./test/node_modules/package-with-style-field-and-css/${syntax}`
+                  ),
+                ],
+              },
+          implementation,
+          api,
+        };
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
+        const codeFromSass = await getCodeFromSass(testId, options);
 
-          expect(codeFromBundle.css).toBe(codeFromSass.css);
-          expect(codeFromBundle.css).toMatchSnapshot("css");
-          expect(getWarnings(stats)).toMatchSnapshot("warnings");
-          expect(getErrors(stats)).toMatchSnapshot("errors");
-        });
-      }
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot("css");
+        expect(getWarnings(stats)).toMatchSnapshot("warnings");
+        expect(getErrors(stats)).toMatchSnapshot("errors");
+      });
 
-      if (!isModernAPI && !isSassEmbedded) {
+      if (!isModernAPI) {
         it(`should load only sass/scss files for the "mainFiles" ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           const testId = getTestId(
             "import-package-with-js-and-css-main-files",
@@ -982,7 +978,7 @@ describe("loader", () => {
         });
       }
 
-      if (!isModernAPI && !isSassEmbedded) {
+      if (!isModernAPI) {
         it(`should respect resolving from "process.cwd()" ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           const testId = getTestId("process-cwd", syntax);
           const options = {
@@ -1001,7 +997,7 @@ describe("loader", () => {
         });
       }
 
-      if (!isModernAPI && !isSassEmbedded) {
+      if (!isModernAPI) {
         it(`should respect resolving directory with the "index" file from "process.cwd()"  ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           const testId = getTestId(
             "process-cwd-with-index-file-inside-directory",
@@ -1023,7 +1019,7 @@ describe("loader", () => {
         });
       }
 
-      if (!isModernAPI && !isSassEmbedded) {
+      if (!isModernAPI) {
         it(`should work with a package with "sass" and "exports" fields ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           const testId = getTestId("import-package-with-exports", syntax);
           const options = {
@@ -1042,7 +1038,7 @@ describe("loader", () => {
         });
       }
 
-      if (!isModernAPI && !isSassEmbedded) {
+      if (!isModernAPI) {
         it(`should support resolving using the "file" schema ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           const testId = getTestId("import-file-scheme", syntax);
           const options = {
@@ -1072,7 +1068,7 @@ describe("loader", () => {
         });
       }
 
-      if (!isModernAPI && !isSassEmbedded) {
+      if (!isModernAPI) {
         it(`should resolve server-relative URLs ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           const testId = getTestId("import-absolute-path", syntax);
           const options = {
@@ -1091,7 +1087,7 @@ describe("loader", () => {
         });
       }
 
-      if (!isModernAPI && !isSassEmbedded) {
+      if (!isModernAPI) {
         it(`should resolve absolute paths ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           const testId = getTestId("import-absolute-path", syntax);
           const options = {
@@ -1137,7 +1133,7 @@ describe("loader", () => {
         expect(getErrors(stats)).toMatchSnapshot("errors");
       });
 
-      if (!isModernAPI && !isSassEmbedded) {
+      if (!isModernAPI) {
         it(`should prefer relative import ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           const testId = getTestId("package-with-same-import", syntax);
           const options = {
@@ -1156,7 +1152,7 @@ describe("loader", () => {
         });
       }
 
-      if (!isModernAPI && !isSassEmbedded) {
+      if (!isModernAPI) {
         it(`should work with the 'resolve.byDependecy.sass' option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           const testId = getTestId("by-dependency", syntax);
           const options = {
@@ -1352,7 +1348,7 @@ describe("loader", () => {
           expect(getErrors(stats)).toMatchSnapshot("errors");
         });
 
-        if (!isModernAPI && !isSassEmbedded) {
+        if (!isModernAPI) {
           it(`should work when "@use" at-rules from scoped npm packages ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
             const testId = getTestId("use-from-npm-org-pkg", syntax);
             const options = {
@@ -1425,7 +1421,7 @@ describe("loader", () => {
           expect(getErrors(stats)).toMatchSnapshot("errors");
         });
 
-        if (!isModernAPI && !isSassEmbedded) {
+        if (!isModernAPI) {
           it(`should work when "@use" and use the "sass" field ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
             const testId = getTestId("use-sass-field", syntax);
             const options = {
@@ -1444,7 +1440,7 @@ describe("loader", () => {
           });
         }
 
-        if (!isModernAPI && !isSassEmbedded) {
+        if (!isModernAPI) {
           it(`should work when "@use" and use the "style" field ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
             const testId = getTestId("use-style-field", syntax);
             const options = {
@@ -1463,7 +1459,7 @@ describe("loader", () => {
           });
         }
 
-        if (!isModernAPI && !isSassEmbedded) {
+        if (!isModernAPI) {
           it(`should work when "@use" and use the "main" field ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
             const testId = getTestId("use-main-field", syntax);
             const options = {
@@ -1482,7 +1478,7 @@ describe("loader", () => {
           });
         }
 
-        if (!isModernAPI && !isSassEmbedded) {
+        if (!isModernAPI) {
           it(`should work when "@use" and use the "main" field when the "main" value is not in the "mainFields" resolve option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
             const testId = getTestId("use-main-field", syntax);
             const options = {
@@ -1503,7 +1499,7 @@ describe("loader", () => {
           });
         }
 
-        if (!isModernAPI && !isSassEmbedded) {
+        if (!isModernAPI) {
           it(`should work when "@use" and use the "main" field when the "main" value already in the "mainFields" resolve option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
             const testId = getTestId("use-main-field", syntax);
             const options = {
@@ -1524,7 +1520,7 @@ describe("loader", () => {
           });
         }
 
-        if (!isModernAPI && !isSassEmbedded) {
+        if (!isModernAPI) {
           it(`should work when "@use" and use the "custom-sass" field ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
             const testId = getTestId("use-custom-sass-field", syntax);
             const options = {
@@ -1548,7 +1544,7 @@ describe("loader", () => {
           });
         }
 
-        if (!isModernAPI && !isSassEmbedded) {
+        if (!isModernAPI) {
           it(`should work when "@use" and use the "index" file in package ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
             const testId = getTestId("use-index", syntax);
             const options = {
@@ -1567,7 +1563,7 @@ describe("loader", () => {
           });
         }
 
-        if (!isModernAPI && !isSassEmbedded) {
+        if (!isModernAPI) {
           it(`should work when "@use" and use the "index" file in package when the "index" value is not in the "mainFiles" resolve option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
             const testId = getTestId("use-index", syntax);
             const options = {
@@ -1588,7 +1584,7 @@ describe("loader", () => {
           });
         }
 
-        if (!isModernAPI && !isSassEmbedded) {
+        if (!isModernAPI) {
           it(`should work when "@use" and use the "index" file in package when the "index" value already in the "mainFiles" resolve option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
             const testId = getTestId("use-index", syntax);
             const options = {
@@ -1609,7 +1605,7 @@ describe("loader", () => {
           });
         }
 
-        if (!isModernAPI && !isSassEmbedded) {
+        if (!isModernAPI) {
           it(`should work when "@use" and use the "_index" file in package ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
             const testId = getTestId("use-_index", syntax);
             const options = {
@@ -1628,7 +1624,7 @@ describe("loader", () => {
           });
         }
 
-        if (!isModernAPI && !isSassEmbedded) {
+        if (!isModernAPI) {
           it(`should work when "@use" with an alias ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
             const testId = getTestId("use-alias", syntax);
             const options = {
@@ -1677,7 +1673,7 @@ describe("loader", () => {
           });
         }
 
-        if (!isModernAPI && !isSassEmbedded) {
+        if (!isModernAPI) {
           it(`should work when "@use" with the "bootstrap-sass" package, directly import ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
             const testId = getTestId("use-bootstrap-sass", syntax);
             const options = {
@@ -1696,7 +1692,7 @@ describe("loader", () => {
           });
         }
 
-        if (!isModernAPI && !isSassEmbedded) {
+        if (!isModernAPI) {
           it(`should work when "@use" with the "bootstrap-sass" package, import as a package ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
             const testId = getTestId("use-bootstrap-sass-package", syntax);
             const options = {
@@ -1715,7 +1711,7 @@ describe("loader", () => {
           });
         }
 
-        if (!isModernAPI && !isSassEmbedded) {
+        if (!isModernAPI) {
           it(`should work when "@use" with "bootstrap" package v4, import as a package ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
             const testId = getTestId("use-bootstrap-v4", syntax);
             const options = {
@@ -1734,7 +1730,7 @@ describe("loader", () => {
           });
         }
 
-        if (!isModernAPI && !isSassEmbedded) {
+        if (!isModernAPI) {
           it(`should work when "@use" with "bootstrap" package v4 without tilde, import as a package ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
             const testId = getTestId("use-bootstrap-package-v4", syntax);
             const options = {
@@ -1753,7 +1749,7 @@ describe("loader", () => {
           });
         }
 
-        if (!isModernAPI && !isSassEmbedded) {
+        if (!isModernAPI) {
           it(`should work when "@use" with "bootstrap" package v5, import as a package ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
             const testId = getTestId("use-bootstrap-v5", syntax);
             const options = {
@@ -1772,7 +1768,7 @@ describe("loader", () => {
           });
         }
 
-        if (!isModernAPI && !isSassEmbedded) {
+        if (!isModernAPI) {
           it(`should work when "@use" with "bootstrap" package v5 without tilde, import as a package ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
             const testId = getTestId("use-bootstrap-package-v5", syntax);
             const options = {
@@ -1832,7 +1828,7 @@ describe("loader", () => {
           });
         }
 
-        if (!isSassEmbedded) {
+        if (!isModernAPI && !isSassEmbedded) {
           it(`should work with the "material-components-web" package ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
             const testId = getTestId("use-material-components-web", syntax);
             const options = {
@@ -1890,7 +1886,7 @@ describe("loader", () => {
           expect(getErrors(stats)).toMatchSnapshot("errors");
         });
 
-        if (!isModernAPI && !isSassEmbedded) {
+        if (!isModernAPI) {
           it(`should import .import.${syntax} files from a package ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
             const testId = getTestId(
               "import-index-import-from-package",
