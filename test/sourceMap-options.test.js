@@ -36,9 +36,12 @@ describe("sourceMap option", () => {
   implementations.forEach((item) => {
     syntaxStyles.forEach((syntax) => {
       const { name: implementationName, api, implementation } = item;
+      // TODO fix me https://github.com/webpack-contrib/sass-loader/issues/774
+      const isSassEmbedded = implementationName === "sass-embedded";
+      const isLegacyAPI = api === "legacy";
 
       it(`should generate source maps when value is not specified and the "devtool" option has "source-map" value ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
-        expect.assertions(10);
+        expect.assertions(isSassEmbedded && isLegacyAPI ? 7 : 10);
 
         const testId = getTestId("language", syntax);
         const options = { implementation, api };
@@ -51,6 +54,11 @@ describe("sourceMap option", () => {
 
         sourceMap.sourceRoot = "";
         sourceMap.sources = sourceMap.sources.map((source) => {
+          // TODO remove me
+          if (/stdin/.test(source)) {
+            return "";
+          }
+
           expect(path.isAbsolute(source)).toBe(true);
           expect(source).toBe(path.normalize(source));
           expect(
@@ -69,7 +77,7 @@ describe("sourceMap option", () => {
       });
 
       it(`should generate source maps when value has "true" value and the "devtool" option has "source-map" value ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
-        expect.assertions(10);
+        expect.assertions(isSassEmbedded && isLegacyAPI ? 7 : 10);
 
         const testId = getTestId("language", syntax);
         const options = { implementation, api, sourceMap: true };
@@ -82,6 +90,11 @@ describe("sourceMap option", () => {
 
         sourceMap.sourceRoot = "";
         sourceMap.sources = sourceMap.sources.map((source) => {
+          // TODO remove me
+          if (/stdin/.test(source)) {
+            return "";
+          }
+
           expect(path.isAbsolute(source)).toBe(true);
           expect(source).toBe(path.normalize(source));
           expect(
@@ -100,7 +113,7 @@ describe("sourceMap option", () => {
       });
 
       it(`should generate source maps when value has "true" value and the "devtool" option has "false" value ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
-        expect.assertions(10);
+        expect.assertions(isSassEmbedded && isLegacyAPI ? 7 : 10);
 
         const testId = getTestId("language", syntax);
         const options = { implementation, api, sourceMap: true };
@@ -113,8 +126,8 @@ describe("sourceMap option", () => {
 
         sourceMap.sourceRoot = "";
         sourceMap.sources = sourceMap.sources.map((source) => {
-          if (source === "stdin") {
-            return "stdin";
+          if (/stdin/.test(source)) {
+            return "";
           }
 
           expect(path.isAbsolute(source)).toBe(true);
@@ -135,25 +148,26 @@ describe("sourceMap option", () => {
       });
 
       it(`should generate source maps when value has "false" value, but the "sassOptions.sourceMap" has the "true" value ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
-        expect.assertions(api === "modern" ? 8 : 6);
+        expect.assertions(
+          isSassEmbedded ? (isLegacyAPI ? 6 : 10) : isLegacyAPI ? 8 : 10
+        );
 
         const testId = getTestId("language", syntax);
         const options = {
           implementation,
           api,
           sourceMap: false,
-          sassOptions:
-            api === "modern"
-              ? {
-                  sourceMap: true,
-                }
-              : {
-                  sourceMap: true,
-                  outFile: path.join(__dirname, "style.css.map"),
-                  sourceMapContents: true,
-                  omitSourceMapUrl: true,
-                  sourceMapEmbed: false,
-                },
+          sassOptions: !isLegacyAPI
+            ? {
+                sourceMap: true,
+              }
+            : {
+                sourceMap: true,
+                outFile: path.join(__dirname, "style.css.map"),
+                sourceMapContents: true,
+                omitSourceMapUrl: true,
+                sourceMapEmbed: false,
+              },
         };
         const compiler = getCompiler(testId, {
           devtool: false,
@@ -164,8 +178,8 @@ describe("sourceMap option", () => {
 
         sourceMap.sourceRoot = "";
         sourceMap.sources = sourceMap.sources.map((source) => {
-          if (source === "stdin") {
-            return "stdin";
+          if (/stdin/.test(source)) {
+            return "";
           }
 
           let normalizedSource = source;
