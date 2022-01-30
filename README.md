@@ -719,16 +719,16 @@ module.exports = {
 Type:
 
 ```ts
-type api = "old" | "modern";
+type api = "legacy" | "modern";
 ```
 
-Default: `"old"`
+Default: `"legacy"`
 
-Allows you to switch between `old` and `modern` API. You can find more information [here](https://sass-lang.com/documentation/js-api).
+Allows you to switch between `legacy` and `modern` API. You can find more information [here](https://sass-lang.com/documentation/js-api).
 
-> ⚠ This is experimental, so some features may not work (known: built-in `importer` is not working and files with errors is not watching on initial run), you can follow this [here](https://github.com/webpack-contrib/sass-loader/issues/774).
+> ⚠ "modern" API is experimental, so some features may not work (known: built-in `importer` is not working and files with errors is not watching on initial run), you can follow this [here](https://github.com/webpack-contrib/sass-loader/issues/774).
 
-> ⚠ The options are different for `modern` and `old` APIs. Please look at [docs](https://sass-lang.com/documentation/js-api) how to migrate on new options.
+> ⚠ The sass options are different for `modern` and `old` APIs. Please look at [docs](https://sass-lang.com/documentation/js-api) how to migrate on new options.
 
 **webpack.config.js**
 

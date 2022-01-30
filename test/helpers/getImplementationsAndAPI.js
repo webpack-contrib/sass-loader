@@ -8,12 +8,12 @@ export default function getImplementationsAndAPI() {
     {
       name: nodeSass.info.split("\t")[0],
       implementation: nodeSass,
-      api: "old",
+      api: "legacy",
     },
     {
       name: dartSass.info.split("\t")[0],
       implementation: dartSass,
-      api: "old",
+      api: "legacy",
     },
     {
       name: dartSass.info.split("\t")[0],
@@ -23,7 +23,7 @@ export default function getImplementationsAndAPI() {
     {
       name: SassEmbedded.info.split("\t")[0],
       implementation: SassEmbedded,
-      api: "old",
+      api: "legacy",
     },
     {
       name: SassEmbedded.info.split("\t")[0],

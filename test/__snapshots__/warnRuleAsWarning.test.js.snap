@@ -1,5 +1,69 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`loader should not emit warning by default ('dart-sass', 'legacy' API, 'sass' syntax): css 1`] = `
+"a {
+  color: red;
+}"
+`;
+
+exports[`loader should not emit warning by default ('dart-sass', 'legacy' API, 'sass' syntax): errors 1`] = `Array []`;
+
+exports[`loader should not emit warning by default ('dart-sass', 'legacy' API, 'sass' syntax): logs 1`] = `
+Array [
+  Array [
+    Object {
+      "args": Array [
+        "file:///<cwd>/sass/logging.sass:0:0: My debug message",
+      ],
+      "type": "debug",
+    },
+    Object {
+      "args": Array [
+        "My warning message
+
+test/sass/logging.sass 2:1  root stylesheet
+",
+      ],
+      "type": "warn",
+    },
+  ],
+]
+`;
+
+exports[`loader should not emit warning by default ('dart-sass', 'legacy' API, 'sass' syntax): warnings 1`] = `Array []`;
+
+exports[`loader should not emit warning by default ('dart-sass', 'legacy' API, 'scss' syntax): css 1`] = `
+"a {
+  color: red;
+}"
+`;
+
+exports[`loader should not emit warning by default ('dart-sass', 'legacy' API, 'scss' syntax): errors 1`] = `Array []`;
+
+exports[`loader should not emit warning by default ('dart-sass', 'legacy' API, 'scss' syntax): logs 1`] = `
+Array [
+  Array [
+    Object {
+      "args": Array [
+        "file:///<cwd>/scss/logging.scss:0:0: My debug message",
+      ],
+      "type": "debug",
+    },
+    Object {
+      "args": Array [
+        "My warning message
+
+test/scss/logging.scss 2:1  root stylesheet
+",
+      ],
+      "type": "warn",
+    },
+  ],
+]
+`;
+
+exports[`loader should not emit warning by default ('dart-sass', 'legacy' API, 'scss' syntax): warnings 1`] = `Array []`;
+
 exports[`loader should not emit warning by default ('dart-sass', 'modern' API, 'sass' syntax): css 1`] = `
 "a {
   color: red;
@@ -64,15 +128,39 @@ test/scss/logging.scss 2:1  root stylesheet
 
 exports[`loader should not emit warning by default ('dart-sass', 'modern' API, 'scss' syntax): warnings 1`] = `Array []`;
 
-exports[`loader should not emit warning by default ('dart-sass', 'old' API, 'sass' syntax): css 1`] = `
+exports[`loader should not emit warning by default ('node-sass', 'legacy' API, 'sass' syntax): css 1`] = `
+"a {
+  color: red; }
+"
+`;
+
+exports[`loader should not emit warning by default ('node-sass', 'legacy' API, 'sass' syntax): errors 1`] = `Array []`;
+
+exports[`loader should not emit warning by default ('node-sass', 'legacy' API, 'sass' syntax): logs 1`] = `Array []`;
+
+exports[`loader should not emit warning by default ('node-sass', 'legacy' API, 'sass' syntax): warnings 1`] = `Array []`;
+
+exports[`loader should not emit warning by default ('node-sass', 'legacy' API, 'scss' syntax): css 1`] = `
+"a {
+  color: red; }
+"
+`;
+
+exports[`loader should not emit warning by default ('node-sass', 'legacy' API, 'scss' syntax): errors 1`] = `Array []`;
+
+exports[`loader should not emit warning by default ('node-sass', 'legacy' API, 'scss' syntax): logs 1`] = `Array []`;
+
+exports[`loader should not emit warning by default ('node-sass', 'legacy' API, 'scss' syntax): warnings 1`] = `Array []`;
+
+exports[`loader should not emit warning by default ('sass-embedded', 'legacy' API, 'sass' syntax): css 1`] = `
 "a {
   color: red;
 }"
 `;
 
-exports[`loader should not emit warning by default ('dart-sass', 'old' API, 'sass' syntax): errors 1`] = `Array []`;
+exports[`loader should not emit warning by default ('sass-embedded', 'legacy' API, 'sass' syntax): errors 1`] = `Array []`;
 
-exports[`loader should not emit warning by default ('dart-sass', 'old' API, 'sass' syntax): logs 1`] = `
+exports[`loader should not emit warning by default ('sass-embedded', 'legacy' API, 'sass' syntax): logs 1`] = `
 Array [
   Array [
     Object {
@@ -94,17 +182,17 @@ test/sass/logging.sass 2:1  root stylesheet
 ]
 `;
 
-exports[`loader should not emit warning by default ('dart-sass', 'old' API, 'sass' syntax): warnings 1`] = `Array []`;
+exports[`loader should not emit warning by default ('sass-embedded', 'legacy' API, 'sass' syntax): warnings 1`] = `Array []`;
 
-exports[`loader should not emit warning by default ('dart-sass', 'old' API, 'scss' syntax): css 1`] = `
+exports[`loader should not emit warning by default ('sass-embedded', 'legacy' API, 'scss' syntax): css 1`] = `
 "a {
   color: red;
 }"
 `;
 
-exports[`loader should not emit warning by default ('dart-sass', 'old' API, 'scss' syntax): errors 1`] = `Array []`;
+exports[`loader should not emit warning by default ('sass-embedded', 'legacy' API, 'scss' syntax): errors 1`] = `Array []`;
 
-exports[`loader should not emit warning by default ('dart-sass', 'old' API, 'scss' syntax): logs 1`] = `
+exports[`loader should not emit warning by default ('sass-embedded', 'legacy' API, 'scss' syntax): logs 1`] = `
 Array [
   Array [
     Object {
@@ -126,31 +214,7 @@ test/scss/logging.scss 2:1  root stylesheet
 ]
 `;
 
-exports[`loader should not emit warning by default ('dart-sass', 'old' API, 'scss' syntax): warnings 1`] = `Array []`;
-
-exports[`loader should not emit warning by default ('node-sass', 'old' API, 'sass' syntax): css 1`] = `
-"a {
-  color: red; }
-"
-`;
-
-exports[`loader should not emit warning by default ('node-sass', 'old' API, 'sass' syntax): errors 1`] = `Array []`;
-
-exports[`loader should not emit warning by default ('node-sass', 'old' API, 'sass' syntax): logs 1`] = `Array []`;
-
-exports[`loader should not emit warning by default ('node-sass', 'old' API, 'sass' syntax): warnings 1`] = `Array []`;
-
-exports[`loader should not emit warning by default ('node-sass', 'old' API, 'scss' syntax): css 1`] = `
-"a {
-  color: red; }
-"
-`;
-
-exports[`loader should not emit warning by default ('node-sass', 'old' API, 'scss' syntax): errors 1`] = `Array []`;
-
-exports[`loader should not emit warning by default ('node-sass', 'old' API, 'scss' syntax): logs 1`] = `Array []`;
-
-exports[`loader should not emit warning by default ('node-sass', 'old' API, 'scss' syntax): warnings 1`] = `Array []`;
+exports[`loader should not emit warning by default ('sass-embedded', 'legacy' API, 'scss' syntax): warnings 1`] = `Array []`;
 
 exports[`loader should not emit warning by default ('sass-embedded', 'modern' API, 'sass' syntax): css 1`] = `
 "a {
@@ -216,15 +280,15 @@ test/scss/logging.scss 2:1  root stylesheet
 
 exports[`loader should not emit warning by default ('sass-embedded', 'modern' API, 'scss' syntax): warnings 1`] = `Array []`;
 
-exports[`loader should not emit warning by default ('sass-embedded', 'old' API, 'sass' syntax): css 1`] = `
+exports[`loader should not emit warning when 'false' used ('dart-sass', 'legacy' API, 'sass' syntax): css 1`] = `
 "a {
   color: red;
 }"
 `;
 
-exports[`loader should not emit warning by default ('sass-embedded', 'old' API, 'sass' syntax): errors 1`] = `Array []`;
+exports[`loader should not emit warning when 'false' used ('dart-sass', 'legacy' API, 'sass' syntax): errors 1`] = `Array []`;
 
-exports[`loader should not emit warning by default ('sass-embedded', 'old' API, 'sass' syntax): logs 1`] = `
+exports[`loader should not emit warning when 'false' used ('dart-sass', 'legacy' API, 'sass' syntax): logs 1`] = `
 Array [
   Array [
     Object {
@@ -246,17 +310,17 @@ test/sass/logging.sass 2:1  root stylesheet
 ]
 `;
 
-exports[`loader should not emit warning by default ('sass-embedded', 'old' API, 'sass' syntax): warnings 1`] = `Array []`;
+exports[`loader should not emit warning when 'false' used ('dart-sass', 'legacy' API, 'sass' syntax): warnings 1`] = `Array []`;
 
-exports[`loader should not emit warning by default ('sass-embedded', 'old' API, 'scss' syntax): css 1`] = `
+exports[`loader should not emit warning when 'false' used ('dart-sass', 'legacy' API, 'scss' syntax): css 1`] = `
 "a {
   color: red;
 }"
 `;
 
-exports[`loader should not emit warning by default ('sass-embedded', 'old' API, 'scss' syntax): errors 1`] = `Array []`;
+exports[`loader should not emit warning when 'false' used ('dart-sass', 'legacy' API, 'scss' syntax): errors 1`] = `Array []`;
 
-exports[`loader should not emit warning by default ('sass-embedded', 'old' API, 'scss' syntax): logs 1`] = `
+exports[`loader should not emit warning when 'false' used ('dart-sass', 'legacy' API, 'scss' syntax): logs 1`] = `
 Array [
   Array [
     Object {
@@ -278,7 +342,7 @@ test/scss/logging.scss 2:1  root stylesheet
 ]
 `;
 
-exports[`loader should not emit warning by default ('sass-embedded', 'old' API, 'scss' syntax): warnings 1`] = `Array []`;
+exports[`loader should not emit warning when 'false' used ('dart-sass', 'legacy' API, 'scss' syntax): warnings 1`] = `Array []`;
 
 exports[`loader should not emit warning when 'false' used ('dart-sass', 'modern' API, 'sass' syntax): css 1`] = `
 "a {
@@ -344,15 +408,39 @@ test/scss/logging.scss 2:1  root stylesheet
 
 exports[`loader should not emit warning when 'false' used ('dart-sass', 'modern' API, 'scss' syntax): warnings 1`] = `Array []`;
 
-exports[`loader should not emit warning when 'false' used ('dart-sass', 'old' API, 'sass' syntax): css 1`] = `
+exports[`loader should not emit warning when 'false' used ('node-sass', 'legacy' API, 'sass' syntax): css 1`] = `
+"a {
+  color: red; }
+"
+`;
+
+exports[`loader should not emit warning when 'false' used ('node-sass', 'legacy' API, 'sass' syntax): errors 1`] = `Array []`;
+
+exports[`loader should not emit warning when 'false' used ('node-sass', 'legacy' API, 'sass' syntax): logs 1`] = `Array []`;
+
+exports[`loader should not emit warning when 'false' used ('node-sass', 'legacy' API, 'sass' syntax): warnings 1`] = `Array []`;
+
+exports[`loader should not emit warning when 'false' used ('node-sass', 'legacy' API, 'scss' syntax): css 1`] = `
+"a {
+  color: red; }
+"
+`;
+
+exports[`loader should not emit warning when 'false' used ('node-sass', 'legacy' API, 'scss' syntax): errors 1`] = `Array []`;
+
+exports[`loader should not emit warning when 'false' used ('node-sass', 'legacy' API, 'scss' syntax): logs 1`] = `Array []`;
+
+exports[`loader should not emit warning when 'false' used ('node-sass', 'legacy' API, 'scss' syntax): warnings 1`] = `Array []`;
+
+exports[`loader should not emit warning when 'false' used ('sass-embedded', 'legacy' API, 'sass' syntax): css 1`] = `
 "a {
   color: red;
 }"
 `;
 
-exports[`loader should not emit warning when 'false' used ('dart-sass', 'old' API, 'sass' syntax): errors 1`] = `Array []`;
+exports[`loader should not emit warning when 'false' used ('sass-embedded', 'legacy' API, 'sass' syntax): errors 1`] = `Array []`;
 
-exports[`loader should not emit warning when 'false' used ('dart-sass', 'old' API, 'sass' syntax): logs 1`] = `
+exports[`loader should not emit warning when 'false' used ('sass-embedded', 'legacy' API, 'sass' syntax): logs 1`] = `
 Array [
   Array [
     Object {
@@ -374,17 +462,17 @@ test/sass/logging.sass 2:1  root stylesheet
 ]
 `;
 
-exports[`loader should not emit warning when 'false' used ('dart-sass', 'old' API, 'sass' syntax): warnings 1`] = `Array []`;
+exports[`loader should not emit warning when 'false' used ('sass-embedded', 'legacy' API, 'sass' syntax): warnings 1`] = `Array []`;
 
-exports[`loader should not emit warning when 'false' used ('dart-sass', 'old' API, 'scss' syntax): css 1`] = `
+exports[`loader should not emit warning when 'false' used ('sass-embedded', 'legacy' API, 'scss' syntax): css 1`] = `
 "a {
   color: red;
 }"
 `;
 
-exports[`loader should not emit warning when 'false' used ('dart-sass', 'old' API, 'scss' syntax): errors 1`] = `Array []`;
+exports[`loader should not emit warning when 'false' used ('sass-embedded', 'legacy' API, 'scss' syntax): errors 1`] = `Array []`;
 
-exports[`loader should not emit warning when 'false' used ('dart-sass', 'old' API, 'scss' syntax): logs 1`] = `
+exports[`loader should not emit warning when 'false' used ('sass-embedded', 'legacy' API, 'scss' syntax): logs 1`] = `
 Array [
   Array [
     Object {
@@ -406,31 +494,7 @@ test/scss/logging.scss 2:1  root stylesheet
 ]
 `;
 
-exports[`loader should not emit warning when 'false' used ('dart-sass', 'old' API, 'scss' syntax): warnings 1`] = `Array []`;
-
-exports[`loader should not emit warning when 'false' used ('node-sass', 'old' API, 'sass' syntax): css 1`] = `
-"a {
-  color: red; }
-"
-`;
-
-exports[`loader should not emit warning when 'false' used ('node-sass', 'old' API, 'sass' syntax): errors 1`] = `Array []`;
-
-exports[`loader should not emit warning when 'false' used ('node-sass', 'old' API, 'sass' syntax): logs 1`] = `Array []`;
-
-exports[`loader should not emit warning when 'false' used ('node-sass', 'old' API, 'sass' syntax): warnings 1`] = `Array []`;
-
-exports[`loader should not emit warning when 'false' used ('node-sass', 'old' API, 'scss' syntax): css 1`] = `
-"a {
-  color: red; }
-"
-`;
-
-exports[`loader should not emit warning when 'false' used ('node-sass', 'old' API, 'scss' syntax): errors 1`] = `Array []`;
-
-exports[`loader should not emit warning when 'false' used ('node-sass', 'old' API, 'scss' syntax): logs 1`] = `Array []`;
-
-exports[`loader should not emit warning when 'false' used ('node-sass', 'old' API, 'scss' syntax): warnings 1`] = `Array []`;
+exports[`loader should not emit warning when 'false' used ('sass-embedded', 'legacy' API, 'scss' syntax): warnings 1`] = `Array []`;
 
 exports[`loader should not emit warning when 'false' used ('sass-embedded', 'modern' API, 'sass' syntax): css 1`] = `
 "a {
@@ -496,15 +560,15 @@ test/scss/logging.scss 2:1  root stylesheet
 
 exports[`loader should not emit warning when 'false' used ('sass-embedded', 'modern' API, 'scss' syntax): warnings 1`] = `Array []`;
 
-exports[`loader should not emit warning when 'false' used ('sass-embedded', 'old' API, 'sass' syntax): css 1`] = `
+exports[`loader should not emit warning when 'true' used ('dart-sass', 'legacy' API, 'sass' syntax): css 1`] = `
 "a {
   color: red;
 }"
 `;
 
-exports[`loader should not emit warning when 'false' used ('sass-embedded', 'old' API, 'sass' syntax): errors 1`] = `Array []`;
+exports[`loader should not emit warning when 'true' used ('dart-sass', 'legacy' API, 'sass' syntax): errors 1`] = `Array []`;
 
-exports[`loader should not emit warning when 'false' used ('sass-embedded', 'old' API, 'sass' syntax): logs 1`] = `
+exports[`loader should not emit warning when 'true' used ('dart-sass', 'legacy' API, 'sass' syntax): logs 1`] = `
 Array [
   Array [
     Object {
@@ -513,30 +577,26 @@ Array [
       ],
       "type": "debug",
     },
-    Object {
-      "args": Array [
-        "My warning message
-
-test/sass/logging.sass 2:1  root stylesheet
-",
-      ],
-      "type": "warn",
-    },
   ],
 ]
 `;
 
-exports[`loader should not emit warning when 'false' used ('sass-embedded', 'old' API, 'sass' syntax): warnings 1`] = `Array []`;
+exports[`loader should not emit warning when 'true' used ('dart-sass', 'legacy' API, 'sass' syntax): warnings 1`] = `
+Array [
+  "ModuleWarning: Module Warning (from ../src/cjs.js):
+My warning message",
+]
+`;
 
-exports[`loader should not emit warning when 'false' used ('sass-embedded', 'old' API, 'scss' syntax): css 1`] = `
+exports[`loader should not emit warning when 'true' used ('dart-sass', 'legacy' API, 'scss' syntax): css 1`] = `
 "a {
   color: red;
 }"
 `;
 
-exports[`loader should not emit warning when 'false' used ('sass-embedded', 'old' API, 'scss' syntax): errors 1`] = `Array []`;
+exports[`loader should not emit warning when 'true' used ('dart-sass', 'legacy' API, 'scss' syntax): errors 1`] = `Array []`;
 
-exports[`loader should not emit warning when 'false' used ('sass-embedded', 'old' API, 'scss' syntax): logs 1`] = `
+exports[`loader should not emit warning when 'true' used ('dart-sass', 'legacy' API, 'scss' syntax): logs 1`] = `
 Array [
   Array [
     Object {
@@ -545,20 +605,16 @@ Array [
       ],
       "type": "debug",
     },
-    Object {
-      "args": Array [
-        "My warning message
-
-test/scss/logging.scss 2:1  root stylesheet
-",
-      ],
-      "type": "warn",
-    },
   ],
 ]
 `;
 
-exports[`loader should not emit warning when 'false' used ('sass-embedded', 'old' API, 'scss' syntax): warnings 1`] = `Array []`;
+exports[`loader should not emit warning when 'true' used ('dart-sass', 'legacy' API, 'scss' syntax): warnings 1`] = `
+Array [
+  "ModuleWarning: Module Warning (from ../src/cjs.js):
+My warning message",
+]
+`;
 
 exports[`loader should not emit warning when 'true' used ('dart-sass', 'modern' API, 'sass' syntax): css 1`] = `
 "a {
@@ -616,15 +672,39 @@ My warning message",
 ]
 `;
 
-exports[`loader should not emit warning when 'true' used ('dart-sass', 'old' API, 'sass' syntax): css 1`] = `
+exports[`loader should not emit warning when 'true' used ('node-sass', 'legacy' API, 'sass' syntax): css 1`] = `
+"a {
+  color: red; }
+"
+`;
+
+exports[`loader should not emit warning when 'true' used ('node-sass', 'legacy' API, 'sass' syntax): errors 1`] = `Array []`;
+
+exports[`loader should not emit warning when 'true' used ('node-sass', 'legacy' API, 'sass' syntax): logs 1`] = `Array []`;
+
+exports[`loader should not emit warning when 'true' used ('node-sass', 'legacy' API, 'sass' syntax): warnings 1`] = `Array []`;
+
+exports[`loader should not emit warning when 'true' used ('node-sass', 'legacy' API, 'scss' syntax): css 1`] = `
+"a {
+  color: red; }
+"
+`;
+
+exports[`loader should not emit warning when 'true' used ('node-sass', 'legacy' API, 'scss' syntax): errors 1`] = `Array []`;
+
+exports[`loader should not emit warning when 'true' used ('node-sass', 'legacy' API, 'scss' syntax): logs 1`] = `Array []`;
+
+exports[`loader should not emit warning when 'true' used ('node-sass', 'legacy' API, 'scss' syntax): warnings 1`] = `Array []`;
+
+exports[`loader should not emit warning when 'true' used ('sass-embedded', 'legacy' API, 'sass' syntax): css 1`] = `
 "a {
   color: red;
 }"
 `;
 
-exports[`loader should not emit warning when 'true' used ('dart-sass', 'old' API, 'sass' syntax): errors 1`] = `Array []`;
+exports[`loader should not emit warning when 'true' used ('sass-embedded', 'legacy' API, 'sass' syntax): errors 1`] = `Array []`;
 
-exports[`loader should not emit warning when 'true' used ('dart-sass', 'old' API, 'sass' syntax): logs 1`] = `
+exports[`loader should not emit warning when 'true' used ('sass-embedded', 'legacy' API, 'sass' syntax): logs 1`] = `
 Array [
   Array [
     Object {
@@ -637,22 +717,22 @@ Array [
 ]
 `;
 
-exports[`loader should not emit warning when 'true' used ('dart-sass', 'old' API, 'sass' syntax): warnings 1`] = `
+exports[`loader should not emit warning when 'true' used ('sass-embedded', 'legacy' API, 'sass' syntax): warnings 1`] = `
 Array [
   "ModuleWarning: Module Warning (from ../src/cjs.js):
 My warning message",
 ]
 `;
 
-exports[`loader should not emit warning when 'true' used ('dart-sass', 'old' API, 'scss' syntax): css 1`] = `
+exports[`loader should not emit warning when 'true' used ('sass-embedded', 'legacy' API, 'scss' syntax): css 1`] = `
 "a {
   color: red;
 }"
 `;
 
-exports[`loader should not emit warning when 'true' used ('dart-sass', 'old' API, 'scss' syntax): errors 1`] = `Array []`;
+exports[`loader should not emit warning when 'true' used ('sass-embedded', 'legacy' API, 'scss' syntax): errors 1`] = `Array []`;
 
-exports[`loader should not emit warning when 'true' used ('dart-sass', 'old' API, 'scss' syntax): logs 1`] = `
+exports[`loader should not emit warning when 'true' used ('sass-embedded', 'legacy' API, 'scss' syntax): logs 1`] = `
 Array [
   Array [
     Object {
@@ -665,36 +745,12 @@ Array [
 ]
 `;
 
-exports[`loader should not emit warning when 'true' used ('dart-sass', 'old' API, 'scss' syntax): warnings 1`] = `
+exports[`loader should not emit warning when 'true' used ('sass-embedded', 'legacy' API, 'scss' syntax): warnings 1`] = `
 Array [
   "ModuleWarning: Module Warning (from ../src/cjs.js):
 My warning message",
 ]
 `;
-
-exports[`loader should not emit warning when 'true' used ('node-sass', 'old' API, 'sass' syntax): css 1`] = `
-"a {
-  color: red; }
-"
-`;
-
-exports[`loader should not emit warning when 'true' used ('node-sass', 'old' API, 'sass' syntax): errors 1`] = `Array []`;
-
-exports[`loader should not emit warning when 'true' used ('node-sass', 'old' API, 'sass' syntax): logs 1`] = `Array []`;
-
-exports[`loader should not emit warning when 'true' used ('node-sass', 'old' API, 'sass' syntax): warnings 1`] = `Array []`;
-
-exports[`loader should not emit warning when 'true' used ('node-sass', 'old' API, 'scss' syntax): css 1`] = `
-"a {
-  color: red; }
-"
-`;
-
-exports[`loader should not emit warning when 'true' used ('node-sass', 'old' API, 'scss' syntax): errors 1`] = `Array []`;
-
-exports[`loader should not emit warning when 'true' used ('node-sass', 'old' API, 'scss' syntax): logs 1`] = `Array []`;
-
-exports[`loader should not emit warning when 'true' used ('node-sass', 'old' API, 'scss' syntax): warnings 1`] = `Array []`;
 
 exports[`loader should not emit warning when 'true' used ('sass-embedded', 'modern' API, 'sass' syntax): css 1`] = `
 "a {
@@ -746,62 +802,6 @@ Array [
 `;
 
 exports[`loader should not emit warning when 'true' used ('sass-embedded', 'modern' API, 'scss' syntax): warnings 1`] = `
-Array [
-  "ModuleWarning: Module Warning (from ../src/cjs.js):
-My warning message",
-]
-`;
-
-exports[`loader should not emit warning when 'true' used ('sass-embedded', 'old' API, 'sass' syntax): css 1`] = `
-"a {
-  color: red;
-}"
-`;
-
-exports[`loader should not emit warning when 'true' used ('sass-embedded', 'old' API, 'sass' syntax): errors 1`] = `Array []`;
-
-exports[`loader should not emit warning when 'true' used ('sass-embedded', 'old' API, 'sass' syntax): logs 1`] = `
-Array [
-  Array [
-    Object {
-      "args": Array [
-        "file:///<cwd>/sass/logging.sass:0:0: My debug message",
-      ],
-      "type": "debug",
-    },
-  ],
-]
-`;
-
-exports[`loader should not emit warning when 'true' used ('sass-embedded', 'old' API, 'sass' syntax): warnings 1`] = `
-Array [
-  "ModuleWarning: Module Warning (from ../src/cjs.js):
-My warning message",
-]
-`;
-
-exports[`loader should not emit warning when 'true' used ('sass-embedded', 'old' API, 'scss' syntax): css 1`] = `
-"a {
-  color: red;
-}"
-`;
-
-exports[`loader should not emit warning when 'true' used ('sass-embedded', 'old' API, 'scss' syntax): errors 1`] = `Array []`;
-
-exports[`loader should not emit warning when 'true' used ('sass-embedded', 'old' API, 'scss' syntax): logs 1`] = `
-Array [
-  Array [
-    Object {
-      "args": Array [
-        "file:///<cwd>/scss/logging.scss:0:0: My debug message",
-      ],
-      "type": "debug",
-    },
-  ],
-]
-`;
-
-exports[`loader should not emit warning when 'true' used ('sass-embedded', 'old' API, 'scss' syntax): warnings 1`] = `
 Array [
   "ModuleWarning: Module Warning (from ../src/cjs.js):
 My warning message",

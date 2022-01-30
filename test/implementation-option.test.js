@@ -45,7 +45,7 @@ describe("implementation option", () => {
     if (typeof item === "string") {
       implementationName = item;
       implementation = getImplementationByName(implementationName);
-      api = "old";
+      api = "legacy";
     } else {
       ({ name: implementationName, api, implementation } = item);
     }
@@ -88,7 +88,7 @@ describe("implementation option", () => {
           expect(dartSassSpyModernAPI).toHaveBeenCalledTimes(1);
           expect(sassEmbeddedSpy).toHaveBeenCalledTimes(0);
           expect(sassEmbeddedSpyModernAPI).toHaveBeenCalledTimes(0);
-        } else if (api === "old") {
+        } else if (api === "legacy") {
           expect(nodeSassSpy).toHaveBeenCalledTimes(0);
           expect(dartSassSpy).toHaveBeenCalledTimes(1);
           expect(dartSassSpyModernAPI).toHaveBeenCalledTimes(0);
@@ -102,7 +102,7 @@ describe("implementation option", () => {
           expect(dartSassSpyModernAPI).toHaveBeenCalledTimes(0);
           expect(sassEmbeddedSpy).toHaveBeenCalledTimes(0);
           expect(sassEmbeddedSpyModernAPI).toHaveBeenCalledTimes(1);
-        } else if (api === "old") {
+        } else if (api === "legacy") {
           expect(nodeSassSpy).toHaveBeenCalledTimes(0);
           expect(dartSassSpy).toHaveBeenCalledTimes(0);
           expect(dartSassSpyModernAPI).toHaveBeenCalledTimes(0);
@@ -154,13 +154,13 @@ describe("implementation option", () => {
     dartSassSpy.mockRestore();
   });
 
-  it("not specify with old API", async () => {
+  it("not specify with legacy API", async () => {
     const nodeSassSpy = jest.spyOn(nodeSass, "render");
     const dartSassSpy = jest.spyOn(dartSass, "render");
 
     const testId = getTestId("language", "scss");
     const options = {
-      api: "old",
+      api: "legacy",
     };
     const compiler = getCompiler(testId, { loader: { options } });
     const stats = await compile(compiler);

@@ -71,7 +71,7 @@ async function loader(content) {
     if (error.span && typeof error.span.url !== "undefined") {
       this.addDependency(url.fileURLToPath(error.span.url));
     }
-    // Old API
+    // Legacy API
     else if (typeof error.file !== "undefined") {
       // `node-sass` returns POSIX paths
       this.addDependency(path.normalize(error.file));
@@ -83,7 +83,7 @@ async function loader(content) {
   }
 
   let map =
-    // Modern API, then Old API
+    // Modern API, then legacy API
     result.sourceMap
       ? result.sourceMap
       : result.map
@@ -106,7 +106,7 @@ async function loader(content) {
       }
     });
   }
-  // Old API
+  // Legacy API
   else if (
     typeof result.stats !== "undefined" &&
     typeof result.stats.includedFiles !== "undefined"
