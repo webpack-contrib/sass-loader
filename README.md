@@ -321,12 +321,12 @@ Type:
 
 ```ts
 type sassOptions =
-  | object
+  | import("sass").LegacyOptions<"async">
   | ((
       content: string | Buffer,
       loaderContext: LoaderContext,
       meta: any
-    ) => object);
+    ) => import("sass").LegacyOptions<"async">);
 ```
 
 Default: defaults values for Sass implementation
@@ -352,7 +352,7 @@ Please consult documentation before using them:
 
 #### `object`
 
-Use and object for the Sass implementation setup.
+Use an object for the Sass implementation setup.
 
 **webpack.config.js**
 
