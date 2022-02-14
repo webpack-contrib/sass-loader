@@ -13,6 +13,7 @@ describe("validate options", () => {
   beforeAll(async () => {
     if (isSupportedFibers()) {
       const { default: fibers } = await import("fibers");
+
       Fiber = fibers;
     }
   });
@@ -26,8 +27,16 @@ describe("validate options", () => {
 
   const tests = {
     implementation: {
-      // eslint-disable-next-line global-require
-      success: [require("sass"), require("node-sass"), "sass", "node-sass"],
+      success: [
+        // eslint-disable-next-line global-require
+        require("sass"),
+        // eslint-disable-next-line global-require
+        require("node-sass"),
+        // eslint-disable-next-line global-require
+        require("sass-embedded"),
+        "sass",
+        "node-sass",
+      ],
       failure: [true, () => {}],
     },
     sassOptions: {
@@ -55,6 +64,10 @@ describe("validate options", () => {
     warnRuleAsWarning: {
       success: [true, false],
       failure: ["string"],
+    },
+    api: {
+      success: ["legacy", "modern"],
+      failure: ["string", true],
     },
     unknown: {
       success: [],

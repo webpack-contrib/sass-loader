@@ -5,13 +5,23 @@ class SassError extends Error {
     this.name = "SassError";
     // TODO remove me in the next major release
     this.originalSassError = sassError;
-    this.loc = {
-      line: sassError.line,
-      column: sassError.column,
-    };
+
+    if (
+      typeof sassError.line !== "undefined" ||
+      typeof sassError.column !== "undefined"
+    ) {
+      this.loc = {
+        line: sassError.line,
+        column: sassError.column,
+      };
+    }
 
     // Keep original error if `sassError.formatted` is unavailable
-    this.message = `${this.name}: ${this.originalSassError.message}`;
+    this.message = `${this.name}: ${
+      typeof this.originalSassError.message !== "undefined"
+        ? this.originalSassError.message
+        : this.originalSassError
+    }`;
 
     if (this.originalSassError.formatted) {
       this.message = `${this.name}: ${this.originalSassError.formatted.replace(

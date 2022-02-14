@@ -1,3 +1,3 @@
 module.exports = {
-  testEnvironment: "node",
+  testEnvironment: "jest-environment-node-single-context",
 };
