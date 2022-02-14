@@ -15,8 +15,13 @@ function getDefaultSassImplementation() {
     try {
       require.resolve("node-sass");
       sassImplPkg = "node-sass";
-    } catch (ignoreError) {
-      sassImplPkg = "sass";
+    } catch (error) {
+      try {
+        require.resolve("sass-embedded");
+        sassImplPkg = "sass-embedded";
+      } catch (ignoreError) {
+        sassImplPkg = "sass";
+      }
     }
   }
 
