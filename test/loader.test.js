@@ -1068,7 +1068,7 @@ describe("loader", () => {
         });
       }
 
-      if (!isModernAPI) {
+      if (!isModernAPI && !isSassEmbedded) {
         it(`should resolve server-relative URLs ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           const testId = getTestId("import-absolute-path", syntax);
           const options = {
