@@ -678,6 +678,71 @@ Object {
     "sass/language.sass",
     "",
   ],
+  "sourcesContent": Array [
+    "@import \\"another/variables\\"
+@import \\"./file.css\\"
+
+$font-stack:    Helvetica, sans-serif
+$primary-color: #333
+$pi:            '\\\\e0C6'
+
+body
+  font: 100% $font-stack
+  color: $primary-color
+
+nav
+  ul
+    margin: 0
+    padding: 0
+    list-style: none
+
+  li
+    display: inline-block
+
+  a
+    display: block
+    padding: 6px 12px
+    text-decoration: none
+
+=border-radius($radius)
+  -webkit-border-radius: $radius
+  -moz-border-radius:    $radius
+  -ms-border-radius:     $radius
+  border-radius:         $radius
+
+.box
+  +border-radius(10px)
+
+.message
+  border: 1px solid #ccc
+  padding: 10px
+  color: #333
+
+.success
+  @extend .message
+  border-color: green
+
+.error
+  @extend .message
+  border-color: red
+
+.warning
+  @extend .message
+  border-color: yellow
+
+.foo
+  &:before
+    content: $pi
+
+.bar
+  &:before
+    content: $n-ary-summation
+
+",
+    "$n-ary-summation: '\\\\2211'
+
+@import \\"sass-embedded-legacy-load-done:10\\"",
+  ],
   "version": 3,
 }
 `;
@@ -733,6 +798,60 @@ Object {
   "sources": Array [
     "scss/language.scss",
     "",
+  ],
+  "sourcesContent": Array [
+    "@import \\"another/variables\\";
+@import \\"./file.css\\";
+
+$font-stack:    Helvetica, sans-serif;
+$primary-color: #333;
+$pi:            '\\\\e0C6';
+
+body {
+  font: 100% $font-stack;
+  color: $primary-color;
+}
+
+nav {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li { display: inline-block; }
+
+  a {
+    display: block;
+    padding: 6px 12px;
+    text-decoration: none;
+  }
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+.box { @include border-radius(10px); }
+
+.foo {
+  &:before {
+    content: $pi;
+  }
+}
+
+.bar {
+  &:before {
+    content: $n-ary-summation;
+  }
+}
+",
+    "$n-ary-summation: '\\\\2211'
+
+;@import \\"sass-embedded-legacy-load-done:3\\";",
   ],
   "version": 3,
 }
@@ -1541,6 +1660,71 @@ Object {
     "test/sass/language.sass",
     "",
   ],
+  "sourcesContent": Array [
+    "@import \\"another/variables\\"
+@import \\"./file.css\\"
+
+$font-stack:    Helvetica, sans-serif
+$primary-color: #333
+$pi:            '\\\\e0C6'
+
+body
+  font: 100% $font-stack
+  color: $primary-color
+
+nav
+  ul
+    margin: 0
+    padding: 0
+    list-style: none
+
+  li
+    display: inline-block
+
+  a
+    display: block
+    padding: 6px 12px
+    text-decoration: none
+
+=border-radius($radius)
+  -webkit-border-radius: $radius
+  -moz-border-radius:    $radius
+  -ms-border-radius:     $radius
+  border-radius:         $radius
+
+.box
+  +border-radius(10px)
+
+.message
+  border: 1px solid #ccc
+  padding: 10px
+  color: #333
+
+.success
+  @extend .message
+  border-color: green
+
+.error
+  @extend .message
+  border-color: red
+
+.warning
+  @extend .message
+  border-color: yellow
+
+.foo
+  &:before
+    content: $pi
+
+.bar
+  &:before
+    content: $n-ary-summation
+
+",
+    "$n-ary-summation: '\\\\2211'
+
+@import \\"sass-embedded-legacy-load-done:9\\"",
+  ],
   "version": 3,
 }
 `;
@@ -1595,6 +1779,60 @@ Object {
   "sources": Array [
     "test/scss/language.scss",
     "",
+  ],
+  "sourcesContent": Array [
+    "@import \\"another/variables\\";
+@import \\"./file.css\\";
+
+$font-stack:    Helvetica, sans-serif;
+$primary-color: #333;
+$pi:            '\\\\e0C6';
+
+body {
+  font: 100% $font-stack;
+  color: $primary-color;
+}
+
+nav {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li { display: inline-block; }
+
+  a {
+    display: block;
+    padding: 6px 12px;
+    text-decoration: none;
+  }
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+.box { @include border-radius(10px); }
+
+.foo {
+  &:before {
+    content: $pi;
+  }
+}
+
+.bar {
+  &:before {
+    content: $n-ary-summation;
+  }
+}
+",
+    "$n-ary-summation: '\\\\2211'
+
+;@import \\"sass-embedded-legacy-load-done:2\\";",
   ],
   "version": 3,
 }
@@ -2403,6 +2641,71 @@ Object {
     "test/sass/language.sass",
     "",
   ],
+  "sourcesContent": Array [
+    "@import \\"another/variables\\"
+@import \\"./file.css\\"
+
+$font-stack:    Helvetica, sans-serif
+$primary-color: #333
+$pi:            '\\\\e0C6'
+
+body
+  font: 100% $font-stack
+  color: $primary-color
+
+nav
+  ul
+    margin: 0
+    padding: 0
+    list-style: none
+
+  li
+    display: inline-block
+
+  a
+    display: block
+    padding: 6px 12px
+    text-decoration: none
+
+=border-radius($radius)
+  -webkit-border-radius: $radius
+  -moz-border-radius:    $radius
+  -ms-border-radius:     $radius
+  border-radius:         $radius
+
+.box
+  +border-radius(10px)
+
+.message
+  border: 1px solid #ccc
+  padding: 10px
+  color: #333
+
+.success
+  @extend .message
+  border-color: green
+
+.error
+  @extend .message
+  border-color: red
+
+.warning
+  @extend .message
+  border-color: yellow
+
+.foo
+  &:before
+    content: $pi
+
+.bar
+  &:before
+    content: $n-ary-summation
+
+",
+    "$n-ary-summation: '\\\\2211'
+
+@import \\"sass-embedded-legacy-load-done:8\\"",
+  ],
   "version": 3,
 }
 `;
@@ -2457,6 +2760,60 @@ Object {
   "sources": Array [
     "test/scss/language.scss",
     "",
+  ],
+  "sourcesContent": Array [
+    "@import \\"another/variables\\";
+@import \\"./file.css\\";
+
+$font-stack:    Helvetica, sans-serif;
+$primary-color: #333;
+$pi:            '\\\\e0C6';
+
+body {
+  font: 100% $font-stack;
+  color: $primary-color;
+}
+
+nav {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li { display: inline-block; }
+
+  a {
+    display: block;
+    padding: 6px 12px;
+    text-decoration: none;
+  }
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+.box { @include border-radius(10px); }
+
+.foo {
+  &:before {
+    content: $pi;
+  }
+}
+
+.bar {
+  &:before {
+    content: $n-ary-summation;
+  }
+}
+",
+    "$n-ary-summation: '\\\\2211'
+
+;@import \\"sass-embedded-legacy-load-done:1\\";",
   ],
   "version": 3,
 }
@@ -3265,6 +3622,71 @@ Object {
     "test/sass/language.sass",
     "",
   ],
+  "sourcesContent": Array [
+    "@import \\"another/variables\\"
+@import \\"./file.css\\"
+
+$font-stack:    Helvetica, sans-serif
+$primary-color: #333
+$pi:            '\\\\e0C6'
+
+body
+  font: 100% $font-stack
+  color: $primary-color
+
+nav
+  ul
+    margin: 0
+    padding: 0
+    list-style: none
+
+  li
+    display: inline-block
+
+  a
+    display: block
+    padding: 6px 12px
+    text-decoration: none
+
+=border-radius($radius)
+  -webkit-border-radius: $radius
+  -moz-border-radius:    $radius
+  -ms-border-radius:     $radius
+  border-radius:         $radius
+
+.box
+  +border-radius(10px)
+
+.message
+  border: 1px solid #ccc
+  padding: 10px
+  color: #333
+
+.success
+  @extend .message
+  border-color: green
+
+.error
+  @extend .message
+  border-color: red
+
+.warning
+  @extend .message
+  border-color: yellow
+
+.foo
+  &:before
+    content: $pi
+
+.bar
+  &:before
+    content: $n-ary-summation
+
+",
+    "$n-ary-summation: '\\\\2211'
+
+@import \\"sass-embedded-legacy-load-done:7\\"",
+  ],
   "version": 3,
 }
 `;
@@ -3319,6 +3741,60 @@ Object {
   "sources": Array [
     "test/scss/language.scss",
     "",
+  ],
+  "sourcesContent": Array [
+    "@import \\"another/variables\\";
+@import \\"./file.css\\";
+
+$font-stack:    Helvetica, sans-serif;
+$primary-color: #333;
+$pi:            '\\\\e0C6';
+
+body {
+  font: 100% $font-stack;
+  color: $primary-color;
+}
+
+nav {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li { display: inline-block; }
+
+  a {
+    display: block;
+    padding: 6px 12px;
+    text-decoration: none;
+  }
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+.box { @include border-radius(10px); }
+
+.foo {
+  &:before {
+    content: $pi;
+  }
+}
+
+.bar {
+  &:before {
+    content: $n-ary-summation;
+  }
+}
+",
+    "$n-ary-summation: '\\\\2211'
+
+;@import \\"sass-embedded-legacy-load-done:0\\";",
   ],
   "version": 3,
 }
