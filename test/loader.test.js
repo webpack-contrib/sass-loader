@@ -1038,7 +1038,7 @@ describe("loader", () => {
         });
       }
 
-      if (!isModernAPI) {
+      if (!isModernAPI && !isSassEmbedded) {
         it(`should support resolving using the "file" schema ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           const testId = getTestId("import-file-scheme", syntax);
           const options = {
