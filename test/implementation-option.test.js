@@ -246,6 +246,44 @@ describe("implementation option", () => {
     expect(getErrors(stats)).toMatchSnapshot("errors");
   });
 
+  it("should try to load using valid order", async () => {
+    jest.doMock("sass", () => {
+      const error = new Error("Some error sass");
+
+      error.code = "MODULE_NOT_FOUND";
+      error.stack = null;
+
+      throw error;
+    });
+
+    jest.doMock("node-sass", () => {
+      const error = new Error("Some error node-sass");
+
+      error.code = "MODULE_NOT_FOUND";
+      error.stack = null;
+
+      throw error;
+    });
+
+    jest.doMock("sass-embedded", () => {
+      const error = new Error("Some error sass-embedded");
+
+      error.code = "MODULE_NOT_FOUND";
+      error.stack = null;
+
+      throw error;
+    });
+
+    const testId = getTestId("language", "scss");
+    const options = {};
+
+    const compiler = getCompiler(testId, { loader: { options } });
+    const stats = await compile(compiler);
+
+    expect(getWarnings(stats)).toMatchSnapshot("warnings");
+    expect(getErrors(stats)).toMatchSnapshot("errors");
+  });
+
   it("should not swallow an error when trying to load a sass implementation", async () => {
     jest.doMock("node-sass", () => {
       const error = new Error("Some error");
