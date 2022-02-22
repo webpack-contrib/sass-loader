@@ -676,7 +676,7 @@ Object {
   "sourceRoot": "",
   "sources": Array [
     "sass/language.sass",
-    "",
+    "sass/another/variables.sass",
   ],
   "sourcesContent": Array [
     "@import \\"another/variables\\"
@@ -797,7 +797,7 @@ Object {
   "sourceRoot": "",
   "sources": Array [
     "scss/language.scss",
-    "",
+    "scss/another/_variables.scss",
   ],
   "sourcesContent": Array [
     "@import \\"another/variables\\";
@@ -1658,7 +1658,7 @@ Object {
   "sourceRoot": "",
   "sources": Array [
     "test/sass/language.sass",
-    "",
+    "test/sass/another/variables.sass",
   ],
   "sourcesContent": Array [
     "@import \\"another/variables\\"
@@ -1778,7 +1778,7 @@ Object {
   "sourceRoot": "",
   "sources": Array [
     "test/scss/language.scss",
-    "",
+    "test/scss/another/_variables.scss",
   ],
   "sourcesContent": Array [
     "@import \\"another/variables\\";
@@ -2639,7 +2639,7 @@ Object {
   "sourceRoot": "",
   "sources": Array [
     "test/sass/language.sass",
-    "",
+    "test/sass/another/variables.sass",
   ],
   "sourcesContent": Array [
     "@import \\"another/variables\\"
@@ -2759,7 +2759,7 @@ Object {
   "sourceRoot": "",
   "sources": Array [
     "test/scss/language.scss",
-    "",
+    "test/scss/another/_variables.scss",
   ],
   "sourcesContent": Array [
     "@import \\"another/variables\\";
@@ -3620,7 +3620,7 @@ Object {
   "sourceRoot": "",
   "sources": Array [
     "test/sass/language.sass",
-    "",
+    "test/sass/another/variables.sass",
   ],
   "sourcesContent": Array [
     "@import \\"another/variables\\"
@@ -3740,7 +3740,7 @@ Object {
   "sourceRoot": "",
   "sources": Array [
     "test/scss/language.scss",
-    "",
+    "test/scss/another/_variables.scss",
   ],
   "sourcesContent": Array [
     "@import \\"another/variables\\";
