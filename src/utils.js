@@ -10,12 +10,17 @@ function getDefaultSassImplementation() {
 
   try {
     require.resolve("sass");
-  } catch (error) {
+  } catch (ignoreError) {
     try {
       require.resolve("node-sass");
       sassImplPkg = "node-sass";
-    } catch (ignoreError) {
-      sassImplPkg = "sass";
+    } catch (_ignoreError) {
+      try {
+        require.resolve("sass-embedded");
+        sassImplPkg = "sass-embedded";
+      } catch (__ignoreError) {
+        sassImplPkg = "sass";
+      }
     }
   }
 
@@ -77,6 +82,9 @@ function getSassImplementation(loaderContext, implementation) {
   } else if (implementationName === "node-sass") {
     // eslint-disable-next-line consistent-return
     return resolvedImplementation;
+  } else if (implementationName === "sass-embedded") {
+    // eslint-disable-next-line consistent-return
+    return resolvedImplementation;
   }
 
   loaderContext.emitError(
@@ -133,99 +141,13 @@ async function getSassOptions(
     : {};
 
   const isDartSass = implementation.info.includes("dart-sass");
+  const isModernAPI = loaderOptions.api === "modern";
 
-  if (isDartSass && isSupportedFibers()) {
-    const shouldTryToResolveFibers = !options.fiber && options.fiber !== false;
-
-    if (shouldTryToResolveFibers) {
-      let fibers;
-
-      try {
-        fibers = require.resolve("fibers");
-      } catch (_error) {
-        // Nothing
-      }
-
-      if (fibers) {
-        // eslint-disable-next-line global-require, import/no-dynamic-require
-        options.fiber = require(fibers);
-      }
-    } else if (options.fiber === false) {
-      // Don't pass the `fiber` option for `sass` (`Dart Sass`)
-      delete options.fiber;
-    }
-  } else {
-    // Don't pass the `fiber` option for `node-sass`
-    delete options.fiber;
-  }
-
-  options.file = loaderContext.resourcePath;
   options.data = loaderOptions.additionalData
     ? typeof loaderOptions.additionalData === "function"
       ? await loaderOptions.additionalData(content, loaderContext)
       : `${loaderOptions.additionalData}\n${content}`
     : content;
-
-  // opt.outputStyle
-  if (!options.outputStyle && isProductionLikeMode(loaderContext)) {
-    options.outputStyle = "compressed";
-  }
-
-  if (useSourceMap) {
-    // Deliberately overriding the sourceMap option here.
-    // node-sass won't produce source maps if the data option is used and options.sourceMap is not a string.
-    // In case it is a string, options.sourceMap should be a path where the source map is written.
-    // But since we're using the data option, the source map will not actually be written, but
-    // all paths in sourceMap.sources will be relative to that path.
-    // Pretty complicated... :(
-    options.sourceMap = true;
-    options.outFile = path.join(loaderContext.rootContext, "style.css.map");
-    options.sourceMapContents = true;
-    options.omitSourceMapUrl = true;
-    options.sourceMapEmbed = false;
-  }
-
-  const { resourcePath } = loaderContext;
-  const ext = path.extname(resourcePath);
-
-  // If we are compiling sass and indentedSyntax isn't set, automatically set it.
-  if (
-    ext &&
-    ext.toLowerCase() === ".sass" &&
-    typeof options.indentedSyntax === "undefined"
-  ) {
-    options.indentedSyntax = true;
-  } else {
-    options.indentedSyntax = Boolean(options.indentedSyntax);
-  }
-
-  // Allow passing custom importers to `sass`/`node-sass`. Accepts `Function` or an array of `Function`s.
-  options.importer = options.importer
-    ? proxyCustomImporters(
-        Array.isArray(options.importer) ? options.importer : [options.importer],
-        loaderContext
-      )
-    : [];
-
-  options.includePaths = []
-    .concat(process.cwd())
-    .concat(
-      // We use `includePaths` in context for resolver, so it should be always absolute
-      (options.includePaths || []).map((includePath) =>
-        path.isAbsolute(includePath)
-          ? includePath
-          : path.join(process.cwd(), includePath)
-      )
-    )
-    .concat(
-      process.env.SASS_PATH
-        ? process.env.SASS_PATH.split(process.platform === "win32" ? ";" : ":")
-        : []
-    );
-
-  if (typeof options.charset === "undefined") {
-    options.charset = true;
-  }
 
   if (!options.logger) {
     // TODO set me to `true` by default in the next major release
@@ -273,6 +195,135 @@ async function getSassOptions(
         }
       },
     };
+  }
+
+  const { resourcePath } = loaderContext;
+
+  if (isModernAPI) {
+    options.url = url.pathToFileURL(resourcePath);
+
+    // opt.outputStyle
+    if (!options.style && isProductionLikeMode(loaderContext)) {
+      options.style = "compressed";
+    }
+
+    if (useSourceMap) {
+      options.sourceMap = true;
+    }
+
+    // If we are compiling sass and indentedSyntax isn't set, automatically set it.
+    if (typeof options.syntax === "undefined") {
+      const ext = path.extname(resourcePath);
+
+      if (ext && ext.toLowerCase() === ".scss") {
+        options.syntax = "scss";
+      } else if (ext && ext.toLowerCase() === ".sass") {
+        options.syntax = "indented";
+      } else if (ext && ext.toLowerCase() === ".css") {
+        options.syntax = "css";
+      }
+    }
+
+    options.importers = options.importers
+      ? proxyCustomImporters(
+          Array.isArray(options.importers)
+            ? options.importers
+            : [options.importers],
+          loaderContext
+        )
+      : [];
+  } else {
+    options.file = resourcePath;
+
+    if (isDartSass && isSupportedFibers()) {
+      const shouldTryToResolveFibers =
+        !options.fiber && options.fiber !== false;
+
+      if (shouldTryToResolveFibers) {
+        let fibers;
+
+        try {
+          fibers = require.resolve("fibers");
+        } catch (_error) {
+          // Nothing
+        }
+
+        if (fibers) {
+          // eslint-disable-next-line global-require, import/no-dynamic-require
+          options.fiber = require(fibers);
+        }
+      } else if (options.fiber === false) {
+        // Don't pass the `fiber` option for `sass` (`Dart Sass`)
+        delete options.fiber;
+      }
+    } else {
+      // Don't pass the `fiber` option for `node-sass`
+      delete options.fiber;
+    }
+
+    // opt.outputStyle
+    if (!options.outputStyle && isProductionLikeMode(loaderContext)) {
+      options.outputStyle = "compressed";
+    }
+
+    if (useSourceMap) {
+      // Deliberately overriding the sourceMap option here.
+      // node-sass won't produce source maps if the data option is used and options.sourceMap is not a string.
+      // In case it is a string, options.sourceMap should be a path where the source map is written.
+      // But since we're using the data option, the source map will not actually be written, but
+      // all paths in sourceMap.sources will be relative to that path.
+      // Pretty complicated... :(
+      options.sourceMap = true;
+      options.outFile = path.join(loaderContext.rootContext, "style.css.map");
+      options.sourceMapContents = true;
+      options.omitSourceMapUrl = true;
+      options.sourceMapEmbed = false;
+    }
+
+    const ext = path.extname(resourcePath);
+
+    // If we are compiling sass and indentedSyntax isn't set, automatically set it.
+    if (
+      ext &&
+      ext.toLowerCase() === ".sass" &&
+      typeof options.indentedSyntax === "undefined"
+    ) {
+      options.indentedSyntax = true;
+    } else {
+      options.indentedSyntax = Boolean(options.indentedSyntax);
+    }
+
+    // Allow passing custom importers to `sass`/`node-sass`. Accepts `Function` or an array of `Function`s.
+    options.importer = options.importer
+      ? proxyCustomImporters(
+          Array.isArray(options.importer)
+            ? options.importer
+            : [options.importer],
+          loaderContext
+        )
+      : [];
+
+    options.includePaths = []
+      .concat(process.cwd())
+      .concat(
+        // We use `includePaths` in context for resolver, so it should be always absolute
+        (options.includePaths || []).map((includePath) =>
+          path.isAbsolute(includePath)
+            ? includePath
+            : path.join(process.cwd(), includePath)
+        )
+      )
+      .concat(
+        process.env.SASS_PATH
+          ? process.env.SASS_PATH.split(
+              process.platform === "win32" ? ";" : ":"
+            )
+          : []
+      );
+
+    if (typeof options.charset === "undefined") {
+      options.charset = true;
+    }
   }
 
   return options;
@@ -379,6 +430,37 @@ function promiseResolve(callbackResolve) {
     });
 }
 
+async function startResolving(resolutionMap) {
+  if (resolutionMap.length === 0) {
+    return Promise.reject();
+  }
+
+  const [{ possibleRequests }] = resolutionMap;
+
+  if (possibleRequests.length === 0) {
+    return Promise.reject();
+  }
+
+  const [{ resolve, context }] = resolutionMap;
+
+  try {
+    return await resolve(context, possibleRequests[0]);
+  } catch (_ignoreError) {
+    const [, ...tailResult] = possibleRequests;
+
+    if (tailResult.length === 0) {
+      const [, ...tailResolutionMap] = resolutionMap;
+
+      return startResolving(tailResolutionMap);
+    }
+
+    // eslint-disable-next-line no-param-reassign
+    resolutionMap[0].possibleRequests = tailResult;
+
+    return startResolving(resolutionMap);
+  }
+}
+
 const IS_SPECIAL_MODULE_IMPORT = /^~[^/]+$/;
 // `[drive_letter]:\` + `\\[server]\[sharename]\`
 const IS_NATIVE_WIN32_PATH = /^[a-z]:[/\\]|^\\\\/i;
@@ -405,38 +487,8 @@ function getWebpackResolver(
   implementation,
   includePaths = []
 ) {
-  async function startResolving(resolutionMap) {
-    if (resolutionMap.length === 0) {
-      return Promise.reject();
-    }
-
-    const [{ possibleRequests }] = resolutionMap;
-
-    if (possibleRequests.length === 0) {
-      return Promise.reject();
-    }
-
-    const [{ resolve, context }] = resolutionMap;
-
-    try {
-      return await resolve(context, possibleRequests[0]);
-    } catch (_ignoreError) {
-      const [, ...tailResult] = possibleRequests;
-
-      if (tailResult.length === 0) {
-        const [, ...tailResolutionMap] = resolutionMap;
-
-        return startResolving(tailResolutionMap);
-      }
-
-      // eslint-disable-next-line no-param-reassign
-      resolutionMap[0].possibleRequests = tailResult;
-
-      return startResolving(resolutionMap);
-    }
-  }
-
-  const isDartSass = implementation.info.includes("dart-sass");
+  const isDartSass =
+    implementation && implementation.info.includes("dart-sass");
   // We only have one difference with the built-in sass resolution logic and out resolution logic:
   // First, we look at the files starting with `_`, then without `_` (i.e. `_name.sass`, `_name.scss`, `_name.css`, `name.sass`, `name.scss`, `name.css`),
   // although `sass` look together by extensions (i.e. `_name.sass`/`name.sass`/`_name.scss`/`name.scss`/`_name.css`/`name.css`).
@@ -587,6 +639,17 @@ function getWebpackResolver(
 
 const MATCH_CSS = /\.css$/i;
 
+function getModernWebpackImporter() {
+  return {
+    async canonicalize() {
+      return null;
+    },
+    load() {
+      // TODO implement
+    },
+  };
+}
+
 function getWebpackImporter(loaderContext, implementation, includePaths) {
   const resolve = getWebpackResolver(
     loaderContext.getResolve,
@@ -620,13 +683,39 @@ let nodeSassJobQueue = null;
  * Verifies that the implementation and version of Sass is supported by this loader.
  *
  * @param {Object} implementation
+ * @param {Object} options
  * @returns {Function}
  */
-function getRenderFunctionFromSassImplementation(implementation) {
-  const isDartSass = implementation.info.includes("dart-sass");
+function getCompileFn(implementation, options) {
+  const isNewSass =
+    implementation.info.includes("dart-sass") ||
+    implementation.info.includes("sass-embedded");
 
-  if (isDartSass) {
-    return implementation.render.bind(implementation);
+  if (isNewSass) {
+    if (options.api === "modern") {
+      return (sassOptions) => {
+        const { data, ...rest } = sassOptions;
+
+        return implementation.compileStringAsync(data, rest);
+      };
+    }
+
+    return (sassOptions) =>
+      new Promise((resolve, reject) => {
+        implementation.render(sassOptions, (error, result) => {
+          if (error) {
+            reject(error);
+
+            return;
+          }
+
+          resolve(result);
+        });
+      });
+  }
+
+  if (options.api === "modern") {
+    throw new Error("Modern API is not supported for 'node-sass'");
   }
 
   // There is an issue with node-sass when async custom importers are used
@@ -641,7 +730,21 @@ function getRenderFunctionFromSassImplementation(implementation) {
     );
   }
 
-  return nodeSassJobQueue.push.bind(nodeSassJobQueue);
+  return (sassOptions) =>
+    new Promise((resolve, reject) => {
+      nodeSassJobQueue.push.bind(nodeSassJobQueue)(
+        sassOptions,
+        (error, result) => {
+          if (error) {
+            reject(error);
+
+            return;
+          }
+
+          resolve(result);
+        }
+      );
+    });
 }
 
 const ABSOLUTE_SCHEME = /^[A-Za-z0-9+\-.]+:/;
@@ -672,7 +775,9 @@ function normalizeSourceMap(map, rootContext) {
   // result.map.file is an optional property that provides the output filename.
   // Since we don't know the final filename in the webpack build chain yet, it makes no sense to have it.
   // eslint-disable-next-line no-param-reassign
-  delete newMap.file;
+  if (typeof newMap.file !== "undefined") {
+    delete newMap.file;
+  }
 
   // eslint-disable-next-line no-param-reassign
   newMap.sourceRoot = "";
@@ -684,8 +789,10 @@ function normalizeSourceMap(map, rootContext) {
   newMap.sources = newMap.sources.map((source) => {
     const sourceType = getURLType(source);
 
-    // Do no touch `scheme-relative`, `path-absolute` and `absolute` types
-    if (sourceType === "path-relative") {
+    // Do no touch `scheme-relative`, `path-absolute` and `absolute` types (except `file:`)
+    if (sourceType === "absolute" && /^file:/i.test(source)) {
+      return url.fileURLToPath(source);
+    } else if (sourceType === "path-relative") {
       return path.resolve(rootContext, path.normalize(source));
     }
 
@@ -698,9 +805,10 @@ function normalizeSourceMap(map, rootContext) {
 export {
   getSassImplementation,
   getSassOptions,
+  getModernWebpackImporter,
   getWebpackResolver,
   getWebpackImporter,
-  getRenderFunctionFromSassImplementation,
+  getCompileFn,
   normalizeSourceMap,
   isSupportedFibers,
 };

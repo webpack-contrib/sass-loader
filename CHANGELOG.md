@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [12.6.0](https://github.com/webpack-contrib/sass-loader/compare/v12.5.0...v12.6.0) (2022-02-15)
+
+
+### Features
+
+* added support for automatic loading of `sass-embedded` ([#1025](https://github.com/webpack-contrib/sass-loader/issues/1025)) ([c8dae87](https://github.com/webpack-contrib/sass-loader/commit/c8dae87f0c90b13303096e0d3aec857c4046c36b))
+
+## [12.5.0](https://github.com/webpack-contrib/sass-loader/compare/v12.4.0...v12.5.0) (2022-02-14)
+
+
+### Features
+
+* added support for `sass-embedded` (faster than `node-sass`), feel free to [feedback](https://github.com/webpack-contrib/sass-loader/issues/774)
+* added the `api` option (`modern` api is experimental and currently doesn't support built-in webpack resolver) ([afbe114](https://github.com/webpack-contrib/sass-loader/commit/afbe114fecf54fa99ef635aea5ae1d3db6a119c1))
+
 ## [12.4.0](https://github.com/webpack-contrib/sass-loader/compare/v12.3.0...v12.4.0) (2021-12-07)
 
 

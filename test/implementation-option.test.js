@@ -1,5 +1,7 @@
 import nodeSass from "node-sass";
 import dartSass from "sass";
+// eslint-disable-next-line import/no-namespace
+import * as sassEmbedded from "sass-embedded";
 
 import { isSupportedFibers } from "../src/utils";
 
@@ -9,6 +11,7 @@ import {
   getCompiler,
   getErrors,
   getImplementationByName,
+  getImplementationsAndAPI,
   getTestId,
   getWarnings,
 } from "./helpers";
@@ -16,12 +19,13 @@ import {
 jest.setTimeout(30000);
 
 let Fiber;
-const implementations = [nodeSass, dartSass, "sass_string"];
+const implementations = [...getImplementationsAndAPI(), "sass_string"];
 
 describe("implementation option", () => {
   beforeAll(async () => {
     if (isSupportedFibers()) {
       const { default: fibers } = await import("fibers");
+
       Fiber = fibers;
     }
   });
@@ -33,21 +37,31 @@ describe("implementation option", () => {
     }
   });
 
-  implementations.forEach((implementation) => {
-    let implementationName = implementation;
+  implementations.forEach((item) => {
+    let implementationName;
+    let implementation;
+    let api;
 
-    if (implementation.info) {
-      [implementationName] = implementation.info.split("\t");
+    if (typeof item === "string") {
+      implementationName = item;
+      implementation = getImplementationByName(implementationName);
+      api = "legacy";
+    } else {
+      ({ name: implementationName, api, implementation } = item);
     }
 
-    it(`${implementationName}`, async () => {
+    it(`'${implementationName}', '${api}' API`, async () => {
       const nodeSassSpy = jest.spyOn(nodeSass, "render");
       const dartSassSpy = jest.spyOn(dartSass, "render");
+      const dartSassSpyModernAPI = jest.spyOn(dartSass, "compileStringAsync");
+      const sassEmbeddedSpy = jest.spyOn(sassEmbedded, "render");
+      const sassEmbeddedSpyModernAPI = jest.spyOn(
+        sassEmbedded,
+        "compileStringAsync"
+      );
 
       const testId = getTestId("language", "scss");
-      const options = {
-        implementation: getImplementationByName(implementationName),
-      };
+      const options = { api, implementation };
       const compiler = getCompiler(testId, { loader: { options } });
       const stats = await compile(compiler);
       const { css, sourceMap } = getCodeFromBundle(stats, compiler);
@@ -61,16 +75,47 @@ describe("implementation option", () => {
       if (implementationName === "node-sass") {
         expect(nodeSassSpy).toHaveBeenCalledTimes(1);
         expect(dartSassSpy).toHaveBeenCalledTimes(0);
+        expect(dartSassSpyModernAPI).toHaveBeenCalledTimes(0);
+        expect(sassEmbeddedSpy).toHaveBeenCalledTimes(0);
+        expect(sassEmbeddedSpyModernAPI).toHaveBeenCalledTimes(0);
       } else if (
         implementationName === "dart-sass" ||
         implementationName === "dart-sass_string"
       ) {
-        expect(nodeSassSpy).toHaveBeenCalledTimes(0);
-        expect(dartSassSpy).toHaveBeenCalledTimes(1);
+        if (api === "modern") {
+          expect(nodeSassSpy).toHaveBeenCalledTimes(0);
+          expect(dartSassSpy).toHaveBeenCalledTimes(0);
+          expect(dartSassSpyModernAPI).toHaveBeenCalledTimes(1);
+          expect(sassEmbeddedSpy).toHaveBeenCalledTimes(0);
+          expect(sassEmbeddedSpyModernAPI).toHaveBeenCalledTimes(0);
+        } else if (api === "legacy") {
+          expect(nodeSassSpy).toHaveBeenCalledTimes(0);
+          expect(dartSassSpy).toHaveBeenCalledTimes(1);
+          expect(dartSassSpyModernAPI).toHaveBeenCalledTimes(0);
+          expect(sassEmbeddedSpy).toHaveBeenCalledTimes(0);
+          expect(sassEmbeddedSpyModernAPI).toHaveBeenCalledTimes(0);
+        }
+      } else if (implementationName === "sass-embedded") {
+        if (api === "modern") {
+          expect(nodeSassSpy).toHaveBeenCalledTimes(0);
+          expect(dartSassSpy).toHaveBeenCalledTimes(0);
+          expect(dartSassSpyModernAPI).toHaveBeenCalledTimes(0);
+          expect(sassEmbeddedSpy).toHaveBeenCalledTimes(0);
+          expect(sassEmbeddedSpyModernAPI).toHaveBeenCalledTimes(1);
+        } else if (api === "legacy") {
+          expect(nodeSassSpy).toHaveBeenCalledTimes(0);
+          expect(dartSassSpy).toHaveBeenCalledTimes(0);
+          expect(dartSassSpyModernAPI).toHaveBeenCalledTimes(0);
+          expect(sassEmbeddedSpy).toHaveBeenCalledTimes(1);
+          expect(sassEmbeddedSpyModernAPI).toHaveBeenCalledTimes(0);
+        }
       }
 
       nodeSassSpy.mockRestore();
       dartSassSpy.mockRestore();
+      dartSassSpyModernAPI.mockRestore();
+      sassEmbeddedSpy.mockRestore();
+      sassEmbeddedSpyModernAPI.mockRestore();
     });
   });
 
@@ -92,6 +137,56 @@ describe("implementation option", () => {
 
     const testId = getTestId("language", "scss");
     const options = {};
+    const compiler = getCompiler(testId, { loader: { options } });
+    const stats = await compile(compiler);
+    const { css, sourceMap } = getCodeFromBundle(stats, compiler);
+
+    expect(css).toBeDefined();
+    expect(sourceMap).toBeUndefined();
+
+    expect(getWarnings(stats)).toMatchSnapshot("warnings");
+    expect(getErrors(stats)).toMatchSnapshot("errors");
+
+    expect(nodeSassSpy).toHaveBeenCalledTimes(0);
+    expect(dartSassSpy).toHaveBeenCalledTimes(1);
+
+    nodeSassSpy.mockRestore();
+    dartSassSpy.mockRestore();
+  });
+
+  it("not specify with legacy API", async () => {
+    const nodeSassSpy = jest.spyOn(nodeSass, "render");
+    const dartSassSpy = jest.spyOn(dartSass, "render");
+
+    const testId = getTestId("language", "scss");
+    const options = {
+      api: "legacy",
+    };
+    const compiler = getCompiler(testId, { loader: { options } });
+    const stats = await compile(compiler);
+    const { css, sourceMap } = getCodeFromBundle(stats, compiler);
+
+    expect(css).toBeDefined();
+    expect(sourceMap).toBeUndefined();
+
+    expect(getWarnings(stats)).toMatchSnapshot("warnings");
+    expect(getErrors(stats)).toMatchSnapshot("errors");
+
+    expect(nodeSassSpy).toHaveBeenCalledTimes(0);
+    expect(dartSassSpy).toHaveBeenCalledTimes(1);
+
+    nodeSassSpy.mockRestore();
+    dartSassSpy.mockRestore();
+  });
+
+  it("not specify with modern API", async () => {
+    const nodeSassSpy = jest.spyOn(nodeSass, "render");
+    const dartSassSpy = jest.spyOn(dartSass, "compileStringAsync");
+
+    const testId = getTestId("language", "scss");
+    const options = {
+      api: "modern",
+    };
     const compiler = getCompiler(testId, { loader: { options } });
     const stats = await compile(compiler);
     const { css, sourceMap } = getCodeFromBundle(stats, compiler);
@@ -143,6 +238,44 @@ describe("implementation option", () => {
       // eslint-disable-next-line no-undefined
       implementation: Object.assign({}, dartSass, { info: undefined }),
     };
+
+    const compiler = getCompiler(testId, { loader: { options } });
+    const stats = await compile(compiler);
+
+    expect(getWarnings(stats)).toMatchSnapshot("warnings");
+    expect(getErrors(stats)).toMatchSnapshot("errors");
+  });
+
+  it("should try to load using valid order", async () => {
+    jest.doMock("sass", () => {
+      const error = new Error("Some error sass");
+
+      error.code = "MODULE_NOT_FOUND";
+      error.stack = null;
+
+      throw error;
+    });
+
+    jest.doMock("node-sass", () => {
+      const error = new Error("Some error node-sass");
+
+      error.code = "MODULE_NOT_FOUND";
+      error.stack = null;
+
+      throw error;
+    });
+
+    jest.doMock("sass-embedded", () => {
+      const error = new Error("Some error sass-embedded");
+
+      error.code = "MODULE_NOT_FOUND";
+      error.stack = null;
+
+      throw error;
+    });
+
+    const testId = getTestId("language", "scss");
+    const options = {};
 
     const compiler = getCompiler(testId, { loader: { options } });
     const stats = await compile(compiler);
