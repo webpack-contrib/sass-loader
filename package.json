@@ -55,7 +55,6 @@
     }
   },
   "dependencies": {
-    "klona": "^2.0.4",
     "neo-async": "^2.6.2"
   },
   "devDependencies": {

@@ -1,7 +1,6 @@
 import url from "url";
 import path from "path";
 
-import { klona } from "klona/full";
 import async from "neo-async";
 
 import SassWarning from "./SassWarning";
@@ -127,13 +126,11 @@ async function getSassOptions(
   implementation,
   useSourceMap
 ) {
-  const options = klona(
-    loaderOptions.sassOptions
-      ? typeof loaderOptions.sassOptions === "function"
-        ? loaderOptions.sassOptions(loaderContext) || {}
-        : loaderOptions.sassOptions
-      : {}
-  );
+  const options = loaderOptions.sassOptions
+    ? typeof loaderOptions.sassOptions === "function"
+      ? { ...loaderOptions.sassOptions(loaderContext) } || {}
+      : { ...loaderOptions.sassOptions }
+    : {};
 
   const isDartSass = implementation.info.includes("dart-sass");
 
