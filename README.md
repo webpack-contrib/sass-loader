@@ -349,7 +349,7 @@ There is a slight difference between the `sass` (`dart-sass`) and `node-sass` op
 
 Please consult documentation before using them:
 
-- [Dart Sass documentation](https://github.com/sass/dart-sass#javascript-api) for all available `sass` options.
+- [Dart Sass documentation](https://sass-lang.com/documentation/js-api/interfaces/Options) for all available `sass` options.
 - [Node Sass documentation](https://github.com/sass/node-sass/#options) for all available `node-sass` options.
 
 #### `object`
