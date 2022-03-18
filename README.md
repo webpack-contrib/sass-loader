@@ -128,7 +128,7 @@ You will be disrupted by this first issue. It is natural to expect relative refe
 
 Thankfully there are a two solutions to this problem:
 
-- Add the missing url rewriting using the [resolve-url-loader](https://github.com/bholloway/resolve-url-loader). Place it before `sass-loader` in the loader chain.
+- Add the missing url rewriting using the [resolve-url-loader](https://github.com/bholloway/resolve-url-loader). Place it before `sass-loader` in the loader chain, and enable the [`sourceMap`](#sourcemap) option for `sass-loader` if not already enabled.
 - Library authors usually provide a variable to modify the asset path. [bootstrap-sass](https://github.com/twbs/bootstrap-sass) for example has an `$icon-font-path`.
 
 ## Options
