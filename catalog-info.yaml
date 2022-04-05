@@ -1,0 +1,18 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: sass-loader # REQUIRED: should match the repo name
+  description: >
+    forked sass-loader that works with webpack 5
+  tags:
+    - users-na
+    - camp-foundations
+    - data-data-none
+  annotations:
+    github.com/project-slug: sass-loader
+    github.com/team-slug: front-end-foundations
+    buildkite.com/project-slug: cultureamp/sass-loader
+spec:
+  type: library
+  owner: front-end-foundations
+  lifecycle: development
