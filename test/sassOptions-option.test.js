@@ -42,6 +42,7 @@ describe("sassOptions option", () => {
 
   implementations.forEach((item) => {
     const { name: implementationName, api, implementation } = item;
+    const isModernAPI = api === "modern";
 
     syntaxStyles.forEach((syntax) => {
       it(`should work when the option like "Object" ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -128,7 +129,7 @@ describe("sassOptions option", () => {
         expect(getErrors(stats)).toMatchSnapshot("errors");
       });
 
-      if (api === "modern") {
+      if (isModernAPI) {
         it(`should ignore the "url" option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           const testId = getTestId("language", syntax);
           const options = {
@@ -191,8 +192,6 @@ describe("sassOptions option", () => {
       });
 
       // TODO fix me https://github.com/webpack-contrib/sass-loader/issues/774
-      const isModernAPI = api === "modern";
-
       if (!isModernAPI) {
         it(`should work with the "functions" option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           const testId = getTestId(
@@ -353,7 +352,7 @@ describe("sassOptions option", () => {
         });
       }
 
-      if (api !== "modern") {
+      if (!isModernAPI) {
         it(`should work with the "indentWidth" option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           const testId = getTestId("language", syntax);
           const options = {
@@ -399,7 +398,7 @@ describe("sassOptions option", () => {
         expect(getErrors(stats)).toMatchSnapshot("errors");
       });
 
-      if (api !== "modern") {
+      if (!isModernAPI) {
         it(`should work with the "linefeed" option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           const testId = getTestId("language", syntax);
           const options = {
@@ -420,7 +419,7 @@ describe("sassOptions option", () => {
         });
       }
 
-      if (api !== "modern") {
+      if (!isModernAPI) {
         it(`should work with the "fiber" option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           const dartSassSpy = jest.spyOn(dartSass, "render");
           const testId = getTestId("language", syntax);
