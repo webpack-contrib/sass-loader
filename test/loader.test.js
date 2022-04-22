@@ -214,7 +214,7 @@ describe("loader", () => {
         expect(getErrors(stats)).toMatchSnapshot("errors");
       });
 
-      if (!isModernAPI && !isSassEmbedded) {
+      if (!isModernAPI) {
         it(`should work with difference "@import" at-rules ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           const testId = getTestId("imports", syntax);
           const options = {
@@ -342,7 +342,7 @@ describe("loader", () => {
         expect(getErrors(stats)).toMatchSnapshot("errors");
       });
 
-      if (!isModernAPI && !isSassEmbedded) {
+      if (!isModernAPI) {
         it(`should work with multiple "@import" at-rules without quotes ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           if (syntax === "scss") {
             return;
@@ -819,30 +819,28 @@ describe("loader", () => {
         expect(getErrors(stats)).toMatchSnapshot("errors");
       });
 
-      if (!isSassEmbedded) {
-        it(`should work with the "foundation-sites" package, adjusting CSS output ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
-          const testId = getTestId(
-            "foundation-sites-adjusting-css-output",
-            syntax
-          );
-          const options = {
-            implementation,
-            api,
-            sassOptions: isModernAPI
-              ? { loadPaths: ["node_modules/foundation-sites/scss"] }
-              : { includePaths: ["node_modules/foundation-sites/scss"] },
-          };
-          const compiler = getCompiler(testId, { loader: { options } });
-          const stats = await compile(compiler);
-          const codeFromBundle = getCodeFromBundle(stats, compiler);
-          const codeFromSass = await getCodeFromSass(testId, options);
+      it(`should work with the "foundation-sites" package, adjusting CSS output ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
+        const testId = getTestId(
+          "foundation-sites-adjusting-css-output",
+          syntax
+        );
+        const options = {
+          implementation,
+          api,
+          sassOptions: isModernAPI
+            ? { loadPaths: ["node_modules/foundation-sites/scss"] }
+            : { includePaths: ["node_modules/foundation-sites/scss"] },
+        };
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
+        const codeFromSass = await getCodeFromSass(testId, options);
 
-          expect(codeFromBundle.css).toBe(codeFromSass.css);
-          expect(codeFromBundle.css).toMatchSnapshot("css");
-          expect(getWarnings(stats)).toMatchSnapshot("warnings");
-          expect(getErrors(stats)).toMatchSnapshot("errors");
-        });
-      }
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot("css");
+        expect(getWarnings(stats)).toMatchSnapshot("warnings");
+        expect(getErrors(stats)).toMatchSnapshot("errors");
+      });
 
       it(`should work and output the "compressed" outputStyle when "mode" is production ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
         const testId = getTestId("language", syntax);
@@ -944,7 +942,7 @@ describe("loader", () => {
         expect(getErrors(stats)).toMatchSnapshot("errors");
       });
 
-      if (!isModernAPI && !isSassEmbedded) {
+      if (!isModernAPI) {
         it(`should respect resolving from the "SASS_PATH" environment variable ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           process.env.SASS_PATH =
             process.platform === "win32"
@@ -1038,7 +1036,7 @@ describe("loader", () => {
         });
       }
 
-      if (!isModernAPI && !isSassEmbedded) {
+      if (!isModernAPI) {
         it(`should support resolving using the "file" schema ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           const testId = getTestId("import-file-scheme", syntax);
           const options = {
@@ -1068,7 +1066,7 @@ describe("loader", () => {
         });
       }
 
-      if (!isModernAPI && !isSassEmbedded) {
+      if (!isModernAPI) {
         it(`should resolve server-relative URLs ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           const testId = getTestId("import-absolute-path", syntax);
           const options = {
@@ -1312,7 +1310,7 @@ describe("loader", () => {
           expect(getErrors(stats)).toMatchSnapshot("errors");
         });
 
-        if (!isModernAPI && !isSassEmbedded) {
+        if (!isModernAPI) {
           it(`should work with different "@use" at-rules ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
             const testId = getTestId("uses", syntax);
             const options = {
@@ -1782,6 +1780,24 @@ describe("loader", () => {
 
             expect(codeFromBundle.css).toBe(codeFromSass.css);
             expect(codeFromBundle.css).toMatchSnapshot("css");
+            expect(getWarnings(stats)).toMatchSnapshot("warnings");
+            expect(getErrors(stats)).toMatchSnapshot("errors");
+          });
+        }
+
+        if (!isModernAPI) {
+          it.only(`should work with "bootstrap" and custom imports ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
+            const testId = getTestId("bootstrap-custom-import", syntax);
+            const options = {
+              implementation,
+              api,
+            };
+            const compiler = getCompiler(testId, { loader: { options } });
+            const stats = await compile(compiler);
+            const codeFromBundle = getCodeFromBundle(stats, compiler);
+            const codeFromSass = await getCodeFromSass(testId, options);
+
+            expect(codeFromBundle.css).toBe(codeFromSass.css);
             expect(getWarnings(stats)).toMatchSnapshot("warnings");
             expect(getErrors(stats)).toMatchSnapshot("errors");
           });
