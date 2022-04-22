@@ -1786,7 +1786,7 @@ describe("loader", () => {
         }
 
         if (!isModernAPI) {
-          it.only(`should work with "bootstrap" and custom imports ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
+          it(`should work with "bootstrap" and custom imports ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
             const testId = getTestId("bootstrap-custom-import", syntax);
             const options = {
               implementation,
