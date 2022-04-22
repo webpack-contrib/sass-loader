@@ -41,6 +41,7 @@ describe("loader", () => {
     const { name: implementationName, api, implementation } = item;
     // TODO fix me https://github.com/webpack-contrib/sass-loader/issues/774
     const isSassEmbedded = implementationName === "sass-embedded";
+    const isNodeSass = implementationName === "node-sass";
     const isModernAPI = api === "modern";
 
     syntaxStyles.forEach((syntax) => {
@@ -687,7 +688,7 @@ describe("loader", () => {
         });
       }
 
-      if (!isModernAPI) {
+      if (!isModernAPI && !isNodeSass) {
         it(`should work with the "bootstrap-sass" package, directly import ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           const testId = getTestId("bootstrap-sass", syntax);
           const options = {
@@ -706,7 +707,7 @@ describe("loader", () => {
         });
       }
 
-      if (!isModernAPI) {
+      if (!isModernAPI && !isNodeSass) {
         it(`should work with the "bootstrap-sass" package, import as a package ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           const testId = getTestId("bootstrap-sass-package", syntax);
           const options = {
