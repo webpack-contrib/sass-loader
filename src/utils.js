@@ -224,15 +224,6 @@ async function getSassOptions(
         options.syntax = "css";
       }
     }
-
-    options.importers = options.importers
-      ? proxyCustomImporters(
-          Array.isArray(options.importers)
-            ? options.importers
-            : [options.importers],
-          loaderContext
-        )
-      : [];
   } else {
     options.file = resourcePath;
 
