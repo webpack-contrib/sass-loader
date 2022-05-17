@@ -3,8 +3,6 @@ class SassError extends Error {
     super();
 
     this.name = "SassError";
-    // TODO remove me in the next major release
-    this.originalSassError = sassError;
 
     if (
       typeof sassError.line !== "undefined" ||
@@ -18,13 +16,11 @@ class SassError extends Error {
 
     // Keep original error if `sassError.formatted` is unavailable
     this.message = `${this.name}: ${
-      typeof this.originalSassError.message !== "undefined"
-        ? this.originalSassError.message
-        : this.originalSassError
+      typeof sassError.message !== "undefined" ? sassError.message : sassError
     }`;
 
-    if (this.originalSassError.formatted) {
-      this.message = `${this.name}: ${this.originalSassError.formatted.replace(
+    if (sassError.formatted) {
+      this.message = `${this.name}: ${sassError.formatted.replace(
         /^Error: /,
         ""
       )}`;
