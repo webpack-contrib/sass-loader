@@ -153,9 +153,7 @@ async function getSassOptions(
     : content;
 
   if (!options.logger) {
-    // TODO set me to `true` by default in the next major release
-    const needEmitWarning = loaderOptions.warnRuleAsWarning === true;
-
+    const needEmitWarning = loaderOptions.warnRuleAsWarning !== false;
     const logger = loaderContext.getLogger("sass-loader");
     const formatSpan = (span) =>
       `${span.url || "-"}:${span.start.line}:${span.start.column}: `;
