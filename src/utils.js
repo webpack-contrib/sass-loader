@@ -226,12 +226,9 @@ async function getSassOptions(
     }
 
     options.importers = options.importers
-      ? proxyCustomImporters(
-          Array.isArray(options.importers)
-            ? options.importers
-            : [options.importers],
-          loaderContext
-        )
+      ? Array.isArray(options.importers)
+        ? options.importers
+        : [options.importers]
       : [];
   } else {
     options.file = resourcePath;
