@@ -224,6 +224,12 @@ async function getSassOptions(
         options.syntax = "css";
       }
     }
+
+    options.importers = options.importers
+      ? Array.isArray(options.importers)
+        ? options.importers
+        : [options.importers]
+      : [];
   } else {
     options.file = resourcePath;
 
