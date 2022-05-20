@@ -9,7 +9,6 @@
 
 [![npm][npm]][npm-url]
 [![node][node]][node-url]
-[![deps][deps]][deps-url]
 [![tests][tests]][tests-url]
 [![coverage][cover]][cover-url]
 [![chat][chat]][chat-url]
@@ -852,8 +851,6 @@ Please take a moment to read our contributing guidelines if you haven't yet done
 [npm-url]: https://npmjs.com/package/sass-loader
 [node]: https://img.shields.io/node/v/sass-loader.svg
 [node-url]: https://nodejs.org
-[deps]: https://david-dm.org/webpack-contrib/sass-loader.svg
-[deps-url]: https://david-dm.org/webpack-contrib/sass-loader
 [tests]: https://github.com/webpack-contrib/sass-loader/workflows/sass-loader/badge.svg
 [tests-url]: https://github.com/webpack-contrib/sass-loader/actions
 [cover]: https://codecov.io/gh/webpack-contrib/sass-loader/branch/master/graph/badge.svg
