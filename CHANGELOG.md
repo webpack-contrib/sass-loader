@@ -59,7 +59,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 * allow `String` value for the `implementation` option ([382a3ca](https://github.com/webpack-contrib/sass-loader/commit/382a3ca7ca8b7041712de30ce5ad8e6532944c1b))
 
-## [12.0.0](https://github.com/webpack-contrib/sa automatically use thess-loader/compare/v11.1.1...v12.0.0) (2021-06-01)
+## [12.0.0](https://github.com/webpack-contrib/sass-loader/compare/v11.1.1...v12.0.0) (2021-06-01)
 
 
 ### ⚠ BREAKING CHANGES
