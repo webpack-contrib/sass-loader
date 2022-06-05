@@ -252,7 +252,6 @@ Using `~` means looking for files in [`node_modules`](https://webpack.js.org/con
 
 ### Features
 
-* automatically use the `fibers` package if it is possible ([#744](https://github.com/webpack-contrib/sass-loader/issues/744)) ([96184e1](https://github.com/webpack-contrib/sass-loader/commit/96184e1))
 * source map generation depends on the `devtool` option ([#743](https://github.com/webpack-contrib/sass-loader/issues/743)) ([fcea88e](https://github.com/webpack-contrib/sass-loader/commit/fcea88e))
 * validate loader options ([#737](https://github.com/webpack-contrib/sass-loader/issues/737)) ([7b543fc](https://github.com/webpack-contrib/sass-loader/commit/7b543fc))
 * reworked error handling from `node-sass`/`sass`

@@ -112,12 +112,6 @@ function proxyCustomImporters(importers, loaderContext) {
   );
 }
 
-function isSupportedFibers() {
-  const [nodeVersion] = process.versions.node.split(".");
-
-  return Number(nodeVersion) < 16;
-}
-
 /**
  * Derives the sass options from the loader context and normalizes its values with sane defaults.
  *
@@ -143,7 +137,6 @@ async function getSassOptions(
       : {}
   );
 
-  const isDartSass = implementation.info.includes("dart-sass");
   const isModernAPI = loaderOptions.api === "modern";
 
   options.data = loaderOptions.additionalData
@@ -232,32 +225,6 @@ async function getSassOptions(
       : [];
   } else {
     options.file = resourcePath;
-
-    if (isDartSass && isSupportedFibers()) {
-      const shouldTryToResolveFibers =
-        !options.fiber && options.fiber !== false;
-
-      if (shouldTryToResolveFibers) {
-        let fibers;
-
-        try {
-          fibers = require.resolve("fibers");
-        } catch (_error) {
-          // Nothing
-        }
-
-        if (fibers) {
-          // eslint-disable-next-line global-require, import/no-dynamic-require
-          options.fiber = require(fibers);
-        }
-      } else if (options.fiber === false) {
-        // Don't pass the `fiber` option for `sass` (`Dart Sass`)
-        delete options.fiber;
-      }
-    } else {
-      // Don't pass the `fiber` option for `node-sass`
-      delete options.fiber;
-    }
 
     // opt.outputStyle
     if (!options.outputStyle && isProductionLikeMode(loaderContext)) {
@@ -808,5 +775,4 @@ export {
   getWebpackImporter,
   getCompileFn,
   normalizeSourceMap,
-  isSupportedFibers,
 };
