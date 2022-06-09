@@ -1,3 +1,5 @@
+import { isSupportedFibers } from "../src/utils";
+
 import {
   compile,
   getCodeFromBundle,
@@ -9,10 +11,25 @@ import {
   getWarnings,
 } from "./helpers";
 
+let Fiber;
 const implementations = getImplementationsAndAPI();
 const syntaxStyles = ["scss", "sass"];
 
 describe("webpackImporter option", () => {
+  beforeAll(async () => {
+    if (isSupportedFibers()) {
+      const { default: fibers } = await import("fibers");
+      Fiber = fibers;
+    }
+  });
+
+  beforeEach(() => {
+    if (isSupportedFibers()) {
+      // The `sass` (`Dart Sass`) package modify the `Function` prototype, but the `jest` lose a prototype
+      Object.setPrototypeOf(Fiber, Function.prototype);
+    }
+  });
+
   implementations.forEach((item) => {
     syntaxStyles.forEach((syntax) => {
       const { name: implementationName, api, implementation } = item;

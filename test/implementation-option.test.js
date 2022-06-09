@@ -3,6 +3,8 @@ import dartSass from "sass";
 // eslint-disable-next-line import/no-namespace
 import * as sassEmbedded from "sass-embedded";
 
+import { isSupportedFibers } from "../src/utils";
+
 import {
   compile,
   getCodeFromBundle,
@@ -16,9 +18,25 @@ import {
 
 jest.setTimeout(30000);
 
+let Fiber;
 const implementations = [...getImplementationsAndAPI(), "sass_string"];
 
 describe("implementation option", () => {
+  beforeAll(async () => {
+    if (isSupportedFibers()) {
+      const { default: fibers } = await import("fibers");
+
+      Fiber = fibers;
+    }
+  });
+
+  beforeEach(() => {
+    if (isSupportedFibers()) {
+      // The `sass` (`Dart Sass`) package modify the `Function` prototype, but the `jest` lose a prototype
+      Object.setPrototypeOf(Fiber, Function.prototype);
+    }
+  });
+
   implementations.forEach((item) => {
     let implementationName;
     let implementation;

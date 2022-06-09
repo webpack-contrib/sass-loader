@@ -3,6 +3,8 @@ import url from "url";
 
 import del from "del";
 
+import { isSupportedFibers } from "../src/utils";
+
 import {
   compile,
   getCodeFromBundle,
@@ -16,10 +18,25 @@ import {
 
 jest.setTimeout(60000);
 
+let Fiber;
 const implementations = getImplementationsAndAPI();
 const syntaxStyles = ["scss", "sass"];
 
 describe("loader", () => {
+  beforeAll(async () => {
+    if (isSupportedFibers()) {
+      const { default: fibers } = await import("fibers");
+      Fiber = fibers;
+    }
+  });
+
+  beforeEach(() => {
+    if (isSupportedFibers()) {
+      // The `sass` (`Dart Sass`) package modify the `Function` prototype, but the `jest` lose a prototype
+      Object.setPrototypeOf(Fiber, Function.prototype);
+    }
+  });
+
   implementations.forEach((item) => {
     const { name: implementationName, api, implementation } = item;
     // TODO fix me https://github.com/webpack-contrib/sass-loader/issues/774

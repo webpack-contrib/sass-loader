@@ -1,6 +1,10 @@
 import path from "path";
 
 import globImporter from "node-sass-glob-importer";
+import semver from "semver";
+import dartSass from "sass";
+
+import { isSupportedFibers } from "../src/utils";
 
 import {
   compile,
@@ -17,10 +21,25 @@ import {
 
 jest.setTimeout(30000);
 
+let Fiber;
 const implementations = getImplementationsAndAPI();
 const syntaxStyles = ["scss", "sass"];
 
 describe("sassOptions option", () => {
+  beforeAll(async () => {
+    if (isSupportedFibers()) {
+      const { default: fibers } = await import("fibers");
+      Fiber = fibers;
+    }
+  });
+
+  beforeEach(() => {
+    if (isSupportedFibers()) {
+      // The `sass` (`Dart Sass`) package modify the `Function` prototype, but the `jest` lose a prototype
+      Object.setPrototypeOf(Fiber, Function.prototype);
+    }
+  });
+
   implementations.forEach((item) => {
     const { name: implementationName, api, implementation } = item;
     const isModernAPI = api === "modern";
@@ -397,6 +416,103 @@ describe("sassOptions option", () => {
           expect(codeFromBundle.css).toMatchSnapshot("css");
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
+        });
+      }
+
+      if (!isModernAPI) {
+        it(`should work with the "fiber" option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
+          const dartSassSpy = jest.spyOn(dartSass, "render");
+          const testId = getTestId("language", syntax);
+          const options = {
+            implementation,
+            api,
+            sassOptions: {},
+          };
+
+          if (
+            implementationName === "dart-sass" &&
+            semver.satisfies(process.version, ">= 10")
+          ) {
+            // eslint-disable-next-line global-require
+            options.sassOptions.fiber = Fiber;
+          }
+
+          const compiler = getCompiler(testId, { loader: { options } });
+          const stats = await compile(compiler);
+          const codeFromBundle = getCodeFromBundle(stats, compiler);
+          const codeFromSass = await getCodeFromSass(testId, options);
+
+          if (
+            implementationName === "dart-sass" &&
+            semver.satisfies(process.version, ">= 10") &&
+            isSupportedFibers()
+          ) {
+            expect(dartSassSpy.mock.calls[0][0]).toHaveProperty("fiber");
+          }
+
+          expect(codeFromBundle.css).toBe(codeFromSass.css);
+          expect(codeFromBundle.css).toMatchSnapshot("css");
+          expect(getWarnings(stats)).toMatchSnapshot("warnings");
+          expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          dartSassSpy.mockRestore();
+        });
+
+        it(`should use the "fibers" package if it is possible ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
+          const dartSassSpy = jest.spyOn(dartSass, "render");
+          const testId = getTestId("language", syntax);
+          const options = {
+            implementation,
+            api,
+            sassOptions: {},
+          };
+          const compiler = getCompiler(testId, { loader: { options } });
+          const stats = await compile(compiler);
+          const codeFromBundle = getCodeFromBundle(stats, compiler);
+          const codeFromSass = await getCodeFromSass(testId, options);
+
+          if (
+            implementationName === "dart-sass" &&
+            semver.satisfies(process.version, ">= 10") &&
+            isSupportedFibers()
+          ) {
+            expect(dartSassSpy.mock.calls[0][0]).toHaveProperty("fiber");
+          }
+
+          expect(codeFromBundle.css).toBe(codeFromSass.css);
+          expect(codeFromBundle.css).toMatchSnapshot("css");
+          expect(getWarnings(stats)).toMatchSnapshot("warnings");
+          expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          dartSassSpy.mockRestore();
+        });
+
+        it(`should don't use the "fibers" package when the "fiber" option is "false" ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
+          const dartSassSpy = jest.spyOn(dartSass, "render");
+          const testId = getTestId("language", syntax);
+          const options = {
+            implementation,
+            api,
+            sassOptions: { fiber: false },
+          };
+          const compiler = getCompiler(testId, { loader: { options } });
+          const stats = await compile(compiler);
+          const codeFromBundle = getCodeFromBundle(stats, compiler);
+          const codeFromSass = await getCodeFromSass(testId, options);
+
+          if (
+            implementationName === "dart-sass" &&
+            semver.satisfies(process.version, ">= 10")
+          ) {
+            expect(dartSassSpy.mock.calls[0][0]).not.toHaveProperty("fiber");
+          }
+
+          expect(codeFromBundle.css).toBe(codeFromSass.css);
+          expect(codeFromBundle.css).toMatchSnapshot("css");
+          expect(getWarnings(stats)).toMatchSnapshot("warnings");
+          expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          dartSassSpy.mockRestore();
         });
       }
 
