@@ -157,13 +157,15 @@ async function getSassOptions(
     const logger = loaderContext.getLogger("sass-loader");
     const formatSpan = (span) =>
       `${span.url || "-"}:${span.start.line}:${span.start.column}: `;
+    const formatDebugSpan = (span) => 
+      `[debug:${span.start.line}:${span.start.column}] `;
 
     options.logger = {
       debug(message, loggerOptions) {
         let builtMessage = "";
 
         if (loggerOptions.span) {
-          builtMessage = formatSpan(loggerOptions.span);
+          builtMessage = formatDebugSpan(loggerOptions.span);
         }
 
         builtMessage += message;
