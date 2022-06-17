@@ -42,11 +42,17 @@ pnpm add -D sass-loader sass webpack
 
 This allows you to control the versions of all your dependencies, and to choose which Sass implementation to use.
 
-> ℹ️ We highly recommend using [Dart Sass](https://github.com/sass/dart-sass).
+> **Note**
+>
+> We highly recommend using [Dart Sass](https://github.com/sass/dart-sass).
 
-> ⚠ [Node Sass](https://github.com/sass/node-sass) does not work with [Yarn PnP](https://classic.yarnpkg.com/en/docs/pnp/) feature and doesn't support [@use rule](https://sass-lang.com/documentation/at-rules/use).
+> **Warning**
+>
+> [Node Sass](https://github.com/sass/node-sass) does not work with [Yarn PnP](https://classic.yarnpkg.com/en/docs/pnp/) feature and doesn't support [@use rule](https://sass-lang.com/documentation/at-rules/use).
 
-> ⚠ [Sass Embedded](https://github.com/sass/embedded-host-node) is experimental and in `beta`, therefore some features may not work
+> **Warning**
+>
+> [Sass Embedded](https://github.com/sass/embedded-host-node) is experimental and in `beta`, therefore some features may not work
 
 Chain the `sass-loader` with the [css-loader](https://github.com/webpack-contrib/css-loader) and the [style-loader](https://github.com/webpack-contrib/style-loader) to immediately apply all styles to the DOM or the [mini-css-extract-plugin](https://github.com/webpack-contrib/mini-css-extract-plugin) to extract it into a separate file.
 
@@ -334,15 +340,23 @@ Default: defaults values for Sass implementation
 
 Options for [Dart Sass](http://sass-lang.com/dart-sass) or [Node Sass](https://github.com/sass/node-sass) implementation.
 
-> ℹ️ The `charset` option has `true` value by default for `dart-sass`, we strongly discourage change value to `false`, because webpack doesn't support files other than `utf-8`.
+> **Note**
+>
+> The `charset` option has `true` value by default for `dart-sass`, we strongly discourage change value to `false`, because webpack doesn't support files other than `utf-8`.
 
-> ℹ️ The `indentedSyntax` option has `true` value for the `sass` extension.
+> **Note**
+>
+> The `indentedSyntax` option has `true` value for the `sass` extension.
 
-> ℹ️ Options such as `data` and `file` are unavailable and will be ignored.
+> **Note**
+>
+> Options such as `data` and `file` are unavailable and will be ignored.
 
 > ℹ We strongly discourage change `outFile`, `sourceMapContents`, `sourceMapEmbed`, `sourceMapRoot` options because `sass-loader` automatically sets these options when the `sourceMap` option is `true`.
 
-> ℹ️ Access to the [loader context](https://webpack.js.org/api/loaders/#the-loader-context) inside the custom importer can be done using the `this.webpackLoaderContext` property.
+> **Note**
+>
+> Access to the [loader context](https://webpack.js.org/api/loaders/#the-loader-context) inside the custom importer can be done using the `this.webpackLoaderContext` property.
 
 There is a slight difference between the `sass` (`dart-sass`) and `node-sass` options.
 
@@ -661,7 +675,9 @@ Default: `false`
 
 Treats the `@warn` rule as a webpack warning.
 
-> ℹ️ It will be `true` by default in the next major release.
+> **Note**
+>
+> It will be `true` by default in the next major release.
 
 **style.scss**
 
@@ -725,9 +741,13 @@ Default: `"legacy"`
 
 Allows you to switch between `legacy` and `modern` API. You can find more information [here](https://sass-lang.com/documentation/js-api).
 
-> ⚠ "modern" API is experimental, so some features may not work (known: built-in `importer` is not working and files with errors is not watching on initial run), you can follow this [here](https://github.com/webpack-contrib/sass-loader/issues/774).
+> **Warning**
+>
+> "modern" API is experimental, so some features may not work (known: built-in `importer` is not working and files with errors is not watching on initial run), you can follow this [here](https://github.com/webpack-contrib/sass-loader/issues/774).
 
-> ⚠ The sass options are different for `modern` and `old` APIs. Please look at [docs](https://sass-lang.com/documentation/js-api) how to migrate on new options.
+> **Warning**
+>
+> The sass options are different for `modern` and `old` APIs. Please look at [docs](https://sass-lang.com/documentation/js-api) how to migrate on new options.
 
 **webpack.config.js**
 
