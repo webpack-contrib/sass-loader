@@ -780,13 +780,14 @@ module.exports = {
 
 Defaults, the output of `@debug` messages is disabled.
 To enable it, add to **webpack.config.js** following:
+
 ```js
 module.exports = {
   stats: {
-    loggingDebug: ['sass-loader'],
+    loggingDebug: ["sass-loader"],
   },
-  //...
-}
+  // ...
+};
 ```
 
 ## Examples

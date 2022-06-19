@@ -157,7 +157,7 @@ async function getSassOptions(
     const logger = loaderContext.getLogger("sass-loader");
     const formatSpan = (span) =>
       `${span.url || "-"}:${span.start.line}:${span.start.column}: `;
-    const formatDebugSpan = (span) => 
+    const formatDebugSpan = (span) =>
       `[debug:${span.start.line}:${span.start.column}] `;
 
     options.logger = {
