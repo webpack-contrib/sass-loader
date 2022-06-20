@@ -250,7 +250,9 @@ To avoid this overhead, you can use the [fibers](https://www.npmjs.com/package/f
 
 We automatically inject the [`fibers`](https://github.com/laverdet/node-fibers) package (setup `sassOptions.fiber`) for `Node.js` less v16.0.0 if is possible (i.e. you need install the [`fibers`](https://github.com/laverdet/node-fibers) package).
 
-> Fibers is not compatible with `Node.js` v16.0.0 or later ([see introduction to readme](https://github.com/laverdet/node-fibers)).
+> **Warning**
+>
+> Fibers is not compatible with `Node.js` v16.0.0 or later. Unfortunately, v8 commit [dacc2fee0f](https://github.com/v8/v8/commit/dacc2fee0f815823782a7e432c79c2a7767a4765) is a breaking change and workarounds are non-trivial. ([see introduction to readme](https://github.com/laverdet/node-fibers)).
 
 **package.json**
 
