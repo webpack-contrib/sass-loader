@@ -778,6 +778,20 @@ module.exports = {
 };
 ```
 
+## How to enable `@debug` output
+
+Defaults, the output of `@debug` messages is disabled.
+To enable it, add to **webpack.config.js** following:
+
+```js
+module.exports = {
+  stats: {
+    loggingDebug: ["sass-loader"],
+  },
+  // ...
+};
+```
+
 ## Examples
 
 ### Extracts CSS into separate files
