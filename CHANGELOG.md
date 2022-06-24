@@ -7,7 +7,6 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Bug Fixes
 
-* ci ([#1056](https://github.com/webpack-contrib/sass-loader/issues/1056)) ([9714899](https://github.com/webpack-contrib/sass-loader/commit/97148990bea7b66b0a273671794930749adb9f9c))
 * optimize debug message formatting, [#1065](https://github.com/webpack-contrib/sass-loader/issues/1065) ([#1066](https://github.com/webpack-contrib/sass-loader/issues/1066)) ([49a578a](https://github.com/webpack-contrib/sass-loader/commit/49a578a218574ddc92a597c7e365b6c21960717e))
 
 ## [13.0.0](https://github.com/webpack-contrib/sass-loader/compare/v12.6.0...v13.0.0) (2022-05-18)
