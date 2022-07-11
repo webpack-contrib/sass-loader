@@ -1,9 +1,9 @@
-import nodeSass from "node-sass";
-import dartSass from "sass";
+const nodeSass = require("node-sass");
+const dartSass = require("sass");
 // eslint-disable-next-line import/no-namespace
-import * as SassEmbedded from "sass-embedded";
+const SassEmbedded = require("sass-embedded");
 
-export default function getImplementationsAndAPI() {
+module.exports = function getImplementationsAndAPI() {
   return [
     {
       name: nodeSass.info.split("\t")[0],
@@ -31,4 +31,4 @@ export default function getImplementationsAndAPI() {
       api: "modern",
     },
   ];
-}
+};

@@ -1,11 +1,11 @@
-import nodeSass from "node-sass";
-import dartSass from "sass";
+const nodeSass = require("node-sass");
+const dartSass = require("sass");
 // eslint-disable-next-line import/no-namespace
-import * as sassEmbedded from "sass-embedded";
+const sassEmbedded = require("sass-embedded");
 
-import { isSupportedFibers } from "../src/utils";
+const { isSupportedFibers } = require("../src/utils");
 
-import {
+const {
   compile,
   getCodeFromBundle,
   getCompiler,
@@ -14,7 +14,7 @@ import {
   getImplementationsAndAPI,
   getTestId,
   getWarnings,
-} from "./helpers";
+} = require("./helpers");
 
 jest.setTimeout(30000);
 
@@ -24,7 +24,7 @@ const implementations = [...getImplementationsAndAPI(), "sass_string"];
 describe("implementation option", () => {
   beforeAll(async () => {
     if (isSupportedFibers()) {
-      const { default: fibers } = await import("fibers");
+      const fibers = await require("fibers");
 
       Fiber = fibers;
     }

@@ -11,15 +11,11 @@
     "type": "opencollective",
     "url": "https://opencollective.com/webpack"
   },
-  "main": "dist/cjs.js",
+  "main": "src/cjs.js",
   "engines": {
     "node": ">= 14.15.0"
   },
   "scripts": {
-    "start": "npm run build -- -w",
-    "clean": "del-cli dist",
-    "prebuild": "npm run clean",
-    "build": "cross-env NODE_ENV=production babel src -d dist --copy-files",
     "commitlint": "commitlint --from=master",
     "security": "npm audit --production",
     "lint:prettier": "prettier --list-different .",
@@ -31,11 +27,11 @@
     "test:coverage": "npm run test:only -- --collectCoverageFrom=\"src/**/*.js\" --coverage",
     "pretest": "npm run lint",
     "test": "npm run test:coverage",
-    "prepare": "husky install && npm run build",
+    "prepare": "husky install",
     "release": "standard-version"
   },
   "files": [
-    "dist"
+    "src"
   ],
   "peerDependencies": {
     "fibers": ">= 3.1.0",
@@ -63,13 +59,9 @@
     "neo-async": "^2.6.2"
   },
   "devDependencies": {
-    "@babel/cli": "^7.18.6",
-    "@babel/core": "^7.18.6",
-    "@babel/preset-env": "^7.18.6",
     "@commitlint/cli": "^17.0.3",
     "@commitlint/config-conventional": "^17.0.3",
     "@webpack-contrib/eslint-config-webpack": "^3.0.0",
-    "babel-jest": "^28.1.2",
     "bootstrap-sass": "^3.4.1",
     "bootstrap-v4": "npm:bootstrap@^4.5.3",
     "bootstrap-v5": "npm:bootstrap@^5.0.1",

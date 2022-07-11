@@ -1,16 +1,16 @@
-import url from "url";
-import path from "path";
+const url = require("url");
+const path = require("path");
 
-import schema from "./options.json";
-import {
+const schema = require("./options.json");
+const {
   getSassImplementation,
   getSassOptions,
   getWebpackImporter,
   getModernWebpackImporter,
   getCompileFn,
   normalizeSourceMap,
-} from "./utils";
-import SassError from "./SassError";
+} = require("./utils");
+const SassError = require("./SassError");
 
 /**
  * The sass-loader makes node-sass and dart-sass available to webpack modules.
@@ -124,4 +124,4 @@ async function loader(content) {
   callback(null, result.css.toString(), map);
 }
 
-export default loader;
+module.exports = loader;

@@ -12,4 +12,4 @@ function getImplementationByName(implementationName) {
   throw new Error(`Can't find ${implementationName}`);
 }
 
-export default getImplementationByName;
+module.exports = getImplementationByName;

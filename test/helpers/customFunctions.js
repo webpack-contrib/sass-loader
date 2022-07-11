@@ -1,4 +1,4 @@
-export default (api, implementation) => {
+module.exports = (api, implementation) => {
   if (api === "modern") {
     return {
       // Note: in real code, you should use `math.pow()` from the built-in

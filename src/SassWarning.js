@@ -14,4 +14,4 @@ class SassWarning extends Error {
   }
 }
 
-export default SassWarning;
+module.exports = SassWarning;

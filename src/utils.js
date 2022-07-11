@@ -1,10 +1,10 @@
-import url from "url";
-import path from "path";
+const url = require("url");
+const path = require("path");
 
-import { klona } from "klona/full";
-import async from "neo-async";
+const { klona } = require("klona/full");
+const async = require("neo-async");
 
-import SassWarning from "./SassWarning";
+const SassWarning = require("./SassWarning");
 
 function getDefaultSassImplementation() {
   let sassImplPkg = "sass";
@@ -802,7 +802,7 @@ function normalizeSourceMap(map, rootContext) {
   return newMap;
 }
 
-export {
+module.exports = {
   getSassImplementation,
   getSassOptions,
   getModernWebpackImporter,

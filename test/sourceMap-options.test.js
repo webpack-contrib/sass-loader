@@ -1,10 +1,10 @@
-import fs from "fs";
-import path from "path";
-import url from "url";
+const fs = require("fs");
+const path = require("path");
+const url = require("url");
 
-import { isSupportedFibers } from "../src/utils";
+const { isSupportedFibers } = require("../src/utils");
 
-import {
+const {
   compile,
   getCodeFromBundle,
   getCompiler,
@@ -12,7 +12,7 @@ import {
   getImplementationsAndAPI,
   getTestId,
   getWarnings,
-} from "./helpers";
+} = require("./helpers");
 
 let Fiber;
 const implementations = getImplementationsAndAPI();
@@ -21,7 +21,7 @@ const syntaxStyles = ["scss", "sass"];
 describe("sourceMap option", () => {
   beforeAll(async () => {
     if (isSupportedFibers()) {
-      const { default: fibers } = await import("fibers");
+      const fibers = await require("fibers");
       Fiber = fibers;
     }
   });

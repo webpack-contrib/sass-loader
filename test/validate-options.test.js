@@ -1,18 +1,18 @@
-import { isSupportedFibers } from "../src/utils";
+const { isSupportedFibers } = require("../src/utils");
 
-import {
+const {
   getCompiler,
   compile,
   getTestId,
   getImplementationByName,
-} from "./helpers/index";
+} = require("./helpers/index");
 
 let Fiber;
 
 describe("validate options", () => {
   beforeAll(async () => {
     if (isSupportedFibers()) {
-      const { default: fibers } = await import("fibers");
+      const fibers = await require("fibers");
 
       Fiber = fibers;
     }

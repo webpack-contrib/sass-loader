@@ -12,7 +12,7 @@ function removeCWD(str) {
   return str.replace(new RegExp(cwd, "g"), "");
 }
 
-export default (errors) =>
+module.exports = (errors) =>
   errors.map((error) =>
     removeCWD(error.toString().split("\n").slice(0, 2).join("\n"))
   );

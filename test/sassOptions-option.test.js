@@ -1,12 +1,12 @@
-import path from "path";
+const path = require("path");
 
-import globImporter from "node-sass-glob-importer";
-import semver from "semver";
-import dartSass from "sass";
+const globImporter = require("node-sass-glob-importer");
+const semver = require("semver");
+const dartSass = require("sass");
 
-import { isSupportedFibers } from "../src/utils";
+const { isSupportedFibers } = require("../src/utils");
 
-import {
+const {
   compile,
   customImporter,
   customFunctions,
@@ -17,7 +17,7 @@ import {
   getWarnings,
   getCompiler,
   getImplementationsAndAPI,
-} from "./helpers";
+} = require("./helpers");
 
 jest.setTimeout(30000);
 
@@ -28,7 +28,7 @@ const syntaxStyles = ["scss", "sass"];
 describe("sassOptions option", () => {
   beforeAll(async () => {
     if (isSupportedFibers()) {
-      const { default: fibers } = await import("fibers");
+      const fibers = await require("fibers");
       Fiber = fibers;
     }
   });

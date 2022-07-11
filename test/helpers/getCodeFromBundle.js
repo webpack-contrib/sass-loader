@@ -1,6 +1,6 @@
-import vm from "vm";
+const vm = require("vm");
 
-import readAsset from "./readAsset";
+const readAsset = require("./readAsset");
 
 function getCodeFromBundle(stats, compiler, asset) {
   let code = null;
@@ -25,7 +25,7 @@ function getCodeFromBundle(stats, compiler, asset) {
     }
   );
 
-  return result.default;
+  return result;
 }
 
-export default getCodeFromBundle;
+module.exports = getCodeFromBundle;

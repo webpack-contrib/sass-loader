@@ -33,4 +33,4 @@ class SassError extends Error {
   }
 }
 
-export default SassError;
+module.exports = SassError;

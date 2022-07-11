@@ -1,3 +1,3 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-import "bootstrap-v4";
-import "./style.scss";
+require("bootstrap-v4");
+require("./style.scss");

@@ -1,8 +1,8 @@
-import url from "url";
-import path from "path";
-import fs from "fs";
+const url = require("url");
+const path = require("path");
+const fs = require("fs");
 
-import { klona } from "klona/full";
+const { klona } = require("klona/full");
 
 async function getCodeFromSass(testId, options) {
   const loaderOptions = klona(options);
@@ -830,4 +830,4 @@ async function getCodeFromSass(testId, options) {
   return { css: css.toString(), sourceMap: map };
 }
 
-export default getCodeFromSass;
+module.exports = getCodeFromSass;

@@ -1,9 +1,9 @@
-import { fileURLToPath } from "url";
+const { fileURLToPath } = require("url");
 
-import enhanced from "enhanced-resolve";
-import sass from "sass";
+const enhanced = require("enhanced-resolve");
+const sass = require("sass");
 
-import { getWebpackResolver } from "../src/utils";
+const { getWebpackResolver } = require("../src/utils");
 
 /**
  * Because `getWebpackResolver` is a public function that can be imported by

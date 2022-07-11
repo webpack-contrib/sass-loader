@@ -1,8 +1,8 @@
-import url from "url";
+const url = require("url");
 
-import { isSupportedFibers } from "../src/utils";
+const { isSupportedFibers } = require("../src/utils");
 
-import {
+const {
   compile,
   getCodeFromBundle,
   getCodeFromSass,
@@ -11,7 +11,7 @@ import {
   getImplementationsAndAPI,
   getTestId,
   getWarnings,
-} from "./helpers";
+} = require("./helpers");
 
 jest.setTimeout(60000);
 
@@ -22,7 +22,7 @@ const syntaxStyles = ["scss", "sass"];
 describe("loader", () => {
   beforeAll(async () => {
     if (isSupportedFibers()) {
-      const { default: fibers } = await import("fibers");
+      const fibers = await require("fibers");
 
       Fiber = fibers;
     }

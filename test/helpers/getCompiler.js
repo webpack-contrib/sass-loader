@@ -1,10 +1,10 @@
-import path from "path";
+const path = require("path");
 
-import webpack from "webpack";
-import { createFsFromVolume, Volume } from "memfs";
-import del from "del";
+const webpack = require("webpack");
+const { createFsFromVolume, Volume } = require("memfs");
+const del = require("del");
 
-const module = (config) => {
+const moduleConfig = (config) => {
   return {
     rules: config.rules
       ? config.rules
@@ -39,7 +39,7 @@ const output = (config) => {
   };
 };
 
-export default function getCompiler(fixture, config = {}, options = {}) {
+module.exports = function getCompiler(fixture, config = {}, options = {}) {
   // webpack Config
   // eslint-disable-next-line no-param-reassign
   config = {
@@ -50,7 +50,7 @@ export default function getCompiler(fixture, config = {}, options = {}) {
     context: path.resolve(__dirname, ".."),
     entry: config.entry || `./${fixture}`,
     output: output(config),
-    module: module(config),
+    module: moduleConfig(config),
     plugins: plugins(config),
     optimization: {
       runtimeChunk: false,
@@ -75,4 +75,4 @@ export default function getCompiler(fixture, config = {}, options = {}) {
   }
 
   return compiler;
-}
+};

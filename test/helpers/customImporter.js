@@ -17,4 +17,4 @@ customImporter.returnValue = {
   contents: ".custom-imported {}",
 };
 
-export default customImporter;
+module.exports = customImporter;
