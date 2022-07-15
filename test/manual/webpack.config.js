@@ -19,7 +19,7 @@ module.exports = {
             },
           },
           {
-            loader: require.resolve("../../dist/cjs.js"),
+            loader: require.resolve("../../dist/index.js"),
             options: {
               implementation: process.env.SASS_IMPLEMENTATION
                 ? // eslint-disable-next-line global-require, import/no-dynamic-require
