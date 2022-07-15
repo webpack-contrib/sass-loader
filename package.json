@@ -11,7 +11,7 @@
     "type": "opencollective",
     "url": "https://opencollective.com/webpack"
   },
-  "main": "src/cjs.js",
+  "main": "src/index.js",
   "engines": {
     "node": ">= 14.15.0"
   },
