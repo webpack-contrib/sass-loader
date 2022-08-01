@@ -798,10 +798,47 @@ module.exports = {
 
 For production builds it's recommended to extract the CSS from your bundle being able to use parallel loading of CSS/JS resources later on.
 
-There are two possibilities to extract a style sheet from the bundle:
+There are three possibilities to extract a style sheet from the bundle:
 
-- [mini-css-extract-plugin](https://github.com/webpack-contrib/mini-css-extract-plugin)
-- [extract-loader](https://github.com/peerigon/extract-loader) (simpler, but specialized on the css-loader's output)
+#### 1. [file-loader](https://github.com/webpack-contrib/file-loader)
+
+**webpack.config.js**
+```js
+const path = require('path');
+
+module.exports = {
+    entry: [
+        __dirname + '/src/js/app.js',
+        __dirname + '/src/scss/app.scss'
+    ],
+    output: {
+        path: path.resolve(__dirname, 'dist'), 
+        filename: 'js/app.min.js',
+    },
+    module: {
+        rules: [
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: [],
+            }, {
+                test: /\.scss$/,
+                exclude: /node_modules/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: { outputPath: 'css/', name: '[name].min.css'}
+                    },
+                    'sass-loader'
+                ]
+            }
+        ]
+    }
+};
+```
+(source: https://stackoverflow.com/a/60029923/2969615)
+
+#### 2. [mini-css-extract-plugin](https://github.com/webpack-contrib/mini-css-extract-plugin)
 
 **webpack.config.js**
 
@@ -834,6 +871,9 @@ module.exports = {
   ],
 };
 ```
+
+#### 3. [extract-loader](https://github.com/peerigon/extract-loader) (simpler, but specialized on the css-loader's output)
+
 
 ### Source maps
 
