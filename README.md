@@ -800,35 +800,7 @@ For production builds it's recommended to extract the CSS from your bundle being
 
 There are four possibilities to extract a style sheet from the bundle:
 
-#### 1. [Asset Modules](https://webpack.js.org/guides/asset-modules/)
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  entry: [__dirname + "/src/scss/app.scss"],
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: [],
-      },
-      {
-        test: /\.scss$/,
-        exclude: /node_modules/,
-        type: "asset/resource",
-        generator: {
-          filename: "bundle.css",
-        },
-        use: ["sass-loader"],
-      },
-    ],
-  },
-};
-```
-
-#### 2. [mini-css-extract-plugin](https://github.com/webpack-contrib/mini-css-extract-plugin)
+#### 1. [mini-css-extract-plugin](https://github.com/webpack-contrib/mini-css-extract-plugin)
 
 **webpack.config.js**
 
@@ -859,6 +831,34 @@ module.exports = {
       chunkFilename: "[id].css",
     }),
   ],
+};
+```
+
+#### 2. [Asset Modules](https://webpack.js.org/guides/asset-modules/)
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  entry: [__dirname + "/src/scss/app.scss"],
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: [],
+      },
+      {
+        test: /\.scss$/,
+        exclude: /node_modules/,
+        type: "asset/resource",
+        generator: {
+          filename: "bundle.css",
+        },
+        use: ["sass-loader"],
+      },
+    ],
+  },
 };
 ```
 
