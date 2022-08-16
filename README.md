@@ -803,30 +803,28 @@ There are four possibilities to extract a style sheet from the bundle:
 #### 1. [Asset Modules](https://webpack.js.org/guides/asset-modules/)
 
 **webpack.config.js**
+
 ```js
 module.exports = {
-    entry: [
-        __dirname + '/src/scss/app.scss'
+  entry: [__dirname + "/src/scss/app.scss"],
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: [],
+      },
+      {
+        test: /\.scss$/,
+        exclude: /node_modules/,
+        type: "asset/resource",
+        generator: {
+          filename: "bundle.css",
+        },
+        use: ["sass-loader"],
+      },
     ],
-    module: {
-        rules: [
-            {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                use: [],
-            }, {
-                test: /\.scss$/,
-                exclude: /node_modules/,
-				type: 'asset/resource',
-				generator: {
-					filename: 'bundle.css'
-				},
-				use: [
-					'sass-loader'
-				]
-            }
-        ]
-    }
+  },
 };
 ```
 
@@ -869,34 +867,34 @@ module.exports = {
 #### 4. [file-loader](https://github.com/webpack-contrib/file-loader) (deprecated--should only be used in Webpack v4)
 
 **webpack.config.js**
+
 ```js
 module.exports = {
-    entry: [
-        __dirname + '/src/scss/app.scss'
+  entry: [__dirname + "/src/scss/app.scss"],
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: [],
+      },
+      {
+        test: /\.scss$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: "file-loader",
+            options: { outputPath: "css/", name: "[name].min.css" },
+          },
+          "sass-loader",
+        ],
+      },
     ],
-    module: {
-        rules: [
-            {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                use: [],
-            }, {
-                test: /\.scss$/,
-                exclude: /node_modules/,
-                use: [
-                    {
-                        loader: 'file-loader',
-                        options: { outputPath: 'css/', name: '[name].min.css'}
-                    },
-                    'sass-loader'
-                ]
-            }
-        ]
-    }
+  },
 };
 ```
-(source: https://stackoverflow.com/a/60029923/2969615)
 
+(source: https://stackoverflow.com/a/60029923/2969615)
 
 ### Source maps
 
