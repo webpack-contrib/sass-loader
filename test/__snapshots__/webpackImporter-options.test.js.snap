@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`webpackImporter option false ('dart-sass', 'legacy' API, 'sass' syntax): css 1`] = `
-"@charset \\"UTF-8\\";
-@import \\"./file.css\\";
+"@charset "UTF-8";
+@import "./file.css";
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -48,21 +48,21 @@ nav a {
 }
 
 .foo:before {
-  content: \\"\\\\e0c6\\";
+  content: "\\e0c6";
 }
 
 .bar:before {
-  content: \\"∑\\";
+  content: "∑";
 }"
 `;
 
-exports[`webpackImporter option false ('dart-sass', 'legacy' API, 'sass' syntax): errors 1`] = `Array []`;
+exports[`webpackImporter option false ('dart-sass', 'legacy' API, 'sass' syntax): errors 1`] = `[]`;
 
-exports[`webpackImporter option false ('dart-sass', 'legacy' API, 'sass' syntax): warnings 1`] = `Array []`;
+exports[`webpackImporter option false ('dart-sass', 'legacy' API, 'sass' syntax): warnings 1`] = `[]`;
 
 exports[`webpackImporter option false ('dart-sass', 'legacy' API, 'scss' syntax): css 1`] = `
-"@charset \\"UTF-8\\";
-@import \\"./file.css\\";
+"@charset "UTF-8";
+@import "./file.css";
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -90,20 +90,20 @@ nav a {
 }
 
 .foo:before {
-  content: \\"\\\\e0c6\\";
+  content: "\\e0c6";
 }
 
 .bar:before {
-  content: \\"∑\\";
+  content: "∑";
 }"
 `;
 
-exports[`webpackImporter option false ('dart-sass', 'legacy' API, 'scss' syntax): errors 1`] = `Array []`;
+exports[`webpackImporter option false ('dart-sass', 'legacy' API, 'scss' syntax): errors 1`] = `[]`;
 
-exports[`webpackImporter option false ('dart-sass', 'legacy' API, 'scss' syntax): warnings 1`] = `Array []`;
+exports[`webpackImporter option false ('dart-sass', 'legacy' API, 'scss' syntax): warnings 1`] = `[]`;
 
 exports[`webpackImporter option false ('node-sass', 'legacy' API, 'sass' syntax): css 1`] = `
-"@charset \\"UTF-8\\";
+"@charset "UTF-8";
 @import url(./file.css);
 body {
   font: 100% Helvetica, sans-serif;
@@ -143,19 +143,19 @@ nav a {
   border-color: yellow; }
 
 .foo:before {
-  content: \\"\\"; }
+  content: ""; }
 
 .bar:before {
-  content: \\"∑\\"; }
+  content: "∑"; }
 "
 `;
 
-exports[`webpackImporter option false ('node-sass', 'legacy' API, 'sass' syntax): errors 1`] = `Array []`;
+exports[`webpackImporter option false ('node-sass', 'legacy' API, 'sass' syntax): errors 1`] = `[]`;
 
-exports[`webpackImporter option false ('node-sass', 'legacy' API, 'sass' syntax): warnings 1`] = `Array []`;
+exports[`webpackImporter option false ('node-sass', 'legacy' API, 'sass' syntax): warnings 1`] = `[]`;
 
 exports[`webpackImporter option false ('node-sass', 'legacy' API, 'scss' syntax): css 1`] = `
-"@charset \\"UTF-8\\";
+"@charset "UTF-8";
 @import url(./file.css);
 body {
   font: 100% Helvetica, sans-serif;
@@ -181,20 +181,20 @@ nav a {
   border-radius: 10px; }
 
 .foo:before {
-  content: \\"\\"; }
+  content: ""; }
 
 .bar:before {
-  content: \\"∑\\"; }
+  content: "∑"; }
 "
 `;
 
-exports[`webpackImporter option false ('node-sass', 'legacy' API, 'scss' syntax): errors 1`] = `Array []`;
+exports[`webpackImporter option false ('node-sass', 'legacy' API, 'scss' syntax): errors 1`] = `[]`;
 
-exports[`webpackImporter option false ('node-sass', 'legacy' API, 'scss' syntax): warnings 1`] = `Array []`;
+exports[`webpackImporter option false ('node-sass', 'legacy' API, 'scss' syntax): warnings 1`] = `[]`;
 
 exports[`webpackImporter option false ('sass-embedded', 'legacy' API, 'sass' syntax): css 1`] = `
-"@charset \\"UTF-8\\";
-@import \\"./file.css\\";
+"@charset "UTF-8";
+@import "./file.css";
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -240,21 +240,21 @@ nav a {
 }
 
 .foo:before {
-  content: \\"\\\\e0c6\\";
+  content: "\\e0c6";
 }
 
 .bar:before {
-  content: \\"∑\\";
+  content: "∑";
 }"
 `;
 
-exports[`webpackImporter option false ('sass-embedded', 'legacy' API, 'sass' syntax): errors 1`] = `Array []`;
+exports[`webpackImporter option false ('sass-embedded', 'legacy' API, 'sass' syntax): errors 1`] = `[]`;
 
-exports[`webpackImporter option false ('sass-embedded', 'legacy' API, 'sass' syntax): warnings 1`] = `Array []`;
+exports[`webpackImporter option false ('sass-embedded', 'legacy' API, 'sass' syntax): warnings 1`] = `[]`;
 
 exports[`webpackImporter option false ('sass-embedded', 'legacy' API, 'scss' syntax): css 1`] = `
-"@charset \\"UTF-8\\";
-@import \\"./file.css\\";
+"@charset "UTF-8";
+@import "./file.css";
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -282,21 +282,21 @@ nav a {
 }
 
 .foo:before {
-  content: \\"\\\\e0c6\\";
+  content: "\\e0c6";
 }
 
 .bar:before {
-  content: \\"∑\\";
+  content: "∑";
 }"
 `;
 
-exports[`webpackImporter option false ('sass-embedded', 'legacy' API, 'scss' syntax): errors 1`] = `Array []`;
+exports[`webpackImporter option false ('sass-embedded', 'legacy' API, 'scss' syntax): errors 1`] = `[]`;
 
-exports[`webpackImporter option false ('sass-embedded', 'legacy' API, 'scss' syntax): warnings 1`] = `Array []`;
+exports[`webpackImporter option false ('sass-embedded', 'legacy' API, 'scss' syntax): warnings 1`] = `[]`;
 
 exports[`webpackImporter option not specify ('dart-sass', 'legacy' API, 'sass' syntax): css 1`] = `
-"@charset \\"UTF-8\\";
-@import \\"./file.css\\";
+"@charset "UTF-8";
+@import "./file.css";
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -342,21 +342,21 @@ nav a {
 }
 
 .foo:before {
-  content: \\"\\\\e0c6\\";
+  content: "\\e0c6";
 }
 
 .bar:before {
-  content: \\"∑\\";
+  content: "∑";
 }"
 `;
 
-exports[`webpackImporter option not specify ('dart-sass', 'legacy' API, 'sass' syntax): errors 1`] = `Array []`;
+exports[`webpackImporter option not specify ('dart-sass', 'legacy' API, 'sass' syntax): errors 1`] = `[]`;
 
-exports[`webpackImporter option not specify ('dart-sass', 'legacy' API, 'sass' syntax): warnings 1`] = `Array []`;
+exports[`webpackImporter option not specify ('dart-sass', 'legacy' API, 'sass' syntax): warnings 1`] = `[]`;
 
 exports[`webpackImporter option not specify ('dart-sass', 'legacy' API, 'scss' syntax): css 1`] = `
-"@charset \\"UTF-8\\";
-@import \\"./file.css\\";
+"@charset "UTF-8";
+@import "./file.css";
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -384,20 +384,20 @@ nav a {
 }
 
 .foo:before {
-  content: \\"\\\\e0c6\\";
+  content: "\\e0c6";
 }
 
 .bar:before {
-  content: \\"∑\\";
+  content: "∑";
 }"
 `;
 
-exports[`webpackImporter option not specify ('dart-sass', 'legacy' API, 'scss' syntax): errors 1`] = `Array []`;
+exports[`webpackImporter option not specify ('dart-sass', 'legacy' API, 'scss' syntax): errors 1`] = `[]`;
 
-exports[`webpackImporter option not specify ('dart-sass', 'legacy' API, 'scss' syntax): warnings 1`] = `Array []`;
+exports[`webpackImporter option not specify ('dart-sass', 'legacy' API, 'scss' syntax): warnings 1`] = `[]`;
 
 exports[`webpackImporter option not specify ('node-sass', 'legacy' API, 'sass' syntax): css 1`] = `
-"@charset \\"UTF-8\\";
+"@charset "UTF-8";
 @import url(./file.css);
 body {
   font: 100% Helvetica, sans-serif;
@@ -437,19 +437,19 @@ nav a {
   border-color: yellow; }
 
 .foo:before {
-  content: \\"\\"; }
+  content: ""; }
 
 .bar:before {
-  content: \\"∑\\"; }
+  content: "∑"; }
 "
 `;
 
-exports[`webpackImporter option not specify ('node-sass', 'legacy' API, 'sass' syntax): errors 1`] = `Array []`;
+exports[`webpackImporter option not specify ('node-sass', 'legacy' API, 'sass' syntax): errors 1`] = `[]`;
 
-exports[`webpackImporter option not specify ('node-sass', 'legacy' API, 'sass' syntax): warnings 1`] = `Array []`;
+exports[`webpackImporter option not specify ('node-sass', 'legacy' API, 'sass' syntax): warnings 1`] = `[]`;
 
 exports[`webpackImporter option not specify ('node-sass', 'legacy' API, 'scss' syntax): css 1`] = `
-"@charset \\"UTF-8\\";
+"@charset "UTF-8";
 @import url(./file.css);
 body {
   font: 100% Helvetica, sans-serif;
@@ -475,20 +475,20 @@ nav a {
   border-radius: 10px; }
 
 .foo:before {
-  content: \\"\\"; }
+  content: ""; }
 
 .bar:before {
-  content: \\"∑\\"; }
+  content: "∑"; }
 "
 `;
 
-exports[`webpackImporter option not specify ('node-sass', 'legacy' API, 'scss' syntax): errors 1`] = `Array []`;
+exports[`webpackImporter option not specify ('node-sass', 'legacy' API, 'scss' syntax): errors 1`] = `[]`;
 
-exports[`webpackImporter option not specify ('node-sass', 'legacy' API, 'scss' syntax): warnings 1`] = `Array []`;
+exports[`webpackImporter option not specify ('node-sass', 'legacy' API, 'scss' syntax): warnings 1`] = `[]`;
 
 exports[`webpackImporter option not specify ('sass-embedded', 'legacy' API, 'sass' syntax): css 1`] = `
-"@charset \\"UTF-8\\";
-@import \\"./file.css\\";
+"@charset "UTF-8";
+@import "./file.css";
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -534,21 +534,21 @@ nav a {
 }
 
 .foo:before {
-  content: \\"\\\\e0c6\\";
+  content: "\\e0c6";
 }
 
 .bar:before {
-  content: \\"∑\\";
+  content: "∑";
 }"
 `;
 
-exports[`webpackImporter option not specify ('sass-embedded', 'legacy' API, 'sass' syntax): errors 1`] = `Array []`;
+exports[`webpackImporter option not specify ('sass-embedded', 'legacy' API, 'sass' syntax): errors 1`] = `[]`;
 
-exports[`webpackImporter option not specify ('sass-embedded', 'legacy' API, 'sass' syntax): warnings 1`] = `Array []`;
+exports[`webpackImporter option not specify ('sass-embedded', 'legacy' API, 'sass' syntax): warnings 1`] = `[]`;
 
 exports[`webpackImporter option not specify ('sass-embedded', 'legacy' API, 'scss' syntax): css 1`] = `
-"@charset \\"UTF-8\\";
-@import \\"./file.css\\";
+"@charset "UTF-8";
+@import "./file.css";
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -576,21 +576,21 @@ nav a {
 }
 
 .foo:before {
-  content: \\"\\\\e0c6\\";
+  content: "\\e0c6";
 }
 
 .bar:before {
-  content: \\"∑\\";
+  content: "∑";
 }"
 `;
 
-exports[`webpackImporter option not specify ('sass-embedded', 'legacy' API, 'scss' syntax): errors 1`] = `Array []`;
+exports[`webpackImporter option not specify ('sass-embedded', 'legacy' API, 'scss' syntax): errors 1`] = `[]`;
 
-exports[`webpackImporter option not specify ('sass-embedded', 'legacy' API, 'scss' syntax): warnings 1`] = `Array []`;
+exports[`webpackImporter option not specify ('sass-embedded', 'legacy' API, 'scss' syntax): warnings 1`] = `[]`;
 
 exports[`webpackImporter option true ('dart-sass', 'legacy' API, 'sass' syntax): css 1`] = `
-"@charset \\"UTF-8\\";
-@import \\"./file.css\\";
+"@charset "UTF-8";
+@import "./file.css";
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -636,21 +636,21 @@ nav a {
 }
 
 .foo:before {
-  content: \\"\\\\e0c6\\";
+  content: "\\e0c6";
 }
 
 .bar:before {
-  content: \\"∑\\";
+  content: "∑";
 }"
 `;
 
-exports[`webpackImporter option true ('dart-sass', 'legacy' API, 'sass' syntax): errors 1`] = `Array []`;
+exports[`webpackImporter option true ('dart-sass', 'legacy' API, 'sass' syntax): errors 1`] = `[]`;
 
-exports[`webpackImporter option true ('dart-sass', 'legacy' API, 'sass' syntax): warnings 1`] = `Array []`;
+exports[`webpackImporter option true ('dart-sass', 'legacy' API, 'sass' syntax): warnings 1`] = `[]`;
 
 exports[`webpackImporter option true ('dart-sass', 'legacy' API, 'scss' syntax): css 1`] = `
-"@charset \\"UTF-8\\";
-@import \\"./file.css\\";
+"@charset "UTF-8";
+@import "./file.css";
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -678,20 +678,20 @@ nav a {
 }
 
 .foo:before {
-  content: \\"\\\\e0c6\\";
+  content: "\\e0c6";
 }
 
 .bar:before {
-  content: \\"∑\\";
+  content: "∑";
 }"
 `;
 
-exports[`webpackImporter option true ('dart-sass', 'legacy' API, 'scss' syntax): errors 1`] = `Array []`;
+exports[`webpackImporter option true ('dart-sass', 'legacy' API, 'scss' syntax): errors 1`] = `[]`;
 
-exports[`webpackImporter option true ('dart-sass', 'legacy' API, 'scss' syntax): warnings 1`] = `Array []`;
+exports[`webpackImporter option true ('dart-sass', 'legacy' API, 'scss' syntax): warnings 1`] = `[]`;
 
 exports[`webpackImporter option true ('node-sass', 'legacy' API, 'sass' syntax): css 1`] = `
-"@charset \\"UTF-8\\";
+"@charset "UTF-8";
 @import url(./file.css);
 body {
   font: 100% Helvetica, sans-serif;
@@ -731,19 +731,19 @@ nav a {
   border-color: yellow; }
 
 .foo:before {
-  content: \\"\\"; }
+  content: ""; }
 
 .bar:before {
-  content: \\"∑\\"; }
+  content: "∑"; }
 "
 `;
 
-exports[`webpackImporter option true ('node-sass', 'legacy' API, 'sass' syntax): errors 1`] = `Array []`;
+exports[`webpackImporter option true ('node-sass', 'legacy' API, 'sass' syntax): errors 1`] = `[]`;
 
-exports[`webpackImporter option true ('node-sass', 'legacy' API, 'sass' syntax): warnings 1`] = `Array []`;
+exports[`webpackImporter option true ('node-sass', 'legacy' API, 'sass' syntax): warnings 1`] = `[]`;
 
 exports[`webpackImporter option true ('node-sass', 'legacy' API, 'scss' syntax): css 1`] = `
-"@charset \\"UTF-8\\";
+"@charset "UTF-8";
 @import url(./file.css);
 body {
   font: 100% Helvetica, sans-serif;
@@ -769,20 +769,20 @@ nav a {
   border-radius: 10px; }
 
 .foo:before {
-  content: \\"\\"; }
+  content: ""; }
 
 .bar:before {
-  content: \\"∑\\"; }
+  content: "∑"; }
 "
 `;
 
-exports[`webpackImporter option true ('node-sass', 'legacy' API, 'scss' syntax): errors 1`] = `Array []`;
+exports[`webpackImporter option true ('node-sass', 'legacy' API, 'scss' syntax): errors 1`] = `[]`;
 
-exports[`webpackImporter option true ('node-sass', 'legacy' API, 'scss' syntax): warnings 1`] = `Array []`;
+exports[`webpackImporter option true ('node-sass', 'legacy' API, 'scss' syntax): warnings 1`] = `[]`;
 
 exports[`webpackImporter option true ('sass-embedded', 'legacy' API, 'sass' syntax): css 1`] = `
-"@charset \\"UTF-8\\";
-@import \\"./file.css\\";
+"@charset "UTF-8";
+@import "./file.css";
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -828,21 +828,21 @@ nav a {
 }
 
 .foo:before {
-  content: \\"\\\\e0c6\\";
+  content: "\\e0c6";
 }
 
 .bar:before {
-  content: \\"∑\\";
+  content: "∑";
 }"
 `;
 
-exports[`webpackImporter option true ('sass-embedded', 'legacy' API, 'sass' syntax): errors 1`] = `Array []`;
+exports[`webpackImporter option true ('sass-embedded', 'legacy' API, 'sass' syntax): errors 1`] = `[]`;
 
-exports[`webpackImporter option true ('sass-embedded', 'legacy' API, 'sass' syntax): warnings 1`] = `Array []`;
+exports[`webpackImporter option true ('sass-embedded', 'legacy' API, 'sass' syntax): warnings 1`] = `[]`;
 
 exports[`webpackImporter option true ('sass-embedded', 'legacy' API, 'scss' syntax): css 1`] = `
-"@charset \\"UTF-8\\";
-@import \\"./file.css\\";
+"@charset "UTF-8";
+@import "./file.css";
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
@@ -870,14 +870,14 @@ nav a {
 }
 
 .foo:before {
-  content: \\"\\\\e0c6\\";
+  content: "\\e0c6";
 }
 
 .bar:before {
-  content: \\"∑\\";
+  content: "∑";
 }"
 `;
 
-exports[`webpackImporter option true ('sass-embedded', 'legacy' API, 'scss' syntax): errors 1`] = `Array []`;
+exports[`webpackImporter option true ('sass-embedded', 'legacy' API, 'scss' syntax): errors 1`] = `[]`;
 
-exports[`webpackImporter option true ('sass-embedded', 'legacy' API, 'scss' syntax): warnings 1`] = `Array []`;
+exports[`webpackImporter option true ('sass-embedded', 'legacy' API, 'scss' syntax): warnings 1`] = `[]`;
