@@ -530,7 +530,7 @@ function getWebpackResolver(
   const webpackModuleResolve = promiseResolve(
     resolverFactory({
       dependencyType: "sass",
-      conditionNames: ["sass", "style"],
+      conditionNames: ["sass", "style", "..."],
       mainFields: ["sass", "style", "main", "..."],
       mainFiles: ["_index", "index", "..."],
       extensions: [".sass", ".scss", ".css"],
@@ -541,7 +541,7 @@ function getWebpackResolver(
   const webpackImportResolve = promiseResolve(
     resolverFactory({
       dependencyType: "sass",
-      conditionNames: ["sass", "style"],
+      conditionNames: ["sass", "style", "..."],
       mainFields: ["sass", "style", "main", "..."],
       mainFiles: ["_index.import", "_index", "index.import", "index", "..."],
       extensions: [".sass", ".scss", ".css"],
