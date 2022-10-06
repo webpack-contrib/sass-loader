@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [13.1.0](https://github.com/webpack-contrib/sass-loader/compare/v13.0.2...v13.1.0) (2022-10-06)
+
+
+### Features
+
+* allow to extend `conditionNames` ([#1092](https://github.com/webpack-contrib/sass-loader/issues/1092)) ([6e02c64](https://github.com/webpack-contrib/sass-loader/commit/6e02c64da80e3c8b3b6399923b7268aaf957d2cb))
+
 ### [13.0.2](https://github.com/webpack-contrib/sass-loader/compare/v13.0.1...v13.0.2) (2022-06-27)
 
 
