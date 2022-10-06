@@ -1038,6 +1038,64 @@ describe("loader", () => {
       }
 
       if (!isModernAPI) {
+        it(`should work with a package with "sass" and "exports" fields and a custom condition (theme1) ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
+          const testId = getTestId(
+            "import-package-with-exports-and-custom-condition",
+            syntax
+          );
+          const options = {
+            implementation,
+            api,
+          };
+          const compiler = getCompiler(testId, {
+            loader: { options },
+            resolve: {
+              conditionNames: ["theme1", "..."],
+            },
+          });
+          const stats = await compile(compiler);
+          const codeFromBundle = getCodeFromBundle(stats, compiler);
+          const codeFromSass = await getCodeFromSass(testId, options, {
+            packageExportsCustomConditionTestVariant: 1,
+          });
+
+          expect(codeFromBundle.css).toBe(codeFromSass.css);
+          expect(codeFromBundle.css).toMatchSnapshot("css");
+          expect(getWarnings(stats)).toMatchSnapshot("warnings");
+          expect(getErrors(stats)).toMatchSnapshot("errors");
+        });
+      }
+
+      if (!isModernAPI) {
+        it(`should work with a package with "sass" and "exports" fields and a custom condition (theme2) ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
+          const testId = getTestId(
+            "import-package-with-exports-and-custom-condition",
+            syntax
+          );
+          const options = {
+            implementation,
+            api,
+          };
+          const compiler = getCompiler(testId, {
+            loader: { options },
+            resolve: {
+              conditionNames: ["theme2", "..."],
+            },
+          });
+          const stats = await compile(compiler);
+          const codeFromBundle = getCodeFromBundle(stats, compiler);
+          const codeFromSass = await getCodeFromSass(testId, options, {
+            packageExportsCustomConditionTestVariant: 2,
+          });
+
+          expect(codeFromBundle.css).toBe(codeFromSass.css);
+          expect(codeFromBundle.css).toMatchSnapshot("css");
+          expect(getWarnings(stats)).toMatchSnapshot("warnings");
+          expect(getErrors(stats)).toMatchSnapshot("errors");
+        });
+      }
+
+      if (!isModernAPI) {
         it(`should support resolving using the "file" schema ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           const testId = getTestId("import-file-scheme", syntax);
           const options = {
