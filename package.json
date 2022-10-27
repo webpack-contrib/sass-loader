@@ -81,7 +81,6 @@
     "eslint": "^8.24.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.25.4",
-    "fibers": "^5.0.3",
     "file-loader": "^6.2.0",
     "foundation-sites": "^6.7.5",
     "husky": "^8.0.1",
