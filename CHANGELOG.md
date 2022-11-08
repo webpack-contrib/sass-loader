@@ -2,6 +2,40 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [13.1.0](https://github.com/webpack-contrib/sass-loader/compare/v13.0.2...v13.1.0) (2022-10-06)
+
+
+### Features
+
+* allow to extend `conditionNames` ([#1092](https://github.com/webpack-contrib/sass-loader/issues/1092)) ([6e02c64](https://github.com/webpack-contrib/sass-loader/commit/6e02c64da80e3c8b3b6399923b7268aaf957d2cb))
+
+### [13.0.2](https://github.com/webpack-contrib/sass-loader/compare/v13.0.1...v13.0.2) (2022-06-27)
+
+
+### Bug Fixes
+
+* hide error stacktrace on Sass errors ([#1069](https://github.com/webpack-contrib/sass-loader/issues/1069)) ([5e6a61b](https://github.com/webpack-contrib/sass-loader/commit/5e6a61bd7248ff13fd4dbe882b2556f70cecf892))
+
+### [13.0.1](https://github.com/webpack-contrib/sass-loader/compare/v13.0.0...v13.0.1) (2022-06-24)
+
+
+### Bug Fixes
+
+* optimize debug message formatting, [#1065](https://github.com/webpack-contrib/sass-loader/issues/1065) ([#1066](https://github.com/webpack-contrib/sass-loader/issues/1066)) ([49a578a](https://github.com/webpack-contrib/sass-loader/commit/49a578a218574ddc92a597c7e365b6c21960717e))
+
+## [13.0.0](https://github.com/webpack-contrib/sass-loader/compare/v12.6.0...v13.0.0) (2022-05-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* minimum supported `Node.js` version is `14.15.0` (#1048)
+* emit `@warn` at-rules as webpack warnings by default, if you want to revert behavior please use the [`warnRuleAsWarning`](https://github.com/webpack-contrib/sass-loader#warnruleaswarning) option ([#1054](https://github.com/webpack-contrib/sass-loader/issues/1054)) ([58ffb68](https://github.com/webpack-contrib/sass-loader/commit/58ffb686768defb684669a2428bea040c95c2399))
+
+### Bug Fixes
+
+* do not crash on importers for modern API ([#1052](https://github.com/webpack-contrib/sass-loader/issues/1052)) ([095814e](https://github.com/webpack-contrib/sass-loader/commit/095814e6c2a991bacad3c3af4f239e9b1bc4b2e3))
+* do not store original sass error in webpack error([#1053](https://github.com/webpack-contrib/sass-loader/issues/1053)) ([06d7533](https://github.com/webpack-contrib/sass-loader/commit/06d7533cef2029d4a91f4760071078eb676c8c1c))
+
 ## [12.6.0](https://github.com/webpack-contrib/sass-loader/compare/v12.5.0...v12.6.0) (2022-02-15)
 
 

@@ -39,7 +39,7 @@ describe("loader", () => {
     const { name: implementationName, api, implementation } = item;
 
     syntaxStyles.forEach((syntax) => {
-      it(`should not emit warning by default ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
+      it(`should emit warning by default ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
         const testId = getTestId("logging", syntax);
         const options = {
           implementation,
@@ -112,7 +112,7 @@ describe("loader", () => {
         expect(logs).toMatchSnapshot("logs");
       });
 
-      it(`should not emit warning when 'true' used ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
+      it(`should emit warning when 'true' used ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
         const testId = getTestId("logging", syntax);
         const options = {
           implementation,

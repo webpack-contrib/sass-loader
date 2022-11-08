@@ -2,7 +2,7 @@ import url from "url";
 import path from "path";
 import fs from "fs";
 
-async function getCodeFromSass(testId, options) {
+async function getCodeFromSass(testId, options, context = {}) {
   const loaderOptions = { ...options };
   let sassOptions = options.sassOptions || {};
 
@@ -54,6 +54,27 @@ async function getCodeFromSass(testId, options) {
     testFolder,
     "node_modules/package-with-exports/style.scss"
   );
+  const pathToSassPackageWithExportsFieldsAndCustomConditionReplacer = () => {
+    if (context.packageExportsCustomConditionTestVariant === 1) {
+      return path.resolve(
+        testFolder,
+        "node_modules/package-with-exports-and-custom-condition/style-1.scss"
+      );
+    }
+
+    if (context.packageExportsCustomConditionTestVariant === 2) {
+      return path.resolve(
+        testFolder,
+        "node_modules/package-with-exports-and-custom-condition/style-2.scss"
+      );
+    }
+
+    console.warn(
+      "Expedted to receive .packageExportsCustomConditionTestVariant to properly resolve stylesheet in sass only compilation. "
+    );
+    return "";
+  };
+
   const pathToSCSSPackageWithIndexFile = path.resolve(
     testFolder,
     "node_modules/scss-package-with-index/index.scss"
@@ -763,7 +784,11 @@ async function getCodeFromSass(testId, options) {
         )
         .replace(/^~package-with-js-main-field/, pathToPackageWithJsMainField)
         .replace(/^~package-with-index/, pathToPackageWithIndex)
-        .replace(/^package-with-exports/, pathToSassPackageWithExportsFields)
+        .replace(
+          /^package-with-exports-and-custom-condition$/,
+          pathToSassPackageWithExportsFieldsAndCustomConditionReplacer
+        )
+        .replace(/^package-with-exports$/, pathToSassPackageWithExportsFields)
         .replace(/^file:\/\/\/language/, pathToLanguage)
         .replace(/^\/sass\/language.sass/, pathToLanguage)
         .replace(/^\/scss\/language.scss/, pathToLanguage)

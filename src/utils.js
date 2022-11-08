@@ -150,19 +150,19 @@ async function getSassOptions(
     : content;
 
   if (!options.logger) {
-    // TODO set me to `true` by default in the next major release
-    const needEmitWarning = loaderOptions.warnRuleAsWarning === true;
-
+    const needEmitWarning = loaderOptions.warnRuleAsWarning !== false;
     const logger = loaderContext.getLogger("sass-loader");
     const formatSpan = (span) =>
       `${span.url || "-"}:${span.start.line}:${span.start.column}: `;
+    const formatDebugSpan = (span) =>
+      `[debug:${span.start.line}:${span.start.column}] `;
 
     options.logger = {
       debug(message, loggerOptions) {
         let builtMessage = "";
 
         if (loggerOptions.span) {
-          builtMessage = formatSpan(loggerOptions.span);
+          builtMessage = formatDebugSpan(loggerOptions.span);
         }
 
         builtMessage += message;
@@ -225,12 +225,9 @@ async function getSassOptions(
     }
 
     options.importers = options.importers
-      ? proxyCustomImporters(
-          Array.isArray(options.importers)
-            ? options.importers
-            : [options.importers],
-          loaderContext
-        )
+      ? Array.isArray(options.importers)
+        ? options.importers
+        : [options.importers]
       : [];
   } else {
     options.file = resourcePath;
@@ -530,7 +527,7 @@ function getWebpackResolver(
   const webpackModuleResolve = promiseResolve(
     resolverFactory({
       dependencyType: "sass",
-      conditionNames: ["sass", "style"],
+      conditionNames: ["sass", "style", "..."],
       mainFields: ["sass", "style", "main", "..."],
       mainFiles: ["_index", "index", "..."],
       extensions: [".sass", ".scss", ".css"],
@@ -541,7 +538,7 @@ function getWebpackResolver(
   const webpackImportResolve = promiseResolve(
     resolverFactory({
       dependencyType: "sass",
-      conditionNames: ["sass", "style"],
+      conditionNames: ["sass", "style", "..."],
       mainFields: ["sass", "style", "main", "..."],
       mainFiles: ["_index.import", "_index", "index.import", "index", "..."],
       extensions: [".sass", ".scss", ".css"],

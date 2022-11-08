@@ -9,7 +9,6 @@
 
 [![npm][npm]][npm-url]
 [![node][node]][node-url]
-[![deps][deps]][deps-url]
 [![tests][tests]][tests-url]
 [![coverage][cover]][cover-url]
 [![chat][chat]][chat-url]
@@ -43,11 +42,17 @@ pnpm add -D sass-loader sass webpack
 
 This allows you to control the versions of all your dependencies, and to choose which Sass implementation to use.
 
-> ℹ️ We highly recommend using [Dart Sass](https://github.com/sass/dart-sass).
+> **Note**
+>
+> We highly recommend using [Dart Sass](https://github.com/sass/dart-sass).
 
-> ⚠ [Node Sass](https://github.com/sass/node-sass) does not work with [Yarn PnP](https://classic.yarnpkg.com/en/docs/pnp/) feature and doesn't support [@use rule](https://sass-lang.com/documentation/at-rules/use).
+> **Warning**
+>
+> [Node Sass](https://github.com/sass/node-sass) does not work with [Yarn PnP](https://classic.yarnpkg.com/en/docs/pnp/) feature and doesn't support [@use rule](https://sass-lang.com/documentation/at-rules/use).
 
-> ⚠ [Sass Embedded](https://github.com/sass/embedded-host-node) is experimental and in `beta`, therefore some features may not work
+> **Warning**
+>
+> [Sass Embedded](https://github.com/sass/embedded-host-node) is experimental and in `beta`, therefore some features may not work
 
 Chain the `sass-loader` with the [css-loader](https://github.com/webpack-contrib/css-loader) and the [style-loader](https://github.com/webpack-contrib/style-loader) to immediately apply all styles to the DOM or the [mini-css-extract-plugin](https://github.com/webpack-contrib/mini-css-extract-plugin) to extract it into a separate file.
 
@@ -245,7 +250,9 @@ To avoid this overhead, you can use the [fibers](https://www.npmjs.com/package/f
 
 We automatically inject the [`fibers`](https://github.com/laverdet/node-fibers) package (setup `sassOptions.fiber`) for `Node.js` less v16.0.0 if is possible (i.e. you need install the [`fibers`](https://github.com/laverdet/node-fibers) package).
 
-> Fibers is not compatible with `Node.js` v16.0.0 or later ([see introduction to readme](https://github.com/laverdet/node-fibers)).
+> **Warning**
+>
+> Fibers is not compatible with `Node.js` v16.0.0 or later. Unfortunately, v8 commit [dacc2fee0f](https://github.com/v8/v8/commit/dacc2fee0f815823782a7e432c79c2a7767a4765) is a breaking change and workarounds are non-trivial. ([see introduction to readme](https://github.com/laverdet/node-fibers)).
 
 **package.json**
 
@@ -335,21 +342,29 @@ Default: defaults values for Sass implementation
 
 Options for [Dart Sass](http://sass-lang.com/dart-sass) or [Node Sass](https://github.com/sass/node-sass) implementation.
 
-> ℹ️ The `charset` option has `true` value by default for `dart-sass`, we strongly discourage change value to `false`, because webpack doesn't support files other than `utf-8`.
+> **Note**
+>
+> The `charset` option has `true` value by default for `dart-sass`, we strongly discourage change value to `false`, because webpack doesn't support files other than `utf-8`.
 
-> ℹ️ The `indentedSyntax` option has `true` value for the `sass` extension.
+> **Note**
+>
+> The `indentedSyntax` option has `true` value for the `sass` extension.
 
-> ℹ️ Options such as `data` and `file` are unavailable and will be ignored.
+> **Note**
+>
+> Options such as `data` and `file` are unavailable and will be ignored.
 
 > ℹ We strongly discourage change `outFile`, `sourceMapContents`, `sourceMapEmbed`, `sourceMapRoot` options because `sass-loader` automatically sets these options when the `sourceMap` option is `true`.
 
-> ℹ️ Access to the [loader context](https://webpack.js.org/api/loaders/#the-loader-context) inside the custom importer can be done using the `this.webpackLoaderContext` property.
+> **Note**
+>
+> Access to the [loader context](https://webpack.js.org/api/loaders/#the-loader-context) inside the custom importer can be done using the `this.webpackLoaderContext` property.
 
 There is a slight difference between the `sass` (`dart-sass`) and `node-sass` options.
 
 Please consult documentation before using them:
 
-- [Dart Sass documentation](https://github.com/sass/dart-sass#javascript-api) for all available `sass` options.
+- [Dart Sass documentation](https://sass-lang.com/documentation/js-api/interfaces/Options) for all available `sass` options.
 - [Node Sass documentation](https://github.com/sass/node-sass/#options) for all available `node-sass` options.
 
 #### `object`
@@ -662,7 +677,9 @@ Default: `false`
 
 Treats the `@warn` rule as a webpack warning.
 
-> ℹ️ It will be `true` by default in the next major release.
+> **Note**
+>
+> It will be `true` by default in the next major release.
 
 **style.scss**
 
@@ -726,9 +743,13 @@ Default: `"legacy"`
 
 Allows you to switch between `legacy` and `modern` API. You can find more information [here](https://sass-lang.com/documentation/js-api).
 
-> ⚠ "modern" API is experimental, so some features may not work (known: built-in `importer` is not working and files with errors is not watching on initial run), you can follow this [here](https://github.com/webpack-contrib/sass-loader/issues/774).
+> **Warning**
+>
+> "modern" API is experimental, so some features may not work (known: built-in `importer` is not working and files with errors is not watching on initial run), you can follow this [here](https://github.com/webpack-contrib/sass-loader/issues/774).
 
-> ⚠ The sass options are different for `modern` and `old` APIs. Please look at [docs](https://sass-lang.com/documentation/js-api) how to migrate on new options.
+> **Warning**
+>
+> The sass options are different for `modern` and `old` APIs. Please look at [docs](https://sass-lang.com/documentation/js-api) how to migrate on new options.
 
 **webpack.config.js**
 
@@ -757,16 +778,29 @@ module.exports = {
 };
 ```
 
+## How to enable `@debug` output
+
+Defaults, the output of `@debug` messages is disabled.
+To enable it, add to **webpack.config.js** following:
+
+```js
+module.exports = {
+  stats: {
+    loggingDebug: ["sass-loader"],
+  },
+  // ...
+};
+```
+
 ## Examples
 
 ### Extracts CSS into separate files
 
 For production builds it's recommended to extract the CSS from your bundle being able to use parallel loading of CSS/JS resources later on.
 
-There are two possibilities to extract a style sheet from the bundle:
+There are four possibilities to extract a style sheet from the bundle:
 
-- [mini-css-extract-plugin](https://github.com/webpack-contrib/mini-css-extract-plugin)
-- [extract-loader](https://github.com/peerigon/extract-loader) (simpler, but specialized on the css-loader's output)
+#### 1. [mini-css-extract-plugin](https://github.com/webpack-contrib/mini-css-extract-plugin)
 
 **webpack.config.js**
 
@@ -799,6 +833,68 @@ module.exports = {
   ],
 };
 ```
+
+#### 2. [Asset Modules](https://webpack.js.org/guides/asset-modules/)
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  entry: [__dirname + "/src/scss/app.scss"],
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: [],
+      },
+      {
+        test: /\.scss$/,
+        exclude: /node_modules/,
+        type: "asset/resource",
+        generator: {
+          filename: "bundle.css",
+        },
+        use: ["sass-loader"],
+      },
+    ],
+  },
+};
+```
+
+#### 3. [extract-loader](https://github.com/peerigon/extract-loader) (simpler, but specialized on the css-loader's output)
+
+#### 4. [file-loader](https://github.com/webpack-contrib/file-loader) (deprecated--should only be used in Webpack v4)
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  entry: [__dirname + "/src/scss/app.scss"],
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: [],
+      },
+      {
+        test: /\.scss$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: "file-loader",
+            options: { outputPath: "css/", name: "[name].min.css" },
+          },
+          "sass-loader",
+        ],
+      },
+    ],
+  },
+};
+```
+
+(source: https://stackoverflow.com/a/60029923/2969615)
 
 ### Source maps
 
@@ -852,8 +948,6 @@ Please take a moment to read our contributing guidelines if you haven't yet done
 [npm-url]: https://npmjs.com/package/sass-loader
 [node]: https://img.shields.io/node/v/sass-loader.svg
 [node-url]: https://nodejs.org
-[deps]: https://david-dm.org/webpack-contrib/sass-loader.svg
-[deps-url]: https://david-dm.org/webpack-contrib/sass-loader
 [tests]: https://github.com/webpack-contrib/sass-loader/workflows/sass-loader/badge.svg
 [tests-url]: https://github.com/webpack-contrib/sass-loader/actions
 [cover]: https://codecov.io/gh/webpack-contrib/sass-loader/branch/master/graph/badge.svg
