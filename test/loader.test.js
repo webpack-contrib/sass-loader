@@ -1210,7 +1210,7 @@ describe("loader", () => {
       }
 
       if (!isModernAPI) {
-        it(`should work with the 'resolve.byDependecy.sass' option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
+        it(`should work with the 'resolve.byDependency.sass' option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           const testId = getTestId("by-dependency", syntax);
           const options = {
             implementation,

@@ -72,7 +72,7 @@ async function getCodeFromSass(testId, options, context = {}) {
     }
 
     console.warn(
-      "Expedted to receive .packageExportsCustomConditionTestVariant to properly resolve stylesheet in sass only compilation. "
+      "Expected to receive .packageExportsCustomConditionTestVariant to properly resolve stylesheet in sass only compilation. "
     );
     return "";
   };
