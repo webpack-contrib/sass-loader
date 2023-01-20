@@ -25,6 +25,9 @@
     "dist/**",
     "**/__snapshots__/**",
     "package-lock.json",
-    "*.sass"
+    "*.sass",
+    "node_modules",
+    "coverage",
+    "*.log"
   ]
 }
