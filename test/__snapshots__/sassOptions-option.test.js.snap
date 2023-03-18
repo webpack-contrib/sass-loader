@@ -4158,6 +4158,22 @@ exports[`sassOptions option should work when the option like "Object" ('sass-emb
 
 exports[`sassOptions option should work when the option like "Object" ('sass-embedded', 'modern' API, 'scss' syntax): warnings 1`] = `[]`;
 
+exports[`sassOptions option should work with custom scheme import ('dart-sass', 'modern' API, 'sass' syntax): errors 1`] = `[]`;
+
+exports[`sassOptions option should work with custom scheme import ('dart-sass', 'modern' API, 'sass' syntax): warnings 1`] = `[]`;
+
+exports[`sassOptions option should work with custom scheme import ('dart-sass', 'modern' API, 'scss' syntax): errors 1`] = `[]`;
+
+exports[`sassOptions option should work with custom scheme import ('dart-sass', 'modern' API, 'scss' syntax): warnings 1`] = `[]`;
+
+exports[`sassOptions option should work with custom scheme import ('sass-embedded', 'modern' API, 'sass' syntax): errors 1`] = `[]`;
+
+exports[`sassOptions option should work with custom scheme import ('sass-embedded', 'modern' API, 'sass' syntax): warnings 1`] = `[]`;
+
+exports[`sassOptions option should work with custom scheme import ('sass-embedded', 'modern' API, 'scss' syntax): errors 1`] = `[]`;
+
+exports[`sassOptions option should work with custom scheme import ('sass-embedded', 'modern' API, 'scss' syntax): warnings 1`] = `[]`;
+
 exports[`sassOptions option should work with the "fiber" option ('dart-sass', 'legacy' API, 'sass' syntax): css 1`] = `
 "@charset "UTF-8";
 @import "./file.css";

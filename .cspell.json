@@ -15,7 +15,8 @@
     "klona",
     "sharename",
     "wekbit",
-    "commitlint"
+    "commitlint",
+    "bgcolor"
   ],
 
   "ignorePaths": [

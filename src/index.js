@@ -97,14 +97,16 @@ async function loader(content) {
 
   // Modern API
   if (typeof result.loadedUrls !== "undefined") {
-    result.loadedUrls.forEach((includedFile) => {
-      const normalizedIncludedFile = url.fileURLToPath(includedFile);
+    result.loadedUrls
+      .filter((url) => url.protocol === "file")
+      .forEach((includedFile) => {
+        const normalizedIncludedFile = url.fileURLToPath(includedFile);
 
-      // Custom `importer` can return only `contents` so includedFile will be relative
-      if (path.isAbsolute(normalizedIncludedFile)) {
-        this.addDependency(normalizedIncludedFile);
-      }
-    });
+        // Custom `importer` can return only `contents` so includedFile will be relative
+        if (path.isAbsolute(normalizedIncludedFile)) {
+          this.addDependency(normalizedIncludedFile);
+        }
+      });
   }
   // Legacy API
   else if (

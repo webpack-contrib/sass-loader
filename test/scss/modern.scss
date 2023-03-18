@@ -1,0 +1,7 @@
+@import 'modern-vars';
+// this is import by custom importer
+@import 'bgcolor:cornflowerblue';
+
+a {
+  --color-fg: $color-fg;
+}
