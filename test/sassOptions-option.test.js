@@ -149,6 +149,39 @@ describe("sassOptions option", () => {
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
         });
+
+        it(`should work with custom scheme import ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
+          const testId = getTestId("modern", syntax);
+          const options = {
+            implementation,
+            api,
+            sassOptions: {
+              // https://sass-lang.com/documentation/js-api/interfaces/Importer
+              importers: [
+                {
+                  canonicalize(url) {
+                    if (!url.startsWith("bgcolor:")) {
+                      return null;
+                    }
+
+                    return new URL(url);
+                  },
+                  load(canonicalUrl) {
+                    return {
+                      contents: `body {background-color: ${canonicalUrl.pathname}}`,
+                      syntax: "scss",
+                    };
+                  },
+                },
+              ],
+            },
+          };
+          const compiler = getCompiler(testId, { loader: { options } });
+          const stats = await compile(compiler);
+
+          expect(getWarnings(stats)).toMatchSnapshot("warnings");
+          expect(getErrors(stats)).toMatchSnapshot("errors");
+        });
       } else {
         it(`should ignore the "file" option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           const testId = getTestId("language", syntax);
