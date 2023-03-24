@@ -98,7 +98,7 @@ async function loader(content) {
   // Modern API
   if (typeof result.loadedUrls !== "undefined") {
     result.loadedUrls
-      .filter((url) => url.protocol === "file")
+      .filter((url) => url.protocol === "file:")
       .forEach((includedFile) => {
         const normalizedIncludedFile = url.fileURLToPath(includedFile);
 
