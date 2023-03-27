@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [13.2.2](https://github.com/webpack-contrib/sass-loader/compare/v13.2.1...v13.2.2) (2023-03-27)
+
+
+### Bug Fixes
+
+* fix dependencies in modern API ([#1125](https://github.com/webpack-contrib/sass-loader/issues/1125)) ([50987bc](https://github.com/webpack-contrib/sass-loader/commit/50987bceca61b270375719ec6b731a071ecd83c2))
+
 ### [13.2.1](https://github.com/webpack-contrib/sass-loader/compare/v13.2.0...v13.2.1) (2023-03-18)
 
 
