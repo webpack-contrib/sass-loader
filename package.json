@@ -65,9 +65,9 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.21.0",
-    "@babel/core": "^7.21.3",
-    "@babel/preset-env": "^7.20.2",
-    "@commitlint/cli": "^17.5.0",
+    "@babel/core": "^7.21.4",
+    "@babel/preset-env": "^7.21.4",
+    "@commitlint/cli": "^17.5.1",
     "@commitlint/config-conventional": "^17.4.4",
     "@webpack-contrib/eslint-config-webpack": "^3.0.0",
     "babel-jest": "^29.5.0",
@@ -80,7 +80,7 @@
     "del": "^6.1.1",
     "del-cli": "^4.0.1",
     "enhanced-resolve": "^5.12.0",
-    "eslint": "^8.36.0",
+    "eslint": "^8.37.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-import": "^2.27.5",
     "fibers": "^5.0.3",
@@ -96,12 +96,12 @@
     "node-sass-glob-importer": "^5.3.2",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.8.7",
-    "sass": "^1.58.0",
-    "sass-embedded": "^1.57.1",
+    "sass": "^1.60.0",
+    "sass-embedded": "^1.60.0",
     "semver": "^7.3.8",
     "standard-version": "^9.3.1",
-    "style-loader": "^3.2.1",
-    "webpack": "^5.76.3"
+    "style-loader": "^3.3.2",
+    "webpack": "^5.77.0"
   },
   "keywords": [
     "sass",
