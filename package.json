@@ -89,7 +89,7 @@
     "husky": "^8.0.3",
     "jest": "^29.5.0",
     "jest-environment-node-single-context": "^29.0.0",
-    "lint-staged": "^12.5.0",
+    "lint-staged": "^13.2.1",
     "material-components-web": "^8.0.0",
     "memfs": "^3.5.1",
     "node-sass": "^8.0.0",
