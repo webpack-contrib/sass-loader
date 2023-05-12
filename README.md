@@ -11,7 +11,7 @@
 [![node][node]][node-url]
 [![tests][tests]][tests-url]
 [![coverage][cover]][cover-url]
-[![chat][chat]][chat-url]
+[![discussion][discussion]][discussion-url]
 [![size][size]][size-url]
 
 # sass-loader
@@ -952,7 +952,7 @@ Please take a moment to read our contributing guidelines if you haven't yet done
 [tests-url]: https://github.com/webpack-contrib/sass-loader/actions
 [cover]: https://codecov.io/gh/webpack-contrib/sass-loader/branch/master/graph/badge.svg
 [cover-url]: https://codecov.io/gh/webpack-contrib/sass-loader
-[chat]: https://badges.gitter.im/webpack/webpack.svg
-[chat-url]: https://gitter.im/webpack/webpack
+[discussion]: https://img.shields.io/github/discussions/webpack/webpack
+[discussion-url]: https://github.com/webpack/webpack/discussions
 [size]: https://packagephobia.now.sh/badge?p=sass-loader
 [size-url]: https://packagephobia.now.sh/result?p=sass-loader
