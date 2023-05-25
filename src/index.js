@@ -32,6 +32,14 @@ async function loader(content) {
     return;
   }
 
+  if (!implementation) {
+    callback(
+      new Error(`The Sass implementation "${options.implementation}" not found`)
+    );
+
+    return;
+  }
+
   const useSourceMap =
     typeof options.sourceMap === "boolean" ? options.sourceMap : this.sourceMap;
   const sassOptions = await getSassOptions(
