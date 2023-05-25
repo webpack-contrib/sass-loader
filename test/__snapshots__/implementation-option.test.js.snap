@@ -38,7 +38,7 @@ exports[`implementation option not specify: warnings 1`] = `[]`;
 
 exports[`implementation option should not swallow an error when trying to load a sass implementation: errors 1`] = `
 [
-  "ModuleError: Module Error (from ../src/cjs.js):
+  "ModuleBuildError: Module build failed (from ../src/cjs.js):
 Some error",
 ]
 `;
@@ -47,8 +47,8 @@ exports[`implementation option should not swallow an error when trying to load a
 
 exports[`implementation option should throw an error on an unknown sass implementation: errors 1`] = `
 [
-  "ModuleError: Module Error (from ../src/cjs.js):
-Unknown Sass implementation "strange-sass".",
+  "ModuleBuildError: Module build failed (from ../src/cjs.js):
+Error: Unknown Sass implementation "strange-sass".",
 ]
 `;
 
@@ -56,8 +56,8 @@ exports[`implementation option should throw an error on an unknown sass implemen
 
 exports[`implementation option should throw an error when the "info" is unparseable: errors 1`] = `
 [
-  "ModuleError: Module Error (from ../src/cjs.js):
-Unknown Sass implementation "asdfj".",
+  "ModuleBuildError: Module build failed (from ../src/cjs.js):
+Error: Unknown Sass implementation "asdfj".",
 ]
 `;
 
@@ -65,8 +65,8 @@ exports[`implementation option should throw an error when the "info" is unparsea
 
 exports[`implementation option should throw error when the "info" does not exist: errors 1`] = `
 [
-  "ModuleError: Module Error (from ../src/cjs.js):
-Unknown Sass implementation.",
+  "ModuleBuildError: Module build failed (from ../src/cjs.js):
+Error: Unknown Sass implementation.",
 ]
 `;
 
@@ -74,8 +74,8 @@ exports[`implementation option should throw error when the "info" does not exist
 
 exports[`implementation option should throw error when unresolved package: errors 1`] = `
 [
-  "ModuleError: Module Error (from ../src/cjs.js):
-Cannot find module 'unresolved' from 'src/utils.js'",
+  "ModuleBuildError: Module build failed (from ../src/cjs.js):
+Error: Cannot find module 'unresolved' from 'src/utils.js'",
 ]
 `;
 
@@ -83,7 +83,7 @@ exports[`implementation option should throw error when unresolved package: warni
 
 exports[`implementation option should try to load using valid order: errors 1`] = `
 [
-  "ModuleError: Module Error (from ../src/cjs.js):
+  "ModuleBuildError: Module build failed (from ../src/cjs.js):
 Some error sass",
 ]
 `;
