@@ -36,43 +36,24 @@ function getSassImplementation(loaderContext, implementation) {
   let resolvedImplementation = implementation;
 
   if (!resolvedImplementation) {
-    try {
-      resolvedImplementation = getDefaultSassImplementation();
-    } catch (error) {
-      loaderContext.emitError(error);
-
-      return;
-    }
+    resolvedImplementation = getDefaultSassImplementation();
   }
 
   if (typeof resolvedImplementation === "string") {
-    try {
-      // eslint-disable-next-line import/no-dynamic-require, global-require
-      resolvedImplementation = require(resolvedImplementation);
-    } catch (error) {
-      loaderContext.emitError(error);
-
-      // eslint-disable-next-line consistent-return
-      return;
-    }
+    // eslint-disable-next-line import/no-dynamic-require, global-require
+    resolvedImplementation = require(resolvedImplementation);
   }
 
   const { info } = resolvedImplementation;
 
   if (!info) {
-    loaderContext.emitError(new Error("Unknown Sass implementation."));
-
-    return;
+    throw new Error("Unknown Sass implementation.");
   }
 
   const infoParts = info.split("\t");
 
   if (infoParts.length < 2) {
-    loaderContext.emitError(
-      new Error(`Unknown Sass implementation "${info}".`)
-    );
-
-    return;
+    throw new Error(`Unknown Sass implementation "${info}".`);
   }
 
   const [implementationName] = infoParts;
@@ -88,9 +69,7 @@ function getSassImplementation(loaderContext, implementation) {
     return resolvedImplementation;
   }
 
-  loaderContext.emitError(
-    new Error(`Unknown Sass implementation "${implementationName}".`)
-  );
+  throw new Error(`Unknown Sass implementation "${implementationName}".`);
 }
 
 /**

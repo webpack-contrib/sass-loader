@@ -21,10 +21,13 @@ import SassError from "./SassError";
 async function loader(content) {
   const options = this.getOptions(schema);
   const callback = this.async();
-  const implementation = getSassImplementation(this, options.implementation);
 
-  if (!implementation) {
-    callback();
+  let implementation;
+
+  try {
+    implementation = getSassImplementation(this, options.implementation);
+  } catch (error) {
+    callback(error);
 
     return;
   }
@@ -59,7 +62,14 @@ async function loader(content) {
     }
   }
 
-  const compile = getCompileFn(implementation, options);
+  let compile;
+
+  try {
+    compile = getCompileFn(implementation, options);
+  } catch (error) {
+    callback(error);
+    return;
+  }
 
   let result;
 
