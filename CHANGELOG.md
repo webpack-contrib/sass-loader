@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [13.3.1](https://github.com/webpack-contrib/sass-loader/compare/v13.3.0...v13.3.1) (2023-05-28)
+
+
+### Bug Fixes
+
+* error handling better ([#1141](https://github.com/webpack-contrib/sass-loader/issues/1141)) ([1f99474](https://github.com/webpack-contrib/sass-loader/commit/1f9947441ae95f7bd396886ec7a7d0ecbe939f8c))
+* warnings and errors serialization ([#1142](https://github.com/webpack-contrib/sass-loader/issues/1142)) ([ed6f313](https://github.com/webpack-contrib/sass-loader/commit/ed6f3136f067e4c863077cb0d6c89c7ea8638bf8))
+
 ## [13.3.0](https://github.com/webpack-contrib/sass-loader/compare/v13.2.2...v13.3.0) (2023-05-22)
 
 

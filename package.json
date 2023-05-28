@@ -1,6 +1,6 @@
 {
   "name": "sass-loader",
-  "version": "13.3.0",
+  "version": "13.3.1",
   "description": "Sass loader for webpack",
   "license": "MIT",
   "repository": "webpack-contrib/sass-loader",
