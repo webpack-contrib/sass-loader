@@ -9,8 +9,8 @@ import {
   getModernWebpackImporter,
   getCompileFn,
   normalizeSourceMap,
+  errorFactory,
 } from "./utils";
-import SassError from "./SassError";
 
 /**
  * The sass-loader makes node-sass and dart-sass available to webpack modules.
@@ -87,7 +87,7 @@ async function loader(content) {
       this.addDependency(path.normalize(error.file));
     }
 
-    callback(new SassError(error));
+    callback(errorFactory(error));
 
     return;
   }

@@ -4,8 +4,6 @@ import path from "path";
 import { klona } from "klona/full";
 import async from "neo-async";
 
-import SassWarning from "./SassWarning";
-
 function getDefaultSassImplementation() {
   let sassImplPkg = "sass";
 
@@ -169,9 +167,12 @@ async function getSassOptions(
         }
 
         if (needEmitWarning) {
-          loaderContext.emitWarning(
-            new SassWarning(builtMessage, loggerOptions)
-          );
+          const warning = new Error(builtMessage);
+
+          warning.name = "SassWarning";
+          warning.stack = null;
+
+          loaderContext.emitWarning(warning);
         } else {
           logger.warn(builtMessage);
         }
@@ -781,6 +782,23 @@ function normalizeSourceMap(map, rootContext) {
   return newMap;
 }
 
+function errorFactory(error) {
+  let message;
+
+  if (error.formatted) {
+    message = error.formatted.replace(/^Error: /, "");
+  } else {
+    // Keep original error if `sassError.formatted` is unavailable
+    ({ message } = error);
+  }
+
+  const obj = new Error(message, { cause: error });
+
+  obj.stack = null;
+
+  return obj;
+}
+
 export {
   getSassImplementation,
   getSassOptions,
@@ -790,4 +808,5 @@ export {
   getCompileFn,
   normalizeSourceMap,
   isSupportedFibers,
+  errorFactory,
 };
