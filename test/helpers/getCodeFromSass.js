@@ -2,15 +2,12 @@ import url from "url";
 import path from "path";
 import fs from "fs";
 
-import { klona } from "klona/full";
-
 async function getCodeFromSass(testId, options, context = {}) {
-  const loaderOptions = klona(options);
-  let sassOptions = options.sassOptions || {};
-
-  if (typeof sassOptions === "function") {
-    sassOptions = sassOptions({ mock: true }) || {};
-  }
+  const loaderOptions = { ...options };
+  const sassOptions =
+    typeof loaderOptions.sassOptions === "function"
+      ? loaderOptions.sassOptions({ mock: true }) || {}
+      : { ...options.sassOptions } || {};
 
   if (sassOptions.data) {
     delete sassOptions.data;

@@ -1,7 +1,6 @@
 import url from "url";
 import path from "path";
 
-import { klona } from "klona/full";
 import async from "neo-async";
 
 function getDefaultSassImplementation() {
@@ -112,24 +111,21 @@ async function getSassOptions(
   implementation,
   useSourceMap
 ) {
-  const options = klona(
-    loaderOptions.sassOptions
-      ? typeof loaderOptions.sassOptions === "function"
-        ? loaderOptions.sassOptions(loaderContext) || {}
-        : loaderOptions.sassOptions
-      : {}
-  );
+  const options = loaderOptions.sassOptions
+    ? typeof loaderOptions.sassOptions === "function"
+      ? loaderOptions.sassOptions(loaderContext) || {}
+      : loaderOptions.sassOptions
+    : {};
+  const sassOptions = {
+    ...options,
+    data: loaderOptions.additionalData
+      ? typeof loaderOptions.additionalData === "function"
+        ? await loaderOptions.additionalData(content, loaderContext)
+        : `${loaderOptions.additionalData}\n${content}`
+      : content,
+  };
 
-  const isDartSass = implementation.info.includes("dart-sass");
-  const isModernAPI = loaderOptions.api === "modern";
-
-  options.data = loaderOptions.additionalData
-    ? typeof loaderOptions.additionalData === "function"
-      ? await loaderOptions.additionalData(content, loaderContext)
-      : `${loaderOptions.additionalData}\n${content}`
-    : content;
-
-  if (!options.logger) {
+  if (!sassOptions.logger) {
     const needEmitWarning = loaderOptions.warnRuleAsWarning !== false;
     const logger = loaderContext.getLogger("sass-loader");
     const formatSpan = (span) =>
@@ -137,7 +133,7 @@ async function getSassOptions(
     const formatDebugSpan = (span) =>
       `[debug:${span.start.line}:${span.start.column}] `;
 
-    options.logger = {
+    sassOptions.logger = {
       debug(message, loggerOptions) {
         let builtMessage = "";
 
@@ -180,44 +176,47 @@ async function getSassOptions(
     };
   }
 
+  const isModernAPI = loaderOptions.api === "modern";
   const { resourcePath } = loaderContext;
 
   if (isModernAPI) {
-    options.url = url.pathToFileURL(resourcePath);
+    sassOptions.url = url.pathToFileURL(resourcePath);
 
     // opt.outputStyle
-    if (!options.style && isProductionLikeMode(loaderContext)) {
-      options.style = "compressed";
+    if (!sassOptions.style && isProductionLikeMode(loaderContext)) {
+      sassOptions.style = "compressed";
     }
 
     if (useSourceMap) {
-      options.sourceMap = true;
+      sassOptions.sourceMap = true;
     }
 
     // If we are compiling sass and indentedSyntax isn't set, automatically set it.
-    if (typeof options.syntax === "undefined") {
+    if (typeof sassOptions.syntax === "undefined") {
       const ext = path.extname(resourcePath);
 
       if (ext && ext.toLowerCase() === ".scss") {
-        options.syntax = "scss";
+        sassOptions.syntax = "scss";
       } else if (ext && ext.toLowerCase() === ".sass") {
-        options.syntax = "indented";
+        sassOptions.syntax = "indented";
       } else if (ext && ext.toLowerCase() === ".css") {
-        options.syntax = "css";
+        sassOptions.syntax = "css";
       }
     }
 
-    options.importers = options.importers
-      ? Array.isArray(options.importers)
-        ? options.importers
-        : [options.importers]
+    sassOptions.importers = sassOptions.importers
+      ? Array.isArray(sassOptions.importers)
+        ? sassOptions.importers.slice()
+        : [sassOptions.importers]
       : [];
   } else {
-    options.file = resourcePath;
+    sassOptions.file = resourcePath;
+
+    const isDartSass = implementation.info.includes("dart-sass");
 
     if (isDartSass && isSupportedFibers()) {
       const shouldTryToResolveFibers =
-        !options.fiber && options.fiber !== false;
+        !sassOptions.fiber && sassOptions.fiber !== false;
 
       if (shouldTryToResolveFibers) {
         let fibers;
@@ -230,20 +229,20 @@ async function getSassOptions(
 
         if (fibers) {
           // eslint-disable-next-line global-require, import/no-dynamic-require
-          options.fiber = require(fibers);
+          sassOptions.fiber = require(fibers);
         }
-      } else if (options.fiber === false) {
+      } else if (sassOptions.fiber === false) {
         // Don't pass the `fiber` option for `sass` (`Dart Sass`)
-        delete options.fiber;
+        delete sassOptions.fiber;
       }
     } else {
       // Don't pass the `fiber` option for `node-sass`
-      delete options.fiber;
+      delete sassOptions.fiber;
     }
 
     // opt.outputStyle
-    if (!options.outputStyle && isProductionLikeMode(loaderContext)) {
-      options.outputStyle = "compressed";
+    if (!sassOptions.outputStyle && isProductionLikeMode(loaderContext)) {
+      sassOptions.outputStyle = "compressed";
     }
 
     if (useSourceMap) {
@@ -253,11 +252,14 @@ async function getSassOptions(
       // But since we're using the data option, the source map will not actually be written, but
       // all paths in sourceMap.sources will be relative to that path.
       // Pretty complicated... :(
-      options.sourceMap = true;
-      options.outFile = path.join(loaderContext.rootContext, "style.css.map");
-      options.sourceMapContents = true;
-      options.omitSourceMapUrl = true;
-      options.sourceMapEmbed = false;
+      sassOptions.sourceMap = true;
+      sassOptions.outFile = path.join(
+        loaderContext.rootContext,
+        "style.css.map"
+      );
+      sassOptions.sourceMapContents = true;
+      sassOptions.omitSourceMapUrl = true;
+      sassOptions.sourceMapEmbed = false;
     }
 
     const ext = path.extname(resourcePath);
@@ -266,31 +268,32 @@ async function getSassOptions(
     if (
       ext &&
       ext.toLowerCase() === ".sass" &&
-      typeof options.indentedSyntax === "undefined"
+      typeof sassOptions.indentedSyntax === "undefined"
     ) {
-      options.indentedSyntax = true;
+      sassOptions.indentedSyntax = true;
     } else {
-      options.indentedSyntax = Boolean(options.indentedSyntax);
+      sassOptions.indentedSyntax = Boolean(sassOptions.indentedSyntax);
     }
 
     // Allow passing custom importers to `sass`/`node-sass`. Accepts `Function` or an array of `Function`s.
-    options.importer = options.importer
+    sassOptions.importer = sassOptions.importer
       ? proxyCustomImporters(
-          Array.isArray(options.importer)
-            ? options.importer
-            : [options.importer],
+          Array.isArray(sassOptions.importer)
+            ? sassOptions.importer.slice()
+            : [sassOptions.importer],
           loaderContext
         )
       : [];
 
-    options.includePaths = []
+    sassOptions.includePaths = []
       .concat(process.cwd())
       .concat(
         // We use `includePaths` in context for resolver, so it should be always absolute
-        (options.includePaths || []).map((includePath) =>
-          path.isAbsolute(includePath)
-            ? includePath
-            : path.join(process.cwd(), includePath)
+        (sassOptions.includePaths ? sassOptions.includePaths.slice() : []).map(
+          (includePath) =>
+            path.isAbsolute(includePath)
+              ? includePath
+              : path.join(process.cwd(), includePath)
         )
       )
       .concat(
@@ -301,12 +304,12 @@ async function getSassOptions(
           : []
       );
 
-    if (typeof options.charset === "undefined") {
-      options.charset = true;
+    if (typeof sassOptions.charset === "undefined") {
+      sassOptions.charset = true;
     }
   }
 
-  return options;
+  return sassOptions;
 }
 
 const MODULE_REQUEST_REGEX = /^[^?]*~/;
