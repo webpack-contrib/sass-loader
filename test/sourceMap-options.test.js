@@ -36,6 +36,7 @@ describe("sourceMap option", () => {
   implementations.forEach((item) => {
     syntaxStyles.forEach((syntax) => {
       const { name: implementationName, api, implementation } = item;
+      const isModernAPI = api === "modern";
 
       it(`should generate source maps when value is not specified and the "devtool" option has "source-map" value ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
         expect.assertions(10);
@@ -226,6 +227,33 @@ describe("sourceMap option", () => {
         const options = { implementation, api, sourceMap: false };
         const compiler = getCompiler(testId, {
           devtool: false,
+          loader: { options },
+        });
+        const stats = await compile(compiler);
+        const { css, sourceMap } = getCodeFromBundle(stats, compiler);
+
+        expect(css).toMatchSnapshot("css");
+        expect(sourceMap).toMatchSnapshot("source map");
+        expect(getWarnings(stats)).toMatchSnapshot("warnings");
+        expect(getErrors(stats)).toMatchSnapshot("errors");
+      });
+
+      it(`should generate source maps and emit source map  ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
+        const testId = getTestId("language", syntax);
+        const options = {
+          implementation,
+          api,
+          sassOptions: isModernAPI
+            ? { sourceMap: true }
+            : {
+                sourceMap: true,
+                outFile: "style.css",
+                sourceMapContents: true,
+                omitSourceMapUrl: false,
+                sourceMapEmbed: false,
+              },
+        };
+        const compiler = getCompiler(testId, {
           loader: { options },
         });
         const stats = await compile(compiler);
