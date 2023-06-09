@@ -98,6 +98,10 @@ module.exports = {
 
 Finally run `webpack` via your preferred method.
 
+### The `outputStyle` (old API) and `style` (new API) options in `production` mode
+
+For `production` mode, the `outputStyle` (old API) and `style` (new API) options default to `compressed` unless otherwise specified in `sassOptions`.
+
 ### Resolving `import` at-rules
 
 Webpack provides an [advanced mechanism to resolve files](https://webpack.js.org/concepts/module-resolution/).
