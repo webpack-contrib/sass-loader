@@ -238,7 +238,7 @@ describe("sourceMap option", () => {
         expect(getErrors(stats)).toMatchSnapshot("errors");
       });
 
-      it(`should generate source maps and emit source map  ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
+      it(`should generate source maps with custom sass options  ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
         const testId = getTestId("language", syntax);
         const options = {
           implementation,
