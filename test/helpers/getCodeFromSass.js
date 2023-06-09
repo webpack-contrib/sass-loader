@@ -4,11 +4,10 @@ import fs from "fs";
 
 async function getCodeFromSass(testId, options, context = {}) {
   const loaderOptions = { ...options };
-  let sassOptions = { ...options.sassOptions } || {};
-
-  if (typeof sassOptions === "function") {
-    sassOptions = sassOptions({ mock: true }) || {};
-  }
+  const sassOptions =
+    typeof loaderOptions.sassOptions === "function"
+      ? loaderOptions.sassOptions({ mock: true }) || {}
+      : { ...options.sassOptions } || {};
 
   if (sassOptions.data) {
     delete sassOptions.data;
