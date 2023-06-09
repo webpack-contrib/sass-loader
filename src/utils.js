@@ -1,8 +1,6 @@
 import url from "url";
 import path from "path";
 
-import async from "neo-async";
-
 function getDefaultSassImplementation() {
   let sassImplPkg = "sass";
 
@@ -706,6 +704,9 @@ function getCompileFn(implementation, options) {
   // We need to use a job queue to make sure that one thread is always available to the UV lib
   if (nodeSassJobQueue === null) {
     const threadPoolSize = Number(process.env.UV_THREADPOOL_SIZE || 4);
+    // Only used for `node-sass`, so let's load it lazily
+    // eslint-disable-next-line global-require
+    const async = require("neo-async");
 
     nodeSassJobQueue = async.queue(
       implementation.render.bind(implementation),
