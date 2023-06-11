@@ -62,6 +62,37 @@ describe("loader", () => {
         expect(getErrors(stats)).toMatchSnapshot("errors");
       });
 
+      it(`should work ('${implementationName}', '${api}' API, '${syntax}' syntax) and don't modify sass options`, async () => {
+        const testId = getTestId("language", syntax);
+        const sassOptions = isModernAPI
+          ? { loadPaths: ["node_modules/foundation-sites/scss"] }
+          : { includePaths: ["node_modules/foundation-sites/scss"] };
+        const options = {
+          implementation,
+          api,
+          sassOptions,
+        };
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
+        const codeFromSass = await getCodeFromSass(testId, options);
+
+        if (isModernAPI) {
+          expect(sassOptions).toEqual({
+            loadPaths: ["node_modules/foundation-sites/scss"],
+          });
+        } else {
+          expect(sassOptions).toEqual({
+            includePaths: ["node_modules/foundation-sites/scss"],
+          });
+        }
+
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot("css");
+        expect(getWarnings(stats)).toMatchSnapshot("warnings");
+        expect(getErrors(stats)).toMatchSnapshot("errors");
+      });
+
       it(`should work ('${implementationName}', '${api}' API, '${syntax}' syntax) with the "memory" cache`, async () => {
         const cache = path.resolve(
           __dirname,

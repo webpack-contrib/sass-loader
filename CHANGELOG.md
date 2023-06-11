@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [13.3.2](https://github.com/webpack-contrib/sass-loader/compare/v13.3.1...v13.3.2) (2023-06-09)
+
+
+### Bug Fixes
+
+* **perf:** avoid using `klona` for `sass` options ([#1145](https://github.com/webpack-contrib/sass-loader/issues/1145)) ([9e87b6b](https://github.com/webpack-contrib/sass-loader/commit/9e87b6b103c4f8a32f89235f97f006c3a1115355))
+
 ### [13.3.1](https://github.com/webpack-contrib/sass-loader/compare/v13.3.0...v13.3.1) (2023-05-28)
 
 

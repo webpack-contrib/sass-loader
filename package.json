@@ -1,6 +1,6 @@
 {
   "name": "sass-loader",
-  "version": "13.3.1",
+  "version": "13.3.2",
   "description": "Sass loader for webpack",
   "license": "MIT",
   "repository": "webpack-contrib/sass-loader",
@@ -63,7 +63,6 @@
     }
   },
   "dependencies": {
-    "klona": "^2.0.6",
     "neo-async": "^2.6.2"
   },
   "devDependencies": {
