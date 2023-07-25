@@ -87,6 +87,9 @@ function getSassImplementation(loaderContext, implementation) {
 
     // eslint-disable-next-line consistent-return
     return resolvedImplementation;
+  } else if (implementationName === "sass-embedded") {
+    // eslint-disable-next-line consistent-return
+    return resolvedImplementation;
   }
 
   loaderContext.emitError(
