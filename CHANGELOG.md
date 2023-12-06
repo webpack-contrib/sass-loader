@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [10.5.0](https://github.com/webpack-contrib/sass-loader/compare/v10.4.1...v10.5.0) (2023-12-06)
+
+
+### Features
+
+* support `node-sass@9` ([#1168](https://github.com/webpack-contrib/sass-loader/issues/1168)) ([6e59be2](https://github.com/webpack-contrib/sass-loader/commit/6e59be2801bbb60b7089609f5c42f32240749c87))
+* support sass-embedded implementation ([#1152](https://github.com/webpack-contrib/sass-loader/issues/1152)) ([47e9814](https://github.com/webpack-contrib/sass-loader/commit/47e9814aa8c9ddbbe8a3ad7db6b79d030501d23d))
+
 ### [10.4.1](https://github.com/webpack-contrib/sass-loader/compare/v10.4.0...v10.4.1) (2022-11-15)
 
 
