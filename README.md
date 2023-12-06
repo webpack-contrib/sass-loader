@@ -677,13 +677,9 @@ Type:
 type warnRuleAsWarning = boolean;
 ```
 
-Default: `false`
+Default: `true`
 
 Treats the `@warn` rule as a webpack warning.
-
-> **Note**
->
-> It will be `true` by default in the next major release.
 
 **style.scss**
 
