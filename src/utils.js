@@ -127,7 +127,9 @@ async function getSassOptions(
     const needEmitWarning = loaderOptions.warnRuleAsWarning !== false;
     const logger = loaderContext.getLogger("sass-loader");
     const formatSpan = (span) =>
-      `${span.url || "-"}:${span.start.line}:${span.start.column}: `;
+      `Warning on line ${span.start.line}, column ${span.start.column} of ${
+        span.url || "-"
+      }:${span.start.line}:${span.start.column}:\n`;
     const formatDebugSpan = (span) =>
       `[debug:${span.start.line}:${span.start.column}] `;
 
@@ -150,13 +152,17 @@ async function getSassOptions(
           builtMessage += "Deprecation ";
         }
 
-        if (loggerOptions.span && !loggerOptions.stack) {
+        if (loggerOptions.span) {
           builtMessage = formatSpan(loggerOptions.span);
         }
 
         builtMessage += message;
 
-        if (loggerOptions.stack) {
+        if (loggerOptions.span && loggerOptions.span.context) {
+          builtMessage += `\n\n${loggerOptions.span.start.line} | ${loggerOptions.span.context}`;
+        }
+
+        if (loggerOptions.stack && loggerOptions.stack !== "null") {
           builtMessage += `\n\n${loggerOptions.stack}`;
         }
 
