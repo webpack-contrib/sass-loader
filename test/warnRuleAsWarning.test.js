@@ -161,7 +161,7 @@ describe("loader", () => {
           }
 
           expect(codeFromBundle.css).toMatchSnapshot("css");
-          expect(stats.compilation.warnings).toMatchSnapshot("warnings");
+          expect(getWarnings(stats, true)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
           expect(logs).toMatchSnapshot("logs");
         });

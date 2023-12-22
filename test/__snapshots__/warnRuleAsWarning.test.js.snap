@@ -8,12 +8,12 @@ exports[`loader should emit good formatted warning ('dart-sass', 'legacy' API, '
 
 exports[`loader should emit good formatted warning ('dart-sass', 'legacy' API, 'sass' syntax): warnings 1`] = `
 [
-  [ModuleWarning: Module Warning (from ../src/cjs.js):
-Warning on line 5, column 3 of file:///home/akait/IdeaProjects/sass-loader/test/sass/broken.sass:5:3:
+  "ModuleWarning: Module Warning (from ../src/cjs.js):
+Warning on line 5, column 3 of file:///test/sass/broken.sass:5:3:
 This selector doesn't have any properties and won't be rendered.
 
 5 |    asdf
-],
+",
 ]
 `;
 
@@ -25,12 +25,12 @@ exports[`loader should emit good formatted warning ('dart-sass', 'modern' API, '
 
 exports[`loader should emit good formatted warning ('dart-sass', 'modern' API, 'sass' syntax): warnings 1`] = `
 [
-  [ModuleWarning: Module Warning (from ../src/cjs.js):
-Warning on line 5, column 3 of file:///home/akait/IdeaProjects/sass-loader/test/sass/broken.sass:5:3:
+  "ModuleWarning: Module Warning (from ../src/cjs.js):
+Warning on line 5, column 3 of file:///test/sass/broken.sass:5:3:
 This selector doesn't have any properties and won't be rendered.
 
 5 |    asdf
-],
+",
 ]
 `;
 
@@ -42,12 +42,12 @@ exports[`loader should emit good formatted warning ('sass-embedded', 'legacy' AP
 
 exports[`loader should emit good formatted warning ('sass-embedded', 'legacy' API, 'sass' syntax): warnings 1`] = `
 [
-  [ModuleWarning: Module Warning (from ../src/cjs.js):
-Warning on line 5, column 3 of file:///home/akait/IdeaProjects/sass-loader/test/sass/broken.sass:5:3:
+  "ModuleWarning: Module Warning (from ../src/cjs.js):
+Warning on line 5, column 3 of file:///test/sass/broken.sass:5:3:
 This selector doesn't have any properties and won't be rendered.
 
 5 |    asdf
-],
+",
 ]
 `;
 
@@ -59,12 +59,12 @@ exports[`loader should emit good formatted warning ('sass-embedded', 'modern' AP
 
 exports[`loader should emit good formatted warning ('sass-embedded', 'modern' API, 'sass' syntax): warnings 1`] = `
 [
-  [ModuleWarning: Module Warning (from ../src/cjs.js):
-Warning on line 5, column 3 of file:///home/akait/IdeaProjects/sass-loader/test/sass/broken.sass:5:3:
+  "ModuleWarning: Module Warning (from ../src/cjs.js):
+Warning on line 5, column 3 of file:///test/sass/broken.sass:5:3:
 This selector doesn't have any properties and won't be rendered.
 
 5 |    asdf
-],
+",
 ]
 `;
 
