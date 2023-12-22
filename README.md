@@ -418,7 +418,7 @@ module.exports = {
           {
             loader: "sass-loader",
             options: {
-              sassOptions: (loaderContext) => {
+              sassOptions: (content, loaderContext) => {
                 // More information about available properties https://webpack.js.org/api/loaders/
                 const { resourcePath, rootContext } = loaderContext;
                 const relativePath = path.relative(rootContext, resourcePath);
@@ -677,13 +677,9 @@ Type:
 type warnRuleAsWarning = boolean;
 ```
 
-Default: `false`
+Default: `true`
 
 Treats the `@warn` rule as a webpack warning.
-
-> **Note**
->
-> It will be `true` by default in the next major release.
 
 **style.scss**
 
