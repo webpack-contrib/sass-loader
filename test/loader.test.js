@@ -1853,7 +1853,7 @@ describe("loader", () => {
 
             expect(codeFromBundle.css).toBe(codeFromSass.css);
             expect(codeFromBundle.css).toMatchSnapshot("css");
-            expect(getWarnings(stats)).toMatchSnapshot("warnings");
+            expect(getWarnings(stats, true)).toMatchSnapshot("warnings");
             expect(getErrors(stats)).toMatchSnapshot("errors");
           });
         }
@@ -2040,7 +2040,7 @@ describe("loader", () => {
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
           expect(codeFromBundle.css).toMatchSnapshot("css");
-          expect(getWarnings(stats)).toMatchSnapshot("warnings");
+          expect(getWarnings(stats, true)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
         });
 

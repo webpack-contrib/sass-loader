@@ -153,7 +153,7 @@ async function getSassOptions(
         }
 
         if (loggerOptions.span) {
-          builtMessage = formatSpan(loggerOptions.span);
+          builtMessage += formatSpan(loggerOptions.span);
         }
 
         builtMessage += message;
