@@ -82,8 +82,8 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
 
-      - name: Uninstall fibers
-        run: npm uninstall fibers --save-dev --no-scripts --ignore-scripts
+      - name: Install deps
+        run: npm install node-sass@9.0.0
         if: matrix.node-version == '20.x'
 
       - name: Install dependencies
