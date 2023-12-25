@@ -737,7 +737,7 @@ exports[`loader should not emit warning when 'false' used ('sass-embedded', 'leg
       "args": [
         "My warning message
 
-test/sass/logging.sass 2:1  root stylesheet
+file:///<cwd>/sass/logging.sass 2:1  root stylesheet
 ",
       ],
       "type": "warn",
@@ -769,7 +769,7 @@ exports[`loader should not emit warning when 'false' used ('sass-embedded', 'leg
       "args": [
         "My warning message
 
-test/scss/logging.scss 2:1  root stylesheet
+file:///<cwd>/scss/logging.scss 2:1  root stylesheet
 ",
       ],
       "type": "warn",

@@ -299,8 +299,10 @@ describe("sassOptions option", () => {
         });
       }
 
-      if (!isModernAPI) {
-        it(`should work with the "importer" as a array of functions option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
+      const isSassEmbedded = implementationName === "sass-embedded";
+
+      if (!isModernAPI && !isSassEmbedded) {
+        it(`should work with the "importer" as a array of functions option - glob ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           const testId = getTestId("glob-importer", syntax);
           const options = {
             implementation,

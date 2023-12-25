@@ -9,7 +9,9 @@ function removeCWD(str) {
     cwd = cwd.replace(/\\/g, "/");
   }
 
-  return str.replace(new RegExp(cwd, "g"), "").replace("file:////", "file:///");
+  return str
+    .replace(new RegExp(cwd, "g"), "")
+    .replace(/file:\/\/\/\//g, "file:///");
 }
 
 export default (errors, needVerbose) =>

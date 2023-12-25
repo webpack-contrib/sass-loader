@@ -289,6 +289,14 @@ async function getSassOptions(
         )
       : [];
 
+    // Regression on the `sass-embedded` side
+    if (
+      loaderOptions.webpackImporter === false &&
+      sassOptions.importer.length === 0
+    ) {
+      sassOptions.importer = undefined;
+    }
+
     sassOptions.includePaths = []
       .concat(process.cwd())
       .concat(
