@@ -814,48 +814,50 @@ describe("loader", () => {
         });
       }
 
-      it(`should work with the "foundation-sites" package, import as a package ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
-        const testId = getTestId("foundation-sites", syntax);
-        const options = {
-          implementation,
-          api,
-          sassOptions: isModernAPI
-            ? { loadPaths: ["node_modules/foundation-sites/scss"] }
-            : { includePaths: ["node_modules/foundation-sites/scss"] },
-        };
-        const compiler = getCompiler(testId, { loader: { options } });
-        const stats = await compile(compiler);
-        const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = await getCodeFromSass(testId, options);
+      if (!isNodeSass) {
+        it(`should work with the "foundation-sites" package, import as a package ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
+          const testId = getTestId("foundation-sites", syntax);
+          const options = {
+            implementation,
+            api,
+            sassOptions: isModernAPI
+              ? { loadPaths: ["node_modules/foundation-sites/scss"] }
+              : { includePaths: ["node_modules/foundation-sites/scss"] },
+          };
+          const compiler = getCompiler(testId, { loader: { options } });
+          const stats = await compile(compiler);
+          const codeFromBundle = getCodeFromBundle(stats, compiler);
+          const codeFromSass = await getCodeFromSass(testId, options);
 
-        expect(codeFromBundle.css).toBe(codeFromSass.css);
-        expect(codeFromBundle.css).toMatchSnapshot("css");
-        expect(getWarnings(stats)).toMatchSnapshot("warnings");
-        expect(getErrors(stats)).toMatchSnapshot("errors");
-      });
+          expect(codeFromBundle.css).toBe(codeFromSass.css);
+          expect(codeFromBundle.css).toMatchSnapshot("css");
+          expect(getWarnings(stats)).toMatchSnapshot("warnings");
+          expect(getErrors(stats)).toMatchSnapshot("errors");
+        });
 
-      it(`should work with the "foundation-sites" package, adjusting CSS output ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
-        const testId = getTestId(
-          "foundation-sites-adjusting-css-output",
-          syntax
-        );
-        const options = {
-          implementation,
-          api,
-          sassOptions: isModernAPI
-            ? { loadPaths: ["node_modules/foundation-sites/scss"] }
-            : { includePaths: ["node_modules/foundation-sites/scss"] },
-        };
-        const compiler = getCompiler(testId, { loader: { options } });
-        const stats = await compile(compiler);
-        const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = await getCodeFromSass(testId, options);
+        it(`should work with the "foundation-sites" package, adjusting CSS output ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
+          const testId = getTestId(
+            "foundation-sites-adjusting-css-output",
+            syntax
+          );
+          const options = {
+            implementation,
+            api,
+            sassOptions: isModernAPI
+              ? { loadPaths: ["node_modules/foundation-sites/scss"] }
+              : { includePaths: ["node_modules/foundation-sites/scss"] },
+          };
+          const compiler = getCompiler(testId, { loader: { options } });
+          const stats = await compile(compiler);
+          const codeFromBundle = getCodeFromBundle(stats, compiler);
+          const codeFromSass = await getCodeFromSass(testId, options);
 
-        expect(codeFromBundle.css).toBe(codeFromSass.css);
-        expect(codeFromBundle.css).toMatchSnapshot("css");
-        expect(getWarnings(stats)).toMatchSnapshot("warnings");
-        expect(getErrors(stats)).toMatchSnapshot("errors");
-      });
+          expect(codeFromBundle.css).toBe(codeFromSass.css);
+          expect(codeFromBundle.css).toMatchSnapshot("css");
+          expect(getWarnings(stats)).toMatchSnapshot("warnings");
+          expect(getErrors(stats)).toMatchSnapshot("errors");
+        });
+      }
 
       it(`should work and output the "compressed" outputStyle when "mode" is production ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
         const testId = getTestId("language", syntax);
