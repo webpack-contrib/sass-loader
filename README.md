@@ -249,85 +249,6 @@ module.exports = {
 };
 ```
 
-Note that when using `sass` (`Dart Sass`), **synchronous compilation is twice as fast as asynchronous compilation** by default, due to the overhead of asynchronous callbacks.
-To avoid this overhead, you can use the [fibers](https://www.npmjs.com/package/fibers) package to call asynchronous importers from the synchronous code path.
-
-We automatically inject the [`fibers`](https://github.com/laverdet/node-fibers) package (setup `sassOptions.fiber`) for `Node.js` less v16.0.0 if is possible (i.e. you need install the [`fibers`](https://github.com/laverdet/node-fibers) package).
-
-> **Warning**
->
-> Fibers is not compatible with `Node.js` v16.0.0 or later. Unfortunately, v8 commit [dacc2fee0f](https://github.com/v8/v8/commit/dacc2fee0f815823782a7e432c79c2a7767a4765) is a breaking change and workarounds are non-trivial. ([see introduction to readme](https://github.com/laverdet/node-fibers)).
-
-**package.json**
-
-```json
-{
-  "devDependencies": {
-    "sass-loader": "^7.2.0",
-    "sass": "^1.22.10",
-    "fibers": "^4.0.1"
-  }
-}
-```
-
-You can disable automatically injecting the [`fibers`](https://github.com/laverdet/node-fibers) package by passing a `false` value for the `sassOptions.fiber` option.
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  module: {
-    rules: [
-      {
-        test: /\.s[ac]ss$/i,
-        use: [
-          "style-loader",
-          "css-loader",
-          {
-            loader: "sass-loader",
-            options: {
-              implementation: require("sass"),
-              sassOptions: {
-                fiber: false,
-              },
-            },
-          },
-        ],
-      },
-    ],
-  },
-};
-```
-
-You can also pass the `fiber` value using this code:
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  module: {
-    rules: [
-      {
-        test: /\.s[ac]ss$/i,
-        use: [
-          "style-loader",
-          "css-loader",
-          {
-            loader: "sass-loader",
-            options: {
-              implementation: require("sass"),
-              sassOptions: {
-                fiber: require("fibers"),
-              },
-            },
-          },
-        ],
-      },
-    ],
-  },
-};
-```
-
 ### `sassOptions`
 
 Type:
@@ -338,7 +259,7 @@ type sassOptions =
   | ((
       content: string | Buffer,
       loaderContext: LoaderContext,
-      meta: any
+      meta: any,
     ) => import("sass").LegacyOptions<"async">);
 ```
 

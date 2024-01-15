@@ -20,7 +20,7 @@ describe("getWebpackResolver", () => {
 
   it("should resolve from passed `includePaths`", async () => {
     expect(await resolve("empty", [`${__dirname}/scss`])).toMatch(
-      /empty\.scss$/
+      /empty\.scss$/,
     );
   });
 

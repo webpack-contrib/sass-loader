@@ -42,10 +42,10 @@ describe("loader", () => {
                   args: i.args.map((arg) =>
                     arg
                       .replace(url.pathToFileURL(__dirname), "file:///<cwd>")
-                      .replace(/\\/g, "/")
+                      .replace(/\\/g, "/"),
                   ),
                 };
-              })
+              }),
             );
           }
         }
@@ -79,10 +79,10 @@ describe("loader", () => {
                   args: i.args.map((arg) =>
                     arg
                       .replace(url.pathToFileURL(__dirname), "file:///<cwd>")
-                      .replace(/\\/g, "/")
+                      .replace(/\\/g, "/"),
                   ),
                 };
-              })
+              }),
             );
           }
         }
@@ -116,10 +116,10 @@ describe("loader", () => {
                   args: i.args.map((arg) =>
                     arg
                       .replace(url.pathToFileURL(__dirname), "file:///<cwd>")
-                      .replace(/\\/g, "/")
+                      .replace(/\\/g, "/"),
                   ),
                 };
-              })
+              }),
             );
           }
         }
@@ -152,10 +152,10 @@ describe("loader", () => {
                     args: i.args.map((arg) =>
                       arg
                         .replace(url.pathToFileURL(__dirname), "file:///<cwd>")
-                        .replace(/\\/g, "/")
+                        .replace(/\\/g, "/"),
                     ),
                   };
-                })
+                }),
               );
             }
           }

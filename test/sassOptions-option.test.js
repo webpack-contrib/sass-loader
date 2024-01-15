@@ -1,8 +1,6 @@
 import path from "path";
 
 import globImporter from "node-sass-glob-importer";
-import semver from "semver";
-import dartSass from "sass";
 
 import {
   compile,
@@ -212,7 +210,7 @@ describe("sassOptions option", () => {
         it(`should work with the "functions" option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           const testId = getTestId(
             api === "modern" ? "custom-functions-modern" : "custom-functions",
-            syntax
+            syntax,
           );
           const options = {
             implementation,
@@ -434,36 +432,6 @@ describe("sassOptions option", () => {
           expect(codeFromBundle.css).toMatchSnapshot("css");
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
-        });
-      }
-
-      if (!isModernAPI) {
-        it(`should don't use the "fibers" package when the "fiber" option is "false" ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
-          const dartSassSpy = jest.spyOn(dartSass, "render");
-          const testId = getTestId("language", syntax);
-          const options = {
-            implementation,
-            api,
-            sassOptions: { fiber: false },
-          };
-          const compiler = getCompiler(testId, { loader: { options } });
-          const stats = await compile(compiler);
-          const codeFromBundle = getCodeFromBundle(stats, compiler);
-          const codeFromSass = await getCodeFromSass(testId, options);
-
-          if (
-            implementationName === "dart-sass" &&
-            semver.satisfies(process.version, ">= 10")
-          ) {
-            expect(dartSassSpy.mock.calls[0][0]).not.toHaveProperty("fiber");
-          }
-
-          expect(codeFromBundle.css).toBe(codeFromSass.css);
-          expect(codeFromBundle.css).toMatchSnapshot("css");
-          expect(getWarnings(stats)).toMatchSnapshot("warnings");
-          expect(getErrors(stats)).toMatchSnapshot("errors");
-
-          dartSassSpy.mockRestore();
         });
       }
 

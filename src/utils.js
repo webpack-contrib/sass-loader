@@ -82,14 +82,8 @@ function proxyCustomImporters(importers, loaderContext) {
         const self = { ...this, webpackLoaderContext: loaderContext };
 
         return importer.apply(self, args);
-      }
+      },
   );
-}
-
-function isSupportedFibers() {
-  const [nodeVersion] = process.versions.node.split(".");
-
-  return Number(nodeVersion) < 16;
 }
 
 /**
@@ -107,7 +101,7 @@ async function getSassOptions(
   loaderOptions,
   content,
   implementation,
-  useSourceMap
+  useSourceMap,
 ) {
   const options = loaderOptions.sassOptions
     ? typeof loaderOptions.sassOptions === "function"
@@ -216,34 +210,6 @@ async function getSassOptions(
   } else {
     sassOptions.file = resourcePath;
 
-    const isDartSass = implementation.info.includes("dart-sass");
-
-    if (isDartSass && isSupportedFibers()) {
-      const shouldTryToResolveFibers =
-        !sassOptions.fiber && sassOptions.fiber !== false;
-
-      if (shouldTryToResolveFibers) {
-        let fibers;
-
-        try {
-          fibers = require.resolve("fibers");
-        } catch (_error) {
-          // Nothing
-        }
-
-        if (fibers) {
-          // eslint-disable-next-line global-require, import/no-dynamic-require
-          sassOptions.fiber = require(fibers);
-        }
-      } else if (sassOptions.fiber === false) {
-        // Don't pass the `fiber` option for `sass` (`Dart Sass`)
-        delete sassOptions.fiber;
-      }
-    } else {
-      // Don't pass the `fiber` option for `node-sass`
-      delete sassOptions.fiber;
-    }
-
     // opt.outputStyle
     if (!sassOptions.outputStyle && isProductionLikeMode(loaderContext)) {
       sassOptions.outputStyle = "compressed";
@@ -259,7 +225,7 @@ async function getSassOptions(
       sassOptions.sourceMap = true;
       sassOptions.outFile = path.join(
         loaderContext.rootContext,
-        "style.css.map"
+        "style.css.map",
       );
       sassOptions.sourceMapContents = true;
       sassOptions.omitSourceMapUrl = true;
@@ -285,7 +251,7 @@ async function getSassOptions(
           Array.isArray(sassOptions.importer)
             ? sassOptions.importer.slice()
             : [sassOptions.importer],
-          loaderContext
+          loaderContext,
         )
       : [];
 
@@ -294,6 +260,7 @@ async function getSassOptions(
       loaderOptions.webpackImporter === false &&
       sassOptions.importer.length === 0
     ) {
+      // eslint-disable-next-line no-undefined
       sassOptions.importer = undefined;
     }
 
@@ -305,15 +272,15 @@ async function getSassOptions(
           (includePath) =>
             path.isAbsolute(includePath)
               ? includePath
-              : path.join(process.cwd(), includePath)
-        )
+              : path.join(process.cwd(), includePath),
+        ),
       )
       .concat(
         process.env.SASS_PATH
           ? process.env.SASS_PATH.split(
-              process.platform === "win32" ? ";" : ":"
+              process.platform === "win32" ? ";" : ":",
             )
-          : []
+          : [],
       );
 
     if (typeof sassOptions.charset === "undefined") {
@@ -354,7 +321,7 @@ function getPossibleRequests(
   // eslint-disable-next-line no-shadow
   url,
   forWebpackResolver = false,
-  fromImport = false
+  fromImport = false,
 ) {
   let request = url;
 
@@ -401,13 +368,13 @@ function getPossibleRequests(
                 `${normalizedDirname}_${basenameWithoutExtension}.import${extension}`,
                 `${normalizedDirname}${basenameWithoutExtension}.import${extension}`,
               ]
-            : []
+            : [],
         )
         .concat([
           `${normalizedDirname}_${basename}`,
           `${normalizedDirname}${basename}`,
         ])
-        .concat(forWebpackResolver ? [url] : [])
+        .concat(forWebpackResolver ? [url] : []),
     ),
   ];
 }
@@ -480,7 +447,7 @@ const IS_NATIVE_WIN32_PATH = /^[a-z]:[/\\]|^\\\\/i;
 function getWebpackResolver(
   resolverFactory,
   implementation,
-  includePaths = []
+  includePaths = [],
 ) {
   const isDartSass =
     implementation && implementation.info.includes("dart-sass");
@@ -505,7 +472,7 @@ function getWebpackResolver(
       modules: [],
       restrictions: [/\.((sa|sc|c)ss)$/i],
       preferRelative: true,
-    })
+    }),
   );
   const sassImportResolve = promiseResolve(
     resolverFactory({
@@ -520,7 +487,7 @@ function getWebpackResolver(
       modules: [],
       restrictions: [/\.((sa|sc|c)ss)$/i],
       preferRelative: true,
-    })
+    }),
   );
   const webpackModuleResolve = promiseResolve(
     resolverFactory({
@@ -531,7 +498,7 @@ function getWebpackResolver(
       extensions: [".sass", ".scss", ".css"],
       restrictions: [/\.((sa|sc|c)ss)$/i],
       preferRelative: true,
-    })
+    }),
   );
   const webpackImportResolve = promiseResolve(
     resolverFactory({
@@ -542,7 +509,7 @@ function getWebpackResolver(
       extensions: [".sass", ".scss", ".css"],
       restrictions: [/\.((sa|sc|c)ss)$/i],
       preferRelative: true,
-    })
+    }),
   );
 
   return (context, request, fromImport) => {
@@ -592,7 +559,7 @@ function getWebpackResolver(
       const sassPossibleRequests = getPossibleRequests(
         request,
         false,
-        fromImport
+        fromImport,
       );
 
       // `node-sass` calls our importer before `1. Filesystem imports relative to the base file.`, so we need emulate this too
@@ -612,14 +579,14 @@ function getWebpackResolver(
             context,
             possibleRequests: sassPossibleRequests,
           };
-        })
+        }),
       );
     }
 
     const webpackPossibleRequests = getPossibleRequests(
       request,
       true,
-      fromImport
+      fromImport,
     );
 
     resolutionMap = resolutionMap.concat({
@@ -649,7 +616,7 @@ function getWebpackImporter(loaderContext, implementation, includePaths) {
   const resolve = getWebpackResolver(
     loaderContext.getResolve,
     implementation,
-    includePaths
+    includePaths,
   );
 
   return function importer(originalUrl, prev, done) {
@@ -724,7 +691,7 @@ function getCompileFn(implementation, options) {
 
     nodeSassJobQueue = async.queue(
       implementation.render.bind(implementation),
-      threadPoolSize - 1
+      threadPoolSize - 1,
     );
   }
 
@@ -740,7 +707,7 @@ function getCompileFn(implementation, options) {
           }
 
           resolve(result);
-        }
+        },
       );
     });
 }
@@ -825,6 +792,5 @@ export {
   getWebpackImporter,
   getCompileFn,
   normalizeSourceMap,
-  isSupportedFibers,
   errorFactory,
 };

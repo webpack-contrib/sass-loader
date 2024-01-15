@@ -1,4 +1,4 @@
-import url from "url";
+import { pathToFileURL } from "url";
 import path from "path";
 import fs from "fs";
 
@@ -35,7 +35,7 @@ async function getCodeFromSass(testId, options, context = {}) {
       isIndentedSyntax ? "\n" : ";"
     }\n${fs.readFileSync(path.resolve(__dirname, "..", testId), "utf8")}`;
   } else if (isModernAPI) {
-    const URL = url.pathToFileURL(path.resolve(__dirname, "..", testId));
+    const URL = pathToFileURL(path.resolve(__dirname, "..", testId));
 
     sassOptions.url = URL;
     sassOptions.data = fs.readFileSync(URL).toString();
@@ -47,96 +47,97 @@ async function getCodeFromSass(testId, options, context = {}) {
   const testNodeModules = path.resolve(testFolder, "node_modules") + path.sep;
   const pathToSassPackageWithIndexFile = path.resolve(
     testFolder,
-    "node_modules/sass-package-with-index/index.sass"
+    "node_modules/sass-package-with-index/index.sass",
   );
   const pathToSassPackageWithExportsFields = path.resolve(
     testFolder,
-    "node_modules/package-with-exports/style.scss"
+    "node_modules/package-with-exports/style.scss",
   );
   const pathToSassPackageWithExportsFieldsAndCustomConditionReplacer = () => {
     if (context.packageExportsCustomConditionTestVariant === 1) {
       return path.resolve(
         testFolder,
-        "node_modules/package-with-exports-and-custom-condition/style-1.scss"
+        "node_modules/package-with-exports-and-custom-condition/style-1.scss",
       );
     }
 
     if (context.packageExportsCustomConditionTestVariant === 2) {
       return path.resolve(
         testFolder,
-        "node_modules/package-with-exports-and-custom-condition/style-2.scss"
+        "node_modules/package-with-exports-and-custom-condition/style-2.scss",
       );
     }
 
+    // eslint-disable-next-line no-console
     console.warn(
-      "Expected to receive .packageExportsCustomConditionTestVariant to properly resolve stylesheet in sass only compilation. "
+      "Expected to receive .packageExportsCustomConditionTestVariant to properly resolve stylesheet in sass only compilation. ",
     );
     return "";
   };
 
   const pathToSCSSPackageWithIndexFile = path.resolve(
     testFolder,
-    "node_modules/scss-package-with-index/index.scss"
+    "node_modules/scss-package-with-index/index.scss",
   );
   const pathToSassPackageWithUnderscoreIndexFile = path.resolve(
     testFolder,
-    "node_modules/sass-package-with-underscore-index/_index.sass"
+    "node_modules/sass-package-with-underscore-index/_index.sass",
   );
   const pathToSCSSPackageWithUnderscoreIndexFile = path.resolve(
     testFolder,
-    "node_modules/scss-package-with-underscore-index/_index.scss"
+    "node_modules/scss-package-with-underscore-index/_index.scss",
   );
   const pathToSCSSUnderscoreDir = path.resolve(
     testFolder,
-    "scss/_underscore-dir/_index.scss"
+    "scss/_underscore-dir/_index.scss",
   );
   const pathToSCSSUnderscoreDir1 = path.resolve(
     testFolder,
-    "scss/_underscore-dir-1/index.scss"
+    "scss/_underscore-dir-1/index.scss",
   );
   const pathToSCSSUnderscoreDir2 = path.resolve(
     testFolder,
-    "scss/_underscore-dir-2/_index.sass"
+    "scss/_underscore-dir-2/_index.sass",
   );
   const pathToSCSSUnderscoreDir3 = path.resolve(
     testFolder,
-    "scss/_underscore-dir-3/index.sass"
+    "scss/_underscore-dir-3/index.sass",
   );
   // Avoid `.css` extensions because `node-sass` doesn't compile them
   const pathToSCSSUnderscoreDir4 = path.resolve(
     testFolder,
-    "scss/_underscore-dir-4/_index"
+    "scss/_underscore-dir-4/_index",
   );
   // Avoid `.css` extensions because `node-sass` doesn't compile them
   const pathToSCSSUnderscoreDir5 = path.resolve(
     testFolder,
-    "scss/_underscore-dir-5/index"
+    "scss/_underscore-dir-5/index",
   );
   const pathToSassUnderscoreDir = path.resolve(
     testFolder,
-    "sass/_underscore-dir/_index.sass"
+    "sass/_underscore-dir/_index.sass",
   );
   const pathToSassUnderscoreDir1 = path.resolve(
     testFolder,
-    "sass/_underscore-dir-1/index.sass"
+    "sass/_underscore-dir-1/index.sass",
   );
   const pathToSassUnderscoreDir2 = path.resolve(
     testFolder,
-    "sass/_underscore-dir-2/_index.scss"
+    "sass/_underscore-dir-2/_index.scss",
   );
   const pathToSassUnderscoreDir3 = path.resolve(
     testFolder,
-    "sass/_underscore-dir-3/index.scss"
+    "sass/_underscore-dir-3/index.scss",
   );
   // Avoid `.css` extensions because `node-sass` doesn't compile them
   const pathToSassUnderscoreDir4 = path.resolve(
     testFolder,
-    "sass/_underscore-dir-4/_index"
+    "sass/_underscore-dir-4/_index",
   );
   // Avoid `.css` extensions because `node-sass` doesn't compile them
   const pathToSassUnderscoreDir5 = path.resolve(
     testFolder,
-    "sass/_underscore-dir-5/index"
+    "sass/_underscore-dir-5/index",
   );
   const pathToSCSSWord6 = path.resolve(testFolder, "scss/word-6/_index.scss");
   const pathToSCSSWord7 = path.resolve(testFolder, "scss/word-7/index.scss");
@@ -146,27 +147,27 @@ async function getCodeFromSass(testId, options, context = {}) {
   const pathToSCSSWord11 = path.resolve(testFolder, "scss/word-11/index");
   const pathToSCSSDirectory6 = path.resolve(
     testFolder,
-    "scss/directory-6/file/_index.scss"
+    "scss/directory-6/file/_index.scss",
   );
   const pathToSCSSDirectory7 = path.resolve(
     testFolder,
-    "scss/directory-7/file/index.scss"
+    "scss/directory-7/file/index.scss",
   );
   const pathToSCSSDirectory8 = path.resolve(
     testFolder,
-    "scss/directory-8/file/_index.sass"
+    "scss/directory-8/file/_index.sass",
   );
   const pathToSCSSDirectory9 = path.resolve(
     testFolder,
-    "scss/directory-9/file/index.sass"
+    "scss/directory-9/file/index.sass",
   );
   const pathToSCSSDirectory10 = path.resolve(
     testFolder,
-    "scss/directory-10/file/index"
+    "scss/directory-10/file/index",
   );
   const pathToSCSSDirectory11 = path.resolve(
     testFolder,
-    "scss/directory-11/file/index"
+    "scss/directory-11/file/index",
   );
   const pathToSassWord6 = path.resolve(testFolder, "sass/word-6/_index.sass");
   const pathToSassWord7 = path.resolve(testFolder, "sass/word-7/index.sass");
@@ -176,145 +177,145 @@ async function getCodeFromSass(testId, options, context = {}) {
   const pathToSassWord11 = path.resolve(testFolder, "sass/word-11/index");
   const pathToSassDirectory6 = path.resolve(
     testFolder,
-    "sass/directory-6/file/_index.sass"
+    "sass/directory-6/file/_index.sass",
   );
   const pathToSassDirectory7 = path.resolve(
     testFolder,
-    "sass/directory-7/file/index.sass"
+    "sass/directory-7/file/index.sass",
   );
   const pathToSassDirectory8 = path.resolve(
     testFolder,
-    "sass/directory-8/file/_index.scss"
+    "sass/directory-8/file/_index.scss",
   );
   const pathToSassDirectory9 = path.resolve(
     testFolder,
-    "sass/directory-9/file/index.scss"
+    "sass/directory-9/file/index.scss",
   );
   const pathToSassDirectory10 = path.resolve(
     testFolder,
-    "sass/directory-10/file/index"
+    "sass/directory-10/file/index",
   );
   const pathToSassDirectory11 = path.resolve(
     testFolder,
-    "sass/directory-11/file/index"
+    "sass/directory-11/file/index",
   );
   const pathToAlias = path.resolve(
     testFolder,
     path.extname(testId).slice(1),
     "another",
-    `alias.${path.extname(testId).slice(1)}`
+    `alias.${path.extname(testId).slice(1)}`,
   );
   const pathToSCSSSassField = path.resolve(
     testFolder,
-    "node_modules/scss-sass-field/nested/style.scss"
+    "node_modules/scss-sass-field/nested/style.scss",
   );
   const pathToSassSassField = path.resolve(
     testFolder,
-    "node_modules/sass-sass-field/nested/style.sass"
+    "node_modules/sass-sass-field/nested/style.sass",
   );
   const pathToSCSSStyleField = path.resolve(
     testFolder,
-    "node_modules/scss-style-field/nested/style.scss"
+    "node_modules/scss-style-field/nested/style.scss",
   );
   const pathToSassStyleField = path.resolve(
     testFolder,
-    "node_modules/sass-style-field/nested/style.sass"
+    "node_modules/sass-style-field/nested/style.sass",
   );
   const pathToSCSSMainField = path.resolve(
     testFolder,
-    "node_modules/scss-main-field/nested/style.scss"
+    "node_modules/scss-main-field/nested/style.scss",
   );
   const pathToSassMainField = path.resolve(
     testFolder,
-    "node_modules/sass-main-field/nested/style.sass"
+    "node_modules/sass-main-field/nested/style.sass",
   );
   const pathToSCSSAlias = path.resolve(
     testFolder,
-    "scss/directory-6/file/_index.scss"
+    "scss/directory-6/file/_index.scss",
   );
   const pathToSassAlias = path.resolve(
     testFolder,
-    "sass/directory-6/file/_index.sass"
+    "sass/directory-6/file/_index.sass",
   );
   const pathToSCSSIndexAlias = path.resolve(
     testFolder,
-    "scss/dir-with-underscore-index/_index.scss"
+    "scss/dir-with-underscore-index/_index.scss",
   );
   const pathToSassIndexAlias = path.resolve(
     testFolder,
-    "sass/dir-with-underscore-index/_index.sass"
+    "sass/dir-with-underscore-index/_index.sass",
   );
   const pathToScopedNpmPkg = path.resolve(
     testFolder,
-    "node_modules/@org/pkg/index.scss"
+    "node_modules/@org/pkg/index.scss",
   );
   const pathToScopedNpmFile = path.resolve(
     testFolder,
-    "node_modules/@org/style.scss"
+    "node_modules/@org/style.scss",
   );
   const pathToSCSSCustomSassField = path.resolve(
     testFolder,
-    "node_modules/scss-custom-sass-field/nested/style.scss"
+    "node_modules/scss-custom-sass-field/nested/style.scss",
   );
   const pathToSassCustomSassField = path.resolve(
     testFolder,
-    "node_modules/sass-custom-sass-field/nested/style.sass"
+    "node_modules/sass-custom-sass-field/nested/style.sass",
   );
   const pathToBootstrap3Entry = path.resolve(
     testFolder,
-    "../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap.scss"
+    "../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap.scss",
   );
   const pathToBootstrap3Package = path.resolve(
     testFolder,
-    "../node_modules/bootstrap-sass"
+    "../node_modules/bootstrap-sass",
   );
   const pathToBootstrap4Entry = path.resolve(
     testFolder,
-    "../node_modules/bootstrap-v4/scss/bootstrap.scss"
+    "../node_modules/bootstrap-v4/scss/bootstrap.scss",
   );
   const pathToBootstrap5Entry = path.resolve(
     testFolder,
-    "../node_modules/bootstrap-v5/scss/bootstrap.scss"
+    "../node_modules/bootstrap-v5/scss/bootstrap.scss",
   );
   const pathToModule = path.resolve(
     testFolder,
-    "node_modules/module/module.scss"
+    "node_modules/module/module.scss",
   );
   const pathToAnother = path.resolve(
     testFolder,
-    "node_modules/another/module.scss"
+    "node_modules/another/module.scss",
   );
   const pathToPackageWithStyleFieldAndCss = isSass
     ? path.resolve(
         testFolder,
-        "node_modules/package-with-style-field-and-css/sass/package-with-style-field-and-css.sass"
+        "node_modules/package-with-style-field-and-css/sass/package-with-style-field-and-css.sass",
       )
     : path.resolve(
         testFolder,
-        "node_modules/package-with-style-field-and-css/scss/package-with-style-field-and-css.scss"
+        "node_modules/package-with-style-field-and-css/scss/package-with-style-field-and-css.scss",
       );
   const pathToPackageWithJsAndCssMainFiles = path.resolve(
     testFolder,
-    "node_modules/package-with-js-and-css-main-files/index"
+    "node_modules/package-with-js-and-css-main-files/index",
   );
   const pathToPackageWithJsMainField = path.resolve(
     testFolder,
-    "node_modules/package-with-js-main-field/index.scss"
+    "node_modules/package-with-js-main-field/index.scss",
   );
   const pathToPackageWithIndex = path.resolve(
     testFolder,
-    "node_modules/package-with-index/_index.scss"
+    "node_modules/package-with-index/_index.scss",
   );
   const pathToLanguage = isSass
     ? path.resolve(testFolder, "sass/language.sass")
     : path.resolve(testFolder, "scss/language.scss");
   const pathToPackageWithSameImport = path.resolve(
     testFolder,
-    "node_modules/package-with-same-import/style.scss"
+    "node_modules/package-with-same-import/style.scss",
   );
   const pathToMaterial = path.resolve(
     __dirname,
-    "../../node_modules/@material"
+    "../../node_modules/@material",
   );
   const pathToCustomMainFiles = isSass
     ? path.resolve(testFolder, "sass/custom-main-files/custom.sass")
@@ -731,7 +732,7 @@ async function getCodeFromSass(testId, options, context = {}) {
         .replace(/^path-to-alias/, pathToAlias)
         .replace(
           /^package-with-style-field-and-css/,
-          pathToPackageWithStyleFieldAndCss
+          pathToPackageWithStyleFieldAndCss,
         )
         .replace(/^~scss-sass-field/, pathToSCSSSassField)
         .replace(/^~sass-sass-field/, pathToSassSassField)
@@ -745,27 +746,27 @@ async function getCodeFromSass(testId, options, context = {}) {
         .replace(/^~@sass$/, pathToSassAlias)
         .replace(
           /^~@path-to-scss-dir\/dir-with-underscore-index$/,
-          pathToSCSSIndexAlias
+          pathToSCSSIndexAlias,
         )
         .replace(
           /^~@path-to-scss-dir\/dir-with-underscore-index\/$/,
-          pathToSCSSIndexAlias
+          pathToSCSSIndexAlias,
         )
         .replace(
           /^~@path-to-sass-dir\/dir-with-underscore-index$/,
-          pathToSassIndexAlias
+          pathToSassIndexAlias,
         )
         .replace(
           /^~@path-to-sass-dir\/dir-with-underscore-index\/$/,
-          pathToSassIndexAlias
+          pathToSassIndexAlias,
         )
         .replace(
           /^~@\/path-to-scss-dir\/dir-with-underscore-index$/,
-          pathToSCSSIndexAlias
+          pathToSCSSIndexAlias,
         )
         .replace(
           /^~@\/path-to-sass-dir\/dir-with-underscore-index$/,
-          pathToSassIndexAlias
+          pathToSassIndexAlias,
         )
         .replace(/^~@org\/pkg/, pathToScopedNpmPkg)
         .replace(/^@org\/style/, pathToScopedNpmFile)
@@ -779,13 +780,13 @@ async function getCodeFromSass(testId, options, context = {}) {
         .replace(/^~another/, pathToAnother)
         .replace(
           /^~package-with-js-and-css-main-files/,
-          pathToPackageWithJsAndCssMainFiles
+          pathToPackageWithJsAndCssMainFiles,
         )
         .replace(/^~package-with-js-main-field/, pathToPackageWithJsMainField)
         .replace(/^~package-with-index/, pathToPackageWithIndex)
         .replace(
           /^package-with-exports-and-custom-condition$/,
-          pathToSassPackageWithExportsFieldsAndCustomConditionReplacer
+          pathToSassPackageWithExportsFieldsAndCustomConditionReplacer,
         )
         .replace(/^package-with-exports$/, pathToSassPackageWithExportsFields)
         .replace(/^file:\/\/\/language/, pathToLanguage)
@@ -795,7 +796,7 @@ async function getCodeFromSass(testId, options, context = {}) {
         .replace(/^file:\/\/\/sass\/language.sass/, pathToLanguage)
         .replace(
           /^package-with-same-import\/style/,
-          pathToPackageWithSameImport
+          pathToPackageWithSameImport,
         )
         .replace(/@material/, pathToMaterial)
         .replace(/custom-main-files/, pathToCustomMainFiles)
@@ -813,7 +814,7 @@ async function getCodeFromSass(testId, options, context = {}) {
           .concat(
             Array.isArray(sassOptions.importer)
               ? [...sassOptions.importer]
-              : [sassOptions.importer]
+              : [sassOptions.importer],
           )
           .concat([testImporter])
       : [testImporter];
@@ -829,14 +830,10 @@ async function getCodeFromSass(testId, options, context = {}) {
 
     ({ css, sourceMap: map } = await implementation.compileStringAsync(
       data,
-      rest
+      rest,
     ));
   } else {
     ({ css, map } = await new Promise((resolve, reject) => {
-      if (sassOptions.fiber === false) {
-        delete sassOptions.fiber;
-      }
-
       implementation.render(sassOptions, (error, result) => {
         if (error) {
           reject(error);

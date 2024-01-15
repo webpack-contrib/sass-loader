@@ -22,7 +22,7 @@ function getCodeFromBundle(stats, compiler, asset) {
     `${code};\nmodule.exports = sassLoaderExport;`,
     {
       module: {},
-    }
+    },
   );
 
   return result.default;

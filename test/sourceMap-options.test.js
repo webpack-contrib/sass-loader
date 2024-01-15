@@ -37,7 +37,7 @@ describe("sourceMap option", () => {
           expect(path.isAbsolute(source)).toBe(true);
           expect(source).toBe(path.normalize(source));
           expect(
-            fs.existsSync(path.resolve(sourceMap.sourceRoot, source))
+            fs.existsSync(path.resolve(sourceMap.sourceRoot, source)),
           ).toBe(true);
 
           return path
@@ -68,7 +68,7 @@ describe("sourceMap option", () => {
           expect(path.isAbsolute(source)).toBe(true);
           expect(source).toBe(path.normalize(source));
           expect(
-            fs.existsSync(path.resolve(sourceMap.sourceRoot, source))
+            fs.existsSync(path.resolve(sourceMap.sourceRoot, source)),
           ).toBe(true);
 
           return path
@@ -99,7 +99,7 @@ describe("sourceMap option", () => {
           expect(path.isAbsolute(source)).toBe(true);
           expect(source).toBe(path.normalize(source));
           expect(
-            fs.existsSync(path.resolve(sourceMap.sourceRoot, source))
+            fs.existsSync(path.resolve(sourceMap.sourceRoot, source)),
           ).toBe(true);
 
           return path
@@ -157,8 +157,8 @@ describe("sourceMap option", () => {
 
           expect(
             fs.existsSync(
-              path.resolve(__dirname, path.normalize(normalizedSource))
-            )
+              path.resolve(__dirname, path.normalize(normalizedSource)),
+            ),
           ).toBe(true);
 
           return path

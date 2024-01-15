@@ -19,6 +19,6 @@ export default (errors, needVerbose) =>
     removeCWD(
       needVerbose
         ? error.toString()
-        : error.toString().split("\n").slice(0, 2).join("\n")
-    )
+        : error.toString().split("\n").slice(0, 2).join("\n"),
+    ),
   );
