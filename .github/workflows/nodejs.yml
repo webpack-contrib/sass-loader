@@ -83,8 +83,8 @@ jobs:
           cache: "npm"
 
       - name: Install deps
-        run: npm install node-sass@9.0.0
-        if: matrix.node-version == '20.x'
+        run: npm install node-sass@8.0.0
+        if: matrix.node-version == '21.x'
 
       - name: Install dependencies
         run: npm ci
