@@ -79,7 +79,7 @@ describe("loader", () => {
       it(`should work ('${implementationName}', '${api}' API, '${syntax}' syntax) with the "memory" cache`, async () => {
         const cache = path.resolve(
           __dirname,
-          `./outputs/.cache/sass-loader/${implementationName}/${syntax}`
+          `./outputs/.cache/sass-loader/${implementationName}/${syntax}`,
         );
 
         await del(cache);
@@ -108,7 +108,7 @@ describe("loader", () => {
       it(`should work ('${implementationName}', '${api}' API, '${syntax}' syntax) with the "filesystem" cache`, async () => {
         const cache = path.resolve(
           __dirname,
-          `./outputs/.cache/sass-loader/${implementationName}/${syntax}`
+          `./outputs/.cache/sass-loader/${implementationName}/${syntax}`,
         );
 
         await del(cache);
@@ -163,8 +163,8 @@ describe("loader", () => {
 
         expect(
           stats.compilation.fileDependencies.has(
-            path.resolve(`./test/${syntax}/error.${syntax}`)
-          )
+            path.resolve(`./test/${syntax}/error.${syntax}`),
+          ),
         ).toBe(true);
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
@@ -181,13 +181,13 @@ describe("loader", () => {
 
         expect(
           stats.compilation.fileDependencies.has(
-            path.resolve(`./test/${syntax}/error-import.${syntax}`)
-          )
+            path.resolve(`./test/${syntax}/error-import.${syntax}`),
+          ),
         ).toBe(true);
         expect(
           stats.compilation.fileDependencies.has(
-            path.resolve(`./test/${syntax}/error.${syntax}`)
-          )
+            path.resolve(`./test/${syntax}/error.${syntax}`),
+          ),
         ).toBe(true);
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
@@ -204,8 +204,8 @@ describe("loader", () => {
 
         expect(
           stats.compilation.fileDependencies.has(
-            path.resolve(`./test/${syntax}/error-file-not-found.${syntax}`)
-          )
+            path.resolve(`./test/${syntax}/error-file-not-found.${syntax}`),
+          ),
         ).toBe(true);
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
@@ -222,8 +222,8 @@ describe("loader", () => {
 
         expect(
           stats.compilation.fileDependencies.has(
-            path.resolve(`./test/${syntax}/error-file-not-found-2.${syntax}`)
-          )
+            path.resolve(`./test/${syntax}/error-file-not-found-2.${syntax}`),
+          ),
         ).toBe(true);
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
@@ -340,7 +340,7 @@ describe("loader", () => {
       it(`should work when "@import" at-rules without extensions and do not start with "_" ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
         const testId = getTestId(
           "import-without-extension-and-underscore",
-          syntax
+          syntax,
         );
         const options = {
           implementation,
@@ -568,7 +568,7 @@ describe("loader", () => {
         it(`should prefer "mainFiles" over "mainFields" when the field contains "js" file ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           const testId = getTestId(
             "import-prefer-main-files-over-main-fields",
-            syntax
+            syntax,
           );
           const options = {
             implementation,
@@ -590,7 +590,7 @@ describe("loader", () => {
         it(`should prefer "mainFiles" with extension over without ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           const testId = getTestId(
             "import-prefer-main-files-with-extension",
-            syntax
+            syntax,
           );
           const options = {
             implementation,
@@ -646,21 +646,21 @@ describe("loader", () => {
                   __dirname,
                   syntax,
                   "another",
-                  `alias.${syntax}`
+                  `alias.${syntax}`,
                 ),
                 "@sass": path.resolve(
                   __dirname,
                   "sass",
                   "directory-6",
                   "file",
-                  "_index.sass"
+                  "_index.sass",
                 ),
                 "@scss": path.resolve(
                   __dirname,
                   "scss",
                   "directory-6",
                   "file",
-                  `_index.scss`
+                  `_index.scss`,
                 ),
                 "@path-to-scss-dir": path.resolve(__dirname, "scss"),
                 "@path-to-sass-dir": path.resolve(__dirname, "sass"),
@@ -838,7 +838,7 @@ describe("loader", () => {
         it(`should work with the "foundation-sites" package, adjusting CSS output ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           const testId = getTestId(
             "foundation-sites-adjusting-css-output",
-            syntax
+            syntax,
           );
           const options = {
             implementation,
@@ -879,7 +879,7 @@ describe("loader", () => {
               : {
                   outputStyle: "compressed",
                 },
-          })
+          }),
         );
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
@@ -895,14 +895,14 @@ describe("loader", () => {
             ? {
                 loadPaths: [
                   path.resolve(
-                    `./test/node_modules/package-with-style-field-and-css/${syntax}`
+                    `./test/node_modules/package-with-style-field-and-css/${syntax}`,
                   ),
                 ],
               }
             : {
                 includePaths: [
                   path.resolve(
-                    `./test/node_modules/package-with-style-field-and-css/${syntax}`
+                    `./test/node_modules/package-with-style-field-and-css/${syntax}`,
                   ),
                 ],
               },
@@ -924,7 +924,7 @@ describe("loader", () => {
         it(`should load only sass/scss files for the "mainFiles" ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           const testId = getTestId(
             "import-package-with-js-and-css-main-files",
-            syntax
+            syntax,
           );
           const options = {
             implementation,
@@ -966,12 +966,12 @@ describe("loader", () => {
               ? `${path.resolve("test", syntax, "sass_path")};${path.resolve(
                   "test",
                   syntax,
-                  "sass_path_other"
+                  "sass_path_other",
                 )}`
               : `${path.resolve("test", syntax, "sass_path")}:${path.resolve(
                   "test",
                   syntax,
-                  "sass_path_other"
+                  "sass_path_other",
                 )}`;
 
           const testId = getTestId("sass_path-env", syntax);
@@ -1016,7 +1016,7 @@ describe("loader", () => {
         it(`should respect resolving directory with the "index" file from "process.cwd()"  ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           const testId = getTestId(
             "process-cwd-with-index-file-inside-directory",
-            syntax
+            syntax,
           );
           const options = {
             implementation,
@@ -1057,7 +1057,7 @@ describe("loader", () => {
         it(`should work with a package with "sass" and "exports" fields and a custom condition (theme1) ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           const testId = getTestId(
             "import-package-with-exports-and-custom-condition",
-            syntax
+            syntax,
           );
           const options = {
             implementation,
@@ -1086,7 +1086,7 @@ describe("loader", () => {
         it(`should work with a package with "sass" and "exports" fields and a custom condition (theme2) ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           const testId = getTestId(
             "import-package-with-exports-and-custom-condition",
-            syntax
+            syntax,
           );
           const options = {
             implementation,
@@ -1125,7 +1125,7 @@ describe("loader", () => {
                 "/language": path.resolve(
                   "./test",
                   syntax,
-                  `language.${syntax}`
+                  `language.${syntax}`,
                 ),
               },
             },
@@ -1172,13 +1172,13 @@ describe("loader", () => {
                   /\/scss\/language.scss/g,
                   `file:///${path
                     .resolve(__dirname, "scss/language.scss")
-                    .replace(/\\/g, "/")}`
+                    .replace(/\\/g, "/")}`,
                 )
                 .replace(
                   /\/sass\/language.sass/g,
                   `file:///${path
                     .resolve(__dirname, "sass/language.sass")
-                    .replace(/\\/g, "/")}`
+                    .replace(/\\/g, "/")}`,
                 ),
           };
           const compiler = getCompiler(testId, { loader: { options } });
@@ -1333,13 +1333,13 @@ describe("loader", () => {
 
           expect(
             stats.compilation.fileDependencies.has(
-              path.resolve(`./test/${syntax}/error-use.${syntax}`)
-            )
+              path.resolve(`./test/${syntax}/error-use.${syntax}`),
+            ),
           ).toBe(true);
           expect(
             stats.compilation.fileDependencies.has(
-              path.resolve(`./test/${syntax}/error.${syntax}`)
-            )
+              path.resolve(`./test/${syntax}/error.${syntax}`),
+            ),
           ).toBe(true);
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
@@ -1357,9 +1357,9 @@ describe("loader", () => {
           expect(
             stats.compilation.fileDependencies.has(
               path.resolve(
-                `./test/${syntax}/error-file-not-found-use.${syntax}`
-              )
-            )
+                `./test/${syntax}/error-file-not-found-use.${syntax}`,
+              ),
+            ),
           ).toBe(true);
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
@@ -1377,9 +1377,9 @@ describe("loader", () => {
           expect(
             stats.compilation.fileDependencies.has(
               path.resolve(
-                `./test/${syntax}/error-file-not-found-use-2.${syntax}`
-              )
-            )
+                `./test/${syntax}/error-file-not-found-use-2.${syntax}`,
+              ),
+            ),
           ).toBe(true);
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
@@ -1477,7 +1477,7 @@ describe("loader", () => {
         it(`should work when "@use" at-rules without extensions and do not start with "_" ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           const testId = getTestId(
             "use-without-extension-and-underscore",
-            syntax
+            syntax,
           );
           const options = {
             implementation,
@@ -1711,21 +1711,21 @@ describe("loader", () => {
                     __dirname,
                     syntax,
                     "another",
-                    `alias.${syntax}`
+                    `alias.${syntax}`,
                   ),
                   "@sass": path.resolve(
                     __dirname,
                     "sass",
                     "directory-6",
                     "file",
-                    "_index.sass"
+                    "_index.sass",
                   ),
                   "@scss": path.resolve(
                     __dirname,
                     "scss",
                     "directory-6",
                     "file",
-                    `_index.scss`
+                    `_index.scss`,
                   ),
                   "@path-to-scss-dir": path.resolve(__dirname, "scss"),
                   "@path-to-sass-dir": path.resolve(__dirname, "sass"),
@@ -1981,7 +1981,7 @@ describe("loader", () => {
           it(`should import .import.${syntax} files from a package ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
             const testId = getTestId(
               "import-index-import-from-package",
-              syntax
+              syntax,
             );
             const options = {
               implementation,
@@ -2080,10 +2080,10 @@ describe("loader", () => {
                     args: i.args.map((arg) =>
                       arg
                         .replace(url.pathToFileURL(__dirname), "file:///<cwd>")
-                        .replace(/\\/g, "/")
+                        .replace(/\\/g, "/"),
                     ),
                   };
-                })
+                }),
               );
             }
           }

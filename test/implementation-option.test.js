@@ -39,7 +39,7 @@ describe("implementation option", () => {
       const sassEmbeddedSpy = jest.spyOn(sassEmbedded, "render");
       const sassEmbeddedSpyModernAPI = jest.spyOn(
         sassEmbedded,
-        "compileStringAsync"
+        "compileStringAsync",
       );
 
       const testId = getTestId("language", "scss");

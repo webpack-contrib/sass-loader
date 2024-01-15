@@ -32,7 +32,7 @@ const output = (config) => {
   return {
     path: path.resolve(
       __dirname,
-      `../outputs/${config.output ? config.output : ""}`
+      `../outputs/${config.output ? config.output : ""}`,
     ),
     filename: "[name].bundle.js",
     library: "sassLoaderExport",

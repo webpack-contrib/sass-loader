@@ -39,7 +39,7 @@ async function loader(content) {
     options,
     content,
     implementation,
-    useSourceMap
+    useSourceMap,
   );
   const shouldUseWebpackImporter =
     typeof options.webpackImporter === "boolean"
@@ -53,11 +53,11 @@ async function loader(content) {
       const { includePaths } = sassOptions;
 
       sassOptions.importer.push(
-        getWebpackImporter(this, implementation, includePaths)
+        getWebpackImporter(this, implementation, includePaths),
       );
     } else {
       sassOptions.importers.push(
-        getModernWebpackImporter(this, implementation)
+        getModernWebpackImporter(this, implementation),
       );
     }
   }
@@ -97,8 +97,8 @@ async function loader(content) {
     result.sourceMap
       ? result.sourceMap
       : result.map
-      ? JSON.parse(result.map)
-      : null;
+        ? JSON.parse(result.map)
+        : null;
 
   // Modify source paths only for webpack, otherwise we do nothing
   if (map && useSourceMap) {
@@ -108,7 +108,7 @@ async function loader(content) {
   // Modern API
   if (typeof result.loadedUrls !== "undefined") {
     result.loadedUrls
-      .filter((url) => url.protocol === "file:")
+      .filter((loadedUrl) => loadedUrl.protocol === "file:")
       .forEach((includedFile) => {
         const normalizedIncludedFile = url.fileURLToPath(includedFile);
 
