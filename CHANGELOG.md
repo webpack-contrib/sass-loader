@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [14.0.0](https://github.com/webpack-contrib/sass-loader/compare/v13.3.3...v14.0.0) (2024-01-15)
+
+
+### ⚠ BREAKING CHANGES
+
+* removed `fibers` support
+* minimum supported Node.js version is `18.12.0` ([627f55d](https://github.com/webpack-contrib/sass-loader/commit/627f55d750eb0aa21161b949b327e9801f971e98))
+
 ### [13.3.3](https://github.com/webpack-contrib/sass-loader/compare/v13.3.2...v13.3.3) (2023-12-25)
 
 
