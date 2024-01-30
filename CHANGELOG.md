@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [14.1.0](https://github.com/webpack-contrib/sass-loader/compare/v14.0.0...v14.1.0) (2024-01-30)
+
+
+### Features
+
+* add `@rspack/core` as an optional peer dependency ([#1184](https://github.com/webpack-contrib/sass-loader/issues/1184)) ([637ba5b](https://github.com/webpack-contrib/sass-loader/commit/637ba5b49005ab5d31a2b2979ad9af7f008b0267))
+
 ## [14.0.0](https://github.com/webpack-contrib/sass-loader/compare/v13.3.3...v14.0.0) (2024-01-15)
 
 
