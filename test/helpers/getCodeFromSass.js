@@ -320,6 +320,10 @@ async function getCodeFromSass(testId, options, context = {}) {
   const pathToCustomMainFiles = isSass
     ? path.resolve(testFolder, "sass/custom-main-files/custom.sass")
     : path.resolve(testFolder, "scss/custom-main-files/custom.scss");
+  const pathToWebpackExportField = path.resolve(
+    testFolder,
+    "node_modules/webpack-export-field/dist/styles/webpack/file.scss",
+  );
 
   // Pseudo importer for tests
   function testImporter(url) {
@@ -729,6 +733,10 @@ async function getCodeFromSass(testId, options, context = {}) {
 
       // eslint-disable-next-line no-param-reassign
       url = url
+        .replace(
+          /^webpack-export-field\/styles\/file$/,
+          pathToWebpackExportField,
+        )
         .replace(/^path-to-alias/, pathToAlias)
         .replace(
           /^package-with-style-field-and-css/,
