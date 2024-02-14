@@ -2123,6 +2123,25 @@ describe("loader", () => {
           expect(getErrors(stats)).toMatchSnapshot("errors");
           expect(logs).toMatchSnapshot("logs");
         });
+
+        if (!isModernAPI) {
+          it(`should work with the "webpack" export field ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
+            const testId = getTestId("webpack-export-field", syntax);
+            const options = {
+              implementation,
+              api,
+            };
+            const compiler = getCompiler(testId, { loader: { options } });
+            const stats = await compile(compiler);
+            const codeFromBundle = getCodeFromBundle(stats, compiler);
+            const codeFromSass = await getCodeFromSass(testId, options);
+
+            expect(codeFromBundle.css).toBe(codeFromSass.css);
+            expect(codeFromBundle.css).toMatchSnapshot("css");
+            expect(getWarnings(stats)).toMatchSnapshot("warnings");
+            expect(getErrors(stats)).toMatchSnapshot("errors");
+          });
+        }
       }
     });
   });
