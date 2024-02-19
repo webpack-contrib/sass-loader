@@ -2142,6 +2142,23 @@ describe("loader", () => {
             expect(getErrors(stats)).toMatchSnapshot("errors");
           });
         }
+
+        if (!isModernAPI) {
+          it(`should work with "pkg" prefix in "@use" ('${implementationName}', '${api}' API, '${syntax}' syntax) with "@charset "UTF-8";"`, async () => {
+            const testId = getTestId("use-pkg", syntax);
+            const options = {
+              implementation,
+              api,
+            };
+            const compiler = getCompiler(testId, { loader: { options } });
+            const stats = await compile(compiler);
+            const codeFromBundle = getCodeFromBundle(stats, compiler);
+
+            expect(codeFromBundle.css).toMatchSnapshot("css");
+            expect(getWarnings(stats)).toMatchSnapshot("warnings");
+            expect(getErrors(stats)).toMatchSnapshot("errors");
+          });
+        }
       }
     });
   });

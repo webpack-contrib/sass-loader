@@ -303,6 +303,8 @@ const MODULE_REQUEST_REGEX = /^[^?]*~/;
 const IS_MODULE_IMPORT =
   /^~([^/]+|[^/]+\/|@[^/]+[/][^/]+|@[^/]+\/?|@[^/]+[/][^/]+\/)$/;
 
+const IS_PKG_SCHEME = /^pkg:/i;
+
 /**
  * When `sass`/`node-sass` tries to resolve an import, it uses a special algorithm.
  * Since the `sass-loader` uses webpack to resolve the modules, we need to simulate that algorithm.
@@ -331,7 +333,13 @@ function getPossibleRequests(
       request = request.replace(MODULE_REQUEST_REGEX, "");
     }
 
-    if (IS_MODULE_IMPORT.test(url)) {
+    if (IS_PKG_SCHEME.test(url)) {
+      request = `${request.slice(4)}`;
+
+      return [...new Set([request, url])];
+    }
+
+    if (IS_MODULE_IMPORT.test(url) || IS_PKG_SCHEME.test(url)) {
       request = request[request.length - 1] === "/" ? request : `${request}/`;
 
       return [...new Set([request, url])];
@@ -538,6 +546,8 @@ function getWebpackResolver(
     const needEmulateSassResolver =
       // `sass` doesn't support module import
       !IS_SPECIAL_MODULE_IMPORT.test(request) &&
+      // don't handle `pkg:` scheme
+      !IS_PKG_SCHEME.test(request) &&
       // We need improve absolute paths handling.
       // Absolute paths should be resolved:
       // - Server-relative URLs - `<context>/path/to/file.ext` (where `<context>` is root context)
