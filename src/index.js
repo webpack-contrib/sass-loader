@@ -74,7 +74,7 @@ async function loader(content) {
   let result;
 
   try {
-    result = await compile(sassOptions, options);
+    result = await compile(sassOptions);
   } catch (error) {
     // There are situations when the `file`/`span.url` property do not exist
     // Modern API

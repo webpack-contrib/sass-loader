@@ -650,6 +650,7 @@ function getWebpackImporter(loaderContext, implementation, includePaths) {
 }
 
 let nodeSassJobQueue = null;
+let sassEmbeddedCompiler = null;
 
 /**
  * Verifies that the implementation and version of Sass is supported by this loader.
@@ -665,10 +666,16 @@ function getCompileFn(implementation, options) {
 
   if (isNewSass) {
     if (options.api === "modern") {
-      return (sassOptions) => {
+      return async (sassOptions) => {
         const { data, ...rest } = sassOptions;
 
-        return implementation.compileStringAsync(data, rest);
+        if (!sassEmbeddedCompiler) {
+          // Create a long-running compiler process that can be reused
+          // for compiling individual files.
+          sassEmbeddedCompiler = await implementation.initAsyncCompiler();
+        }
+
+        return sassEmbeddedCompiler.compileStringAsync(data, rest);
       };
     }
 
