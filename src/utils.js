@@ -651,7 +651,7 @@ function getWebpackImporter(loaderContext, implementation, includePaths) {
 }
 
 let nodeSassJobQueue = null;
-let sassEmbeddedCompiler = null;
+const sassModernCompilers = {};
 
 /**
  * Verifies that the implementation and version of Sass is supported by this loader.
@@ -662,11 +662,10 @@ let sassEmbeddedCompiler = null;
  * @returns {Function}
  */
 function getCompileFn(loaderContext, implementation, options) {
-  const isNewSass =
-    implementation.info.includes("dart-sass") ||
-    implementation.info.includes("sass-embedded");
+  const isDartSass = implementation.info.includes("dart-sass");
+  const isSassEmbedded = implementation.info.includes("sass-embedded");
 
-  if (isNewSass) {
+  if (isDartSass || isSassEmbedded) {
     if (options.api === "modern") {
       return (sassOptions) => {
         const { data, ...rest } = sassOptions;
@@ -684,15 +683,17 @@ function getCompileFn(loaderContext, implementation, options) {
         // Some people can run the loader in a multi-threading way;
         // there is no webpack compiler object in such case.
         if (webpackCompiler) {
-          if (!sassEmbeddedCompiler) {
+          const key = isDartSass ? "dart-sass" : "sass-embedded";
+          if (!sassModernCompilers[key]) {
             // Create a long-running compiler process that can be reused
             // for compiling individual files.
-            sassEmbeddedCompiler = await implementation.initAsyncCompiler();
+            const compiler = await implementation.initAsyncCompiler();
             webpackCompiler.hooks.shutdown.tap("sass-loader", () => {
-              sassEmbeddedCompiler.dispose();
+              compiler.dispose();
             });
+            sassModernCompilers[key] = compiler;
           }
-          return sassEmbeddedCompiler.compileStringAsync(data, rest);
+          return sassModernCompilers[key].compileStringAsync(data, rest);
         }
 
         return implementation.compileStringAsync(data, rest);
