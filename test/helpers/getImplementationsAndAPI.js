@@ -21,6 +21,11 @@ export default function getImplementationsAndAPI() {
       api: "modern",
     },
     {
+      name: dartSass.info.split("\t")[0],
+      implementation: dartSass,
+      api: "modern-compiler",
+    },
+    {
       name: SassEmbedded.info.split("\t")[0],
       implementation: SassEmbedded,
       api: "legacy",
@@ -29,6 +34,11 @@ export default function getImplementationsAndAPI() {
       name: SassEmbedded.info.split("\t")[0],
       implementation: SassEmbedded,
       api: "modern",
+    },
+    {
+      name: SassEmbedded.info.split("\t")[0],
+      implementation: SassEmbedded,
+      api: "modern-compiler",
     },
   ];
 }

@@ -23,7 +23,7 @@ const syntaxStyles = ["scss", "sass"];
 describe("sassOptions option", () => {
   implementations.forEach((item) => {
     const { name: implementationName, api, implementation } = item;
-    const isModernAPI = api === "modern";
+    const isModernAPI = api === "modern" || api === "modern-compiler";
 
     syntaxStyles.forEach((syntax) => {
       it(`should work when the option like "Object" ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -74,7 +74,9 @@ describe("sassOptions option", () => {
           sassOptions: (loaderContext) => {
             expect(loaderContext).toBeDefined();
 
-            return api === "modern" ? {} : { indentWidth: 10 };
+            return api === "modern" || api === "modern-compiler"
+              ? {}
+              : { indentWidth: 10 };
           },
         };
         const compiler = getCompiler(testId, { loader: { options } });
@@ -209,7 +211,9 @@ describe("sassOptions option", () => {
       if (!isModernAPI) {
         it(`should work with the "functions" option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           const testId = getTestId(
-            api === "modern" ? "custom-functions-modern" : "custom-functions",
+            api === "modern" || api === "modern-compiler"
+              ? "custom-functions-modern"
+              : "custom-functions",
             syntax,
           );
           const options = {
@@ -327,7 +331,7 @@ describe("sassOptions option", () => {
           implementation,
           api,
           sassOptions:
-            api === "modern"
+            api === "modern" || api === "modern-compiler"
               ? {
                   loadPaths: [path.resolve(__dirname, syntax, "includePath")],
                 }
@@ -348,7 +352,7 @@ describe("sassOptions option", () => {
         expect(getErrors(stats)).toMatchSnapshot("errors");
       });
 
-      if (api !== "modern") {
+      if (api !== "modern" && api !== "modern-compiler") {
         it(`should work with the "indentType" option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           const testId = getTestId("language", syntax);
           const options = {
@@ -395,7 +399,7 @@ describe("sassOptions option", () => {
           implementation,
           api,
           sassOptions:
-            api === "modern"
+            api === "modern" || api === "modern-compiler"
               ? {
                   syntax: syntax === "sass" ? "indented" : "scss",
                 }
@@ -421,7 +425,10 @@ describe("sassOptions option", () => {
             implementation,
             api,
             // Doesn't supported by modern API
-            sassOptions: api === "modern" ? {} : { linefeed: "lf" },
+            sassOptions:
+              api === "modern" || api === "modern-compiler"
+                ? {}
+                : { linefeed: "lf" },
           };
           const compiler = getCompiler(testId, { loader: { options } });
           const stats = await compile(compiler);
@@ -441,7 +448,7 @@ describe("sassOptions option", () => {
           implementation,
           api,
           sassOptions:
-            api === "modern"
+            api === "modern" || api === "modern-compiler"
               ? { style: "expanded" }
               : { outputStyle: "expanded" },
         };
@@ -471,7 +478,7 @@ describe("sassOptions option", () => {
         const codeFromSass = await getCodeFromSass(testId, {
           ...options,
           sassOptions:
-            api === "modern"
+            api === "modern" || api === "modern-compiler"
               ? { style: "compressed" }
               : { outputStyle: "compressed" },
         });

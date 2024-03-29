@@ -146,7 +146,7 @@ describe("sourceMap option", () => {
         sourceMap.sources = sourceMap.sources.map((source) => {
           let normalizedSource = source;
 
-          if (api === "modern") {
+          if (api === "modern" || api === "modern-compiler") {
             normalizedSource = url.fileURLToPath(normalizedSource);
 
             expect(source).toMatch(/^file:/);
