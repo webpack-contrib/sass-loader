@@ -174,7 +174,8 @@ async function getSassOptions(
     };
   }
 
-  const isModernAPI = loaderOptions.api === "modern";
+  const isModernAPI =
+    loaderOptions.api === "modern" || loaderOptions.api === "modern-compiler";
   const { resourcePath } = loaderContext;
 
   if (isModernAPI) {
@@ -655,27 +656,46 @@ let sassEmbeddedCompiler = null;
 /**
  * Verifies that the implementation and version of Sass is supported by this loader.
  *
+ * @param {Object} loaderContext
  * @param {Object} implementation
  * @param {Object} options
  * @returns {Function}
  */
-function getCompileFn(implementation, options) {
+function getCompileFn(loaderContext, implementation, options) {
   const isNewSass =
     implementation.info.includes("dart-sass") ||
     implementation.info.includes("sass-embedded");
 
   if (isNewSass) {
     if (options.api === "modern") {
-      return async (sassOptions) => {
+      return (sassOptions) => {
         const { data, ...rest } = sassOptions;
 
-        if (!sassEmbeddedCompiler) {
-          // Create a long-running compiler process that can be reused
-          // for compiling individual files.
-          sassEmbeddedCompiler = await implementation.initAsyncCompiler();
+        return implementation.compileStringAsync(data, rest);
+      };
+    }
+
+    if (options.api === "modern-compiler") {
+      return async (sassOptions) => {
+        // eslint-disable-next-line no-underscore-dangle
+        const webpackCompiler = loaderContext._compiler;
+        const { data, ...rest } = sassOptions;
+
+        // Some people can run the loader in a multi-threading way;
+        // there is no webpack compiler object in such case.
+        if (webpackCompiler) {
+          if (!sassEmbeddedCompiler) {
+            // Create a long-running compiler process that can be reused
+            // for compiling individual files.
+            sassEmbeddedCompiler = await implementation.initAsyncCompiler();
+            webpackCompiler.hooks.shutdown.tap("sass-loader", () => {
+              sassEmbeddedCompiler.dispose();
+            });
+          }
+          return sassEmbeddedCompiler.compileStringAsync(data, rest);
         }
 
-        return sassEmbeddedCompiler.compileStringAsync(data, rest);
+        return implementation.compileStringAsync(data, rest);
       };
     }
 
@@ -693,7 +713,7 @@ function getCompileFn(implementation, options) {
       });
   }
 
-  if (options.api === "modern") {
+  if (options.api === "modern" || options.api === "modern-compiler") {
     throw new Error("Modern API is not supported for 'node-sass'");
   }
 

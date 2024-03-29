@@ -47,7 +47,8 @@ async function loader(content) {
       : true;
 
   if (shouldUseWebpackImporter) {
-    const isModernAPI = options.api === "modern";
+    const isModernAPI =
+      options.api === "modern" || options.api === "modern-compiler";
 
     if (!isModernAPI) {
       const { includePaths } = sassOptions;
@@ -65,7 +66,7 @@ async function loader(content) {
   let compile;
 
   try {
-    compile = getCompileFn(implementation, options);
+    compile = getCompileFn(this, implementation, options);
   } catch (error) {
     callback(error);
     return;
