@@ -40,6 +40,10 @@ exports[`implementation option not specify with modern API: errors 1`] = `[]`;
 
 exports[`implementation option not specify with modern API: warnings 1`] = `[]`;
 
+exports[`implementation option not specify with modern-compiler API: errors 1`] = `[]`;
+
+exports[`implementation option not specify with modern-compiler API: warnings 1`] = `[]`;
+
 exports[`implementation option not specify: errors 1`] = `[]`;
 
 exports[`implementation option not specify: warnings 1`] = `[]`;
@@ -52,6 +56,14 @@ Some error",
 `;
 
 exports[`implementation option should not swallow an error when trying to load a sass implementation: warnings 1`] = `[]`;
+
+exports[`implementation option should support switching the implementation within the same process when using the modern-compiler API: errors 1`] = `[]`;
+
+exports[`implementation option should support switching the implementation within the same process when using the modern-compiler API: errors 2`] = `[]`;
+
+exports[`implementation option should support switching the implementation within the same process when using the modern-compiler API: warnings 1`] = `[]`;
+
+exports[`implementation option should support switching the implementation within the same process when using the modern-compiler API: warnings 2`] = `[]`;
 
 exports[`implementation option should throw an error on an unknown sass implementation: errors 1`] = `
 [
