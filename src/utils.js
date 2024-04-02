@@ -651,7 +651,7 @@ function getWebpackImporter(loaderContext, implementation, includePaths) {
 }
 
 let nodeSassJobQueue = null;
-const sassModernCompilers = {};
+const sassModernCompilers = new WeakMap();
 
 /**
  * Verifies that the implementation and version of Sass is supported by this loader.
@@ -662,10 +662,11 @@ const sassModernCompilers = {};
  * @returns {Function}
  */
 function getCompileFn(loaderContext, implementation, options) {
-  const isDartSass = implementation.info.includes("dart-sass");
-  const isSassEmbedded = implementation.info.includes("sass-embedded");
+  const isNewSass =
+    implementation.info.includes("dart-sass") ||
+    implementation.info.includes("sass-embedded");
 
-  if (isDartSass || isSassEmbedded) {
+  if (isNewSass) {
     if (options.api === "modern") {
       return (sassOptions) => {
         const { data, ...rest } = sassOptions;
@@ -683,17 +684,20 @@ function getCompileFn(loaderContext, implementation, options) {
         // Some people can run the loader in a multi-threading way;
         // there is no webpack compiler object in such case.
         if (webpackCompiler) {
-          const key = isDartSass ? "dart-sass" : "sass-embedded";
-          if (!sassModernCompilers[key]) {
+          if (!sassModernCompilers.has(implementation)) {
             // Create a long-running compiler process that can be reused
             // for compiling individual files.
             const compiler = await implementation.initAsyncCompiler();
-            webpackCompiler.hooks.shutdown.tap("sass-loader", () => {
-              compiler.dispose();
-            });
-            sassModernCompilers[key] = compiler;
+            // Check again because awaiting the initialization function
+            // introduces a race condition.
+            if (!sassModernCompilers.has(implementation)) {
+              sassModernCompilers.set(implementation, compiler);
+              webpackCompiler.hooks.shutdown.tap("sass-loader", () => {
+                compiler.dispose();
+              });
+            }
           }
-          return sassModernCompilers[key].compileStringAsync(data, rest);
+          return sassModernCompilers.get(implementation).compileStringAsync(data, rest);
         }
 
         return implementation.compileStringAsync(data, rest);
