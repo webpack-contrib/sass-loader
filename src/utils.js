@@ -697,7 +697,9 @@ function getCompileFn(loaderContext, implementation, options) {
               });
             }
           }
-          return sassModernCompilers.get(implementation).compileStringAsync(data, rest);
+          return sassModernCompilers
+            .get(implementation)
+            .compileStringAsync(data, rest);
         }
 
         return implementation.compileStringAsync(data, rest);
