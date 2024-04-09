@@ -25,7 +25,7 @@ describe("loader", () => {
     // TODO fix me https://github.com/webpack-contrib/sass-loader/issues/774
     const isSassEmbedded = implementationName === "sass-embedded";
     const isNodeSass = implementationName === "node-sass";
-    const isModernAPI = api === "modern";
+    const isModernAPI = api === "modern" || api === "modern-compiler";
 
     syntaxStyles.forEach((syntax) => {
       it(`should work ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {

@@ -16,7 +16,8 @@ async function getCodeFromSass(testId, options, context = {}) {
   const { implementation } = loaderOptions;
   const isNodeSassImplementation =
     loaderOptions.implementation.info.includes("node-sass");
-  const isModernAPI = options.api === "modern";
+  const isModernAPI =
+    options.api === "modern" || options.api === "modern-compiler";
 
   delete loaderOptions.implementation;
 

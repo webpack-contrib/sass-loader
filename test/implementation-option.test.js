@@ -18,7 +18,47 @@ jest.setTimeout(30000);
 
 const implementations = [...getImplementationsAndAPI(), "sass_string"];
 
+/** Helper to create spy functions for the modern Compiler API */
+const spyOnCompiler = (implementation) => {
+  const actualFn = implementation.initAsyncCompiler.bind(implementation);
+
+  const initSpy = jest
+    .spyOn(implementation, "initAsyncCompiler")
+    .mockImplementation(async () => {
+      const compiler = await actualFn();
+      // eslint-disable-next-line no-use-before-define
+      spies.compileStringSpy = jest.spyOn(compiler, "compileStringAsync");
+      return compiler;
+    });
+
+  const spies = {
+    initSpy,
+    mockClear() {
+      if (this.compileStringSpy) {
+        this.compileStringSpy.mockClear();
+      }
+    },
+    mockRestore() {
+      initSpy.mockRestore();
+      delete this.compileStringSpy;
+    },
+  };
+
+  return spies;
+};
+
 describe("implementation option", () => {
+  const nodeSassSpy = jest.spyOn(nodeSass, "render");
+  const dartSassSpy = jest.spyOn(dartSass, "render");
+  const dartSassSpyModernAPI = jest.spyOn(dartSass, "compileStringAsync");
+  const dartSassCompilerSpies = spyOnCompiler(dartSass);
+  const sassEmbeddedSpy = jest.spyOn(sassEmbedded, "render");
+  const sassEmbeddedSpyModernAPI = jest.spyOn(
+    sassEmbedded,
+    "compileStringAsync",
+  );
+  const sassEmbeddedCompilerSpies = spyOnCompiler(sassEmbedded);
+
   implementations.forEach((item) => {
     let implementationName;
     let implementation;
@@ -33,15 +73,6 @@ describe("implementation option", () => {
     }
 
     it(`'${implementationName}', '${api}' API`, async () => {
-      const nodeSassSpy = jest.spyOn(nodeSass, "render");
-      const dartSassSpy = jest.spyOn(dartSass, "render");
-      const dartSassSpyModernAPI = jest.spyOn(dartSass, "compileStringAsync");
-      const sassEmbeddedSpy = jest.spyOn(sassEmbedded, "render");
-      const sassEmbeddedSpyModernAPI = jest.spyOn(
-        sassEmbedded,
-        "compileStringAsync",
-      );
-
       const testId = getTestId("language", "scss");
       const options = { api, implementation };
       const compiler = getCompiler(testId, { loader: { options } });
@@ -70,6 +101,15 @@ describe("implementation option", () => {
           expect(dartSassSpyModernAPI).toHaveBeenCalledTimes(1);
           expect(sassEmbeddedSpy).toHaveBeenCalledTimes(0);
           expect(sassEmbeddedSpyModernAPI).toHaveBeenCalledTimes(0);
+        } else if (api === "modern-compiler") {
+          expect(nodeSassSpy).toHaveBeenCalledTimes(0);
+          expect(dartSassSpy).toHaveBeenCalledTimes(0);
+          expect(dartSassSpyModernAPI).toHaveBeenCalledTimes(0);
+          expect(dartSassCompilerSpies.compileStringSpy).toHaveBeenCalledTimes(
+            1,
+          );
+          expect(sassEmbeddedSpy).toHaveBeenCalledTimes(0);
+          expect(sassEmbeddedSpyModernAPI).toHaveBeenCalledTimes(0);
         } else if (api === "legacy") {
           expect(nodeSassSpy).toHaveBeenCalledTimes(0);
           expect(dartSassSpy).toHaveBeenCalledTimes(1);
@@ -84,6 +124,15 @@ describe("implementation option", () => {
           expect(dartSassSpyModernAPI).toHaveBeenCalledTimes(0);
           expect(sassEmbeddedSpy).toHaveBeenCalledTimes(0);
           expect(sassEmbeddedSpyModernAPI).toHaveBeenCalledTimes(1);
+        } else if (api === "modern-compiler") {
+          expect(nodeSassSpy).toHaveBeenCalledTimes(0);
+          expect(dartSassSpy).toHaveBeenCalledTimes(0);
+          expect(dartSassSpyModernAPI).toHaveBeenCalledTimes(0);
+          expect(sassEmbeddedSpy).toHaveBeenCalledTimes(0);
+          expect(sassEmbeddedSpyModernAPI).toHaveBeenCalledTimes(0);
+          expect(
+            sassEmbeddedCompilerSpies.compileStringSpy,
+          ).toHaveBeenCalledTimes(1);
         } else if (api === "legacy") {
           expect(nodeSassSpy).toHaveBeenCalledTimes(0);
           expect(dartSassSpy).toHaveBeenCalledTimes(0);
@@ -93,11 +142,13 @@ describe("implementation option", () => {
         }
       }
 
-      nodeSassSpy.mockRestore();
-      dartSassSpy.mockRestore();
-      dartSassSpyModernAPI.mockRestore();
-      sassEmbeddedSpy.mockRestore();
-      sassEmbeddedSpyModernAPI.mockRestore();
+      nodeSassSpy.mockClear();
+      dartSassSpy.mockClear();
+      dartSassSpyModernAPI.mockClear();
+      dartSassCompilerSpies.mockClear();
+      sassEmbeddedSpy.mockClear();
+      sassEmbeddedSpyModernAPI.mockClear();
+      sassEmbeddedCompilerSpies.mockClear();
     });
   });
 
@@ -114,9 +165,6 @@ describe("implementation option", () => {
   });
 
   it("not specify", async () => {
-    const nodeSassSpy = jest.spyOn(nodeSass, "render");
-    const dartSassSpy = jest.spyOn(dartSass, "render");
-
     const testId = getTestId("language", "scss");
     const options = {};
     const compiler = getCompiler(testId, { loader: { options } });
@@ -132,14 +180,11 @@ describe("implementation option", () => {
     expect(nodeSassSpy).toHaveBeenCalledTimes(0);
     expect(dartSassSpy).toHaveBeenCalledTimes(1);
 
-    nodeSassSpy.mockRestore();
-    dartSassSpy.mockRestore();
+    nodeSassSpy.mockClear();
+    dartSassSpy.mockClear();
   });
 
   it("not specify with legacy API", async () => {
-    const nodeSassSpy = jest.spyOn(nodeSass, "render");
-    const dartSassSpy = jest.spyOn(dartSass, "render");
-
     const testId = getTestId("language", "scss");
     const options = {
       api: "legacy",
@@ -157,14 +202,11 @@ describe("implementation option", () => {
     expect(nodeSassSpy).toHaveBeenCalledTimes(0);
     expect(dartSassSpy).toHaveBeenCalledTimes(1);
 
-    nodeSassSpy.mockRestore();
-    dartSassSpy.mockRestore();
+    nodeSassSpy.mockClear();
+    dartSassSpy.mockClear();
   });
 
   it("not specify with modern API", async () => {
-    const nodeSassSpy = jest.spyOn(nodeSass, "render");
-    const dartSassSpy = jest.spyOn(dartSass, "compileStringAsync");
-
     const testId = getTestId("language", "scss");
     const options = {
       api: "modern",
@@ -180,11 +222,65 @@ describe("implementation option", () => {
     expect(getErrors(stats)).toMatchSnapshot("errors");
 
     expect(nodeSassSpy).toHaveBeenCalledTimes(0);
-    expect(dartSassSpy).toHaveBeenCalledTimes(1);
+    expect(dartSassSpyModernAPI).toHaveBeenCalledTimes(1);
 
-    nodeSassSpy.mockRestore();
-    dartSassSpy.mockRestore();
+    nodeSassSpy.mockClear();
+    dartSassSpyModernAPI.mockClear();
   });
+
+  it("not specify with modern-compiler API", async () => {
+    const testId = getTestId("language", "scss");
+    const options = {
+      api: "modern-compiler",
+    };
+    const compiler = getCompiler(testId, { loader: { options } });
+    const stats = await compile(compiler);
+    const { css, sourceMap } = getCodeFromBundle(stats, compiler);
+
+    expect(css).toBeDefined();
+    expect(sourceMap).toBeUndefined();
+
+    expect(getWarnings(stats)).toMatchSnapshot("warnings");
+    expect(getErrors(stats)).toMatchSnapshot("errors");
+
+    expect(nodeSassSpy).toHaveBeenCalledTimes(0);
+    expect(dartSassSpyModernAPI).toHaveBeenCalledTimes(0);
+    expect(dartSassCompilerSpies.compileStringSpy).toHaveBeenCalledTimes(1);
+
+    nodeSassSpy.mockClear();
+    dartSassSpyModernAPI.mockClear();
+    dartSassCompilerSpies.mockClear();
+  });
+
+  it.each(["dart-sass", "sass-embedded"])(
+    "should support switching the implementation within the same process when using the modern-compiler API",
+    async (implementationName) => {
+      const testId = getTestId("language", "scss");
+      const options = {
+        api: "modern-compiler",
+        implementation: getImplementationByName(implementationName),
+      };
+      const compiler = getCompiler(testId, { loader: { options } });
+      const stats = await compile(compiler);
+      const { css, sourceMap } = getCodeFromBundle(stats, compiler);
+
+      expect(css).toBeDefined();
+      expect(sourceMap).toBeUndefined();
+
+      expect(getWarnings(stats)).toMatchSnapshot("warnings");
+      expect(getErrors(stats)).toMatchSnapshot("errors");
+
+      expect(dartSassCompilerSpies.compileStringSpy).toHaveBeenCalledTimes(
+        implementationName === "dart-sass" ? 1 : 0,
+      );
+      expect(sassEmbeddedCompilerSpies.compileStringSpy).toHaveBeenCalledTimes(
+        implementationName === "sass-embedded" ? 1 : 0,
+      );
+
+      dartSassCompilerSpies.mockClear();
+      sassEmbeddedCompilerSpies.mockClear();
+    },
+  );
 
   it("should throw an error on an unknown sass implementation", async () => {
     const testId = getTestId("language", "scss");

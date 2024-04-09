@@ -56,6 +56,34 @@ exports[`additionalData option should use same EOL on all os ('dart-sass', 'mode
 
 exports[`additionalData option should use same EOL on all os ('dart-sass', 'modern' API, 'scss' syntax): warnings 1`] = `[]`;
 
+exports[`additionalData option should use same EOL on all os ('dart-sass', 'modern-compiler' API, 'sass' syntax): css 1`] = `
+"a {
+  color: hotpink;
+}
+
+body {
+  color: hotpink;
+}"
+`;
+
+exports[`additionalData option should use same EOL on all os ('dart-sass', 'modern-compiler' API, 'sass' syntax): errors 1`] = `[]`;
+
+exports[`additionalData option should use same EOL on all os ('dart-sass', 'modern-compiler' API, 'sass' syntax): warnings 1`] = `[]`;
+
+exports[`additionalData option should use same EOL on all os ('dart-sass', 'modern-compiler' API, 'scss' syntax): css 1`] = `
+"a {
+  color: red;
+}
+
+body {
+  color: hotpink;
+}"
+`;
+
+exports[`additionalData option should use same EOL on all os ('dart-sass', 'modern-compiler' API, 'scss' syntax): errors 1`] = `[]`;
+
+exports[`additionalData option should use same EOL on all os ('dart-sass', 'modern-compiler' API, 'scss' syntax): warnings 1`] = `[]`;
+
 exports[`additionalData option should use same EOL on all os ('node-sass', 'legacy' API, 'sass' syntax): css 1`] = `
 "a {
   color: hotpink; }
@@ -138,6 +166,34 @@ exports[`additionalData option should use same EOL on all os ('sass-embedded', '
 
 exports[`additionalData option should use same EOL on all os ('sass-embedded', 'modern' API, 'scss' syntax): warnings 1`] = `[]`;
 
+exports[`additionalData option should use same EOL on all os ('sass-embedded', 'modern-compiler' API, 'sass' syntax): css 1`] = `
+"a {
+  color: hotpink;
+}
+
+body {
+  color: hotpink;
+}"
+`;
+
+exports[`additionalData option should use same EOL on all os ('sass-embedded', 'modern-compiler' API, 'sass' syntax): errors 1`] = `[]`;
+
+exports[`additionalData option should use same EOL on all os ('sass-embedded', 'modern-compiler' API, 'sass' syntax): warnings 1`] = `[]`;
+
+exports[`additionalData option should use same EOL on all os ('sass-embedded', 'modern-compiler' API, 'scss' syntax): css 1`] = `
+"a {
+  color: red;
+}
+
+body {
+  color: hotpink;
+}"
+`;
+
+exports[`additionalData option should use same EOL on all os ('sass-embedded', 'modern-compiler' API, 'scss' syntax): errors 1`] = `[]`;
+
+exports[`additionalData option should use same EOL on all os ('sass-embedded', 'modern-compiler' API, 'scss' syntax): warnings 1`] = `[]`;
+
 exports[`additionalData option should work as a function ('dart-sass', 'legacy' API, 'sass' syntax): css 1`] = `
 "body {
   color: hotpink;
@@ -177,6 +233,26 @@ exports[`additionalData option should work as a function ('dart-sass', 'modern' 
 exports[`additionalData option should work as a function ('dart-sass', 'modern' API, 'scss' syntax): errors 1`] = `[]`;
 
 exports[`additionalData option should work as a function ('dart-sass', 'modern' API, 'scss' syntax): warnings 1`] = `[]`;
+
+exports[`additionalData option should work as a function ('dart-sass', 'modern-compiler' API, 'sass' syntax): css 1`] = `
+"body {
+  color: hotpink;
+}"
+`;
+
+exports[`additionalData option should work as a function ('dart-sass', 'modern-compiler' API, 'sass' syntax): errors 1`] = `[]`;
+
+exports[`additionalData option should work as a function ('dart-sass', 'modern-compiler' API, 'sass' syntax): warnings 1`] = `[]`;
+
+exports[`additionalData option should work as a function ('dart-sass', 'modern-compiler' API, 'scss' syntax): css 1`] = `
+"body {
+  color: hotpink;
+}"
+`;
+
+exports[`additionalData option should work as a function ('dart-sass', 'modern-compiler' API, 'scss' syntax): errors 1`] = `[]`;
+
+exports[`additionalData option should work as a function ('dart-sass', 'modern-compiler' API, 'scss' syntax): warnings 1`] = `[]`;
 
 exports[`additionalData option should work as a function ('node-sass', 'legacy' API, 'sass' syntax): css 1`] = `
 "body {
@@ -238,6 +314,26 @@ exports[`additionalData option should work as a function ('sass-embedded', 'mode
 
 exports[`additionalData option should work as a function ('sass-embedded', 'modern' API, 'scss' syntax): warnings 1`] = `[]`;
 
+exports[`additionalData option should work as a function ('sass-embedded', 'modern-compiler' API, 'sass' syntax): css 1`] = `
+"body {
+  color: hotpink;
+}"
+`;
+
+exports[`additionalData option should work as a function ('sass-embedded', 'modern-compiler' API, 'sass' syntax): errors 1`] = `[]`;
+
+exports[`additionalData option should work as a function ('sass-embedded', 'modern-compiler' API, 'sass' syntax): warnings 1`] = `[]`;
+
+exports[`additionalData option should work as a function ('sass-embedded', 'modern-compiler' API, 'scss' syntax): css 1`] = `
+"body {
+  color: hotpink;
+}"
+`;
+
+exports[`additionalData option should work as a function ('sass-embedded', 'modern-compiler' API, 'scss' syntax): errors 1`] = `[]`;
+
+exports[`additionalData option should work as a function ('sass-embedded', 'modern-compiler' API, 'scss' syntax): warnings 1`] = `[]`;
+
 exports[`additionalData option should work as a string ('dart-sass', 'legacy' API, 'sass' syntax): css 1`] = `
 "body {
   color: hotpink;
@@ -277,6 +373,26 @@ exports[`additionalData option should work as a string ('dart-sass', 'modern' AP
 exports[`additionalData option should work as a string ('dart-sass', 'modern' API, 'scss' syntax): errors 1`] = `[]`;
 
 exports[`additionalData option should work as a string ('dart-sass', 'modern' API, 'scss' syntax): warnings 1`] = `[]`;
+
+exports[`additionalData option should work as a string ('dart-sass', 'modern-compiler' API, 'sass' syntax): css 1`] = `
+"body {
+  color: hotpink;
+}"
+`;
+
+exports[`additionalData option should work as a string ('dart-sass', 'modern-compiler' API, 'sass' syntax): errors 1`] = `[]`;
+
+exports[`additionalData option should work as a string ('dart-sass', 'modern-compiler' API, 'sass' syntax): warnings 1`] = `[]`;
+
+exports[`additionalData option should work as a string ('dart-sass', 'modern-compiler' API, 'scss' syntax): css 1`] = `
+"body {
+  color: hotpink;
+}"
+`;
+
+exports[`additionalData option should work as a string ('dart-sass', 'modern-compiler' API, 'scss' syntax): errors 1`] = `[]`;
+
+exports[`additionalData option should work as a string ('dart-sass', 'modern-compiler' API, 'scss' syntax): warnings 1`] = `[]`;
 
 exports[`additionalData option should work as a string ('node-sass', 'legacy' API, 'sass' syntax): css 1`] = `
 "body {
@@ -338,6 +454,26 @@ exports[`additionalData option should work as a string ('sass-embedded', 'modern
 
 exports[`additionalData option should work as a string ('sass-embedded', 'modern' API, 'scss' syntax): warnings 1`] = `[]`;
 
+exports[`additionalData option should work as a string ('sass-embedded', 'modern-compiler' API, 'sass' syntax): css 1`] = `
+"body {
+  color: hotpink;
+}"
+`;
+
+exports[`additionalData option should work as a string ('sass-embedded', 'modern-compiler' API, 'sass' syntax): errors 1`] = `[]`;
+
+exports[`additionalData option should work as a string ('sass-embedded', 'modern-compiler' API, 'sass' syntax): warnings 1`] = `[]`;
+
+exports[`additionalData option should work as a string ('sass-embedded', 'modern-compiler' API, 'scss' syntax): css 1`] = `
+"body {
+  color: hotpink;
+}"
+`;
+
+exports[`additionalData option should work as a string ('sass-embedded', 'modern-compiler' API, 'scss' syntax): errors 1`] = `[]`;
+
+exports[`additionalData option should work as a string ('sass-embedded', 'modern-compiler' API, 'scss' syntax): warnings 1`] = `[]`;
+
 exports[`additionalData option should work as an async function ('dart-sass', 'legacy' API, 'sass' syntax): css 1`] = `
 "body {
   color: hotpink;
@@ -377,6 +513,26 @@ exports[`additionalData option should work as an async function ('dart-sass', 'm
 exports[`additionalData option should work as an async function ('dart-sass', 'modern' API, 'scss' syntax): errors 1`] = `[]`;
 
 exports[`additionalData option should work as an async function ('dart-sass', 'modern' API, 'scss' syntax): warnings 1`] = `[]`;
+
+exports[`additionalData option should work as an async function ('dart-sass', 'modern-compiler' API, 'sass' syntax): css 1`] = `
+"body {
+  color: hotpink;
+}"
+`;
+
+exports[`additionalData option should work as an async function ('dart-sass', 'modern-compiler' API, 'sass' syntax): errors 1`] = `[]`;
+
+exports[`additionalData option should work as an async function ('dart-sass', 'modern-compiler' API, 'sass' syntax): warnings 1`] = `[]`;
+
+exports[`additionalData option should work as an async function ('dart-sass', 'modern-compiler' API, 'scss' syntax): css 1`] = `
+"body {
+  color: hotpink;
+}"
+`;
+
+exports[`additionalData option should work as an async function ('dart-sass', 'modern-compiler' API, 'scss' syntax): errors 1`] = `[]`;
+
+exports[`additionalData option should work as an async function ('dart-sass', 'modern-compiler' API, 'scss' syntax): warnings 1`] = `[]`;
 
 exports[`additionalData option should work as an async function ('node-sass', 'legacy' API, 'sass' syntax): css 1`] = `
 "body {
@@ -437,3 +593,23 @@ exports[`additionalData option should work as an async function ('sass-embedded'
 exports[`additionalData option should work as an async function ('sass-embedded', 'modern' API, 'scss' syntax): errors 1`] = `[]`;
 
 exports[`additionalData option should work as an async function ('sass-embedded', 'modern' API, 'scss' syntax): warnings 1`] = `[]`;
+
+exports[`additionalData option should work as an async function ('sass-embedded', 'modern-compiler' API, 'sass' syntax): css 1`] = `
+"body {
+  color: hotpink;
+}"
+`;
+
+exports[`additionalData option should work as an async function ('sass-embedded', 'modern-compiler' API, 'sass' syntax): errors 1`] = `[]`;
+
+exports[`additionalData option should work as an async function ('sass-embedded', 'modern-compiler' API, 'sass' syntax): warnings 1`] = `[]`;
+
+exports[`additionalData option should work as an async function ('sass-embedded', 'modern-compiler' API, 'scss' syntax): css 1`] = `
+"body {
+  color: hotpink;
+}"
+`;
+
+exports[`additionalData option should work as an async function ('sass-embedded', 'modern-compiler' API, 'scss' syntax): errors 1`] = `[]`;
+
+exports[`additionalData option should work as an async function ('sass-embedded', 'modern-compiler' API, 'scss' syntax): warnings 1`] = `[]`;

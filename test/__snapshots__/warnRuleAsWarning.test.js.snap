@@ -34,6 +34,23 @@ This selector doesn't have any properties and won't be rendered.
 ]
 `;
 
+exports[`loader should emit good formatted warning ('dart-sass', 'modern-compiler' API, 'sass' syntax): css 1`] = `""`;
+
+exports[`loader should emit good formatted warning ('dart-sass', 'modern-compiler' API, 'sass' syntax): errors 1`] = `[]`;
+
+exports[`loader should emit good formatted warning ('dart-sass', 'modern-compiler' API, 'sass' syntax): logs 1`] = `[]`;
+
+exports[`loader should emit good formatted warning ('dart-sass', 'modern-compiler' API, 'sass' syntax): warnings 1`] = `
+[
+  "ModuleWarning: Module Warning (from ../src/cjs.js):
+Warning on line 5, column 3 of file:///test/sass/broken.sass:5:3:
+This selector doesn't have any properties and won't be rendered.
+
+5 |    asdf
+",
+]
+`;
+
 exports[`loader should emit good formatted warning ('sass-embedded', 'legacy' API, 'sass' syntax): css 1`] = `""`;
 
 exports[`loader should emit good formatted warning ('sass-embedded', 'legacy' API, 'sass' syntax): errors 1`] = `[]`;
@@ -58,6 +75,23 @@ exports[`loader should emit good formatted warning ('sass-embedded', 'modern' AP
 exports[`loader should emit good formatted warning ('sass-embedded', 'modern' API, 'sass' syntax): logs 1`] = `[]`;
 
 exports[`loader should emit good formatted warning ('sass-embedded', 'modern' API, 'sass' syntax): warnings 1`] = `
+[
+  "ModuleWarning: Module Warning (from ../src/cjs.js):
+Warning on line 5, column 3 of file:///test/sass/broken.sass:5:3:
+This selector doesn't have any properties and won't be rendered.
+
+5 |    asdf
+",
+]
+`;
+
+exports[`loader should emit good formatted warning ('sass-embedded', 'modern-compiler' API, 'sass' syntax): css 1`] = `""`;
+
+exports[`loader should emit good formatted warning ('sass-embedded', 'modern-compiler' API, 'sass' syntax): errors 1`] = `[]`;
+
+exports[`loader should emit good formatted warning ('sass-embedded', 'modern-compiler' API, 'sass' syntax): logs 1`] = `[]`;
+
+exports[`loader should emit good formatted warning ('sass-embedded', 'modern-compiler' API, 'sass' syntax): warnings 1`] = `
 [
   "ModuleWarning: Module Warning (from ../src/cjs.js):
 Warning on line 5, column 3 of file:///test/sass/broken.sass:5:3:
@@ -174,6 +208,62 @@ exports[`loader should emit warning by default ('dart-sass', 'modern' API, 'scss
 `;
 
 exports[`loader should emit warning by default ('dart-sass', 'modern' API, 'scss' syntax): warnings 1`] = `
+[
+  "ModuleWarning: Module Warning (from ../src/cjs.js):
+My warning message",
+]
+`;
+
+exports[`loader should emit warning by default ('dart-sass', 'modern-compiler' API, 'sass' syntax): css 1`] = `
+"a {
+  color: red;
+}"
+`;
+
+exports[`loader should emit warning by default ('dart-sass', 'modern-compiler' API, 'sass' syntax): errors 1`] = `[]`;
+
+exports[`loader should emit warning by default ('dart-sass', 'modern-compiler' API, 'sass' syntax): logs 1`] = `
+[
+  [
+    {
+      "args": [
+        "[debug:0:0] My debug message",
+      ],
+      "type": "debug",
+    },
+  ],
+]
+`;
+
+exports[`loader should emit warning by default ('dart-sass', 'modern-compiler' API, 'sass' syntax): warnings 1`] = `
+[
+  "ModuleWarning: Module Warning (from ../src/cjs.js):
+My warning message",
+]
+`;
+
+exports[`loader should emit warning by default ('dart-sass', 'modern-compiler' API, 'scss' syntax): css 1`] = `
+"a {
+  color: red;
+}"
+`;
+
+exports[`loader should emit warning by default ('dart-sass', 'modern-compiler' API, 'scss' syntax): errors 1`] = `[]`;
+
+exports[`loader should emit warning by default ('dart-sass', 'modern-compiler' API, 'scss' syntax): logs 1`] = `
+[
+  [
+    {
+      "args": [
+        "[debug:0:0] My debug message",
+      ],
+      "type": "debug",
+    },
+  ],
+]
+`;
+
+exports[`loader should emit warning by default ('dart-sass', 'modern-compiler' API, 'scss' syntax): warnings 1`] = `
 [
   "ModuleWarning: Module Warning (from ../src/cjs.js):
 My warning message",
@@ -316,6 +406,62 @@ My warning message",
 ]
 `;
 
+exports[`loader should emit warning by default ('sass-embedded', 'modern-compiler' API, 'sass' syntax): css 1`] = `
+"a {
+  color: red;
+}"
+`;
+
+exports[`loader should emit warning by default ('sass-embedded', 'modern-compiler' API, 'sass' syntax): errors 1`] = `[]`;
+
+exports[`loader should emit warning by default ('sass-embedded', 'modern-compiler' API, 'sass' syntax): logs 1`] = `
+[
+  [
+    {
+      "args": [
+        "[debug:0:0] My debug message",
+      ],
+      "type": "debug",
+    },
+  ],
+]
+`;
+
+exports[`loader should emit warning by default ('sass-embedded', 'modern-compiler' API, 'sass' syntax): warnings 1`] = `
+[
+  "ModuleWarning: Module Warning (from ../src/cjs.js):
+My warning message",
+]
+`;
+
+exports[`loader should emit warning by default ('sass-embedded', 'modern-compiler' API, 'scss' syntax): css 1`] = `
+"a {
+  color: red;
+}"
+`;
+
+exports[`loader should emit warning by default ('sass-embedded', 'modern-compiler' API, 'scss' syntax): errors 1`] = `[]`;
+
+exports[`loader should emit warning by default ('sass-embedded', 'modern-compiler' API, 'scss' syntax): logs 1`] = `
+[
+  [
+    {
+      "args": [
+        "[debug:0:0] My debug message",
+      ],
+      "type": "debug",
+    },
+  ],
+]
+`;
+
+exports[`loader should emit warning by default ('sass-embedded', 'modern-compiler' API, 'scss' syntax): warnings 1`] = `
+[
+  "ModuleWarning: Module Warning (from ../src/cjs.js):
+My warning message",
+]
+`;
+
 exports[`loader should emit warning when 'true' used ('dart-sass', 'legacy' API, 'sass' syntax): css 1`] = `
 "a {
   color: red;
@@ -422,6 +568,62 @@ exports[`loader should emit warning when 'true' used ('dart-sass', 'modern' API,
 `;
 
 exports[`loader should emit warning when 'true' used ('dart-sass', 'modern' API, 'scss' syntax): warnings 1`] = `
+[
+  "ModuleWarning: Module Warning (from ../src/cjs.js):
+My warning message",
+]
+`;
+
+exports[`loader should emit warning when 'true' used ('dart-sass', 'modern-compiler' API, 'sass' syntax): css 1`] = `
+"a {
+  color: red;
+}"
+`;
+
+exports[`loader should emit warning when 'true' used ('dart-sass', 'modern-compiler' API, 'sass' syntax): errors 1`] = `[]`;
+
+exports[`loader should emit warning when 'true' used ('dart-sass', 'modern-compiler' API, 'sass' syntax): logs 1`] = `
+[
+  [
+    {
+      "args": [
+        "[debug:0:0] My debug message",
+      ],
+      "type": "debug",
+    },
+  ],
+]
+`;
+
+exports[`loader should emit warning when 'true' used ('dart-sass', 'modern-compiler' API, 'sass' syntax): warnings 1`] = `
+[
+  "ModuleWarning: Module Warning (from ../src/cjs.js):
+My warning message",
+]
+`;
+
+exports[`loader should emit warning when 'true' used ('dart-sass', 'modern-compiler' API, 'scss' syntax): css 1`] = `
+"a {
+  color: red;
+}"
+`;
+
+exports[`loader should emit warning when 'true' used ('dart-sass', 'modern-compiler' API, 'scss' syntax): errors 1`] = `[]`;
+
+exports[`loader should emit warning when 'true' used ('dart-sass', 'modern-compiler' API, 'scss' syntax): logs 1`] = `
+[
+  [
+    {
+      "args": [
+        "[debug:0:0] My debug message",
+      ],
+      "type": "debug",
+    },
+  ],
+]
+`;
+
+exports[`loader should emit warning when 'true' used ('dart-sass', 'modern-compiler' API, 'scss' syntax): warnings 1`] = `
 [
   "ModuleWarning: Module Warning (from ../src/cjs.js):
 My warning message",
@@ -564,6 +766,62 @@ My warning message",
 ]
 `;
 
+exports[`loader should emit warning when 'true' used ('sass-embedded', 'modern-compiler' API, 'sass' syntax): css 1`] = `
+"a {
+  color: red;
+}"
+`;
+
+exports[`loader should emit warning when 'true' used ('sass-embedded', 'modern-compiler' API, 'sass' syntax): errors 1`] = `[]`;
+
+exports[`loader should emit warning when 'true' used ('sass-embedded', 'modern-compiler' API, 'sass' syntax): logs 1`] = `
+[
+  [
+    {
+      "args": [
+        "[debug:0:0] My debug message",
+      ],
+      "type": "debug",
+    },
+  ],
+]
+`;
+
+exports[`loader should emit warning when 'true' used ('sass-embedded', 'modern-compiler' API, 'sass' syntax): warnings 1`] = `
+[
+  "ModuleWarning: Module Warning (from ../src/cjs.js):
+My warning message",
+]
+`;
+
+exports[`loader should emit warning when 'true' used ('sass-embedded', 'modern-compiler' API, 'scss' syntax): css 1`] = `
+"a {
+  color: red;
+}"
+`;
+
+exports[`loader should emit warning when 'true' used ('sass-embedded', 'modern-compiler' API, 'scss' syntax): errors 1`] = `[]`;
+
+exports[`loader should emit warning when 'true' used ('sass-embedded', 'modern-compiler' API, 'scss' syntax): logs 1`] = `
+[
+  [
+    {
+      "args": [
+        "[debug:0:0] My debug message",
+      ],
+      "type": "debug",
+    },
+  ],
+]
+`;
+
+exports[`loader should emit warning when 'true' used ('sass-embedded', 'modern-compiler' API, 'scss' syntax): warnings 1`] = `
+[
+  "ModuleWarning: Module Warning (from ../src/cjs.js):
+My warning message",
+]
+`;
+
 exports[`loader should not emit warning when 'false' used ('dart-sass', 'legacy' API, 'sass' syntax): css 1`] = `
 "a {
   color: red;
@@ -691,6 +949,70 @@ test/scss/logging.scss 2:1  root stylesheet
 `;
 
 exports[`loader should not emit warning when 'false' used ('dart-sass', 'modern' API, 'scss' syntax): warnings 1`] = `[]`;
+
+exports[`loader should not emit warning when 'false' used ('dart-sass', 'modern-compiler' API, 'sass' syntax): css 1`] = `
+"a {
+  color: red;
+}"
+`;
+
+exports[`loader should not emit warning when 'false' used ('dart-sass', 'modern-compiler' API, 'sass' syntax): errors 1`] = `[]`;
+
+exports[`loader should not emit warning when 'false' used ('dart-sass', 'modern-compiler' API, 'sass' syntax): logs 1`] = `
+[
+  [
+    {
+      "args": [
+        "[debug:0:0] My debug message",
+      ],
+      "type": "debug",
+    },
+    {
+      "args": [
+        "My warning message
+
+test/sass/logging.sass 2:1  root stylesheet
+",
+      ],
+      "type": "warn",
+    },
+  ],
+]
+`;
+
+exports[`loader should not emit warning when 'false' used ('dart-sass', 'modern-compiler' API, 'sass' syntax): warnings 1`] = `[]`;
+
+exports[`loader should not emit warning when 'false' used ('dart-sass', 'modern-compiler' API, 'scss' syntax): css 1`] = `
+"a {
+  color: red;
+}"
+`;
+
+exports[`loader should not emit warning when 'false' used ('dart-sass', 'modern-compiler' API, 'scss' syntax): errors 1`] = `[]`;
+
+exports[`loader should not emit warning when 'false' used ('dart-sass', 'modern-compiler' API, 'scss' syntax): logs 1`] = `
+[
+  [
+    {
+      "args": [
+        "[debug:0:0] My debug message",
+      ],
+      "type": "debug",
+    },
+    {
+      "args": [
+        "My warning message
+
+test/scss/logging.scss 2:1  root stylesheet
+",
+      ],
+      "type": "warn",
+    },
+  ],
+]
+`;
+
+exports[`loader should not emit warning when 'false' used ('dart-sass', 'modern-compiler' API, 'scss' syntax): warnings 1`] = `[]`;
 
 exports[`loader should not emit warning when 'false' used ('node-sass', 'legacy' API, 'sass' syntax): css 1`] = `
 "a {
@@ -843,3 +1165,67 @@ exports[`loader should not emit warning when 'false' used ('sass-embedded', 'mod
 `;
 
 exports[`loader should not emit warning when 'false' used ('sass-embedded', 'modern' API, 'scss' syntax): warnings 1`] = `[]`;
+
+exports[`loader should not emit warning when 'false' used ('sass-embedded', 'modern-compiler' API, 'sass' syntax): css 1`] = `
+"a {
+  color: red;
+}"
+`;
+
+exports[`loader should not emit warning when 'false' used ('sass-embedded', 'modern-compiler' API, 'sass' syntax): errors 1`] = `[]`;
+
+exports[`loader should not emit warning when 'false' used ('sass-embedded', 'modern-compiler' API, 'sass' syntax): logs 1`] = `
+[
+  [
+    {
+      "args": [
+        "[debug:0:0] My debug message",
+      ],
+      "type": "debug",
+    },
+    {
+      "args": [
+        "My warning message
+
+../../../../test/sass/logging.sass 2:1  root stylesheet
+",
+      ],
+      "type": "warn",
+    },
+  ],
+]
+`;
+
+exports[`loader should not emit warning when 'false' used ('sass-embedded', 'modern-compiler' API, 'sass' syntax): warnings 1`] = `[]`;
+
+exports[`loader should not emit warning when 'false' used ('sass-embedded', 'modern-compiler' API, 'scss' syntax): css 1`] = `
+"a {
+  color: red;
+}"
+`;
+
+exports[`loader should not emit warning when 'false' used ('sass-embedded', 'modern-compiler' API, 'scss' syntax): errors 1`] = `[]`;
+
+exports[`loader should not emit warning when 'false' used ('sass-embedded', 'modern-compiler' API, 'scss' syntax): logs 1`] = `
+[
+  [
+    {
+      "args": [
+        "[debug:0:0] My debug message",
+      ],
+      "type": "debug",
+    },
+    {
+      "args": [
+        "My warning message
+
+../../../../test/scss/logging.scss 2:1  root stylesheet
+",
+      ],
+      "type": "warn",
+    },
+  ],
+]
+`;
+
+exports[`loader should not emit warning when 'false' used ('sass-embedded', 'modern-compiler' API, 'scss' syntax): warnings 1`] = `[]`;

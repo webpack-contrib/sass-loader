@@ -1,5 +1,5 @@
 export default (api, implementation) => {
-  if (api === "modern") {
+  if (api === "modern" || api === "modern-compiler") {
     return {
       // Note: in real code, you should use `math.pow()` from the built-in
       // `sass:math` module.

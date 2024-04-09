@@ -657,12 +657,12 @@ module.exports = {
 Type:
 
 ```ts
-type api = "legacy" | "modern";
+type api = "legacy" | "modern" | "modern-compiler";
 ```
 
 Default: `"legacy"`
 
-Allows you to switch between `legacy` and `modern` API. You can find more information [here](https://sass-lang.com/documentation/js-api).
+Allows you to switch between `legacy` and `modern` API. You can find more information [here](https://sass-lang.com/documentation/js-api). The `modern-compiler` option enables the modern API with support for [Shared Resources](https://github.com/sass/sass/blob/main/accepted/shared-resources.d.ts.md).
 
 > **Warning**
 >
