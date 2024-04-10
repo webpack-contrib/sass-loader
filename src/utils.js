@@ -675,7 +675,6 @@ function getModernWebpackImporter(loaderContext, implementation, loadPaths) {
 
         return { contents, syntax };
       } catch (err) {
-        console.log(err);
         return null;
       }
     },

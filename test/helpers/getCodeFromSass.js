@@ -71,10 +71,52 @@ async function getCodeFromSass(testId, options, context = {}) {
     // eslint-disable-next-line global-require
     const ResolverFactory = require("webpack/lib/ResolverFactory");
     const resolverFactory = new ResolverFactory();
+    const syntax = context.syntax || "scss";
     const resolver = resolverFactory.get("normal", {
+      roots: [path.resolve(__dirname, "..")],
+      alias: {
+        "path-to-alias": path.resolve(
+          __dirname,
+          "..",
+          syntax,
+          "another",
+          `alias.${syntax}`,
+        ),
+        "@sass": path.resolve(
+          __dirname,
+          "..",
+          "sass",
+          "directory-6",
+          "file",
+          "_index.sass",
+        ),
+        "@scss": path.resolve(
+          __dirname,
+          "..",
+          "scss",
+          "directory-6",
+          "file",
+          `_index.scss`,
+        ),
+        "@path-to-scss-dir": path.resolve(__dirname, "..", "scss"),
+        "@path-to-sass-dir": path.resolve(__dirname, "..", "sass"),
+        "@/path-to-scss-dir": path.resolve(__dirname, "..", "scss"),
+        "@/path-to-sass-dir": path.resolve(__dirname, "..", "sass"),
+        "/language": path.resolve(
+          __dirname,
+          "..",
+          syntax,
+          `language.${syntax}`,
+        ),
+      },
       fileSystem: fs,
       mainFields: ["custom-sass", "..."],
       conditionNames: ["webpack", "..."],
+      byDependency: {
+        sass: {
+          mainFiles: ["custom"],
+        },
+      },
     });
 
     // eslint-disable-next-line no-shadow

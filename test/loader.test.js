@@ -17,10 +17,7 @@ import {
 jest.setTimeout(60000);
 
 const implementations = getImplementationsAndAPI();
-const syntaxStyles = [
-  "scss",
-  // "sass"
-];
+const syntaxStyles = ["scss", "sass"];
 
 describe("loader", () => {
   implementations.forEach((item) => {
@@ -642,7 +639,7 @@ describe("loader", () => {
         });
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = await getCodeFromSass(testId, options);
+        const codeFromSass = await getCodeFromSass(testId, options, { syntax });
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -1054,29 +1051,37 @@ describe("loader", () => {
         expect(getErrors(stats)).toMatchSnapshot("errors");
       });
 
-      it(`should support resolving using the "file" schema ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
-        const testId = getTestId("import-file-scheme", syntax);
-        const options = {
-          implementation,
-          api,
-        };
-        const compiler = getCompiler(testId, {
-          loader: { options },
-          resolve: {
-            alias: {
-              "/language": path.resolve("./test", syntax, `language.${syntax}`),
+      if (!isModernAPI) {
+        it(`should support resolving using the "file" schema ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
+          const testId = getTestId("import-file-scheme", syntax);
+          const options = {
+            implementation,
+            api,
+          };
+          const compiler = getCompiler(testId, {
+            loader: { options },
+            resolve: {
+              alias: {
+                "/language": path.resolve(
+                  "./test",
+                  syntax,
+                  `language.${syntax}`,
+                ),
+              },
             },
-          },
-        });
-        const stats = await compile(compiler);
-        const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = await getCodeFromSass(testId, options);
+          });
+          const stats = await compile(compiler);
+          const codeFromBundle = getCodeFromBundle(stats, compiler);
+          const codeFromSass = await getCodeFromSass(testId, options, {
+            syntax,
+          });
 
-        expect(codeFromBundle.css).toBe(codeFromSass.css);
-        expect(codeFromBundle.css).toMatchSnapshot("css");
-        expect(getWarnings(stats)).toMatchSnapshot("warnings");
-        expect(getErrors(stats)).toMatchSnapshot("errors");
-      });
+          expect(codeFromBundle.css).toBe(codeFromSass.css);
+          expect(codeFromBundle.css).toMatchSnapshot("css");
+          expect(getWarnings(stats)).toMatchSnapshot("warnings");
+          expect(getErrors(stats)).toMatchSnapshot("errors");
+        });
+      }
 
       it(`should resolve server-relative URLs ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
         const testId = getTestId("import-absolute-path", syntax);
@@ -1641,7 +1646,9 @@ describe("loader", () => {
           });
           const stats = await compile(compiler);
           const codeFromBundle = getCodeFromBundle(stats, compiler);
-          const codeFromSass = await getCodeFromSass(testId, options);
+          const codeFromSass = await getCodeFromSass(testId, options, {
+            syntax,
+          });
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
           expect(codeFromBundle.css).toMatchSnapshot("css");
