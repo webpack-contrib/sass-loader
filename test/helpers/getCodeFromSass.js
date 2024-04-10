@@ -111,7 +111,12 @@ async function getCodeFromSass(testId, options, context = {}) {
       },
       fileSystem: fs,
       mainFields: ["custom-sass", "..."],
-      conditionNames: ["webpack", "..."],
+      conditionNames: [
+        context.packageExportsCustomConditionTestVariant === 1 ? "theme1" : "",
+        context.packageExportsCustomConditionTestVariant === 2 ? "theme2" : "",
+        "webpack",
+        "...",
+      ],
       byDependency: {
         sass: {
           mainFiles: ["custom"],
