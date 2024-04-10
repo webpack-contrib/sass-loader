@@ -612,13 +612,70 @@ function getWebpackResolver(
 
 const MATCH_CSS = /\.css$/i;
 
-function getModernWebpackImporter() {
+function getModernWebpackImporter(loaderContext, implementation, loadPaths) {
+  const resolve = getWebpackResolver(
+    loaderContext.getResolve,
+    implementation,
+    loadPaths,
+  );
+
   return {
-    async canonicalize() {
-      return null;
+    async canonicalize(originalUrl, context) {
+      const { fromImport } = context;
+      // TODO memorize?
+      const prev = url.fileURLToPath(context.containingUrl.toString());
+
+      let result;
+
+      try {
+        result = await resolve(prev, originalUrl, fromImport);
+      } catch (err) {
+        // If no stylesheets are found, the importer should return null.
+        return null;
+      }
+
+      loaderContext.addDependency(path.normalize(result));
+
+      return url.pathToFileURL(result);
     },
-    load() {
-      // TODO implement
+    async load(canonicalUrl) {
+      const ext = path.extname(canonicalUrl.pathname);
+
+      let syntax;
+
+      if (ext && ext.toLowerCase() === ".scss") {
+        syntax = "scss";
+      } else if (ext && ext.toLowerCase() === ".sass") {
+        syntax = "indented";
+      } else if (ext && ext.toLowerCase() === ".css") {
+        syntax = "css";
+      } else {
+        // Fallback to default value
+        syntax = "scss";
+      }
+
+      try {
+        const contents = await new Promise((resolve, reject) => {
+          // Old version of `enhanced-resolve` supports only path as a string
+          // TODO simplify in the next major release and pass URL
+          // TODO memorize?
+          const canonicalPath = url.fileURLToPath(canonicalUrl);
+
+          loaderContext.fs.readFile(canonicalPath, "utf8", (err, content) => {
+            if (err) {
+              reject(err);
+              return;
+            }
+
+            resolve(content);
+          });
+        });
+
+        return { contents, syntax };
+      } catch (err) {
+        console.log(err);
+        return null;
+      }
     },
   };
 }
