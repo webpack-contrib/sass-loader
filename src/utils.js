@@ -688,15 +688,17 @@ function getCompileFn(loaderContext, implementation, options) {
             // Create a long-running compiler process that can be reused
             // for compiling individual files.
             const compiler = await implementation.initAsyncCompiler();
+
             // Check again because awaiting the initialization function
             // introduces a race condition.
             if (!sassModernCompilers.has(implementation)) {
               sassModernCompilers.set(implementation, compiler);
-              webpackCompiler.hooks.shutdown.tap("sass-loader", () => {
+              webpackCompiler.hooks.watchClose.tap("sass-loader", () => {
                 compiler.dispose();
               });
             }
           }
+
           return sassModernCompilers
             .get(implementation)
             .compileStringAsync(data, rest);
