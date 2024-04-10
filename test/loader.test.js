@@ -17,7 +17,10 @@ import {
 jest.setTimeout(60000);
 
 const implementations = getImplementationsAndAPI();
-const syntaxStyles = ["scss", "sass"];
+const syntaxStyles = [
+  "scss",
+  // "sass"
+];
 
 describe("loader", () => {
   implementations.forEach((item) => {

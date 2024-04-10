@@ -623,7 +623,9 @@ function getModernWebpackImporter(loaderContext, implementation, loadPaths) {
     async canonicalize(originalUrl, context) {
       const { fromImport } = context;
       // TODO memorize?
-      const prev = url.fileURLToPath(context.containingUrl.toString());
+      const prev = context.containingUrl
+        ? url.fileURLToPath(context.containingUrl.toString())
+        : loaderContext.resourcePath;
 
       let result;
 

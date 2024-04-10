@@ -73,6 +73,8 @@ async function getCodeFromSass(testId, options, context = {}) {
     const resolverFactory = new ResolverFactory();
     const resolver = resolverFactory.get("normal", {
       fileSystem: fs,
+      mainFields: ["custom-sass", "..."],
+      conditionNames: ["webpack", "..."],
     });
 
     // eslint-disable-next-line no-shadow
