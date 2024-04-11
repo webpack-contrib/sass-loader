@@ -4,6 +4,7 @@ import dartSass from "sass";
 import * as sassEmbedded from "sass-embedded";
 
 import {
+  close,
   compile,
   getCodeFromBundle,
   getCompiler,
@@ -149,6 +150,8 @@ describe("implementation option", () => {
       sassEmbeddedSpy.mockClear();
       sassEmbeddedSpyModernAPI.mockClear();
       sassEmbeddedCompilerSpies.mockClear();
+
+      await close(compiler);
     });
   });
 
@@ -162,6 +165,8 @@ describe("implementation option", () => {
 
     expect(getWarnings(stats)).toMatchSnapshot("warnings");
     expect(getErrors(stats)).toMatchSnapshot("errors");
+
+    await close(compiler);
   });
 
   it("not specify", async () => {
@@ -182,6 +187,8 @@ describe("implementation option", () => {
 
     nodeSassSpy.mockClear();
     dartSassSpy.mockClear();
+
+    await close(compiler);
   });
 
   it("not specify with legacy API", async () => {
@@ -204,6 +211,8 @@ describe("implementation option", () => {
 
     nodeSassSpy.mockClear();
     dartSassSpy.mockClear();
+
+    await close(compiler);
   });
 
   it("not specify with modern API", async () => {
@@ -226,6 +235,8 @@ describe("implementation option", () => {
 
     nodeSassSpy.mockClear();
     dartSassSpyModernAPI.mockClear();
+
+    await close(compiler);
   });
 
   it("not specify with modern-compiler API", async () => {
@@ -250,6 +261,8 @@ describe("implementation option", () => {
     nodeSassSpy.mockClear();
     dartSassSpyModernAPI.mockClear();
     dartSassCompilerSpies.mockClear();
+
+    await close(compiler);
   });
 
   it.each(["dart-sass", "sass-embedded"])(
@@ -279,6 +292,8 @@ describe("implementation option", () => {
 
       dartSassCompilerSpies.mockClear();
       sassEmbeddedCompilerSpies.mockClear();
+
+      await close(compiler);
     },
   );
 
@@ -295,6 +310,8 @@ describe("implementation option", () => {
 
     expect(getWarnings(stats)).toMatchSnapshot("warnings");
     expect(getErrors(stats)).toMatchSnapshot("errors");
+
+    await close(compiler);
   });
 
   it('should throw an error when the "info" is unparseable', async () => {
@@ -308,6 +325,8 @@ describe("implementation option", () => {
 
     expect(getWarnings(stats)).toMatchSnapshot("warnings");
     expect(getErrors(stats)).toMatchSnapshot("errors");
+
+    await close(compiler);
   });
 
   it('should throw error when the "info" does not exist', async () => {
@@ -322,6 +341,8 @@ describe("implementation option", () => {
 
     expect(getWarnings(stats)).toMatchSnapshot("warnings");
     expect(getErrors(stats)).toMatchSnapshot("errors");
+
+    await close(compiler);
   });
 
   it("should try to load using valid order", async () => {
@@ -360,6 +381,8 @@ describe("implementation option", () => {
 
     expect(getWarnings(stats)).toMatchSnapshot("warnings");
     expect(getErrors(stats)).toMatchSnapshot("errors");
+
+    await close(compiler);
   });
 
   it("should not swallow an error when trying to load a sass implementation", async () => {
@@ -389,5 +412,7 @@ describe("implementation option", () => {
 
     expect(getWarnings(stats)).toMatchSnapshot("warnings");
     expect(getErrors(stats)).toMatchSnapshot("errors");
+
+    await close(compiler);
   });
 });

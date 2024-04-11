@@ -1,6 +1,7 @@
 import url from "url";
 
 import {
+  close,
   compile,
   getCodeFromBundle,
   getCodeFromSass,
@@ -55,6 +56,8 @@ describe("loader", () => {
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
         expect(logs).toMatchSnapshot("logs");
+
+        await close(compiler);
       });
 
       it(`should not emit warning when 'false' used ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -92,6 +95,8 @@ describe("loader", () => {
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
         expect(logs).toMatchSnapshot("logs");
+
+        await close(compiler);
       });
 
       it(`should emit warning when 'true' used ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -129,6 +134,8 @@ describe("loader", () => {
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
         expect(logs).toMatchSnapshot("logs");
+
+        await close(compiler);
       });
 
       if (syntax === "sass" && implementationName !== "node-sass") {
@@ -164,6 +171,8 @@ describe("loader", () => {
           expect(getWarnings(stats, true)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
           expect(logs).toMatchSnapshot("logs");
+
+          await close(compiler);
         });
       }
     });

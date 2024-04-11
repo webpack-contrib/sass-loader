@@ -1,4 +1,5 @@
 import {
+  close,
   compile,
   getCodeFromBundle,
   getCodeFromSass,
@@ -37,6 +38,8 @@ describe("webpackImporter option", () => {
         expect(codeFromBundle.css).toMatchSnapshot("css");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       it(`false ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -55,6 +58,8 @@ describe("webpackImporter option", () => {
         expect(codeFromBundle.css).toMatchSnapshot("css");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       it(`true ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -73,6 +78,8 @@ describe("webpackImporter option", () => {
         expect(codeFromBundle.css).toMatchSnapshot("css");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
     });
   });

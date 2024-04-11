@@ -13,6 +13,7 @@ import {
   getWarnings,
   getCompiler,
   getImplementationsAndAPI,
+  close,
 } from "./helpers";
 
 jest.setTimeout(30000);
@@ -44,6 +45,8 @@ describe("sassOptions option", () => {
         expect(codeFromBundle.css).toMatchSnapshot("css");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       it(`should work when the option is empty "Object" ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -62,6 +65,8 @@ describe("sassOptions option", () => {
         expect(codeFromBundle.css).toMatchSnapshot("css");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       it(`should work when the option like "Function" ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -88,6 +93,8 @@ describe("sassOptions option", () => {
         expect(codeFromBundle.css).toMatchSnapshot("css");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       it(`should work when the option like "Function" and never return ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -110,6 +117,8 @@ describe("sassOptions option", () => {
         expect(codeFromBundle.css).toMatchSnapshot("css");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       if (isModernAPI) {
@@ -118,9 +127,11 @@ describe("sassOptions option", () => {
           const options = {
             implementation,
             api,
-            sassOptions: {
-              url: "test",
-            },
+            sassOptions: isModernAPI
+              ? {}
+              : {
+                  url: "test",
+                },
           };
           const compiler = getCompiler(testId, { loader: { options } });
           const stats = await compile(compiler);
@@ -131,6 +142,8 @@ describe("sassOptions option", () => {
           expect(codeFromBundle.css).toMatchSnapshot("css");
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          await close(compiler);
         });
 
         it(`should work with custom scheme import ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -164,6 +177,8 @@ describe("sassOptions option", () => {
 
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          await close(compiler);
         });
       } else {
         it(`should ignore the "file" option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -184,6 +199,8 @@ describe("sassOptions option", () => {
           expect(codeFromBundle.css).toMatchSnapshot("css");
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          await close(compiler);
         });
       }
 
@@ -205,35 +222,36 @@ describe("sassOptions option", () => {
         expect(codeFromBundle.css).toMatchSnapshot("css");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
-      // TODO fix me https://github.com/webpack-contrib/sass-loader/issues/774
-      if (!isModernAPI) {
-        it(`should work with the "functions" option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
-          const testId = getTestId(
-            api === "modern" || api === "modern-compiler"
-              ? "custom-functions-modern"
-              : "custom-functions",
-            syntax,
-          );
-          const options = {
-            implementation,
-            api,
-            sassOptions: {
-              functions: customFunctions(api, implementation),
-            },
-          };
-          const compiler = getCompiler(testId, { loader: { options } });
-          const stats = await compile(compiler);
-          const codeFromBundle = getCodeFromBundle(stats, compiler);
-          const codeFromSass = await getCodeFromSass(testId, options);
+      it(`should work with the "functions" option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
+        const testId = getTestId(
+          api === "modern" || api === "modern-compiler"
+            ? "custom-functions-modern"
+            : "custom-functions",
+          syntax,
+        );
+        const options = {
+          implementation,
+          api,
+          sassOptions: {
+            functions: customFunctions(api, implementation),
+          },
+        };
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
+        const codeFromSass = await getCodeFromSass(testId, options);
 
-          expect(codeFromBundle.css).toBe(codeFromSass.css);
-          expect(codeFromBundle.css).toMatchSnapshot("css");
-          expect(getWarnings(stats)).toMatchSnapshot("warnings");
-          expect(getErrors(stats)).toMatchSnapshot("errors");
-        });
-      }
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot("css");
+        expect(getWarnings(stats)).toMatchSnapshot("warnings");
+        expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
+      });
 
       if (!isModernAPI) {
         it(`should work with the "importer" as a single function option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -254,6 +272,8 @@ describe("sassOptions option", () => {
           expect(codeFromBundle.css).toMatchSnapshot("css");
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          await close(compiler);
         });
 
         it(`should work with the "importer" as a array of functions option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -274,6 +294,8 @@ describe("sassOptions option", () => {
           expect(codeFromBundle.css).toMatchSnapshot("css");
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          await close(compiler);
         });
 
         it(`should work with the "importer" as a single function option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -298,6 +320,8 @@ describe("sassOptions option", () => {
           expect(codeFromBundle.css).toMatchSnapshot("css");
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          await close(compiler);
         });
       }
 
@@ -322,6 +346,8 @@ describe("sassOptions option", () => {
           expect(codeFromBundle.css).toMatchSnapshot("css");
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          await close(compiler);
         });
       }
 
@@ -350,6 +376,8 @@ describe("sassOptions option", () => {
         expect(codeFromBundle.css).toMatchSnapshot("css");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       if (api !== "modern" && api !== "modern-compiler") {
@@ -369,29 +397,31 @@ describe("sassOptions option", () => {
           expect(codeFromBundle.css).toMatchSnapshot("css");
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          await close(compiler);
         });
       }
 
-      if (!isModernAPI) {
-        it(`should work with the "indentWidth" option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
-          const testId = getTestId("language", syntax);
-          const options = {
-            implementation,
-            api,
-            // Doesn't supported by modern API
-            sassOptions: { indentWidth: 4 },
-          };
-          const compiler = getCompiler(testId, { loader: { options } });
-          const stats = await compile(compiler);
-          const codeFromBundle = getCodeFromBundle(stats, compiler);
-          const codeFromSass = await getCodeFromSass(testId, options);
+      it(`should work with the "indentWidth" option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
+        const testId = getTestId("language", syntax);
+        const options = {
+          implementation,
+          api,
+          // Doesn't supported by modern API
+          sassOptions: isModernAPI ? {} : { indentWidth: 4 },
+        };
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
+        const codeFromSass = await getCodeFromSass(testId, options);
 
-          expect(codeFromBundle.css).toBe(codeFromSass.css);
-          expect(codeFromBundle.css).toMatchSnapshot("css");
-          expect(getWarnings(stats)).toMatchSnapshot("warnings");
-          expect(getErrors(stats)).toMatchSnapshot("errors");
-        });
-      }
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot("css");
+        expect(getWarnings(stats)).toMatchSnapshot("warnings");
+        expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
+      });
 
       it(`should work with the "indentedSyntax"/"syntax" option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
         const testId = getTestId("language", syntax);
@@ -416,31 +446,33 @@ describe("sassOptions option", () => {
         expect(codeFromBundle.css).toMatchSnapshot("css");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
-      if (!isModernAPI) {
-        it(`should work with the "linefeed" option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
-          const testId = getTestId("language", syntax);
-          const options = {
-            implementation,
-            api,
-            // Doesn't supported by modern API
-            sassOptions:
-              api === "modern" || api === "modern-compiler"
-                ? {}
-                : { linefeed: "lf" },
-          };
-          const compiler = getCompiler(testId, { loader: { options } });
-          const stats = await compile(compiler);
-          const codeFromBundle = getCodeFromBundle(stats, compiler);
-          const codeFromSass = await getCodeFromSass(testId, options);
+      it(`should work with the "linefeed" option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
+        const testId = getTestId("language", syntax);
+        const options = {
+          implementation,
+          api,
+          // Doesn't supported by modern API
+          sassOptions:
+            api === "modern" || api === "modern-compiler"
+              ? {}
+              : { linefeed: "lf" },
+        };
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
+        const codeFromSass = await getCodeFromSass(testId, options);
 
-          expect(codeFromBundle.css).toBe(codeFromSass.css);
-          expect(codeFromBundle.css).toMatchSnapshot("css");
-          expect(getWarnings(stats)).toMatchSnapshot("warnings");
-          expect(getErrors(stats)).toMatchSnapshot("errors");
-        });
-      }
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot("css");
+        expect(getWarnings(stats)).toMatchSnapshot("warnings");
+        expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
+      });
 
       it(`should respect the "outputStyle"/"style" option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
         const testId = getTestId("language", syntax);
@@ -464,6 +496,8 @@ describe("sassOptions option", () => {
         expect(codeFromBundle.css).toMatchSnapshot("css");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       it(`should use "compressed" output style in the "production" mode ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -487,6 +521,8 @@ describe("sassOptions option", () => {
         expect(codeFromBundle.css).toMatchSnapshot("css");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
     });
   });

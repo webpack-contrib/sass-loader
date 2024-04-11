@@ -5074,6 +5074,46 @@ exports[`sassOptions option should work with the "functions" option ('dart-sass'
 
 exports[`sassOptions option should work with the "functions" option ('dart-sass', 'legacy' API, 'scss' syntax): warnings 1`] = `[]`;
 
+exports[`sassOptions option should work with the "functions" option ('dart-sass', 'modern' API, 'sass' syntax): css 1`] = `
+"h1 {
+  font-size: 32px;
+}"
+`;
+
+exports[`sassOptions option should work with the "functions" option ('dart-sass', 'modern' API, 'sass' syntax): errors 1`] = `[]`;
+
+exports[`sassOptions option should work with the "functions" option ('dart-sass', 'modern' API, 'sass' syntax): warnings 1`] = `[]`;
+
+exports[`sassOptions option should work with the "functions" option ('dart-sass', 'modern' API, 'scss' syntax): css 1`] = `
+"h1 {
+  font-size: 32px;
+}"
+`;
+
+exports[`sassOptions option should work with the "functions" option ('dart-sass', 'modern' API, 'scss' syntax): errors 1`] = `[]`;
+
+exports[`sassOptions option should work with the "functions" option ('dart-sass', 'modern' API, 'scss' syntax): warnings 1`] = `[]`;
+
+exports[`sassOptions option should work with the "functions" option ('dart-sass', 'modern-compiler' API, 'sass' syntax): css 1`] = `
+"h1 {
+  font-size: 32px;
+}"
+`;
+
+exports[`sassOptions option should work with the "functions" option ('dart-sass', 'modern-compiler' API, 'sass' syntax): errors 1`] = `[]`;
+
+exports[`sassOptions option should work with the "functions" option ('dart-sass', 'modern-compiler' API, 'sass' syntax): warnings 1`] = `[]`;
+
+exports[`sassOptions option should work with the "functions" option ('dart-sass', 'modern-compiler' API, 'scss' syntax): css 1`] = `
+"h1 {
+  font-size: 32px;
+}"
+`;
+
+exports[`sassOptions option should work with the "functions" option ('dart-sass', 'modern-compiler' API, 'scss' syntax): errors 1`] = `[]`;
+
+exports[`sassOptions option should work with the "functions" option ('dart-sass', 'modern-compiler' API, 'scss' syntax): warnings 1`] = `[]`;
+
 exports[`sassOptions option should work with the "functions" option ('node-sass', 'legacy' API, 'sass' syntax): css 1`] = `
 "h2, h3, h4, h5 {
   color: #08c; }
@@ -5113,6 +5153,46 @@ exports[`sassOptions option should work with the "functions" option ('sass-embed
 exports[`sassOptions option should work with the "functions" option ('sass-embedded', 'legacy' API, 'scss' syntax): errors 1`] = `[]`;
 
 exports[`sassOptions option should work with the "functions" option ('sass-embedded', 'legacy' API, 'scss' syntax): warnings 1`] = `[]`;
+
+exports[`sassOptions option should work with the "functions" option ('sass-embedded', 'modern' API, 'sass' syntax): css 1`] = `
+"h1 {
+  font-size: 32px;
+}"
+`;
+
+exports[`sassOptions option should work with the "functions" option ('sass-embedded', 'modern' API, 'sass' syntax): errors 1`] = `[]`;
+
+exports[`sassOptions option should work with the "functions" option ('sass-embedded', 'modern' API, 'sass' syntax): warnings 1`] = `[]`;
+
+exports[`sassOptions option should work with the "functions" option ('sass-embedded', 'modern' API, 'scss' syntax): css 1`] = `
+"h1 {
+  font-size: 32px;
+}"
+`;
+
+exports[`sassOptions option should work with the "functions" option ('sass-embedded', 'modern' API, 'scss' syntax): errors 1`] = `[]`;
+
+exports[`sassOptions option should work with the "functions" option ('sass-embedded', 'modern' API, 'scss' syntax): warnings 1`] = `[]`;
+
+exports[`sassOptions option should work with the "functions" option ('sass-embedded', 'modern-compiler' API, 'sass' syntax): css 1`] = `
+"h1 {
+  font-size: 32px;
+}"
+`;
+
+exports[`sassOptions option should work with the "functions" option ('sass-embedded', 'modern-compiler' API, 'sass' syntax): errors 1`] = `[]`;
+
+exports[`sassOptions option should work with the "functions" option ('sass-embedded', 'modern-compiler' API, 'sass' syntax): warnings 1`] = `[]`;
+
+exports[`sassOptions option should work with the "functions" option ('sass-embedded', 'modern-compiler' API, 'scss' syntax): css 1`] = `
+"h1 {
+  font-size: 32px;
+}"
+`;
+
+exports[`sassOptions option should work with the "functions" option ('sass-embedded', 'modern-compiler' API, 'scss' syntax): errors 1`] = `[]`;
+
+exports[`sassOptions option should work with the "functions" option ('sass-embedded', 'modern-compiler' API, 'scss' syntax): warnings 1`] = `[]`;
 
 exports[`sassOptions option should work with the "importer" as a array of functions option ('dart-sass', 'legacy' API, 'sass' syntax): css 1`] = `""`;
 
@@ -5890,6 +5970,210 @@ exports[`sassOptions option should work with the "indentWidth" option ('dart-sas
 
 exports[`sassOptions option should work with the "indentWidth" option ('dart-sass', 'legacy' API, 'scss' syntax): warnings 1`] = `[]`;
 
+exports[`sassOptions option should work with the "indentWidth" option ('dart-sass', 'modern' API, 'sass' syntax): css 1`] = `
+"@charset "UTF-8";
+@import "./file.css";
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+nav li {
+  display: inline-block;
+}
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none;
+}
+
+.box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.message, .warning, .error, .success {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333;
+}
+
+.success {
+  border-color: green;
+}
+
+.error {
+  border-color: red;
+}
+
+.warning {
+  border-color: yellow;
+}
+
+.foo:before {
+  content: "\\e0c6";
+}
+
+.bar:before {
+  content: "∑";
+}"
+`;
+
+exports[`sassOptions option should work with the "indentWidth" option ('dart-sass', 'modern' API, 'sass' syntax): errors 1`] = `[]`;
+
+exports[`sassOptions option should work with the "indentWidth" option ('dart-sass', 'modern' API, 'sass' syntax): warnings 1`] = `[]`;
+
+exports[`sassOptions option should work with the "indentWidth" option ('dart-sass', 'modern' API, 'scss' syntax): css 1`] = `
+"@charset "UTF-8";
+@import "./file.css";
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+nav li {
+  display: inline-block;
+}
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none;
+}
+
+.box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.foo:before {
+  content: "\\e0c6";
+}
+
+.bar:before {
+  content: "∑";
+}"
+`;
+
+exports[`sassOptions option should work with the "indentWidth" option ('dart-sass', 'modern' API, 'scss' syntax): errors 1`] = `[]`;
+
+exports[`sassOptions option should work with the "indentWidth" option ('dart-sass', 'modern' API, 'scss' syntax): warnings 1`] = `[]`;
+
+exports[`sassOptions option should work with the "indentWidth" option ('dart-sass', 'modern-compiler' API, 'sass' syntax): css 1`] = `
+"@charset "UTF-8";
+@import "./file.css";
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+nav li {
+  display: inline-block;
+}
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none;
+}
+
+.box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.message, .warning, .error, .success {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333;
+}
+
+.success {
+  border-color: green;
+}
+
+.error {
+  border-color: red;
+}
+
+.warning {
+  border-color: yellow;
+}
+
+.foo:before {
+  content: "\\e0c6";
+}
+
+.bar:before {
+  content: "∑";
+}"
+`;
+
+exports[`sassOptions option should work with the "indentWidth" option ('dart-sass', 'modern-compiler' API, 'sass' syntax): errors 1`] = `[]`;
+
+exports[`sassOptions option should work with the "indentWidth" option ('dart-sass', 'modern-compiler' API, 'sass' syntax): warnings 1`] = `[]`;
+
+exports[`sassOptions option should work with the "indentWidth" option ('dart-sass', 'modern-compiler' API, 'scss' syntax): css 1`] = `
+"@charset "UTF-8";
+@import "./file.css";
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+nav li {
+  display: inline-block;
+}
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none;
+}
+
+.box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.foo:before {
+  content: "\\e0c6";
+}
+
+.bar:before {
+  content: "∑";
+}"
+`;
+
+exports[`sassOptions option should work with the "indentWidth" option ('dart-sass', 'modern-compiler' API, 'scss' syntax): errors 1`] = `[]`;
+
+exports[`sassOptions option should work with the "indentWidth" option ('dart-sass', 'modern-compiler' API, 'scss' syntax): warnings 1`] = `[]`;
+
 exports[`sassOptions option should work with the "indentWidth" option ('node-sass', 'legacy' API, 'sass' syntax): css 1`] = `
 "@charset "UTF-8";
 @import url(./file.css);
@@ -6081,6 +6365,210 @@ nav a {
 exports[`sassOptions option should work with the "indentWidth" option ('sass-embedded', 'legacy' API, 'scss' syntax): errors 1`] = `[]`;
 
 exports[`sassOptions option should work with the "indentWidth" option ('sass-embedded', 'legacy' API, 'scss' syntax): warnings 1`] = `[]`;
+
+exports[`sassOptions option should work with the "indentWidth" option ('sass-embedded', 'modern' API, 'sass' syntax): css 1`] = `
+"@charset "UTF-8";
+@import "./file.css";
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+nav li {
+  display: inline-block;
+}
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none;
+}
+
+.box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.message, .warning, .error, .success {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333;
+}
+
+.success {
+  border-color: green;
+}
+
+.error {
+  border-color: red;
+}
+
+.warning {
+  border-color: yellow;
+}
+
+.foo:before {
+  content: "\\e0c6";
+}
+
+.bar:before {
+  content: "∑";
+}"
+`;
+
+exports[`sassOptions option should work with the "indentWidth" option ('sass-embedded', 'modern' API, 'sass' syntax): errors 1`] = `[]`;
+
+exports[`sassOptions option should work with the "indentWidth" option ('sass-embedded', 'modern' API, 'sass' syntax): warnings 1`] = `[]`;
+
+exports[`sassOptions option should work with the "indentWidth" option ('sass-embedded', 'modern' API, 'scss' syntax): css 1`] = `
+"@charset "UTF-8";
+@import "./file.css";
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+nav li {
+  display: inline-block;
+}
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none;
+}
+
+.box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.foo:before {
+  content: "\\e0c6";
+}
+
+.bar:before {
+  content: "∑";
+}"
+`;
+
+exports[`sassOptions option should work with the "indentWidth" option ('sass-embedded', 'modern' API, 'scss' syntax): errors 1`] = `[]`;
+
+exports[`sassOptions option should work with the "indentWidth" option ('sass-embedded', 'modern' API, 'scss' syntax): warnings 1`] = `[]`;
+
+exports[`sassOptions option should work with the "indentWidth" option ('sass-embedded', 'modern-compiler' API, 'sass' syntax): css 1`] = `
+"@charset "UTF-8";
+@import "./file.css";
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+nav li {
+  display: inline-block;
+}
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none;
+}
+
+.box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.message, .warning, .error, .success {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333;
+}
+
+.success {
+  border-color: green;
+}
+
+.error {
+  border-color: red;
+}
+
+.warning {
+  border-color: yellow;
+}
+
+.foo:before {
+  content: "\\e0c6";
+}
+
+.bar:before {
+  content: "∑";
+}"
+`;
+
+exports[`sassOptions option should work with the "indentWidth" option ('sass-embedded', 'modern-compiler' API, 'sass' syntax): errors 1`] = `[]`;
+
+exports[`sassOptions option should work with the "indentWidth" option ('sass-embedded', 'modern-compiler' API, 'sass' syntax): warnings 1`] = `[]`;
+
+exports[`sassOptions option should work with the "indentWidth" option ('sass-embedded', 'modern-compiler' API, 'scss' syntax): css 1`] = `
+"@charset "UTF-8";
+@import "./file.css";
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+nav li {
+  display: inline-block;
+}
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none;
+}
+
+.box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.foo:before {
+  content: "\\e0c6";
+}
+
+.bar:before {
+  content: "∑";
+}"
+`;
+
+exports[`sassOptions option should work with the "indentWidth" option ('sass-embedded', 'modern-compiler' API, 'scss' syntax): errors 1`] = `[]`;
+
+exports[`sassOptions option should work with the "indentWidth" option ('sass-embedded', 'modern-compiler' API, 'scss' syntax): warnings 1`] = `[]`;
 
 exports[`sassOptions option should work with the "indentedSyntax"/"syntax" option ('dart-sass', 'legacy' API, 'sass' syntax): css 1`] = `
 "@charset "UTF-8";
@@ -6886,6 +7374,210 @@ exports[`sassOptions option should work with the "linefeed" option ('dart-sass',
 
 exports[`sassOptions option should work with the "linefeed" option ('dart-sass', 'legacy' API, 'scss' syntax): warnings 1`] = `[]`;
 
+exports[`sassOptions option should work with the "linefeed" option ('dart-sass', 'modern' API, 'sass' syntax): css 1`] = `
+"@charset "UTF-8";
+@import "./file.css";
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+nav li {
+  display: inline-block;
+}
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none;
+}
+
+.box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.message, .warning, .error, .success {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333;
+}
+
+.success {
+  border-color: green;
+}
+
+.error {
+  border-color: red;
+}
+
+.warning {
+  border-color: yellow;
+}
+
+.foo:before {
+  content: "\\e0c6";
+}
+
+.bar:before {
+  content: "∑";
+}"
+`;
+
+exports[`sassOptions option should work with the "linefeed" option ('dart-sass', 'modern' API, 'sass' syntax): errors 1`] = `[]`;
+
+exports[`sassOptions option should work with the "linefeed" option ('dart-sass', 'modern' API, 'sass' syntax): warnings 1`] = `[]`;
+
+exports[`sassOptions option should work with the "linefeed" option ('dart-sass', 'modern' API, 'scss' syntax): css 1`] = `
+"@charset "UTF-8";
+@import "./file.css";
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+nav li {
+  display: inline-block;
+}
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none;
+}
+
+.box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.foo:before {
+  content: "\\e0c6";
+}
+
+.bar:before {
+  content: "∑";
+}"
+`;
+
+exports[`sassOptions option should work with the "linefeed" option ('dart-sass', 'modern' API, 'scss' syntax): errors 1`] = `[]`;
+
+exports[`sassOptions option should work with the "linefeed" option ('dart-sass', 'modern' API, 'scss' syntax): warnings 1`] = `[]`;
+
+exports[`sassOptions option should work with the "linefeed" option ('dart-sass', 'modern-compiler' API, 'sass' syntax): css 1`] = `
+"@charset "UTF-8";
+@import "./file.css";
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+nav li {
+  display: inline-block;
+}
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none;
+}
+
+.box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.message, .warning, .error, .success {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333;
+}
+
+.success {
+  border-color: green;
+}
+
+.error {
+  border-color: red;
+}
+
+.warning {
+  border-color: yellow;
+}
+
+.foo:before {
+  content: "\\e0c6";
+}
+
+.bar:before {
+  content: "∑";
+}"
+`;
+
+exports[`sassOptions option should work with the "linefeed" option ('dart-sass', 'modern-compiler' API, 'sass' syntax): errors 1`] = `[]`;
+
+exports[`sassOptions option should work with the "linefeed" option ('dart-sass', 'modern-compiler' API, 'sass' syntax): warnings 1`] = `[]`;
+
+exports[`sassOptions option should work with the "linefeed" option ('dart-sass', 'modern-compiler' API, 'scss' syntax): css 1`] = `
+"@charset "UTF-8";
+@import "./file.css";
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+nav li {
+  display: inline-block;
+}
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none;
+}
+
+.box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.foo:before {
+  content: "\\e0c6";
+}
+
+.bar:before {
+  content: "∑";
+}"
+`;
+
+exports[`sassOptions option should work with the "linefeed" option ('dart-sass', 'modern-compiler' API, 'scss' syntax): errors 1`] = `[]`;
+
+exports[`sassOptions option should work with the "linefeed" option ('dart-sass', 'modern-compiler' API, 'scss' syntax): warnings 1`] = `[]`;
+
 exports[`sassOptions option should work with the "linefeed" option ('node-sass', 'legacy' API, 'sass' syntax): css 1`] = `
 "@charset "UTF-8";
 @import url(./file.css);
@@ -7077,3 +7769,207 @@ nav a {
 exports[`sassOptions option should work with the "linefeed" option ('sass-embedded', 'legacy' API, 'scss' syntax): errors 1`] = `[]`;
 
 exports[`sassOptions option should work with the "linefeed" option ('sass-embedded', 'legacy' API, 'scss' syntax): warnings 1`] = `[]`;
+
+exports[`sassOptions option should work with the "linefeed" option ('sass-embedded', 'modern' API, 'sass' syntax): css 1`] = `
+"@charset "UTF-8";
+@import "./file.css";
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+nav li {
+  display: inline-block;
+}
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none;
+}
+
+.box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.message, .warning, .error, .success {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333;
+}
+
+.success {
+  border-color: green;
+}
+
+.error {
+  border-color: red;
+}
+
+.warning {
+  border-color: yellow;
+}
+
+.foo:before {
+  content: "\\e0c6";
+}
+
+.bar:before {
+  content: "∑";
+}"
+`;
+
+exports[`sassOptions option should work with the "linefeed" option ('sass-embedded', 'modern' API, 'sass' syntax): errors 1`] = `[]`;
+
+exports[`sassOptions option should work with the "linefeed" option ('sass-embedded', 'modern' API, 'sass' syntax): warnings 1`] = `[]`;
+
+exports[`sassOptions option should work with the "linefeed" option ('sass-embedded', 'modern' API, 'scss' syntax): css 1`] = `
+"@charset "UTF-8";
+@import "./file.css";
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+nav li {
+  display: inline-block;
+}
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none;
+}
+
+.box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.foo:before {
+  content: "\\e0c6";
+}
+
+.bar:before {
+  content: "∑";
+}"
+`;
+
+exports[`sassOptions option should work with the "linefeed" option ('sass-embedded', 'modern' API, 'scss' syntax): errors 1`] = `[]`;
+
+exports[`sassOptions option should work with the "linefeed" option ('sass-embedded', 'modern' API, 'scss' syntax): warnings 1`] = `[]`;
+
+exports[`sassOptions option should work with the "linefeed" option ('sass-embedded', 'modern-compiler' API, 'sass' syntax): css 1`] = `
+"@charset "UTF-8";
+@import "./file.css";
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+nav li {
+  display: inline-block;
+}
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none;
+}
+
+.box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.message, .warning, .error, .success {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333;
+}
+
+.success {
+  border-color: green;
+}
+
+.error {
+  border-color: red;
+}
+
+.warning {
+  border-color: yellow;
+}
+
+.foo:before {
+  content: "\\e0c6";
+}
+
+.bar:before {
+  content: "∑";
+}"
+`;
+
+exports[`sassOptions option should work with the "linefeed" option ('sass-embedded', 'modern-compiler' API, 'sass' syntax): errors 1`] = `[]`;
+
+exports[`sassOptions option should work with the "linefeed" option ('sass-embedded', 'modern-compiler' API, 'sass' syntax): warnings 1`] = `[]`;
+
+exports[`sassOptions option should work with the "linefeed" option ('sass-embedded', 'modern-compiler' API, 'scss' syntax): css 1`] = `
+"@charset "UTF-8";
+@import "./file.css";
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+nav li {
+  display: inline-block;
+}
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none;
+}
+
+.box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.foo:before {
+  content: "\\e0c6";
+}
+
+.bar:before {
+  content: "∑";
+}"
+`;
+
+exports[`sassOptions option should work with the "linefeed" option ('sass-embedded', 'modern-compiler' API, 'scss' syntax): errors 1`] = `[]`;
+
+exports[`sassOptions option should work with the "linefeed" option ('sass-embedded', 'modern-compiler' API, 'scss' syntax): warnings 1`] = `[]`;

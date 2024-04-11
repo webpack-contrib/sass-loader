@@ -1,5 +1,6 @@
 import {
   compile,
+  close,
   getCodeFromBundle,
   getCodeFromSass,
   getCompiler,
@@ -35,6 +36,8 @@ describe("additionalData option", () => {
         expect(codeFromBundle.css).toMatchSnapshot("css");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       it(`should work as a function ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -60,6 +63,8 @@ describe("additionalData option", () => {
         expect(codeFromBundle.css).toMatchSnapshot("css");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       it(`should work as an async function ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -85,6 +90,8 @@ describe("additionalData option", () => {
         expect(codeFromBundle.css).toMatchSnapshot("css");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       it(`should use same EOL on all os ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -106,6 +113,8 @@ a {
         expect(codeFromBundle.css).toMatchSnapshot("css");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
     });
   });

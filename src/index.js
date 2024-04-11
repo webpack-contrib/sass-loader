@@ -58,7 +58,8 @@ async function loader(content) {
       );
     } else {
       sassOptions.importers.push(
-        getModernWebpackImporter(this, implementation),
+        // No need to pass `loadPaths`, because modern API handle them itself
+        getModernWebpackImporter(this, implementation, []),
       );
     }
   }

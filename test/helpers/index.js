@@ -1,4 +1,5 @@
 import compile from "./compiler";
+import close from "./close";
 import customFunctions from "./customFunctions";
 import customImporter from "./customImporter";
 import getCodeFromBundle from "./getCodeFromBundle";
@@ -13,6 +14,7 @@ import readAsset from "./readAsset";
 
 export {
   compile,
+  close,
   customFunctions,
   customImporter,
   getCodeFromBundle,
