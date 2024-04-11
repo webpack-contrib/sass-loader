@@ -767,8 +767,8 @@ function getCompileFn(loaderContext, implementation, options) {
 
             // Check again because awaiting the initialization function
             // introduces a race condition.
-            if (!sassModernCompilers.has(implementation)) {
-              sassModernCompilers.set(implementation, compiler);
+            if (!sassModernCompilers.has(webpackCompiler)) {
+              sassModernCompilers.set(webpackCompiler, compiler);
               webpackCompiler.hooks.shutdown.tap("sass-loader", () => {
                 compiler.dispose();
               });
@@ -776,7 +776,7 @@ function getCompileFn(loaderContext, implementation, options) {
           }
 
           return sassModernCompilers
-            .get(implementation)
+            .get(webpackCompiler)
             .compileStringAsync(data, rest);
         }
 

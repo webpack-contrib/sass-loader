@@ -5,6 +5,7 @@ import del from "del";
 
 import {
   compile,
+  close,
   getCodeFromBundle,
   getCodeFromSass,
   getCompiler,
@@ -33,6 +34,7 @@ describe("loader", () => {
           api,
         };
         const compiler = getCompiler(testId, { loader: { options } });
+
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
         const codeFromSass = await getCodeFromSass(testId, options);
@@ -41,6 +43,8 @@ describe("loader", () => {
         expect(codeFromBundle.css).toMatchSnapshot("css");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       it(`should work ('${implementationName}', '${api}' API, '${syntax}' syntax) and don't modify sass options`, async () => {
@@ -72,6 +76,8 @@ describe("loader", () => {
         expect(codeFromBundle.css).toMatchSnapshot("css");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       it(`should work ('${implementationName}', '${api}' API, '${syntax}' syntax) with the "memory" cache`, async () => {
@@ -101,6 +107,8 @@ describe("loader", () => {
         expect(codeFromBundle.css).toMatchSnapshot("css");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       it(`should work ('${implementationName}', '${api}' API, '${syntax}' syntax) with the "filesystem" cache`, async () => {
@@ -131,6 +139,8 @@ describe("loader", () => {
         expect(codeFromBundle.css).toMatchSnapshot("css");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       it(`should work with an empty file ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -148,6 +158,8 @@ describe("loader", () => {
         expect(codeFromBundle.css).toMatchSnapshot("css");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       it(`should output an understandable error ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -166,6 +178,8 @@ describe("loader", () => {
         ).toBe(true);
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       it(`should output an understandable error when the problem in "@import" ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -189,6 +203,8 @@ describe("loader", () => {
         ).toBe(true);
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       it(`should output an understandable error when a file could not be found ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -207,6 +223,8 @@ describe("loader", () => {
         ).toBe(true);
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       it(`should throw an error with a explicit file and a file does not exist ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -225,6 +243,8 @@ describe("loader", () => {
         ).toBe(true);
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       it(`should work with difference "@import" at-rules ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -242,6 +262,8 @@ describe("loader", () => {
         expect(codeFromBundle.css).toMatchSnapshot("css");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       // Test for issue: https://github.com/webpack-contrib/sass-loader/issues/32
@@ -260,6 +282,8 @@ describe("loader", () => {
         expect(codeFromBundle.css).toMatchSnapshot("css");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       // Test for issue: https://github.com/webpack-contrib/sass-loader/issues/73
@@ -278,6 +302,8 @@ describe("loader", () => {
         expect(codeFromBundle.css).toMatchSnapshot("css");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       it(`should work when "@import" at-rules from scoped npm packages ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -295,6 +321,8 @@ describe("loader", () => {
         expect(codeFromBundle.css).toMatchSnapshot("css");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       it(`should work when "@import" at-rules with extensions ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -312,6 +340,8 @@ describe("loader", () => {
         expect(codeFromBundle.css).toMatchSnapshot("css");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       it(`should work when "@import" at-rules starting with "_" ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -329,6 +359,8 @@ describe("loader", () => {
         expect(codeFromBundle.css).toMatchSnapshot("css");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       it(`should work when "@import" at-rules without extensions and do not start with "_" ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -349,6 +381,8 @@ describe("loader", () => {
         expect(codeFromBundle.css).toMatchSnapshot("css");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       it(`should work with multiple "@import" at-rules without quotes ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -370,6 +404,8 @@ describe("loader", () => {
         expect(codeFromBundle.css).toMatchSnapshot("css");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       it(`should work and use the "sass" field ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -387,6 +423,8 @@ describe("loader", () => {
         expect(codeFromBundle.css).toMatchSnapshot("css");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       it(`should work and use the "style" field ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -404,6 +442,8 @@ describe("loader", () => {
         expect(codeFromBundle.css).toMatchSnapshot("css");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       it(`should work and use the "main" field ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -421,6 +461,8 @@ describe("loader", () => {
         expect(codeFromBundle.css).toMatchSnapshot("css");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       it(`should work and use the "main" field when the "main" value is not in the "mainFields" resolve option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -440,6 +482,8 @@ describe("loader", () => {
         expect(codeFromBundle.css).toMatchSnapshot("css");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       it(`should work and use the "main" field when the "main" value already in the "mainFields" resolve option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -459,6 +503,8 @@ describe("loader", () => {
         expect(codeFromBundle.css).toMatchSnapshot("css");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       it(`should work and use the "custom-sass" field ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -481,6 +527,8 @@ describe("loader", () => {
         expect(codeFromBundle.css).toMatchSnapshot("css");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       it(`should work and use the "index" file in package ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -498,6 +546,8 @@ describe("loader", () => {
         expect(codeFromBundle.css).toMatchSnapshot("css");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       it(`should work and use the "index" file in package when the "index" value is not in the "mainFiles" resolve option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -517,6 +567,8 @@ describe("loader", () => {
         expect(codeFromBundle.css).toMatchSnapshot("css");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       it(`should work and use the "index" file in package when the "index" value already in the "mainFiles" resolve option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -536,6 +588,8 @@ describe("loader", () => {
         expect(codeFromBundle.css).toMatchSnapshot("css");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       it(`should prefer "mainFiles" over "mainFields" when the field contains "js" file ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -556,6 +610,8 @@ describe("loader", () => {
         expect(codeFromBundle.css).toMatchSnapshot("css");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       it(`should prefer "mainFiles" with extension over without ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -579,6 +635,8 @@ describe("loader", () => {
         expect(codeFromBundle.css).toMatchSnapshot("css");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       it(`should work and use the "_index" file in package ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -596,6 +654,8 @@ describe("loader", () => {
         expect(codeFromBundle.css).toMatchSnapshot("css");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       it(`should work with an alias ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -643,6 +703,8 @@ describe("loader", () => {
         expect(codeFromBundle.css).toMatchSnapshot("css");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       // Legacy support for CSS imports with node-sass
@@ -662,6 +724,8 @@ describe("loader", () => {
         expect(codeFromBundle.css).toMatchSnapshot("css");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       if (!isNodeSass) {
@@ -680,6 +744,8 @@ describe("loader", () => {
           expect(codeFromBundle.css).toMatchSnapshot("css");
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          await close(compiler);
         });
       }
 
@@ -699,6 +765,8 @@ describe("loader", () => {
           expect(codeFromBundle.css).toMatchSnapshot("css");
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          await close(compiler);
         });
       }
 
@@ -717,6 +785,8 @@ describe("loader", () => {
         expect(codeFromBundle.css).toMatchSnapshot("css");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       it(`should work with "bootstrap" package v4 without tilde, import as a package ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -733,6 +803,8 @@ describe("loader", () => {
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       it(`should work with "bootstrap" package v5, import as a package ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -750,6 +822,8 @@ describe("loader", () => {
         expect(codeFromBundle.css).toMatchSnapshot("css");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       it(`should work with "bootstrap" package v5 without tilde, import as a package ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -766,6 +840,8 @@ describe("loader", () => {
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       if (!isNodeSass) {
@@ -787,6 +863,8 @@ describe("loader", () => {
           expect(codeFromBundle.css).toMatchSnapshot("css");
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          await close(compiler);
         });
 
         it(`should work with the "foundation-sites" package, adjusting CSS output ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -810,6 +888,8 @@ describe("loader", () => {
           expect(codeFromBundle.css).toMatchSnapshot("css");
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          await close(compiler);
         });
       }
 
@@ -838,6 +918,8 @@ describe("loader", () => {
         expect(codeFromBundle.css).toMatchSnapshot("css");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       it(`should watch firstly in the "includePaths" values ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -870,6 +952,8 @@ describe("loader", () => {
         expect(codeFromBundle.css).toMatchSnapshot("css");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       it(`should load only sass/scss files for the "mainFiles" ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -890,6 +974,8 @@ describe("loader", () => {
         expect(codeFromBundle.css).toMatchSnapshot("css");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       it(`should load files with underscore in the name ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -907,6 +993,8 @@ describe("loader", () => {
         expect(codeFromBundle.css).toMatchSnapshot("css");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       it(`should respect resolving from the "SASS_PATH" environment variable ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -938,6 +1026,8 @@ describe("loader", () => {
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
 
+        await close(compiler);
+
         delete process.env.SASS_PATH;
       });
 
@@ -958,6 +1048,8 @@ describe("loader", () => {
           expect(codeFromBundle.css).toMatchSnapshot("css");
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          await close(compiler);
         });
 
         it(`should respect resolving directory with the "index" file from "process.cwd()"  ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -978,6 +1070,8 @@ describe("loader", () => {
           expect(codeFromBundle.css).toMatchSnapshot("css");
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          await close(compiler);
         });
       }
 
@@ -996,6 +1090,8 @@ describe("loader", () => {
         expect(codeFromBundle.css).toMatchSnapshot("css");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       it(`should work with a package with "sass" and "exports" fields and a custom condition (theme1) ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -1023,6 +1119,8 @@ describe("loader", () => {
         expect(codeFromBundle.css).toMatchSnapshot("css");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       it(`should work with a package with "sass" and "exports" fields and a custom condition (theme2) ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -1050,6 +1148,8 @@ describe("loader", () => {
         expect(codeFromBundle.css).toMatchSnapshot("css");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       if (!isModernAPI) {
@@ -1081,6 +1181,8 @@ describe("loader", () => {
           expect(codeFromBundle.css).toMatchSnapshot("css");
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          await close(compiler);
         });
       }
 
@@ -1099,6 +1201,8 @@ describe("loader", () => {
         expect(codeFromBundle.css).toMatchSnapshot("css");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       it(`should resolve absolute paths ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -1110,15 +1214,15 @@ describe("loader", () => {
             content
               .replace(
                 /\/scss\/language.scss/g,
-                `file:///${path
-                  .resolve(__dirname, "scss/language.scss")
-                  .replace(/\\/g, "/")}`,
+                url.pathToFileURL(
+                  path.resolve(__dirname, "scss/language.scss"),
+                ),
               )
               .replace(
                 /\/sass\/language.sass/g,
-                `file:///${path
-                  .resolve(__dirname, "sass/language.sass")
-                  .replace(/\\/g, "/")}`,
+                url.pathToFileURL(
+                  path.resolve(__dirname, "sass/language.sass"),
+                ),
               ),
         };
         const compiler = getCompiler(testId, { loader: { options } });
@@ -1130,6 +1234,8 @@ describe("loader", () => {
         expect(codeFromBundle.css).toMatchSnapshot("css");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       it(`should throw an error on ambiguous import (only on "dart-sass") ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -1143,6 +1249,8 @@ describe("loader", () => {
 
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       it(`should prefer relative import ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -1160,6 +1268,8 @@ describe("loader", () => {
         expect(codeFromBundle.css).toMatchSnapshot("css");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       it(`should work with the 'resolve.byDependency.sass' option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -1186,6 +1296,8 @@ describe("loader", () => {
         expect(codeFromBundle.css).toMatchSnapshot("css");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       it(`should throw an error on circular import ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -1199,6 +1311,8 @@ describe("loader", () => {
 
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       it(`should work prefer \`loadPaths\` over \`SASS_PATH\` ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -1237,6 +1351,8 @@ describe("loader", () => {
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
 
+        await close(compiler);
+
         delete process.env.SASS_PATH;
       });
 
@@ -1259,6 +1375,8 @@ describe("loader", () => {
           expect(codeFromBundle.css).toMatchSnapshot("css");
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          await close(compiler);
         });
 
         it(`should work ('${implementationName}', '${api}' API, '${syntax}' syntax) add "@charset "UTF-8";" for non ascii characters`, async () => {
@@ -1276,6 +1394,8 @@ describe("loader", () => {
           expect(codeFromBundle.css).toMatchSnapshot("css");
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          await close(compiler);
         });
 
         it(`should work ('${implementationName}', '${api}' API, '${syntax}' syntax) to disable "@charset "UTF-8";" generation`, async () => {
@@ -1294,6 +1414,8 @@ describe("loader", () => {
           expect(codeFromBundle.css).toMatchSnapshot("css");
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          await close(compiler);
         });
 
         it(`should output an understandable error with a problem in "@use" ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -1317,6 +1439,8 @@ describe("loader", () => {
           ).toBe(true);
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          await close(compiler);
         });
 
         it(`should output an understandable error when a file could not be found using "@use" rule ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -1337,6 +1461,8 @@ describe("loader", () => {
           ).toBe(true);
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          await close(compiler);
         });
 
         it(`should throw an error with a explicit file and a file does not exist using "@use" rule ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -1357,6 +1483,8 @@ describe("loader", () => {
           ).toBe(true);
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          await close(compiler);
         });
 
         it(`should work with different "@use" at-rules ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -1374,6 +1502,8 @@ describe("loader", () => {
           expect(codeFromBundle.css).toMatchSnapshot("css");
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          await close(compiler);
         });
 
         it(`should work with "@use" at-rules from other language style ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -1391,6 +1521,8 @@ describe("loader", () => {
           expect(codeFromBundle.css).toMatchSnapshot("css");
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          await close(compiler);
         });
 
         it(`should work when "@use" at-rules from scoped npm packages ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -1408,6 +1540,8 @@ describe("loader", () => {
           expect(codeFromBundle.css).toMatchSnapshot("css");
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          await close(compiler);
         });
 
         it(`should work when "@use" at-rules with extensions ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -1425,6 +1559,8 @@ describe("loader", () => {
           expect(codeFromBundle.css).toMatchSnapshot("css");
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          await close(compiler);
         });
 
         it(`should work when "@use" at-rules starting with "_" ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -1442,6 +1578,8 @@ describe("loader", () => {
           expect(codeFromBundle.css).toMatchSnapshot("css");
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          await close(compiler);
         });
 
         it(`should work when "@use" at-rules without extensions and do not start with "_" ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -1462,6 +1600,8 @@ describe("loader", () => {
           expect(codeFromBundle.css).toMatchSnapshot("css");
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          await close(compiler);
         });
 
         it(`should work when "@use" and use the "sass" field ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -1479,6 +1619,8 @@ describe("loader", () => {
           expect(codeFromBundle.css).toMatchSnapshot("css");
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          await close(compiler);
         });
 
         it(`should work when "@use" and use the "style" field ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -1496,6 +1638,8 @@ describe("loader", () => {
           expect(codeFromBundle.css).toMatchSnapshot("css");
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          await close(compiler);
         });
 
         it(`should work when "@use" and use the "main" field ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -1513,6 +1657,8 @@ describe("loader", () => {
           expect(codeFromBundle.css).toMatchSnapshot("css");
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          await close(compiler);
         });
 
         it(`should work when "@use" and use the "main" field when the "main" value is not in the "mainFields" resolve option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -1532,6 +1678,8 @@ describe("loader", () => {
           expect(codeFromBundle.css).toMatchSnapshot("css");
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          await close(compiler);
         });
 
         it(`should work when "@use" and use the "main" field when the "main" value already in the "mainFields" resolve option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -1551,6 +1699,8 @@ describe("loader", () => {
           expect(codeFromBundle.css).toMatchSnapshot("css");
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          await close(compiler);
         });
 
         it(`should work when "@use" and use the "custom-sass" field ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -1573,6 +1723,8 @@ describe("loader", () => {
           expect(codeFromBundle.css).toMatchSnapshot("css");
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          await close(compiler);
         });
 
         it(`should work when "@use" and use the "index" file in package ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -1590,6 +1742,8 @@ describe("loader", () => {
           expect(codeFromBundle.css).toMatchSnapshot("css");
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          await close(compiler);
         });
 
         it(`should work when "@use" and use the "index" file in package when the "index" value is not in the "mainFiles" resolve option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -1609,6 +1763,8 @@ describe("loader", () => {
           expect(codeFromBundle.css).toMatchSnapshot("css");
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          await close(compiler);
         });
 
         it(`should work when "@use" and use the "index" file in package when the "index" value already in the "mainFiles" resolve option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -1628,6 +1784,8 @@ describe("loader", () => {
           expect(codeFromBundle.css).toMatchSnapshot("css");
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          await close(compiler);
         });
 
         it(`should work when "@use" and use the "_index" file in package ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -1645,6 +1803,8 @@ describe("loader", () => {
           expect(codeFromBundle.css).toMatchSnapshot("css");
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          await close(compiler);
         });
 
         it(`should work when "@use" with an alias ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -1694,6 +1854,8 @@ describe("loader", () => {
           expect(codeFromBundle.css).toMatchSnapshot("css");
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          await close(compiler);
         });
 
         it(`should work when "@use" with the "bootstrap-sass" package, directly import ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -1711,6 +1873,8 @@ describe("loader", () => {
           expect(codeFromBundle.css).toMatchSnapshot("css");
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          await close(compiler);
         });
 
         it(`should work when "@use" with the "bootstrap-sass" package, import as a package ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -1728,6 +1892,8 @@ describe("loader", () => {
           expect(codeFromBundle.css).toMatchSnapshot("css");
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          await close(compiler);
         });
 
         it(`should work when "@use" with "bootstrap" package v4, import as a package ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -1745,6 +1911,8 @@ describe("loader", () => {
           expect(codeFromBundle.css).toMatchSnapshot("css");
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          await close(compiler);
         });
 
         it(`should work when "@use" with "bootstrap" package v4 without tilde, import as a package ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -1762,6 +1930,8 @@ describe("loader", () => {
           expect(codeFromBundle.css).toMatchSnapshot("css");
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          await close(compiler);
         });
 
         it(`should work when "@use" with "bootstrap" package v5, import as a package ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -1779,6 +1949,8 @@ describe("loader", () => {
           expect(codeFromBundle.css).toMatchSnapshot("css");
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          await close(compiler);
         });
 
         it(`should work when "@use" with "bootstrap" package v5 without tilde, import as a package ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -1796,6 +1968,8 @@ describe("loader", () => {
           expect(codeFromBundle.css).toMatchSnapshot("css");
           expect(getWarnings(stats, true)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          await close(compiler);
         });
 
         it(`should work with "bootstrap" and custom imports ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -1812,6 +1986,8 @@ describe("loader", () => {
           expect(codeFromBundle.css).toBe(codeFromSass.css);
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          await close(compiler);
         });
 
         it(`should work with the "material-components-web" package ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -1832,6 +2008,8 @@ describe("loader", () => {
           expect(codeFromBundle.css).toMatchSnapshot("css");
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          await close(compiler);
         });
 
         it(`should work with the "material-components-web" package without the "includePaths" option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -1849,6 +2027,8 @@ describe("loader", () => {
           expect(codeFromBundle.css).toMatchSnapshot("css");
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          await close(compiler);
         });
 
         it(`should work with the "material-components-web" package ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -1869,6 +2049,8 @@ describe("loader", () => {
           expect(codeFromBundle.css).toMatchSnapshot("css");
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          await close(compiler);
         });
 
         it(`should work with the "material-components-web" package without the "includePaths" option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -1886,6 +2068,8 @@ describe("loader", () => {
           expect(codeFromBundle.css).toMatchSnapshot("css");
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          await close(compiler);
         });
 
         it(`should import .import.${syntax} files ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -1903,6 +2087,8 @@ describe("loader", () => {
           expect(codeFromBundle.css).toMatchSnapshot("css");
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          await close(compiler);
         });
 
         it(`should import .import.${syntax} files from a package ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -1920,6 +2106,8 @@ describe("loader", () => {
           expect(codeFromBundle.css).toMatchSnapshot("css");
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          await close(compiler);
         });
 
         it(`should not use .import.${syntax} files ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -1933,6 +2121,8 @@ describe("loader", () => {
 
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          await close(compiler);
         });
 
         it(`should prefer "${syntax})" over CSS ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -1950,6 +2140,8 @@ describe("loader", () => {
           expect(codeFromBundle.css).toMatchSnapshot("css");
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          await close(compiler);
         });
 
         it(`should work and output deprecation message (${implementationName})`, async () => {
@@ -1967,6 +2159,8 @@ describe("loader", () => {
           expect(codeFromBundle.css).toMatchSnapshot("css");
           expect(getWarnings(stats, true)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          await close(compiler);
         });
 
         it(`should throw an error on circular use ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -1980,6 +2174,8 @@ describe("loader", () => {
 
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          await close(compiler);
         });
 
         it(`should use webpack logger ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -2015,6 +2211,8 @@ describe("loader", () => {
           expect(codeFromBundle.css).toMatchSnapshot("css");
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          await close(compiler);
           expect(logs).toMatchSnapshot("logs");
         });
 
@@ -2044,6 +2242,8 @@ describe("loader", () => {
           expect(codeFromBundle.css).toMatchSnapshot("css");
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          await close(compiler);
           expect(logs).toMatchSnapshot("logs");
         });
 
@@ -2062,6 +2262,8 @@ describe("loader", () => {
           expect(codeFromBundle.css).toMatchSnapshot("css");
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          await close(compiler);
         });
 
         it(`should work with "pkg" prefix in "@use" ('${implementationName}', '${api}' API, '${syntax}' syntax) with "@charset "UTF-8";"`, async () => {
@@ -2077,6 +2279,8 @@ describe("loader", () => {
           expect(codeFromBundle.css).toMatchSnapshot("css");
           expect(getWarnings(stats)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          await close(compiler);
         });
       }
     });

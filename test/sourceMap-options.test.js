@@ -4,6 +4,7 @@ import url from "url";
 
 import {
   compile,
+  close,
   getCodeFromBundle,
   getCompiler,
   getErrors,
@@ -49,6 +50,8 @@ describe("sourceMap option", () => {
         expect(sourceMap).toMatchSnapshot("source map");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       it(`should generate source maps when value has "true" value and the "devtool" option has "source-map" value ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -80,6 +83,8 @@ describe("sourceMap option", () => {
         expect(sourceMap).toMatchSnapshot("source map");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       it(`should generate source maps when value has "true" value and the "devtool" option has "false" value ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -111,6 +116,8 @@ describe("sourceMap option", () => {
         expect(sourceMap).toMatchSnapshot("source map");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       it(`should generate source maps when value has "false" value, but the "sassOptions.sourceMap" has the "true" value ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -170,6 +177,8 @@ describe("sourceMap option", () => {
         expect(sourceMap).toMatchSnapshot("source map");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       it(`should not generate source maps when value is not specified and the "devtool" option has "false" value ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -186,6 +195,8 @@ describe("sourceMap option", () => {
         expect(sourceMap).toMatchSnapshot("source map");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       it(`should not generate source maps when value has "false" value and the "devtool" option has "source-map" value ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -202,6 +213,8 @@ describe("sourceMap option", () => {
         expect(sourceMap).toMatchSnapshot("source map");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
 
       it(`should not generate source maps when value has "false" value and the "devtool" option has "false" value ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -218,6 +231,8 @@ describe("sourceMap option", () => {
         expect(sourceMap).toMatchSnapshot("source map");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
       });
     });
   });
