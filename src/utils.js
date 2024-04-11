@@ -769,7 +769,7 @@ function getCompileFn(loaderContext, implementation, options) {
             // introduces a race condition.
             if (!sassModernCompilers.has(implementation)) {
               sassModernCompilers.set(implementation, compiler);
-              webpackCompiler.hooks.watchClose.tap("sass-loader", () => {
+              webpackCompiler.hooks.shutdown.tap("sass-loader", () => {
                 compiler.dispose();
               });
             }
