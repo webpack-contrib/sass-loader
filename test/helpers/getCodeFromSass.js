@@ -33,17 +33,22 @@ async function getCodeFromSass(testId, options, context = {}) {
     sassOptions.indentedSyntax = isSass;
   }
 
-  if (loaderOptions.additionalData) {
-    sassOptions.data = `$prepended-data: hotpink${
-      isIndentedSyntax ? "\n" : ";"
-    }\n${fs.readFileSync(path.resolve(__dirname, "..", testId), "utf8")}`;
-  } else if (isModernAPI) {
-    const URL = pathToFileURL(path.resolve(__dirname, "..", testId));
+  const URL = pathToFileURL(path.resolve(__dirname, "..", testId));
 
+  if (isModernAPI) {
     sassOptions.url = URL;
-    sassOptions.data = fs.readFileSync(URL).toString();
   } else {
     sassOptions.file = path.resolve(__dirname, "..", testId);
+  }
+
+  sassOptions.data = fs.readFileSync(URL).toString();
+
+  if (typeof loaderOptions.additionalData === "string") {
+    sassOptions.data = `$prepended-data: hotpink${
+      isIndentedSyntax ? "\n" : ";"
+    }\n${sassOptions.data}`;
+  } else if (typeof loaderOptions.additionalData === "function") {
+    sassOptions.data = await loaderOptions.additionalData(sassOptions.data, {});
   }
 
   if (isModernAPI) {
@@ -52,6 +57,7 @@ async function getCodeFromSass(testId, options, context = {}) {
       addContextDependency() {},
       addMissingDependency() {},
       fs,
+      resourcePath: path.resolve(__dirname, "..", "scss", "language.scss"),
     };
 
     const getResolveContext = () => {
@@ -920,6 +926,7 @@ async function getCodeFromSass(testId, options, context = {}) {
           )
           .replace(/^package-with-exports$/, pathToSassPackageWithExportsFields)
           .replace(/^file:\/\/\/language/, pathToLanguage)
+          .replace(/^file:\/\/\/\/.+\/language\..+/, pathToLanguage)
           .replace(/^\/sass\/language.sass/, pathToLanguage)
           .replace(/^\/scss\/language.scss/, pathToLanguage)
           .replace(/^file:\/\/\/scss\/language.scss/, pathToLanguage)

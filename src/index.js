@@ -57,11 +57,9 @@ async function loader(content) {
         getWebpackImporter(this, implementation, includePaths),
       );
     } else {
-      // TODO loadsPaths
-      const { loadPaths } = sassOptions;
-
       sassOptions.importers.push(
-        getModernWebpackImporter(this, implementation, loadPaths),
+        // No need to pass `loadPaths`, because modern API handle them itself
+        getModernWebpackImporter(this, implementation, []),
       );
     }
   }

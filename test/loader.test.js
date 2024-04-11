@@ -22,8 +22,6 @@ const syntaxStyles = ["scss", "sass"];
 describe("loader", () => {
   implementations.forEach((item) => {
     const { name: implementationName, api, implementation } = item;
-    // TODO fix me https://github.com/webpack-contrib/sass-loader/issues/774
-    const isSassEmbedded = implementationName === "sass-embedded";
     const isNodeSass = implementationName === "node-sass";
     const isModernAPI = api === "modern" || api === "modern-compiler";
 
@@ -943,42 +941,45 @@ describe("loader", () => {
         delete process.env.SASS_PATH;
       });
 
-      it(`should respect resolving from "process.cwd()" ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
-        const testId = getTestId("process-cwd", syntax);
-        const options = {
-          implementation,
-          api,
-        };
-        const compiler = getCompiler(testId, { loader: { options } });
-        const stats = await compile(compiler);
-        const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = await getCodeFromSass(testId, options);
+      // Modern API doesn't support resolving from `process.cwd()`
+      if (!isModernAPI) {
+        it(`should respect resolving from "process.cwd()" ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
+          const testId = getTestId("process-cwd", syntax);
+          const options = {
+            implementation,
+            api,
+          };
+          const compiler = getCompiler(testId, { loader: { options } });
+          const stats = await compile(compiler);
+          const codeFromBundle = getCodeFromBundle(stats, compiler);
+          const codeFromSass = await getCodeFromSass(testId, options);
 
-        expect(codeFromBundle.css).toBe(codeFromSass.css);
-        expect(codeFromBundle.css).toMatchSnapshot("css");
-        expect(getWarnings(stats)).toMatchSnapshot("warnings");
-        expect(getErrors(stats)).toMatchSnapshot("errors");
-      });
+          expect(codeFromBundle.css).toBe(codeFromSass.css);
+          expect(codeFromBundle.css).toMatchSnapshot("css");
+          expect(getWarnings(stats)).toMatchSnapshot("warnings");
+          expect(getErrors(stats)).toMatchSnapshot("errors");
+        });
 
-      it(`should respect resolving directory with the "index" file from "process.cwd()"  ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
-        const testId = getTestId(
-          "process-cwd-with-index-file-inside-directory",
-          syntax,
-        );
-        const options = {
-          implementation,
-          api,
-        };
-        const compiler = getCompiler(testId, { loader: { options } });
-        const stats = await compile(compiler);
-        const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = await getCodeFromSass(testId, options);
+        it(`should respect resolving directory with the "index" file from "process.cwd()"  ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
+          const testId = getTestId(
+            "process-cwd-with-index-file-inside-directory",
+            syntax,
+          );
+          const options = {
+            implementation,
+            api,
+          };
+          const compiler = getCompiler(testId, { loader: { options } });
+          const stats = await compile(compiler);
+          const codeFromBundle = getCodeFromBundle(stats, compiler);
+          const codeFromSass = await getCodeFromSass(testId, options);
 
-        expect(codeFromBundle.css).toBe(codeFromSass.css);
-        expect(codeFromBundle.css).toMatchSnapshot("css");
-        expect(getWarnings(stats)).toMatchSnapshot("warnings");
-        expect(getErrors(stats)).toMatchSnapshot("errors");
-      });
+          expect(codeFromBundle.css).toBe(codeFromSass.css);
+          expect(codeFromBundle.css).toMatchSnapshot("css");
+          expect(getWarnings(stats)).toMatchSnapshot("warnings");
+          expect(getErrors(stats)).toMatchSnapshot("errors");
+        });
+      }
 
       it(`should work with a package with "sass" and "exports" fields ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
         const testId = getTestId("import-package-with-exports", syntax);
@@ -1198,6 +1199,45 @@ describe("loader", () => {
 
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
+      });
+
+      it(`should work prefer \`loadPaths\` over \`SASS_PATH\` ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
+        process.env.SASS_PATH =
+          process.platform === "win32"
+            ? `${path.resolve("test", syntax, "sass_path")};${path.resolve(
+                __dirname,
+                "outside",
+                "my-pkg-env",
+              )}`
+            : `${path.resolve("test", syntax, "sass_path")}:${path.resolve(
+                __dirname,
+                "outside",
+                "my-pkg-env",
+              )}`;
+
+        const testId = getTestId("env-and-paths", syntax);
+        const options = {
+          implementation,
+          api,
+          sassOptions: isModernAPI
+            ? { loadPaths: [path.resolve(__dirname, "outside", "my-pkg-path")] }
+            : {
+                includePaths: [
+                  path.resolve(__dirname, "outside", "my-pkg-path"),
+                ],
+              },
+        };
+        const compiler = getCompiler(testId, { loader: { options } });
+        const stats = await compile(compiler);
+        const codeFromBundle = getCodeFromBundle(stats, compiler);
+        const codeFromSass = await getCodeFromSass(testId, options);
+
+        expect(codeFromBundle.css).toBe(codeFromSass.css);
+        expect(codeFromBundle.css).toMatchSnapshot("css");
+        expect(getWarnings(stats)).toMatchSnapshot("warnings");
+        expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        delete process.env.SASS_PATH;
       });
 
       if (
@@ -1774,87 +1814,79 @@ describe("loader", () => {
           expect(getErrors(stats)).toMatchSnapshot("errors");
         });
 
-        if (!isSassEmbedded) {
-          it(`should work with the "material-components-web" package ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
-            const testId = getTestId("import-material-components-web", syntax);
-            const options = {
-              implementation,
-              api,
-              sassOptions: isModernAPI
-                ? { loadPaths: ["node_modules"] }
-                : { includePaths: ["node_modules"] },
-            };
-            const compiler = getCompiler(testId, { loader: { options } });
-            const stats = await compile(compiler);
-            const codeFromBundle = getCodeFromBundle(stats, compiler);
-            const codeFromSass = await getCodeFromSass(testId, options);
+        it(`should work with the "material-components-web" package ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
+          const testId = getTestId("import-material-components-web", syntax);
+          const options = {
+            implementation,
+            api,
+            sassOptions: isModernAPI
+              ? { loadPaths: ["node_modules"] }
+              : { includePaths: ["node_modules"] },
+          };
+          const compiler = getCompiler(testId, { loader: { options } });
+          const stats = await compile(compiler);
+          const codeFromBundle = getCodeFromBundle(stats, compiler);
+          const codeFromSass = await getCodeFromSass(testId, options);
 
-            expect(codeFromBundle.css).toBe(codeFromSass.css);
-            expect(codeFromBundle.css).toMatchSnapshot("css");
-            expect(getWarnings(stats)).toMatchSnapshot("warnings");
-            expect(getErrors(stats)).toMatchSnapshot("errors");
-          });
-        }
+          expect(codeFromBundle.css).toBe(codeFromSass.css);
+          expect(codeFromBundle.css).toMatchSnapshot("css");
+          expect(getWarnings(stats)).toMatchSnapshot("warnings");
+          expect(getErrors(stats)).toMatchSnapshot("errors");
+        });
 
-        if (!isSassEmbedded) {
-          it(`should work with the "material-components-web" package without the "includePaths" option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
-            const testId = getTestId("import-material-components-web", syntax);
-            const options = {
-              implementation,
-              api,
-            };
-            const compiler = getCompiler(testId, { loader: { options } });
-            const stats = await compile(compiler);
-            const codeFromBundle = getCodeFromBundle(stats, compiler);
-            const codeFromSass = await getCodeFromSass(testId, options);
+        it(`should work with the "material-components-web" package without the "includePaths" option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
+          const testId = getTestId("import-material-components-web", syntax);
+          const options = {
+            implementation,
+            api,
+          };
+          const compiler = getCompiler(testId, { loader: { options } });
+          const stats = await compile(compiler);
+          const codeFromBundle = getCodeFromBundle(stats, compiler);
+          const codeFromSass = await getCodeFromSass(testId, options);
 
-            expect(codeFromBundle.css).toBe(codeFromSass.css);
-            expect(codeFromBundle.css).toMatchSnapshot("css");
-            expect(getWarnings(stats)).toMatchSnapshot("warnings");
-            expect(getErrors(stats)).toMatchSnapshot("errors");
-          });
-        }
+          expect(codeFromBundle.css).toBe(codeFromSass.css);
+          expect(codeFromBundle.css).toMatchSnapshot("css");
+          expect(getWarnings(stats)).toMatchSnapshot("warnings");
+          expect(getErrors(stats)).toMatchSnapshot("errors");
+        });
 
-        if (!isSassEmbedded) {
-          it(`should work with the "material-components-web" package ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
-            const testId = getTestId("use-material-components-web", syntax);
-            const options = {
-              implementation,
-              api,
-              sassOptions: isModernAPI
-                ? { loadPaths: ["node_modules"] }
-                : { includePaths: ["node_modules"] },
-            };
-            const compiler = getCompiler(testId, { loader: { options } });
-            const stats = await compile(compiler);
-            const codeFromBundle = getCodeFromBundle(stats, compiler);
-            const codeFromSass = await getCodeFromSass(testId, options);
+        it(`should work with the "material-components-web" package ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
+          const testId = getTestId("use-material-components-web", syntax);
+          const options = {
+            implementation,
+            api,
+            sassOptions: isModernAPI
+              ? { loadPaths: ["node_modules"] }
+              : { includePaths: ["node_modules"] },
+          };
+          const compiler = getCompiler(testId, { loader: { options } });
+          const stats = await compile(compiler);
+          const codeFromBundle = getCodeFromBundle(stats, compiler);
+          const codeFromSass = await getCodeFromSass(testId, options);
 
-            expect(codeFromBundle.css).toBe(codeFromSass.css);
-            expect(codeFromBundle.css).toMatchSnapshot("css");
-            expect(getWarnings(stats)).toMatchSnapshot("warnings");
-            expect(getErrors(stats)).toMatchSnapshot("errors");
-          });
-        }
+          expect(codeFromBundle.css).toBe(codeFromSass.css);
+          expect(codeFromBundle.css).toMatchSnapshot("css");
+          expect(getWarnings(stats)).toMatchSnapshot("warnings");
+          expect(getErrors(stats)).toMatchSnapshot("errors");
+        });
 
-        if (!isSassEmbedded) {
-          it(`should work with the "material-components-web" package without the "includePaths" option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
-            const testId = getTestId("use-material-components-web", syntax);
-            const options = {
-              implementation,
-              api,
-            };
-            const compiler = getCompiler(testId, { loader: { options } });
-            const stats = await compile(compiler);
-            const codeFromBundle = getCodeFromBundle(stats, compiler);
-            const codeFromSass = await getCodeFromSass(testId, options);
+        it(`should work with the "material-components-web" package without the "includePaths" option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
+          const testId = getTestId("use-material-components-web", syntax);
+          const options = {
+            implementation,
+            api,
+          };
+          const compiler = getCompiler(testId, { loader: { options } });
+          const stats = await compile(compiler);
+          const codeFromBundle = getCodeFromBundle(stats, compiler);
+          const codeFromSass = await getCodeFromSass(testId, options);
 
-            expect(codeFromBundle.css).toBe(codeFromSass.css);
-            expect(codeFromBundle.css).toMatchSnapshot("css");
-            expect(getWarnings(stats)).toMatchSnapshot("warnings");
-            expect(getErrors(stats)).toMatchSnapshot("errors");
-          });
-        }
+          expect(codeFromBundle.css).toBe(codeFromSass.css);
+          expect(codeFromBundle.css).toMatchSnapshot("css");
+          expect(getWarnings(stats)).toMatchSnapshot("warnings");
+          expect(getErrors(stats)).toMatchSnapshot("errors");
+        });
 
         it(`should import .import.${syntax} files ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           const testId = getTestId("import-index-import", syntax);

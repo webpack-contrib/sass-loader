@@ -664,9 +664,9 @@ Default: `"legacy"`
 
 Allows you to switch between `legacy` and `modern` API. You can find more information [here](https://sass-lang.com/documentation/js-api). The `modern-compiler` option enables the modern API with support for [Shared Resources](https://github.com/sass/sass/blob/main/accepted/shared-resources.d.ts.md).
 
-> **Warning**
+> **Note**
 >
-> "modern" API is experimental, so some features may not work (known: built-in `importer` is not working and files with errors is not watching on initial run), you can follow this [here](https://github.com/webpack-contrib/sass-loader/issues/774).
+> Using `modern-compiler` and `sass-embedded` together significantly improve performance and decrease built time. We strongly recommend their use. We will enable them by default in a future major release.
 
 > **Warning**
 >

@@ -203,6 +203,24 @@ async function getSassOptions(
       }
     }
 
+    sassOptions.loadPaths = []
+      .concat(
+        // We use `loadPaths` in context for resolver, so it should be always absolute
+        (sassOptions.loadPaths ? sassOptions.loadPaths.slice() : []).map(
+          (includePath) =>
+            path.isAbsolute(includePath)
+              ? includePath
+              : path.join(process.cwd(), includePath),
+        ),
+      )
+      .concat(
+        process.env.SASS_PATH
+          ? process.env.SASS_PATH.split(
+              process.platform === "win32" ? ";" : ":",
+            )
+          : [],
+      );
+
     sassOptions.importers = sassOptions.importers
       ? Array.isArray(sassOptions.importers)
         ? sassOptions.importers.slice()
@@ -458,8 +476,10 @@ function getWebpackResolver(
   implementation,
   includePaths = [],
 ) {
-  const isDartSass =
-    implementation && implementation.info.includes("dart-sass");
+  const isModernSass =
+    implementation &&
+    (implementation.info.includes("dart-sass") ||
+      implementation.info.includes("sass-embedded"));
   // We only have one difference with the built-in sass resolution logic and out resolution logic:
   // First, we look at the files starting with `_`, then without `_` (i.e. `_name.sass`, `_name.scss`, `_name.css`, `name.sass`, `name.scss`, `name.css`),
   // although `sass` look together by extensions (i.e. `_name.sass`/`name.sass`/`_name.scss`/`name.scss`/`_name.css`/`name.css`).
@@ -525,7 +545,7 @@ function getWebpackResolver(
     // See https://github.com/webpack/webpack/issues/12340
     // Because `node-sass` calls our importer before `1. Filesystem imports relative to the base file.`
     // custom importer may not return `{ file: '/path/to/name.ext' }` and therefore our `context` will be relative
-    if (!isDartSass && !path.isAbsolute(context)) {
+    if (!isModernSass && !path.isAbsolute(context)) {
       return Promise.reject();
     }
 
@@ -574,7 +594,7 @@ function getWebpackResolver(
       );
 
       // `node-sass` calls our importer before `1. Filesystem imports relative to the base file.`, so we need emulate this too
-      if (!isDartSass) {
+      if (!isModernSass) {
         resolutionMap = resolutionMap.concat({
           resolve: fromImport ? sassImportResolve : sassModuleResolve,
           context: path.dirname(context),
@@ -622,7 +642,6 @@ function getModernWebpackImporter(loaderContext, implementation, loadPaths) {
   return {
     async canonicalize(originalUrl, context) {
       const { fromImport } = context;
-      // TODO memorize?
       const prev = context.containingUrl
         ? url.fileURLToPath(context.containingUrl.toString())
         : loaderContext.resourcePath;
@@ -660,7 +679,6 @@ function getModernWebpackImporter(loaderContext, implementation, loadPaths) {
         const contents = await new Promise((resolve, reject) => {
           // Old version of `enhanced-resolve` supports only path as a string
           // TODO simplify in the next major release and pass URL
-          // TODO memorize?
           const canonicalPath = url.fileURLToPath(canonicalUrl);
 
           loaderContext.fs.readFile(canonicalPath, "utf8", (err, content) => {
