@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [14.2.0](https://github.com/webpack-contrib/sass-loader/compare/v14.1.1...v14.2.0) (2024-04-11)
+
+
+### Features
+
+* added the `modern-compiler` value for API to reuse compiler process ([#1195](https://github.com/webpack-contrib/sass-loader/issues/1195)) ([cef40a8](https://github.com/webpack-contrib/sass-loader/commit/cef40a8af9891adca9fc99d9641b46dc58db023f))
+* support webpack built-in resolver for `modern` and `modern-compiler` API ([#1197](https://github.com/webpack-contrib/sass-loader/issues/1197)) ([2265b72](https://github.com/webpack-contrib/sass-loader/commit/2265b72c4899a6784e0785938f892743d1c942bf))
+
+Notes:
+
+Using the `modern-compiler` value for the `api` option together with `sass-embedded` reduces compilation time by 5-10 times, especially for projects using large files with a lot of `@import`/`@use`, for small files the build time reduction will not be significant.
+
 ### [14.1.1](https://github.com/webpack-contrib/sass-loader/compare/v14.1.0...v14.1.1) (2024-02-19)
 
 
