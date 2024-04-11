@@ -926,11 +926,10 @@ async function getCodeFromSass(testId, options, context = {}) {
           )
           .replace(/^package-with-exports$/, pathToSassPackageWithExportsFields)
           .replace(/^file:\/\/\/language/, pathToLanguage)
-          .replace(/^file:\/\/\/\/.+\/language\..+/, pathToLanguage)
           .replace(/^\/sass\/language.sass/, pathToLanguage)
           .replace(/^\/scss\/language.scss/, pathToLanguage)
-          .replace(/^file:\/\/\/scss\/language.scss/, pathToLanguage)
-          .replace(/^file:\/\/\/sass\/language.sass/, pathToLanguage)
+          .replace(/^file:\/\/\/.+\/scss\/language.scss/, pathToLanguage)
+          .replace(/^file:\/\/\/.+\/sass\/language.sass/, pathToLanguage)
           .replace(
             /^package-with-same-import\/style/,
             pathToPackageWithSameImport,
