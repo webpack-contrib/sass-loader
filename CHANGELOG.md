@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [14.2.1](https://github.com/webpack-contrib/sass-loader/compare/v14.2.0...v14.2.1) (2024-04-16)
+
+
+### Bug Fixes
+
+* avoid multiple sass compiler creation ([#1199](https://github.com/webpack-contrib/sass-loader/issues/1199)) ([77051d8](https://github.com/webpack-contrib/sass-loader/commit/77051d81b26ffe42e8a7c6769337a1c0f55f73ef))
+
 ## [14.2.0](https://github.com/webpack-contrib/sass-loader/compare/v14.1.1...v14.2.0) (2024-04-11)
 
 
