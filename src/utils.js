@@ -760,7 +760,7 @@ function getCompileFn(loaderContext, implementation, options) {
         // Some people can run the loader in a multi-threading way;
         // there is no webpack compiler object in such case.
         if (webpackCompiler) {
-          if (!sassModernCompilers.has(implementation)) {
+          if (!sassModernCompilers.has(webpackCompiler)) {
             // Create a long-running compiler process that can be reused
             // for compiling individual files.
             const compiler = await implementation.initAsyncCompiler();
