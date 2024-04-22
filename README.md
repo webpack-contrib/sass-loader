@@ -23,22 +23,22 @@ Loads a Sass/SCSS file and compiles it to CSS.
 To begin, you'll need to install `sass-loader`:
 
 ```console
-npm install sass-loader sass webpack --save-dev
+npm install sass-loader sass webpack style-loader css-loader --save-dev
 ```
 
 or
 
 ```console
-yarn add -D sass-loader sass webpack
+yarn add -D sass-loader sass webpack style-loader css-loader
 ```
 
 or
 
 ```console
-pnpm add -D sass-loader sass webpack
+pnpm add -D sass-loader sass webpack style-loader css-loader
 ```
 
-`sass-loader` requires you to install either [Dart Sass](https://github.com/sass/dart-sass), [Node Sass](https://github.com/sass/node-sass) on your own (more documentation can be found below) or [Sass Embedded](https://github.com/sass/embedded-host-node).
+`sass-loader` requires you to install either [Dart Sass](https://github.com/sass/dart-sass), [Node Sass](https://github.com/sass/node-sass) on your own (more documentation can be found below) or [Sass Embedded](https://github.com/sass/embedded-host-node). The install commands above install the [saas](https://www.npmjs.com/package/sass) which is a distribution of Dart Sass, compiled to pure JavaScript.
 
 This allows you to control the versions of all your dependencies, and to choose which Sass implementation to use.
 
@@ -58,13 +58,13 @@ Chain the `sass-loader` with the [css-loader](https://github.com/webpack-contrib
 
 Then add the loader to your Webpack configuration. For example:
 
-**app.js**
+**src/index.js**
 
 ```js
 import "./style.scss";
 ```
 
-**style.scss**
+**src/style.scss**
 
 ```scss
 $body-color: red;
