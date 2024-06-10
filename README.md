@@ -38,19 +38,23 @@ or
 pnpm add -D sass-loader sass webpack
 ```
 
+> [!NOTE]
+>
+> To enable CSS processing in your project, you need to install [style-loader](https://webpack.js.org/loaders/style-loader/) and [css-loader](https://webpack.js.org/loaders/css-loader/) via `npm i style-loader css-loader`.
+
 `sass-loader` requires you to install either [Dart Sass](https://github.com/sass/dart-sass), [Node Sass](https://github.com/sass/node-sass) on your own (more documentation can be found below) or [Sass Embedded](https://github.com/sass/embedded-host-node).
 
 This allows you to control the versions of all your dependencies, and to choose which Sass implementation to use.
 
-> **Note**
+> [!NOTE]
 >
 > We highly recommend using [Dart Sass](https://github.com/sass/dart-sass).
 
-> **Warning**
+> [!WARNING]
 >
 > [Node Sass](https://github.com/sass/node-sass) does not work with [Yarn PnP](https://classic.yarnpkg.com/en/docs/pnp/) feature and doesn't support [@use rule](https://sass-lang.com/documentation/at-rules/use).
 
-> **Warning**
+> [!WARNING]
 >
 > [Sass Embedded](https://github.com/sass/embedded-host-node) is experimental and in `beta`, therefore some features may not work
 
@@ -267,21 +271,21 @@ Default: defaults values for Sass implementation
 
 Options for [Dart Sass](http://sass-lang.com/dart-sass) or [Node Sass](https://github.com/sass/node-sass) implementation.
 
-> **Note**
+> [!NOTE]
 >
 > The `charset` option has `true` value by default for `dart-sass`, we strongly discourage change value to `false`, because webpack doesn't support files other than `utf-8`.
 
-> **Note**
+> [!NOTE]
 >
 > The `indentedSyntax` option has `true` value for the `sass` extension.
 
-> **Note**
+> [!NOTE]
 >
 > Options such as `data` and `file` are unavailable and will be ignored.
 
 > ℹ We strongly discourage change `outFile`, `sourceMapContents`, `sourceMapEmbed`, `sourceMapRoot` options because `sass-loader` automatically sets these options when the `sourceMap` option is `true`.
 
-> **Note**
+> [!NOTE]
 >
 > Access to the [loader context](https://webpack.js.org/api/loaders/#the-loader-context) inside the custom importer can be done using the `this.webpackLoaderContext` property.
 
@@ -664,11 +668,11 @@ Default: `"legacy"`
 
 Allows you to switch between `legacy` and `modern` API. You can find more information [here](https://sass-lang.com/documentation/js-api). The `modern-compiler` option enables the modern API with support for [Shared Resources](https://github.com/sass/sass/blob/main/accepted/shared-resources.d.ts.md).
 
-> **Note**
+> [!NOTE]
 >
 > Using `modern-compiler` and `sass-embedded` together significantly improve performance and decrease built time. We strongly recommend their use. We will enable them by default in a future major release.
 
-> **Warning**
+> [!WARNING]
 >
 > The sass options are different for `modern` and `old` APIs. Please look at [docs](https://sass-lang.com/documentation/js-api) how to migrate on new options.
 
