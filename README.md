@@ -116,7 +116,7 @@ The `sass-loader` uses Sass's custom importer feature to pass all queries to the
 @import "bootstrap";
 ```
 
-Using `~` is deprecated and should be removed from your code (**we recommend it**), but we still support it for historical reasons.
+Using `~` is deprecated and should be removed from your code, but we still support it for historical reasons.
 Why can you remove it? The loader will first try to resolve `@import` as a relative path. If it cannot be resolved, then the loader will try to resolve `@import` inside [`node_modules`](https://webpack.js.org/configuration/resolve/#resolvemodules).
 
 Prepending module paths with a `~` tells webpack to search through [`node_modules`](https://webpack.js.org/configuration/resolve/#resolvemodules).
