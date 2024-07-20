@@ -21,6 +21,7 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest]
         node-version: [lts/*]
@@ -59,6 +60,7 @@ jobs:
     name: Test - ${{ matrix.os }} - Node v${{ matrix.node-version }}, Webpack ${{ matrix.webpack-version }}
 
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
         # TODO add 21.x after node-sass gets support
