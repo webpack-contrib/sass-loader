@@ -566,7 +566,7 @@ Default: `true`
 
 Enables/Disables the default webpack importer.
 
-This can improve performance in some cases though use it with caution because aliases and `@import` at-rules starting with `~` will not work.
+This can improve performance in some cases, though use it with caution because aliases and `@import` at-rules starting with `~` will not work.
 You can pass your own `importer` to solve this (see [`importer docs`](https://github.com/sass/node-sass#importer--v200---experimental)).
 
 **webpack.config.js**
