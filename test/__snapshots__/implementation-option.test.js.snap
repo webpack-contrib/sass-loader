@@ -51,7 +51,7 @@ exports[`implementation option not specify: warnings 1`] = `[]`;
 exports[`implementation option should not swallow an error when trying to load a sass implementation: errors 1`] = `
 [
   "ModuleBuildError: Module build failed (from ../src/cjs.js):
-Some error",
+Some error sass-embedded",
 ]
 `;
 
@@ -104,7 +104,7 @@ exports[`implementation option should throw error when unresolved package: warni
 exports[`implementation option should try to load using valid order: errors 1`] = `
 [
   "ModuleBuildError: Module build failed (from ../src/cjs.js):
-Some error sass",
+Some error sass-embedded",
 ]
 `;
 

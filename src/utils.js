@@ -5,15 +5,15 @@ function getDefaultSassImplementation() {
   let sassImplPkg = "sass";
 
   try {
-    require.resolve("sass");
+    require.resolve("sass-embedded");
+    sassImplPkg = "sass-embedded";
   } catch (ignoreError) {
     try {
-      require.resolve("node-sass");
-      sassImplPkg = "node-sass";
+      require.resolve("sass");
     } catch (_ignoreError) {
       try {
-        require.resolve("sass-embedded");
-        sassImplPkg = "sass-embedded";
+        require.resolve("node-sass");
+        sassImplPkg = "node-sass";
       } catch (__ignoreError) {
         sassImplPkg = "sass";
       }
@@ -676,6 +676,7 @@ function getModernWebpackImporter(loaderContext, implementation, loadPaths) {
       }
 
       try {
+        // eslint-disable-next-line no-shadow
         const contents = await new Promise((resolve, reject) => {
           // Old version of `enhanced-resolve` supports only path as a string
           // TODO simplify in the next major release and pass URL

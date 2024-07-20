@@ -10,11 +10,12 @@ describe("validate options", () => {
     implementation: {
       success: [
         // eslint-disable-next-line global-require
+        require("sass-embedded"),
+        // eslint-disable-next-line global-require
         require("sass"),
         // eslint-disable-next-line global-require
         require("node-sass"),
-        // eslint-disable-next-line global-require
-        require("sass-embedded"),
+        "sass-embedded",
         "sass",
         "node-sass",
       ],
