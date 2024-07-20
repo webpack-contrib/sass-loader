@@ -16,7 +16,8 @@
     "sharename",
     "wekbit",
     "commitlint",
-    "bgcolor"
+    "bgcolor",
+    "autocrlf"
   ],
 
   "ignorePaths": [
