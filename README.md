@@ -60,7 +60,7 @@ This allows you to control the versions of all your dependencies, and to choose 
 
 Chain the `sass-loader` with the [css-loader](https://github.com/webpack-contrib/css-loader) and the [style-loader](https://github.com/webpack-contrib/style-loader) to immediately apply all styles to the DOM or the [mini-css-extract-plugin](https://github.com/webpack-contrib/mini-css-extract-plugin) to extract it into a separate file.
 
-Then add the loader to your Webpack configuration. For example:
+Then add the loader to your webpack configuration. For example:
 
 **app.js**
 
@@ -110,7 +110,7 @@ For `production` mode, the `outputStyle` (old API) and `style` (new API) options
 
 Webpack provides an [advanced mechanism to resolve files](https://webpack.js.org/concepts/module-resolution/).
 
-The `sass-loader` uses Sass's custom importer feature to pass all queries to the Webpack resolving engine enabling you to import your Sass modules from `node_modules`.
+The `sass-loader` uses Sass's custom importer feature to pass all queries to the webpack resolving engine enabling you to import your Sass modules from `node_modules`.
 
 ```scss
 @import "bootstrap";
@@ -564,7 +564,7 @@ type webpackImporter = boolean;
 
 Default: `true`
 
-Enables/Disables the default Webpack importer.
+Enables/Disables the default webpack importer.
 
 This can improve performance in some cases though use it with caution because aliases and `@import` at-rules starting with `~` will not work.
 You can pass your own `importer` to solve this (see [`importer docs`](https://github.com/sass/node-sass#importer--v200---experimental)).
@@ -788,7 +788,7 @@ module.exports = {
 
 #### 3. [extract-loader](https://github.com/peerigon/extract-loader) (simpler, but specialized on the css-loader's output)
 
-#### 4. [file-loader](https://github.com/webpack-contrib/file-loader) (deprecated--should only be used in Webpack v4)
+#### 4. [file-loader](https://github.com/webpack-contrib/file-loader) (deprecated--should only be used in webpack v4)
 
 **webpack.config.js**
 
