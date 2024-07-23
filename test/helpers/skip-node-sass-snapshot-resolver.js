@@ -10,7 +10,7 @@ module.exports = {
   // resolves from snapshot to test path
   resolveTestPath: (snapshotFilePath, snapshotExtension) =>
     snapshotFilePath
-      .replace("test/__snapshots__", "test")
+      .replace(/test[/\\]__snapshots__/, "test")
       .replace(".no-node-sass", "")
       .slice(0, -snapshotExtension.length),
 
