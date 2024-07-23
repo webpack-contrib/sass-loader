@@ -48,15 +48,11 @@ This allows you to control the versions of all your dependencies, and to choose 
 
 > [!NOTE]
 >
-> We highly recommend using [Dart Sass](https://github.com/sass/dart-sass).
+> We highly recommend using [Sass Embedded](https://github.com/sass/embedded-host-node) or [Dart Sass](https://github.com/sass/dart-sass).
 
 > [!WARNING]
 >
 > [Node Sass](https://github.com/sass/node-sass) does not work with [Yarn PnP](https://classic.yarnpkg.com/en/docs/pnp/) and doesn't support [@use rule](https://sass-lang.com/documentation/at-rules/use).
-
-> [!WARNING]
->
-> [Sass Embedded](https://github.com/sass/embedded-host-node) is experimental and in `beta`, therefore some features may not work
 
 Chain the `sass-loader` with the [css-loader](https://github.com/webpack-contrib/css-loader) and the [style-loader](https://github.com/webpack-contrib/style-loader) to immediately apply all styles to the DOM or the [mini-css-extract-plugin](https://github.com/webpack-contrib/mini-css-extract-plugin) to extract it into a separate file.
 
@@ -164,8 +160,8 @@ Default: `sass`
 
 The special `implementation` option determines which implementation of Sass to use.
 
-By default, the loader resolve the implementation based on your dependencies.
-Just add the desired implementation to your `package.json` (`sass` or `node-sass` package) and install dependencies.
+By default, the loader resolves the implementation based on your dependencies.
+Just add the desired implementation to your `package.json` (`sass`, `sass-embedded`, or `node-sass` package) and install dependencies.
 
 Example where the `sass-loader` loader uses the `sass` (`dart-sass`) implementation:
 
@@ -193,14 +189,38 @@ Example where the `sass-loader` loader uses the `node-sass` implementation:
 }
 ```
 
-Beware the situation where both `node-sass` and `sass` are installed! By default, the `sass-loader` prefers `sass`.
-In order to avoid this situation you can use the `implementation` option.
+Example where the `sass-loader` loader uses the `sass-embedded` implementation:
 
-The `implementation` options either accepts `sass` (`Dart Sass`) or `node-sass` as a module.
+**package.json**
+
+```json
+{
+  "devDependencies": {
+    "sass-loader": "^7.2.0",
+    "sass": "^1.22.10"
+  },
+  "optionalDependencies": {
+    "sass-embedded": "^1.70.0"
+  }
+}
+```
+
+> [!NOTE]
+>
+> Using `optionalDependencies` means that `sass-loader` can fallback to `sass`
+> when running on an operating system not supported by `sass-embedded`
+
+Be aware of the order that `sass-loader` will resolve the implementation:
+
+1. `sass-embedded`
+2. `sass`
+3. `node-sass`
+
+You can specify a specific implementation by using the `implementation` option, which accepts one of the above values.
 
 #### `object`
 
-For example, to use Dart Sass, you'd pass:
+For example, to always use Dart Sass, you'd pass:
 
 ```js
 module.exports = {
@@ -214,7 +234,7 @@ module.exports = {
           {
             loader: "sass-loader",
             options: {
-              // Prefer `dart-sass`
+              // Prefer `dart-sass`, even if `sass-embedded` is available
               implementation: require("sass"),
             },
           },
@@ -241,7 +261,7 @@ module.exports = {
           {
             loader: "sass-loader",
             options: {
-              // Prefer `dart-sass`
+              // Prefer `dart-sass`, even if `sass-embedded` is available
               implementation: require.resolve("sass"),
             },
           },
