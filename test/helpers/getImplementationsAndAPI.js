@@ -3,7 +3,7 @@ import dartSass from "sass";
 // eslint-disable-next-line import/no-namespace
 import * as SassEmbedded from "sass-embedded";
 
-const [nodeMajor] = process.versions.node.split(".").map(Number);
+import isNodeSassSupported from "./is-node-sass-supported";
 
 export default function getImplementationsAndAPI() {
   const implementations = [
@@ -39,7 +39,7 @@ export default function getImplementationsAndAPI() {
     },
   ];
 
-  if (nodeMajor <= 20) {
+  if (isNodeSassSupported()) {
     implementations.unshift({
       name: nodeSass.info.split("\t")[0],
       implementation: nodeSass,
