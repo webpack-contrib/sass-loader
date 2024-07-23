@@ -61,8 +61,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        # TODO add 21.x after node-sass gets support
-        node-version: [18.x, 20.x]
+        node-version: [18.x, 20.x, 22.x]
         webpack-version: [latest]
 
     runs-on: ${{ matrix.os }}
