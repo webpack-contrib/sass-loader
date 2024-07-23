@@ -13,6 +13,7 @@ import {
   getImplementationsAndAPI,
   getTestId,
   getWarnings,
+  isNodeSassSupported,
 } from "./helpers";
 
 jest.setTimeout(30000);
@@ -112,7 +113,9 @@ describe("implementation option", () => {
           expect(sassEmbeddedSpy).toHaveBeenCalledTimes(0);
           expect(sassEmbeddedSpyModernAPI).toHaveBeenCalledTimes(0);
         } else if (api === "legacy") {
-          expect(nodeSassSpy).toHaveBeenCalledTimes(0);
+          if (isNodeSassSupported()) {
+            expect(nodeSassSpy).toHaveBeenCalledTimes(0);
+          }
           expect(dartSassSpy).toHaveBeenCalledTimes(1);
           expect(dartSassSpyModernAPI).toHaveBeenCalledTimes(0);
           expect(sassEmbeddedSpy).toHaveBeenCalledTimes(0);

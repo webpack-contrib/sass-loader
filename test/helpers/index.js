@@ -11,6 +11,7 @@ import getImplementationsAndAPI from "./getImplementationsAndAPI";
 import getTestId from "./getTestId";
 import getWarnings from "./getWarnings";
 import readAsset from "./readAsset";
+import isNodeSassSupported from "./is-node-sass-supported";
 
 export {
   compile,
@@ -26,4 +27,5 @@ export {
   getTestId,
   getWarnings,
   readAsset,
+  isNodeSassSupported,
 };
