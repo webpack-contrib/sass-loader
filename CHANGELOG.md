@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [15.0.0](https://github.com/webpack-contrib/sass-loader/compare/v14.2.1...v15.0.0) (2024-07-23)
+
+
+### ⚠ BREAKING CHANGES
+
+* prefer `sass-embedded` over `sass` by default (#1211)
+
+### Features
+
+* prefer `sass-embedded` over `sass` by default ([#1211](https://github.com/webpack-contrib/sass-loader/issues/1211)) ([83423ff](https://github.com/webpack-contrib/sass-loader/commit/83423ff933b1086e6203ca640c0994e14b95de2b))
+
 ### [14.2.1](https://github.com/webpack-contrib/sass-loader/compare/v14.2.0...v14.2.1) (2024-04-16)
 
 
