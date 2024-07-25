@@ -478,9 +478,7 @@ function getWebpackResolver(
   includePaths = [],
 ) {
   const isModernSass =
-    implementation &&
-    (implementation.info.includes("dart-sass") ||
-      implementation.info.includes("sass-embedded"));
+    implementation && typeof implementation.compileStringAsync !== "undefined";
   // We only have one difference with the built-in sass resolution logic and out resolution logic:
   // First, we look at the files starting with `_`, then without `_` (i.e. `_name.sass`, `_name.scss`, `_name.css`, `name.sass`, `name.scss`, `name.css`),
   // although `sass` look together by extensions (i.e. `_name.sass`/`name.sass`/`_name.scss`/`name.scss`/`_name.css`/`name.css`).
@@ -740,11 +738,7 @@ const sassModernCompilers = new WeakMap();
  * @returns {Function}
  */
 function getCompileFn(loaderContext, implementation, apiType) {
-  const isNewSass =
-    implementation.info.includes("dart-sass") ||
-    implementation.info.includes("sass-embedded");
-
-  if (isNewSass) {
+  if (typeof implementation.compileStringAsync !== "undefined") {
     if (apiType === "modern") {
       return (sassOptions) => {
         const { data, ...rest } = sassOptions;
