@@ -683,7 +683,7 @@ Type:
 type api = "legacy" | "modern" | "modern-compiler";
 ```
 
-Default: `"modern"`
+Default: `"modern"` for `sass` (`dart-sass`) and `sass-embedded` or `"legacy"` for `node-sass`
 
 Allows you to switch between the `legacy` and `modern` APIs. You can find more information [here](https://sass-lang.com/documentation/js-api). The `modern-compiler` option enables the modern API with support for [Shared Resources](https://github.com/sass/sass/blob/main/accepted/shared-resources.d.ts.md).
 
@@ -709,7 +709,7 @@ module.exports = {
           {
             loader: "sass-loader",
             options: {
-              api: "modern",
+              api: "modern-compiler",
               sassOptions: {
                 // Your sass options
               },

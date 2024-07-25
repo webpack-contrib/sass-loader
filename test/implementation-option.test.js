@@ -200,6 +200,36 @@ describe("implementation option", () => {
     await close(compiler);
   });
 
+  it("not specify with node-sass", async () => {
+    const testId = getTestId("language", "scss");
+    const options = {
+      implementation: nodeSass
+    };
+    const compiler = getCompiler(testId, { loader: { options } });
+    const stats = await compile(compiler);
+    const { css, sourceMap } = getCodeFromBundle(stats, compiler);
+
+    expect(css).toBeDefined();
+    expect(sourceMap).toBeUndefined();
+
+    expect(getWarnings(stats)).toMatchSnapshot("warnings");
+    expect(getErrors(stats)).toMatchSnapshot("errors");
+
+    expect(sassEmbeddedSpy).toHaveBeenCalledTimes(0);
+    expect(sassEmbeddedSpyModernAPI).toHaveBeenCalledTimes(0);
+    expect(nodeSassSpy).toHaveBeenCalledTimes(1);
+    expect(dartSassSpy).toHaveBeenCalledTimes(0);
+    expect(dartSassSpyModernAPI).toHaveBeenCalledTimes(0);
+
+    sassEmbeddedSpy.mockClear();
+    sassEmbeddedSpyModernAPI.mockClear();
+    nodeSassSpy.mockClear();
+    dartSassSpy.mockClear();
+    dartSassSpyModernAPI.mockClear();
+
+    await close(compiler);
+  });
+
   it("not specify with legacy API", async () => {
     const testId = getTestId("language", "scss");
     const options = {

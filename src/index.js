@@ -34,7 +34,12 @@ async function loader(content) {
 
   const useSourceMap =
     typeof options.sourceMap === "boolean" ? options.sourceMap : this.sourceMap;
-  const apiType = typeof options.api === "undefined" ? "modern" : options.api;
+  // Use `legacy` for `node-sass` and `modern` for `dart-sass` and `sass-embedded`
+  const apiType = !implementation.compileStringAsync
+    ? "legacy"
+    : typeof options.api === "undefined"
+      ? "modern"
+      : options.api;
   const sassOptions = await getSassOptions(
     this,
     options,
