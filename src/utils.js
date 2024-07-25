@@ -94,6 +94,7 @@ function proxyCustomImporters(importers, loaderContext) {
  * @param {string} content
  * @param {object} implementation
  * @param {boolean} useSourceMap
+ * @param {"legacy" | "modern" | "modern-compiler"} apiType
  * @returns {Object}
  */
 async function getSassOptions(
@@ -102,6 +103,7 @@ async function getSassOptions(
   content,
   implementation,
   useSourceMap,
+  apiType,
 ) {
   const options = loaderOptions.sassOptions
     ? typeof loaderOptions.sassOptions === "function"
@@ -175,7 +177,7 @@ async function getSassOptions(
   }
 
   const isModernAPI =
-    loaderOptions.api === "modern" || loaderOptions.api === "modern-compiler";
+    apiType === "modern" || apiType === "modern-compiler";
   const { resourcePath } = loaderContext;
 
   if (isModernAPI) {
@@ -735,16 +737,16 @@ const sassModernCompilers = new WeakMap();
  *
  * @param {Object} loaderContext
  * @param {Object} implementation
- * @param {Object} options
+ * @param {"legacy" | "modern" | "modern-compiler"} apiType
  * @returns {Function}
  */
-function getCompileFn(loaderContext, implementation, options) {
+function getCompileFn(loaderContext, implementation, apiType) {
   const isNewSass =
     implementation.info.includes("dart-sass") ||
     implementation.info.includes("sass-embedded");
 
   if (isNewSass) {
-    if (options.api === "modern") {
+    if (apiType === "modern") {
       return (sassOptions) => {
         const { data, ...rest } = sassOptions;
 
@@ -752,7 +754,7 @@ function getCompileFn(loaderContext, implementation, options) {
       };
     }
 
-    if (options.api === "modern-compiler") {
+    if (apiType === "modern-compiler") {
       return async (sassOptions) => {
         // eslint-disable-next-line no-underscore-dangle
         const webpackCompiler = loaderContext._compiler;
@@ -799,7 +801,7 @@ function getCompileFn(loaderContext, implementation, options) {
       });
   }
 
-  if (options.api === "modern" || options.api === "modern-compiler") {
+  if (apiType === "modern" || apiType === "modern-compiler") {
     throw new Error("Modern API is not supported for 'node-sass'");
   }
 
