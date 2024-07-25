@@ -203,7 +203,7 @@ describe("implementation option", () => {
   it("not specify with node-sass", async () => {
     const testId = getTestId("language", "scss");
     const options = {
-      implementation: nodeSass
+      implementation: nodeSass,
     };
     const compiler = getCompiler(testId, { loader: { options } });
     const stats = await compile(compiler);

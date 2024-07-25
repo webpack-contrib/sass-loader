@@ -176,8 +176,7 @@ async function getSassOptions(
     };
   }
 
-  const isModernAPI =
-    apiType === "modern" || apiType === "modern-compiler";
+  const isModernAPI = apiType === "modern" || apiType === "modern-compiler";
   const { resourcePath } = loaderContext;
 
   if (isModernAPI) {
