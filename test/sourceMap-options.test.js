@@ -234,6 +234,67 @@ describe("sourceMap option", () => {
 
         await close(compiler);
       });
+
+      it(`should generate sourcemap with "asset/resource" ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
+        const testId = getTestId("language", syntax);
+        const compiler = getCompiler(testId, {
+          devtool: "source-map",
+          rules: [
+            {
+              test: /\.(scss|sass)$/i,
+              type: "asset/resource",
+              generator: {
+                binary: false,
+                filename: "static/[name].css",
+              },
+              use: [
+                {
+                  loader: path.join(__dirname, "../src/cjs.js"),
+                  options: {
+                    implementation,
+                    api,
+                    sourceMap: true,
+                  },
+                },
+              ],
+            },
+          ],
+        });
+        const stats = await compile(compiler);
+
+        const usedFs = compiler.outputFileSystem;
+        const outputPath = stats.compilation.outputOptions.path;
+        const targetFile = "static/language.css";
+
+        let css;
+
+        try {
+          css = usedFs
+            .readFileSync(path.join(outputPath, targetFile))
+            .toString();
+        } catch (error) {
+          throw error;
+        }
+
+        const targetMapFile = "static/language.css.map";
+
+        let sourceMap;
+
+        try {
+          sourceMap = usedFs
+            .readFileSync(path.join(outputPath, targetMapFile))
+            .toString();
+        } catch (error) {
+          throw error;
+        }
+
+        expect(css).toMatchSnapshot("css");
+        expect(JSON.parse(sourceMap)).toMatchSnapshot("source map");
+        expect(getWarnings(stats)).toMatchSnapshot("warnings");
+        expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
+      });
     });
   });
 });
