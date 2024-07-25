@@ -217,9 +217,11 @@ describe("implementation option", () => {
 
     expect(sassEmbeddedSpy).toHaveBeenCalledTimes(0);
     expect(sassEmbeddedSpyModernAPI).toHaveBeenCalledTimes(0);
-    expect(nodeSassSpy).toHaveBeenCalledTimes(1);
+    expect(nodeSassSpy).toHaveBeenCalledTimes(isNodeSassSupported() ? 1 : 0);
     expect(dartSassSpy).toHaveBeenCalledTimes(0);
-    expect(dartSassSpyModernAPI).toHaveBeenCalledTimes(0);
+    expect(dartSassSpyModernAPI).toHaveBeenCalledTimes(
+      isNodeSassSupported() ? 0 : 1,
+    );
 
     sassEmbeddedSpy.mockClear();
     sassEmbeddedSpyModernAPI.mockClear();
