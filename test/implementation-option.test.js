@@ -185,13 +185,49 @@ describe("implementation option", () => {
     expect(getWarnings(stats)).toMatchSnapshot("warnings");
     expect(getErrors(stats)).toMatchSnapshot("errors");
 
-    expect(sassEmbeddedSpy).toHaveBeenCalledTimes(1);
+    expect(sassEmbeddedSpy).toHaveBeenCalledTimes(0);
+    expect(sassEmbeddedSpyModernAPI).toHaveBeenCalledTimes(1);
     expect(nodeSassSpy).toHaveBeenCalledTimes(0);
     expect(dartSassSpy).toHaveBeenCalledTimes(0);
+    expect(dartSassSpyModernAPI).toHaveBeenCalledTimes(0);
 
     sassEmbeddedSpy.mockClear();
+    sassEmbeddedSpyModernAPI.mockClear();
     nodeSassSpy.mockClear();
     dartSassSpy.mockClear();
+    dartSassSpyModernAPI.mockClear();
+
+    await close(compiler);
+  });
+
+  it("not specify with node-sass", async () => {
+    const testId = getTestId("language", "scss");
+    const options = {
+      implementation: nodeSass,
+    };
+    const compiler = getCompiler(testId, { loader: { options } });
+    const stats = await compile(compiler);
+    const { css, sourceMap } = getCodeFromBundle(stats, compiler);
+
+    expect(css).toBeDefined();
+    expect(sourceMap).toBeUndefined();
+
+    expect(getWarnings(stats)).toMatchSnapshot("warnings");
+    expect(getErrors(stats)).toMatchSnapshot("errors");
+
+    expect(sassEmbeddedSpy).toHaveBeenCalledTimes(0);
+    expect(sassEmbeddedSpyModernAPI).toHaveBeenCalledTimes(0);
+    expect(nodeSassSpy).toHaveBeenCalledTimes(isNodeSassSupported() ? 1 : 0);
+    expect(dartSassSpy).toHaveBeenCalledTimes(0);
+    expect(dartSassSpyModernAPI).toHaveBeenCalledTimes(
+      isNodeSassSupported() ? 0 : 1,
+    );
+
+    sassEmbeddedSpy.mockClear();
+    sassEmbeddedSpyModernAPI.mockClear();
+    nodeSassSpy.mockClear();
+    dartSassSpy.mockClear();
+    dartSassSpyModernAPI.mockClear();
 
     await close(compiler);
   });
@@ -216,8 +252,10 @@ describe("implementation option", () => {
     expect(dartSassSpy).toHaveBeenCalledTimes(0);
 
     sassEmbeddedSpy.mockClear();
+    sassEmbeddedSpyModernAPI.mockClear();
     nodeSassSpy.mockClear();
     dartSassSpy.mockClear();
+    dartSassSpyModernAPI.mockClear();
 
     await close(compiler);
   });
@@ -241,8 +279,10 @@ describe("implementation option", () => {
     expect(nodeSassSpy).toHaveBeenCalledTimes(0);
     expect(dartSassSpyModernAPI).toHaveBeenCalledTimes(0);
 
+    sassEmbeddedSpy.mockClear();
     sassEmbeddedSpyModernAPI.mockClear();
     nodeSassSpy.mockClear();
+    dartSassSpy.mockClear();
     dartSassSpyModernAPI.mockClear();
 
     await close(compiler);
@@ -269,9 +309,11 @@ describe("implementation option", () => {
     expect(dartSassSpyModernAPI).toHaveBeenCalledTimes(0);
     expect(dartSassCompilerSpies.compileStringSpy).toHaveBeenCalledTimes(0);
 
+    sassEmbeddedSpy.mockClear();
+    sassEmbeddedSpyModernAPI.mockClear();
     nodeSassSpy.mockClear();
+    dartSassSpy.mockClear();
     dartSassSpyModernAPI.mockClear();
-    dartSassCompilerSpies.mockClear();
 
     await close(compiler);
   });

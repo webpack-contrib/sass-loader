@@ -34,21 +34,29 @@ async function loader(content) {
 
   const useSourceMap =
     typeof options.sourceMap === "boolean" ? options.sourceMap : this.sourceMap;
+  // Use `legacy` for `node-sass` and `modern` for `dart-sass` and `sass-embedded`
+  const apiType =
+    typeof implementation.compileStringAsync === "undefined"
+      ? "legacy"
+      : typeof options.api === "undefined"
+        ? "modern"
+        : options.api;
   const sassOptions = await getSassOptions(
     this,
     options,
     content,
     implementation,
     useSourceMap,
+    apiType,
   );
+
   const shouldUseWebpackImporter =
     typeof options.webpackImporter === "boolean"
       ? options.webpackImporter
       : true;
 
   if (shouldUseWebpackImporter) {
-    const isModernAPI =
-      options.api === "modern" || options.api === "modern-compiler";
+    const isModernAPI = apiType === "modern" || apiType === "modern-compiler";
 
     if (!isModernAPI) {
       const { includePaths } = sassOptions;
@@ -67,7 +75,7 @@ async function loader(content) {
   let compile;
 
   try {
-    compile = getCompileFn(this, implementation, options);
+    compile = getCompileFn(this, implementation, apiType);
   } catch (error) {
     callback(error);
     return;
