@@ -2,6 +2,48 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [16.0.0](https://github.com/webpack-contrib/sass-loader/compare/v15.0.0...v16.0.0) (2024-07-26)
+
+
+### ⚠ BREAKING CHANGES
+
+* use modern Sass JS API by default for `sass` and `sass-embedded`
+
+> [!WARNING]
+>
+> The sass options are different for the `legacy` (before) and `modern` APIs. Please look at [docs](https://sass-lang.com/documentation/js-api) how to migrate to the modern options.
+> Legacy options - https://sass-lang.com/documentation/js-api/interfaces/legacystringoptions/
+> Modern options - https://sass-lang.com/documentation/js-api/interfaces/options/
+
+To return to the previous logic use:
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          "style-loader",
+          "css-loader",
+          {
+            loader: "sass-loader",
+            options: {
+              api: "legacy",
+              // Your options
+            },
+          },
+        ],
+      },
+    ],
+  },
+};
+```
+
+### Features
+
+* use modern Sass JS API by default for `sass` and `sass-embedded` ([10be1ba](https://github.com/webpack-contrib/sass-loader/commit/10be1ba161557638fd3b80f4a5467159179ef9b1))
+
 ## [15.0.0](https://github.com/webpack-contrib/sass-loader/compare/v14.2.1...v15.0.0) (2024-07-23)
 
 
