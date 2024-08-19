@@ -295,6 +295,37 @@ describe("sourceMap option", () => {
 
         await close(compiler);
       });
+
+      it(`should generate source maps with absolute URLs ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
+        const testId = getTestId("language-source-maps", syntax);
+        const options = { implementation, api };
+        const compiler = getCompiler(testId, {
+          devtool: "source-map",
+          loader: { options },
+        });
+        const stats = await compile(compiler);
+        const { css, sourceMap } = getCodeFromBundle(stats, compiler);
+
+        sourceMap.sourceRoot = "";
+        sourceMap.sources = sourceMap.sources.map((source) => {
+          expect(path.isAbsolute(source)).toBe(true);
+          expect(source).toBe(path.normalize(source));
+          expect(
+            fs.existsSync(path.resolve(sourceMap.sourceRoot, source)),
+          ).toBe(true);
+
+          return path
+            .relative(path.resolve(__dirname, ".."), source)
+            .replace(/\\/g, "/");
+        });
+
+        expect(css).toMatchSnapshot("css");
+        expect(sourceMap).toMatchSnapshot("source map");
+        expect(getWarnings(stats)).toMatchSnapshot("warnings");
+        expect(getErrors(stats)).toMatchSnapshot("errors");
+
+        await close(compiler);
+      });
     });
   });
 });
