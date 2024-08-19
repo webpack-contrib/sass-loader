@@ -691,7 +691,7 @@ function getModernWebpackImporter(loaderContext, implementation, loadPaths) {
           });
         });
 
-        return { contents, syntax };
+        return { contents, syntax, sourceMapUrl: canonicalUrl };
       } catch (err) {
         return null;
       }
