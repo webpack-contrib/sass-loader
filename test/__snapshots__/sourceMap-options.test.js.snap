@@ -4954,7 +4954,7 @@ exports[`sourceMap option should generate source maps when value is not specifie
 
 exports[`sourceMap option should generate source maps when value is not specified and the "devtool" option has "source-map" value ('sass-embedded', 'modern-compiler' API, 'scss' syntax): warnings 1`] = `[]`;
 
-exports[`sourceMap option should generate source maps with absoluve URLs ('dart-sass', 'legacy' API, 'sass' syntax): css 1`] = `
+exports[`sourceMap option should generate source maps with absolute URLs ('dart-sass', 'legacy' API, 'sass' syntax): css 1`] = `
 "@charset "UTF-8";
 @import "./file.css";
 .module {
@@ -5014,9 +5014,9 @@ nav a {
 }"
 `;
 
-exports[`sourceMap option should generate source maps with absoluve URLs ('dart-sass', 'legacy' API, 'sass' syntax): errors 1`] = `[]`;
+exports[`sourceMap option should generate source maps with absolute URLs ('dart-sass', 'legacy' API, 'sass' syntax): errors 1`] = `[]`;
 
-exports[`sourceMap option should generate source maps with absoluve URLs ('dart-sass', 'legacy' API, 'sass' syntax): source map 1`] = `
+exports[`sourceMap option should generate source maps with absolute URLs ('dart-sass', 'legacy' API, 'sass' syntax): source map 1`] = `
 {
   "mappings": ";AACQ;ACDR;EACI;;;ADOJ;EACE;EACA,OALc;;;AAQd;EACE;EACA;EACA;;AAEF;EACE;;AAEF;EACE;EACA;EACA;;;AAQJ;EALE,uBAMe;EALf,oBAKe;EAJf,mBAIe;EAHf,eAGe;;;AAEjB;EACE;EACA;EACA;;;AAEF;EAEE;;;AAEF;EAEE;;;AAEF;EAEE;;;AAGA;EACE,SAhDY;;;AAmDd;EACE,SE1Dc",
   "names": [],
@@ -5099,9 +5099,9 @@ nav
 }
 `;
 
-exports[`sourceMap option should generate source maps with absoluve URLs ('dart-sass', 'legacy' API, 'sass' syntax): warnings 1`] = `[]`;
+exports[`sourceMap option should generate source maps with absolute URLs ('dart-sass', 'legacy' API, 'sass' syntax): warnings 1`] = `[]`;
 
-exports[`sourceMap option should generate source maps with absoluve URLs ('dart-sass', 'legacy' API, 'scss' syntax): css 1`] = `
+exports[`sourceMap option should generate source maps with absolute URLs ('dart-sass', 'legacy' API, 'scss' syntax): css 1`] = `
 "@charset "UTF-8";
 @import "./file.css";
 .module {
@@ -5143,9 +5143,9 @@ nav a {
 }"
 `;
 
-exports[`sourceMap option should generate source maps with absoluve URLs ('dart-sass', 'legacy' API, 'scss' syntax): errors 1`] = `[]`;
+exports[`sourceMap option should generate source maps with absolute URLs ('dart-sass', 'legacy' API, 'scss' syntax): errors 1`] = `[]`;
 
-exports[`sourceMap option should generate source maps with absoluve URLs ('dart-sass', 'legacy' API, 'scss' syntax): source map 1`] = `
+exports[`sourceMap option should generate source maps with absolute URLs ('dart-sass', 'legacy' API, 'scss' syntax): source map 1`] = `
 {
   "mappings": ";AACQ;ACDR;EACI;;;ADOJ;EACE;EACA,OALc;;;AASd;EACE;EACA;EACA;;AAGF;EAAK;;AAEL;EACE;EACA;EACA;;;AAWJ;EANE,uBAM4B;EALzB,oBAKyB;EAJxB,mBAIwB;EAHpB,eAGoB;;;AAG5B;EACE,SAlCY;;;AAuCd;EACE,SE9Cc",
   "names": [],
@@ -5217,9 +5217,9 @@ nav {
 }
 `;
 
-exports[`sourceMap option should generate source maps with absoluve URLs ('dart-sass', 'legacy' API, 'scss' syntax): warnings 1`] = `[]`;
+exports[`sourceMap option should generate source maps with absolute URLs ('dart-sass', 'legacy' API, 'scss' syntax): warnings 1`] = `[]`;
 
-exports[`sourceMap option should generate source maps with absoluve URLs ('dart-sass', 'modern' API, 'sass' syntax): css 1`] = `
+exports[`sourceMap option should generate source maps with absolute URLs ('dart-sass', 'modern' API, 'sass' syntax): css 1`] = `
 "@charset "UTF-8";
 @import "./file.css";
 .module {
@@ -5279,9 +5279,9 @@ nav a {
 }"
 `;
 
-exports[`sourceMap option should generate source maps with absoluve URLs ('dart-sass', 'modern' API, 'sass' syntax): errors 1`] = `[]`;
+exports[`sourceMap option should generate source maps with absolute URLs ('dart-sass', 'modern' API, 'sass' syntax): errors 1`] = `[]`;
 
-exports[`sourceMap option should generate source maps with absoluve URLs ('dart-sass', 'modern' API, 'sass' syntax): source map 1`] = `
+exports[`sourceMap option should generate source maps with absolute URLs ('dart-sass', 'modern' API, 'sass' syntax): source map 1`] = `
 {
   "mappings": ";AACQ;ACDR;EACI;;;ADOJ;EACE;EACA,OALc;;;AAQd;EACE;EACA;EACA;;AAEF;EACE;;AAEF;EACE;EACA;EACA;;;AAQJ;EALE,uBAMe;EALf,oBAKe;EAJf,mBAIe;EAHf,eAGe;;;AAEjB;EACE;EACA;EACA;;;AAEF;EAEE;;;AAEF;EAEE;;;AAEF;EAEE;;;AAGA;EACE,SAhDY;;;AAmDd;EACE,SE1Dc",
   "names": [],
@@ -5295,9 +5295,9 @@ exports[`sourceMap option should generate source maps with absoluve URLs ('dart-
 }
 `;
 
-exports[`sourceMap option should generate source maps with absoluve URLs ('dart-sass', 'modern' API, 'sass' syntax): warnings 1`] = `[]`;
+exports[`sourceMap option should generate source maps with absolute URLs ('dart-sass', 'modern' API, 'sass' syntax): warnings 1`] = `[]`;
 
-exports[`sourceMap option should generate source maps with absoluve URLs ('dart-sass', 'modern' API, 'scss' syntax): css 1`] = `
+exports[`sourceMap option should generate source maps with absolute URLs ('dart-sass', 'modern' API, 'scss' syntax): css 1`] = `
 "@charset "UTF-8";
 @import "./file.css";
 .module {
@@ -5339,9 +5339,9 @@ nav a {
 }"
 `;
 
-exports[`sourceMap option should generate source maps with absoluve URLs ('dart-sass', 'modern' API, 'scss' syntax): errors 1`] = `[]`;
+exports[`sourceMap option should generate source maps with absolute URLs ('dart-sass', 'modern' API, 'scss' syntax): errors 1`] = `[]`;
 
-exports[`sourceMap option should generate source maps with absoluve URLs ('dart-sass', 'modern' API, 'scss' syntax): source map 1`] = `
+exports[`sourceMap option should generate source maps with absolute URLs ('dart-sass', 'modern' API, 'scss' syntax): source map 1`] = `
 {
   "mappings": ";AACQ;ACDR;EACI;;;ADOJ;EACE;EACA,OALc;;;AASd;EACE;EACA;EACA;;AAGF;EAAK;;AAEL;EACE;EACA;EACA;;;AAWJ;EANE,uBAM4B;EALzB,oBAKyB;EAJxB,mBAIwB;EAHpB,eAGoB;;;AAG5B;EACE,SAlCY;;;AAuCd;EACE,SE9Cc",
   "names": [],
@@ -5355,9 +5355,9 @@ exports[`sourceMap option should generate source maps with absoluve URLs ('dart-
 }
 `;
 
-exports[`sourceMap option should generate source maps with absoluve URLs ('dart-sass', 'modern' API, 'scss' syntax): warnings 1`] = `[]`;
+exports[`sourceMap option should generate source maps with absolute URLs ('dart-sass', 'modern' API, 'scss' syntax): warnings 1`] = `[]`;
 
-exports[`sourceMap option should generate source maps with absoluve URLs ('dart-sass', 'modern-compiler' API, 'sass' syntax): css 1`] = `
+exports[`sourceMap option should generate source maps with absolute URLs ('dart-sass', 'modern-compiler' API, 'sass' syntax): css 1`] = `
 "@charset "UTF-8";
 @import "./file.css";
 .module {
@@ -5417,9 +5417,9 @@ nav a {
 }"
 `;
 
-exports[`sourceMap option should generate source maps with absoluve URLs ('dart-sass', 'modern-compiler' API, 'sass' syntax): errors 1`] = `[]`;
+exports[`sourceMap option should generate source maps with absolute URLs ('dart-sass', 'modern-compiler' API, 'sass' syntax): errors 1`] = `[]`;
 
-exports[`sourceMap option should generate source maps with absoluve URLs ('dart-sass', 'modern-compiler' API, 'sass' syntax): source map 1`] = `
+exports[`sourceMap option should generate source maps with absolute URLs ('dart-sass', 'modern-compiler' API, 'sass' syntax): source map 1`] = `
 {
   "mappings": ";AACQ;ACDR;EACI;;;ADOJ;EACE;EACA,OALc;;;AAQd;EACE;EACA;EACA;;AAEF;EACE;;AAEF;EACE;EACA;EACA;;;AAQJ;EALE,uBAMe;EALf,oBAKe;EAJf,mBAIe;EAHf,eAGe;;;AAEjB;EACE;EACA;EACA;;;AAEF;EAEE;;;AAEF;EAEE;;;AAEF;EAEE;;;AAGA;EACE,SAhDY;;;AAmDd;EACE,SE1Dc",
   "names": [],
@@ -5433,9 +5433,9 @@ exports[`sourceMap option should generate source maps with absoluve URLs ('dart-
 }
 `;
 
-exports[`sourceMap option should generate source maps with absoluve URLs ('dart-sass', 'modern-compiler' API, 'sass' syntax): warnings 1`] = `[]`;
+exports[`sourceMap option should generate source maps with absolute URLs ('dart-sass', 'modern-compiler' API, 'sass' syntax): warnings 1`] = `[]`;
 
-exports[`sourceMap option should generate source maps with absoluve URLs ('dart-sass', 'modern-compiler' API, 'scss' syntax): css 1`] = `
+exports[`sourceMap option should generate source maps with absolute URLs ('dart-sass', 'modern-compiler' API, 'scss' syntax): css 1`] = `
 "@charset "UTF-8";
 @import "./file.css";
 .module {
@@ -5477,9 +5477,9 @@ nav a {
 }"
 `;
 
-exports[`sourceMap option should generate source maps with absoluve URLs ('dart-sass', 'modern-compiler' API, 'scss' syntax): errors 1`] = `[]`;
+exports[`sourceMap option should generate source maps with absolute URLs ('dart-sass', 'modern-compiler' API, 'scss' syntax): errors 1`] = `[]`;
 
-exports[`sourceMap option should generate source maps with absoluve URLs ('dart-sass', 'modern-compiler' API, 'scss' syntax): source map 1`] = `
+exports[`sourceMap option should generate source maps with absolute URLs ('dart-sass', 'modern-compiler' API, 'scss' syntax): source map 1`] = `
 {
   "mappings": ";AACQ;ACDR;EACI;;;ADOJ;EACE;EACA,OALc;;;AASd;EACE;EACA;EACA;;AAGF;EAAK;;AAEL;EACE;EACA;EACA;;;AAWJ;EANE,uBAM4B;EALzB,oBAKyB;EAJxB,mBAIwB;EAHpB,eAGoB;;;AAG5B;EACE,SAlCY;;;AAuCd;EACE,SE9Cc",
   "names": [],
@@ -5493,9 +5493,9 @@ exports[`sourceMap option should generate source maps with absoluve URLs ('dart-
 }
 `;
 
-exports[`sourceMap option should generate source maps with absoluve URLs ('dart-sass', 'modern-compiler' API, 'scss' syntax): warnings 1`] = `[]`;
+exports[`sourceMap option should generate source maps with absolute URLs ('dart-sass', 'modern-compiler' API, 'scss' syntax): warnings 1`] = `[]`;
 
-exports[`sourceMap option should generate source maps with absoluve URLs ('node-sass', 'legacy' API, 'sass' syntax): css 1`] = `
+exports[`sourceMap option should generate source maps with absolute URLs ('node-sass', 'legacy' API, 'sass' syntax): css 1`] = `
 "@charset "UTF-8";
 @import url(./file.css);
 .module {
@@ -5546,9 +5546,9 @@ nav a {
 "
 `;
 
-exports[`sourceMap option should generate source maps with absoluve URLs ('node-sass', 'legacy' API, 'sass' syntax): errors 1`] = `[]`;
+exports[`sourceMap option should generate source maps with absolute URLs ('node-sass', 'legacy' API, 'sass' syntax): errors 1`] = `[]`;
 
-exports[`sourceMap option should generate source maps with absoluve URLs ('node-sass', 'legacy' API, 'sass' syntax): source map 1`] = `
+exports[`sourceMap option should generate source maps with absolute URLs ('node-sass', 'legacy' API, 'sass' syntax): source map 1`] = `
 {
   "mappings": ";AACA,OAAO,CAAP,eAAO;AEDP,AAAA,OAAO,CAAC;EACJ,UAAU,EAAE,OAAO,GACtB;;AFMD,AAAA,IAAI,CAAC;EACH,IAAI,EAAE,IAAI,CALI,SAAS,EAAE,UAAU;EAMnC,KAAK,EALS,IAAI,GAKM;;AAE1B,AACE,GADC,CACD,EAAE,CAAC;EACD,MAAM,EAAE,CAAC;EACT,OAAO,EAAE,CAAC;EACV,UAAU,EAAE,IAAI,GAAG;;AAJvB,AAME,GANC,CAMD,EAAE,CAAC;EACD,OAAO,EAAE,YAAY,GAAG;;AAP5B,AASE,GATC,CASD,CAAC,CAAC;EACA,OAAO,EAAE,KAAK;EACd,OAAO,EAAE,QAAQ;EACjB,eAAe,EAAE,IAAI,GAAG;;AAQ5B,AAAA,IAAI,CAAC;EALH,qBAAqB,EAME,IAAI;EAL3B,kBAAkB,EAKK,IAAI;EAJ3B,iBAAiB,EAIM,IAAI;EAH3B,aAAa,EAGU,IAAI,GAAI;;AAEjC,AAAA,QAAQ,EAKR,QAAQ,EAIR,MAAM,EAIN,QAAQ,CAbC;EACP,MAAM,EAAE,cAAc;EACtB,OAAO,EAAE,IAAI;EACb,KAAK,EAAE,IAAI,GAAG;;AAEhB,AAAA,QAAQ,CAAC;EAEP,YAAY,EAAE,KAAK,GAAG;;AAExB,AAAA,MAAM,CAAC;EAEL,YAAY,EAAE,GAAG,GAAG;;AAEtB,AAAA,QAAQ,CAAC;EAEP,YAAY,EAAE,MAAM,GAAG;;AAEzB,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,EAhDK,IAAO,GAgDJ;;AAEnB,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,EC1DO,IAAO,GD0DO",
   "names": [],
@@ -5631,9 +5631,9 @@ nav {
 }
 `;
 
-exports[`sourceMap option should generate source maps with absoluve URLs ('node-sass', 'legacy' API, 'sass' syntax): warnings 1`] = `[]`;
+exports[`sourceMap option should generate source maps with absolute URLs ('node-sass', 'legacy' API, 'sass' syntax): warnings 1`] = `[]`;
 
-exports[`sourceMap option should generate source maps with absoluve URLs ('node-sass', 'legacy' API, 'scss' syntax): css 1`] = `
+exports[`sourceMap option should generate source maps with absolute URLs ('node-sass', 'legacy' API, 'scss' syntax): css 1`] = `
 "@charset "UTF-8";
 @import url(./file.css);
 .module {
@@ -5670,9 +5670,9 @@ nav a {
 "
 `;
 
-exports[`sourceMap option should generate source maps with absoluve URLs ('node-sass', 'legacy' API, 'scss' syntax): errors 1`] = `[]`;
+exports[`sourceMap option should generate source maps with absolute URLs ('node-sass', 'legacy' API, 'scss' syntax): errors 1`] = `[]`;
 
-exports[`sourceMap option should generate source maps with absoluve URLs ('node-sass', 'legacy' API, 'scss' syntax): source map 1`] = `
+exports[`sourceMap option should generate source maps with absolute URLs ('node-sass', 'legacy' API, 'scss' syntax): source map 1`] = `
 {
   "mappings": ";AACA,OAAO,CAAP,eAAO;AEDP,AAAA,OAAO,CAAC;EACJ,UAAU,EAAE,OAAO,GACtB;;AFMD,AAAA,IAAI,CAAC;EACH,IAAI,EAAE,IAAI,CALI,SAAS,EAAE,UAAU;EAMnC,KAAK,EALS,IAAI,GAMnB;;AAED,AACE,GADC,CACD,EAAE,CAAC;EACD,MAAM,EAAE,CAAC;EACT,OAAO,EAAE,CAAC;EACV,UAAU,EAAE,IAAI,GACjB;;AALH,AAOE,GAPC,CAOD,EAAE,CAAC;EAAE,OAAO,EAAE,YAAY,GAAI;;AAPhC,AASE,GATC,CASD,CAAC,CAAC;EACA,OAAO,EAAE,KAAK;EACd,OAAO,EAAE,QAAQ;EACjB,eAAe,EAAE,IAAI,GACtB;;AAUH,AAAA,IAAI,CAAC;EANH,qBAAqB,EAMO,IAAI;EAL7B,kBAAkB,EAKO,IAAI;EAJ5B,iBAAiB,EAIO,IAAI;EAHxB,aAAa,EAGO,IAAI,GAAK;;AAEvC,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,EAlCK,IAAO,GAmCpB;;AAGH,AACE,IADE,AACD,OAAO,CAAC;EACP,OAAO,EC9CO,IAAO,GD+CtB",
   "names": [],
@@ -5744,9 +5744,9 @@ nav {
 }
 `;
 
-exports[`sourceMap option should generate source maps with absoluve URLs ('node-sass', 'legacy' API, 'scss' syntax): warnings 1`] = `[]`;
+exports[`sourceMap option should generate source maps with absolute URLs ('node-sass', 'legacy' API, 'scss' syntax): warnings 1`] = `[]`;
 
-exports[`sourceMap option should generate source maps with absoluve URLs ('sass-embedded', 'legacy' API, 'sass' syntax): css 1`] = `
+exports[`sourceMap option should generate source maps with absolute URLs ('sass-embedded', 'legacy' API, 'sass' syntax): css 1`] = `
 "@charset "UTF-8";
 @import "./file.css";
 .module {
@@ -5806,9 +5806,9 @@ nav a {
 }"
 `;
 
-exports[`sourceMap option should generate source maps with absoluve URLs ('sass-embedded', 'legacy' API, 'sass' syntax): errors 1`] = `[]`;
+exports[`sourceMap option should generate source maps with absolute URLs ('sass-embedded', 'legacy' API, 'sass' syntax): errors 1`] = `[]`;
 
-exports[`sourceMap option should generate source maps with absoluve URLs ('sass-embedded', 'legacy' API, 'sass' syntax): source map 1`] = `
+exports[`sourceMap option should generate source maps with absolute URLs ('sass-embedded', 'legacy' API, 'sass' syntax): source map 1`] = `
 {
   "mappings": ";AACQ;ACDR;EACI;;;ADOJ;EACE;EACA,OALc;;;AAQd;EACE;EACA;EACA;;AAEF;EACE;;AAEF;EACE;EACA;EACA;;;AAQJ;EALE,uBAMe;EALf,oBAKe;EAJf,mBAIe;EAHf,eAGe;;;AAEjB;EACE;EACA;EACA;;;AAEF;EAEE;;;AAEF;EAEE;;;AAEF;EAEE;;;AAGA;EACE,SAhDY;;;AAmDd;EACE,SE1Dc",
   "names": [],
@@ -5893,9 +5893,9 @@ nav
 }
 `;
 
-exports[`sourceMap option should generate source maps with absoluve URLs ('sass-embedded', 'legacy' API, 'sass' syntax): warnings 1`] = `[]`;
+exports[`sourceMap option should generate source maps with absolute URLs ('sass-embedded', 'legacy' API, 'sass' syntax): warnings 1`] = `[]`;
 
-exports[`sourceMap option should generate source maps with absoluve URLs ('sass-embedded', 'legacy' API, 'scss' syntax): css 1`] = `
+exports[`sourceMap option should generate source maps with absolute URLs ('sass-embedded', 'legacy' API, 'scss' syntax): css 1`] = `
 "@charset "UTF-8";
 @import "./file.css";
 .module {
@@ -5937,9 +5937,9 @@ nav a {
 }"
 `;
 
-exports[`sourceMap option should generate source maps with absoluve URLs ('sass-embedded', 'legacy' API, 'scss' syntax): errors 1`] = `[]`;
+exports[`sourceMap option should generate source maps with absolute URLs ('sass-embedded', 'legacy' API, 'scss' syntax): errors 1`] = `[]`;
 
-exports[`sourceMap option should generate source maps with absoluve URLs ('sass-embedded', 'legacy' API, 'scss' syntax): source map 1`] = `
+exports[`sourceMap option should generate source maps with absolute URLs ('sass-embedded', 'legacy' API, 'scss' syntax): source map 1`] = `
 {
   "mappings": ";AACQ;ACDR;EACI;;;ADOJ;EACE;EACA,OALc;;;AASd;EACE;EACA;EACA;;AAGF;EAAK;;AAEL;EACE;EACA;EACA;;;AAWJ;EANE,uBAM4B;EALzB,oBAKyB;EAJxB,mBAIwB;EAHpB,eAGoB;;;AAG5B;EACE,SAlCY;;;AAuCd;EACE,SE9Cc",
   "names": [],
@@ -6013,9 +6013,9 @@ nav {
 }
 `;
 
-exports[`sourceMap option should generate source maps with absoluve URLs ('sass-embedded', 'legacy' API, 'scss' syntax): warnings 1`] = `[]`;
+exports[`sourceMap option should generate source maps with absolute URLs ('sass-embedded', 'legacy' API, 'scss' syntax): warnings 1`] = `[]`;
 
-exports[`sourceMap option should generate source maps with absoluve URLs ('sass-embedded', 'modern' API, 'sass' syntax): css 1`] = `
+exports[`sourceMap option should generate source maps with absolute URLs ('sass-embedded', 'modern' API, 'sass' syntax): css 1`] = `
 "@charset "UTF-8";
 @import "./file.css";
 .module {
@@ -6075,9 +6075,9 @@ nav a {
 }"
 `;
 
-exports[`sourceMap option should generate source maps with absoluve URLs ('sass-embedded', 'modern' API, 'sass' syntax): errors 1`] = `[]`;
+exports[`sourceMap option should generate source maps with absolute URLs ('sass-embedded', 'modern' API, 'sass' syntax): errors 1`] = `[]`;
 
-exports[`sourceMap option should generate source maps with absoluve URLs ('sass-embedded', 'modern' API, 'sass' syntax): source map 1`] = `
+exports[`sourceMap option should generate source maps with absolute URLs ('sass-embedded', 'modern' API, 'sass' syntax): source map 1`] = `
 {
   "mappings": ";AACQ;ACDR;EACI;;;ADOJ;EACE;EACA,OALc;;;AAQd;EACE;EACA;EACA;;AAEF;EACE;;AAEF;EACE;EACA;EACA;;;AAQJ;EALE,uBAMe;EALf,oBAKe;EAJf,mBAIe;EAHf,eAGe;;;AAEjB;EACE;EACA;EACA;;;AAEF;EAEE;;;AAEF;EAEE;;;AAEF;EAEE;;;AAGA;EACE,SAhDY;;;AAmDd;EACE,SE1Dc",
   "names": [],
@@ -6091,9 +6091,9 @@ exports[`sourceMap option should generate source maps with absoluve URLs ('sass-
 }
 `;
 
-exports[`sourceMap option should generate source maps with absoluve URLs ('sass-embedded', 'modern' API, 'sass' syntax): warnings 1`] = `[]`;
+exports[`sourceMap option should generate source maps with absolute URLs ('sass-embedded', 'modern' API, 'sass' syntax): warnings 1`] = `[]`;
 
-exports[`sourceMap option should generate source maps with absoluve URLs ('sass-embedded', 'modern' API, 'scss' syntax): css 1`] = `
+exports[`sourceMap option should generate source maps with absolute URLs ('sass-embedded', 'modern' API, 'scss' syntax): css 1`] = `
 "@charset "UTF-8";
 @import "./file.css";
 .module {
@@ -6135,9 +6135,9 @@ nav a {
 }"
 `;
 
-exports[`sourceMap option should generate source maps with absoluve URLs ('sass-embedded', 'modern' API, 'scss' syntax): errors 1`] = `[]`;
+exports[`sourceMap option should generate source maps with absolute URLs ('sass-embedded', 'modern' API, 'scss' syntax): errors 1`] = `[]`;
 
-exports[`sourceMap option should generate source maps with absoluve URLs ('sass-embedded', 'modern' API, 'scss' syntax): source map 1`] = `
+exports[`sourceMap option should generate source maps with absolute URLs ('sass-embedded', 'modern' API, 'scss' syntax): source map 1`] = `
 {
   "mappings": ";AACQ;ACDR;EACI;;;ADOJ;EACE;EACA,OALc;;;AASd;EACE;EACA;EACA;;AAGF;EAAK;;AAEL;EACE;EACA;EACA;;;AAWJ;EANE,uBAM4B;EALzB,oBAKyB;EAJxB,mBAIwB;EAHpB,eAGoB;;;AAG5B;EACE,SAlCY;;;AAuCd;EACE,SE9Cc",
   "names": [],
@@ -6151,9 +6151,9 @@ exports[`sourceMap option should generate source maps with absoluve URLs ('sass-
 }
 `;
 
-exports[`sourceMap option should generate source maps with absoluve URLs ('sass-embedded', 'modern' API, 'scss' syntax): warnings 1`] = `[]`;
+exports[`sourceMap option should generate source maps with absolute URLs ('sass-embedded', 'modern' API, 'scss' syntax): warnings 1`] = `[]`;
 
-exports[`sourceMap option should generate source maps with absoluve URLs ('sass-embedded', 'modern-compiler' API, 'sass' syntax): css 1`] = `
+exports[`sourceMap option should generate source maps with absolute URLs ('sass-embedded', 'modern-compiler' API, 'sass' syntax): css 1`] = `
 "@charset "UTF-8";
 @import "./file.css";
 .module {
@@ -6213,9 +6213,9 @@ nav a {
 }"
 `;
 
-exports[`sourceMap option should generate source maps with absoluve URLs ('sass-embedded', 'modern-compiler' API, 'sass' syntax): errors 1`] = `[]`;
+exports[`sourceMap option should generate source maps with absolute URLs ('sass-embedded', 'modern-compiler' API, 'sass' syntax): errors 1`] = `[]`;
 
-exports[`sourceMap option should generate source maps with absoluve URLs ('sass-embedded', 'modern-compiler' API, 'sass' syntax): source map 1`] = `
+exports[`sourceMap option should generate source maps with absolute URLs ('sass-embedded', 'modern-compiler' API, 'sass' syntax): source map 1`] = `
 {
   "mappings": ";AACQ;ACDR;EACI;;;ADOJ;EACE;EACA,OALc;;;AAQd;EACE;EACA;EACA;;AAEF;EACE;;AAEF;EACE;EACA;EACA;;;AAQJ;EALE,uBAMe;EALf,oBAKe;EAJf,mBAIe;EAHf,eAGe;;;AAEjB;EACE;EACA;EACA;;;AAEF;EAEE;;;AAEF;EAEE;;;AAEF;EAEE;;;AAGA;EACE,SAhDY;;;AAmDd;EACE,SE1Dc",
   "names": [],
@@ -6229,9 +6229,9 @@ exports[`sourceMap option should generate source maps with absoluve URLs ('sass-
 }
 `;
 
-exports[`sourceMap option should generate source maps with absoluve URLs ('sass-embedded', 'modern-compiler' API, 'sass' syntax): warnings 1`] = `[]`;
+exports[`sourceMap option should generate source maps with absolute URLs ('sass-embedded', 'modern-compiler' API, 'sass' syntax): warnings 1`] = `[]`;
 
-exports[`sourceMap option should generate source maps with absoluve URLs ('sass-embedded', 'modern-compiler' API, 'scss' syntax): css 1`] = `
+exports[`sourceMap option should generate source maps with absolute URLs ('sass-embedded', 'modern-compiler' API, 'scss' syntax): css 1`] = `
 "@charset "UTF-8";
 @import "./file.css";
 .module {
@@ -6273,9 +6273,9 @@ nav a {
 }"
 `;
 
-exports[`sourceMap option should generate source maps with absoluve URLs ('sass-embedded', 'modern-compiler' API, 'scss' syntax): errors 1`] = `[]`;
+exports[`sourceMap option should generate source maps with absolute URLs ('sass-embedded', 'modern-compiler' API, 'scss' syntax): errors 1`] = `[]`;
 
-exports[`sourceMap option should generate source maps with absoluve URLs ('sass-embedded', 'modern-compiler' API, 'scss' syntax): source map 1`] = `
+exports[`sourceMap option should generate source maps with absolute URLs ('sass-embedded', 'modern-compiler' API, 'scss' syntax): source map 1`] = `
 {
   "mappings": ";AACQ;ACDR;EACI;;;ADOJ;EACE;EACA,OALc;;;AASd;EACE;EACA;EACA;;AAGF;EAAK;;AAEL;EACE;EACA;EACA;;;AAWJ;EANE,uBAM4B;EALzB,oBAKyB;EAJxB,mBAIwB;EAHpB,eAGoB;;;AAG5B;EACE,SAlCY;;;AAuCd;EACE,SE9Cc",
   "names": [],
@@ -6289,7 +6289,7 @@ exports[`sourceMap option should generate source maps with absoluve URLs ('sass-
 }
 `;
 
-exports[`sourceMap option should generate source maps with absoluve URLs ('sass-embedded', 'modern-compiler' API, 'scss' syntax): warnings 1`] = `[]`;
+exports[`sourceMap option should generate source maps with absolute URLs ('sass-embedded', 'modern-compiler' API, 'scss' syntax): warnings 1`] = `[]`;
 
 exports[`sourceMap option should generate sourcemap with "asset/resource" ('dart-sass', 'legacy' API, 'sass' syntax): css 1`] = `
 "@charset "UTF-8";
