@@ -1227,7 +1227,7 @@ exports[`sassOptions option should ignore the "url" option ('sass-embedded', 'mo
 exports[`sassOptions option should output a normal error with the wrong "fatalDeprecations" option ('dart-sass', 'modern' API, 'sass' syntax): errors 1`] = `
 [
   "ModuleBuildError: Module build failed (from ../src/cjs.js):
-NoSuchMethodError: method not found: 'get$iterator' (J.getInterceptor$ax(...).get$iterator is not a function)",
+TypeError: J.getInterceptor$ax(...).get$iterator is not a function",
 ]
 `;
 
@@ -1236,7 +1236,7 @@ exports[`sassOptions option should output a normal error with the wrong "fatalDe
 exports[`sassOptions option should output a normal error with the wrong "fatalDeprecations" option ('dart-sass', 'modern' API, 'scss' syntax): errors 1`] = `
 [
   "ModuleBuildError: Module build failed (from ../src/cjs.js):
-NoSuchMethodError: method not found: 'get$iterator' (J.getInterceptor$ax(...).get$iterator is not a function)",
+TypeError: J.getInterceptor$ax(...).get$iterator is not a function",
 ]
 `;
 
@@ -1245,7 +1245,7 @@ exports[`sassOptions option should output a normal error with the wrong "fatalDe
 exports[`sassOptions option should output a normal error with the wrong "fatalDeprecations" option ('dart-sass', 'modern-compiler' API, 'sass' syntax): errors 1`] = `
 [
   "ModuleBuildError: Module build failed (from ../src/cjs.js):
-NoSuchMethodError: method not found: 'get$iterator' (J.getInterceptor$ax(...).get$iterator is not a function)",
+TypeError: J.getInterceptor$ax(...).get$iterator is not a function",
 ]
 `;
 
@@ -1254,7 +1254,7 @@ exports[`sassOptions option should output a normal error with the wrong "fatalDe
 exports[`sassOptions option should output a normal error with the wrong "fatalDeprecations" option ('dart-sass', 'modern-compiler' API, 'scss' syntax): errors 1`] = `
 [
   "ModuleBuildError: Module build failed (from ../src/cjs.js):
-NoSuchMethodError: method not found: 'get$iterator' (J.getInterceptor$ax(...).get$iterator is not a function)",
+TypeError: J.getInterceptor$ax(...).get$iterator is not a function",
 ]
 `;
 
@@ -1263,7 +1263,7 @@ exports[`sassOptions option should output a normal error with the wrong "fatalDe
 exports[`sassOptions option should output a normal error with the wrong "fatalDeprecations" option ('sass-embedded', 'modern' API, 'sass' syntax): errors 1`] = `
 [
   "ModuleBuildError: Module build failed (from ../src/cjs.js):
-arr.flatMap is not a function",
+TypeError: arr.flatMap is not a function",
 ]
 `;
 
@@ -1272,7 +1272,7 @@ exports[`sassOptions option should output a normal error with the wrong "fatalDe
 exports[`sassOptions option should output a normal error with the wrong "fatalDeprecations" option ('sass-embedded', 'modern' API, 'scss' syntax): errors 1`] = `
 [
   "ModuleBuildError: Module build failed (from ../src/cjs.js):
-arr.flatMap is not a function",
+TypeError: arr.flatMap is not a function",
 ]
 `;
 
@@ -1281,7 +1281,7 @@ exports[`sassOptions option should output a normal error with the wrong "fatalDe
 exports[`sassOptions option should output a normal error with the wrong "fatalDeprecations" option ('sass-embedded', 'modern-compiler' API, 'sass' syntax): errors 1`] = `
 [
   "ModuleBuildError: Module build failed (from ../src/cjs.js):
-arr.flatMap is not a function",
+TypeError: arr.flatMap is not a function",
 ]
 `;
 
@@ -1290,7 +1290,7 @@ exports[`sassOptions option should output a normal error with the wrong "fatalDe
 exports[`sassOptions option should output a normal error with the wrong "fatalDeprecations" option ('sass-embedded', 'modern-compiler' API, 'scss' syntax): errors 1`] = `
 [
   "ModuleBuildError: Module build failed (from ../src/cjs.js):
-arr.flatMap is not a function",
+TypeError: arr.flatMap is not a function",
 ]
 `;
 
@@ -4463,7 +4463,7 @@ exports[`sassOptions option should work with custom scheme import ('sass-embedde
 exports[`sassOptions option should work with the "fatalDeprecations" option ('dart-sass', 'modern' API, 'sass' syntax): errors 1`] = `
 [
   "ModuleBuildError: Module build failed (from ../src/cjs.js):
-Using / for division outside of calc() is deprecated and will be removed in Dart Sass 2.0.0.",
+Error: Using / for division outside of calc() is deprecated and will be removed in Dart Sass 2.0.0.",
 ]
 `;
 
@@ -4472,7 +4472,7 @@ exports[`sassOptions option should work with the "fatalDeprecations" option ('da
 exports[`sassOptions option should work with the "fatalDeprecations" option ('dart-sass', 'modern' API, 'scss' syntax): errors 1`] = `
 [
   "ModuleBuildError: Module build failed (from ../src/cjs.js):
-Using / for division outside of calc() is deprecated and will be removed in Dart Sass 2.0.0.",
+Error: Using / for division outside of calc() is deprecated and will be removed in Dart Sass 2.0.0.",
 ]
 `;
 
@@ -4481,7 +4481,7 @@ exports[`sassOptions option should work with the "fatalDeprecations" option ('da
 exports[`sassOptions option should work with the "fatalDeprecations" option ('dart-sass', 'modern-compiler' API, 'sass' syntax): errors 1`] = `
 [
   "ModuleBuildError: Module build failed (from ../src/cjs.js):
-Using / for division outside of calc() is deprecated and will be removed in Dart Sass 2.0.0.",
+Error: Using / for division outside of calc() is deprecated and will be removed in Dart Sass 2.0.0.",
 ]
 `;
 
@@ -4490,7 +4490,7 @@ exports[`sassOptions option should work with the "fatalDeprecations" option ('da
 exports[`sassOptions option should work with the "fatalDeprecations" option ('dart-sass', 'modern-compiler' API, 'scss' syntax): errors 1`] = `
 [
   "ModuleBuildError: Module build failed (from ../src/cjs.js):
-Using / for division outside of calc() is deprecated and will be removed in Dart Sass 2.0.0.",
+Error: Using / for division outside of calc() is deprecated and will be removed in Dart Sass 2.0.0.",
 ]
 `;
 
@@ -4499,7 +4499,7 @@ exports[`sassOptions option should work with the "fatalDeprecations" option ('da
 exports[`sassOptions option should work with the "fatalDeprecations" option ('sass-embedded', 'modern' API, 'sass' syntax): errors 1`] = `
 [
   "ModuleBuildError: Module build failed (from ../src/cjs.js):
-Error: Using / for division outside of calc() is deprecated and will be removed in Dart Sass 2.0.0.",
+Error: Error: Using / for division outside of calc() is deprecated and will be removed in Dart Sass 2.0.0.",
 ]
 `;
 
@@ -4508,7 +4508,7 @@ exports[`sassOptions option should work with the "fatalDeprecations" option ('sa
 exports[`sassOptions option should work with the "fatalDeprecations" option ('sass-embedded', 'modern' API, 'scss' syntax): errors 1`] = `
 [
   "ModuleBuildError: Module build failed (from ../src/cjs.js):
-Error: Using / for division outside of calc() is deprecated and will be removed in Dart Sass 2.0.0.",
+Error: Error: Using / for division outside of calc() is deprecated and will be removed in Dart Sass 2.0.0.",
 ]
 `;
 
@@ -4517,7 +4517,7 @@ exports[`sassOptions option should work with the "fatalDeprecations" option ('sa
 exports[`sassOptions option should work with the "fatalDeprecations" option ('sass-embedded', 'modern-compiler' API, 'sass' syntax): errors 1`] = `
 [
   "ModuleBuildError: Module build failed (from ../src/cjs.js):
-Error: Using / for division outside of calc() is deprecated and will be removed in Dart Sass 2.0.0.",
+Error: Error: Using / for division outside of calc() is deprecated and will be removed in Dart Sass 2.0.0.",
 ]
 `;
 
@@ -4526,7 +4526,7 @@ exports[`sassOptions option should work with the "fatalDeprecations" option ('sa
 exports[`sassOptions option should work with the "fatalDeprecations" option ('sass-embedded', 'modern-compiler' API, 'scss' syntax): errors 1`] = `
 [
   "ModuleBuildError: Module build failed (from ../src/cjs.js):
-Error: Using / for division outside of calc() is deprecated and will be removed in Dart Sass 2.0.0.",
+Error: Error: Using / for division outside of calc() is deprecated and will be removed in Dart Sass 2.0.0.",
 ]
 `;
 
