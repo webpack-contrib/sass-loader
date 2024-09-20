@@ -887,19 +887,18 @@ function normalizeSourceMap(map, rootContext) {
 
 function errorFactory(error) {
   let message;
-  let stack = null;
 
   if (error.formatted) {
-    message = error.formatted.replace(/^Error: /, "");
+    message = error.formatted.replace(/^(.+)?Error: /, "");
   } else {
     // Keep original error if `sassError.formatted` is unavailable
-    message = error.message || error.toString();
-    stack = error.stack || (error.$thrownJsError && error.$thrownJsError.stack);
+    message = (error.message || error.toString()).replace(/^(.+)?Error: /, "");
   }
 
   const obj = new Error(message, { cause: error });
 
-  obj.stack = stack;
+  obj.name = error.name;
+  obj.stack = null;
 
   return obj;
 }
