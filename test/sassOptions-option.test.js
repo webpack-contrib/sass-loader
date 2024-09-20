@@ -524,6 +524,44 @@ describe("sassOptions option", () => {
 
         await close(compiler);
       });
+
+      if (isModernAPI) {
+        it(`should output a normal error with the wrong "fatalDeprecations" option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
+          const testId = getTestId("language", syntax);
+          const options = {
+            implementation,
+            api,
+            sassOptions: {
+              fatalDeprecations: "test",
+            },
+          };
+          const compiler = getCompiler(testId, { loader: { options } });
+          const stats = await compile(compiler);
+
+          expect(getWarnings(stats)).toMatchSnapshot("warnings");
+          expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          await close(compiler);
+        });
+
+        it(`should work with the "fatalDeprecations" option ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
+          const testId = getTestId("slash-div", syntax);
+          const options = {
+            implementation,
+            api,
+            sassOptions: {
+              fatalDeprecations: ["slash-div"],
+            },
+          };
+          const compiler = getCompiler(testId, { loader: { options } });
+          const stats = await compile(compiler);
+
+          expect(getWarnings(stats)).toMatchSnapshot("warnings");
+          expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          await close(compiler);
+        });
+      }
     });
   });
 });

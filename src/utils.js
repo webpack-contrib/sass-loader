@@ -889,14 +889,15 @@ function errorFactory(error) {
   let message;
 
   if (error.formatted) {
-    message = error.formatted.replace(/^Error: /, "");
+    message = error.formatted.replace(/^(.+)?Error: /, "");
   } else {
     // Keep original error if `sassError.formatted` is unavailable
-    ({ message } = error);
+    message = (error.message || error.toString()).replace(/^(.+)?Error: /, "");
   }
 
   const obj = new Error(message, { cause: error });
 
+  obj.name = error.name;
   obj.stack = null;
 
   return obj;
