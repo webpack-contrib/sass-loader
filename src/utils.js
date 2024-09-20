@@ -892,7 +892,7 @@ function errorFactory(error) {
     message = error.formatted.replace(/^Error: /, "");
   } else {
     // Keep original error if `sassError.formatted` is unavailable
-    ({ message } = error);
+    message = error.message || error.toString();
   }
 
   const obj = new Error(message, { cause: error });
