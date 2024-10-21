@@ -98,11 +98,11 @@ module.exports = {
 
 Finally run `webpack` via your preferred method.
 
-### The `outputStyle` (old API) and `style` (new API) options in `production` mode
+### The `style` (new API, by default since 16 version) and `outputStyle` (old API) options in `production` mode
 
-For `production` mode, the `outputStyle` (old API) and `style` (new API) options default to `compressed` unless otherwise specified in `sassOptions`.
+For `production` mode, the `style` (new API, by default since 16 version) and `outputStyle` (old API) options default to `compressed` unless otherwise specified in `sassOptions`.
 
-### Resolving `import` at-rules
+### Resolving `import` and `use` at-rules
 
 Webpack provides an [advanced mechanism to resolve files](https://webpack.js.org/concepts/module-resolution/).
 
@@ -296,13 +296,13 @@ Options for [Dart Sass](http://sass-lang.com/dart-sass) or [Node Sass](https://g
 
 > [!NOTE]
 >
-> The `indentedSyntax` option is `true` for the `sass` extension.
+> The `syntax` (new API, by default since 16 version)`and`indentedSyntax`(old API) option is`scss`for the`scss`extension,`indented`for the`sass`extension and`css`for the`css` extension.
 
 > [!NOTE]
 >
 > Options such as `data` and `file` are unavailable and will be ignored.
 
-> ℹ We strongly discourage changing the `outFile`, `sourceMapContents`, `sourceMapEmbed`, and `sourceMapRoot` options because `sass-loader` sets these automatically when the `sourceMap` option is `true`.
+> ℹ We strongly discourage changing the `sourceMap` (new API, by default since 16 version), `outFile` (old API), `sourceMapContents` (old API), `sourceMapEmbed` (old API), and `sourceMapRoot` (old API) options because `sass-loader` sets these automatically when the `sourceMap` option is `true`.
 
 > [!NOTE]
 >
@@ -313,7 +313,9 @@ There is a slight difference between the options for `sass` (`dart-sass`) and `n
 Please consult their respective documentation before using them:
 
 - [Dart Sass documentation](https://sass-lang.com/documentation/js-api/interfaces/Options) for all available `sass` options.
+- [Sass Embedded documentation](https://github.com/sass/embedded-host-node) for all available `sass` options.
 - [Node Sass documentation](https://github.com/sass/node-sass/#options) for all available `node-sass` options.
+- [Sass Embedded documentation](https://github.com/sass/embedded-host-node) for all available `sass` options.
 
 #### `object`
 
@@ -334,8 +336,8 @@ module.exports = {
             loader: "sass-loader",
             options: {
               sassOptions: {
-                indentWidth: 4,
-                includePaths: ["absolute/path/a", "absolute/path/b"],
+                style: `compressed`,
+                loadPaths: ["absolute/path/a", "absolute/path/b"],
               },
             },
           },
@@ -369,12 +371,12 @@ module.exports = {
 
                 if (relativePath === "styles/foo.scss") {
                   return {
-                    includePaths: ["absolute/path/c", "absolute/path/d"],
+                    loadPaths: ["absolute/path/c", "absolute/path/d"],
                   };
                 }
 
                 return {
-                  includePaths: ["absolute/path/a", "absolute/path/b"],
+                  loadPaths: ["absolute/path/a", "absolute/path/b"],
                 };
               },
             },
@@ -401,7 +403,7 @@ Enables/Disables generation of source maps.
 By default generation of source maps depends on the [`devtool`](https://webpack.js.org/configuration/devtool/) option.
 All values enable source map generation except `eval` and `false`.
 
-> ℹ If `true`, the `sourceMap`, `sourceMapRoot`, `sourceMapEmbed`, `sourceMapContents` and `omitSourceMapUrl` options from `sassOptions` will be ignored.
+> ℹ If `true`, the `sourceMap` (new API, by default since 16 version), `outFile` (old API), `sourceMapContents` (old API), `sourceMapEmbed` (old API), and `sourceMapRoot` (old API) from `sassOptions` will be ignored.
 
 **webpack.config.js**
 
@@ -683,7 +685,7 @@ Type:
 type api = "legacy" | "modern" | "modern-compiler";
 ```
 
-Default: `"modern"` for `sass` (`dart-sass`) and `sass-embedded` or `"legacy"` for `node-sass`
+Default: `"modern"` for `sass` (`dart-sass`) and `sass-embedded`, or `"legacy"` for `node-sass`
 
 Allows you to switch between the `legacy` and `modern` APIs. You can find more information [here](https://sass-lang.com/documentation/js-api). The `modern-compiler` option enables the modern API with support for [Shared Resources](https://github.com/sass/sass/blob/main/accepted/shared-resources.d.ts.md).
 
