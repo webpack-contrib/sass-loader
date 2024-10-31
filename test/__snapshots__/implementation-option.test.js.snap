@@ -52,6 +52,10 @@ exports[`implementation option not specify: errors 1`] = `[]`;
 
 exports[`implementation option not specify: warnings 1`] = `[]`;
 
+exports[`implementation option should dispose redundant compilers for \`modern-compiler\`: errors 1`] = `[]`;
+
+exports[`implementation option should dispose redundant compilers for \`modern-compiler\`: warnings 1`] = `[]`;
+
 exports[`implementation option should not swallow an error when trying to load a sass implementation: errors 1`] = `
 [
   "ModuleBuildError: Module build failed (from ../src/cjs.js):

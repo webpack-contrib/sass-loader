@@ -398,6 +398,70 @@ describe("implementation option", () => {
     await close(compiler);
   });
 
+  it("should dispose redundant compilers for `modern-compiler`", async () => {
+    sassEmbeddedCompilerSpies.mockRestore();
+
+    let isInRace = false;
+
+    let firstDisposeSpy;
+    let secondDisposeSpy;
+
+    const actualFn = sassEmbedded.initAsyncCompiler.bind(sassEmbedded);
+
+    const initSpy = jest
+      .spyOn(sassEmbedded, "initAsyncCompiler")
+      .mockImplementation(async () => {
+        const compiler = await actualFn();
+
+        if (!isInRace) {
+          firstDisposeSpy = jest.spyOn(compiler, "dispose");
+          isInRace = true;
+
+          return new Promise((resolve) => {
+            const interval = setInterval(() => {
+              if (!isInRace) {
+                clearInterval(interval);
+                resolve(compiler);
+              }
+            });
+          });
+        }
+
+        isInRace = false;
+        secondDisposeSpy = jest.spyOn(compiler, "dispose");
+
+        return compiler;
+      });
+
+    const testId1 = getTestId("language", "scss");
+    const testId2 = getTestId("language", "sass");
+    const options = { api: "modern-compiler" };
+
+    // eslint-disable-next-line no-undefined
+    const compiler = getCompiler(undefined, {
+      entry: {
+        one: `./${testId1}`,
+        two: `./${testId2}`,
+      },
+      loader: { options },
+    });
+    const stats = await compile(compiler);
+
+    expect(getWarnings(stats)).toMatchSnapshot("warnings");
+    expect(getErrors(stats)).toMatchSnapshot("errors");
+    expect(initSpy).toHaveBeenCalledTimes(2);
+
+    await close(compiler);
+
+    initSpy.mockRestore();
+
+    expect(firstDisposeSpy).toHaveBeenCalledTimes(1);
+    firstDisposeSpy.mockRestore();
+
+    expect(secondDisposeSpy).toHaveBeenCalledTimes(1);
+    secondDisposeSpy.mockRestore();
+  });
+
   it("should try to load using valid order", async () => {
     jest.doMock("sass", () => {
       const error = new Error("Some error sass");
