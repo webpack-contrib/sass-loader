@@ -768,6 +768,8 @@ function getCompileFn(loaderContext, implementation, apiType) {
               webpackCompiler.hooks.shutdown.tap("sass-loader", () => {
                 compiler.dispose();
               });
+            } else {
+              compiler.dispose();
             }
           }
 
