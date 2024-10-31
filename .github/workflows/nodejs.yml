@@ -89,7 +89,7 @@ jobs:
           cache: "npm"
 
       - name: Install webpack ${{ matrix.webpack-version }}
-        if: matrix.node-version == '22.x'
+        if: matrix.node-version == '22.x' || matrix.node-version == '23.x'
         run: npm uninstall node-sass
 
       - name: Install dependencies
