@@ -189,6 +189,7 @@ async function getSassOptions(
 
     if (useSourceMap) {
       sassOptions.sourceMap = true;
+      sassOptions.sourceMapIncludeSources = true;
     }
 
     // If we are compiling sass and indentedSyntax isn't set, automatically set it.

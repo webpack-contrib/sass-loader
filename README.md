@@ -147,6 +147,7 @@ Thankfully there are two solutions to this problem:
 - **[`additionalData`](#additionaldata)**
 - **[`webpackImporter`](#webpackimporter)**
 - **[`warnRuleAsWarning`](#warnruleaswarning)**
+- **[`api`](#api)**
 
 ### `implementation`
 

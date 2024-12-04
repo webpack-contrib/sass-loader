@@ -1555,6 +1555,70 @@ exports[`sourceMap option should generate source maps when value has "true" valu
     "test/sass/language.sass",
     "test/sass/another/variables.sass",
   ],
+  "sourcesContent": [
+    "@import "another/variables"
+@import "./file.css"
+
+$font-stack:    Helvetica, sans-serif
+$primary-color: #333
+$pi:            '\\e0C6'
+
+body
+  font: 100% $font-stack
+  color: $primary-color
+
+nav
+  ul
+    margin: 0
+    padding: 0
+    list-style: none
+
+  li
+    display: inline-block
+
+  a
+    display: block
+    padding: 6px 12px
+    text-decoration: none
+
+=border-radius($radius)
+  -webkit-border-radius: $radius
+  -moz-border-radius:    $radius
+  -ms-border-radius:     $radius
+  border-radius:         $radius
+
+.box
+  +border-radius(10px)
+
+.message
+  border: 1px solid #ccc
+  padding: 10px
+  color: #333
+
+.success
+  @extend .message
+  border-color: green
+
+.error
+  @extend .message
+  border-color: red
+
+.warning
+  @extend .message
+  border-color: yellow
+
+.foo
+  &:before
+    content: $pi
+
+.bar
+  &:before
+    content: $n-ary-summation
+
+",
+    "$n-ary-summation: '\\2211'
+",
+  ],
   "version": 3,
 }
 `;
@@ -1609,6 +1673,59 @@ exports[`sourceMap option should generate source maps when value has "true" valu
   "sources": [
     "test/scss/language.scss",
     "test/scss/another/_variables.scss",
+  ],
+  "sourcesContent": [
+    "@import "another/variables";
+@import "./file.css";
+
+$font-stack:    Helvetica, sans-serif;
+$primary-color: #333;
+$pi:            '\\e0C6';
+
+body {
+  font: 100% $font-stack;
+  color: $primary-color;
+}
+
+nav {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li { display: inline-block; }
+
+  a {
+    display: block;
+    padding: 6px 12px;
+    text-decoration: none;
+  }
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+.box { @include border-radius(10px); }
+
+.foo {
+  &:before {
+    content: $pi;
+  }
+}
+
+.bar {
+  &:before {
+    content: $n-ary-summation;
+  }
+}
+",
+    "$n-ary-summation: '\\2211'
+",
   ],
   "version": 3,
 }
@@ -1683,6 +1800,70 @@ exports[`sourceMap option should generate source maps when value has "true" valu
     "test/sass/language.sass",
     "test/sass/another/variables.sass",
   ],
+  "sourcesContent": [
+    "@import "another/variables"
+@import "./file.css"
+
+$font-stack:    Helvetica, sans-serif
+$primary-color: #333
+$pi:            '\\e0C6'
+
+body
+  font: 100% $font-stack
+  color: $primary-color
+
+nav
+  ul
+    margin: 0
+    padding: 0
+    list-style: none
+
+  li
+    display: inline-block
+
+  a
+    display: block
+    padding: 6px 12px
+    text-decoration: none
+
+=border-radius($radius)
+  -webkit-border-radius: $radius
+  -moz-border-radius:    $radius
+  -ms-border-radius:     $radius
+  border-radius:         $radius
+
+.box
+  +border-radius(10px)
+
+.message
+  border: 1px solid #ccc
+  padding: 10px
+  color: #333
+
+.success
+  @extend .message
+  border-color: green
+
+.error
+  @extend .message
+  border-color: red
+
+.warning
+  @extend .message
+  border-color: yellow
+
+.foo
+  &:before
+    content: $pi
+
+.bar
+  &:before
+    content: $n-ary-summation
+
+",
+    "$n-ary-summation: '\\2211'
+",
+  ],
   "version": 3,
 }
 `;
@@ -1737,6 +1918,59 @@ exports[`sourceMap option should generate source maps when value has "true" valu
   "sources": [
     "test/scss/language.scss",
     "test/scss/another/_variables.scss",
+  ],
+  "sourcesContent": [
+    "@import "another/variables";
+@import "./file.css";
+
+$font-stack:    Helvetica, sans-serif;
+$primary-color: #333;
+$pi:            '\\e0C6';
+
+body {
+  font: 100% $font-stack;
+  color: $primary-color;
+}
+
+nav {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li { display: inline-block; }
+
+  a {
+    display: block;
+    padding: 6px 12px;
+    text-decoration: none;
+  }
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+.box { @include border-radius(10px); }
+
+.foo {
+  &:before {
+    content: $pi;
+  }
+}
+
+.bar {
+  &:before {
+    content: $n-ary-summation;
+  }
+}
+",
+    "$n-ary-summation: '\\2211'
+",
   ],
   "version": 3,
 }
@@ -2291,6 +2525,70 @@ exports[`sourceMap option should generate source maps when value has "true" valu
     "test/sass/language.sass",
     "test/sass/another/variables.sass",
   ],
+  "sourcesContent": [
+    "@import "another/variables"
+@import "./file.css"
+
+$font-stack:    Helvetica, sans-serif
+$primary-color: #333
+$pi:            '\\e0C6'
+
+body
+  font: 100% $font-stack
+  color: $primary-color
+
+nav
+  ul
+    margin: 0
+    padding: 0
+    list-style: none
+
+  li
+    display: inline-block
+
+  a
+    display: block
+    padding: 6px 12px
+    text-decoration: none
+
+=border-radius($radius)
+  -webkit-border-radius: $radius
+  -moz-border-radius:    $radius
+  -ms-border-radius:     $radius
+  border-radius:         $radius
+
+.box
+  +border-radius(10px)
+
+.message
+  border: 1px solid #ccc
+  padding: 10px
+  color: #333
+
+.success
+  @extend .message
+  border-color: green
+
+.error
+  @extend .message
+  border-color: red
+
+.warning
+  @extend .message
+  border-color: yellow
+
+.foo
+  &:before
+    content: $pi
+
+.bar
+  &:before
+    content: $n-ary-summation
+
+",
+    "$n-ary-summation: '\\2211'
+",
+  ],
   "version": 3,
 }
 `;
@@ -2345,6 +2643,59 @@ exports[`sourceMap option should generate source maps when value has "true" valu
   "sources": [
     "test/scss/language.scss",
     "test/scss/another/_variables.scss",
+  ],
+  "sourcesContent": [
+    "@import "another/variables";
+@import "./file.css";
+
+$font-stack:    Helvetica, sans-serif;
+$primary-color: #333;
+$pi:            '\\e0C6';
+
+body {
+  font: 100% $font-stack;
+  color: $primary-color;
+}
+
+nav {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li { display: inline-block; }
+
+  a {
+    display: block;
+    padding: 6px 12px;
+    text-decoration: none;
+  }
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+.box { @include border-radius(10px); }
+
+.foo {
+  &:before {
+    content: $pi;
+  }
+}
+
+.bar {
+  &:before {
+    content: $n-ary-summation;
+  }
+}
+",
+    "$n-ary-summation: '\\2211'
+",
   ],
   "version": 3,
 }
@@ -2419,6 +2770,70 @@ exports[`sourceMap option should generate source maps when value has "true" valu
     "test/sass/language.sass",
     "test/sass/another/variables.sass",
   ],
+  "sourcesContent": [
+    "@import "another/variables"
+@import "./file.css"
+
+$font-stack:    Helvetica, sans-serif
+$primary-color: #333
+$pi:            '\\e0C6'
+
+body
+  font: 100% $font-stack
+  color: $primary-color
+
+nav
+  ul
+    margin: 0
+    padding: 0
+    list-style: none
+
+  li
+    display: inline-block
+
+  a
+    display: block
+    padding: 6px 12px
+    text-decoration: none
+
+=border-radius($radius)
+  -webkit-border-radius: $radius
+  -moz-border-radius:    $radius
+  -ms-border-radius:     $radius
+  border-radius:         $radius
+
+.box
+  +border-radius(10px)
+
+.message
+  border: 1px solid #ccc
+  padding: 10px
+  color: #333
+
+.success
+  @extend .message
+  border-color: green
+
+.error
+  @extend .message
+  border-color: red
+
+.warning
+  @extend .message
+  border-color: yellow
+
+.foo
+  &:before
+    content: $pi
+
+.bar
+  &:before
+    content: $n-ary-summation
+
+",
+    "$n-ary-summation: '\\2211'
+",
+  ],
   "version": 3,
 }
 `;
@@ -2473,6 +2888,59 @@ exports[`sourceMap option should generate source maps when value has "true" valu
   "sources": [
     "test/scss/language.scss",
     "test/scss/another/_variables.scss",
+  ],
+  "sourcesContent": [
+    "@import "another/variables";
+@import "./file.css";
+
+$font-stack:    Helvetica, sans-serif;
+$primary-color: #333;
+$pi:            '\\e0C6';
+
+body {
+  font: 100% $font-stack;
+  color: $primary-color;
+}
+
+nav {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li { display: inline-block; }
+
+  a {
+    display: block;
+    padding: 6px 12px;
+    text-decoration: none;
+  }
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+.box { @include border-radius(10px); }
+
+.foo {
+  &:before {
+    content: $pi;
+  }
+}
+
+.bar {
+  &:before {
+    content: $n-ary-summation;
+  }
+}
+",
+    "$n-ary-summation: '\\2211'
+",
   ],
   "version": 3,
 }
@@ -2792,6 +3260,70 @@ exports[`sourceMap option should generate source maps when value has "true" valu
     "test/sass/language.sass",
     "test/sass/another/variables.sass",
   ],
+  "sourcesContent": [
+    "@import "another/variables"
+@import "./file.css"
+
+$font-stack:    Helvetica, sans-serif
+$primary-color: #333
+$pi:            '\\e0C6'
+
+body
+  font: 100% $font-stack
+  color: $primary-color
+
+nav
+  ul
+    margin: 0
+    padding: 0
+    list-style: none
+
+  li
+    display: inline-block
+
+  a
+    display: block
+    padding: 6px 12px
+    text-decoration: none
+
+=border-radius($radius)
+  -webkit-border-radius: $radius
+  -moz-border-radius:    $radius
+  -ms-border-radius:     $radius
+  border-radius:         $radius
+
+.box
+  +border-radius(10px)
+
+.message
+  border: 1px solid #ccc
+  padding: 10px
+  color: #333
+
+.success
+  @extend .message
+  border-color: green
+
+.error
+  @extend .message
+  border-color: red
+
+.warning
+  @extend .message
+  border-color: yellow
+
+.foo
+  &:before
+    content: $pi
+
+.bar
+  &:before
+    content: $n-ary-summation
+
+",
+    "$n-ary-summation: '\\2211'
+",
+  ],
   "version": 3,
 }
 `;
@@ -2846,6 +3378,59 @@ exports[`sourceMap option should generate source maps when value has "true" valu
   "sources": [
     "test/scss/language.scss",
     "test/scss/another/_variables.scss",
+  ],
+  "sourcesContent": [
+    "@import "another/variables";
+@import "./file.css";
+
+$font-stack:    Helvetica, sans-serif;
+$primary-color: #333;
+$pi:            '\\e0C6';
+
+body {
+  font: 100% $font-stack;
+  color: $primary-color;
+}
+
+nav {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li { display: inline-block; }
+
+  a {
+    display: block;
+    padding: 6px 12px;
+    text-decoration: none;
+  }
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+.box { @include border-radius(10px); }
+
+.foo {
+  &:before {
+    content: $pi;
+  }
+}
+
+.bar {
+  &:before {
+    content: $n-ary-summation;
+  }
+}
+",
+    "$n-ary-summation: '\\2211'
+",
   ],
   "version": 3,
 }
@@ -2920,6 +3505,70 @@ exports[`sourceMap option should generate source maps when value has "true" valu
     "test/sass/language.sass",
     "test/sass/another/variables.sass",
   ],
+  "sourcesContent": [
+    "@import "another/variables"
+@import "./file.css"
+
+$font-stack:    Helvetica, sans-serif
+$primary-color: #333
+$pi:            '\\e0C6'
+
+body
+  font: 100% $font-stack
+  color: $primary-color
+
+nav
+  ul
+    margin: 0
+    padding: 0
+    list-style: none
+
+  li
+    display: inline-block
+
+  a
+    display: block
+    padding: 6px 12px
+    text-decoration: none
+
+=border-radius($radius)
+  -webkit-border-radius: $radius
+  -moz-border-radius:    $radius
+  -ms-border-radius:     $radius
+  border-radius:         $radius
+
+.box
+  +border-radius(10px)
+
+.message
+  border: 1px solid #ccc
+  padding: 10px
+  color: #333
+
+.success
+  @extend .message
+  border-color: green
+
+.error
+  @extend .message
+  border-color: red
+
+.warning
+  @extend .message
+  border-color: yellow
+
+.foo
+  &:before
+    content: $pi
+
+.bar
+  &:before
+    content: $n-ary-summation
+
+",
+    "$n-ary-summation: '\\2211'
+",
+  ],
   "version": 3,
 }
 `;
@@ -2974,6 +3623,59 @@ exports[`sourceMap option should generate source maps when value has "true" valu
   "sources": [
     "test/scss/language.scss",
     "test/scss/another/_variables.scss",
+  ],
+  "sourcesContent": [
+    "@import "another/variables";
+@import "./file.css";
+
+$font-stack:    Helvetica, sans-serif;
+$primary-color: #333;
+$pi:            '\\e0C6';
+
+body {
+  font: 100% $font-stack;
+  color: $primary-color;
+}
+
+nav {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li { display: inline-block; }
+
+  a {
+    display: block;
+    padding: 6px 12px;
+    text-decoration: none;
+  }
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+.box { @include border-radius(10px); }
+
+.foo {
+  &:before {
+    content: $pi;
+  }
+}
+
+.bar {
+  &:before {
+    content: $n-ary-summation;
+  }
+}
+",
+    "$n-ary-summation: '\\2211'
+",
   ],
   "version": 3,
 }
@@ -3528,6 +4230,70 @@ exports[`sourceMap option should generate source maps when value has "true" valu
     "test/sass/language.sass",
     "test/sass/another/variables.sass",
   ],
+  "sourcesContent": [
+    "@import "another/variables"
+@import "./file.css"
+
+$font-stack:    Helvetica, sans-serif
+$primary-color: #333
+$pi:            '\\e0C6'
+
+body
+  font: 100% $font-stack
+  color: $primary-color
+
+nav
+  ul
+    margin: 0
+    padding: 0
+    list-style: none
+
+  li
+    display: inline-block
+
+  a
+    display: block
+    padding: 6px 12px
+    text-decoration: none
+
+=border-radius($radius)
+  -webkit-border-radius: $radius
+  -moz-border-radius:    $radius
+  -ms-border-radius:     $radius
+  border-radius:         $radius
+
+.box
+  +border-radius(10px)
+
+.message
+  border: 1px solid #ccc
+  padding: 10px
+  color: #333
+
+.success
+  @extend .message
+  border-color: green
+
+.error
+  @extend .message
+  border-color: red
+
+.warning
+  @extend .message
+  border-color: yellow
+
+.foo
+  &:before
+    content: $pi
+
+.bar
+  &:before
+    content: $n-ary-summation
+
+",
+    "$n-ary-summation: '\\2211'
+",
+  ],
   "version": 3,
 }
 `;
@@ -3582,6 +4348,59 @@ exports[`sourceMap option should generate source maps when value has "true" valu
   "sources": [
     "test/scss/language.scss",
     "test/scss/another/_variables.scss",
+  ],
+  "sourcesContent": [
+    "@import "another/variables";
+@import "./file.css";
+
+$font-stack:    Helvetica, sans-serif;
+$primary-color: #333;
+$pi:            '\\e0C6';
+
+body {
+  font: 100% $font-stack;
+  color: $primary-color;
+}
+
+nav {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li { display: inline-block; }
+
+  a {
+    display: block;
+    padding: 6px 12px;
+    text-decoration: none;
+  }
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+.box { @include border-radius(10px); }
+
+.foo {
+  &:before {
+    content: $pi;
+  }
+}
+
+.bar {
+  &:before {
+    content: $n-ary-summation;
+  }
+}
+",
+    "$n-ary-summation: '\\2211'
+",
   ],
   "version": 3,
 }
@@ -3656,6 +4475,70 @@ exports[`sourceMap option should generate source maps when value has "true" valu
     "test/sass/language.sass",
     "test/sass/another/variables.sass",
   ],
+  "sourcesContent": [
+    "@import "another/variables"
+@import "./file.css"
+
+$font-stack:    Helvetica, sans-serif
+$primary-color: #333
+$pi:            '\\e0C6'
+
+body
+  font: 100% $font-stack
+  color: $primary-color
+
+nav
+  ul
+    margin: 0
+    padding: 0
+    list-style: none
+
+  li
+    display: inline-block
+
+  a
+    display: block
+    padding: 6px 12px
+    text-decoration: none
+
+=border-radius($radius)
+  -webkit-border-radius: $radius
+  -moz-border-radius:    $radius
+  -ms-border-radius:     $radius
+  border-radius:         $radius
+
+.box
+  +border-radius(10px)
+
+.message
+  border: 1px solid #ccc
+  padding: 10px
+  color: #333
+
+.success
+  @extend .message
+  border-color: green
+
+.error
+  @extend .message
+  border-color: red
+
+.warning
+  @extend .message
+  border-color: yellow
+
+.foo
+  &:before
+    content: $pi
+
+.bar
+  &:before
+    content: $n-ary-summation
+
+",
+    "$n-ary-summation: '\\2211'
+",
+  ],
   "version": 3,
 }
 `;
@@ -3710,6 +4593,59 @@ exports[`sourceMap option should generate source maps when value has "true" valu
   "sources": [
     "test/scss/language.scss",
     "test/scss/another/_variables.scss",
+  ],
+  "sourcesContent": [
+    "@import "another/variables";
+@import "./file.css";
+
+$font-stack:    Helvetica, sans-serif;
+$primary-color: #333;
+$pi:            '\\e0C6';
+
+body {
+  font: 100% $font-stack;
+  color: $primary-color;
+}
+
+nav {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li { display: inline-block; }
+
+  a {
+    display: block;
+    padding: 6px 12px;
+    text-decoration: none;
+  }
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+.box { @include border-radius(10px); }
+
+.foo {
+  &:before {
+    content: $pi;
+  }
+}
+
+.bar {
+  &:before {
+    content: $n-ary-summation;
+  }
+}
+",
+    "$n-ary-summation: '\\2211'
+",
   ],
   "version": 3,
 }
@@ -4029,6 +4965,70 @@ exports[`sourceMap option should generate source maps when value is not specifie
     "test/sass/language.sass",
     "test/sass/another/variables.sass",
   ],
+  "sourcesContent": [
+    "@import "another/variables"
+@import "./file.css"
+
+$font-stack:    Helvetica, sans-serif
+$primary-color: #333
+$pi:            '\\e0C6'
+
+body
+  font: 100% $font-stack
+  color: $primary-color
+
+nav
+  ul
+    margin: 0
+    padding: 0
+    list-style: none
+
+  li
+    display: inline-block
+
+  a
+    display: block
+    padding: 6px 12px
+    text-decoration: none
+
+=border-radius($radius)
+  -webkit-border-radius: $radius
+  -moz-border-radius:    $radius
+  -ms-border-radius:     $radius
+  border-radius:         $radius
+
+.box
+  +border-radius(10px)
+
+.message
+  border: 1px solid #ccc
+  padding: 10px
+  color: #333
+
+.success
+  @extend .message
+  border-color: green
+
+.error
+  @extend .message
+  border-color: red
+
+.warning
+  @extend .message
+  border-color: yellow
+
+.foo
+  &:before
+    content: $pi
+
+.bar
+  &:before
+    content: $n-ary-summation
+
+",
+    "$n-ary-summation: '\\2211'
+",
+  ],
   "version": 3,
 }
 `;
@@ -4083,6 +5083,59 @@ exports[`sourceMap option should generate source maps when value is not specifie
   "sources": [
     "test/scss/language.scss",
     "test/scss/another/_variables.scss",
+  ],
+  "sourcesContent": [
+    "@import "another/variables";
+@import "./file.css";
+
+$font-stack:    Helvetica, sans-serif;
+$primary-color: #333;
+$pi:            '\\e0C6';
+
+body {
+  font: 100% $font-stack;
+  color: $primary-color;
+}
+
+nav {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li { display: inline-block; }
+
+  a {
+    display: block;
+    padding: 6px 12px;
+    text-decoration: none;
+  }
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+.box { @include border-radius(10px); }
+
+.foo {
+  &:before {
+    content: $pi;
+  }
+}
+
+.bar {
+  &:before {
+    content: $n-ary-summation;
+  }
+}
+",
+    "$n-ary-summation: '\\2211'
+",
   ],
   "version": 3,
 }
@@ -4157,6 +5210,70 @@ exports[`sourceMap option should generate source maps when value is not specifie
     "test/sass/language.sass",
     "test/sass/another/variables.sass",
   ],
+  "sourcesContent": [
+    "@import "another/variables"
+@import "./file.css"
+
+$font-stack:    Helvetica, sans-serif
+$primary-color: #333
+$pi:            '\\e0C6'
+
+body
+  font: 100% $font-stack
+  color: $primary-color
+
+nav
+  ul
+    margin: 0
+    padding: 0
+    list-style: none
+
+  li
+    display: inline-block
+
+  a
+    display: block
+    padding: 6px 12px
+    text-decoration: none
+
+=border-radius($radius)
+  -webkit-border-radius: $radius
+  -moz-border-radius:    $radius
+  -ms-border-radius:     $radius
+  border-radius:         $radius
+
+.box
+  +border-radius(10px)
+
+.message
+  border: 1px solid #ccc
+  padding: 10px
+  color: #333
+
+.success
+  @extend .message
+  border-color: green
+
+.error
+  @extend .message
+  border-color: red
+
+.warning
+  @extend .message
+  border-color: yellow
+
+.foo
+  &:before
+    content: $pi
+
+.bar
+  &:before
+    content: $n-ary-summation
+
+",
+    "$n-ary-summation: '\\2211'
+",
+  ],
   "version": 3,
 }
 `;
@@ -4211,6 +5328,59 @@ exports[`sourceMap option should generate source maps when value is not specifie
   "sources": [
     "test/scss/language.scss",
     "test/scss/another/_variables.scss",
+  ],
+  "sourcesContent": [
+    "@import "another/variables";
+@import "./file.css";
+
+$font-stack:    Helvetica, sans-serif;
+$primary-color: #333;
+$pi:            '\\e0C6';
+
+body {
+  font: 100% $font-stack;
+  color: $primary-color;
+}
+
+nav {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li { display: inline-block; }
+
+  a {
+    display: block;
+    padding: 6px 12px;
+    text-decoration: none;
+  }
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+.box { @include border-radius(10px); }
+
+.foo {
+  &:before {
+    content: $pi;
+  }
+}
+
+.bar {
+  &:before {
+    content: $n-ary-summation;
+  }
+}
+",
+    "$n-ary-summation: '\\2211'
+",
   ],
   "version": 3,
 }
@@ -4765,6 +5935,70 @@ exports[`sourceMap option should generate source maps when value is not specifie
     "test/sass/language.sass",
     "test/sass/another/variables.sass",
   ],
+  "sourcesContent": [
+    "@import "another/variables"
+@import "./file.css"
+
+$font-stack:    Helvetica, sans-serif
+$primary-color: #333
+$pi:            '\\e0C6'
+
+body
+  font: 100% $font-stack
+  color: $primary-color
+
+nav
+  ul
+    margin: 0
+    padding: 0
+    list-style: none
+
+  li
+    display: inline-block
+
+  a
+    display: block
+    padding: 6px 12px
+    text-decoration: none
+
+=border-radius($radius)
+  -webkit-border-radius: $radius
+  -moz-border-radius:    $radius
+  -ms-border-radius:     $radius
+  border-radius:         $radius
+
+.box
+  +border-radius(10px)
+
+.message
+  border: 1px solid #ccc
+  padding: 10px
+  color: #333
+
+.success
+  @extend .message
+  border-color: green
+
+.error
+  @extend .message
+  border-color: red
+
+.warning
+  @extend .message
+  border-color: yellow
+
+.foo
+  &:before
+    content: $pi
+
+.bar
+  &:before
+    content: $n-ary-summation
+
+",
+    "$n-ary-summation: '\\2211'
+",
+  ],
   "version": 3,
 }
 `;
@@ -4819,6 +6053,59 @@ exports[`sourceMap option should generate source maps when value is not specifie
   "sources": [
     "test/scss/language.scss",
     "test/scss/another/_variables.scss",
+  ],
+  "sourcesContent": [
+    "@import "another/variables";
+@import "./file.css";
+
+$font-stack:    Helvetica, sans-serif;
+$primary-color: #333;
+$pi:            '\\e0C6';
+
+body {
+  font: 100% $font-stack;
+  color: $primary-color;
+}
+
+nav {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li { display: inline-block; }
+
+  a {
+    display: block;
+    padding: 6px 12px;
+    text-decoration: none;
+  }
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+.box { @include border-radius(10px); }
+
+.foo {
+  &:before {
+    content: $pi;
+  }
+}
+
+.bar {
+  &:before {
+    content: $n-ary-summation;
+  }
+}
+",
+    "$n-ary-summation: '\\2211'
+",
   ],
   "version": 3,
 }
@@ -4893,6 +6180,70 @@ exports[`sourceMap option should generate source maps when value is not specifie
     "test/sass/language.sass",
     "test/sass/another/variables.sass",
   ],
+  "sourcesContent": [
+    "@import "another/variables"
+@import "./file.css"
+
+$font-stack:    Helvetica, sans-serif
+$primary-color: #333
+$pi:            '\\e0C6'
+
+body
+  font: 100% $font-stack
+  color: $primary-color
+
+nav
+  ul
+    margin: 0
+    padding: 0
+    list-style: none
+
+  li
+    display: inline-block
+
+  a
+    display: block
+    padding: 6px 12px
+    text-decoration: none
+
+=border-radius($radius)
+  -webkit-border-radius: $radius
+  -moz-border-radius:    $radius
+  -ms-border-radius:     $radius
+  border-radius:         $radius
+
+.box
+  +border-radius(10px)
+
+.message
+  border: 1px solid #ccc
+  padding: 10px
+  color: #333
+
+.success
+  @extend .message
+  border-color: green
+
+.error
+  @extend .message
+  border-color: red
+
+.warning
+  @extend .message
+  border-color: yellow
+
+.foo
+  &:before
+    content: $pi
+
+.bar
+  &:before
+    content: $n-ary-summation
+
+",
+    "$n-ary-summation: '\\2211'
+",
+  ],
   "version": 3,
 }
 `;
@@ -4947,6 +6298,59 @@ exports[`sourceMap option should generate source maps when value is not specifie
   "sources": [
     "test/scss/language.scss",
     "test/scss/another/_variables.scss",
+  ],
+  "sourcesContent": [
+    "@import "another/variables";
+@import "./file.css";
+
+$font-stack:    Helvetica, sans-serif;
+$primary-color: #333;
+$pi:            '\\e0C6';
+
+body {
+  font: 100% $font-stack;
+  color: $primary-color;
+}
+
+nav {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li { display: inline-block; }
+
+  a {
+    display: block;
+    padding: 6px 12px;
+    text-decoration: none;
+  }
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+.box { @include border-radius(10px); }
+
+.foo {
+  &:before {
+    content: $pi;
+  }
+}
+
+.bar {
+  &:before {
+    content: $n-ary-summation;
+  }
+}
+",
+    "$n-ary-summation: '\\2211'
+",
   ],
   "version": 3,
 }
@@ -5291,6 +6695,75 @@ exports[`sourceMap option should generate source maps with absolute URLs ('dart-
     "test/node_modules/module/module.scss",
     "test/sass/another/variables.sass",
   ],
+  "sourcesContent": [
+    "@import "another/variables"
+@import "./file.css"
+@import "module"
+
+$font-stack:    Helvetica, sans-serif
+$primary-color: #333
+$pi:            '\\e0C6'
+
+body
+  font: 100% $font-stack
+  color: $primary-color
+
+nav
+  ul
+    margin: 0
+    padding: 0
+    list-style: none
+
+  li
+    display: inline-block
+
+  a
+    display: block
+    padding: 6px 12px
+    text-decoration: none
+
+=border-radius($radius)
+  -webkit-border-radius: $radius
+  -moz-border-radius:    $radius
+  -ms-border-radius:     $radius
+  border-radius:         $radius
+
+.box
+  +border-radius(10px)
+
+.message
+  border: 1px solid #ccc
+  padding: 10px
+  color: #333
+
+.success
+  @extend .message
+  border-color: green
+
+.error
+  @extend .message
+  border-color: red
+
+.warning
+  @extend .message
+  border-color: yellow
+
+.foo
+  &:before
+    content: $pi
+
+.bar
+  &:before
+    content: $n-ary-summation
+
+",
+    ".module {
+    background: hotpink;
+}
+",
+    "$n-ary-summation: '\\2211'
+",
+  ],
   "version": 3,
 }
 `;
@@ -5350,6 +6823,64 @@ exports[`sourceMap option should generate source maps with absolute URLs ('dart-
     "test/scss/language-source-maps.scss",
     "test/node_modules/module/module.scss",
     "test/scss/another/_variables.scss",
+  ],
+  "sourcesContent": [
+    "@import "another/variables";
+@import "./file.css";
+@import 'module';
+
+$font-stack:    Helvetica, sans-serif;
+$primary-color: #333;
+$pi:            '\\e0C6';
+
+body {
+  font: 100% $font-stack;
+  color: $primary-color;
+}
+
+nav {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li { display: inline-block; }
+
+  a {
+    display: block;
+    padding: 6px 12px;
+    text-decoration: none;
+  }
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+.box { @include border-radius(10px); }
+
+.foo {
+  &:before {
+    content: $pi;
+  }
+}
+
+.bar {
+  &:before {
+    content: $n-ary-summation;
+  }
+}
+",
+    ".module {
+    background: hotpink;
+}
+",
+    "$n-ary-summation: '\\2211'
+",
   ],
   "version": 3,
 }
@@ -5429,6 +6960,75 @@ exports[`sourceMap option should generate source maps with absolute URLs ('dart-
     "test/node_modules/module/module.scss",
     "test/sass/another/variables.sass",
   ],
+  "sourcesContent": [
+    "@import "another/variables"
+@import "./file.css"
+@import "module"
+
+$font-stack:    Helvetica, sans-serif
+$primary-color: #333
+$pi:            '\\e0C6'
+
+body
+  font: 100% $font-stack
+  color: $primary-color
+
+nav
+  ul
+    margin: 0
+    padding: 0
+    list-style: none
+
+  li
+    display: inline-block
+
+  a
+    display: block
+    padding: 6px 12px
+    text-decoration: none
+
+=border-radius($radius)
+  -webkit-border-radius: $radius
+  -moz-border-radius:    $radius
+  -ms-border-radius:     $radius
+  border-radius:         $radius
+
+.box
+  +border-radius(10px)
+
+.message
+  border: 1px solid #ccc
+  padding: 10px
+  color: #333
+
+.success
+  @extend .message
+  border-color: green
+
+.error
+  @extend .message
+  border-color: red
+
+.warning
+  @extend .message
+  border-color: yellow
+
+.foo
+  &:before
+    content: $pi
+
+.bar
+  &:before
+    content: $n-ary-summation
+
+",
+    ".module {
+    background: hotpink;
+}
+",
+    "$n-ary-summation: '\\2211'
+",
+  ],
   "version": 3,
 }
 `;
@@ -5488,6 +7088,64 @@ exports[`sourceMap option should generate source maps with absolute URLs ('dart-
     "test/scss/language-source-maps.scss",
     "test/node_modules/module/module.scss",
     "test/scss/another/_variables.scss",
+  ],
+  "sourcesContent": [
+    "@import "another/variables";
+@import "./file.css";
+@import 'module';
+
+$font-stack:    Helvetica, sans-serif;
+$primary-color: #333;
+$pi:            '\\e0C6';
+
+body {
+  font: 100% $font-stack;
+  color: $primary-color;
+}
+
+nav {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li { display: inline-block; }
+
+  a {
+    display: block;
+    padding: 6px 12px;
+    text-decoration: none;
+  }
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+.box { @include border-radius(10px); }
+
+.foo {
+  &:before {
+    content: $pi;
+  }
+}
+
+.bar {
+  &:before {
+    content: $n-ary-summation;
+  }
+}
+",
+    ".module {
+    background: hotpink;
+}
+",
+    "$n-ary-summation: '\\2211'
+",
   ],
   "version": 3,
 }
@@ -6087,6 +7745,75 @@ exports[`sourceMap option should generate source maps with absolute URLs ('sass-
     "test/node_modules/module/module.scss",
     "test/sass/another/variables.sass",
   ],
+  "sourcesContent": [
+    "@import "another/variables"
+@import "./file.css"
+@import "module"
+
+$font-stack:    Helvetica, sans-serif
+$primary-color: #333
+$pi:            '\\e0C6'
+
+body
+  font: 100% $font-stack
+  color: $primary-color
+
+nav
+  ul
+    margin: 0
+    padding: 0
+    list-style: none
+
+  li
+    display: inline-block
+
+  a
+    display: block
+    padding: 6px 12px
+    text-decoration: none
+
+=border-radius($radius)
+  -webkit-border-radius: $radius
+  -moz-border-radius:    $radius
+  -ms-border-radius:     $radius
+  border-radius:         $radius
+
+.box
+  +border-radius(10px)
+
+.message
+  border: 1px solid #ccc
+  padding: 10px
+  color: #333
+
+.success
+  @extend .message
+  border-color: green
+
+.error
+  @extend .message
+  border-color: red
+
+.warning
+  @extend .message
+  border-color: yellow
+
+.foo
+  &:before
+    content: $pi
+
+.bar
+  &:before
+    content: $n-ary-summation
+
+",
+    ".module {
+    background: hotpink;
+}
+",
+    "$n-ary-summation: '\\2211'
+",
+  ],
   "version": 3,
 }
 `;
@@ -6146,6 +7873,64 @@ exports[`sourceMap option should generate source maps with absolute URLs ('sass-
     "test/scss/language-source-maps.scss",
     "test/node_modules/module/module.scss",
     "test/scss/another/_variables.scss",
+  ],
+  "sourcesContent": [
+    "@import "another/variables";
+@import "./file.css";
+@import 'module';
+
+$font-stack:    Helvetica, sans-serif;
+$primary-color: #333;
+$pi:            '\\e0C6';
+
+body {
+  font: 100% $font-stack;
+  color: $primary-color;
+}
+
+nav {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li { display: inline-block; }
+
+  a {
+    display: block;
+    padding: 6px 12px;
+    text-decoration: none;
+  }
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+.box { @include border-radius(10px); }
+
+.foo {
+  &:before {
+    content: $pi;
+  }
+}
+
+.bar {
+  &:before {
+    content: $n-ary-summation;
+  }
+}
+",
+    ".module {
+    background: hotpink;
+}
+",
+    "$n-ary-summation: '\\2211'
+",
   ],
   "version": 3,
 }
@@ -6225,6 +8010,75 @@ exports[`sourceMap option should generate source maps with absolute URLs ('sass-
     "test/node_modules/module/module.scss",
     "test/sass/another/variables.sass",
   ],
+  "sourcesContent": [
+    "@import "another/variables"
+@import "./file.css"
+@import "module"
+
+$font-stack:    Helvetica, sans-serif
+$primary-color: #333
+$pi:            '\\e0C6'
+
+body
+  font: 100% $font-stack
+  color: $primary-color
+
+nav
+  ul
+    margin: 0
+    padding: 0
+    list-style: none
+
+  li
+    display: inline-block
+
+  a
+    display: block
+    padding: 6px 12px
+    text-decoration: none
+
+=border-radius($radius)
+  -webkit-border-radius: $radius
+  -moz-border-radius:    $radius
+  -ms-border-radius:     $radius
+  border-radius:         $radius
+
+.box
+  +border-radius(10px)
+
+.message
+  border: 1px solid #ccc
+  padding: 10px
+  color: #333
+
+.success
+  @extend .message
+  border-color: green
+
+.error
+  @extend .message
+  border-color: red
+
+.warning
+  @extend .message
+  border-color: yellow
+
+.foo
+  &:before
+    content: $pi
+
+.bar
+  &:before
+    content: $n-ary-summation
+
+",
+    ".module {
+    background: hotpink;
+}
+",
+    "$n-ary-summation: '\\2211'
+",
+  ],
   "version": 3,
 }
 `;
@@ -6284,6 +8138,64 @@ exports[`sourceMap option should generate source maps with absolute URLs ('sass-
     "test/scss/language-source-maps.scss",
     "test/node_modules/module/module.scss",
     "test/scss/another/_variables.scss",
+  ],
+  "sourcesContent": [
+    "@import "another/variables";
+@import "./file.css";
+@import 'module';
+
+$font-stack:    Helvetica, sans-serif;
+$primary-color: #333;
+$pi:            '\\e0C6';
+
+body {
+  font: 100% $font-stack;
+  color: $primary-color;
+}
+
+nav {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li { display: inline-block; }
+
+  a {
+    display: block;
+    padding: 6px 12px;
+    text-decoration: none;
+  }
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+.box { @include border-radius(10px); }
+
+.foo {
+  &:before {
+    content: $pi;
+  }
+}
+
+.bar {
+  &:before {
+    content: $n-ary-summation;
+  }
+}
+",
+    ".module {
+    background: hotpink;
+}
+",
+    "$n-ary-summation: '\\2211'
+",
   ],
   "version": 3,
 }
@@ -6609,6 +8521,70 @@ exports[`sourceMap option should generate sourcemap with "asset/resource" ('dart
     "webpack://sassLoaderExport/./sass/language.sass",
     "webpack://sassLoaderExport/./sass/another/variables.sass",
   ],
+  "sourcesContent": [
+    "@import "another/variables"
+@import "./file.css"
+
+$font-stack:    Helvetica, sans-serif
+$primary-color: #333
+$pi:            '\\e0C6'
+
+body
+  font: 100% $font-stack
+  color: $primary-color
+
+nav
+  ul
+    margin: 0
+    padding: 0
+    list-style: none
+
+  li
+    display: inline-block
+
+  a
+    display: block
+    padding: 6px 12px
+    text-decoration: none
+
+=border-radius($radius)
+  -webkit-border-radius: $radius
+  -moz-border-radius:    $radius
+  -ms-border-radius:     $radius
+  border-radius:         $radius
+
+.box
+  +border-radius(10px)
+
+.message
+  border: 1px solid #ccc
+  padding: 10px
+  color: #333
+
+.success
+  @extend .message
+  border-color: green
+
+.error
+  @extend .message
+  border-color: red
+
+.warning
+  @extend .message
+  border-color: yellow
+
+.foo
+  &:before
+    content: $pi
+
+.bar
+  &:before
+    content: $n-ary-summation
+
+",
+    "$n-ary-summation: '\\2211'
+",
+  ],
   "version": 3,
 }
 `;
@@ -6665,6 +8641,59 @@ exports[`sourceMap option should generate sourcemap with "asset/resource" ('dart
   "sources": [
     "webpack://sassLoaderExport/./scss/language.scss",
     "webpack://sassLoaderExport/./scss/another/_variables.scss",
+  ],
+  "sourcesContent": [
+    "@import "another/variables";
+@import "./file.css";
+
+$font-stack:    Helvetica, sans-serif;
+$primary-color: #333;
+$pi:            '\\e0C6';
+
+body {
+  font: 100% $font-stack;
+  color: $primary-color;
+}
+
+nav {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li { display: inline-block; }
+
+  a {
+    display: block;
+    padding: 6px 12px;
+    text-decoration: none;
+  }
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+.box { @include border-radius(10px); }
+
+.foo {
+  &:before {
+    content: $pi;
+  }
+}
+
+.bar {
+  &:before {
+    content: $n-ary-summation;
+  }
+}
+",
+    "$n-ary-summation: '\\2211'
+",
   ],
   "version": 3,
 }
@@ -6741,6 +8770,70 @@ exports[`sourceMap option should generate sourcemap with "asset/resource" ('dart
     "webpack://sassLoaderExport/./sass/language.sass",
     "webpack://sassLoaderExport/./sass/another/variables.sass",
   ],
+  "sourcesContent": [
+    "@import "another/variables"
+@import "./file.css"
+
+$font-stack:    Helvetica, sans-serif
+$primary-color: #333
+$pi:            '\\e0C6'
+
+body
+  font: 100% $font-stack
+  color: $primary-color
+
+nav
+  ul
+    margin: 0
+    padding: 0
+    list-style: none
+
+  li
+    display: inline-block
+
+  a
+    display: block
+    padding: 6px 12px
+    text-decoration: none
+
+=border-radius($radius)
+  -webkit-border-radius: $radius
+  -moz-border-radius:    $radius
+  -ms-border-radius:     $radius
+  border-radius:         $radius
+
+.box
+  +border-radius(10px)
+
+.message
+  border: 1px solid #ccc
+  padding: 10px
+  color: #333
+
+.success
+  @extend .message
+  border-color: green
+
+.error
+  @extend .message
+  border-color: red
+
+.warning
+  @extend .message
+  border-color: yellow
+
+.foo
+  &:before
+    content: $pi
+
+.bar
+  &:before
+    content: $n-ary-summation
+
+",
+    "$n-ary-summation: '\\2211'
+",
+  ],
   "version": 3,
 }
 `;
@@ -6797,6 +8890,59 @@ exports[`sourceMap option should generate sourcemap with "asset/resource" ('dart
   "sources": [
     "webpack://sassLoaderExport/./scss/language.scss",
     "webpack://sassLoaderExport/./scss/another/_variables.scss",
+  ],
+  "sourcesContent": [
+    "@import "another/variables";
+@import "./file.css";
+
+$font-stack:    Helvetica, sans-serif;
+$primary-color: #333;
+$pi:            '\\e0C6';
+
+body {
+  font: 100% $font-stack;
+  color: $primary-color;
+}
+
+nav {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li { display: inline-block; }
+
+  a {
+    display: block;
+    padding: 6px 12px;
+    text-decoration: none;
+  }
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+.box { @include border-radius(10px); }
+
+.foo {
+  &:before {
+    content: $pi;
+  }
+}
+
+.bar {
+  &:before {
+    content: $n-ary-summation;
+  }
+}
+",
+    "$n-ary-summation: '\\2211'
+",
   ],
   "version": 3,
 }
@@ -7361,6 +9507,70 @@ exports[`sourceMap option should generate sourcemap with "asset/resource" ('sass
     "webpack://sassLoaderExport/./sass/language.sass",
     "webpack://sassLoaderExport/./sass/another/variables.sass",
   ],
+  "sourcesContent": [
+    "@import "another/variables"
+@import "./file.css"
+
+$font-stack:    Helvetica, sans-serif
+$primary-color: #333
+$pi:            '\\e0C6'
+
+body
+  font: 100% $font-stack
+  color: $primary-color
+
+nav
+  ul
+    margin: 0
+    padding: 0
+    list-style: none
+
+  li
+    display: inline-block
+
+  a
+    display: block
+    padding: 6px 12px
+    text-decoration: none
+
+=border-radius($radius)
+  -webkit-border-radius: $radius
+  -moz-border-radius:    $radius
+  -ms-border-radius:     $radius
+  border-radius:         $radius
+
+.box
+  +border-radius(10px)
+
+.message
+  border: 1px solid #ccc
+  padding: 10px
+  color: #333
+
+.success
+  @extend .message
+  border-color: green
+
+.error
+  @extend .message
+  border-color: red
+
+.warning
+  @extend .message
+  border-color: yellow
+
+.foo
+  &:before
+    content: $pi
+
+.bar
+  &:before
+    content: $n-ary-summation
+
+",
+    "$n-ary-summation: '\\2211'
+",
+  ],
   "version": 3,
 }
 `;
@@ -7417,6 +9627,59 @@ exports[`sourceMap option should generate sourcemap with "asset/resource" ('sass
   "sources": [
     "webpack://sassLoaderExport/./scss/language.scss",
     "webpack://sassLoaderExport/./scss/another/_variables.scss",
+  ],
+  "sourcesContent": [
+    "@import "another/variables";
+@import "./file.css";
+
+$font-stack:    Helvetica, sans-serif;
+$primary-color: #333;
+$pi:            '\\e0C6';
+
+body {
+  font: 100% $font-stack;
+  color: $primary-color;
+}
+
+nav {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li { display: inline-block; }
+
+  a {
+    display: block;
+    padding: 6px 12px;
+    text-decoration: none;
+  }
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+.box { @include border-radius(10px); }
+
+.foo {
+  &:before {
+    content: $pi;
+  }
+}
+
+.bar {
+  &:before {
+    content: $n-ary-summation;
+  }
+}
+",
+    "$n-ary-summation: '\\2211'
+",
   ],
   "version": 3,
 }
@@ -7493,6 +9756,70 @@ exports[`sourceMap option should generate sourcemap with "asset/resource" ('sass
     "webpack://sassLoaderExport/./sass/language.sass",
     "webpack://sassLoaderExport/./sass/another/variables.sass",
   ],
+  "sourcesContent": [
+    "@import "another/variables"
+@import "./file.css"
+
+$font-stack:    Helvetica, sans-serif
+$primary-color: #333
+$pi:            '\\e0C6'
+
+body
+  font: 100% $font-stack
+  color: $primary-color
+
+nav
+  ul
+    margin: 0
+    padding: 0
+    list-style: none
+
+  li
+    display: inline-block
+
+  a
+    display: block
+    padding: 6px 12px
+    text-decoration: none
+
+=border-radius($radius)
+  -webkit-border-radius: $radius
+  -moz-border-radius:    $radius
+  -ms-border-radius:     $radius
+  border-radius:         $radius
+
+.box
+  +border-radius(10px)
+
+.message
+  border: 1px solid #ccc
+  padding: 10px
+  color: #333
+
+.success
+  @extend .message
+  border-color: green
+
+.error
+  @extend .message
+  border-color: red
+
+.warning
+  @extend .message
+  border-color: yellow
+
+.foo
+  &:before
+    content: $pi
+
+.bar
+  &:before
+    content: $n-ary-summation
+
+",
+    "$n-ary-summation: '\\2211'
+",
+  ],
   "version": 3,
 }
 `;
@@ -7549,6 +9876,59 @@ exports[`sourceMap option should generate sourcemap with "asset/resource" ('sass
   "sources": [
     "webpack://sassLoaderExport/./scss/language.scss",
     "webpack://sassLoaderExport/./scss/another/_variables.scss",
+  ],
+  "sourcesContent": [
+    "@import "another/variables";
+@import "./file.css";
+
+$font-stack:    Helvetica, sans-serif;
+$primary-color: #333;
+$pi:            '\\e0C6';
+
+body {
+  font: 100% $font-stack;
+  color: $primary-color;
+}
+
+nav {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li { display: inline-block; }
+
+  a {
+    display: block;
+    padding: 6px 12px;
+    text-decoration: none;
+  }
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+.box { @include border-radius(10px); }
+
+.foo {
+  &:before {
+    content: $pi;
+  }
+}
+
+.bar {
+  &:before {
+    content: $n-ary-summation;
+  }
+}
+",
+    "$n-ary-summation: '\\2211'
+",
   ],
   "version": 3,
 }
