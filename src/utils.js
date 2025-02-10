@@ -379,8 +379,9 @@ function getPossibleRequests(
   //  - imports that have media queries.
   //
   // The `node-sass` package sends `@import` ending on `.css` to importer, it is bug, so we skip resolve
+  // Also sass outputs as is `@import "style.css"`, but `@use "style.css"` should include CSS content
   if (extension === ".css") {
-    return [];
+    return fromImport ? [] : [url];
   }
 
   const dirname = path.dirname(request);

@@ -1858,6 +1858,25 @@ describe("loader", () => {
           await close(compiler);
         });
 
+        it(`should work when "@use" with CSS extension ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
+          const testId = getTestId("use-css", syntax);
+          const options = {
+            implementation,
+            api,
+          };
+          const compiler = getCompiler(testId, { loader: { options } });
+          const stats = await compile(compiler);
+          const codeFromBundle = getCodeFromBundle(stats, compiler);
+          const codeFromSass = await getCodeFromSass(testId, options);
+
+          expect(codeFromBundle.css).toBe(codeFromSass.css);
+          expect(codeFromBundle.css).toMatchSnapshot("css");
+          expect(getWarnings(stats)).toMatchSnapshot("warnings");
+          expect(getErrors(stats)).toMatchSnapshot("errors");
+
+          await close(compiler);
+        });
+
         it(`should work when "@use" with the "bootstrap-sass" package, directly import ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
           const testId = getTestId("use-bootstrap-sass", syntax);
           const options = {
