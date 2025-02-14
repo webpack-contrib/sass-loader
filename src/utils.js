@@ -711,7 +711,12 @@ function getWebpackImporter(loaderContext, implementation, includePaths) {
   return function importer(originalUrl, prev, done) {
     const { fromImport } = this;
 
-    resolve(prev, originalUrl, fromImport)
+    resolve(
+      prev,
+      originalUrl,
+      // For `node-sass`
+      typeof fromImport === "undefined" ? true : fromImport,
+    )
       .then((result) => {
         // Add the result as dependency.
         // Although we're also using stats.includedFiles, this might come in handy when an error occurs.
