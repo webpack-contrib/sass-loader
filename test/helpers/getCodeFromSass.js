@@ -452,6 +452,10 @@ async function getCodeFromSass(testId, options, context = {}) {
       testFolder,
       "node_modules/webpack-export-field/dist/styles/webpack/file.scss",
     );
+    const pathToCSSModule = path.resolve(
+      testFolder,
+      "node_modules/css/some-css-module.css",
+    );
 
     // Pseudo importer for tests
     const testImporter = function testImporter(url) {
@@ -858,7 +862,6 @@ async function getCodeFromSass(testId, options, context = {}) {
             }
           }
         }
-
         // eslint-disable-next-line no-param-reassign
         url = url
           .replace(
@@ -939,6 +942,15 @@ async function getCodeFromSass(testId, options, context = {}) {
           .replace(/^~/, testNodeModules);
       }
 
+      const fromImport =
+        typeof this.fromImport === "undefined" ? true : this.fromImport;
+
+      if (!fromImport && /css\/some-css-module\.css/.test(url)) {
+        return {
+          file: url.replace(/css\/some-css-module\.css/, pathToCSSModule),
+        };
+      }
+
       return {
         file: url,
       };
@@ -956,6 +968,7 @@ async function getCodeFromSass(testId, options, context = {}) {
   }
 
   sassOptions.logger = { debug: () => {}, warn: () => {} };
+  sassOptions.silenceDeprecations = ["legacy-js-api"];
 
   let css;
   let map;

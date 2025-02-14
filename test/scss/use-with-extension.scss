@@ -16,3 +16,4 @@
 @use "../scss/nested/example-5.scss" as module14;
 // TODO https://github.com/sass/dart-sass/issues/798#issuecomment-521229911
 // @use "nested/example-6.SCSS" as module15;
+@use 'css/some-css-module.css';

@@ -379,8 +379,9 @@ function getPossibleRequests(
   //  - imports that have media queries.
   //
   // The `node-sass` package sends `@import` ending on `.css` to importer, it is bug, so we skip resolve
+  // Also sass outputs as is `@import "style.css"`, but `@use "style.css"` should include CSS content
   if (extension === ".css") {
-    return [];
+    return fromImport ? [] : [url];
   }
 
   const dirname = path.dirname(request);
@@ -710,7 +711,12 @@ function getWebpackImporter(loaderContext, implementation, includePaths) {
   return function importer(originalUrl, prev, done) {
     const { fromImport } = this;
 
-    resolve(prev, originalUrl, fromImport)
+    resolve(
+      prev,
+      originalUrl,
+      // For `node-sass`
+      typeof fromImport === "undefined" ? true : fromImport,
+    )
       .then((result) => {
         // Add the result as dependency.
         // Although we're also using stats.includedFiles, this might come in handy when an error occurs.
