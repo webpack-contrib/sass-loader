@@ -942,7 +942,8 @@ async function getCodeFromSass(testId, options, context = {}) {
           .replace(/^~/, testNodeModules);
       }
 
-      const { fromImport } = this;
+      const fromImport =
+        typeof this.fromImport === "undefined" ? true : this.fromImport;
 
       if (!fromImport && /css\/some-css-module\.css/.test(url)) {
         return {
