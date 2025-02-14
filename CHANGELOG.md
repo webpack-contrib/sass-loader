@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [16.0.5](https://github.com/webpack-contrib/sass-loader/compare/v16.0.4...v16.0.5) (2025-02-14)
+
+
+### Bug Fixes
+
+* allow to import CSS using `@use` with `css` extension ([#1254](https://github.com/webpack-contrib/sass-loader/issues/1254)) ([3352e49](https://github.com/webpack-contrib/sass-loader/commit/3352e49f45ac9c7b0e9f6b42752443652e893e21))
+
 ### [16.0.4](https://github.com/webpack-contrib/sass-loader/compare/v16.0.3...v16.0.4) (2024-12-04)
 
 
