@@ -1,13 +1,13 @@
-<div align="center">
-  <img height="170"
+<
+   <Img chiều cao="170" 
     src="https://worldvectorlogo.com/logos/sass-1.svg">
-  <a href="https://github.com/webpack/webpack">
-    <img width="200" height="200"
+  <A Href, Šumperk="https://github.com/webpack/webpack">
+     <Img chiều rộng="200" height="200" 
       src="https://webpack.js.org/assets/icon-square-big.svg">
-  </a>
-</div>
+  </a>>
+</</div>>
 
-[![npm][npm]][npm-url]
+[[!npm][npm]][npm-url]
 [![node][node]][node-url]
 [![tests][tests]][tests-url]
 [![coverage][cover]][cover-url]
@@ -32,15 +32,15 @@ or
 yarn add -D sass-loader sass webpack
 ```
 
-or
+hoặc
 
-```console
+```Bảng điều khiển
 pnpm add -D sass-loader sass webpack
 ```
 
-> [!NOTE]
+> [!ghi chú]
 >
-> To enable CSS processing in your project, you need to install [style-loader](https://webpack.js.org/loaders/style-loader/) and [css-loader](https://webpack.js.org/loaders/css-loader/) via `npm i style-loader css-loader`.
+> Để cho phép xử lý CSS trong dự án của bạn, bạn cần cài đặt [Bộ nạp kiểu](https://webpack.js.org/loaders/style-loader/) Và [Css-loader](https://webpack.js.org/loaders/css-loader/) qua `NPM I: Type-Floader Css-Tloader`.
 
 `sass-loader` requires you to install either [Dart Sass](https://github.com/sass/dart-sass), [Node Sass](https://github.com/sass/node-sass) on your own (more documentation can be found below) or [Sass Embedded](https://github.com/sass/embedded-host-node).
 
