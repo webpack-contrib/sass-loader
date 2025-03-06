@@ -38,6 +38,12 @@ or
 pnpm add -D sass-loader sass webpack
 ```
 
+or
+
+```console
+bun add -D sass-loader sass webpack
+```
+
 > [!NOTE]
 >
 > To enable CSS processing in your project, you need to install [style-loader](https://webpack.js.org/loaders/style-loader/) and [css-loader](https://webpack.js.org/loaders/css-loader/) via `npm i style-loader css-loader`.
