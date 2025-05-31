@@ -44,7 +44,7 @@ pnpm add -D sass-loader sass webpack
 
 `sass-loader` requires you to install either [Dart Sass](https://github.com/sass/dart-sass), [Node Sass](https://github.com/sass/node-sass) on your own (more documentation can be found below) or [Sass Embedded](https://github.com/sass/embedded-host-node).
 
-This allows you to control the versions of all your dependencies, and to choose which Sass implementation to use.
+This allows you to control the versions of all your dependencies and to choose which Sass implementation to use.
 
 > [!NOTE]
 >
@@ -54,7 +54,7 @@ This allows you to control the versions of all your dependencies, and to choose 
 >
 > [Node Sass](https://github.com/sass/node-sass) does not work with [Yarn PnP](https://classic.yarnpkg.com/en/docs/pnp/) and doesn't support [@use rule](https://sass-lang.com/documentation/at-rules/use).
 
-Chain the `sass-loader` with the [css-loader](https://github.com/webpack-contrib/css-loader) and the [style-loader](https://github.com/webpack-contrib/style-loader) to immediately apply all styles to the DOM or the [mini-css-extract-plugin](https://github.com/webpack-contrib/mini-css-extract-plugin) to extract it into a separate file.
+Chain the `sass-loader` with the [css-loader](https://github.com/webpack-contrib/css-loader) and the [style-loader](https://github.com/webpack-contrib/style-loader) to immediately apply all styles to the DOM, or with the [mini-css-extract-plugin](https://github.com/webpack-contrib/mini-css-extract-plugin) to extract it into a separate file.
 
 Then add the loader to your webpack configuration. For example:
 
@@ -96,7 +96,7 @@ module.exports = {
 };
 ```
 
-Finally run `webpack` via your preferred method.
+Finally run `webpack` via your preferred method (e.g., via CLI or an npm script).
 
 ### The `style` (new API, by default since 16 version) and `outputStyle` (old API) options in `production` mode
 
@@ -106,13 +106,14 @@ For `production` mode, the `style` (new API, by default since 16 version) and `o
 
 Webpack provides an [advanced mechanism to resolve files](https://webpack.js.org/concepts/module-resolution/).
 
-The `sass-loader` uses Sass's custom importer feature to pass all queries to the webpack resolving engine enabling you to import your Sass modules from `node_modules`.
+The `sass-loader` uses Sass's custom importer feature to pass all queries to the webpack resolving engine, enabling you to import your Sass modules from `node_modules`.
 
 ```scss
 @import "bootstrap";
 ```
 
 Using `~` is deprecated and should be removed from your code, but we still support it for historical reasons.
+
 Why can you remove it? The loader will first try to resolve `@import` as a relative path. If it cannot be resolved, then the loader will try to resolve `@import` inside [`node_modules`](https://webpack.js.org/configuration/resolve/#resolvemodules).
 
 Prepending module paths with a `~` tells webpack to search through [`node_modules`](https://webpack.js.org/configuration/resolve/#resolvemodules).
@@ -122,22 +123,25 @@ Prepending module paths with a `~` tells webpack to search through [`node_module
 ```
 
 It's important to prepend the path with only `~`, because `~/` resolves to the home directory.
+
 Webpack needs to distinguish between `bootstrap` and `~bootstrap` because CSS and Sass files have no special syntax for importing relative files.
+
 Writing `@import "style.scss"` is the same as `@import "./style.scss";`
 
 ### Problems with `url(...)`
 
 Since Sass implementations don't provide [url rewriting](https://github.com/sass/libsass/issues/532), all linked assets must be relative to the output.
 
-- If you pass the generated CSS on to the `css-loader`, all urls must be relative to the entry-file (e.g. `main.scss`).
-- If you're just generating CSS without passing it to the `css-loader`, it must be relative to your web root.
+- If you pass the generated CSS on to the `css-loader`, all URLs must be relative to the entry-file (e.g. `main.scss`).
+- If you're just generating CSS without passing it to the `css-loader`, URLs must be relative to your web root.
 
 You might be surprised by this first issue, as it is natural to expect relative references to be resolved against the `.sass`/`.scss` file in which they are specified (like in regular `.css` files).
 
 Thankfully there are two solutions to this problem:
 
-- Add the missing url rewriting using the [resolve-url-loader](https://github.com/bholloway/resolve-url-loader). Place it before `sass-loader` in the loader chain.
-- Library authors usually provide a variable to modify the asset path. [bootstrap-sass](https://github.com/twbs/bootstrap-sass) for example has an `$icon-font-path`.
+- Add the missing URL rewriting using the [resolve-url-loader](https://github.com/bholloway/resolve-url-loader). Place it before `sass-loader` in the loader chain.
+
+- Library authors usually provide a variable to modify the asset path. [bootstrap-sass](https://github.com/twbs/bootstrap-sass) for example, has an `$icon-font-path`.
 
 ## Options
 
@@ -164,7 +168,7 @@ The special `implementation` option determines which implementation of Sass to u
 By default, the loader resolves the implementation based on your dependencies.
 Just add the desired implementation to your `package.json` (`sass`, `sass-embedded`, or `node-sass` package) and install dependencies.
 
-Example where the `sass-loader` loader uses the `sass` (`dart-sass`) implementation:
+Example where the `sass-loader` uses the `sass` (`dart-sass`) implementation:
 
 **package.json**
 
@@ -177,7 +181,7 @@ Example where the `sass-loader` loader uses the `sass` (`dart-sass`) implementat
 }
 ```
 
-Example where the `sass-loader` loader uses the `node-sass` implementation:
+Example where the `sass-loader` uses the `node-sass` implementation:
 
 **package.json**
 
@@ -190,7 +194,7 @@ Example where the `sass-loader` loader uses the `node-sass` implementation:
 }
 ```
 
-Example where the `sass-loader` loader uses the `sass-embedded` implementation:
+Example where the `sass-loader` uses the `sass-embedded` implementation:
 
 **package.json**
 
@@ -208,8 +212,7 @@ Example where the `sass-loader` loader uses the `sass-embedded` implementation:
 
 > [!NOTE]
 >
-> Using `optionalDependencies` means that `sass-loader` can fallback to `sass`
-> when running on an operating system not supported by `sass-embedded`
+> Using `optionalDependencies` means that `sass-loader` can fallback to `sass` when running on an operating system not supported by `sass-embedded`
 
 Be aware of the order that `sass-loader` will resolve the implementation:
 
@@ -221,7 +224,7 @@ You can specify a specific implementation by using the `implementation` option, 
 
 #### `object`
 
-For example, to always use Dart Sass, you'd pass:
+For example, to always use `Dart Sass`, you'd pass:
 
 ```js
 module.exports = {
@@ -293,11 +296,11 @@ Options for [Dart Sass](http://sass-lang.com/dart-sass) or [Node Sass](https://g
 
 > [!NOTE]
 >
-> The `charset` option is `true` by default for `dart-sass`, we strongly discourage setting this to `false`, because webpack doesn't support files other than `utf-8`.
+> The `charset` option is `true` by default for `dart-sass`. We strongly discourage setting this to `false` because webpack doesn't support files other than `utf-8`.
 
 > [!NOTE]
 >
-> The `syntax` (new API, by default since 16 version)`and`indentedSyntax`(old API) option is`scss`for the`scss`extension,`indented`for the`sass`extension and`css`for the`css` extension.
+> The `syntax` (new API, by default since 16 version)`and`indentedSyntax`(old API) option is `scss`for the`scss` extension,`indented`for the`sass`extension and`css`for the`css` extension.
 
 > [!NOTE]
 >
@@ -398,7 +401,7 @@ type sourceMap = boolean;
 
 Default: depends on the `compiler.devtool` value
 
-Enables/Disables generation of source maps.
+Enables/disables generation of source maps.
 
 By default generation of source maps depends on the [`devtool`](https://webpack.js.org/configuration/devtool/) option.
 All values enable source map generation except `eval` and `false`.
@@ -434,9 +437,9 @@ module.exports = {
 };
 ```
 
-> ℹ In some rare cases `node-sass` can output invalid source maps (it is a `node-sass` bug).
+> ℹ In some rare cases `node-sass` can output invalid source maps (this is a `node-sass` bug).
 >
-> In order to avoid this, you can try to update `node-sass` to latest version, or you can try to set within `sassOptions` the `outputStyle` option to `compressed`.
+> In order to avoid this, you can try to update `node-sass` to the latest version, or you can try to set within `sassOptions` the `outputStyle` option to `compressed`.
 
 **webpack.config.js**
 
@@ -586,10 +589,10 @@ type webpackImporter = boolean;
 
 Default: `true`
 
-Enables/Disables the default webpack importer.
+Enables/disables the default webpack importer.
 
 This can improve performance in some cases, though use it with caution because aliases and `@import` at-rules starting with `~` will not work.
-You can pass your own `importer` to solve this (see [`importer docs`](https://github.com/sass/node-sass#importer--v200---experimental)).
+You can pass your own `importer` to solve this (see [`importer` docs](https://github.com/sass/node-sass#importer--v200---experimental)).
 
 **webpack.config.js**
 
@@ -649,7 +652,7 @@ $known-prefixes: webkit, moz, ms, o;
 }
 ```
 
-The presented code will throw a webpack warning instead logging.
+The presented code will throw a webpack warning instead of logging.
 
 To ignore unnecessary warnings you can use the [ignoreWarnings](https://webpack.js.org/configuration/other-options/#ignorewarnings) option.
 
@@ -691,11 +694,11 @@ Allows you to switch between the `legacy` and `modern` APIs. You can find more i
 
 > [!NOTE]
 >
-> Using `modern-compiler` and `sass-embedded` together significantly improve performance and decrease built time. We strongly recommend their use. We will enable them by default in a future major release.
+> Using `modern-compiler` and `sass-embedded` together significantly improves performance and decreases build time. We strongly recommend their use. We will enable them by default in a future major release.
 
 > [!WARNING]
 >
-> The sass options are different for the `legacy` and `modern` APIs. Please look at [docs](https://sass-lang.com/documentation/js-api) how to migrate to the modern options.
+> The Sass options are different for the `legacy` and `modern` APIs. Please look at [docs](https://sass-lang.com/documentation/js-api) to learn how to migrate to the modern options.
 
 **webpack.config.js**
 
@@ -726,7 +729,7 @@ module.exports = {
 
 ## How to enable `@debug` output
 
-By default, the output of `@debug` messages are disabled.
+By default, the output of `@debug` messages is disabled.
 Add the following to **webpack.config.js** to enable them:
 
 ```js
@@ -742,7 +745,7 @@ module.exports = {
 
 ### Extracts CSS into separate files
 
-For production builds it's recommended to extract the CSS from your bundle to be able to use parallel loading of CSS/JS resources later on.
+For production builds, it's recommended to extract the CSS from your bundle to enable parallel loading of CSS/JS resources.
 
 There are four recommended ways to extract a stylesheet from a bundle:
 
@@ -844,9 +847,9 @@ module.exports = {
 
 ### Source maps
 
-Enables/Disables generation of source maps.
+Enables/disables generation of source maps.
 
-To enable CSS source maps, you'll need to pass the `sourceMap` option to the `sass-loader` _and_ the `css-loader`.
+To enable CSS source maps, you'll need to pass the `sourceMap` option to both the `sass-loader` _and_ the `css-loader`.
 
 **webpack.config.js**
 
@@ -878,11 +881,13 @@ module.exports = {
 };
 ```
 
-If you want to edit the original Sass files inside Chrome, [there's a good blog post](https://medium.com/@toolmantim/getting-started-with-css-sourcemaps-and-in-browser-sass-editing-b4daab987fb0). Checkout [test/sourceMap](https://github.com/webpack-contrib/sass-loader/tree/master/test) for a running example.
+If you want to edit the original Sass files inside Chrome, [there's a good blog post](https://medium.com/@toolmantim/getting-started-with-css-sourcemaps-and-in-browser-sass-editing-b4daab987fb0).
+Checkout [test/sourceMap](https://github.com/webpack-contrib/sass-loader/tree/master/test) for a working example.
 
 ## Contributing
 
-Please take a moment to read our contributing guidelines if you haven't yet done so.
+We welcome all contributions!
+If you're new here, please take a moment to review our contributing guidelines before submitting issues or pull requests.
 
 [CONTRIBUTING](./.github/CONTRIBUTING.md)
 
