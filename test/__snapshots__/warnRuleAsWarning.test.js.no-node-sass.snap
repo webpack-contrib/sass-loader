@@ -13,6 +13,9 @@ Warning on line 5, column 3 of file:///test/sass/broken.sass:5:3:
 This selector doesn't have any properties and won't be rendered.
 
 5 |    asdf
+
+
+test/sass/broken.sass 6:4  root stylesheet
 ",
 ]
 `;
@@ -30,6 +33,9 @@ Warning on line 5, column 3 of file:///test/sass/broken.sass:5:3:
 This selector doesn't have any properties and won't be rendered.
 
 5 |    asdf
+
+
+test/sass/broken.sass 6:4  root stylesheet
 ",
 ]
 `;
@@ -47,6 +53,9 @@ Warning on line 5, column 3 of file:///test/sass/broken.sass:5:3:
 This selector doesn't have any properties and won't be rendered.
 
 5 |    asdf
+
+
+test/sass/broken.sass 6:4  root stylesheet
 ",
 ]
 `;
@@ -64,6 +73,9 @@ Warning on line 5, column 3 of file:///test/sass/broken.sass:5:3:
 This selector doesn't have any properties and won't be rendered.
 
 5 |    asdf
+
+
+file:///test/sass/broken.sass 6:4  root stylesheet
 ",
 ]
 `;
@@ -81,6 +93,9 @@ Warning on line 5, column 3 of file:///test/sass/broken.sass:5:3:
 This selector doesn't have any properties and won't be rendered.
 
 5 |    asdf
+
+
+../../../../test/sass/broken.sass 6:4  root stylesheet
 ",
 ]
 `;
@@ -98,6 +113,9 @@ Warning on line 5, column 3 of file:///test/sass/broken.sass:5:3:
 This selector doesn't have any properties and won't be rendered.
 
 5 |    asdf
+
+
+../../../../test/sass/broken.sass 6:4  root stylesheet
 ",
 ]
 `;
@@ -787,6 +805,14 @@ exports[`loader should not emit warning when 'false' used ('dart-sass', 'legacy'
   [
     {
       "args": [
+        "Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+
+More info: https://sass-lang.com/d/legacy-js-api",
+      ],
+      "type": "warn",
+    },
+    {
+      "args": [
         "[debug:0:0] My debug message",
       ],
       "type": "debug",
@@ -817,6 +843,14 @@ exports[`loader should not emit warning when 'false' used ('dart-sass', 'legacy'
 exports[`loader should not emit warning when 'false' used ('dart-sass', 'legacy' API, 'scss' syntax): logs 1`] = `
 [
   [
+    {
+      "args": [
+        "Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+
+More info: https://sass-lang.com/d/legacy-js-api",
+      ],
+      "type": "warn",
+    },
     {
       "args": [
         "[debug:0:0] My debug message",

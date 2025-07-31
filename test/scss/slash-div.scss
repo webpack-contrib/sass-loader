@@ -1,7 +1,7 @@
-.example {
-  color: red;
+@use "sass:math";
 
-  a {
-    font-weight: (4/2);
-  }
+// Future Sass, doesn't work yet!
+.item3 {
+  $row: span math.div(6, 2) / 7; // A two-element slash-separated list.
+  grid-row: $row;
 }

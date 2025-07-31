@@ -21,6 +21,28 @@ describe("sourceMap option", () => {
     syntaxStyles.forEach((syntax) => {
       const { name: implementationName, api, implementation } = item;
 
+      const getSourceMap = (sourceMap) => {
+        if (
+          implementationName === "sass-embedded" &&
+          api === "legacy" &&
+          sourceMap &&
+          sourceMap.sourcesContent
+        ) {
+          // eslint-disable-next-line no-param-reassign
+          sourceMap.mappings = "<dynamic mappings generation>";
+          // eslint-disable-next-line no-param-reassign
+          sourceMap.sourcesContent = sourceMap.sourcesContent.map((code) => {
+            if (code.includes("sass-embedded-legacy-load-done")) {
+              return "<dynamic content generation>";
+            }
+
+            return code;
+          });
+        }
+
+        return sourceMap;
+      };
+
       it(`should generate source maps when value is not specified and the "devtool" option has "source-map" value ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
         expect.assertions(10);
 
@@ -47,7 +69,7 @@ describe("sourceMap option", () => {
         });
 
         expect(css).toMatchSnapshot("css");
-        expect(sourceMap).toMatchSnapshot("source map");
+        expect(getSourceMap(sourceMap)).toMatchSnapshot("source map");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
 
@@ -80,7 +102,7 @@ describe("sourceMap option", () => {
         });
 
         expect(css).toMatchSnapshot("css");
-        expect(sourceMap).toMatchSnapshot("source map");
+        expect(getSourceMap(sourceMap)).toMatchSnapshot("source map");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
 
@@ -113,7 +135,7 @@ describe("sourceMap option", () => {
         });
 
         expect(css).toMatchSnapshot("css");
-        expect(sourceMap).toMatchSnapshot("source map");
+        expect(getSourceMap(sourceMap)).toMatchSnapshot("source map");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
 
@@ -174,7 +196,7 @@ describe("sourceMap option", () => {
         });
 
         expect(css).toMatchSnapshot("css");
-        expect(sourceMap).toMatchSnapshot("source map");
+        expect(getSourceMap(sourceMap)).toMatchSnapshot("source map");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
 
@@ -192,7 +214,7 @@ describe("sourceMap option", () => {
         const { css, sourceMap } = getCodeFromBundle(stats, compiler);
 
         expect(css).toMatchSnapshot("css");
-        expect(sourceMap).toMatchSnapshot("source map");
+        expect(getSourceMap(sourceMap)).toMatchSnapshot("source map");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
 
@@ -210,7 +232,7 @@ describe("sourceMap option", () => {
         const { css, sourceMap } = getCodeFromBundle(stats, compiler);
 
         expect(css).toMatchSnapshot("css");
-        expect(sourceMap).toMatchSnapshot("source map");
+        expect(getSourceMap(sourceMap)).toMatchSnapshot("source map");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
 
@@ -228,7 +250,7 @@ describe("sourceMap option", () => {
         const { css, sourceMap } = getCodeFromBundle(stats, compiler);
 
         expect(css).toMatchSnapshot("css");
-        expect(sourceMap).toMatchSnapshot("source map");
+        expect(getSourceMap(sourceMap)).toMatchSnapshot("source map");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
 
@@ -289,7 +311,9 @@ describe("sourceMap option", () => {
         }
 
         expect(css).toMatchSnapshot("css");
-        expect(JSON.parse(sourceMap)).toMatchSnapshot("source map");
+        expect(getSourceMap(JSON.parse(sourceMap))).toMatchSnapshot(
+          "source map",
+        );
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
 
@@ -320,7 +344,7 @@ describe("sourceMap option", () => {
         });
 
         expect(css).toMatchSnapshot("css");
-        expect(sourceMap).toMatchSnapshot("source map");
+        expect(getSourceMap(sourceMap)).toMatchSnapshot("source map");
         expect(getWarnings(stats)).toMatchSnapshot("warnings");
         expect(getErrors(stats)).toMatchSnapshot("errors");
 

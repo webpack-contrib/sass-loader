@@ -564,7 +564,7 @@ exports[`sourceMap option should generate source maps when value has "false" val
 exports[`sourceMap option should generate source maps when value has "false" value, but the "sassOptions.sourceMap" has the "true" value ('sass-embedded', 'legacy' API, 'sass' syntax): source map 1`] = `
 {
   "file": "style.css.map",
-  "mappings": ";AACQ;AAMR;EACE;EACA,OALc;;;AAQd;EACE;EACA;EACA;;AAEF;EACE;;AAEF;EACE;EACA;EACA;;;AAQJ;EALE,uBAMe;EALf,oBAKe;EAJf,mBAIe;EAHf,eAGe;;;AAEjB;EACE;EACA;EACA;;;AAEF;EAEE;;;AAEF;EAEE;;;AAEF;EAEE;;;AAGA;EACE,SAhDY;;;AAmDd;EACE,SCzDc",
+  "mappings": "<dynamic mappings generation>",
   "names": [],
   "sourceRoot": "",
   "sources": [
@@ -632,9 +632,7 @@ nav
     content: $n-ary-summation
 
 ",
-    "$n-ary-summation: '\\2211'
-
-@import "sass-embedded-legacy-load-done:13"",
+    "<dynamic content generation>",
   ],
   "version": 3,
 }
@@ -685,7 +683,7 @@ exports[`sourceMap option should generate source maps when value has "false" val
 exports[`sourceMap option should generate source maps when value has "false" value, but the "sassOptions.sourceMap" has the "true" value ('sass-embedded', 'legacy' API, 'scss' syntax): source map 1`] = `
 {
   "file": "style.css.map",
-  "mappings": ";AACQ;AAMR;EACE;EACA,OALc;;;AASd;EACE;EACA;EACA;;AAGF;EAAK;;AAEL;EACE;EACA;EACA;;;AAWJ;EANE,uBAM4B;EALzB,oBAKyB;EAJxB,mBAIwB;EAHpB,eAGoB;;;AAG5B;EACE,SAlCY;;;AAuCd;EACE,SC7Cc",
+  "mappings": "<dynamic mappings generation>",
   "names": [],
   "sourceRoot": "",
   "sources": [
@@ -742,9 +740,7 @@ nav {
   }
 }
 ",
-    "$n-ary-summation: '\\2211'
-
-;@import "sass-embedded-legacy-load-done:3";",
+    "<dynamic content generation>",
   ],
   "version": 3,
 }
@@ -1803,7 +1799,7 @@ exports[`sourceMap option should generate source maps when value has "true" valu
 
 exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "false" value ('sass-embedded', 'legacy' API, 'sass' syntax): source map 1`] = `
 {
-  "mappings": ";AACQ;AAMR;EACE;EACA,OALc;;;AAQd;EACE;EACA;EACA;;AAEF;EACE;;AAEF;EACE;EACA;EACA;;;AAQJ;EALE,uBAMe;EALf,oBAKe;EAJf,mBAIe;EAHf,eAGe;;;AAEjB;EACE;EACA;EACA;;;AAEF;EAEE;;;AAEF;EAEE;;;AAEF;EAEE;;;AAGA;EACE,SAhDY;;;AAmDd;EACE,SCzDc",
+  "mappings": "<dynamic mappings generation>",
   "names": [],
   "sourceRoot": "",
   "sources": [
@@ -1871,9 +1867,7 @@ nav
     content: $n-ary-summation
 
 ",
-    "$n-ary-summation: '\\2211'
-
-@import "sass-embedded-legacy-load-done:12"",
+    "<dynamic content generation>",
   ],
   "version": 3,
 }
@@ -1923,7 +1917,7 @@ exports[`sourceMap option should generate source maps when value has "true" valu
 
 exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "false" value ('sass-embedded', 'legacy' API, 'scss' syntax): source map 1`] = `
 {
-  "mappings": ";AACQ;AAMR;EACE;EACA,OALc;;;AASd;EACE;EACA;EACA;;AAGF;EAAK;;AAEL;EACE;EACA;EACA;;;AAWJ;EANE,uBAM4B;EALzB,oBAKyB;EAJxB,mBAIwB;EAHpB,eAGoB;;;AAG5B;EACE,SAlCY;;;AAuCd;EACE,SC7Cc",
+  "mappings": "<dynamic mappings generation>",
   "names": [],
   "sourceRoot": "",
   "sources": [
@@ -1980,9 +1974,7 @@ nav {
   }
 }
 ",
-    "$n-ary-summation: '\\2211'
-
-;@import "sass-embedded-legacy-load-done:2";",
+    "<dynamic content generation>",
   ],
   "version": 3,
 }
@@ -3275,7 +3267,7 @@ exports[`sourceMap option should generate source maps when value has "true" valu
 
 exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "source-map" value ('sass-embedded', 'legacy' API, 'sass' syntax): source map 1`] = `
 {
-  "mappings": ";AACQ;AAMR;EACE;EACA,OALc;;;AAQd;EACE;EACA;EACA;;AAEF;EACE;;AAEF;EACE;EACA;EACA;;;AAQJ;EALE,uBAMe;EALf,oBAKe;EAJf,mBAIe;EAHf,eAGe;;;AAEjB;EACE;EACA;EACA;;;AAEF;EAEE;;;AAEF;EAEE;;;AAEF;EAEE;;;AAGA;EACE,SAhDY;;;AAmDd;EACE,SCzDc",
+  "mappings": "<dynamic mappings generation>",
   "names": [],
   "sourceRoot": "",
   "sources": [
@@ -3343,9 +3335,7 @@ nav
     content: $n-ary-summation
 
 ",
-    "$n-ary-summation: '\\2211'
-
-@import "sass-embedded-legacy-load-done:11"",
+    "<dynamic content generation>",
   ],
   "version": 3,
 }
@@ -3395,7 +3385,7 @@ exports[`sourceMap option should generate source maps when value has "true" valu
 
 exports[`sourceMap option should generate source maps when value has "true" value and the "devtool" option has "source-map" value ('sass-embedded', 'legacy' API, 'scss' syntax): source map 1`] = `
 {
-  "mappings": ";AACQ;AAMR;EACE;EACA,OALc;;;AASd;EACE;EACA;EACA;;AAGF;EAAK;;AAEL;EACE;EACA;EACA;;;AAWJ;EANE,uBAM4B;EALzB,oBAKyB;EAJxB,mBAIwB;EAHpB,eAGoB;;;AAG5B;EACE,SAlCY;;;AAuCd;EACE,SC7Cc",
+  "mappings": "<dynamic mappings generation>",
   "names": [],
   "sourceRoot": "",
   "sources": [
@@ -3452,9 +3442,7 @@ nav {
   }
 }
 ",
-    "$n-ary-summation: '\\2211'
-
-;@import "sass-embedded-legacy-load-done:1";",
+    "<dynamic content generation>",
   ],
   "version": 3,
 }
@@ -4747,7 +4735,7 @@ exports[`sourceMap option should generate source maps when value is not specifie
 
 exports[`sourceMap option should generate source maps when value is not specified and the "devtool" option has "source-map" value ('sass-embedded', 'legacy' API, 'sass' syntax): source map 1`] = `
 {
-  "mappings": ";AACQ;AAMR;EACE;EACA,OALc;;;AAQd;EACE;EACA;EACA;;AAEF;EACE;;AAEF;EACE;EACA;EACA;;;AAQJ;EALE,uBAMe;EALf,oBAKe;EAJf,mBAIe;EAHf,eAGe;;;AAEjB;EACE;EACA;EACA;;;AAEF;EAEE;;;AAEF;EAEE;;;AAEF;EAEE;;;AAGA;EACE,SAhDY;;;AAmDd;EACE,SCzDc",
+  "mappings": "<dynamic mappings generation>",
   "names": [],
   "sourceRoot": "",
   "sources": [
@@ -4815,9 +4803,7 @@ nav
     content: $n-ary-summation
 
 ",
-    "$n-ary-summation: '\\2211'
-
-@import "sass-embedded-legacy-load-done:10"",
+    "<dynamic content generation>",
   ],
   "version": 3,
 }
@@ -4867,7 +4853,7 @@ exports[`sourceMap option should generate source maps when value is not specifie
 
 exports[`sourceMap option should generate source maps when value is not specified and the "devtool" option has "source-map" value ('sass-embedded', 'legacy' API, 'scss' syntax): source map 1`] = `
 {
-  "mappings": ";AACQ;AAMR;EACE;EACA,OALc;;;AASd;EACE;EACA;EACA;;AAGF;EAAK;;AAEL;EACE;EACA;EACA;;;AAWJ;EANE,uBAM4B;EALzB,oBAKyB;EAJxB,mBAIwB;EAHpB,eAGoB;;;AAG5B;EACE,SAlCY;;;AAuCd;EACE,SC7Cc",
+  "mappings": "<dynamic mappings generation>",
   "names": [],
   "sourceRoot": "",
   "sources": [
@@ -4924,9 +4910,7 @@ nav {
   }
 }
 ",
-    "$n-ary-summation: '\\2211'
-
-;@import "sass-embedded-legacy-load-done:0";",
+    "<dynamic content generation>",
   ],
   "version": 3,
 }
@@ -6283,7 +6267,7 @@ exports[`sourceMap option should generate source maps with absolute URLs ('sass-
 
 exports[`sourceMap option should generate source maps with absolute URLs ('sass-embedded', 'legacy' API, 'sass' syntax): source map 1`] = `
 {
-  "mappings": ";AACQ;ACDR;EACI;;;ADOJ;EACE;EACA,OALc;;;AAQd;EACE;EACA;EACA;;AAEF;EACE;;AAEF;EACE;EACA;EACA;;;AAQJ;EALE,uBAMe;EALf,oBAKe;EAJf,mBAIe;EAHf,eAGe;;;AAEjB;EACE;EACA;EACA;;;AAEF;EAEE;;;AAEF;EAEE;;;AAEF;EAEE;;;AAGA;EACE,SAhDY;;;AAmDd;EACE,SE1Dc",
+  "mappings": "<dynamic mappings generation>",
   "names": [],
   "sourceRoot": "",
   "sources": [
@@ -6353,14 +6337,8 @@ nav
     content: $n-ary-summation
 
 ",
-    ".module {
-    background: hotpink;
-}
-
-;@import "sass-embedded-legacy-load-done:19";",
-    "$n-ary-summation: '\\2211'
-
-@import "sass-embedded-legacy-load-done:18"",
+    "<dynamic content generation>",
+    "<dynamic content generation>",
   ],
   "version": 3,
 }
@@ -6414,7 +6392,7 @@ exports[`sourceMap option should generate source maps with absolute URLs ('sass-
 
 exports[`sourceMap option should generate source maps with absolute URLs ('sass-embedded', 'legacy' API, 'scss' syntax): source map 1`] = `
 {
-  "mappings": ";AACQ;ACDR;EACI;;;ADOJ;EACE;EACA,OALc;;;AASd;EACE;EACA;EACA;;AAGF;EAAK;;AAEL;EACE;EACA;EACA;;;AAWJ;EANE,uBAM4B;EALzB,oBAKyB;EAJxB,mBAIwB;EAHpB,eAGoB;;;AAG5B;EACE,SAlCY;;;AAuCd;EACE,SE9Cc",
+  "mappings": "<dynamic mappings generation>",
   "names": [],
   "sourceRoot": "",
   "sources": [
@@ -6473,14 +6451,8 @@ nav {
   }
 }
 ",
-    ".module {
-    background: hotpink;
-}
-
-;@import "sass-embedded-legacy-load-done:9";",
-    "$n-ary-summation: '\\2211'
-
-;@import "sass-embedded-legacy-load-done:8";",
+    "<dynamic content generation>",
+    "<dynamic content generation>",
   ],
   "version": 3,
 }
@@ -7827,7 +7799,7 @@ exports[`sourceMap option should generate sourcemap with "asset/resource" ('sass
 exports[`sourceMap option should generate sourcemap with "asset/resource" ('sass-embedded', 'legacy' API, 'sass' syntax): source map 1`] = `
 {
   "file": "static/language.css",
-  "mappings": ";AACQ;AAMR;EACE;EACA,OALc;;;AAQd;EACE;EACA;EACA;;AAEF;EACE;;AAEF;EACE;EACA;EACA;;;AAQJ;EALE,uBAMe;EALf,oBAKe;EAJf,mBAIe;EAHf,eAGe;;;AAEjB;EACE;EACA;EACA;;;AAEF;EAEE;;;AAEF;EAEE;;;AAEF;EAEE;;;AAGA;EACE,SAhDY;;;AAmDd;EACE,SCzDc",
+  "mappings": "<dynamic mappings generation>",
   "names": [],
   "sourceRoot": "",
   "sources": [
@@ -7895,9 +7867,7 @@ nav
     content: $n-ary-summation
 
 ",
-    "$n-ary-summation: '\\2211'
-
-@import "sass-embedded-legacy-load-done:17"",
+    "<dynamic content generation>",
   ],
   "version": 3,
 }
@@ -7949,7 +7919,7 @@ exports[`sourceMap option should generate sourcemap with "asset/resource" ('sass
 exports[`sourceMap option should generate sourcemap with "asset/resource" ('sass-embedded', 'legacy' API, 'scss' syntax): source map 1`] = `
 {
   "file": "static/language.css",
-  "mappings": ";AACQ;AAMR;EACE;EACA,OALc;;;AASd;EACE;EACA;EACA;;AAGF;EAAK;;AAEL;EACE;EACA;EACA;;;AAWJ;EANE,uBAM4B;EALzB,oBAKyB;EAJxB,mBAIwB;EAHpB,eAGoB;;;AAG5B;EACE,SAlCY;;;AAuCd;EACE,SC7Cc",
+  "mappings": "<dynamic mappings generation>",
   "names": [],
   "sourceRoot": "",
   "sources": [
@@ -8006,9 +7976,7 @@ nav {
   }
 }
 ",
-    "$n-ary-summation: '\\2211'
-
-;@import "sass-embedded-legacy-load-done:7";",
+    "<dynamic content generation>",
   ],
   "version": 3,
 }

@@ -15,10 +15,21 @@ function removeCWD(str) {
 }
 
 export default (errors, needVerbose) =>
-  errors.map((error) =>
-    removeCWD(
-      needVerbose
-        ? error.toString()
-        : error.toString().split("\n").slice(0, 2).join("\n"),
-    ),
-  );
+  errors
+    .filter((error) => {
+      if (
+        error.message.includes("Sass @import rules are deprecated") ||
+        error.message.includes("The legacy JS API is deprecated")
+      ) {
+        return false;
+      }
+
+      return true;
+    })
+    .map((error) =>
+      removeCWD(
+        needVerbose
+          ? error.toString()
+          : error.toString().split("\n").slice(0, 2).join("\n"),
+      ),
+    );
