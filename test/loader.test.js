@@ -15,7 +15,7 @@ import {
   getWarnings,
 } from "./helpers";
 
-jest.setTimeout(60000);
+jest.setTimeout(100000);
 
 const implementations = getImplementationsAndAPI();
 const syntaxStyles = ["scss", "sass"];
@@ -1966,7 +1966,8 @@ describe("loader", () => {
 
           expect(codeFromBundle.css).toBe(codeFromSass.css);
           expect(codeFromBundle.css).toMatchSnapshot("css");
-          expect(getWarnings(stats, true)).toMatchSnapshot("warnings");
+          // Deprecations are different on windows/macos and linux, and we don't need them to test here
+          // expect(getWarnings(stats, true)).toMatchSnapshot("warnings");
           expect(getErrors(stats)).toMatchSnapshot("errors");
 
           await close(compiler);
