@@ -640,7 +640,7 @@ const MATCH_CSS = /\.css$/i;
  * @param {LoaderContext} loaderContext loader context
  * @param {SassImplementation} implementation sass implementation
  * @param {string[]} loadPaths load paths
- * @returns {Importer} the modert webpack importer
+ * @returns {Importer} the modern webpack importer
  */
 function getModernWebpackImporter(loaderContext, implementation, loadPaths) {
   const resolve = getWebpackResolver(
