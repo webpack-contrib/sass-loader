@@ -160,8 +160,21 @@ async function getCodeFromSass(testId, options, context = {}) {
     const modernTestImporter = getModernWebpackImporter(
       loaderContext,
       implementation,
+      [],
     );
 
+    sassOptions.loadPaths = [
+      // We use `loadPaths` in context for resolver, so it should be always absolute
+      ...(sassOptions.loadPaths ? [...sassOptions.loadPaths] : []).map(
+        (includePath) =>
+          path.isAbsolute(includePath)
+            ? includePath
+            : path.join(process.cwd(), includePath),
+      ),
+      ...(process.env.SASS_PATH
+        ? process.env.SASS_PATH.split(process.platform === "win32" ? ";" : ":")
+        : []),
+    ];
     sassOptions.importers = sassOptions.importers
       ? [
           ...[
@@ -962,6 +975,19 @@ async function getCodeFromSass(testId, options, context = {}) {
       };
     }
 
+    sassOptions.includePaths = [
+      process.cwd(),
+      ...// We use `includePaths` in context for resolver, so it should be always absolute
+      (sassOptions.includePaths ? [...sassOptions.includePaths] : []).map(
+        (includePath) =>
+          path.isAbsolute(includePath)
+            ? includePath
+            : path.join(process.cwd(), includePath),
+      ),
+      ...(process.env.SASS_PATH
+        ? process.env.SASS_PATH.split(process.platform === "win32" ? ";" : ":")
+        : []),
+    ];
     sassOptions.importer = sassOptions.importer
       ? [
           ...[
@@ -982,7 +1008,6 @@ async function getCodeFromSass(testId, options, context = {}) {
 
   if (isModernAPI) {
     const { data, ...rest } = sassOptions;
-
     ({ css, sourceMap: map } = await implementation.compileStringAsync(
       data,
       rest,
