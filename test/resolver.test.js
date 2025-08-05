@@ -26,7 +26,7 @@ describe("getWebpackResolver", () => {
   });
 
   it("should reject when file cannot be resolved", async () => {
-    await expect(resolve("foo/bar/baz")).rejects.toBe();
+    await expect(resolve("foo/bar/baz")).rejects.toEqual(new Error("Next"));
   });
 
   if (process.platform !== "win32") {
