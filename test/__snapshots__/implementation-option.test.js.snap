@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`implementation option 'dart-sass', 'legacy' API: errors 1`] = `[]`;
 
@@ -103,7 +103,7 @@ exports[`implementation option should throw error when the "info" does not exist
 exports[`implementation option should throw error when unresolved package: errors 1`] = `
 [
   "ModuleBuildError: Module build failed (from ../src/cjs.js):
-Error: Cannot find module 'unresolved' from 'src/utils.js'",
+NonErrorEmittedError: (Emitted value instead of an instance of Error) Error: Cannot find module 'unresolved' from 'src/utils.js'",
 ]
 `;
 
