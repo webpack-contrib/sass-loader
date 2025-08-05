@@ -1,11 +1,11 @@
-import path from "path";
-import url from "url";
+import path from "node:path";
+import url from "node:url";
 
 import del from "del";
 
 import {
-  compile,
   close,
+  compile,
   getCodeFromBundle,
   getCodeFromSass,
   getCompiler,
@@ -21,12 +21,12 @@ const implementations = getImplementationsAndAPI();
 const syntaxStyles = ["scss", "sass"];
 
 describe("loader", () => {
-  implementations.forEach((item) => {
+  for (const item of implementations) {
     const { name: implementationName, api, implementation } = item;
     const isNodeSass = implementationName === "node-sass";
     const isModernAPI = api === "modern" || api === "modern-compiler";
 
-    syntaxStyles.forEach((syntax) => {
+    for (const syntax of syntaxStyles) {
       it(`should work ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
         const testId = getTestId("language", syntax);
         const options = {
@@ -685,7 +685,7 @@ describe("loader", () => {
                 "scss",
                 "directory-6",
                 "file",
-                `_index.scss`,
+                "_index.scss",
               ),
               "@path-to-scss-dir": path.resolve(__dirname, "scss"),
               "@path-to-sass-dir": path.resolve(__dirname, "sass"),
@@ -905,14 +905,12 @@ describe("loader", () => {
         });
         const stats = await compile(compiler);
         const codeFromBundle = getCodeFromBundle(stats, compiler);
-        const codeFromSass = await getCodeFromSass(
-          testId,
-          Object.assign({}, options, {
-            sassOptions: isModernAPI
-              ? { style: "compressed" }
-              : { outputStyle: "compressed" },
-          }),
-        );
+        const codeFromSass = await getCodeFromSass(testId, {
+          ...options,
+          sassOptions: isModernAPI
+            ? { style: "compressed" }
+            : { outputStyle: "compressed" },
+        });
 
         expect(codeFromBundle.css).toBe(codeFromSass.css);
         expect(codeFromBundle.css).toMatchSnapshot("css");
@@ -1212,13 +1210,13 @@ describe("loader", () => {
           api,
           additionalData: (content) =>
             content
-              .replace(
+              .replaceAll(
                 /\/scss\/language.scss/g,
                 url.pathToFileURL(
                   path.resolve(__dirname, "scss/language.scss"),
                 ),
               )
-              .replace(
+              .replaceAll(
                 /\/sass\/language.sass/g,
                 url.pathToFileURL(
                   path.resolve(__dirname, "sass/language.sass"),
@@ -1834,7 +1832,7 @@ describe("loader", () => {
                   "scss",
                   "directory-6",
                   "file",
-                  `_index.scss`,
+                  "_index.scss",
                 ),
                 "@path-to-scss-dir": path.resolve(__dirname, "scss"),
                 "@path-to-sass-dir": path.resolve(__dirname, "sass"),
@@ -2194,16 +2192,14 @@ describe("loader", () => {
           for (const [name, value] of stats.compilation.logging) {
             if (/sass-loader/.test(name)) {
               logs.push(
-                value.map((i) => {
-                  return {
-                    type: i.type,
-                    args: i.args.map((arg) =>
-                      arg
-                        .replace(url.pathToFileURL(__dirname), "file:///<cwd>")
-                        .replace(/\\/g, "/"),
-                    ),
-                  };
-                }),
+                value.map((i) => ({
+                  type: i.type,
+                  args: i.args.map((arg) =>
+                    arg
+                      .replace(url.pathToFileURL(__dirname), "file:///<cwd>")
+                      .replaceAll("\\", "/"),
+                  ),
+                })),
               );
             }
           }
@@ -2284,6 +2280,6 @@ describe("loader", () => {
           await close(compiler);
         });
       }
-    });
-  });
+    }
+  }
 });

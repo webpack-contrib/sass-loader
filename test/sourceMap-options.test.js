@@ -1,10 +1,10 @@
-import fs from "fs";
-import path from "path";
-import url from "url";
+import fs from "node:fs";
+import path from "node:path";
+import url from "node:url";
 
 import {
-  compile,
   close,
+  compile,
   getCodeFromBundle,
   getCompiler,
   getErrors,
@@ -17,8 +17,8 @@ const implementations = getImplementationsAndAPI();
 const syntaxStyles = ["scss", "sass"];
 
 describe("sourceMap option", () => {
-  implementations.forEach((item) => {
-    syntaxStyles.forEach((syntax) => {
+  for (const item of implementations) {
+    for (const syntax of syntaxStyles) {
       const { name: implementationName, api, implementation } = item;
 
       const getSourceMap = (sourceMap) => {
@@ -28,9 +28,8 @@ describe("sourceMap option", () => {
           sourceMap &&
           sourceMap.sourcesContent
         ) {
-          // eslint-disable-next-line no-param-reassign
           sourceMap.mappings = "<dynamic mappings generation>";
-          // eslint-disable-next-line no-param-reassign
+
           sourceMap.sourcesContent = sourceMap.sourcesContent.map((code) => {
             if (code.includes("sass-embedded-legacy-load-done")) {
               return "<dynamic content generation>";
@@ -65,7 +64,7 @@ describe("sourceMap option", () => {
 
           return path
             .relative(path.resolve(__dirname, ".."), source)
-            .replace(/\\/g, "/");
+            .replaceAll("\\", "/");
         });
 
         expect(css).toMatchSnapshot("css");
@@ -98,7 +97,7 @@ describe("sourceMap option", () => {
 
           return path
             .relative(path.resolve(__dirname, ".."), source)
-            .replace(/\\/g, "/");
+            .replaceAll("\\", "/");
         });
 
         expect(css).toMatchSnapshot("css");
@@ -131,7 +130,7 @@ describe("sourceMap option", () => {
 
           return path
             .relative(path.resolve(__dirname, ".."), source)
-            .replace(/\\/g, "/");
+            .replaceAll("\\", "/");
         });
 
         expect(css).toMatchSnapshot("css");
@@ -192,7 +191,7 @@ describe("sourceMap option", () => {
 
           return path
             .relative(path.resolve(__dirname, ".."), normalizedSource)
-            .replace(/\\/g, "/");
+            .replaceAll("\\", "/");
         });
 
         expect(css).toMatchSnapshot("css");
@@ -287,28 +286,14 @@ describe("sourceMap option", () => {
         const usedFs = compiler.outputFileSystem;
         const outputPath = stats.compilation.outputOptions.path;
         const targetFile = "static/language.css";
-
-        let css;
-
-        try {
-          css = usedFs
-            .readFileSync(path.join(outputPath, targetFile))
-            .toString();
-        } catch (error) {
-          throw error;
-        }
+        const css = usedFs
+          .readFileSync(path.join(outputPath, targetFile))
+          .toString();
 
         const targetMapFile = "static/language.css.map";
-
-        let sourceMap;
-
-        try {
-          sourceMap = usedFs
-            .readFileSync(path.join(outputPath, targetMapFile))
-            .toString();
-        } catch (error) {
-          throw error;
-        }
+        const sourceMap = usedFs
+          .readFileSync(path.join(outputPath, targetMapFile))
+          .toString();
 
         expect(css).toMatchSnapshot("css");
         expect(getSourceMap(JSON.parse(sourceMap))).toMatchSnapshot(
@@ -340,7 +325,7 @@ describe("sourceMap option", () => {
 
           return path
             .relative(path.resolve(__dirname, ".."), source)
-            .replace(/\\/g, "/");
+            .replaceAll("\\", "/");
         });
 
         expect(css).toMatchSnapshot("css");
@@ -350,6 +335,6 @@ describe("sourceMap option", () => {
 
         await close(compiler);
       });
-    });
-  });
+    }
+  }
 });

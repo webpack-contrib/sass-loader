@@ -21,14 +21,10 @@ module.exports = {
           {
             loader: require.resolve("../../dist/cjs.js"),
             options: {
-              api: process.env.SASS_API
-                ? process.env.SASS_API
-                : "modern-compiler",
+              api: process.env.SASS_API || "modern-compiler",
               implementation: process.env.SASS_IMPLEMENTATION
-                ? // eslint-disable-next-line global-require, import/no-dynamic-require
-                  require(process.env.SASS_IMPLEMENTATION)
-                : // eslint-disable-next-line global-require
-                  require("sass"),
+                ? require(process.env.SASS_IMPLEMENTATION)
+                : require("sass"),
               sourceMap: true,
             },
           },

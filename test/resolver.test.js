@@ -1,4 +1,5 @@
-import { fileURLToPath } from "url";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 import enhanced from "enhanced-resolve";
 import sass from "sass";
@@ -19,7 +20,7 @@ describe("getWebpackResolver", () => {
   });
 
   it("should resolve from passed `includePaths`", async () => {
-    expect(await resolve("empty", [`${__dirname}/scss`])).toMatch(
+    expect(await resolve("empty", [path.resolve(__dirname, "./scss")])).toMatch(
       /empty\.scss$/,
     );
   });
@@ -37,7 +38,9 @@ describe("getWebpackResolver", () => {
     it("should convert an invalid file URL with an erroneous hostname to a relative path", async () => {
       const invalidFileURL = "file://scss/empty";
 
-      expect(() => fileURLToPath(invalidFileURL)).toThrow();
+      expect(() => fileURLToPath(invalidFileURL)).toThrow(
+        /File URL host must be/,
+      );
       expect(await resolve(invalidFileURL)).toMatch(/empty\.scss$/);
     });
   }

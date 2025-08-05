@@ -1,6 +1,6 @@
 import nodeSass from "node-sass";
 import dartSass from "sass";
-// eslint-disable-next-line import/no-namespace
+
 import * as sassEmbedded from "sass-embedded";
 
 import {
@@ -20,7 +20,11 @@ jest.setTimeout(30000);
 
 const implementations = [...getImplementationsAndAPI(), "sass_string"];
 
-/** Helper to create spy functions for the modern Compiler API */
+/**
+ * Helper to create spy functions for the modern Compiler API
+ * @param {"sass" | "sass-embedded"} implementation an implementation
+ * @returns {JestSpy} jest spy
+ */
 const spyOnCompiler = (implementation) => {
   const actualFn = implementation.initAsyncCompiler.bind(implementation);
 
@@ -61,7 +65,7 @@ describe("implementation option", () => {
   );
   const sassEmbeddedCompilerSpies = spyOnCompiler(sassEmbedded);
 
-  implementations.forEach((item) => {
+  for (const item of implementations) {
     let implementationName;
     let implementation;
     let api;
@@ -156,7 +160,7 @@ describe("implementation option", () => {
 
       await close(compiler);
     });
-  });
+  }
 
   it("should throw error when unresolved package", async () => {
     const testId = getTestId("language", "scss");
@@ -353,9 +357,7 @@ describe("implementation option", () => {
   it("should throw an error on an unknown sass implementation", async () => {
     const testId = getTestId("language", "scss");
     const options = {
-      implementation: Object.assign({}, dartSass, {
-        info: "strange-sass\t1.0.0",
-      }),
+      implementation: { ...dartSass, info: "strange-sass\t1.0.0" },
     };
 
     const compiler = getCompiler(testId, { loader: { options } });
@@ -370,7 +372,7 @@ describe("implementation option", () => {
   it('should throw an error when the "info" is unparseable', async () => {
     const testId = getTestId("language", "scss");
     const options = {
-      implementation: Object.assign({}, dartSass, { info: "asdfj" }),
+      implementation: { ...dartSass, info: "asdfj" },
     };
 
     const compiler = getCompiler(testId, { loader: { options } });
@@ -385,8 +387,7 @@ describe("implementation option", () => {
   it('should throw error when the "info" does not exist', async () => {
     const testId = getTestId("language", "scss");
     const options = {
-      // eslint-disable-next-line no-undefined
-      implementation: Object.assign({}, dartSass, { info: undefined }),
+      implementation: { ...dartSass, info: undefined },
     };
 
     const compiler = getCompiler(testId, { loader: { options } });
@@ -437,7 +438,6 @@ describe("implementation option", () => {
     const testId2 = getTestId("language", "sass");
     const options = { api: "modern-compiler" };
 
-    // eslint-disable-next-line no-undefined
     const compiler = getCompiler(undefined, {
       entry: {
         one: `./${testId1}`,

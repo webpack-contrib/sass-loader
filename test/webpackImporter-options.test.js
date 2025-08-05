@@ -14,13 +14,13 @@ const implementations = getImplementationsAndAPI();
 const syntaxStyles = ["scss", "sass"];
 
 describe("webpackImporter option", () => {
-  implementations.forEach((item) => {
-    syntaxStyles.forEach((syntax) => {
+  for (const item of implementations) {
+    for (const syntax of syntaxStyles) {
       const { name: implementationName, api, implementation } = item;
 
       // TODO fix me https://github.com/webpack-contrib/sass-loader/issues/774
       if (api === "modern" || api === "modern-compiler") {
-        return;
+        continue;
       }
 
       it(`not specify ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
@@ -81,6 +81,6 @@ describe("webpackImporter option", () => {
 
         await close(compiler);
       });
-    });
-  });
+    }
+  }
 });

@@ -3,8 +3,8 @@ export default (api, implementation) => {
     return {
       // Note: in real code, you should use `math.pow()` from the built-in
       // `sass:math` module.
-      // eslint-disable-next-line func-names
-      "pow($base, $exponent)": function (args) {
+
+      "pow($base, $exponent)"(args) {
         const base = args[0].assertNumber("base").assertNoUnits("base");
         const exponent = args[1]
           .assertNumber("exponent")
@@ -17,13 +17,13 @@ export default (api, implementation) => {
 
   return {
     "headings($from: 0, $to: 6)": (from, to) => {
-      const f = from.getValue();
-      const t = to.getValue();
-      const list = new implementation.types.List(t - f + 1);
+      const fValue = from.getValue();
+      const tValue = to.getValue();
+      const list = new implementation.types.List(tValue - fValue + 1);
       let i;
 
-      for (i = f; i <= t; i++) {
-        list.setValue(i - f, new implementation.types.String(`h${i}`));
+      for (i = fValue; i <= tValue; i++) {
+        list.setValue(i - fValue, new implementation.types.String(`h${i}`));
       }
 
       return list;

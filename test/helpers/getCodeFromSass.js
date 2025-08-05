@@ -1,15 +1,21 @@
-import { pathToFileURL } from "url";
-import path from "path";
-import fs from "fs";
+import fs from "node:fs";
+import path from "node:path";
+import { pathToFileURL } from "node:url";
 
 import { getModernWebpackImporter } from "../../src/utils";
 
+/**
+ * @param {string} testId test ID
+ * @param {Options} options options
+ * @param {Context} context context
+ * @returns {{ css: string, map: RawSourceMap }} CSS and source map (if exist)
+ */
 async function getCodeFromSass(testId, options, context = {}) {
   const loaderOptions = { ...options };
   const sassOptions =
     typeof loaderOptions.sassOptions === "function"
       ? loaderOptions.sassOptions({ mock: true }) || {}
-      : { ...options.sassOptions } || {};
+      : { ...options.sassOptions };
 
   if (sassOptions.data) {
     delete sassOptions.data;
@@ -60,22 +66,20 @@ async function getCodeFromSass(testId, options, context = {}) {
       resourcePath: path.resolve(__dirname, "..", "scss", "language.scss"),
     };
 
-    const getResolveContext = () => {
-      return {
-        fileDependencies: {
-          add: (d) => loaderContext.addDependency(d),
-        },
-        contextDependencies: {
-          add: (d) => loaderContext.addContextDependency(d),
-        },
-        missingDependencies: {
-          add: (d) => loaderContext.addMissingDependency(d),
-        },
-      };
-    };
+    const getResolveContext = () => ({
+      fileDependencies: {
+        add: (dep) => loaderContext.addDependency(dep),
+      },
+      contextDependencies: {
+        add: (dep) => loaderContext.addContextDependency(dep),
+      },
+      missingDependencies: {
+        add: (dep) => loaderContext.addMissingDependency(dep),
+      },
+    });
 
-    // eslint-disable-next-line global-require
     const ResolverFactory = require("webpack/lib/ResolverFactory");
+
     const resolverFactory = new ResolverFactory();
     const syntax = context.syntax || "scss";
     const resolver = resolverFactory.get("normal", {
@@ -102,7 +106,7 @@ async function getCodeFromSass(testId, options, context = {}) {
           "scss",
           "directory-6",
           "file",
-          `_index.scss`,
+          "_index.scss",
         ),
         "@path-to-scss-dir": path.resolve(__dirname, "..", "scss"),
         "@path-to-sass-dir": path.resolve(__dirname, "..", "sass"),
@@ -130,14 +134,11 @@ async function getCodeFromSass(testId, options, context = {}) {
       },
     });
 
-    // eslint-disable-next-line no-shadow
     loaderContext.getResolve = (options) => {
       const child = options ? resolver.withOptions(options) : resolver;
 
-      // eslint-disable-next-line consistent-return, no-shadow
       return (context, request, callback) => {
         if (callback) {
-          // eslint-disable-next-line no-use-before-define
           child.resolve({}, context, request, getResolveContext(), callback);
         } else {
           return new Promise((resolve, reject) => {
@@ -162,13 +163,14 @@ async function getCodeFromSass(testId, options, context = {}) {
     );
 
     sassOptions.importers = sassOptions.importers
-      ? []
-          .concat(
+      ? [
+          ...[
             Array.isArray(sassOptions.importers)
               ? [...sassOptions.importers]
               : [sassOptions.importers],
-          )
-          .concat([modernTestImporter])
+          ].flat(),
+          modernTestImporter,
+        ]
       : [modernTestImporter];
   } else {
     const testFolder = path.resolve(__dirname, "../");
@@ -458,7 +460,11 @@ async function getCodeFromSass(testId, options, context = {}) {
     );
 
     // Pseudo importer for tests
-    const testImporter = function testImporter(url) {
+    /**
+     * @param {string} url URL
+     * @returns {{ file: string }} resolved URL
+     */
+    function testImporter(url) {
       // Do not transform css imports
       if (/\.css$/i.test(url) === false) {
         // Polyfill for node-sass implementation
@@ -862,7 +868,7 @@ async function getCodeFromSass(testId, options, context = {}) {
             }
           }
         }
-        // eslint-disable-next-line no-param-reassign
+
         url = url
           .replace(
             /^webpack-export-field\/styles\/file$/,
@@ -954,16 +960,17 @@ async function getCodeFromSass(testId, options, context = {}) {
       return {
         file: url,
       };
-    };
+    }
 
     sassOptions.importer = sassOptions.importer
-      ? []
-          .concat(
+      ? [
+          ...[
             Array.isArray(sassOptions.importer)
               ? [...sassOptions.importer]
               : [sassOptions.importer],
-          )
-          .concat([testImporter])
+          ].flat(),
+          testImporter,
+        ]
       : [testImporter];
   }
 

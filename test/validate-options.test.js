@@ -1,19 +1,18 @@
 import {
-  getCompiler,
   compile,
-  getTestId,
+  getCompiler,
   getImplementationByName,
+  getTestId,
 } from "./helpers/index";
 
 describe("validate options", () => {
   const tests = {
     implementation: {
       success: [
-        // eslint-disable-next-line global-require
         require("sass-embedded"),
-        // eslint-disable-next-line global-require
+
         require("sass"),
-        // eslint-disable-next-line global-require
+
         require("node-sass"),
         "sass-embedded",
         "sass",
@@ -22,13 +21,7 @@ describe("validate options", () => {
       failure: [true, () => {}],
     },
     sassOptions: {
-      success: [
-        {},
-        { indentWidth: 6 },
-        () => {
-          return { indentWidth: 6 };
-        },
-      ],
+      success: [{}, { indentWidth: 6 }, () => ({ indentWidth: 6 })],
       failure: [true, "string"],
     },
     additionalData: {

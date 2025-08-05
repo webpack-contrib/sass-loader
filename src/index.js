@@ -1,22 +1,22 @@
-import url from "url";
-import path from "path";
+import path from "node:path";
+import url from "node:url";
 
 import schema from "./options.json";
 import {
+  errorFactory,
+  getCompileFn,
+  getModernWebpackImporter,
   getSassImplementation,
   getSassOptions,
   getWebpackImporter,
-  getModernWebpackImporter,
-  getCompileFn,
   normalizeSourceMap,
-  errorFactory,
 } from "./utils";
 
+// eslint-disable-next-line jsdoc/no-restricted-syntax
 /**
  * The sass-loader makes node-sass and dart-sass available to webpack modules.
- *
- * @this {object}
- * @param {string} content
+ * @this {LoaderContext<{ string: any }>}
+ * @param {string} content content
  */
 async function loader(content) {
   const options = this.getOptions(schema);
@@ -104,11 +104,7 @@ async function loader(content) {
 
   let map =
     // Modern API, then legacy API
-    result.sourceMap
-      ? result.sourceMap
-      : result.map
-        ? JSON.parse(result.map)
-        : null;
+    result.sourceMap || (result.map ? JSON.parse(result.map) : null);
 
   // Modify source paths only for webpack, otherwise we do nothing
   if (map && useSourceMap) {
@@ -117,30 +113,30 @@ async function loader(content) {
 
   // Modern API
   if (typeof result.loadedUrls !== "undefined") {
-    result.loadedUrls
-      .filter((loadedUrl) => loadedUrl.protocol === "file:")
-      .forEach((includedFile) => {
-        const normalizedIncludedFile = url.fileURLToPath(includedFile);
+    for (const includedFile of result.loadedUrls.filter(
+      (loadedUrl) => loadedUrl.protocol === "file:",
+    )) {
+      const normalizedIncludedFile = url.fileURLToPath(includedFile);
 
-        // Custom `importer` can return only `contents` so includedFile will be relative
-        if (path.isAbsolute(normalizedIncludedFile)) {
-          this.addDependency(normalizedIncludedFile);
-        }
-      });
+      // Custom `importer` can return only `contents` so includedFile will be relative
+      if (path.isAbsolute(normalizedIncludedFile)) {
+        this.addDependency(normalizedIncludedFile);
+      }
+    }
   }
   // Legacy API
   else if (
     typeof result.stats !== "undefined" &&
     typeof result.stats.includedFiles !== "undefined"
   ) {
-    result.stats.includedFiles.forEach((includedFile) => {
+    for (const includedFile of result.stats.includedFiles) {
       const normalizedIncludedFile = path.normalize(includedFile);
 
       // Custom `importer` can return only `contents` so includedFile will be relative
       if (path.isAbsolute(normalizedIncludedFile)) {
         this.addDependency(normalizedIncludedFile);
       }
-    });
+    }
   }
 
   callback(null, result.css.toString(), map);

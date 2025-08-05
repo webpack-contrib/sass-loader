@@ -1,17 +1,20 @@
+/**
+ * @param {string} str string
+ * @returns {string} string without cwd
+ */
 function removeCWD(str) {
   const isWin = process.platform === "win32";
   let cwd = process.cwd();
 
   if (isWin) {
-    // eslint-disable-next-line no-param-reassign
-    str = str.replace(/\\/g, "/");
-    // eslint-disable-next-line no-param-reassign
-    cwd = cwd.replace(/\\/g, "/");
+    str = str.replaceAll("\\", "/");
+
+    cwd = cwd.replaceAll("\\", "/");
   }
 
   return str
-    .replace(new RegExp(cwd, "g"), "")
-    .replace(/file:\/\/\/\//g, "file:///");
+    .replaceAll(new RegExp(cwd, "g"), "")
+    .replaceAll("file:////", "file:///");
 }
 
 export default (errors, needVerbose) =>

@@ -1,31 +1,14 @@
-import compile from "./compiler";
-import close from "./close";
-import customFunctions from "./customFunctions";
-import customImporter from "./customImporter";
-import getCodeFromBundle from "./getCodeFromBundle";
-import getCodeFromSass from "./getCodeFromSass";
-import getCompiler from "./getCompiler";
-import getErrors from "./getErrors";
-import getImplementationByName from "./getImplementationByName";
-import getImplementationsAndAPI from "./getImplementationsAndAPI";
-import getTestId from "./getTestId";
-import getWarnings from "./getWarnings";
-import readAsset from "./readAsset";
-import isNodeSassSupported from "./is-node-sass-supported";
-
-export {
-  compile,
-  close,
-  customFunctions,
-  customImporter,
-  getCodeFromBundle,
-  getCodeFromSass,
-  getCompiler,
-  getErrors,
-  getImplementationByName,
-  getImplementationsAndAPI,
-  getTestId,
-  getWarnings,
-  readAsset,
-  isNodeSassSupported,
-};
+export { default as customImporter } from "./customImporter";
+export { default as close } from "./close";
+export { default as customFunctions } from "./customFunctions";
+export { default as compile } from "./compiler";
+export { default as getCodeFromSass } from "./getCodeFromSass";
+export { default as getCodeFromBundle } from "./getCodeFromBundle";
+export { default as getErrors } from "./getErrors";
+export { default as getCompiler } from "./getCompiler";
+export { default as getImplementationsAndAPI } from "./getImplementationsAndAPI";
+export { default as getImplementationByName } from "./getImplementationByName";
+export { default as getTestId } from "./getTestId";
+export { default as getWarnings } from "./getWarnings";
+export { default as readAsset } from "./readAsset";
+export { default as isNodeSassSupported } from "./is-node-sass-supported";

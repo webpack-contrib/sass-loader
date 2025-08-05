@@ -1,19 +1,19 @@
-import path from "path";
+import path from "node:path";
 
 import globImporter from "node-sass-glob-importer";
 
 import {
+  close,
   compile,
-  customImporter,
   customFunctions,
+  customImporter,
   getCodeFromBundle,
   getCodeFromSass,
+  getCompiler,
   getErrors,
+  getImplementationsAndAPI,
   getTestId,
   getWarnings,
-  getCompiler,
-  getImplementationsAndAPI,
-  close,
 } from "./helpers";
 
 jest.setTimeout(30000);
@@ -22,11 +22,11 @@ const implementations = getImplementationsAndAPI();
 const syntaxStyles = ["scss", "sass"];
 
 describe("sassOptions option", () => {
-  implementations.forEach((item) => {
+  for (const item of implementations) {
     const { name: implementationName, api, implementation } = item;
     const isModernAPI = api === "modern" || api === "modern-compiler";
 
-    syntaxStyles.forEach((syntax) => {
+    for (const syntax of syntaxStyles) {
       it(`should work when the option like "Object" ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
         const testId = getTestId("language", syntax);
         const options = {
@@ -544,6 +544,6 @@ describe("sassOptions option", () => {
           await close(compiler);
         });
       }
-    });
-  });
+    }
+  }
 });
