@@ -1,3 +1,12 @@
+/* global expect */
+
+// eslint-disable-next-line jsdoc/no-restricted-syntax
+/**
+ * @param {string} url URL
+ * @param {string} prev prev URL
+ * @param {undefined | ((value: any) => void)} done done callback
+ * @returns {any} result
+ */
 function customImporter(url, prev, done) {
   expect(url).toBe("import-with-custom-logic");
   expect(prev).toMatch(/(sass|scss)[/\\]custom-importer\.(scss|sass)/);
@@ -9,7 +18,6 @@ function customImporter(url, prev, done) {
     return;
   }
 
-  // eslint-disable-next-line consistent-return
   return customImporter.returnValue;
 }
 

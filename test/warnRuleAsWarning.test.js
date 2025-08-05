@@ -1,4 +1,4 @@
-import url from "url";
+import url from "node:url";
 
 import {
   close,
@@ -18,10 +18,10 @@ const implementations = getImplementationsAndAPI();
 const syntaxStyles = ["scss", "sass"];
 
 describe("loader", () => {
-  implementations.forEach((item) => {
+  for (const item of implementations) {
     const { name: implementationName, api, implementation } = item;
 
-    syntaxStyles.forEach((syntax) => {
+    for (const syntax of syntaxStyles) {
       it(`should emit warning by default ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
         const testId = getTestId("logging", syntax);
         const options = {
@@ -37,16 +37,14 @@ describe("loader", () => {
         for (const [name, value] of stats.compilation.logging) {
           if (/sass-loader/.test(name)) {
             logs.push(
-              value.map((i) => {
-                return {
-                  type: i.type,
-                  args: i.args.map((arg) =>
-                    arg
-                      .replace(url.pathToFileURL(__dirname), "file:///<cwd>")
-                      .replace(/\\/g, "/"),
-                  ),
-                };
-              }),
+              value.map((i) => ({
+                type: i.type,
+                args: i.args.map((arg) =>
+                  arg
+                    .replace(url.pathToFileURL(__dirname), "file:///<cwd>")
+                    .replaceAll("\\", "/"),
+                ),
+              })),
             );
           }
         }
@@ -76,16 +74,14 @@ describe("loader", () => {
         for (const [name, value] of stats.compilation.logging) {
           if (/sass-loader/.test(name)) {
             logs.push(
-              value.map((i) => {
-                return {
-                  type: i.type,
-                  args: i.args.map((arg) =>
-                    arg
-                      .replace(url.pathToFileURL(__dirname), "file:///<cwd>")
-                      .replace(/\\/g, "/"),
-                  ),
-                };
-              }),
+              value.map((i) => ({
+                type: i.type,
+                args: i.args.map((arg) =>
+                  arg
+                    .replace(url.pathToFileURL(__dirname), "file:///<cwd>")
+                    .replaceAll("\\", "/"),
+                ),
+              })),
             );
           }
         }
@@ -115,16 +111,14 @@ describe("loader", () => {
         for (const [name, value] of stats.compilation.logging) {
           if (/sass-loader/.test(name)) {
             logs.push(
-              value.map((i) => {
-                return {
-                  type: i.type,
-                  args: i.args.map((arg) =>
-                    arg
-                      .replace(url.pathToFileURL(__dirname), "file:///<cwd>")
-                      .replace(/\\/g, "/"),
-                  ),
-                };
-              }),
+              value.map((i) => ({
+                type: i.type,
+                args: i.args.map((arg) =>
+                  arg
+                    .replace(url.pathToFileURL(__dirname), "file:///<cwd>")
+                    .replaceAll("\\", "/"),
+                ),
+              })),
             );
           }
         }
@@ -153,16 +147,14 @@ describe("loader", () => {
           for (const [name, value] of stats.compilation.logging) {
             if (/sass-loader/.test(name)) {
               logs.push(
-                value.map((i) => {
-                  return {
-                    type: i.type,
-                    args: i.args.map((arg) =>
-                      arg
-                        .replace(url.pathToFileURL(__dirname), "file:///<cwd>")
-                        .replace(/\\/g, "/"),
-                    ),
-                  };
-                }),
+                value.map((i) => ({
+                  type: i.type,
+                  args: i.args.map((arg) =>
+                    arg
+                      .replace(url.pathToFileURL(__dirname), "file:///<cwd>")
+                      .replaceAll("\\", "/"),
+                  ),
+                })),
               );
             }
           }
@@ -175,6 +167,6 @@ describe("loader", () => {
           await close(compiler);
         });
       }
-    });
-  });
+    }
+  }
 });

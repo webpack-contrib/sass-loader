@@ -1,10 +1,14 @@
 import nodeSass from "node-sass";
 import dartSass from "sass";
-// eslint-disable-next-line import/no-namespace
+
 import * as SassEmbedded from "sass-embedded";
 
 import isNodeSassSupported from "./is-node-sass-supported";
 
+// eslint-disable-next-line jsdoc/no-restricted-syntax
+/**
+ * @returns {{ name: string, implementation: any, api: "legacy" | "modern" | "modern-compile" }} implementations
+ */
 export default function getImplementationsAndAPI() {
   const implementations = [
     {

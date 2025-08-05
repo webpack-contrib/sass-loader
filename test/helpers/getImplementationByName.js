@@ -1,12 +1,13 @@
+/**
+ * @param {"node-sass" | "dart-sass" | "sass" | "sass-embedded"} implementationName implementation name
+ * @returns {SassImplementation} a sass implementation
+ */
 function getImplementationByName(implementationName) {
   if (implementationName === "node-sass") {
-    // eslint-disable-next-line global-require
     return require("node-sass");
   } else if (implementationName === "dart-sass") {
-    // eslint-disable-next-line global-require
     return require("sass");
   } else if (implementationName === "sass-embedded") {
-    // eslint-disable-next-line global-require
     return require("sass-embedded");
   } else if (implementationName === "sass_string") {
     return require.resolve("sass");

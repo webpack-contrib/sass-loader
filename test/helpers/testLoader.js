@@ -1,3 +1,8 @@
+/**
+ * @param {string} content content
+ * @param {RawSourceMap} sourceMap source map
+ * @returns {string} test loader code
+ */
 function testLoader(content, sourceMap) {
   const result = { css: content };
 

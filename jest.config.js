@@ -2,7 +2,7 @@ const isNodeSassSupported = require("./test/helpers/is-node-sass-supported");
 
 module.exports = {
   testEnvironment: "jest-environment-node-single-context",
-  // eslint-disable-next-line no-undefined
+
   snapshotResolver:
     "<rootDir>/test/helpers/skip-node-sass-snapshot-resolver.js",
   moduleNameMapper: isNodeSassSupported()

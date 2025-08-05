@@ -1,6 +1,6 @@
 import {
-  compile,
   close,
+  compile,
   getCodeFromBundle,
   getCodeFromSass,
   getCompiler,
@@ -14,10 +14,10 @@ const implementations = getImplementationsAndAPI();
 const syntaxStyles = ["scss", "sass"];
 
 describe("additionalData option", () => {
-  implementations.forEach((item) => {
+  for (const item of implementations) {
     const { name: implementationName, api, implementation } = item;
 
-    syntaxStyles.forEach((syntax) => {
+    for (const syntax of syntaxStyles) {
       it(`should work as a string ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
         const testId = getTestId("prepending-data", syntax);
         const options = {
@@ -116,6 +116,6 @@ a {
 
         await close(compiler);
       });
-    });
-  });
+    }
+  }
 });

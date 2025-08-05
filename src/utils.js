@@ -1,31 +1,46 @@
-import url from "url";
-import path from "path";
+import path from "node:path";
+import url from "node:url";
 
+/** @typedef {import("sass")} Sass */
+/** @typedef {import("sass").StringOptionsWithImporter} SassSassOptions */
+/** @typedef {import("sass-embedded")} SassEmbedded */
+/** @typedef {import("sass-embedded").StringOptionsWithImporter} SassEmbeddedOptions */
+
+/** @typedef {Sass | SassEmbedded} SassImplementation */
+/** @typedef {SassSassOptions | SassEmbeddedOptions} SassOptions */
+// eslint-disable-next-line jsdoc/no-restricted-syntax
+/** @typedef {Record<string, any>} LoaderOptions */
+
+/**
+ * @returns {Sass | SassEmbedded} sass implementation
+ */
 function getDefaultSassImplementation() {
   let sassImplPkg = "sass";
 
   try {
     require.resolve("sass-embedded");
     sassImplPkg = "sass-embedded";
-  } catch (ignoreError) {
+  } catch {
     try {
       require.resolve("sass");
-    } catch (_ignoreError) {
+    } catch {
       try {
         require.resolve("node-sass");
         sassImplPkg = "node-sass";
-      } catch (__ignoreError) {
+      } catch {
         sassImplPkg = "sass";
       }
     }
   }
 
-  // eslint-disable-next-line import/no-dynamic-require, global-require
   return require(sassImplPkg);
 }
 
 /**
  * This function is not Webpack-specific and can be used by tools wishing to mimic `sass-loader`'s behaviour, so its signature should not be changed.
+ * @param {LoaderContext} loaderContext loader context
+ * @param {SassImplementation} implementation sass implementation
+ * @returns {SassImplementation} resolved sass implementation
  */
 function getSassImplementation(loaderContext, implementation) {
   let resolvedImplementation = implementation;
@@ -35,7 +50,6 @@ function getSassImplementation(loaderContext, implementation) {
   }
 
   if (typeof resolvedImplementation === "string") {
-    // eslint-disable-next-line import/no-dynamic-require, global-require
     resolvedImplementation = require(resolvedImplementation);
   }
 
@@ -54,13 +68,10 @@ function getSassImplementation(loaderContext, implementation) {
   const [implementationName] = infoParts;
 
   if (implementationName === "dart-sass") {
-    // eslint-disable-next-line consistent-return
     return resolvedImplementation;
   } else if (implementationName === "node-sass") {
-    // eslint-disable-next-line consistent-return
     return resolvedImplementation;
   } else if (implementationName === "sass-embedded") {
-    // eslint-disable-next-line consistent-return
     return resolvedImplementation;
   }
 
@@ -68,15 +79,20 @@ function getSassImplementation(loaderContext, implementation) {
 }
 
 /**
- * @param {any} loaderContext
- * @returns {boolean}
+ * @param {LoaderContext} loaderContext loader context
+ * @returns {boolean} true when mode is production, otherwise false
  */
 function isProductionLikeMode(loaderContext) {
   return loaderContext.mode === "production" || !loaderContext.mode;
 }
 
+/**
+ * @param {Importer[]} importers importers
+ * @param {LoaderContext} loaderContext loader context
+ * @returns {Importer[]} proxied importers
+ */
 function proxyCustomImporters(importers, loaderContext) {
-  return [].concat(importers).map(
+  return [importers].flat().map(
     (importer) =>
       function proxyImporter(...args) {
         const self = { ...this, webpackLoaderContext: loaderContext };
@@ -88,14 +104,13 @@ function proxyCustomImporters(importers, loaderContext) {
 
 /**
  * Derives the sass options from the loader context and normalizes its values with sane defaults.
- *
- * @param {object} loaderContext
- * @param {object} loaderOptions
- * @param {string} content
- * @param {object} implementation
- * @param {boolean} useSourceMap
- * @param {"legacy" | "modern" | "modern-compiler"} apiType
- * @returns {Object}
+ * @param {LoaderContext} loaderContext loader context
+ * @param {LoaderOptions} loaderOptions loader options
+ * @param {string} content content
+ * @param {SassImplementation} implementation sass implementation
+ * @param {boolean} useSourceMap true when need to generate source maps, otherwise false
+ * @param {"legacy" | "modern" | "modern-compiler"} apiType api type
+ * @returns {SassOptions} sass options
  */
 async function getSassOptions(
   loaderContext,
@@ -205,27 +220,22 @@ async function getSassOptions(
       }
     }
 
-    sassOptions.loadPaths = []
-      .concat(
-        // We use `loadPaths` in context for resolver, so it should be always absolute
-        (sassOptions.loadPaths ? sassOptions.loadPaths.slice() : []).map(
-          (includePath) =>
-            path.isAbsolute(includePath)
-              ? includePath
-              : path.join(process.cwd(), includePath),
-        ),
-      )
-      .concat(
-        process.env.SASS_PATH
-          ? process.env.SASS_PATH.split(
-              process.platform === "win32" ? ";" : ":",
-            )
-          : [],
-      );
+    sassOptions.loadPaths = [
+      // We use `loadPaths` in context for resolver, so it should be always absolute
+      ...(sassOptions.loadPaths ? [...sassOptions.loadPaths] : []).map(
+        (includePath) =>
+          path.isAbsolute(includePath)
+            ? includePath
+            : path.join(process.cwd(), includePath),
+      ),
+      ...(process.env.SASS_PATH
+        ? process.env.SASS_PATH.split(process.platform === "win32" ? ";" : ":")
+        : []),
+    ];
 
     sassOptions.importers = sassOptions.importers
       ? Array.isArray(sassOptions.importers)
-        ? sassOptions.importers.slice()
+        ? [...sassOptions.importers]
         : [sassOptions.importers]
       : [];
   } else {
@@ -270,7 +280,7 @@ async function getSassOptions(
     sassOptions.importer = sassOptions.importer
       ? proxyCustomImporters(
           Array.isArray(sassOptions.importer)
-            ? sassOptions.importer.slice()
+            ? [...sassOptions.importer]
             : [sassOptions.importer],
           loaderContext,
         )
@@ -281,28 +291,22 @@ async function getSassOptions(
       loaderOptions.webpackImporter === false &&
       sassOptions.importer.length === 0
     ) {
-      // eslint-disable-next-line no-undefined
       sassOptions.importer = undefined;
     }
 
-    sassOptions.includePaths = []
-      .concat(process.cwd())
-      .concat(
-        // We use `includePaths` in context for resolver, so it should be always absolute
-        (sassOptions.includePaths ? sassOptions.includePaths.slice() : []).map(
-          (includePath) =>
-            path.isAbsolute(includePath)
-              ? includePath
-              : path.join(process.cwd(), includePath),
-        ),
-      )
-      .concat(
-        process.env.SASS_PATH
-          ? process.env.SASS_PATH.split(
-              process.platform === "win32" ? ";" : ":",
-            )
-          : [],
-      );
+    sassOptions.includePaths = [
+      process.cwd(),
+      ...// We use `includePaths` in context for resolver, so it should be always absolute
+      (sassOptions.includePaths ? [...sassOptions.includePaths] : []).map(
+        (includePath) =>
+          path.isAbsolute(includePath)
+            ? includePath
+            : path.join(process.cwd(), includePath),
+      ),
+      ...(process.env.SASS_PATH
+        ? process.env.SASS_PATH.split(process.platform === "win32" ? ";" : ":")
+        : []),
+    ];
 
     if (typeof sassOptions.charset === "undefined") {
       sassOptions.charset = true;
@@ -334,14 +338,12 @@ const IS_PKG_SCHEME = /^pkg:/i;
  *
  * We don't need emulate `dart-sass` "It's not clear which file to import." errors (when "file.ext" and "_file.ext" files are present simultaneously in the same directory).
  * This reduces performance and `dart-sass` always do it on own side.
- *
- * @param {string} url
- * @param {boolean} forWebpackResolver
- * @param {boolean} fromImport
- * @returns {Array<string>}
+ * @param {string} url url
+ * @param {boolean} forWebpackResolver true when for webpack resolver, otherwise false
+ * @param {boolean} fromImport true when from `@import`, otherwise false
+ * @returns {string[]} possible requests
  */
 function getPossibleRequests(
-  // eslint-disable-next-line no-shadow
   url,
   forWebpackResolver = false,
   fromImport = false,
@@ -390,25 +392,26 @@ function getPossibleRequests(
   const basenameWithoutExtension = path.basename(request, extension);
 
   return [
-    ...new Set(
-      []
-        .concat(
-          fromImport
-            ? [
-                `${normalizedDirname}_${basenameWithoutExtension}.import${extension}`,
-                `${normalizedDirname}${basenameWithoutExtension}.import${extension}`,
-              ]
-            : [],
-        )
-        .concat([
-          `${normalizedDirname}_${basename}`,
-          `${normalizedDirname}${basename}`,
-        ])
-        .concat(forWebpackResolver ? [url] : []),
-    ),
+    ...new Set([
+      ...[
+        fromImport
+          ? [
+              `${normalizedDirname}_${basenameWithoutExtension}.import${extension}`,
+              `${normalizedDirname}${basenameWithoutExtension}.import${extension}`,
+            ]
+          : [],
+      ].flat(),
+      `${normalizedDirname}_${basename}`,
+      `${normalizedDirname}${basename}`,
+      ...(forWebpackResolver ? [url] : []),
+    ]),
   ];
 }
 
+/**
+ * @param {(context: string, request: string, callback: (error: Error | null, result: string) => void) => void} callbackResolve callback resolve
+ * @returns {(context: string, request: string) => Promise<string>} promise resolve
+ */
 function promiseResolve(callbackResolve) {
   return (context, request) =>
     new Promise((resolve, reject) => {
@@ -422,22 +425,26 @@ function promiseResolve(callbackResolve) {
     });
 }
 
+/**
+ * @param {ResolutionMap} resolutionMap resolution map
+ * @returns {Promise<string>} resolved value
+ */
 async function startResolving(resolutionMap) {
   if (resolutionMap.length === 0) {
-    return Promise.reject();
+    throw new Error("Next");
   }
 
   const [{ possibleRequests }] = resolutionMap;
 
   if (possibleRequests.length === 0) {
-    return Promise.reject();
+    throw new Error("Next");
   }
 
   const [{ resolve, context }] = resolutionMap;
 
   try {
     return await resolve(context, possibleRequests[0]);
-  } catch (_ignoreError) {
+  } catch {
     const [, ...tailResult] = possibleRequests;
 
     if (tailResult.length === 0) {
@@ -446,7 +453,6 @@ async function startResolving(resolutionMap) {
       return startResolving(tailResolutionMap);
     }
 
-    // eslint-disable-next-line no-param-reassign
     resolutionMap[0].possibleRequests = tailResult;
 
     return startResolving(resolutionMap);
@@ -458,20 +464,15 @@ const IS_SPECIAL_MODULE_IMPORT = /^~[^/]+$/;
 const IS_NATIVE_WIN32_PATH = /^[a-z]:[/\\]|^\\\\/i;
 
 /**
- * @public
  * Create the resolve function used in the custom Sass importer.
- *
  * Can be used by external tools to mimic how `sass-loader` works, for example
  * in a Jest transform. Such usages will want to wrap `resolve.create` from
  * [`enhanced-resolve`]{@link https://github.com/webpack/enhanced-resolve} to
  * pass as the `resolverFactory` argument.
- *
- * @param {Function} resolverFactory - A factory function for creating a Webpack
- *   resolver.
- * @param {Object} implementation - The imported Sass implementation, both
- *   `sass` (Dart Sass) and `node-sass` are supported.
- * @param {string[]} [includePaths] - The list of include paths passed to Sass.
- *
+ * @param {ResolveFactory} resolverFactory a factory function for creating a Webpack resolver.
+ * @param {Sass} implementation the imported Sass implementation, both `sass` (Dart Sass) and `node-sass` are supported.
+ * @param {string[]=} includePaths the list of include paths passed to Sass.
+ * @returns {Resolver} webpack resolver
  * @throws If a compatible Sass implementation cannot be found.
  */
 function getWebpackResolver(
@@ -555,10 +556,8 @@ function getWebpackResolver(
 
     if (isFileScheme) {
       try {
-        // eslint-disable-next-line no-param-reassign
         request = url.fileURLToPath(originalRequest);
-      } catch (ignoreError) {
-        // eslint-disable-next-line no-param-reassign
+      } catch {
         request = request.slice(7);
       }
     }
@@ -596,23 +595,24 @@ function getWebpackResolver(
 
       // `node-sass` calls our importer before `1. Filesystem imports relative to the base file.`, so we need emulate this too
       if (!isModernSass) {
-        resolutionMap = resolutionMap.concat({
-          resolve: fromImport ? sassImportResolve : sassModuleResolve,
-          context: path.dirname(context),
-          possibleRequests: sassPossibleRequests,
-        });
+        resolutionMap = [
+          ...resolutionMap,
+          {
+            resolve: fromImport ? sassImportResolve : sassModuleResolve,
+            context: path.dirname(context),
+            possibleRequests: sassPossibleRequests,
+          },
+        ];
       }
 
-      resolutionMap = resolutionMap.concat(
-        // eslint-disable-next-line no-shadow
-        includePaths.map((context) => {
-          return {
-            resolve: fromImport ? sassImportResolve : sassModuleResolve,
-            context,
-            possibleRequests: sassPossibleRequests,
-          };
-        }),
-      );
+      resolutionMap = [
+        ...resolutionMap,
+        ...includePaths.map((context) => ({
+          resolve: fromImport ? sassImportResolve : sassModuleResolve,
+          context,
+          possibleRequests: sassPossibleRequests,
+        })),
+      ];
     }
 
     const webpackPossibleRequests = getPossibleRequests(
@@ -621,11 +621,14 @@ function getWebpackResolver(
       fromImport,
     );
 
-    resolutionMap = resolutionMap.concat({
-      resolve: fromImport ? webpackImportResolve : webpackModuleResolve,
-      context: path.dirname(context),
-      possibleRequests: webpackPossibleRequests,
-    });
+    resolutionMap = [
+      ...resolutionMap,
+      {
+        resolve: fromImport ? webpackImportResolve : webpackModuleResolve,
+        context: path.dirname(context),
+        possibleRequests: webpackPossibleRequests,
+      },
+    ];
 
     return startResolving(resolutionMap);
   };
@@ -633,6 +636,12 @@ function getWebpackResolver(
 
 const MATCH_CSS = /\.css$/i;
 
+/**
+ * @param {LoaderContext} loaderContext loader context
+ * @param {SassImplementation} implementation sass implementation
+ * @param {string[]} loadPaths load paths
+ * @returns {Importer} the modern webpack importer
+ */
 function getModernWebpackImporter(loaderContext, implementation, loadPaths) {
   const resolve = getWebpackResolver(
     loaderContext.getResolve,
@@ -651,7 +660,7 @@ function getModernWebpackImporter(loaderContext, implementation, loadPaths) {
 
       try {
         result = await resolve(prev, originalUrl, fromImport);
-      } catch (err) {
+      } catch {
         // If no stylesheets are found, the importer should return null.
         return null;
       }
@@ -677,7 +686,6 @@ function getModernWebpackImporter(loaderContext, implementation, loadPaths) {
       }
 
       try {
-        // eslint-disable-next-line no-shadow
         const contents = await new Promise((resolve, reject) => {
           // Old version of `enhanced-resolve` supports only path as a string
           // TODO simplify in the next major release and pass URL
@@ -694,13 +702,19 @@ function getModernWebpackImporter(loaderContext, implementation, loadPaths) {
         });
 
         return { contents, syntax, sourceMapUrl: canonicalUrl };
-      } catch (err) {
+      } catch {
         return null;
       }
     },
   };
 }
 
+/**
+ * @param {LoaderContext} loaderContext loader context
+ * @param {SassImplementation} implementation sass implementation
+ * @param {string[]} includePaths include paths
+ * @returns {Importer} the webpack importer
+ */
 function getWebpackImporter(loaderContext, implementation, includePaths) {
   const resolve = getWebpackResolver(
     loaderContext.getResolve,
@@ -738,11 +752,10 @@ const sassModernCompilers = new WeakMap();
 
 /**
  * Verifies that the implementation and version of Sass is supported by this loader.
- *
- * @param {Object} loaderContext
- * @param {Object} implementation
- * @param {"legacy" | "modern" | "modern-compiler"} apiType
- * @returns {Function}
+ * @param {LoaderContext} loaderContext loader context
+ * @param {SassImplementation} implementation sass implementation
+ * @param {"legacy" | "modern" | "modern-compiler"} apiType api type
+ * @returns {SassCompileFunction} compile function
  */
 function getCompileFn(loaderContext, implementation, apiType) {
   if (typeof implementation.compileStringAsync !== "undefined") {
@@ -756,7 +769,6 @@ function getCompileFn(loaderContext, implementation, apiType) {
 
     if (apiType === "modern-compiler") {
       return async (sassOptions) => {
-        // eslint-disable-next-line no-underscore-dangle
         const webpackCompiler = loaderContext._compiler;
         const { data, ...rest } = sassOptions;
 
@@ -812,8 +824,9 @@ function getCompileFn(loaderContext, implementation, apiType) {
   // We need to use a job queue to make sure that one thread is always available to the UV lib
   if (nodeSassJobQueue === null) {
     const threadPoolSize = Number(process.env.UV_THREADPOOL_SIZE || 4);
+
     // Only used for `node-sass`, so let's load it lazily
-    // eslint-disable-next-line global-require
+
     const async = require("neo-async");
 
     nodeSassJobQueue = async.queue(
@@ -842,8 +855,8 @@ function getCompileFn(loaderContext, implementation, apiType) {
 const ABSOLUTE_SCHEME = /^[A-Za-z0-9+\-.]+:/;
 
 /**
- * @param {string} source
- * @returns {"absolute" | "scheme-relative" | "path-absolute" | "path-absolute"}
+ * @param {string} source source
+ * @returns {"absolute" | "scheme-relative" | "path-absolute" | "path-absolute"} a type of URL
  */
 function getURLType(source) {
   if (source[0] === "/") {
@@ -861,23 +874,27 @@ function getURLType(source) {
   return ABSOLUTE_SCHEME.test(source) ? "absolute" : "path-relative";
 }
 
+/**
+ * @param {RawSourceMap} map source map
+ * @param {string} rootContext root context
+ * @returns {RawSourceMap} normalized source map
+ */
 function normalizeSourceMap(map, rootContext) {
   const newMap = map;
 
   // result.map.file is an optional property that provides the output filename.
   // Since we don't know the final filename in the webpack build chain yet, it makes no sense to have it.
-  // eslint-disable-next-line no-param-reassign
+
   if (typeof newMap.file !== "undefined") {
     delete newMap.file;
   }
 
-  // eslint-disable-next-line no-param-reassign
   newMap.sourceRoot = "";
 
   // node-sass returns POSIX paths, that's why we need to transform them back to native paths.
   // This fixes an error on windows where the source-map module cannot resolve the source maps.
   // @see https://github.com/webpack-contrib/sass-loader/issues/366#issuecomment-279460722
-  // eslint-disable-next-line no-param-reassign
+
   newMap.sources = newMap.sources.map((source) => {
     const sourceType = getURLType(source);
 
@@ -894,15 +911,14 @@ function normalizeSourceMap(map, rootContext) {
   return newMap;
 }
 
+/**
+ * @param {Error | SassError} error the original sass error
+ * @returns {Error} a new error
+ */
 function errorFactory(error) {
-  let message;
-
-  if (error.formatted) {
-    message = error.formatted.replace(/^(.+)?Error: /, "");
-  } else {
-    // Keep original error if `sassError.formatted` is unavailable
-    message = (error.message || error.toString()).replace(/^(.+)?Error: /, "");
-  }
+  const message = error.formatted
+    ? error.formatted.replace(/^(.+)?Error: /, "")
+    : (error.message || error.toString()).replace(/^(.+)?Error: /, "");
 
   const obj = new Error(message, { cause: error });
 
@@ -913,12 +929,12 @@ function errorFactory(error) {
 }
 
 export {
+  errorFactory,
+  getCompileFn,
+  getModernWebpackImporter,
   getSassImplementation,
   getSassOptions,
-  getModernWebpackImporter,
-  getWebpackResolver,
   getWebpackImporter,
-  getCompileFn,
+  getWebpackResolver,
   normalizeSourceMap,
-  errorFactory,
 };

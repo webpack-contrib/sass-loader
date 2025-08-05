@@ -339,7 +339,7 @@ module.exports = {
             loader: "sass-loader",
             options: {
               sassOptions: {
-                style: `compressed`,
+                style: "compressed",
                 loadPaths: ["absolute/path/a", "absolute/path/b"],
               },
             },
@@ -499,7 +499,7 @@ module.exports = {
           {
             loader: "sass-loader",
             options: {
-              additionalData: "$env: " + process.env.NODE_ENV + ";",
+              additionalData: `$env: ${process.env.NODE_ENV};`,
             },
           },
         ],
@@ -531,10 +531,10 @@ module.exports = {
                 const relativePath = path.relative(rootContext, resourcePath);
 
                 if (relativePath === "styles/foo.scss") {
-                  return "$value: 100px;" + content;
+                  return `$value: 100px;${content}`;
                 }
 
-                return "$value: 200px;" + content;
+                return `$value: 200px;${content}`;
               },
             },
           },
@@ -565,10 +565,10 @@ module.exports = {
                 const relativePath = path.relative(rootContext, resourcePath);
 
                 if (relativePath === "styles/foo.scss") {
-                  return "$value: 100px;" + content;
+                  return `$value: 100px;${content}`;
                 }
 
-                return "$value: 200px;" + content;
+                return `$value: 200px;${content}`;
               },
             },
           },
@@ -788,8 +788,10 @@ module.exports = {
 **webpack.config.js**
 
 ```js
+const path = require("node:path");
+
 module.exports = {
-  entry: [__dirname + "/src/scss/app.scss"],
+  entry: [path.resolve(__dirname, "./src/scss/app.scss")],
   module: {
     rules: [
       {
@@ -818,8 +820,10 @@ module.exports = {
 **webpack.config.js**
 
 ```js
+const path = require("node:path");
+
 module.exports = {
-  entry: [__dirname + "/src/scss/app.scss"],
+  entry: [path.resolve(__dirname, "./src/scss/app.scss")],
   module: {
     rules: [
       {
