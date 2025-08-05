@@ -975,6 +975,19 @@ async function getCodeFromSass(testId, options, context = {}) {
       };
     }
 
+    sassOptions.includePaths = [
+      process.cwd(),
+      ...// We use `includePaths` in context for resolver, so it should be always absolute
+      (sassOptions.includePaths ? [...sassOptions.includePaths] : []).map(
+        (includePath) =>
+          path.isAbsolute(includePath)
+            ? includePath
+            : path.join(process.cwd(), includePath),
+      ),
+      ...(process.env.SASS_PATH
+        ? process.env.SASS_PATH.split(process.platform === "win32" ? ";" : ":")
+        : []),
+    ];
     sassOptions.importer = sassOptions.importer
       ? [
           ...[
