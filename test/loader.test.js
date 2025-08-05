@@ -1185,7 +1185,16 @@ describe("loader", () => {
       }
 
       it(`should resolve server-relative URLs ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
-        const testId = getTestId("import-absolute-path", syntax);
+        //
+        const testId = getTestId(
+          // legacy sass-embedded API doesn't support absolute paths
+          process.platform === "win32" &&
+            implementationName === "sass-embedded" &&
+            !isModernAPI
+            ? "import-absolute-path-windows"
+            : "import-absolute-path",
+          syntax,
+        );
         const options = {
           implementation,
           api,
