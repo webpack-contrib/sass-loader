@@ -300,7 +300,7 @@ Options for [Dart Sass](http://sass-lang.com/dart-sass) or [Node Sass](https://g
 
 > [!NOTE]
 >
-> The `syntax` (new API, by default since 16 version)`and`indentedSyntax`(old API) option is `scss`for the`scss` extension,`indented`for the`sass`extension and`css`for the`css` extension.
+> The `syntax` (new API, by default since 16 version) and `indentedSyntax` (old API) option is `scss` for the `scss` extension, `indented` for the `sass` extension, and `css` for the `css` extension.
 
 > [!NOTE]
 >
