@@ -26,7 +26,7 @@
     "clean": "del-cli dist",
     "prebuild": "npm run clean",
     "build": "cross-env NODE_ENV=production babel src -d dist --copy-files",
-    "commitlint": "commitlint --from=master",
+    "commitlint": "commitlint --from=main",
     "security": "npm audit --production",
     "lint:prettier": "prettier --cache --list-different .",
     "lint:code": "eslint --cache .",
