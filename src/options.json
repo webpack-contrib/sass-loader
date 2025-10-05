@@ -4,7 +4,7 @@
   "properties": {
     "implementation": {
       "description": "The implementation of the sass to be used.",
-      "link": "https://github.com/webpack-contrib/sass-loader#implementation",
+      "link": "https://github.com/webpack/sass-loader#implementation",
       "anyOf": [
         {
           "type": "string"
@@ -16,12 +16,12 @@
     },
     "api": {
       "description": "Switch between old and modern API for `sass` (`Dart Sass`) and `Sass Embedded` implementations.",
-      "link": "https://github.com/webpack-contrib/sass-loader#sassoptions",
+      "link": "https://github.com/webpack/sass-loader#sassoptions",
       "enum": ["legacy", "modern", "modern-compiler"]
     },
     "sassOptions": {
       "description": "Options for `node-sass` or `sass` (`Dart Sass`) implementation.",
-      "link": "https://github.com/webpack-contrib/sass-loader#sassoptions",
+      "link": "https://github.com/webpack/sass-loader#sassoptions",
       "anyOf": [
         {
           "type": "object",
@@ -34,7 +34,7 @@
     },
     "additionalData": {
       "description": "Prepends/Appends `Sass`/`SCSS` code before the actual entry file.",
-      "link": "https://github.com/webpack-contrib/sass-loader#additionaldata",
+      "link": "https://github.com/webpack/sass-loader#additionaldata",
       "anyOf": [
         {
           "type": "string"
@@ -46,17 +46,17 @@
     },
     "sourceMap": {
       "description": "Enables/Disables generation of source maps.",
-      "link": "https://github.com/webpack-contrib/sass-loader#sourcemap",
+      "link": "https://github.com/webpack/sass-loader#sourcemap",
       "type": "boolean"
     },
     "webpackImporter": {
       "description": "Enables/Disables default `webpack` importer.",
-      "link": "https://github.com/webpack-contrib/sass-loader#webpackimporter",
+      "link": "https://github.com/webpack/sass-loader#webpackimporter",
       "type": "boolean"
     },
     "warnRuleAsWarning": {
       "description": "Treats the '@warn' rule as a webpack warning.",
-      "link": "https://github.com/webpack-contrib/sass-loader#warnruleaswarning",
+      "link": "https://github.com/webpack/sass-loader#warnruleaswarning",
       "type": "boolean"
     }
   },

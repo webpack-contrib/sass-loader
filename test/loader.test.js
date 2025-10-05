@@ -266,7 +266,7 @@ describe("loader", () => {
         await close(compiler);
       });
 
-      // Test for issue: https://github.com/webpack-contrib/sass-loader/issues/32
+      // Test for issue: https://github.com/webpack/sass-loader/issues/32
       it(`should work with multiple "@import" at-rules ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
         const testId = getTestId("multiple-imports", syntax);
         const options = {
@@ -286,7 +286,7 @@ describe("loader", () => {
         await close(compiler);
       });
 
-      // Test for issue: https://github.com/webpack-contrib/sass-loader/issues/73
+      // Test for issue: https://github.com/webpack/sass-loader/issues/73
       it(`should work with "@import" at-rules from other language style ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
         const testId = getTestId("import-other-style", syntax);
         const options = {
@@ -708,7 +708,7 @@ describe("loader", () => {
       });
 
       // Legacy support for CSS imports with node-sass
-      // See discussion https://github.com/webpack-contrib/sass-loader/pull/573/files?#r199109203
+      // See discussion https://github.com/webpack/sass-loader/pull/573/files?#r199109203
       it(`should work and ignore all css "@import" at-rules ('${implementationName}', '${api}' API, '${syntax}' syntax)`, async () => {
         const testId = getTestId("import-css", syntax);
         const options = {

@@ -18,7 +18,7 @@ describe("webpackImporter option", () => {
     for (const syntax of syntaxStyles) {
       const { name: implementationName, api, implementation } = item;
 
-      // TODO fix me https://github.com/webpack-contrib/sass-loader/issues/774
+      // TODO fix me https://github.com/webpack/sass-loader/issues/774
       if (api === "modern" || api === "modern-compiler") {
         continue;
       }

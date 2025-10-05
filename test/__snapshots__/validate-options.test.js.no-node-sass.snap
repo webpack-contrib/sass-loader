@@ -5,7 +5,7 @@ exports[`validate options should throw an error on the "additionalData" option w
  - options.additionalData should be one of these:
    string | function
    -> Prepends/Appends \`Sass\`/\`SCSS\` code before the actual entry file.
-   -> Read more at https://github.com/webpack-contrib/sass-loader#additionaldata
+   -> Read more at https://github.com/webpack/sass-loader#additionaldata
    Details:
     * options.additionalData should be a string.
     * options.additionalData should be an instance of function."
@@ -16,7 +16,7 @@ exports[`validate options should throw an error on the "api" option with "string
  - options.api should be one of these:
    "legacy" | "modern" | "modern-compiler"
    -> Switch between old and modern API for \`sass\` (\`Dart Sass\`) and \`Sass Embedded\` implementations.
-   -> Read more at https://github.com/webpack-contrib/sass-loader#sassoptions"
+   -> Read more at https://github.com/webpack/sass-loader#sassoptions"
 `;
 
 exports[`validate options should throw an error on the "api" option with "true" value 1`] = `
@@ -24,7 +24,7 @@ exports[`validate options should throw an error on the "api" option with "true" 
  - options.api should be one of these:
    "legacy" | "modern" | "modern-compiler"
    -> Switch between old and modern API for \`sass\` (\`Dart Sass\`) and \`Sass Embedded\` implementations.
-   -> Read more at https://github.com/webpack-contrib/sass-loader#sassoptions"
+   -> Read more at https://github.com/webpack/sass-loader#sassoptions"
 `;
 
 exports[`validate options should throw an error on the "implementation" option with "() => {}" value 1`] = `
@@ -32,7 +32,7 @@ exports[`validate options should throw an error on the "implementation" option w
  - options.implementation should be one of these:
    string | object { … }
    -> The implementation of the sass to be used.
-   -> Read more at https://github.com/webpack-contrib/sass-loader#implementation
+   -> Read more at https://github.com/webpack/sass-loader#implementation
    Details:
     * options.implementation should be a string.
     * options.implementation should be an object:
@@ -44,7 +44,7 @@ exports[`validate options should throw an error on the "implementation" option w
  - options.implementation should be one of these:
    string | object { … }
    -> The implementation of the sass to be used.
-   -> Read more at https://github.com/webpack-contrib/sass-loader#implementation
+   -> Read more at https://github.com/webpack/sass-loader#implementation
    Details:
     * options.implementation should be a string.
     * options.implementation should be an object:
@@ -56,7 +56,7 @@ exports[`validate options should throw an error on the "sassOptions" option with
  - options.sassOptions should be one of these:
    object { … } | function
    -> Options for \`node-sass\` or \`sass\` (\`Dart Sass\`) implementation.
-   -> Read more at https://github.com/webpack-contrib/sass-loader#sassoptions
+   -> Read more at https://github.com/webpack/sass-loader#sassoptions
    Details:
     * options.sassOptions should be an object:
       object { … }
@@ -68,7 +68,7 @@ exports[`validate options should throw an error on the "sassOptions" option with
  - options.sassOptions should be one of these:
    object { … } | function
    -> Options for \`node-sass\` or \`sass\` (\`Dart Sass\`) implementation.
-   -> Read more at https://github.com/webpack-contrib/sass-loader#sassoptions
+   -> Read more at https://github.com/webpack/sass-loader#sassoptions
    Details:
     * options.sassOptions should be an object:
       object { … }
@@ -79,7 +79,7 @@ exports[`validate options should throw an error on the "sourceMap" option with "
 "Invalid options object. Sass Loader has been initialized using an options object that does not match the API schema.
  - options.sourceMap should be a boolean.
    -> Enables/Disables generation of source maps.
-   -> Read more at https://github.com/webpack-contrib/sass-loader#sourcemap"
+   -> Read more at https://github.com/webpack/sass-loader#sourcemap"
 `;
 
 exports[`validate options should throw an error on the "unknown" option with "/test/" value 1`] = `
@@ -134,12 +134,12 @@ exports[`validate options should throw an error on the "warnRuleAsWarning" optio
 "Invalid options object. Sass Loader has been initialized using an options object that does not match the API schema.
  - options.warnRuleAsWarning should be a boolean.
    -> Treats the '@warn' rule as a webpack warning.
-   -> Read more at https://github.com/webpack-contrib/sass-loader#warnruleaswarning"
+   -> Read more at https://github.com/webpack/sass-loader#warnruleaswarning"
 `;
 
 exports[`validate options should throw an error on the "webpackImporter" option with "string" value 1`] = `
 "Invalid options object. Sass Loader has been initialized using an options object that does not match the API schema.
  - options.webpackImporter should be a boolean.
    -> Enables/Disables default \`webpack\` importer.
-   -> Read more at https://github.com/webpack-contrib/sass-loader#webpackimporter"
+   -> Read more at https://github.com/webpack/sass-loader#webpackimporter"
 `;
