@@ -886,7 +886,7 @@ module.exports = {
 ```
 
 If you want to edit the original Sass files inside Chrome, [there's a good blog post](https://medium.com/@toolmantim/getting-started-with-css-sourcemaps-and-in-browser-sass-editing-b4daab987fb0).
-Checkout [test/sourceMap](https://github.com/webpack-contrib/sass-loader/tree/master/test) for a working example.
+Checkout [test/sourceMap](https://github.com/webpack-contrib/sass-loader/tree/main/test) for a working example.
 
 ## Contributing
 
@@ -905,7 +905,7 @@ If you're new here, please take a moment to review our contributing guidelines b
 [node-url]: https://nodejs.org
 [tests]: https://github.com/webpack-contrib/sass-loader/workflows/sass-loader/badge.svg
 [tests-url]: https://github.com/webpack-contrib/sass-loader/actions
-[cover]: https://codecov.io/gh/webpack-contrib/sass-loader/branch/master/graph/badge.svg
+[cover]: https://codecov.io/gh/webpack-contrib/sass-loader/branch/main/graph/badge.svg
 [cover-url]: https://codecov.io/gh/webpack-contrib/sass-loader
 [discussion]: https://img.shields.io/github/discussions/webpack/webpack
 [discussion-url]: https://github.com/webpack/webpack/discussions
