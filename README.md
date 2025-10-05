@@ -55,7 +55,7 @@ This allows you to control the versions of all your dependencies and to choose w
 >
 > [Node Sass](https://github.com/sass/node-sass) does not work with [Yarn PnP](https://classic.yarnpkg.com/en/docs/pnp/) and doesn't support [@use rule](https://sass-lang.com/documentation/at-rules/use).
 
-Chain the `sass-loader` with the [css-loader](https://github.com/webpack-contrib/css-loader) and the [style-loader](https://github.com/webpack-contrib/style-loader) to immediately apply all styles to the DOM, or with the [mini-css-extract-plugin](https://github.com/webpack-contrib/mini-css-extract-plugin) to extract it into a separate file.
+Chain the `sass-loader` with the [css-loader](https://github.com/webpack/css-loader) and the [style-loader](https://github.com/webpack/style-loader) to immediately apply all styles to the DOM, or with the [mini-css-extract-plugin](https://github.com/webpack-contrib/mini-css-extract-plugin) to extract it into a separate file.
 
 Then add the loader to your webpack configuration. For example:
 
@@ -887,7 +887,7 @@ module.exports = {
 ```
 
 If you want to edit the original Sass files inside Chrome, [there's a good blog post](https://medium.com/@toolmantim/getting-started-with-css-sourcemaps-and-in-browser-sass-editing-b4daab987fb0).
-Checkout [test/sourceMap](https://github.com/webpack-contrib/sass-loader/tree/main/test) for a working example.
+Checkout [test/sourceMap](https://github.com/webpack/sass-loader/tree/main/test) for a working example.
 
 ## Contributing
 
@@ -904,10 +904,10 @@ If you're new here, please take a moment to review our contributing guidelines b
 [npm-url]: https://npmjs.com/package/sass-loader
 [node]: https://img.shields.io/node/v/sass-loader.svg
 [node-url]: https://nodejs.org
-[tests]: https://github.com/webpack-contrib/sass-loader/workflows/sass-loader/badge.svg
-[tests-url]: https://github.com/webpack-contrib/sass-loader/actions
-[cover]: https://codecov.io/gh/webpack-contrib/sass-loader/branch/main/graph/badge.svg
-[cover-url]: https://codecov.io/gh/webpack-contrib/sass-loader
+[tests]: https://github.com/webpack/sass-loader/workflows/sass-loader/badge.svg
+[tests-url]: https://github.com/webpack/sass-loader/actions
+[cover]: https://codecov.io/gh/webpack/sass-loader/branch/main/graph/badge.svg
+[cover-url]: https://codecov.io/gh/webpack/sass-loader
 [discussion]: https://img.shields.io/github/discussions/webpack/webpack
 [discussion-url]: https://github.com/webpack/webpack/discussions
 [size]: https://packagephobia.now.sh/badge?p=sass-loader

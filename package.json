@@ -8,9 +8,9 @@
     "webpack",
     "loader"
   ],
-  "homepage": "https://github.com/webpack-contrib/sass-loader",
-  "bugs": "https://github.com/webpack-contrib/sass-loader/issues",
-  "repository": "webpack-contrib/sass-loader",
+  "homepage": "https://github.com/webpack/sass-loader",
+  "bugs": "https://github.com/webpack/sass-loader/issues",
+  "repository": "webpack/sass-loader",
   "funding": {
     "type": "opencollective",
     "url": "https://opencollective.com/webpack"

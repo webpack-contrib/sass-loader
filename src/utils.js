@@ -370,7 +370,7 @@ function getPossibleRequests(
   }
 
   // Keep in mind: ext can also be something like '.datepicker' when the true extension is omitted and the filename contains a dot.
-  // @see https://github.com/webpack-contrib/sass-loader/issues/167
+  // @see https://github.com/webpack/sass/issues/167
   const extension = path.extname(request).toLowerCase();
 
   // Because @import is also defined in CSS, Sass needs a way of compiling plain CSS @imports without trying to import the files at compile time.
@@ -893,7 +893,7 @@ function normalizeSourceMap(map, rootContext) {
 
   // node-sass returns POSIX paths, that's why we need to transform them back to native paths.
   // This fixes an error on windows where the source-map module cannot resolve the source maps.
-  // @see https://github.com/webpack-contrib/sass-loader/issues/366#issuecomment-279460722
+  // @see https://github.com/webpack/sass-loader/issues/366#issuecomment-279460722
 
   newMap.sources = newMap.sources.map((source) => {
     const sourceType = getURLType(source);
