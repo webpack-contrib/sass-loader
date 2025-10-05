@@ -6,11 +6,6 @@
 
 <h1 align="center">sass-loader</h1>
 
-<p align="center">
-  Loads a Sass/SCSS file and compiles it to CSS.
-</p>
-<br>
-
 [![npm][npm]][npm-url]
 [![node][node]][node-url]
 [![tests][tests]][tests-url]
@@ -18,6 +13,10 @@
 [![discussion][discussion]][discussion-url]
 [![size][size]][size-url]
 [![Discord][discord-invite]][discord-url]
+
+# sass-loader
+
+Loads a Sass/SCSS file and compiles it to CSS.
 
 ## Getting Started
 
