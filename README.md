@@ -1,11 +1,15 @@
 <div align="center">
-  <img height="170"
-    src="https://worldvectorlogo.com/logos/sass-1.svg">
-  <a href="https://github.com/webpack/webpack">
-    <img width="200" height="200"
-      src="https://webpack.js.org/assets/icon-square-big.svg">
-  </a>
+    <a href="https://github.com/webpack/sass-loader">
+        <img width="200" height="200" src="https://webpack.js.org/assets/icon-square-big.svg">
+    </a>
 </div>
+
+<h1 align="center">sass-loader</h1>
+
+<p align="center">
+  Loads a Sass/SCSS file and compiles it to CSS.
+</p>
+<br>
 
 [![npm][npm]][npm-url]
 [![node][node]][node-url]
@@ -13,10 +17,7 @@
 [![coverage][cover]][cover-url]
 [![discussion][discussion]][discussion-url]
 [![size][size]][size-url]
-
-# sass-loader
-
-Loads a Sass/SCSS file and compiles it to CSS.
+[![Discord][discord-invite]][discord-url]
 
 ## Getting Started
 
@@ -911,3 +912,5 @@ If you're new here, please take a moment to review our contributing guidelines b
 [discussion-url]: https://github.com/webpack/webpack/discussions
 [size]: https://packagephobia.now.sh/badge?p=sass-loader
 [size-url]: https://packagephobia.now.sh/result?p=sass-loader
+[discord-invite]: https://img.shields.io/discord/1180618526436888586?style=flat&logo=discord&logoColor=white&label=discord
+[discord-url]: https://discord.gg/ARKBCXBu
