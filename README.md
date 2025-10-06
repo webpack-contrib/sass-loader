@@ -10,7 +10,7 @@
 [![coverage][cover]][cover-url]
 [![discussion][discussion]][discussion-url]
 [![size][size]][size-url]
-[![Discord][discord-invite]][discord-url]
+[![discord-invite][discord-invite]][discord-url]
 
 # sass-loader
 
