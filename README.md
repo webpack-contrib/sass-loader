@@ -1,7 +1,10 @@
 <div align="center">
-    <a href="https://github.com/webpack/sass-loader">
-        <img width="200" height="200" src="https://webpack.js.org/assets/icon-square-big.svg">
-    </a>
+  <img height="170"
+    src="https://worldvectorlogo.com/logos/sass-1.svg">
+  <a href="https://github.com/webpack/webpack">
+    <img width="200" height="200"
+      src="https://webpack.js.org/assets/icon-square-big.svg">
+  </a>
 </div>
 
 [![npm][npm]][npm-url]
@@ -52,7 +55,7 @@ This allows you to control the versions of all your dependencies and to choose w
 >
 > [Node Sass](https://github.com/sass/node-sass) does not work with [Yarn PnP](https://classic.yarnpkg.com/en/docs/pnp/) and doesn't support [@use rule](https://sass-lang.com/documentation/at-rules/use).
 
-Chain the `sass-loader` with the [css-loader](https://github.com/webpack/css-loader) and the [style-loader](https://github.com/webpack/style-loader) to immediately apply all styles to the DOM, or with the [mini-css-extract-plugin](https://github.com/webpack-contrib/mini-css-extract-plugin) to extract it into a separate file.
+Chain the `sass-loader` with the [css-loader](https://github.com/webpack-contrib/css-loader) and the [style-loader](https://github.com/webpack-contrib/style-loader) to immediately apply all styles to the DOM, or with the [mini-css-extract-plugin](https://github.com/webpack-contrib/mini-css-extract-plugin) to extract it into a separate file.
 
 Then add the loader to your webpack configuration. For example:
 
