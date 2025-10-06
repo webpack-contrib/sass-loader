@@ -4,8 +4,6 @@
     </a>
 </div>
 
-<h1 align="center">sass-loader</h1>
-
 [![npm][npm]][npm-url]
 [![node][node]][node-url]
 [![tests][tests]][tests-url]
