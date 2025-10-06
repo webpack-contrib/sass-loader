@@ -4,15 +4,13 @@
     </a>
 </div>
 
-<h1 align="center">sass-loader</h1>
-
 [![npm][npm]][npm-url]
 [![node][node]][node-url]
 [![tests][tests]][tests-url]
 [![coverage][cover]][cover-url]
 [![discussion][discussion]][discussion-url]
 [![size][size]][size-url]
-[![Discord][discord-invite]][discord-url]
+[![discord-invite][discord-invite]][discord-url]
 
 # sass-loader
 
